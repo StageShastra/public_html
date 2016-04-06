@@ -93,10 +93,10 @@ header("Location:index.php");
                             <input type="text" class="form-control add" id="aname" name="name" placeholder= "Name :" required />
                         </div>
                         <div class="col-sm-4 form-group">
-                            <input type="text" class="form-control add inactive" id="alanguage"  name="language" placeholder= "Language :" disabled />
+                            <input type="text" class="form-control add" id="alanguage" data-role="tagsinput" name="language" placeholder= "Language :" />
                         </div>
                         <div class="col-sm-4 form-group">
-                            <input type="text" class="form-control add inactive" id="askills" name="skills" placeholder= "Skills :" disabled />
+                            <input type="text" class="form-control add" data-role="tagsinput" id="askills" name="skills" placeholder= "Skills :"/>
                         </div> 
                     </div>
                     <div class="row vertical-padded">
@@ -107,7 +107,7 @@ header("Location:index.php");
                             <input type="email" class="form-control add" id="aemail" name="email" placeholder= "Email :" required />
                         </div>
                         <div class="col-sm-4 form-group">
-                            <select class="form-control add inactive" id="afacattr" name="facattr" placeholder= "Fac. Attr. :" disabled />
+                            <select class="form-control add" id="afacattr" name="facattr" placeholder= "Fac. Attr. :" />
                             <option value="" disabled selected>Fac. Attr. :</option>
                                 <option>Funky</option>
                                 <option>Cool</option>
@@ -129,7 +129,7 @@ header("Location:index.php");
                             <input type="text" class="form-control add" id="aphone" name="phone" placeholder= "Phone :" required />
                         </div>
                         <div class="col-sm-4 form-group">
-                            <select class="form-control add inactive" id="aphyattr" name="phyattr" placeholder= "" disabled >
+                            <select class="form-control add" id="aphyattr" name="phyattr" placeholder= ""  >
                                 <option value="" disabled selected>Phy. Attr. :</option>
                                 <option>Lean</option>
                                 <option>Muscular</option>
@@ -151,18 +151,18 @@ header("Location:index.php");
                             <input type="text" class="form-control add"  id="aexperience" name="experience" placeholder= "Experience :" required />
                         </div>
                         <div class="col-sm-4 form-group">
-                            <input type="text" class="form-control add" data-role="tagsinput" id="aproject" value="Gulf Oil" name="projects" placeholder= "Projects :" required />
+                            <input type="text" class="form-control add" data-role="tagsinput" id="aproject"  name="projects" placeholder= "Projects :" required />
                         </div>
                     </div>
                     <div class="row vertical-padded">
                         <div class="col-sm-4 form-group">
-                            <input type="text" class="form-control add inactive" id="arange" name="range" placeholder= "Age Range(e.g. 18-24) :" disabled />
+                            <input type="text" class="form-control add" id="arange" name="range" placeholder= "Acting Age Range(e.g. 18-24) :" >
                         </div>
                         <div class="col-sm-4 form-group">
-                            <input type="text" class="form-control add inactive" id="atraining" name="training" placeholder= "Training :" disabled />
+                            <input type="text" class="form-control add" id="atraining" name="training" placeholder= "Training :" />
                         </div>
                         <div class="col-sm-4 form-group">
-                            <input type="text" class="form-control add inactive" id="aauditions" name="auditions" placeholder= "Auditions :" disabled />
+                            <input type="text" class="form-control add" id="aauditions" name="auditions" placeholder= "Auditions :" disabled />
                         </div>
                     </div>
                     <div class="row vertical-padded">
