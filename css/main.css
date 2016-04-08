@@ -63,6 +63,7 @@ body {
 	padding: 25px;
 }
 .login {
+	
 	background: #F2F2F2;
 	border: 0px;
 	border-radius: 8px;
@@ -495,7 +496,7 @@ div.img-div{
         color: white;
 }
 .toggle-btn:focus{
-	background-color: #FF003A;;
+	background-color: #FF003A;
         border-color: white;
         color: white;
 }
@@ -552,4 +553,12 @@ div.img-div{
 	background-color: rgba(255,255,255,0.95);
 	margin-right: 40px;
 	box-shadow: 5px 10px 5px #EAEAEA;
+}
+.marginTop{
+	margin-top: 25px;
+}
+.thinbordered{
+	border: 1px solid  #EAEAEA;
+	padding-top: 25px;
+	padding-bottom: 25px;
 }
