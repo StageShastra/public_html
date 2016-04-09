@@ -240,7 +240,7 @@ function show_details(i)
                        +'                 <font class="info-medium gray">Auditions : '+ actor_data[i].actor_auditions+'</font>'
                        +'             </div>'
                        +'         </div>'
-                       +'         <div class="row">'
+                       +'         <div class="row" style="padding-right:15px;">'
                        +'             <div class="DocumentList">'
                        +'                 <ul class="list-inline">';
 

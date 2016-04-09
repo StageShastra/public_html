@@ -106,7 +106,7 @@ function populate_profile(res)
                        +'                 <font class="info-medium gray">Training : '+ json[i].actor_training+'</font>'
                        +'             </div>'
                        +'         </div>'
-                       +'         <div class="row">'
+                       +'         <div class="row" style="padding-right:15px;">'
                        +'             <div class="DocumentList">'
                        +'                 <ul class="list-inline">';
 
@@ -122,7 +122,7 @@ function populate_profile(res)
                                                             str+=k+'.'+ext;
                         //console.log(str);
                         content+='<li class="DocumentItem">'
-                       +'<a href="'+str+'" data-lightbox="'+json[i].actor_name+'"><img src='+str+' height="100%" width=auto></img></a>' 
+                       +'<a href="'+str+'" data-lightbox="'+json[i].actor_name+'"><img class="photo"src='+str+' height="100%" width=auto></img></a>' 
                        +'         </li>';
                       }
                         content+='                 </ul>'
