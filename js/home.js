@@ -161,6 +161,88 @@ function show_add_actor()
   +'<br><button type="submit" class="btn submit-btn firstcolor" onclick=window.location="add_actor.php" id="btn-login" ><span class="glyphicon glyphicon-user"></span> &nbsp; Add Actor</button></div>';
   div.innerHTML = content; 
 }
+function show_details(i)
+{
+  var div = document.getElementById('actor_detail');
+  div.innerHTML="";
+  collapse= '     <div class="center">'
+                       +'         <div class="row collapsedetail">'
+                       +'             <div class="col-sm-4">'
+                       +'                 <font class="info-medium gray">Name :'+ actor_data[i].actor_name +'</font>'
+                       +'             </div>'
+                       +'             <div class="col-sm-4">'
+                       +'                 <font class="info-medium gray">Email : '+ actor_data[i].actor_email +'</font>'
+                       +'             </div>'
+                       +'             <div class="col-sm-4">'
+                       +'                 <font class="info-medium gray">Facial Attribute : '+ actor_data[i]["actor_facial-attribute"] +'</font>'
+                       +'             </div>'
+                       +'         </div>'
+                       +'         <div class="row collapsedetail">'
+                       +'             <div class="col-sm-4">'
+                       +'                 <font class="info-medium gray">DOB :'+ actor_data[i].actor_dob +'</font>'
+                       +'             </div>'
+                       +'             <div class="col-sm-4">'
+                       +'                 <font class="info-medium gray">Phone : '+ actor_data[i].actor_contact_number +'</font>'
+                       +'             </div>'
+                       +'             <div class="col-sm-4">'
+                       +'                 <font class="info-medium gray">Physical Attribute : '+ actor_data[i]["actor_physical-attribute"] +'</font>'
+                       +'             </div>'
+                       +'         </div>'
+                       +'         <div class="row collapsedetail">'
+                       +'             <div class="col-sm-4">'
+                       +'                 <div class="col-sm-6 " style="padding-left:0px">'
+                       +'                     <font class="info-medium gray">Height : '+ actor_data[i].actor_height +'cms</font>'
+                       +'                 </div>'
+                       +'                <div class="col-sm-6">'
+                       +'                    <font class="info-medium gray">Weight :'+ actor_data[i].actor_weight +'kgs</font>'
+                       +'                 </div>'
+                       +'             </div>'
+                       +'             <div class="col-sm-4 scrolr">'
+                       +'                 <font class="info-medium gray">Experience :'+ actor_data[i].actor_experience +'</font>'
+                       +'             </div>'
+                       +'            <div class="col-sm-4 scrolr">'
+                       +'                 <font class="info-medium gray">Projects : '+ actor_data[i].actor_projects+'</font>'
+                       +'             </div>'
+                       +'         </div>'
+                       +'         <div class="row collapsedetail">'
+                       +'             <div class="col-sm-4">'
+                       +'                 <font class="info-medium gray">Range : '+ actor_data[i].actor_range+' years</font>'
+                       +'             </div>'
+                       +'             <div class="col-sm-4">'
+                       +'                 <font class="info-medium gray">Training : '+ actor_data[i].actor_training+'</font>'
+                       +'             </div>'
+                       +'            <div class="col-sm-4">'
+                       +'                 <font class="info-medium gray">Auditions : '+ actor_data[i].actor_auditions+'</font>'
+                       +'             </div>'
+                       +'         </div>'
+                       +'         <div class="row">'
+                       +'             <div class="DocumentList">'
+                       +'                 <ul class="list-inline">';
+
+                       for(var k=0;k<actor_data[i].actor_images;k++)
+                       {
+                        var str = actor_data[i].actor_profile_photo;
+                        var arr = str.split(".");
+                        var ext = arr[2];
+                        str1 = arr[0];
+                        str2 = arr[1];
+                        str2 = str2.substring(0, str2.length - 1);
+                        str=str1+'.'+str2;
+                        str+=k+'.'+ext;
+                        //console.log(str);
+                        collapse+='<li class="DocumentItem">'
+                       +'<a href="'+str+'" data-lightbox="'+actor_data[i].actor_name+'"><img class="photo" src='+str+' height="100%" width=auto></img></a>' 
+                       +'         </li>';
+                      }
+                        collapse+='                 </ul>'
+                       +'             </div>'
+                       +'         </div>'
+                       +'     </div>'
+                       +'</div> ';
+                      div.innerHTML=collapse;
+                      $('#detailsActor').modal('show');
+
+}
 function populate_browse_table(res)
 {	
 	var json = JSON.parse(res);
@@ -198,7 +280,7 @@ function populate_browse_table(res)
                           +'</td>' 
                    		  +'<td style="vertical-align:middle-top;">'
                           +      '<div class="img-div center">'
-						  +			'<img src="'+json[i].actor_profile_photo+'" data-toggle="collapse" data-target="#collapse'+i+'" />'
+						  +			'<img src="'+json[i].actor_profile_photo+'" onclick="show_details('+i+')" />'
 						  +		 '</div>'
                           + '</td>' 
                           +'<td style="vertical-align:middle;">'
@@ -214,87 +296,9 @@ function populate_browse_table(res)
                           +      '<span class="info gray scrolr">'+json[i][d]+'</span>'
                           + '</td>'
                           +'<td style="vertical-align:middle;">'
-                          + 		'<span class="info gray scrolr">'+json[i][e]+'</span><font class="sortbuttons"><button data-toggle="collapse" data-target="#collapse'+i+'"  class="btn submit-btn firstcolor toggle-btn" ><span class="glyphicon glyphicon-chevron-down"></span></button>'
+                          + 		'<span class="info gray scrolr">'+json[i][e]+'</span><font class="sortbuttons"><button onclick="show_details('+i+')"  class="btn submit-btn firstcolor toggle-btn" ><span class="glyphicon glyphicon-share"></span></button>'
                           +'</td></tr>';
                          
-            collapse=  '<tr id="collapse'+i+'" class="collapse"><td colspan=9>'
-                       +'     <div class="col-sm-12">'
-                       +'         <div class="row collapsedetail">'
-                       +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium gray">Name :'+ json[i].actor_name +'</font>'
-                       +'             </div>'
-                       +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium gray">Email : '+ json[i].actor_email +'</font>'
-                       +'             </div>'
-                       +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium gray">Facial Attribute : '+ json[i]["actor_facial-attribute"] +'</font>'
-                       +'             </div>'
-                       +'         </div>'
-                       +'         <div class="row collapsedetail">'
-                       +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium gray">DOB :'+ json[i].actor_dob +'</font>'
-                       +'             </div>'
-                       +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium gray">Phone : '+ json[i].actor_contact_number +'</font>'
-                       +'             </div>'
-                       +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium gray">Physical Attribute : '+ json[i]["actor_physical-attribute"] +'</font>'
-                       +'             </div>'
-                       +'         </div>'
-                       +'         <div class="row collapsedetail">'
-                       +'             <div class="col-sm-4">'
-                       +'                 <div class="col-sm-6 " style="padding-left:0px">'
-                       +'                     <font class="info-medium gray">Height : '+ json[i].actor_height +'cms</font>'
-                       +'                 </div>'
-                       +'                <div class="col-sm-6">'
-                       +'                    <font class="info-medium gray">Weight :'+ json[i].actor_weight +'kgs</font>'
-                       +'                 </div>'
-                       +'             </div>'
-                       +'             <div class="col-sm-4 scrolr">'
-                       +'                 <font class="info-medium gray">Experience :'+ json[i].actor_experience +'</font>'
-                       +'             </div>'
-                       +'            <div class="col-sm-4 scrolr">'
-                       +'                 <font class="info-medium gray">Projects : '+ json[i].actor_projects+'</font>'
-                       +'             </div>'
-                       +'         </div>'
-                       +'         <div class="row collapsedetail">'
-                       +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium gray">Range : '+ json[i].actor_range+' years</font>'
-                       +'             </div>'
-                       +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium gray">Training : '+ json[i].actor_training+'</font>'
-                       +'             </div>'
-                       +'            <div class="col-sm-4">'
-                       +'                 <font class="info-medium gray">Auditions : '+ json[i].actor_auditions+'</font>'
-                       +'             </div>'
-                       +'         </div>'
-                       +'         <div class="row">'
-                       +'             <div class="DocumentList">'
-                       +'                 <ul class="list-inline">';
-
-                       for(var k=0;k<json[i].actor_images;k++)
-                       {
-                       	var str = json[i].actor_profile_photo;
-                       	var arr = str.split(".");
-                        var ext = arr[2];
-                        str1 = arr[0];
-                        str2 = arr[1];
-						            str2 = str2.substring(0, str2.length - 1);
-						            str=str1+'.'+str2;
-                                                            str+=k+'.'+ext;
-						            //console.log(str);
-                       	collapse+='<li class="DocumentItem">'
-                       +'<a href="'+str+'" data-lightbox="'+json[i].actor_name+'"><img src='+str+' height="100%" width=auto></img></a>' 
-                       +'         </li>';
-                   		}
-                        collapse+='                 </ul>'
-                       +'             </div>'
-                       +'         </div>'
-                       +'     </div>'
-                       +'</div> '
-                       + '</td>'
-                       +'</tr>';
-                       content+=collapse;
 
 	}
 	content+="</tbody></table>";

@@ -5,14 +5,23 @@ var actor={};
     actor.name=$("#fullname").val();
     actor.email=$("#email").val();
     actor.contact=$("#contact").val();
+    actor.whatsapp=$("#whatsapp").val();
     actor.password=$("#password").val();
     $("#form-div-personal").addClass("animated zoomOutUp");
     $("#form-div-bio").addClass("animated zoomInUp");
     $("#form-div-personal").addClass("hidden");
     $("#form-div-bio").removeClass("hidden");
+    $("#pro-bio").removeClass("hidden");
+
+   }
+   function showwhatsapp()
+   {
+    var w = document.getElementById("whatsapp");
+    w.type= "text";
    }
    function showwork()
    {
+    calculateAge();
     actor.dob=$("#dob").val();
     actor.age=$("#age").val();
     actor.sex=$("#sex").val();
@@ -23,6 +32,7 @@ var actor={};
     $("#form-div-work").addClass("animated zoomInUp");
     $("#form-div-bio").addClass("hidden");
     $("#form-div-work").removeClass("hidden");
+    $("#pro-work").removeClass("hidden");
    }
    Dropzone.options.photoUpload={ 
     autoProcessQueue: false,
@@ -31,7 +41,7 @@ var actor={};
     maxFilesize:2,
     addRemoveLinks:true,
     maxFiles: 100,
-    dictDefaultMessage:'Drag or Click here to upload your pictures.<span class="info-small gray">(Please keep image size <1.5mb for faster upload)',
+    dictDefaultMessage:'Drag or click here to upload <span style="color:#FFAA3A;">at least one picture</span>.<span class="info-small gray"><li>Ideally, keep the image size less than 1.5MB</li><li>You can add more later</li></span>',
     acceptedFiles:'image/*',
     paramName:'file',
     dictInvalidFileType:'Please stick to image files.',
@@ -58,6 +68,7 @@ var actor={};
        formData.append("weight", actor.weight);
        formData.append("height",actor.height);
        formData.append("phone", actor.contact);
+       formData.append("whatsapp", actor.whatsapp);
        formData.append("age", actor.age);
        formData.append("sex", actor.sex);
        formData.append("experience", $('#experience').val());
@@ -89,6 +100,7 @@ var actor={};
           $("#form-div-work").addClass("animated zoomOutUp");
           $("#success").removeClass("hidden");
           $("#form-div-work").addClass("hidden");
+          $("#pro-bar").addClass("hidden");
           $("#success").addClass("animated fadeIn");
 
           
@@ -108,3 +120,38 @@ var actor={};
   }
 
 }
+$("input").tooltip({
+ 
+      // place tooltip on the right edge
+      position: "right",
+ 
+      // a little tweaking of the position
+      offset: [0, 0],
+ 
+      // use the built-in fadeIn/fadeOut effect
+      effect: "none",
+ 
+      // custom opacity setting
+      opacity: 0.7
+ 
+      });
+var type = ["Donor","Volunteer","Member","Resource","Follow-up","Friend"]; 
+var elt = $('#lan > > input');
+ elt.tagsinput({
+  typeahead: {
+    source: type
+  }
+});
+
+function calculateAge() { // birthday is a date
+    var dob = $("#dob").val();
+    var Bday = +new Date(dob);
+    var ageDifMs = Date.now() - Bday;
+    //console.log(dob + "and " + ageDifMs);
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    $("#age").val(Math.abs(ageDate.getUTCFullYear() - 1970));
+
+}
+
+
+

@@ -52,38 +52,62 @@ else
               <a href="index.php"><img src="../img/logo.png" class="logo img-fluid"/></a> STAGE<b>SHASTRA</b>
             </div>
             <div class="row center">
+              <div id="pro-bar" class="container col-sm-8 center">
+                      
+                      <div class="progress">
+                        <div class="progress-bar progress-bar-success" id="pro-personal"role="progressbar" style="width:33.33%; background:#FF003A; ">
+                          Personal 
+                        </div>
+                        <div class="progress-bar progress-bar-success hidden" id="pro-bio" role="progressbar" style="width:33.33%;background:#FFAA3A;">
+                          Bio
+                        </div>
+                        <div class="progress-bar progress-bar-danger hidden" id="pro-work" role="progressbar" style="width:33.33%;background:#FEE300; ">
+                          Work
+                        </div>
+                      </div>
+                    </div>
               <div class="col-sm-12 light-padded">
+                    
                 <div class="col-sm-8 center thinbordered" id="form-div-personal">
                   <font class="info gray"><span class="glyphicon glyphicon-user firstcolor" aria-hidden="true"></span>  Personal Details<hr></font>
                       <form role="form" class="col-sm-8 center marginTop" id="signup-form">
                       <div class="form-group">
-                        <input type="text" class="form-control login" id="fullname" name="fullname" placeholder= "Full Name *" required>
+                        <input type="text" class="form-control login" id="fullname" name="fullname" title="Do not add any titles, like Mr. or Ms., etc" placeholder= "Full Name *" required>
                       </div>
                       <div class="form-group">
                         <input type="email" class="form-control login" id="email" name="email" placeholder= "Email *" required >
                       </div>
                       <div class="form-group">
-                        <input type="text" class="form-control login" id="contact" name="contact" placeholder= "Phone No.(will be used to send audition SMS) *" required >
+                        <input type="text" class="form-control login" id="contact" name="contact" title="Do not add zero or +91 before it." placeholder= "Phone No. *" required >
+                      </div>
+                      <div class="form-group no-paddinglr" style="text-align:left;">
+                             <input type="checkbox" name="whatsapp" id="whatsappcheck" class="css-checkbox" onclick="showwhatsapp()" unchecked /><label for="whatsappcheck" class="css-label"><span class="info-small dark-gray ">Add a WhatsApp No.</span></label>
                       </div>
                       <div class="form-group">
-                        <input type="password" class="form-control login" id="password" name="password" placeholder= "Choose a password" required>
+                        <input type="hidden" class="form-control login" id="whatsapp" name="whatsapp" title="Do not add zero or +91 before it." placeholder= "Whatsapp No. *" required >
+                      </div>
+                      <div class="form-group">
+                        <input type="password" class="form-control login" id="password" name="password" title="Atleast 8 letters" placeholder= "Choose a password" required>
                       </div>
                       <button type="button" class="btn submit-btn firstcolor" onclick="showbio()" id="sign-upbtn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Continue</button>
                     </form>
                 </div>
                 <div>
                   <div class="col-sm-8 center thinbordered hidden" id="form-div-bio">
-                  <font class="info gray"><span class="glyphicon glyphicon-pencil firstcolor" aria-hidden="true"></span> Bio<hr></font>
+                  <font class="info gray"><span class="glyphicon glyphicon-pencil info-small firstcolor" aria-hidden="true"></span> Bio<hr></font>
                       <form role="form" class="col-sm-8 center marginTop" id="signup-form">
                       <div class="form-group">
-                        <input type="date" class="form-control login" style="color:#99999B;" id="dob" name="dob" placeholder= "Date of Birth *" required >
+                        <input type="date" class="form-control login" style="color:#99999B;" id="dob" name="dob" title= "Date of Birth" required >
                       </div>
                       <div>
                           <div class="col-sm-6 form-group no-paddinglr">
-                              <input type="text" class="form-control login" id="age" name="age" placeholder= "Age(in years) :" required />
+                              <input type="text" class="form-control login" onclick="calculateAge()" id="age" name="age" placeholder= "Age(in years) :" required />
                           </div>
                           <div class="col-sm-6 form-group no-paddinglr">
-                              <input type="text" class="form-control login" id="sex" name="sex" placeholder= "Sex (M/F) :" required />
+                              <select type="text" class="form-control login" id="sex" name="sex" placeholder= "Sex (M/F) :" required >
+                                <option>M</option>
+                                <option>F</option>
+                              </select>
                           </div>
                       </div>
                       <div>
@@ -105,24 +129,24 @@ else
                   <div class="col-sm-8 center thinbordered hidden" id="form-div-work">
                   <font class="info gray"><span class="glyphicon glyphicon-th-list firstcolor" aria-hidden="true"></span> Work<hr></font>
                       <form role="form" class="col-sm-8 center marginTop" id="signup-form"  style="margin-bottom:50px;">
-                      <div class="form-group">
-                        <input type="text" class="form-control login" data-role="tagsinput" id="language" name="language" placeholder= "Languages you speak" required >
+                      <div class="form-group" id="lan">
+                        <input type="text" class="form-control login"  data-role="tagsinput" id="language" name="language" title="Add a language, then press enter." placeholder= "Languages you speak" required >
                       </div>
                       <div class="form-group">
-                        <input type="text" class="form-control login"  id="experience" name="experience" placeholder= "Work Experience(ads, films etc.)" required >
+                        <input type="text" class="form-control login"  id="experience" name="experience" title="Leave blank  if you don't have any." placeholder= "Work Experience(ads, films etc.)" required >
                       </div>
                       <div class="form-group">
-                        <input type="text" class="form-control login" data-role="tagsinput" id="skills" name="skills" placeholder= "Skills(Swimming, Dancing)" required >
+                        <input type="text" class="form-control login"  data-role="tagsinput" id="skills" name="skills"  placeholder= "Skills(Swimming etc.)" required >
                       </div>
                       <div class="form-group">
-                        <input type="text" class="form-control login" id="age-range" name="age-range" placeholder= "Age Range(15-25) in years" required >
+                        <input type="text" class="form-control login" id="age-range" name="age-range" title="What ages would you naturally be able to play on screen/stage?"placeholder= "Age Range in years" required >
                       </div>
                       <div>
                           <div class="col-sm-6 form-group no-paddinglr" style="text-align:left;">
-                             <input type="checkbox" name="passport" id="passport" class="css-checkbox" unchecked /><label for="passport" class="css-label"><span class="info dark-gray formtext">Passport</span></label>
+                             <input type="checkbox" name="passport" id="passport" class="css-checkbox" unchecked /><label for="passport" class="css-label"><span class="info-small dark-gray "> I have a Passport</span></label>
                           </div>
                           <div class="col-sm-6 form-group no-paddinglr">
-                              <input type="checkbox" name="actorcard" id="actorcard" class="css-checkbox" unchecked /><label for="actorcard" class="css-label"><span class="info dark-gray formtext">Actor' Card</span></label>
+                              <input type="checkbox" name="actorcard" id="actorcard" class="css-checkbox" unchecked /><label for="actorcard" class="css-label"><span class="info-small dark-gray ">I have a Actor's Card</span></label>
                           </div>
                       </div>
                     </form>
@@ -134,7 +158,7 @@ else
                 </div>
                  <div class="container-fluid hidden" id="success">
                   <div class="col-sm-12">
-                    <img src="../img/thanks.png"  style="float:left; height:50%;"/><h1 style="margin-top:15%;" class="firstcolor"> Thank You!</b></h1><br><span class="info">We love to have you onboard! Click <a href="home.php">here</a> to see your profile.</span></br>
+                    <img src="../img/thanks.png"  style="float:left; height:50%;"/><h1 style="margin-top:15%;" class="firstcolor"> Thank You!</b></h1><br><span class="info">Good to have you onboard!<br> Click <a href="home.php">here</a> to go to your profile.</span></br><h1 style="margin-top:5%;" class="firstcolor"> धन्यवाद!</b></h1><br><span class="info">आपके हुमारे साथ जुड़ने की हमे बेहद खुशी है!<br>अपने प्रोफाइल पर जाने के लिए <a href="home.php">यहाँ क्लिक</a> करें</span></br>
                   </div>
                 </div>      
               </div>
@@ -150,8 +174,10 @@ else
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
         <script src="../js/vendor/bootstrap.min.js"></script>
-         <script src="../js/tagsinput.js"></script>
-        <script src="../js/actor_signup.js"></script>
+        <script src="../js/typeahead.js"></script>
+        <script src="../js/tagsinput.js"></script>
+
+        <script src="../js/actor_signup.js"></script> 
         <script src="../js/main.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

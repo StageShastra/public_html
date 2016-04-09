@@ -22,6 +22,7 @@ $dob = $_POST['dob'];
 $weight = $_POST['weight'];
 $height = $_POST['height'];
 $phone = $_POST['phone'];
+$whatsapp = $_POST['whatsapp'];
 $age = $_POST['age'];
 $sex = $_POST['sex'];
 $experience = $_POST['experience'];
@@ -92,7 +93,7 @@ if(isset($_FILES['file']))
 $sql = "INSERT INTO actor (actor_id,actor_email,actor_username,actor_password,actor_name,actor_sex,actor_age,
     actor_dob,actor_age_range_min,actor_age_range_max,actor_height,actor_weight,actor_range,
     actor_contact_number,actor_whatsapp_number,actor_profile_photo,actor_blacklist,actor_card,`actor_physical-attribute`,`actor_facial-attribute`,actor_language,actor_skills,actor_experience,actor_training,actor_projects,actor_images,director_id,actor_passport)
-  VALUES ('$uid', '$email', '$email','$password','$name','$sex','$age','$dob','$start','$end','$height','$weight','$range','$phone','$phone','$profile','0','$actorcard','','','$language','$skills','$experience','$training','$project','$i','$director_id','$passport')";
+  VALUES ('$uid', '$email', '$email','$password','$name','$sex','$age','$dob','$start','$end','$height','$weight','$range','$phone','$whatsapp','$profile','0','$actorcard','','','$language','$skills','$experience','$training','$project','$i','$director_id','$passport')";
 $data_entered=mysqli_query($con, $sql);
 if ($data_entered && $img_uploaded) {
       echo "200";

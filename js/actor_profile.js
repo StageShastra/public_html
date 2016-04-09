@@ -33,7 +33,7 @@ function populate_profile(res)
   var i=0;
   console.log(json[i].actor_name);
 	var content="";
-  content+='<div class="container col-sm-8 center marginTop"><center><font class="info firstcolor">Hello '+json[i].actor_name +'! </font><br><font class="info-small gray">Welcome to Stage<b>Shastra</b>! Below are your profile details.You can edit them anytime you like.</font></center></div><table class="table table-curved display" id="actor_table"><tr id="datarow">' 
+  content+='<table class="table table-curved display" id="actor_table"><tr id="datarow">' 
                         +'<td style="vertical-align:middle-top;">'
                           +      '<div class="img-div center">'
               +     '<img src="'+json[i].actor_profile_photo+'" data-toggle="collapse" data-target="#collapse'+i+'" />'
@@ -52,7 +52,7 @@ function populate_profile(res)
                           +      '<span class="info gray scrolr">'+json[i].actor_contact_number+'</span>'
                           + '</td>'
                           +'<td style="vertical-align:middle;">'
-                          +     '<span class="info gray scrolr">'+json[i].actor_skills+'</span><font class="sortbuttons"><button  class="btn submit-btn firstcolor contact-btn disabled" disabled><span class="glyphicon glyphicon-edit"></span></button>'
+                          +     '<span class="info gray scrolr">'+json[i].actor_skills+'</span><font class="sortbuttons"><button  class="btn submit-btn firstcolor contact-btn disabled" disabled><span class="glyphicon glyphicon-pencil"></span><span class="info-small"></span></button>'
                           +'</td></tr></table>';
 	content+='<div class="col-sm-12">'
                        +' <div class="row">'

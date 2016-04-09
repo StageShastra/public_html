@@ -2,7 +2,7 @@
 session_start();
 if(empty($_SESSION['login_actor']))
 {
-    header("Location:../index.php");
+    header("Location:index.php");
 }
 ?>
 <!doctype html>

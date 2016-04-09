@@ -43,15 +43,15 @@ header("Location:../actor/home.php");
               <div class="col-sm-6 light-padded mycontent-left">
                 <font class="info gray left padded"><br>Actors use Stage Shastra to:<br>
                   <ul>
-                    <li>Organize their data</li>
-                    <li>Create professional account</li>
-                    <li>Instantly connect with Casting Directors </li>
+                    <li> Connect directly with casting directors</li>
+                    <li>Create detailed profiles</li>
+                    <li>Get audition notifications</li>
                   </ul>
                 </font>
               </div>
               <div class="col-sm-6">
                 <div class="mycontent-right center light-padded">
-                    <font class="info firstcolor center"> Log In | <a href="signup.php"><font class="info firstcolor center"> Sign Up! </a></font></font>
+                    <font class="info dark-gray center"> Log In | <a href="signup.php"><font class="info firstcolor center"> Sign Up! </a></font></font>
                     <form role="form" id="login-form" method="post" >
                     <div class="form-group">
                       <input type="email" class="form-control login" id="email" name="email" placeholder= "Email" required />
@@ -62,7 +62,7 @@ header("Location:../actor/home.php");
                     <div class="checkbox-circle">
                       <a href="forgotpassword.html">Forgot Password? </a>
                     </div>
-                    <button type="submit" class="btn submit-btn firstcolor" id="btn-login" ><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign In</button>
+                    <button type="submit" class="btn submit-btn firstcolor" id="btn-login" ><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign In</button>&nbsp;&nbsp;&nbsp;&nbsp;<a href="signup.php"><button type="button" class="btn submit-btn firstcolor" id="btn-login" ><span class="glyphicon glyphicon-list-alt"></span> &nbsp; Sign Up</button></a>
                     <div class="alert alert-danger margin-top hidden" id="error-alert">
                       <button type="button" class="close" data-dismiss="alert">x</button>
                       <strong>Error! </strong>
