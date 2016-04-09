@@ -1,5 +1,5 @@
 var actor={};
-
+var toggle_wa=0;
    function showbio()
    {
     actor.name=$("#fullname").val();
@@ -16,8 +16,24 @@ var actor={};
    }
    function showwhatsapp()
    {
-    var w = document.getElementById("whatsapp");
-    w.type= "text";
+    if(toggle_wa%2==0)
+    {
+      var w = document.getElementById("whatsapp");
+      w.type= "text";
+      toggle_wa++;
+    }
+    else
+    {
+      var w = document.getElementById("whatsapp");
+      w.type= "hidden";
+      toggle_wa++;
+    }
+  
+   }
+   function useasWhatsapp()
+   {
+    var contact=$("#contact").val();
+    $("#whatsapp").val(contact);
    }
    function showwork()
    {
@@ -72,7 +88,9 @@ var actor={};
        formData.append("age", actor.age);
        formData.append("sex", actor.sex);
        formData.append("experience", $('#experience').val());
-       formData.append("range", $('#age-range').val());
+       formData.append("training", $('#training').val());
+       formData.append("agemin",$('#agemin').val());
+       formData.append("agemax",$('#agemax').val());
        formData.append("language", $('#language').val());
        formData.append("directorid", $('#director').val());
        formData.append("skills", $('#skills').val());
@@ -89,6 +107,7 @@ var actor={};
        }
        formData.append("passport",passport);
        formData.append("actorcard",actorcard);
+       console.log(formData);
       });
       this.on("successmultiple", function(files, response)
       { 

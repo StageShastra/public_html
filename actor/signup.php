@@ -54,15 +54,13 @@ else
             <div class="row center">
               <div id="pro-bar" class="container col-sm-8 center">
                       
-                      <div class="progress">
-                        <div class="progress-bar progress-bar-success" id="pro-personal"role="progressbar" style="width:33.33%; background:#FF003A; ">
-                          Personal 
+                      <div class="progress" style="height:4px;">
+                        <div class="progress-bar progress-bar-success" id="pro-personal"role="progressbar" style="width:33.33%; height:4px; background:#FEE300; "> 
                         </div>
-                        <div class="progress-bar progress-bar-success hidden" id="pro-bio" role="progressbar" style="width:33.33%;background:#FFAA3A;">
-                          Bio
+                        <div class="progress-bar progress-bar-success hidden" id="pro-bio" role="progressbar" style="width:33.33%; height:4px; background:#FFAA3A;">
+
                         </div>
-                        <div class="progress-bar progress-bar-danger hidden" id="pro-work" role="progressbar" style="width:33.33%;background:#FEE300; ">
-                          Work
+                        <div class="progress-bar progress-bar-danger hidden" id="pro-work" role="progressbar" style="width:33.33%; height:4px;background:#FF003A; ">
                         </div>
                       </div>
                     </div>
@@ -81,8 +79,12 @@ else
                         <input type="text" class="form-control login" id="contact" name="contact" title="Do not add zero or +91 before it." placeholder= "Phone No. *" required >
                       </div>
                       <div class="form-group no-paddinglr" style="text-align:left;">
-                             <input type="checkbox" name="whatsapp" id="whatsappcheck" class="css-checkbox" onclick="showwhatsapp()" unchecked /><label for="whatsappcheck" class="css-label"><span class="info-small dark-gray ">Add a WhatsApp No.</span></label>
+                             <input type="checkbox" name="useaswhatsapp" id="useaswhatsapp" class="css-checkbox" onclick="useasWhatsapp()" unchecked /><label for="useaswhatsapp" class="css-label"><span class="info-small dark-gray ">Use above as your WhatsApp No.</span></label>
                       </div>
+                      <div class="form-group no-paddinglr" style="text-align:left;">
+                             <input type="checkbox" name="whatsapp" id="whatsappcheck" class="css-checkbox" onclick="showwhatsapp()" unchecked /><label for="whatsappcheck" class="css-label"><span class="info-small dark-gray ">Add a new WhatsApp No.</span></label>
+                      </div>
+
                       <div class="form-group">
                         <input type="hidden" class="form-control login" id="whatsapp" name="whatsapp" title="Do not add zero or +91 before it." placeholder= "Whatsapp No. *" required >
                       </div>
@@ -97,7 +99,7 @@ else
                   <font class="info gray"><span class="glyphicon glyphicon-pencil info-small firstcolor" aria-hidden="true"></span> Bio<hr></font>
                       <form role="form" class="col-sm-8 center marginTop" id="signup-form">
                       <div class="form-group">
-                        <input type="date" class="form-control login" style="color:#99999B;" id="dob" name="dob" title= "Date of Birth" required >
+                        <input type="date" class="form-control login" style="color:#99999B;" id="dob" name="dob" title= "Date of Birth. Be careful to use the right format!" required >
                       </div>
                       <div>
                           <div class="col-sm-6 form-group no-paddinglr">
@@ -135,30 +137,38 @@ else
                       <div class="form-group">
                         <input type="text" class="form-control login"  id="experience" name="experience" title="Leave blank  if you don't have any." placeholder= "Work Experience(ads, films etc.)" required >
                       </div>
+                       <div class="form-group">
+                        <input type="text" class="form-control login"  id="training" name="training" title="Leave blank  if you don't have any." placeholder= "Training(acting school,etc.)" required >
+                      </div>
                       <div class="form-group">
                         <input type="text" class="form-control login"  data-role="tagsinput" id="skills" name="skills"  placeholder= "Skills(Swimming etc.)" required >
                       </div>
-                      <div class="form-group">
-                        <input type="text" class="form-control login" id="age-range" name="age-range" data-toggle="tooltip" data-placement="right" title="What ages would you naturally be able to play on screen/stage?"placeholder= "Age Range in years" required >
+                      <div>
+                          <div class="col-sm-6 form-group no-paddinglr">
+                              <input type="number" class="form-control login" id="agemin" name="agemin" title="What  minimum age would you naturally be able to play on screen/stage?" value="5" required />
+                          </div>
+                          <div class="col-sm-6 form-group no-paddinglr">
+                              <input type="number" class="form-control login" id="agemax" name="agemax" title="What maximum age would you naturally be able to play on screen/stage?" value="45" required />
+                          </div>
                       </div>
                       <div>
                           <div class="col-sm-6 form-group no-paddinglr" style="text-align:left;">
                              <input type="checkbox" name="passport" id="passport" class="css-checkbox" unchecked /><label for="passport" class="css-label"><span class="info-small dark-gray "> I have a Passport</span></label>
                           </div>
                           <div class="col-sm-6 form-group no-paddinglr">
-                              <input type="checkbox" name="actorcard" id="actorcard" class="css-checkbox" unchecked /><label for="actorcard" class="css-label"><span class="info-small dark-gray ">I have a Actor's Card</span></label>
+                              <input type="checkbox" name="actorcard" id="actorcard" class="css-checkbox" unchecked /><label for="actorcard" class="css-label"><span class="info-small dark-gray ">I have an Actor's Card</span></label>
                           </div>
                       </div>
                     </form>
                     <div class="form-group">
-                           <form action="../resources/actor_upload.php" class="dropzone" id="photo-upload" style="border: 1px dashed #b2b2b2;border-radius: 5px;background: white;"></form>
+                           <form action="../resources/actor_upload.php" class="dropzone" id="photo-upload" style="border: 1px dashed #b2b2b2;border-radius: 5px;background: white;margin-top:120px;"></form>
                     </div>
                     <button type="submit" class="btn submit-btn firstcolor" id="save-btn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Save</button>
                 </div>
                 </div>
                  <div class="container-fluid hidden" id="success">
                   <div class="col-sm-12">
-                    <img src="../img/thanks.png"  style="float:left; height:50%;"/><h1 style="margin-top:15%;" class="firstcolor"> Thank You!</b></h1><br><span class="info">Good to have you onboard!<br> Click <a href="home.php">here</a> to go to your profile.</span></br><h1 style="margin-top:5%;" class="firstcolor"> धन्यवाद!</b></h1><br><span class="info">आपके हुमारे साथ जुड़ने की हमे बेहद खुशी है!<br>अपने प्रोफाइल पर जाने के लिए <a href="home.php">यहाँ क्लिक</a> करें</span></br>
+                    <img src="../img/thanks.png"  style="float:left; height:50%;"/><h1 style="margin-top:15%;" class="firstcolor"> Thank You!</b></h1><br><span class="info">Good to have you onboard!<br> Click <a href="home.php">here</a> to go to your profile.</span>
                   </div>
                 </div>      
               </div>

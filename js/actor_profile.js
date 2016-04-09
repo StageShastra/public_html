@@ -1,4 +1,4 @@
-
+var actor_data;
 function send_data()
 {	
 	
@@ -26,12 +26,12 @@ function send_data()
 function populate_profile(res)
 {	
 	var json = JSON.parse(res);
-	var actor_data=json;
-  console.log(json);
+	actor_data=json;
+  //console.log(json);
 	var div = document.getElementById('browse-table');
   div.innerHTML="";
   var i=0;
-  console.log(json[i].actor_name);
+ // console.log(json[i].actor_name);
 	var content="";
   content+='<table class="table table-curved display" id="actor_table"><tr id="datarow">' 
                         +'<td style="vertical-align:middle-top;">'
@@ -52,58 +52,60 @@ function populate_profile(res)
                           +      '<span class="info gray scrolr">'+json[i].actor_contact_number+'</span>'
                           + '</td>'
                           +'<td style="vertical-align:middle;">'
-                          +     '<span class="info gray scrolr">'+json[i].actor_skills+'</span><font class="sortbuttons"><button  class="btn submit-btn firstcolor contact-btn disabled" disabled><span class="glyphicon glyphicon-pencil"></span><span class="info-small"></span></button>'
+                          +     '<span class="info gray scrolr">'+json[i].actor_skills+'</span>'
+                          +'<font class="sortbuttons"><button  class="btn submit-btn firstcolor contact-btn" onclick="populate_edit_form()" data-target="#editprofile" data-toggle="modal">'
+                          +'<span class="glyphicon glyphicon-pencil"></span><span class="info-small"></span></button>'
                           +'</td></tr></table>';
 	content+='<div class="col-sm-12">'
                        +' <div class="row">'
                        +'         <div class="row collapsedetail">'
                        +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium gray">Name :'+ json[i].actor_name +'</font>'
+                       +'                 <font class="info-medium firstcolor">Name :<span class="gray">'+ json[i].actor_name +'</span></font>'
                        +'             </div>'
                        +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium gray">Email : '+ json[i].actor_email +'</font>'
+                       +'                 <font class="info-medium firstcolor ">Email : <span class="gray">'+ json[i].actor_email +'</font>'
                        +'             </div>'
                        +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium gray">Sex: '+ json[i].actor_sex +'</font>'
+                       +'                 <font class="info-medium firstcolor">Sex: <span class="gray">'+ json[i].actor_sex +'</font>'
                        +'             </div>'
                        +'         </div>'
                        +'         <div class="row collapsedetail">'
                        +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium gray">DOB :'+ json[i].actor_dob +'</font>'
+                       +'                 <font class="info-medium firstcolor">DOB :<span class="gray">'+ json[i].actor_dob +'</font>'
                        +'             </div>'
                        +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium gray">Phone : '+ json[i].actor_contact_number +'</font>'
+                       +'                 <font class="info-medium firstcolor">Phone : <span class="gray">'+ json[i].actor_contact_number +'</font>'
                        +'             </div>';
                         var ac, pp;
                        if(json[i].actor_card==1){ ac="Yes";}else{ ac="No";}
                        if(json[i].actor_passport==1){ pp="Yes";}else{ pp="No";}
                         content+='             <div class="col-sm-4">'
-                       +'                 <font class="info-medium gray">Actor\'s Card :'+ac
+                       +'                 <font class="info-medium firstcolor">Actor\'s Card :<span class="gray">'+ac
                        +'</font>'
                        +'             </div>'
                        +'         </div>'
                        +'         <div class="row collapsedetail">'
                        +'             <div class="col-sm-4">'
                        +'                 <div class="col-sm-6 " style="padding-left:0px">'
-                       +'                     <font class="info-medium gray">Height : '+ json[i].actor_height +'cms</font>'
+                       +'                     <font class="info-medium firstcolor">Height : <span class="gray">'+ json[i].actor_height +'cms</font>'
                        +'                 </div>'
                        +'                <div class="col-sm-6">'
-                       +'                    <font class="info-medium gray">Weight :'+ json[i].actor_weight +'kgs</font>'
+                       +'                    <font class="info-medium firstcolor">Weight :<span class="gray">'+ json[i].actor_weight +'kgs</font>'
                        +'                 </div>'
                        +'             </div>'
                        +'             <div class="col-sm-4 scrolr">'
-                       +'                 <font class="info-medium gray">Experience :'+ json[i].actor_experience +'</font>'
+                       +'                 <font class="info-medium firstcolor">Experience :<span class="gray">'+ json[i].actor_experience +'</font>'
                        +'             </div>'
                        +'            <div class="col-sm-4 scrolr">'
-                       +'                 <font class="info-medium gray">Passport : '+  pp +'</font>'
+                       +'                 <font class="info-medium firstcolor">Passport : <span class="gray">'+  pp +'</font>'
                        +'             </div>'
                        +'         </div>'
                        +'         <div class="row collapsedetail">'
                        +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium gray">Range : '+ json[i].actor_range+' years</font>'
+                       +'                 <font class="info-medium firstcolor">Range : <span class="gray">'+ json[i].actor_range+' years</font>'
                        +'             </div>'
                        +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium gray">Training : '+ json[i].actor_training+'</font>'
+                       +'                 <font class="info-medium firstcolor">Training : <span class="gray">'+ json[i].actor_training+'</font>'
                        +'             </div>'
                        +'         </div>'
                        +'         <div class="row" style="padding-right:15px;">'
@@ -136,7 +138,89 @@ function populate_profile(res)
                         });
 
 }
+function populate_edit_form()
+{
+  var i=0;
+  $("#name").val(actor_data[i].actor_name);
+  $("#phone").val(actor_data[i].actor_contact_number);
+  $("#language").val(actor_data[i].actor_language);
+  $("#email").val(actor_data[i].actor_email);
+  $("#whatsapp").val(actor_data[i].actor_whatsapp_number);
+  $("#weight").val(actor_data[i].actor_weight);
+  $("#height").val(actor_data[i].actor_height);
+  $("#dob").val(actor_data[i].actor_dob);
+  $("#sex").val(actor_data[i].actor_sex);
+  $("#password").val(actor_data[i].actor_password);
+  $("#experience").val(actor_data[i].actor_experience);
+  $("#agemin").val(actor_data[i].actor_age_range_min);
+  $("#agemax").val(actor_data[i].actor_age_range_max);
+  $("#training").val(actor_data[i].actor_training);
+  if(actor_data[i].actor_passport==1)
+  {
+    $('#passport').attr('checked', true); // Checks it
+  }
+  if(actor_data[i].actor_card==1)
+  {
+    $('#actorcard').attr('checked', true); // Checks it
+  }
+  calculateAge();
+  
+}
+function updateactor()
+{
+   calculateAge();
+   var formData={};
+   formData.name=$("#name").val();
+   formData.email=$("#email").val();
+   formData.password=$("#password").val();
+   formData.dob= $("#dob").val();
+   formData.weight=$("#weight").val();
+   formData.height=$("#height").val();
+   formData.phone=$("#phone").val();
+   formData.whatsapp=$("#whatsapp").val();
+   formData.age=$("#age").val();
+   formData.sex=$("#sex").val();
+   formData.experience=$('#experience').val();
+   formData.training=$('#training').val();
+   formData.agemin=$('#agemin').val();
+   formData.agemax=$('#agemax').val();
+   formData.language=$('#language').val();
+   formData.directorid=$('#director').val();
+   formData.skills=$('#skills').val();
+   var actorcard,passport;
+   if($('#passport').is(":checked"))
+       {
+          passport=1;
+       }
+       var actorcard=0; 
+       if($('#actorcard').is(":checked"))
+       {
+          actorcard=1;
+       }
+   formData.passport=passport;
+   formData.actorcard=actorcard;
+   console.log(formData);
+   $.ajax({
+    type: "POST",
+    data: formData,
+    url: "../resources/update_actor_profile.php",
+    success: function(res){
+    console.log(res);
+     //var json = JSON.parse(res);
+     //console.log(json);
+     if(res!='401')
+     {
+        $("#successful").removeClass("hidden");
+     }
+     else
+     {
+       $("#unsuccessful").removeClass("hidden");
+     }  
+     
+   }
+});
 
+}
 function show_spinner()
 {
   var div = document.getElementById('browse-table');
@@ -169,5 +253,28 @@ function checkCookie(cookie) {
         return 1;
         }
     }
-
+$("input").tooltip({
+ 
+      // place tooltip on the right edge
+      position: "right",
+ 
+      // a little tweaking of the position
+      offset: [0, 0],
+ 
+      // use the built-in fadeIn/fadeOut effect
+      effect: "none",
+ 
+      // custom opacity setting
+      opacity: 0.7
+ 
+      });
 send_data();
+function calculateAge() { // birthday is a date
+    var dob = $("#dob").val();
+    var Bday = +new Date(dob);
+    var ageDifMs = Date.now() - Bday;
+    //console.log(dob + "and " + ageDifMs);
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    $("#age").val(Math.abs(ageDate.getUTCFullYear() - 1970));
+
+}

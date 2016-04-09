@@ -188,7 +188,7 @@ if(empty($_SESSION['login_user']))
               <div class="modal-content center" style="width:100%;">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title firstcolor info">Actor's Detail</h4>
+                  <h4 class="modal-title firstcolor info">Actor's Details</h4>
                 </div>
                 <div class="modal-body" id="actor_detail"  style="background-color:#fff;">
                   

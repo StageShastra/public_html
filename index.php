@@ -64,7 +64,7 @@ header("Location:home.php");
                       <a href="forgotpassword.html">Forgot Password? </a>
                     </div>
                     <button type="submit" class="btn submit-btn firstcolor" id="btn-login" ><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign In</button>
-                    <div class="alert alert-danger margin-top" id="error-alert">
+                    <div class="alert alert-danger margin-top hidden" id="error-alert">
                       <button type="button" class="close" data-dismiss="alert">x</button>
                       <strong>Error! </strong>
                        Please enter a valid Username and Password

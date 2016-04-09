@@ -62,7 +62,7 @@ header("Location:../actor/home.php");
                     <div class="checkbox-circle">
                       <a href="forgotpassword.html">Forgot Password? </a>
                     </div>
-                    <button type="submit" class="btn submit-btn firstcolor" id="btn-login" ><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign In</button>&nbsp;&nbsp;&nbsp;&nbsp;<a href="signup.php"><button type="button" class="btn submit-btn firstcolor" id="btn-login" ><span class="glyphicon glyphicon-list-alt"></span> &nbsp; Sign Up</button></a>
+                    <button type="submit" class="btn submit-btn firstcolor" id="btn-login" ><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign In</button>
                     <div class="alert alert-danger margin-top hidden" id="error-alert">
                       <button type="button" class="close" data-dismiss="alert">x</button>
                       <strong>Error! </strong>

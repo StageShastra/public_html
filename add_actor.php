@@ -90,7 +90,7 @@ header("Location:index.php");
                     </div>
                     <div class="row vertical-padded">
                         <div class="col-sm-4 form-group">
-                            <input type="text" class="form-control add" id="aname" name="name" placeholder= "Name :" required />
+                            <input type="text" class="form-control add" id="aname" name="name" title="Do not add any titles, like Mr. or Ms., etc" placeholder= "Name :" required />
                         </div>
                         <div class="col-sm-4 form-group">
                             <input type="text" class="form-control add" id="alanguage" data-role="tagsinput" name="language" placeholder= "Language :" />
@@ -101,7 +101,7 @@ header("Location:index.php");
                     </div>
                     <div class="row vertical-padded">
                         <div class="col-sm-4 form-group">
-                            <input type="date" class="form-control add" id="adob" name="dob" placeholder= "DOB :" required />
+                            <input type="date" class="form-control add" id="adob" name="dob" title= "Date of Birth. Be careful to use the right format!" placeholder= "DOB :" required />
                         </div>
                         <div class="col-sm-4 form-group">
                             <input type="email" class="form-control add" id="aemail" name="email" placeholder= "Email :" required />
@@ -148,7 +148,7 @@ header("Location:index.php");
                             </div>
                         </div>
                         <div class="col-sm-4 form-group">
-                            <input type="text" class="form-control add"  id="aexperience" name="experience" placeholder= "Experience :" required />
+                            <input type="text" class="form-control add"  id="aexperience" title="Leave blank  if don't have any." name="experience" placeholder= "Experience :" required />
                         </div>
                         <div class="col-sm-4 form-group">
                             <input type="text" class="form-control add" data-role="tagsinput" id="aproject"  name="projects" placeholder= "Projects :" required />
@@ -166,12 +166,12 @@ header("Location:index.php");
                         </div>
                     </div>
                     <div class="row vertical-padded">
-                        <div class="col-sm-12" style="overflow:scroll">
+                        <div class="col-sm-12">
                            <form action="upload.php" class="dropzone" id="photo-upload" style="border: 1px dashed #b2b2b2;border-radius: 5px;background: white;"></form>
                         </div>
                     </div>
                     <div class="row vertical-padded">
-                        <div class="col-sm-12" style="overflow:scroll">
+                        <div class="col-sm-12" >
                            <button type="submit" class="btn submit-btn firstcolor"  id="upload-btn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Add Actor</button>
                         </div>
                         <div class="alert alert-success" id="successful" role="alert">Actor has been saved in the database. Click <a href="add_actor.php"> here to add more</a> or <a href="home.php">to go back to home</a></div>

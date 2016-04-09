@@ -45,6 +45,9 @@ if(empty($_SESSION['login_actor']))
               from {-webkit-transform: rotate(0deg);}
               to   {-webkit-transform: rotate(359deg);}
           }
+          .bootstrap-tagsinput {
+            background-color: #f2f2f2;
+        }
 
 
         </style>
@@ -96,7 +99,106 @@ if(empty($_SESSION['login_actor']))
            
 
           <!-- Modal -->
-        
+   <div id="editprofile" class="modal fade col-sm-10 center" role="dialog">
+    <div class="modal-dialog" style="width:100%;">
+        <div class="modal-content center" style="width:100%;">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title firstcolor info">Edit Profile</h4>
+            </div>
+            <div class="modal-body" id="actor_detail"  style="background-color:#fff;">
+            <div class="container-fluid padded" id="editactor">
+                <div class="col-sm-10 center" >
+                   <div class="row">
+                    <div class="col-sm-3">
+                        
+                    </div>
+                    </div>
+                    <div class="row vertical-padded">
+                        <div class="col-sm-4 form-group">
+                            <input type="text" class="form-control login" id="name" name="name" title="Do not add any titles, like Mr. or Ms., etc" placeholder= "Name :" required />
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <input type="text" class="form-control login" id="language" data-role="tagsinput" name="language" placeholder= "Language :" />
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <input type="text" class="form-control login" data-role="tagsinput" id="skills" name="skills" placeholder= "Skills :"/>
+                        </div> 
+                    </div>
+                    <div class="row vertical-padded">
+                        <div class="col-sm-4 form-group">
+                            <input type="date" class="form-control login" id="dob" name="dob" title= "Date of Birth. Be careful to use the right format!"  placeholder= "DOB :" required />
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <input type="email" class="form-control login" id="email" name="email" placeholder= "Email :" required />
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <input type="text" class="form-control login" id="phone" name="phone" title="Do not add zero or +91 before it." placeholder= "Phone :" required />
+                        </div>
+                    </div>
+                    <div class="row vertical-padded">
+                        <div class="col-sm-4">
+                            <div class="col-sm-6 form-group no-paddinglr">
+                                <input type="text" class="form-control login" id="weight" name="weight" placeholder= "W(in kgs) :" required />
+                            </div>
+                            <div class="col-sm-6 form-group no-paddinglr">
+                                <input type="text" class="form-control login" id="height" name="height" placeholder= "H(in cms) :" required />
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-6 form-group no-paddinglr">
+                                <input type="text" class="form-control login" id="age" name="age" onclick="calculateAge()"placeholder= "Age :" disabled />
+                            </div>
+                            <div class="col-sm-6 form-group no-paddinglr">
+                                <input type="text" class="form-control login" id="sex" name="sex" placeholder= "Sex (M/F) :" required />
+                            </div>
+                        </div>
+                         <div class="col-sm-4">
+                            <input type="text" class="form-control login"  id="whatsapp"  name="whatsapp" title="Do not add zero or +91 before it." placeholder= "WhatsApp No. :" required />
+                        </div>
+                    </div>
+                    <div class="row vertical-padded">
+                        <div class="col-sm-4 form-group">
+                            <input type="text" class="form-control login" id="training" name="training" placeholder= "Training" >
+                        </div>
+                        <div class="col-sm-4 form-group" style="text-align:left;">
+                            <input type="checkbox" name="passport" id="passport" class="css-checkbox" unchecked /><label for="passport" class="css-label"><span class="info-small dark-gray "> I have a Passport</span></label>
+                        </div>
+                        <div class="col-sm-4 form-group" style="text-align:left;">
+                            <input type="checkbox" name="actorcard" id="actorcard" class="css-checkbox" unchecked /><label for="actorcard" class="css-label"><span class="info-small dark-gray ">I have an Actor's Card</span></label>
+                          </div>
+                    </div>
+                    <div class="row vertical-padded">
+                        <div class="col-sm-4 form-group">
+                            <input type="text" class="form-control login"  id="experience" title="Leave blank  if you don't have any." name="experience" placeholder= "Experience :" required />
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <div class="col-sm-6 form-group no-paddinglr">
+                              <input type="number" class="form-control login" id="agemin" name="agemin" title="What  minimum age would you naturally be able to play on screen/stage?" value="5" required />
+                          </div>
+                          <div class="col-sm-6 form-group no-paddinglr">
+                              <input type="number" class="form-control login" id="agemax" name="agemax" title="What maximum age would you naturally be able to play on screen/stage?" value="45" required />
+                          </div>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <input type="password" class="form-control login" id="password" name="password" placeholder= "Password" >
+                        </div>
+                    </div>
+                    <div class="row vertical-padded">
+                        <div class="col-sm-12" >
+                           <button type="submit" class="btn submit-btn firstcolor" onclick="updateactor()" id="upload-btn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Update Profile</button>
+                        </div>
+                        <div class="alert alert-success hidden " id="successful" role="alert">Profile hase been updated in the database. Click <a href="home.php"> here to refresh</a></div>
+                        <div class="alert alert-danger hidden"  id="unsuccessful" role="alert">Error! Please try again.</div>
+                    </div>
+                </div>
+            </div>
+                            
+            </div>
+        </div>
+    </div>
+    </div>
         <!--================================== Navigation Ends Here =======================================-!-->
             
      

@@ -13,6 +13,7 @@ $("#unsuccessful").hide();
   Dropzone.options.photoUpload={ 
     autoProcessQueue: false,
     uploadMultiple: true,
+    dictDefaultMessage:'Drag or click here to upload <span style="color:#FFAA3A;">at least one picture</span>.<span class="info-small gray"><li>Ideally, keep the image size less than 1.5MB</li><li>You can add more later</li></span>',
     parallelUploads: 100,
     addRemoveLinks:true,
     maxFiles: 100,
@@ -131,4 +132,19 @@ function fill_Skills(res)
       console.log(skills);
 
 }
+$("input").tooltip({
+ 
+      // place tooltip on the right edge
+      position: "right",
+ 
+      // a little tweaking of the position
+      offset: [0, 0],
+ 
+      // use the built-in fadeIn/fadeOut effect
+      effect: "none",
+ 
+      // custom opacity setting
+      opacity: 0.7
+ 
+      });
 //fillModel();
