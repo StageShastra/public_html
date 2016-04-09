@@ -130,7 +130,7 @@ if(empty($_SESSION['login_actor']))
                             <input type="date" class="form-control login" id="dob" name="dob" title= "Date of Birth. Be careful to use the right format!"  placeholder= "DOB :" required />
                         </div>
                         <div class="col-sm-4 form-group">
-                            <input type="email" class="form-control login" id="email" name="email" placeholder= "Email :" required />
+                            <input type="email" class="form-control login" id="email" name="email" title="Please note : Sign-Up email still to be used as Username in case email is changed." placeholder= "Email :" required />
                         </div>
                         <div class="col-sm-4 form-group">
                             <input type="text" class="form-control login" id="phone" name="phone" title="Do not add zero or +91 before it." placeholder= "Phone :" required />
@@ -139,19 +139,19 @@ if(empty($_SESSION['login_actor']))
                     <div class="row vertical-padded">
                         <div class="col-sm-4">
                             <div class="col-sm-6 form-group no-paddinglr">
-                                <input type="text" class="form-control login" id="weight" name="weight" placeholder= "W(in kgs) :" required />
+                                <input type="text" class="form-control login" id="weight" name="weight" title="Weight in kgs" placeholder= "W(in kgs) :" required />
                             </div>
                             <div class="col-sm-6 form-group no-paddinglr">
-                                <input type="text" class="form-control login" id="height" name="height" placeholder= "H(in cms) :" required />
+                                <input type="text" class="form-control login" id="height" name="height" title="Height in kgs" placeholder= "H(in cms) :" required />
                             </div>
                         </div>
                         
                         <div class="col-sm-4 form-group">
                             <div class="col-sm-6 form-group no-paddinglr">
-                                <input type="text" class="form-control login" id="age" name="age" onclick="calculateAge()"placeholder= "Age :" disabled />
+                                <input type="text" class="form-control login" id="age" name="age" title="Age in years "onclick="calculateAge()"placeholder= "Age :" disabled />
                             </div>
                             <div class="col-sm-6 form-group no-paddinglr">
-                                <input type="text" class="form-control login" id="sex" name="sex" placeholder= "Sex (M/F) :" required />
+                                <input type="text" class="form-control login" id="sex" name="sex" title="Sex (M/F) "placeholder= "Sex (M/F) :" required />
                             </div>
                         </div>
                          <div class="col-sm-4">
@@ -160,7 +160,7 @@ if(empty($_SESSION['login_actor']))
                     </div>
                     <div class="row vertical-padded">
                         <div class="col-sm-4 form-group">
-                            <input type="text" class="form-control login" id="training" name="training" placeholder= "Training" >
+                            <input type="text" class="form-control login" id="training" name="training" title="Training " placeholder= "Training" >
                         </div>
                         <div class="col-sm-4 form-group" style="text-align:left;">
                             <input type="checkbox" name="passport" id="passport" class="css-checkbox" unchecked /><label for="passport" class="css-label"><span class="info-small dark-gray "> I have a Passport</span></label>
@@ -182,7 +182,7 @@ if(empty($_SESSION['login_actor']))
                           </div>
                         </div>
                         <div class="col-sm-4 form-group">
-                            <input type="password" class="form-control login" id="password" name="password" placeholder= "Password" >
+                            <input type="password" class="form-control login" id="password" name="password" title="Change Password" placeholder= "Password" >
                         </div>
                     </div>
                     <div class="row vertical-padded">

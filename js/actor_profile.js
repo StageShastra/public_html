@@ -60,18 +60,18 @@ function populate_profile(res)
                        +' <div class="row">'
                        +'         <div class="row collapsedetail">'
                        +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium firstcolor">Name :<span class="gray">'+ json[i].actor_name +'</span></font>'
+                       +'                 <font class="info-medium firstcolor">Name : <span class="gray">'+ json[i].actor_name +'</span></font>'
                        +'             </div>'
                        +'             <div class="col-sm-4">'
                        +'                 <font class="info-medium firstcolor ">Email : <span class="gray">'+ json[i].actor_email +'</font>'
                        +'             </div>'
                        +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium firstcolor">Sex: <span class="gray">'+ json[i].actor_sex +'</font>'
+                       +'                 <font class="info-medium firstcolor">Sex : <span class="gray">'+ json[i].actor_sex +'</font>'
                        +'             </div>'
                        +'         </div>'
                        +'         <div class="row collapsedetail">'
                        +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium firstcolor">DOB :<span class="gray">'+ json[i].actor_dob +'</font>'
+                       +'                 <font class="info-medium firstcolor">DOB : <span class="gray">'+ json[i].actor_dob +'</font>'
                        +'             </div>'
                        +'             <div class="col-sm-4">'
                        +'                 <font class="info-medium firstcolor">Phone : <span class="gray">'+ json[i].actor_contact_number +'</font>'
@@ -79,9 +79,13 @@ function populate_profile(res)
                         var ac, pp;
                        if(json[i].actor_card==1){ ac="Yes";}else{ ac="No";}
                        if(json[i].actor_passport==1){ pp="Yes";}else{ pp="No";}
-                        content+='             <div class="col-sm-4">'
-                       +'                 <font class="info-medium firstcolor">Actor\'s Card :<span class="gray">'+ac
-                       +'</font>'
+                        content+='<div class="col-sm-4 scrolr">'
+                       +'                 <div class="col-sm-6 " style="padding-left:0px">'
+                       +'                     <font class="info-medium firstcolor">Passport : <span class="gray">'+ pp +'</font>'
+                       +'                 </div>'
+                       +'                <div class="col-sm-6">'
+                       +'                    <font class="info-medium firstcolor">Actor\'s Card :<span class="gray">'+ ac +'</font>'
+                       +'                 </div>'
                        +'             </div>'
                        +'         </div>'
                        +'         <div class="row collapsedetail">'
@@ -90,15 +94,15 @@ function populate_profile(res)
                        +'                     <font class="info-medium firstcolor">Height : <span class="gray">'+ json[i].actor_height +'cms</font>'
                        +'                 </div>'
                        +'                <div class="col-sm-6">'
-                       +'                    <font class="info-medium firstcolor">Weight :<span class="gray">'+ json[i].actor_weight +'kgs</font>'
+                       +'                    <font class="info-medium firstcolor">Weight : <span class="gray">'+ json[i].actor_weight +'kgs</font>'
                        +'                 </div>'
                        +'             </div>'
                        +'             <div class="col-sm-4 scrolr">'
-                       +'                 <font class="info-medium firstcolor">Experience :<span class="gray">'+ json[i].actor_experience +'</font>'
+                       +'                 <font class="info-medium firstcolor">Language : <span class="gray">'+ json[i].actor_language +'</font>'
                        +'             </div>'
                        +'            <div class="col-sm-4 scrolr">'
-                       +'                 <font class="info-medium firstcolor">Passport : <span class="gray">'+  pp +'</font>'
-                       +'             </div>'
+                       +'                 <font class="info-medium firstcolor">Skills : <span class="gray">'+ json[i].actor_skills +'</font>'
+                       +'                 </div>'
                        +'         </div>'
                        +'         <div class="row collapsedetail">'
                        +'             <div class="col-sm-4">'
@@ -106,6 +110,9 @@ function populate_profile(res)
                        +'             </div>'
                        +'             <div class="col-sm-4">'
                        +'                 <font class="info-medium firstcolor">Training : <span class="gray">'+ json[i].actor_training+'</font>'
+                       +'             </div>'
+                       +'             <div class="col-sm-4">'
+                       +'                 <font class="info-medium firstcolor">Experience : <span class="gray">'+ json[i].actor_experience+'</font>'
                        +'             </div>'
                        +'         </div>'
                        +'         <div class="row" style="padding-right:15px;">'
@@ -143,14 +150,26 @@ function populate_edit_form()
   var i=0;
   $("#name").val(actor_data[i].actor_name);
   $("#phone").val(actor_data[i].actor_contact_number);
-  $("#language").val(actor_data[i].actor_language);
+  var languageslist=actor_data[i].actor_language.split(",");
+  for(var j=0;j<languageslist.length;j++)
+  {
+    languageslist[j].toProperCase();
+    $('#language').tagsinput('add', languageslist[j]);
+  }
+  var skillslist=actor_data[i].actor_skills.split(",");
+  for(var j=0;j<skillslist.length;j++)
+  {
+    skillslist[j].toProperCase();
+    $('#skills').tagsinput('add', skillslist[j]);
+  }
+  //$("#language").val(actor_data[i].actor_language);
   $("#email").val(actor_data[i].actor_email);
   $("#whatsapp").val(actor_data[i].actor_whatsapp_number);
   $("#weight").val(actor_data[i].actor_weight);
   $("#height").val(actor_data[i].actor_height);
   $("#dob").val(actor_data[i].actor_dob);
   $("#sex").val(actor_data[i].actor_sex);
-  $("#password").val(actor_data[i].actor_password);
+  document.getElementById('password').value=actor_data[i].actor_password;
   $("#experience").val(actor_data[i].actor_experience);
   $("#agemin").val(actor_data[i].actor_age_range_min);
   $("#agemax").val(actor_data[i].actor_age_range_max);
@@ -278,3 +297,6 @@ function calculateAge() { // birthday is a date
     $("#age").val(Math.abs(ageDate.getUTCFullYear() - 1970));
 
 }
+String.prototype.toProperCase = function () {
+    return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+};
