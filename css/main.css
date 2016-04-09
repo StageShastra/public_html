@@ -373,7 +373,7 @@ div.img-div{
 }
 .DocumentList
 {
-    overflow-x:scroll;
+    overflow-x:auto;
     overflow-y:hidden;
     height:220px;
     width:100%;
@@ -540,8 +540,7 @@ div.img-div{
 	overflow : hidden;
 }
 .scrolr{
-	overflow-x: scroll;
-	overflow-y: hidden;  
+	overflow-x: auto; 
 	max-width: 75%;
 }
 .upload-form{
