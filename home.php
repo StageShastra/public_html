@@ -23,6 +23,7 @@ if(empty($_SESSION['login_user']))
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/lightbox.css">
+        <link rel="stylesheet" href="css/animate.css">
         <link rel="stylesheet" href="css/datatable.css">
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>

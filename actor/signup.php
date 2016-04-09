@@ -130,7 +130,7 @@ else
                   <font class="info gray"><span class="glyphicon glyphicon-th-list firstcolor" aria-hidden="true"></span> Work<hr></font>
                       <form role="form" class="col-sm-8 center marginTop" id="signup-form"  style="margin-bottom:50px;">
                       <div class="form-group" id="lan">
-                        <input type="text" class="form-control login"  data-role="tagsinput" id="language" name="language" title="Add a language, then press enter." placeholder= "Languages you speak" required >
+                        <input type="text" class="form-control login"  data-role="tagsinput" id="language" name="language" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom" title="Add a language, then press enter." placeholder= "Languages you speak" required >
                       </div>
                       <div class="form-group">
                         <input type="text" class="form-control login"  id="experience" name="experience" title="Leave blank  if you don't have any." placeholder= "Work Experience(ads, films etc.)" required >
@@ -139,7 +139,7 @@ else
                         <input type="text" class="form-control login"  data-role="tagsinput" id="skills" name="skills"  placeholder= "Skills(Swimming etc.)" required >
                       </div>
                       <div class="form-group">
-                        <input type="text" class="form-control login" id="age-range" name="age-range" title="What ages would you naturally be able to play on screen/stage?"placeholder= "Age Range in years" required >
+                        <input type="text" class="form-control login" id="age-range" name="age-range" data-toggle="tooltip" data-placement="right" title="What ages would you naturally be able to play on screen/stage?"placeholder= "Age Range in years" required >
                       </div>
                       <div>
                           <div class="col-sm-6 form-group no-paddinglr" style="text-align:left;">

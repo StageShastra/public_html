@@ -44,6 +44,31 @@ function populate_cat_table()
 	div.innerHTML+=after_content;
 
 }
+function delete_actor(i)
+{ 
+    var r = confirm("Delete actor "+ actor_data[i].actor_name+" from the database.");
+    if (r == true) {
+        $.ajax({
+    type: "POST",
+    data: {actor_id:actor_data[i].actor_id},
+    url: "resources/delete.php",
+    success: function(res){
+      //console.log(res);
+      $('#datarow'+i).addClass("animated fadeOut");
+      setTimeout(
+        function() 
+        {
+          //do something special
+           $('#datarow'+i).addClass("hidden");
+        }, 1000);
+   }
+});
+
+    } else {
+        return 0;
+    }
+    
+}
 //This function adds selected categories to global_array variable selected
 function add_to_categories(cat){
 	if(count==5)
@@ -274,7 +299,7 @@ function populate_browse_table(res)
     console.log(c);
 	for(var i=0;i<json.length;i++)
 	{
-		content+='<tr id="datarow">'
+		content+='<tr id="datarow'+i+'">'
 						  +'<td id="selectallcheckbox">'
 						  +		'<input type="checkbox" name="checkactor" id="checkactor'+i+'" value='+i+' class="css-checkbox" onclick="actor_check('+i+')" /><label for="checkactor'+i+'" class="css-label"></label>'
                           +'</td>' 
@@ -296,7 +321,7 @@ function populate_browse_table(res)
                           +      '<span class="info gray scrolr">'+json[i][d]+'</span>'
                           + '</td>'
                           +'<td style="vertical-align:middle;">'
-                          + 		'<span class="info gray scrolr">'+json[i][e]+'</span><font class="sortbuttons"><button onclick="show_details('+i+')"  class="btn submit-btn firstcolor toggle-btn" ><span class="glyphicon glyphicon-share"></span></button>'
+                          + 		'<span class="info gray scrolr">'+json[i][e]+'</span><font class="sortbuttons"><button onclick="show_details('+i+')"  class="btn submit-btn firstcolor toggle-btn" style="right:50px;" ><span class="glyphicon glyphicon-share"></span></button><button onclick="delete_actor('+i+')"  class="btn submit-btn firstcolor toggle-btn" ><span class="glyphicon glyphicon-trash"></span></button>'
                           +'</td></tr>';
                          
 
