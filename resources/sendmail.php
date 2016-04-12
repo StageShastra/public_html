@@ -1,5 +1,6 @@
 <?php
 require('mailer.php');
+require('sendsms.php');
 if(isset($_POST['subject']))
 {
 session_start();
@@ -8,8 +9,10 @@ $subject=$_POST['subject'];
 $message=$_POST['message'];
 $message=nl2br($message);
 $mailto=$_POST['mailto'];
-
+$sms=$_POST['sms'];
+$sendto=$_POST['sendto'];
 send_audition($subject,$message,$mailto,$sender);
+send_text($sendto,$sms);
 }
 else
 {

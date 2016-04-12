@@ -198,6 +198,11 @@ header("Location:index.php");
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
         </script>
+        <footer class="footer">
+          <div class="container center">
+            <p class="firstcolor info center ">Place sticky footer content here.</p>
+          </div>
+        </footer>
     </body>
 </html>
 

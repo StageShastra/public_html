@@ -1,27 +1,50 @@
 <?php
 	// Textlocal account details
-	$username = 'prashant@stageshastra.com';
-	$hash = '1q2w3e4rQ';
+	
 	
 	// Message details
-	$bam="7742558868,9928034442";
-	$numbers = explode(",",$bam);
-	$sender = urlencode('TXTLCL');
-	$message = rawurlencode('Please come to the audition on 3rd April at Ville Parle');
- 
-	$numbers = implode(',', $numbers);
- 
-	// Prepare data for POST request
-	$data = array('username' => $username, 'password' => $hash, 'numbers' => $numbers, "sender" => $sender, "message" => $message);
- 
-	// Send the POST request with cURL
-	$ch = curl_init('http://api.textlocal.in/send/');
-	curl_setopt($ch, CURLOPT_POST, true);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$response = curl_exec($ch);
-	curl_close($ch);
+	function send_text($sendto,$sms)
+	{
+		$username = 'shiv@stageshastra.com';
+		$hash = 'Stash123';
+		$reciepients=$sendto;
+		//var_dump($sendto);
+		//echo $reciepients;
+		$numbers = explode(",",$reciepients);
+		$sender = urlencode('TXTLCL');
+		$message = rawurlencode($sms);
+		//var_dump($numbers);
+		$numbers = num_implode($numbers);
+		//echo $numbers;
+		$data = array('username' => $username, 'password' => $hash, 'numbers' => $numbers, "sender" => $sender, "message" => $message);
+		$ch = curl_init('http://api.textlocal.in/send/');
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$response = curl_exec($ch);
+		curl_close($ch);
+		
+		// Process your response here
+		//echo $response;
+
+	}
+	function num_implode($num)
+	{
+		$str="";
+		//echo count($num);
+		for($i=0;$i<count($num);$i++)
+		{
+			$str=$str.(string)$num[$i];
+			//echo $i;
+			//echo "and count is ".$count;
+			if(count($num)-$i!=1)
+			{
+			    //echo "iamcalled";
+				$str=$str.",";
+			}
+		}
+		return $str;
+
+	}
 	
-	// Process your response here
-	echo $response;
 ?>

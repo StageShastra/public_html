@@ -1,7 +1,9 @@
 var select=[];
 var actors_selected=[];
+var actor_phonelist=[];
 var actor_data;
 var count=0;
+var sendsms=0;
 $("#success_send").hide();
 $("#failure_send").hide();  
 $('#contactmodal').modal('hide');
@@ -186,6 +188,22 @@ function show_add_actor()
   +'<br><button type="submit" class="btn submit-btn firstcolor" onclick=window.location="add_actor.php" id="btn-login" ><span class="glyphicon glyphicon-user"></span> &nbsp; Add Actor</button></div>';
   div.innerHTML = content; 
 }
+function sendsmstoo()
+{
+  
+  if($('#checkboxsms').is(':checked'))
+  {
+    sendsms=1;
+    $("#textsms").removeClass("hidden");
+    //$("#textsms").addClass("animated fadeIn");
+  }
+  else
+  {
+    sendsms=0;
+    //$("#textsms").addClass("animated fadeOut");
+    $("#textsms").addClass("hidden");
+  } 
+}
 function show_details(i)
 {
   var div = document.getElementById('actor_detail');
@@ -364,11 +382,13 @@ function selectallactor()
 function add_actor(i)
 {
 	actors_selected.push(actor_data[i].actor_email);
+  actor_phonelist.push(actor_data[i].actor_contact_number);
 
 }
 function remove_actor(i)
 {
 	removeA(actors_selected,actor_data[i].actor_email);	
+  removeA(actor_phonelist,actor_data[i].actor_contact_number);
 }
 function actor_check(i)
 {	
@@ -483,9 +503,24 @@ function send_mail()
   var message=$("#message").val();
   var subject=$("#subject").val();
   var mailto=actors_selected.toString();
+  var sendto="";
+  //sendto+=",";
+  console.log(sendto);
+  var sms;
+  if (sendsms==0)
+  {
+    sms:"";
+    sendto="";
+  }
+  else
+  {
+    sms=$("#textsms").val();
+    sendto=actor_phonelist.toString();
+
+  }
   $.ajax({
     type: "POST",
-    data: {message:message, subject:subject, mailto:mailto},
+    data: {message:message, subject:subject, mailto:mailto, sms:sms, sendto:sendto},
     url: "resources/sendmail.php",
     success: function(res){
       console.log(res);
