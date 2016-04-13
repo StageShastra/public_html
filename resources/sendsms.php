@@ -15,7 +15,7 @@
 		$message = rawurlencode($sms);
 		//var_dump($numbers);
 		$numbers = num_implode($numbers);
-		//echo $numbers;
+		echo $numbers;
 		$data = array('username' => $username, 'password' => $hash, 'numbers' => $numbers, "sender" => $sender, "message" => $message);
 		$ch = curl_init('http://api.textlocal.in/send/');
 		curl_setopt($ch, CURLOPT_POST, true);
