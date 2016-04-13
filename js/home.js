@@ -524,7 +524,7 @@ function send_mail()
     url: "resources/sendmail.php",
     success: function(res){
       console.log(res);
-      if(res==200)
+      if(res!=200)
     {
      $('#contactmodal').modal('hide');
      $("#success_send").show(); 

@@ -25,7 +25,7 @@
 		curl_close($ch);
 		
 		// Process your response here
-		//echo $response;
+		echo $response;
 
 	}
 	function num_implode($num)
