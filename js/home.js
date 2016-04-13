@@ -518,6 +518,8 @@ function send_mail()
     sendto=actor_phonelist.toString();
 
   }
+  console.log(sendsms);
+  console.log(sendto);
   $.ajax({
     type: "POST",
     data: {message:message, subject:subject, mailto:mailto, sms:sms, sendto:sendto},
