@@ -199,8 +199,8 @@ header("Location:index.php");
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
         </script>
         <footer class="footer">
-          <div class="container center">
-            <p class="firstcolor info center ">Place sticky footer content here.</p>
+          <foodiv class="container center">
+            <p class="dark-gray info-small center ">© 2016 StageShastra | connect@stageshastra.com</p>
           </div>
         </footer>
     </body>

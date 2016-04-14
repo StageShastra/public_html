@@ -19,14 +19,14 @@ function send_passcode($email)
 	//$mail->isSMTP();                                      // Set mailer to use SMTP
 	$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
 	$mail->SMTPAuth = true;                               // Enable SMTP authentication
-	$mail->Username = 'prasht63@gmail.com';                 // SMTP username
-	$mail->Password = 'dontkeepitsimplesilly';
+	$mail->Username = '';                 // SMTP username
+	$mail->Password = '';
 	$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 	$mail->Port = 587;                                    // TCP port to connect to
 
 	$mail->setFrom('no-reply@stageshastra.com', 'Confirmation Code');
 	$mail->addAddress($email);     // Add a recipient
-	$mail->addReplyTo('info@example.com', 'Information');
+	$mail->addReplyTo('no-reply@stageshastra.com', 'No Reply');
 	//$mail->addCC('cc@example.com');
 	//$mail->addBCC('bcc@example.com');
 	//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
@@ -55,14 +55,14 @@ function send_thanks($email, $username)
 	//$mail->isSMTP();                                      // Set mailer to use SMTP
 	$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
 	$mail->SMTPAuth = true;                               // Enable SMTP authentication
-	$mail->Username = 'prasht63@gmail.com';                 // SMTP username
-	$mail->Password = 'dontkeepitsimplesilly';                           // SMTP password
+	$mail->Username = '';                 // SMTP username
+	$mail->Password = '';                           // SMTP password
 	$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 	$mail->Port = 587;                                    // TCP port to connect to
 
 	$mail->setFrom('no-reply@stageshastra.com', 'StageShastra');
 	$mail->addAddress($email);     // Add a recipient
-	$mail->addReplyTo('info@example.com', 'Information');
+	$mail->addReplyTo('no-reply@stageshastra.com', 'No Reply');
 	//$mail->addCC('cc@example.com');
 	//$mail->addBCC('bcc@example.com');
 	//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
@@ -89,8 +89,8 @@ function send_audition($subject,$message,$mailto,$replyto)
 	//$mail->isSMTP();                                      // Set mailer to use SMTP
 	$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
 	$mail->SMTPAuth = true;                               // Enable SMTP authentication
-	$mail->Username = 'prasht63@gmail.com';                 // SMTP username
-	$mail->Password = 'dontkeepitsimplesilly';                           // SMTP password
+	$mail->Username = '';                 // SMTP username
+	$mail->Password = '';                           // SMTP password
 	$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 	$mail->Port = 587;                                    // TCP port to connect to
 

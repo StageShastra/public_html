@@ -12,7 +12,6 @@ $mailto=$_POST['mailto'];
 $sms=$_POST['sms'];
 $sendto=$_POST['sendto'];
 send_audition($subject,$message,$mailto,$sender);
-echo "Calling send_text() with $sender".$sendto."and message ".$sms;
 echo send_text($sendto,$sms);
 }
 else

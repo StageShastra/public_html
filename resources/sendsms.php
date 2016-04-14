@@ -11,7 +11,7 @@
 		//var_dump($sendto);
 		//echo $reciepients;
 		$numbers = explode(",",$reciepients);
-		$sender = urlencode('TXTLCL');
+		$sender = urlencode('STGSHS');
 		$message = rawurlencode($sms);
 		//var_dump($numbers);
 		$numbers = num_implode($numbers);
