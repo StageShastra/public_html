@@ -12,7 +12,13 @@
 		//echo $reciepients;
 		$numbers = explode(",",$reciepients);
 		$sender = urlencode('STGSHS');
+		$premessage = "Dear Actor, ";
 		$message = rawurlencode($sms);
+		$postmessage = "\nPowered By: StageShastra"; 
+		$message=$premessage.$message.$postmessage;
+		$len=strlen($message);
+		//echo $message." ";
+		echo $len;
 		//var_dump($numbers);
 		$numbers = num_implode($numbers);
 		echo $numbers;

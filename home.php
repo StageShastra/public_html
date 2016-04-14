@@ -60,7 +60,7 @@ if(empty($_SESSION['login_user']))
               <font class="info dark-gray"><span id="receipents"></span></font>
               <input type="text" class="contact-subject" id="subject" placeholder="Subject"/>
               <textarea class="contact-message" id="message" placeholder="Type your message here."></textarea>
-              <textarea class="contact-sms hidden" id="textsms" placeholder="Type your sms text here."></textarea>
+              <textarea class="contact-sms hidden" id="textsms" maxlength=280 placeholder="Type your sms text here."></textarea>
               <input type="checkbox" name="contact" id="emailcheck" class="css-checkbox" checked /><label for="emailcheck" class="css-label"><span class="info dark-gray formtext">Email</span></label>
               <input type="checkbox" name="checkboxsms" id="checkboxsms" class="css-checkbox" onclick="sendsmstoo()"  /><label for="checkboxsms" class="css-label"><span class="info dark-gray formtext">SMS</span><font class="info-small firstcolor"><sup>New!</sup></font></label><br>
               <button type="submit" class="btn submit-btn firstcolor" onclick="send_mail()" id="btn-login" ><span class="glyphicon glyphicon-send"></span> &nbsp; Send</button>
