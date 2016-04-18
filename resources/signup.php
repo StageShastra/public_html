@@ -15,7 +15,7 @@ if(isset($_REQUEST['fullname']))
 	$result=mysqli_query($con, $sql);
         if($result)
         {
- 	  send_thanks($email,$fullname);
+ 	  //send_thanks($email,$fullname);
         }
 
 }

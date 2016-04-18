@@ -2,7 +2,7 @@
 session_start();
 if(empty($_SESSION['login_actor']))
 {
-    header("Location:index.php");
+    //header("Location:index.php");
 }
 ?>
 <!doctype html>
@@ -91,114 +91,176 @@ if(empty($_SESSION['login_actor']))
            <!-- contact modal toggle -->
             <div class="container-fluid padded">
                 <div class="container col-sm-12 center" id="browse-table">
-                      
+                    <div class="col-sm-8 mycontent-left marginTop">
+                      <div class="col-sm-6 mycontent-left ">
+                        <div class=" col-sm-7 center" id="actorprofile">
+                            <div id="profile_photo">
+                                <span class="info-small gray center" style="vertical-align:middle;"> Upload Picture </span>
+                            </div>
+                            <div class="col-sm-12 left marginTop">
+                                <span id="actor_name" class="info dark-gray ">Shubham Prakash</span><span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true"></span>
+                                <br>
+                                <span id="actor_age" class="info-small black ">11</span><span id="actor_sex" class="info-small black">,M</span>
+                            </div>
+                            <div class="col-sm-12 left marginTop hidden " id="name_edit">
+                                <input type="text" class="editinput" id="name"/>
+                                <input type="text" class="editinput" id="age"/>
+                                <input type="text" class="editinput" id="sex"/>
+                            </div>
+                        </div>   
+                        <div class="col-sm-10 center left marginTop">
+                            <span class="actorlabel" >
+                                Phone No. : <span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true"></span>
+                                <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <span id="actor_phone" class="info dark-gray">7742558868</span>
+                            <hr>
+                        </div>
+                        <div class="col-sm-10 center left marginTop">
+                            <span class="actorlabel" >
+                                Email Id. : <span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true"></span>
+                                <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <span id="actor_email" class="info dark-gray">prasht63@gmail.com</span>
+                            <hr>
+                        </div>
+                         <div class="col-sm-10 center left marginTop">
+                            <span class="actorlabel" >
+                                Date of Birth. : <span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true"></span>
+                                <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <span id="actor_dob" class="info dark-gray">28/09/1993</span>
+                        </div>
+                        
+                      </div>
+                      <div class="col-sm-6 marginTop">
+                        <div class="col-sm-10 center left ">
+                            <span class="actorlabel" >
+                                Height. : <span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true"></span>
+                                <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <span id="actor_height" class="info dark-gray">178 cms</span>
+                            <hr>
+                        </div>
+                        <div class="col-sm-10 center left marginTop">
+                            <span class="actorlabel" >
+                                Weight : <span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true"></span>
+                                <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <span id="actor_weight" class="info dark-gray">78 kgs</span>
+                            <hr>
+                        </div>
+                        <div class="col-sm-10 center left marginTop">
+                            <span class="actorlabel" >
+                                Languages : <span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true"></span>
+                                <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <span id="actor_language" class="info dark-gray">
+                                <div class="col-sm-4 vertical-padded">
+                                    <button type="button" class="btn tagp" aria-label="Left Align" >
+                                        <font class="taga-text">English</font>
+                                    </button>
+                                </div>
+                                <div class="col-sm-4 vertical-padded">
+                                    <button type="button" class="btn tagp" aria-label="Left Align" >
+                                        <font class="taga-text">Hindi</font>
+                                    </button>
+                                </div>
+                                <div class="col-sm-4 vertical-padded">
+                                    <button type="button" class="btn tagp" aria-label="Left Align" >
+                                        <font class="taga-text">German</font>
+                                    </button>
+                                </div>
+                            </span>
+                            <hr class="taghr">
+                        </div>
+                        <div class="col-sm-10 center left marginTop">
+                            <span class="actorlabel" >
+                                Skills : <span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true"></span>
+                                <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <span id="actor_skills" class="info dark-gray">
+                                <div class="col-sm-4 vertical-padded">
+                                    <button type="button" class="btn tagp" aria-label="Left Align" >
+                                        <font class="taga-text">Dancing</font>
+                                    </button>
+                                </div>
+                                <div class="col-sm-4 vertical-padded">
+                                    <button type="button" class="btn tagp" aria-label="Left Align" >
+                                        <font class="taga-text">Swimming</font>
+                                    </button>
+                                </div>
+                                <div class="col-sm-4 vertical-padded">
+                                    <button type="button" class="btn tagp" aria-label="Left Align" >
+                                        <font class="taga-text">Boxing</font>
+                                    </button>
+                                </div>
+                            </span>
+                        
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div class="col-sm-11 center">
+                            <hr>
+                            <span class="actorlabel pull-left" >
+                                    Photos and Videos : <span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true"></span>
+                                    <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <div id="photos_videos">
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="col-sm-10 center left marginTop">
+                            <span class="actorlabel" >
+                                Experience : <span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true"></span>
+                                <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <span id="actor_experience" class="info dark-gray">
+                                <span class="info black" id="title">Taj Mahal ki Neelami</span><hr>
+                                <span class="info-small dark-gray" id="description">
+                                    Its a satirical play about how people try to blow things out of proportion.Its a satirical play about how people try to blow things out of proportionIts a satirical play about how people try to blow things out of proportionIts a satirical play about how people try to blow things out of proportion
+                                </span>
+                            </span>
+                            <br><br>
+                            <span id="actor_experience" class="info dark-gray">
+                                <span class="info black" id="title">Taj Mahal ki Neelami</span><hr>
+                                <span class="info-small dark-gray" id="description">
+                                    Its a satirical play about how people try to blow things out of proportion.Its a satirical play about how people try to blow things out of proportionIts a satirical play about how people try to blow things out of proportionIts a satirical play about how people try to blow things out of proportion
+                                </span>
+                            </span>
+                        <hr>
+                        </div>
+                        <div class="col-sm-10 center left marginTop">
+                            <span class="actorlabel" >
+                                Training : <span class="glyphicon glyphicon-pencil edit-button" aria-hidden="true"></span>
+                                <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <span id="actor_training" class="info dark-gray">
+                                <span class="info black" id="school">Barry John's Acting Academy</span>
+                                <br>
+                                <span class="info-small dark-gray" id="course">Method Acting</span>
+                                <br>
+                                <span class="info-small dark-gray" id="duration">2012-2015</span>
+                                <br>
+                                <span class="info-small dark-gray" id="training_description">
+                                    Its a satirical play about how people try to blow things out of proportion.Its a satirical play about how people try to blow things out of proportionIts a satirical play about how people try to blow things out of proportionIts a satirical play about how people try to blow things out of proportion
+                                </span>
+                                <hr>
+                            </span>
+                            
+                        
+                        </div>
+                    </div>
                 </div>
             </div>
    
-           </div>
+        </div>
            
 
           <!-- Modal -->
-   <div id="editprofile" class="modal fade col-sm-10 center" role="dialog">
-    <div class="modal-dialog" style="width:100%;">
-        <div class="modal-content center" style="width:100%;">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title firstcolor info">Edit Profile</h4>
-            </div>
-            <div class="modal-body" id="actor_detail"  style="background-color:#fff;">
-            <div class="container-fluid padded" id="editactor">
-                <div class="col-sm-10 center" >
-                   <div class="row">
-                    <div class="col-sm-3">
-                        
-                    </div>
-                    </div>
-                    <div class="row vertical-padded">
-                        <div class="col-sm-4 form-group">
-                            <input type="text" class="form-control login" id="name" name="name" title="Do not add any titles, like Mr. or Ms., etc" placeholder= "Name :" required />
-                        </div>
-                        <div class="col-sm-4 form-group">
-                            <input type="text" class="form-control login" id="language" data-role="tagsinput" name="language" placeholder= "Language :" />
-                        </div>
-                        <div class="col-sm-4 form-group">
-                            <input type="text" class="form-control login" data-role="tagsinput" id="skills" name="skills" placeholder= "Skills :"/>
-                        </div> 
-                    </div>
-                    <div class="row vertical-padded">
-                        <div class="col-sm-4 form-group">
-                            <input type="date" class="form-control login" id="dob" name="dob" title= "Date of Birth. Be careful to use the right format!"  placeholder= "DOB :" required />
-                        </div>
-                        <div class="col-sm-4 form-group">
-                            <input type="email" class="form-control login" id="email" name="email" title="Please note : Sign-Up email still to be used as Username in case email is changed." placeholder= "Email :" required />
-                        </div>
-                        <div class="col-sm-4 form-group">
-                            <input type="text" class="form-control login" id="phone" name="phone" title="Do not add zero or +91 before it." placeholder= "Phone :" required />
-                        </div>
-                    </div>
-                    <div class="row vertical-padded">
-                        <div class="col-sm-4">
-                            <div class="col-sm-6 form-group no-paddinglr">
-                                <input type="text" class="form-control login" id="weight" name="weight" title="Weight in kgs" placeholder= "W(in kgs) :" required />
-                            </div>
-                            <div class="col-sm-6 form-group no-paddinglr">
-                                <input type="text" class="form-control login" id="height" name="height" title="Height in kgs" placeholder= "H(in cms) :" required />
-                            </div>
-                        </div>
-                        
-                        <div class="col-sm-4 form-group">
-                            <div class="col-sm-6 form-group no-paddinglr">
-                                <input type="text" class="form-control login" id="age" name="age" title="Age in years "onclick="calculateAge()"placeholder= "Age :" disabled />
-                            </div>
-                            <div class="col-sm-6 form-group no-paddinglr">
-                                <input type="text" class="form-control login" id="sex" name="sex" title="Sex (M/F) "placeholder= "Sex (M/F) :" required />
-                            </div>
-                        </div>
-                         <div class="col-sm-4">
-                            <input type="text" class="form-control login"  id="whatsapp"  name="whatsapp" title="Do not add zero or +91 before it." placeholder= "WhatsApp No. :" required />
-                        </div>
-                    </div>
-                    <div class="row vertical-padded">
-                        <div class="col-sm-4 form-group">
-                            <input type="text" class="form-control login" id="training" name="training" title="Training " placeholder= "Training" >
-                        </div>
-                        <div class="col-sm-4 form-group" style="text-align:left;">
-                            <input type="checkbox" name="passport" id="passport" class="css-checkbox" unchecked /><label for="passport" class="css-label"><span class="info-small dark-gray "> I have a Passport</span></label>
-                        </div>
-                        <div class="col-sm-4 form-group" style="text-align:left;">
-                            <input type="checkbox" name="actorcard" id="actorcard" class="css-checkbox" unchecked /><label for="actorcard" class="css-label"><span class="info-small dark-gray ">I have an Actor's Card</span></label>
-                          </div>
-                    </div>
-                    <div class="row vertical-padded">
-                        <div class="col-sm-4 form-group">
-                            <input type="text" class="form-control login"  id="experience" title="Leave blank  if you don't have any." name="experience" placeholder= "Experience :" required />
-                        </div>
-                        <div class="col-sm-4 form-group">
-                            <div class="col-sm-6 form-group no-paddinglr">
-                              <input type="number" class="form-control login" id="agemin" name="agemin" title="What  minimum age would you naturally be able to play on screen/stage?" value="5" required />
-                          </div>
-                          <div class="col-sm-6 form-group no-paddinglr">
-                              <input type="number" class="form-control login" id="agemax" name="agemax" title="What maximum age would you naturally be able to play on screen/stage?" value="45" required />
-                          </div>
-                        </div>
-                        <div class="col-sm-4 form-group">
-                            <input type="password" class="form-control login" id="password" name="password" title="Change Password" placeholder= "Password" >
-                        </div>
-                    </div>
-                    <div class="row vertical-padded">
-                        <div class="col-sm-12" >
-                           <button type="submit" class="btn submit-btn firstcolor" onclick="updateactor()" id="upload-btn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Update Profile</button>
-                        </div>
-                        <div class="alert alert-success hidden " id="successful" role="alert">Profile hase been updated in the database. Click <a href="home.php"> here to refresh</a></div>
-                        <div class="alert alert-danger hidden"  id="unsuccessful" role="alert">Error! Please try again.</div>
-                    </div>
-                </div>
-            </div>
-                            
-            </div>
-        </div>
-    </div>
-    </div>
+   
         <!--================================== Navigation Ends Here =======================================-!-->
             
      
@@ -206,8 +268,8 @@ if(empty($_SESSION['login_actor']))
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
         <script src="../js/vendor/bootstrap.min.js"></script>
-         <script src='../js/tagsinput.js'></script>
-        <script src="../js/actor_profile.js"></script>
+        <script src='../js/tagsinput.js'></script>
+        <!-- <script src="../js/actor_profile.js"></script> -->
         <script src="../js/lightbox.js"></script>
         <script src="../js/stupidtable.js"></script>
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
@@ -219,6 +281,9 @@ if(empty($_SESSION['login_actor']))
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
         </script>
+        <footer class="footer">
+          <foodiv class="container center">
+            <p class="dark-gray info-small center ">© 2016 StageShastra | connect@stageshastra.com</p>
+        </footer>
     </body>
 </html>
-

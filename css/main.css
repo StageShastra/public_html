@@ -649,3 +649,74 @@ div.img-div{
 	box-shadow: 0 0 10px #000;
     border: 6px solid white;
 }
+#actorprofile{
+	background-color: #EFEFEF;
+	border-radius:15px;
+	padding: 25px;
+	min-height:300px;
+	margin-top: 30px;
+	height: auto;
+
+}
+#profile_photo{
+	min-width:180px;
+	min-height:180px;
+	border-radius:50%;
+	background-color: white;
+	text-align: center;
+	padding: 75px;
+}
+.edit-button{
+	color: gray;
+	font-size: 14px;
+	position: relative;
+	right: -25px;
+}
+.editinput{
+	background: #ffffff;
+	border: 0px;
+	border-radius: 8px;
+	color: #b3b3b3;
+	margin-top: 5px;
+	display: none;
+
+}
+.actorlabel{
+	font-size: 18px;
+	color: black;
+	font-weight: 900;
+
+}
+#actor_name{
+	font-size: 16px;
+	color: #000;
+	font-weight: 700;
+
+}
+.black{
+	color: black;
+}
+.tenth{
+	height:5px;
+	border:none;
+	color:#000;
+	background-color:#000;
+	margin-top: 0px;
+
+}
+.tagp{
+	border-radius: 6px;
+    background-color: #ffd6d9;
+    font-size: 14px;
+    padding: 5px;
+    padding-left: 4px;
+    max-width: 100%;
+    min-width: 100%;
+}
+.taghr{
+	width: 100%;
+    top: 25px;
+    position: relative;
+}
+}
+

@@ -1,4 +1,5 @@
-<?session_start();
+<?php
+session_start();
 if(!empty($_SESSION['login_user']))
 {
 header("Location:home.php");

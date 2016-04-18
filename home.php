@@ -2,7 +2,7 @@
 session_start();
 if(empty($_SESSION['login_user']))
 {
-    header("Location:index.php");
+    //header("Location:index.php");
 }
 ?>
 <!doctype html>
@@ -114,6 +114,10 @@ if(empty($_SESSION['login_user']))
                             <a href="#"><span class="firstcolor" data-toggle="modal" data-target="#advancedSearch"> Advanced<sup><span class="info-small">New!</span></sup></span>
                             </a>
                         </li>
+                        <li >
+                            <a href="#"><span class="firstcolor" data-toggle="modal" data-target="#inviteActors"> Invite </span>
+                            </a>
+                        </li>
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-chevron-down firstcolor" aria-hidden="true"></span></a>
                           <ul class="dropdown-menu">
@@ -182,6 +186,63 @@ if(empty($_SESSION['login_user']))
               </div>
 
             </div>
+
+            <!-- Enter Email and Mobile Modal -->
+            <div id="inviteActors" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title firstcolor info"> Invite Actors </h4>
+                    <span class="info-small gray">Invite Actor to StageShastra by there email and mobile numbers</span>
+                  </div>
+                  <div class="modal-body" style="background-color:#f2f2f2;">
+                    <div class="container" style="max-width:100%; ">
+                      <form action="#" method="post" id="invitationForm">
+                        <div class="row">
+
+                          <div class="col-sm-12 form-group no-paddinglr">
+                            <span class="info-small gray">
+                              Emails (comma seperated)
+                            </span> 
+                            <textarea class="form-control add" name="emails"  placeholder="Add Emails" required rows="3" style="border: 1px solid #999;"></textarea>
+                          </div>
+
+                        </div>
+                        <div class="row">
+
+                          <div class="col-sm-12 form-group no-paddinglr">
+                            <span class="info-small gray">
+                              Mobile Numbers (comma seperated)
+                            </span> 
+                            <textarea class="form-control add" name="mobiles"  placeholder="Add Mobile Numbers" rows="3" required style="border: 1px solid #999;"></textarea>
+                          </div>
+
+                        </div>
+                        <div class="row">
+
+                          <div class="col-sm-12 form-group no-paddinglr">
+                            <span class="info-small gray">
+                              Enter Message
+                            </span> 
+                            <textarea class="form-control add" name="message"  placeholder="Enter Message" rows="5" required style="border: 1px solid #999;"></textarea>
+                          </div>
+
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-6 form-group no-paddinglr">
+                            <button type="submit" class="btn submit-btn firstcolor" style="margin-top: 20px; margin-left:10px;" id="btn-search" ><span class="glyphicon glyphicon-envelope"></span> Invite </button>
+                        </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div id="detailsActor" class="modal fade col-sm-10 center" role="dialog">
             <div class="modal-dialog" style="width:100%;">
 
@@ -206,11 +267,36 @@ if(empty($_SESSION['login_user']))
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
+        <script type="text/javascript">
+          
+        $(document).ready(function(){
+
+          $(document).on("submit", "form#invitationForm", function(){
+            var that = this;
+            var emails = $("textarea[name='emails']").val();
+            var mobiles = $("textarea[name='mobiles']").val();
+            var message = $("textarea['name='mobiles']").val();
+
+            var data = {emails: emails, mobiles: mobiles, message: message};
+
+            // TODO: Generate a preview of email before sending.
+
+            console.log(data);
+            return false;
+          });
+
+        });
+
+        </script>
+
         <script src="js/vendor/bootstrap.min.js"></script>
          <script src='js/tagsinput.js'></script>
         <script src="js/home.js"></script>
         <script src="js/lightbox.js"></script>
         <script src="js/stupidtable.js"></script>
+
+
+
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
