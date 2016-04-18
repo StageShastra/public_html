@@ -39,6 +39,20 @@
 			
 		*/
 
+		$time = time();
+		$query = "INSERT INTO `beta_invitation_send`(`id`, `director_ref`, `message`, `emails`, `emails_failed`, `mobiles`, `mobile_failed`, `timestamp`) 
+			VALUES (
+				null,
+				'{$director_ref}',
+				'{$message}',
+				'".json_encode($filteredEmails)."',
+				'',
+				'".json_encode($filteredMobiles)."',
+				'',
+				'{$time}'
+			)";
+		$runSQL = mysqli_query($con, $query);
+
 	}
 
 ?>
