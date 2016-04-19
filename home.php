@@ -200,7 +200,7 @@ if(empty($_SESSION['login_user']))
                   </div>
                   <div class="modal-body" style="background-color:#f2f2f2;">
                     <div class="container" style="max-width:100%; ">
-                      <form action="#" method="post" id="invitationForm">
+                      <form action="resources/sendInvite.php" method="post" id="invitationForm">
                         <div class="row">
 
                           <div class="col-sm-12 form-group no-paddinglr">
