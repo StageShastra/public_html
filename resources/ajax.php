@@ -207,12 +207,14 @@
 
 		}
 
-		public function addActorExperience($data = ''){
+		public function addActorExperience($data = []){
 			if(!$this->actor_login)
 				$this->response(false, "You are not loggedIn.");
 
 			$ref = $this->actor_id;
+			$db = $this->includeDB(); // including Database Connection.
 			$data['time'] = time();
+			
 			if($db->insertActorExperience($ref, $data)){
 				$this->response(true, "Actor Experience Added");
 			}else{

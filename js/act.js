@@ -60,9 +60,10 @@ $(document).ready(function(){
 						});
 					}
 
-					$(unhide).removeClass("hidden");
-					$(hide).addClass("hidden");
+					
 				}
+				$(unhide).removeClass("hidden");
+				$(hide).addClass("hidden");
 				console.log(response);
 			}
 		});
@@ -104,6 +105,9 @@ $(document).ready(function(){
 						$(unhide).removeClass("hidden");
 						$(hide).addClass("hidden");
 					}
+
+					$(unhide).removeClass("hidden");
+					$(hide).addClass("hidden");
 					console.log(response);
 				}
 			})
@@ -113,9 +117,9 @@ $(document).ready(function(){
 
 	$(document).on("click", ".addExperience", function(){
 		var that = this;
-		var title = $("input[name='expl_title']").val();
-		var role = $("input[name='expl_role']").val();
-		var blurb = $("textarea[name='expl_blurb']").val();
+		var title = $("input[name='exp_title']").val();
+		var role = $("input[name='exp_role']").val();
+		var blurb = $("textarea[name='exp_blurb']").val();
 
 		data = {request: "AddExperience", data: JSON.stringify({title: title, role: role, blurb: blurb})};
 		console.log(data);
@@ -124,7 +128,8 @@ $(document).ready(function(){
 			type: "POST",
 			data: data,
 			success: function(response){
-
+				if(response.status)
+					location.reload();
 				console.log(response);
 			}
 		});
@@ -133,7 +138,7 @@ $(document).ready(function(){
 	});
 
 
-	$(document).on("click", ".addExperience", function(){
+	$(document).on("click", ".addTraining", function(){
 		var that = this;
 		var title = $("input[name='trn_title']").val();
 		var course = $("input[name='trn_course']").val();
@@ -148,7 +153,8 @@ $(document).ready(function(){
 			type: "POST",
 			data: data,
 			success: function(response){
-
+				if(response.status)
+					location.reload();
 				console.log(response);
 			}
 		});
