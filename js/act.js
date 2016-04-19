@@ -8,7 +8,7 @@ $(document).ready(function(){
 
 		//console.log(hide, unhide);
 	});
-
+	populate_photos();
 	$(document).on("click", ".updateDataField", function(){
 
 		var that = this;
@@ -40,8 +40,9 @@ $(document).ready(function(){
 							if(index == "language" || index == "skills"){
 								$.each( value.split(","), function(index, value){
 									name = $.trim(value);
+									name = name.toProperCase();
 									html +='<div class="col-sm-4 vertical-padded">'
-	                                    	+'<button type="button" class="btn tagp" aria-label="Left Align" >'
+	                                    	+'<button type="button" class="btn tagp" style="max-width:auto;"aria-label="Left Align" >'
 	                                        	+'<font class="taga-text">'+name+'</font>'
 	                                    	+'</button>'
 	                                		+'</div> ';
@@ -182,3 +183,89 @@ $("input").tooltip({
       opacity: 0.7
  
 });
+function populate_photos()
+{
+	var json={};
+	json.actor_images = $("#image_count").val();
+	json.actor_profile_photo = $("#profile_pic").val();
+	if(json.actor_images=="")
+	{
+		return;
+	}
+	var photoshtml='<div class="row" style="padding-right:15px;">'
+                       +'<div class="DocumentList">'
+                       +'  <ul class="list-inline">';
+
+                       for(var k=0;k<json.actor_images;k++)
+                       {
+                        var str = json.actor_profile_photo;
+                        var arr = str.split(".");
+                        var ext = arr[2];
+                        str1 = arr[0];
+                        str2 = arr[1];
+                        str2 = str2.substring(0, str2.length - 1);
+                        str=str1+'.'+str2;
+                        str+=k+'.'+ext;
+                        //console.log(str);
+        photoshtml+='<li class="DocumentItem">'
+                       +'<a href="'+str+'" data-lightbox="'+json.actor_name+'"><img class="photo"src='+str+' height="100%" width=auto></img></a>' 
+                       +'         </li>';
+                      }
+        photoshtml+='  </ul>'
+                       +' </div>'
+                       +' </div>';
+        $("#photos_videos").html(photoshtml);
+
+}
+
+Dropzone.options.photoUpload={ 
+    autoProcessQueue: false,
+    uploadMultiple: true,
+    parallelUploads: 100,
+    maxFilesize:2,
+    addRemoveLinks:true,
+    maxFiles: 100,
+    dictDefaultMessage:'Drag or click here to upload <span style="color:#FFAA3A;">at least one picture</span>.<span class="info-small gray"><li>Ideally, keep the image size less than 1.5MB</li><li>You can add more later</li></span>',
+    acceptedFiles:'image/*',
+    paramName:'file',
+    dictInvalidFileType:'Please stick to image files.',
+    // The setting up of the dropzone
+    init: function()
+    {
+      var myDropzone = this;
+      $("#upload-btn").click(function(e)
+      {
+        e.preventDefault();
+        e.stopPropagation();
+        myDropzone.processQueue();
+      });
+
+      // Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead
+      // of the sending event because uploadMultiple is set to true.
+      this.on("sendingmultiple", function(file, xhr, formData)
+      {
+       //console.log(actor);
+      });
+      this.on("successmultiple", function(files, response)
+      { 
+        //console.log(files);
+        console.log(response);
+        if(response == 200)
+        {
+         location.reload();
+        }
+        else
+        { 
+          $("#unsuccessful").show();
+        }
+        // Gets triggered when the files have successfully been sent.
+        // Redirect user or notify of success.
+      });
+      this.on("errormultiple", function(files, response)
+      {
+        // Gets triggered when there was an error sending the files.
+        // Maybe show form again, and notify user of error
+      });
+  }
+
+}

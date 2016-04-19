@@ -12,6 +12,7 @@
 
     $actor_ref = $_SESSION['STASH_ACTOR_ID'];
     $actorProfile = getActorProfile($actor_ref);
+    $_SESSION['STASH_ACTOR_NAME']=$actorProfile['StashActor_name'];
     $actorExperiences = getActorExperience($actor_ref);
     $actorTrainings = getActorTraining($actor_ref);
 
@@ -42,6 +43,9 @@
         <link rel="stylesheet" href="../css/main.css">
         <link rel="stylesheet" href="../css/lightbox.css">
         <link rel="stylesheet" href="../css/datatable.css">
+        <link href="../css/dropzone.css" type="text/css" rel="stylesheet" />
+        <link href="../css/animate.css" type="text/css" rel="stylesheet" />
+        <script src="../js/dropzone.js"></script>
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
         <script src="../js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <link rel="stylesheet" type="text/css" href="../css/tagsinput.css" />
@@ -123,7 +127,9 @@
                                 <span class="info-small gray center " style="vertical-align:middle;" > Upload Picture </span>
                             </div>
                             <div class="img-div center " id="profile_image">
-                                <img src="../img/<?= $actorProfile['StashActor_avatar'] ?>">
+                                <img src="<?= $actorProfile['StashActor_avatar'] ?>">
+                                <input type="hidden" id="image_count" value="<?= $actorProfile['StashActor_images'] ?>">
+                                <input type="hidden" id="profile_pic" value="<?= $actorProfile['StashActor_avatar'] ?>">
                             </div>
                             <div class="col-sm-12 left marginTop " id="name_container">
                                 <span id="actor_name" class="info dark-gray "><?= $actorProfile['StashActor_name'] ?></span>
@@ -231,7 +237,7 @@
                             </span>
                             <span id="actor_agerange" class="info dark-gray">
                                 <span id="actor_min_age"><?= $actorProfile['StashActor_min_role_age'] ?></span> - 
-                                <span id="actor_max_age"><?= $actorProfile['StashActor_max_role_age'] ?></span>
+                                <span id="actor_max_age"><?= $actorProfile['StashActor_max_role_age'] ?></span> years.
                             </span>
                             <span id="agerange_edit" class="left hidden">
                                 <input type="text" name='min_age' class="editwhite short" value="<?= $actorProfile['StashActor_min_role_age'] ?>" title="What  minimum age would you naturally be able to play on screen/stage?" id="agemin"/>
@@ -254,9 +260,9 @@
                                 Height. : <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#height_edit" data-hide-id="#actor_height" aria-hidden="true"></span>
                                 <hr align="left" width="15px" class="tenth">
                             </span>
-                            <span id="actor_height" class="info dark-gray "><?= $actorProfile['StashActor_height'] ?></span>
+                            <span id="actor_height" class="info dark-gray "><?= $actorProfile['StashActor_height'] ?> cms.</span>
                             <span id="height_edit" class="left hidden">
-                                <input type="text" class="editwhite" name='height' value="<?= $actorProfile['StashActor_height'] ?>" id="height"/>
+                                <input type="text" class="editwhite" name='height' placeholder="Height in cms" value="<?= $actorProfile['StashActor_height'] ?>" id="height"/>
                                 <font class="sortbuttons">
                                     <button type="button" class="btn submit-btn firstcolor center tick updateDataField"
                                             data-input-names="height"
@@ -275,9 +281,9 @@
                                 Weight : <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#weight_edit" data-hide-id="#actor_weight" aria-hidden="true"></span>
                                 <hr align="left" width="15px" class="tenth">
                             </span>
-                            <span id="actor_weight" class="info dark-gray"><?= $actorProfile['StashActor_weight'] ?></span>
+                            <span id="actor_weight" class="info dark-gray"><?= $actorProfile['StashActor_weight'] ?> kgs.</span>
                             <span id="weight_edit" class="left hidden">
-                                <input type="text" class="editwhite" name='weight' value="<?= $actorProfile['StashActor_weight'] ?>" id="weight"/>
+                                <input type="text" class="editwhite" name='weight' placeholder="weight in kgs" value="<?= $actorProfile['StashActor_weight'] ?>" id="weight"/>
                                 <font class="sortbuttons">
                                     <button type="button" class="btn submit-btn firstcolor center tick updateDataField"
                                             data-input-names="weight"
@@ -304,7 +310,7 @@
                                     foreach ($languages as $key => $language) {
                                 ?>
                                 <div class="col-sm-4 vertical-padded">
-                                    <button type="button" class="btn tagp" aria-label="Left Align" >
+                                    <button type="button" class="btn tagp" style="max-width:200%;" aria-label="Left Align" >
                                         <font class="taga-text"><?= ucfirst(trim($language)) ?></font>
                                     </button>
                                 </div>  
@@ -340,7 +346,7 @@
                                     foreach ($skills as $key => $skill) {
                                 ?>
                                 <div class="col-sm-4 vertical-padded">
-                                    <button type="button" class="btn tagp" aria-label="Left Align" >
+                                    <button type="button" class="btn tagp" style="max-width:200%;" aria-label="Left Align" >
                                         <font class="taga-text"><?= ucfirst(trim($skill)) ?></font>
                                     </button>
                                 </div>  
@@ -369,7 +375,7 @@
                         <div class="col-sm-11 center">
                             <hr>
                             <span class="actorlabel pull-left" >
-                                    Photos and Videos : <span class="glyphicon glyphicon-pencil edit-button"  aria-hidden="true"></span>
+                                    Photos and Videos : <span class="glyphicon glyphicon-plus edit-button" data-toggle="modal" data-target="#photosupload" aria-hidden="true"></span>
                                     <hr align="left" width="15px" class="tenth">
                             </span>
                             <div id="photos_videos">
@@ -390,7 +396,7 @@
                                 <span id="experience_add" class="hidden">
                                     <input type="text" class="editwhite long" name='exp_title' id="addtitle" Placeholder="Title of the play, ad, film etc." />
                                     <input type="text" class="editwhite long" name='exp_role' id="addrole" Placeholder="Role e.g. Dad, Mom, Character Name"/>
-                                    <textarea class="editwhite long" name='exp_blurb' id="adddescription" style="height:100px;">A little description about the role and the project.</textarea>
+                                    <textarea class="editwhite long" name='exp_blurb' id="adddescription" placeholder="A little description about the role and the project." style="height:80px;"></textarea>
                                     <br><font class="sortbuttons"><button class="btn submit-btn firstcolor center addExperience"  ><span class="glyphicon glyphicon-ok"></span></button></font>
                                 <hr>
                                 </span>
@@ -416,7 +422,7 @@
                                     <span id="experience-<?= $key ?>_edit" class="hidden">
                                         <input type="text" name="ex_title_<?= $key ?>" class="editwhite long" id="edittitlei" value="<?= $experience['StashActorExperience_title'] ?>" Placeholder="Title of the play, ad, film etc." />
                                         <input type="text" name="ex_role_<?= $key ?>" class="editwhite long" id="editrolei" value="<?= $experience['StashActorExperience_role'] ?>" Placeholder="Role e.g. Dad, Mom, Character Name"/>
-                                        <textarea class="editwhite long" name="ex_blurb_<?= $key ?>" id="editdescriptioni" style="height:150px;"><?= $experience['StashActorExperience_blurb'] ?></textarea>
+                                        <textarea class="editwhite long" name="ex_blurb_<?= $key ?>" id="editdescriptioni" style="height:80px;overflow:scroll;"><?= $experience['StashActorExperience_blurb'] ?></textarea>
                                         <br>
                                         <font class="sortbuttons">
                                             <button type="button" class="btn submit-btn firstcolor center btnExpAndTraining"
@@ -456,7 +462,7 @@
                                         <input type="text" class="editwhite short" name='trn_start_time' id="addstart" Placeholder="Starting Year"/>
                                         <input type="text" class="editwhite short" name='trn_end_time' id="addend" Placeholder="Ending Year"/>
                                     </div>
-                                    <textarea class="editwhite long" name='trn_blrub' id="addtrainingdescription" style="height:100px;">A little description about the course.</textarea>
+                                    <textarea class="editwhite long" name='trn_blrub' id="addtrainingdescription" placeholder="A little description about the course." style="height:80px;"></textarea>
                                     <br><font class="sortbuttons"><button class="btn submit-btn firstcolor center addTraining"  ><span class="glyphicon glyphicon-ok"></span></button></font>
                                 <hr>
                                 </span>
@@ -522,7 +528,31 @@
            
 
           <!-- Modal -->
-   
+          <div id="photosupload" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title firstcolor info">Upload Photos</h4><span class="info-small gray">You can upload multiple pictures at a time.Just dran n drop below.</span>
+                </div>
+                <div class="modal-body" style="background-color:#f2f2f2;">
+                  <div class="container" style="max-width:100%; ">
+                   
+                    <div class="form-group" style="margin-top: -100px;">
+                           <form action="../resources/actor_upload.php" class="dropzone" id="photo-upload" style="border: 1px dashed #b2b2b2;border-radius: 5px;background: white;margin-top:120px;"></form>
+                    </div>
+                    <button type="submit" class="btn submit-btn firstcolor" id="upload-btn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Upload</button>
+                
+                  </div>
+                  </div>
+                </div>
+                
+              </div>
+
+            </div>
+                    
         <!--================================== Navigation Ends Here =======================================-!-->
             
      
