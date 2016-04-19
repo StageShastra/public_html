@@ -167,14 +167,15 @@ function send_data()
    	success: function(res){
      $("#prelogin").addClass("hidden");
      $("#home").removeClass("hidden");
-     var json = JSON.parse(res);
-     console.log(json);
-     if(json==null)
+     //var json = JSON.parse(res);
+     console.log(res);
+     if(res==null)
      {
         show_add_actor();
      }
      else
      {
+      console.log("Aa");
       populate_browse_table(res);
      }  
      
@@ -183,6 +184,7 @@ function send_data()
 }
 function show_add_actor()
 {
+  console.log("aa");
   var div = document.getElementById('browse-table');
   content='<div class="showwelcome"><font class="info gray">Ola! It looks like you are new over here. <br>Why don\'t you start with adding some actors?'
   +'<br><button type="submit" class="btn submit-btn firstcolor" onclick=window.location="add_actor.php" id="btn-login" ><span class="glyphicon glyphicon-user"></span> &nbsp; Add Actor</button></div>';
@@ -288,6 +290,7 @@ function show_details(i)
 }
 function populate_browse_table(res)
 {	
+  console.log(res);
 	var json = JSON.parse(res);
 	actor_data=json;
 	var div = document.getElementById('browse-table');
@@ -586,4 +589,4 @@ else
   count=5;
   send_data();
 }
-show_spinner();
+//show_spinner();

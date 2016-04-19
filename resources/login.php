@@ -16,6 +16,7 @@ if(isset($_POST['username']))
 		session_start();
 		$_SESSION['login_user']=$row['director_id']; //Storing user session value.
 		$_SESSION['email']=$row['director_email'];
+		echo "Lets see "+(isset($_SESSION['login_user']));
 		echo "200";
 	}
 	else 

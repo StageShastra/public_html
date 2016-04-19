@@ -53,7 +53,7 @@
 					'".$data['role']."',
 					'',
 					'',
-					'',
+					'".$data['link']."',
 					'".$data['time']."',
 					'0',
 					'1'
@@ -66,6 +66,7 @@
 			$query = "UPDATE `beta_actor_experience` 
 					  SET `StashActorExperience_title`= '".$data['title']."',
 					  `StashActorExperience_blurb`= '".$data['blurb']."',
+					  `StashActorExperience_link`= '".$data['link']."',
 					  `StashActorExperience_role`= '".$data['role']."'
 					  WHERE StashActorExperience_id = {$ref} LIMIT 1";
 			$runSql = $this->connection->query($query);

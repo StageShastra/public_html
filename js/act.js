@@ -7,6 +7,7 @@ $(document).ready(function(){
 		$(hide).addClass("hidden");
 
 		//console.log(hide, unhide);
+
 	});
 	populate_photos();
 	$(document).on("click", ".updateDataField", function(){
@@ -121,8 +122,8 @@ $(document).ready(function(){
 		var title = $("input[name='exp_title']").val();
 		var role = $("input[name='exp_role']").val();
 		var blurb = $("textarea[name='exp_blurb']").val();
-
-		data = {request: "AddExperience", data: JSON.stringify({title: title, role: role, blurb: blurb})};
+		var link = $("input[name='exp_link']").val();
+		data = {request: "AddExperience", data: JSON.stringify({title: title, role: role, blurb: blurb, link: link})};
 		console.log(data);
 		$.ajax({
 			url: "../resources/ajax.php",
@@ -215,6 +216,11 @@ function populate_photos()
                        +' </div>'
                        +' </div>';
         $("#photos_videos").html(photoshtml);
+        $("#warningmsg").addClass("hidden");
+        $("img").error(function () { 
+	    $(this).hide();
+	    // or $(this).css({visibility:"hidden"}); 
+	});
 
 }
 

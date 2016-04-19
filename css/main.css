@@ -427,6 +427,30 @@ div.img-div{
     border-color: #FF003A;
     color: #FF003A;
 }
+.select-btn {
+	
+	background-color: #a5a5a5;
+	color: white;
+	width: 150px;
+	height: 150px;
+	border: 0px;
+	z-index: 999;
+	font-size: 80px;
+	-webkit-border-radius: 75px;
+	-moz-border-radius: 75px;
+	border-radius: 75px;
+}
+.contact-btn:hover{
+	background-color: #fff;
+    border-color: #FF003A;
+    color: #FF003A;
+}
+.contact-btn:focus{
+	background-color: #fff;
+    border-color: #FF003A;
+    color: #FF003A;
+    border: 1px solid;
+}
 .contact-form{
 	width: 40%;
 	min-width: 300px;

@@ -146,7 +146,7 @@
 					$this->response(false, "Some Error Occured!!!");
 				}
 			}else{
-				$this->response(false, "This user already do not exist.");
+				$this->response(false, "This user does not exist.");
 			}
 		}
 
@@ -165,7 +165,7 @@
 					$this->response(false, "Some Error Occured!!!");
 				}
 			}else{
-				$this->response(false, "This user already exist. Please login.");
+				$this->response(false, "This user already exists. Please login.");
 			}
 		}
 
@@ -232,6 +232,7 @@
 			$data['title'] = $data['ex_title_'.$key];
 			$data['blurb'] = $data['ex_blurb_'.$key];
 			$data['role'] = $data['ex_role_'.$key];
+			$data['link'] = $data['ex_link_'.$key];
 			if($db->updateActorExperience($ref, $data)){
 				$this->response(true, "Actor Experience Updated");
 			}else{

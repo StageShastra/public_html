@@ -113,9 +113,9 @@
 
            <!-- contact modal toggle -->
             <div class="container-fluid padded">
-                <div class="alert alert-warning alert-dismissible" role="alert">
+                <div class="alert alert-warning alert-dismissible" id="warningmsg" role="alert">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <strong>Warning!</strong> Better check yourself, you're not looking too good.
+                  <strong>Warning!</strong> Your profile looks empty, we suggest you to complete your profile. It helps you get more auditions.
                 </div>
 
                 <div class="container col-sm-12 center" id="browse-table">
@@ -396,11 +396,12 @@
                                 <span id="experience_add" class="hidden">
                                     <input type="text" class="editwhite long" name='exp_title' id="addtitle" Placeholder="Title of the play, ad, film etc." />
                                     <input type="text" class="editwhite long" name='exp_role' id="addrole" Placeholder="Role e.g. Dad, Mom, Character Name"/>
+                                    <input type="text" class="editwhite long" name='exp_link' id="addlink" Placeholder="Youtube Video Link"/>
                                     <textarea class="editwhite long" name='exp_blurb' id="adddescription" placeholder="A little description about the role and the project." style="height:80px;"></textarea>
                                     <br><font class="sortbuttons"><button class="btn submit-btn firstcolor center addExperience"  ><span class="glyphicon glyphicon-ok"></span></button></font>
                                 <hr>
                                 </span>
-                                <div id="experiencelist">
+                                <div id="experiencelist" style="max-height:400px; overflow:scroll;">
                                 <?php
 
                                     foreach ($actorExperiences as $key => $experience) {
@@ -408,7 +409,7 @@
 
                                     <span id="experience-<?= $key ?>" class="info dark-gray">
                                         <span class="info black" id="actor_ex_title_<?= $key ?>"><b><?= $experience['StashActorExperience_title'] ?></b></span>
-                                        <span class="glyphicon glyphicon-pencil edit-button pull-right firstcolor toggleEdit" data-unhide-id="#experience-<?= $key ?>_edit" data-hide-id="#experience-<?= $key ?>" aria-hidden="true"></span>
+                                        <span class="glyphicon glyphicon-pencil edit-button  firstcolor toggleEdit" data-unhide-id="#experience-<?= $key ?>_edit" data-hide-id="#experience-<?= $key ?>" aria-hidden="true"></span>
                                         <br>
                                         <span class="info black" id="actor_ex_role_<?= $key ?>">
                                             <i>as</i> <?= $experience['StashActorExperience_role'] ?>
@@ -417,16 +418,26 @@
                                         <span class="info-small dark-gray" id="actor_ex_blurb_<?= $key ?>">
                                             <?= $experience['StashActorExperience_blurb'] ?>
                                         </span>
+                                        <span >
+                                            <?
+                                            if($experience['StashActorExperience_link']!="") 
+                                            {
+                                                echo '<br><a class="info-small" href="'.$experience['StashActorExperience_link'].'" target="_blank">Watch Video</a>';
+                                            
+                                            }
+                                            ?>
+                                        </span>
                                         <br><br>
                                     </span>
                                     <span id="experience-<?= $key ?>_edit" class="hidden">
                                         <input type="text" name="ex_title_<?= $key ?>" class="editwhite long" id="edittitlei" value="<?= $experience['StashActorExperience_title'] ?>" Placeholder="Title of the play, ad, film etc." />
                                         <input type="text" name="ex_role_<?= $key ?>" class="editwhite long" id="editrolei" value="<?= $experience['StashActorExperience_role'] ?>" Placeholder="Role e.g. Dad, Mom, Character Name"/>
+                                        <input type="text" name="ex_link_<?= $key ?>" class="editwhite long" id="editlinki" value="<?= $experience['StashActorExperience_link'] ?>" Placeholder="Youtube"/>
                                         <textarea class="editwhite long" name="ex_blurb_<?= $key ?>" id="editdescriptioni" style="height:80px;overflow:scroll;"><?= $experience['StashActorExperience_blurb'] ?></textarea>
                                         <br>
                                         <font class="sortbuttons">
                                             <button type="button" class="btn submit-btn firstcolor center btnExpAndTraining"
-                                                    data-input-names="ex_title_<?= $key ?>, ex_role_<?= $key ?>, ex_blurb_<?= $key ?>"
+                                                    data-input-names="ex_title_<?= $key ?>, ex_role_<?= $key ?>,ex_link_<?= $key ?>,ex_blurb_<?= $key ?>"
                                                     data-key="<?= $key ?>"
                                                     data-table-id="<?= $experience['StashActorExperience_id'] ?>"
                                                     data-request="EditExperience"
@@ -451,7 +462,7 @@
                             <span class="actorlabel" >
                                 Training : <span id="opentrainingicon" class="glyphicon glyphicon-plus edit-button pull-right firstcolor toggleEdit" data-unhide-id="#training_add, #closetrainingicon" data-hide-id="#opentrainingicon" aria-hidden="true"></span>
 
-                                <span id="closetrainingicon" class="glyphicon glyphicon-minus edit-button pull-right hidden toggleEdit" data-hide-id="#training_add, #closetrainingicon" data-unhide-id="#opentrainingicon" aria-hidden="true"></span>
+                                <span id="closetrainingicon" class="glyphicon glyphicon-minus edit-button  hidden toggleEdit" data-hide-id="#training_add, #closetrainingicon" data-unhide-id="#opentrainingicon" aria-hidden="true"></span>
                                 <hr align="left" width="15px" class="tenth">
                             </span>
                             <div id="actor_training">
@@ -466,7 +477,7 @@
                                     <br><font class="sortbuttons"><button class="btn submit-btn firstcolor center addTraining"  ><span class="glyphicon glyphicon-ok"></span></button></font>
                                 <hr>
                                 </span>
-                                <div id="traininglist">
+                                <div id="traininglist" style="max-height:400px; overflow:scroll;">
                                     <?php
                                         foreach ($actorTrainings as $key => $training) {
                                     ?>

@@ -1,13 +1,13 @@
 <?php
 session_start();
-if(empty($_SESSION['login_user']))
+if(!isset($_SESSION['login_user']))
 {
-	header("Location:index.php");
+    header("Location:index.php");
 }
 ini_set('display_errors', '1');
 include_once('resources/db_config.php');
 $data=$_REQUEST['data'];
-//echo data;
+//echo $data;
 $data[0]="actor_".strtolower($data[0]);
 $data[1]="actor_".strtolower($data[1]);
 $data[2]="actor_".strtolower($data[2]);
@@ -39,9 +39,13 @@ function utf8_converter($array)
  
     return $array;
 }
-$rows = utf8_converter($rows);
-print json_encode($rows);
-$error = json_last_error();
+if (mysqli_num_rows($result) > 0) 
+{
+    $rows = utf8_converter($rows);
+    print json_encode($rows);
+    $error = json_last_error();
+   
+}
 
 //var_dump($json, $error === JSON_ERROR_UTF8);
 ?>
