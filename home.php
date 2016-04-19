@@ -275,11 +275,24 @@ if(!isset($_SESSION['login_user']))
             var that = this;
             var emails = $("textarea[name='emails']").val();
             var mobiles = $("textarea[name='mobiles']").val();
-            var message = $("textarea['name='mobiles']").val();
+            var message = $("textarea[name='message']").val();
 
             var data = {emails: emails, mobiles: mobiles, message: message};
 
             // TODO: Generate a preview of email before sending.
+            $.ajax({
+              type: "POST",
+              data: data,
+              url: "resources/sendInvite.php",
+              success: function(res){
+               //console.log(res);
+               $("#success_send").show(); 
+               $("#success_send").fadeTo(2000, 500).slideUp(500, function(){
+                  $("#success_send").alert('close');
+                          });
+               
+             }
+          });
 
             console.log(data);
             return false;

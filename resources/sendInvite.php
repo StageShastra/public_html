@@ -3,26 +3,13 @@
 	require_once('mailer.php');
 	require_once('sendsms.php');
 
-	if(isset($_POST['submit'])){
+	if(isset($_POST['emails'])){
 		// if form submitted
-
 		// Catching CSEmails and filtering,
 		$emails = explode(",", trim($_POST['emails']));
-		$filteredEmails = [];
-		foreach ($emails as $key => $email) {
-			if(filter_var(trim($email), FILTER_VALIDATE_EMAIL)){
-				$filteredEmails[] = trim($email);
-			}
-		}
 
 		// Catching CSMobile Numbers and filtering,
-
-		$mobiles = explode(",", trim($_POST['mobiles']));
-		$filteredMobiles = [];
-		foreach ($mobiles as $key => $mobile) {
-			$filteredMobiles[] = trim($mobile);
-		}
-
+		session_start();
 		$director_ref  = urlencode(trim($_SESSION['login_user']));
 		//$string = base64_encode("Director_" . $director_ref);
 
@@ -43,18 +30,17 @@
 			$mail->Port = 587;                                    // TCP port to connect to
 
 			$mail->setFrom('no-reply@stageshastra.com', 'StageShastra');
-			$mail->addAddress("connect@stageshastra.com");     // Add a recipient
-
-			foreach ($filteredEmails as $key => $email) {
-				$email->AddCC($email);
-			}
+			$mailto = $_POST['emails'];
+			$addr = explode(',',$mailto);
+			foreach ($addr as $ad) {
+		    	$mail->AddAddress( trim($ad) );       
+			}     // Add a recipient
 
 			$mail->addReplyTo('no-reply@stageshastra.com', 'No Reply');
 			$mail->isHTML(true);                                  // Set email format to HTML
 
 			$mail->Subject = 'Invitation for Audition | StageShastra';
-
-			$mail = '
+			$mailmsg = '
 			<div class="center" style="float:none;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" >
 				<div class="logo" style="position:absolute;right:200px;top:10px;" >
 				<font class="info gray" style="color:#252323;font-size:18px;font-weight:10;font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" ><span class="pwdby" style="top:-15px;position:relative;" >Powered By :</span> <img src="http://stageshastra.com/img/logo.png" height="50px" width="50px">
@@ -65,7 +51,6 @@
 					<span id="message">
 						{$message}
 						<br>
-						We are glad to infor you that you ahve been selected for out audition.We will send out email on this channel please join us
 					</span>
 					<br><br>
 					Regards,
@@ -76,9 +61,11 @@
 			</div>';
 
 
-			$mail->Body = $mail;
-
+			$mail->Body = $mailmsg;
 			$mail->send();
+			$text = $_POST['message']."\nYour sign up link is $link";
+			//sms sending code
+			echo send_text($_POST['mobiles'],$text);
 
 		$time = time();
 		$query = "INSERT INTO `beta_invitation_send`(`id`, `director_ref`, `message`, `emails`, `emails_failed`, `mobiles`, `mobile_failed`, `timestamp`) 
@@ -95,8 +82,11 @@
 		$runSQL = mysqli_query($con, $query);
 
 	}
+	else
+	{
+		header("Location:../index.php");	
+	}
 
-
-	header("Location: index.php");
+	
 
 ?>

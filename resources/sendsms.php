@@ -8,17 +8,21 @@
 		$username = 'shiv@stageshastra.com';
 		$hash = 'Stash123';
 		$reciepients=$sendto;
-		//var_dump($sendto);
-		//echo $reciepients;
 		$numbers = explode(",",$reciepients);
 		$sender = urlencode('STGSHS');
 		$premessage = "Dear Actor, ";
 		$message = rawurlencode($sms);
-		$postmessage = "\nPowered By: StageShastra"; 
+		$len=strlen($message);
+		if($len<121)
+		{
+			$postmessage = "\nPowered By. StageShastra"; 	
+		}
+		else
+		{
+			$postmessage = "\nPowered By: StageShastra"; 
+		}
 		$message=$premessage.$message.$postmessage;
 		$len=strlen($message);
-		//echo $message." ";
-		echo $len;
 		//var_dump($numbers);
 		$numbers = num_implode($numbers);
 		echo $numbers;
