@@ -160,6 +160,7 @@ function send_data()
   setCookie("cat3",select[2],0.05);
   setCookie("cat4",select[3],0.05);
   setCookie("cat5",select[4],0.05);
+  console.log(select);
 	$.ajax({
    	type: "POST",
    	data: {data:select},
@@ -167,16 +168,15 @@ function send_data()
    	success: function(res){
      $("#prelogin").addClass("hidden");
      $("#home").removeClass("hidden");
-     //var json = JSON.parse(res);
-     console.log(res);
-     if(res==null)
+     var json = JSON.parse(res);
+     console.log(json);
+     if(json==null)
      {
         show_add_actor();
      }
      else
      {
-      console.log("Aa");
-      populate_browse_table(res);
+        populate_browse_table(res);
      }  
      
    }
@@ -184,10 +184,10 @@ function send_data()
 }
 function show_add_actor()
 {
-  console.log("aa");
+ 
   var div = document.getElementById('browse-table');
-  content='<div class="showwelcome"><font class="info gray">Ola! It looks like you are new over here. <br>Why don\'t you start with adding some actors?'
-  +'<br><button type="submit" class="btn submit-btn firstcolor" onclick=window.location="add_actor.php" id="btn-login" ><span class="glyphicon glyphicon-user"></span> &nbsp; Add Actor</button></div>';
+  content='<div class="showwelcome"><font class="info gray">Ola! It looks like you are new over here. <br>Why don\'t you start with inviting some actors?'
+  +'<br><button type="submit" class="btn submit-btn firstcolor"  data-toggle="modal" data-target="#inviteActors" id="btn-login" ><span class="glyphicon glyphicon-plus"></span> &nbsp;Invite  Actor</button></div>';
   div.innerHTML = content; 
 }
 function sendsmstoo()
@@ -578,7 +578,9 @@ function checkCookie(cookie) {
 
 if(checkCookie("catset")==0)
 {
+  console.log("Populating Categories Table");
   populate_cat_table();
+
 }
 else
 {
@@ -588,6 +590,7 @@ else
   select.push(getCookie("cat4"));
   select.push(getCookie("cat5"));
   count=5;
+  console.log("Calling Send Data");
   send_data();
 }
 //show_spinner();

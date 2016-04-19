@@ -7,10 +7,7 @@ if(!isset($_SESSION['login_user']))
 ini_set('display_errors', '1');
 include_once('resources/db_config.php');
 include_once('resources/functions.php');
-$data = $_REQUEST['data'];
-header("Content-Type: application/json");
-print_r($data);
-exit();
+
 //echo data;
 $data[0]="actor_".strtolower($data[0]);
 $data[1]="actor_".strtolower($data[1]);
@@ -42,8 +39,16 @@ function utf8_converter($array)
  
     return $array;
 }
-$rows = utf8_converter($rows);
-print json_encode($rows);
-$error = json_last_error();
+if(mysqli_num_rows($result) >0)
+{
+    $rows = utf8_converter($rows);
+    print json_encode($rows);
+    $error = json_last_error();    
+}
+else
+{
+    echo "null";
+}
+
 //var_dump($json, $error === JSON_ERROR_UTF8);
 ?>
