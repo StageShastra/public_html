@@ -6,7 +6,7 @@ if(isset($_POST['username']))
 	$username = mysqli_real_escape_string($con,$_POST['username']);
 	$password = mysqli_real_escape_string($con,$_POST['password']);
 	//$password = md5($password);
-	$query="SELECT * FROM director WHERE director_username='$username' and director_password='$password'";
+	$query="SELECT * FROM director WHERE (director_username='$username' OR director_email = '{$username}') and director_password='$password'";
 	$result=mysqli_query($con,$query);
 	$count=mysqli_num_rows($result);
 	$row=mysqli_fetch_array($result,MYSQLI_ASSOC);

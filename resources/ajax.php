@@ -158,7 +158,7 @@
 				$data['time'] = time();
 				$data['ip'] = $_SERVER['REMOTE_ADDR'];
 				if($db->insertNewActor($data)){
-
+					
 					$db->sendConfirmationLink($data['fullname'], $data['email']);
 					$this->response(true, "You are Successfully signed up, please check your email for  confirmation link.");
 				}else{

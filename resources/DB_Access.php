@@ -160,6 +160,11 @@
             	)";
 
             $runSql = $this->connection->query($query);
+
+            $query = "INSERT INTO `beta_actor_director`(`id`, `director_ref`, `actor_ref`, `status`) 
+            		VALUES (null, '".$data['refCode']."', '{$ref}', '1')";
+            $runSql = $this->connection->query($query);
+
 			return ($this->connection->affected_rows) ? true : false;
 		}
 
@@ -207,7 +212,7 @@
 
 			$mail->Subject = 'Thank you for Signing Up | StageShastra';
 
-			$mail = '
+			$message = '
 <div class="center" style="float:none;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" >
 	<div class="logo" style="position:absolute;right:200px;top:10px;" >
 	<font class="info gray" style="color:#252323;font-size:18px;font-weight:10;font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" ><span class="pwdby" style="top:-15px;position:relative;" >Powered By :</span> <img src="http://stageshastra.com/img/logo.png" height="50px" width="50px">
@@ -226,7 +231,7 @@
 </div>';
 
 
-			$mail->Body = $mail;
+			$mail->Body = $message;
 
 			if($mail->send())
 				return true;

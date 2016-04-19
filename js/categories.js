@@ -4,7 +4,7 @@ var count=0;
 //This function populates the table which lets the user to choose categories.
 function populate_cat_table()
 {
-	var list=['Name','Age','Training','Facial-Attribute','Height','Sex','Physical-Attribute','Weight','Projects','Range','Skills','Auditions','Experience','Language','Education'];
+	var list=['Name','Age','Facial-Attribute','Height','Sex','Physical-Attribute','Weight','Range','Skills','Language'];
 	var counter=0;
 	var rows=list.length/3;
 	var div = document.getElementById('categories');
@@ -105,6 +105,9 @@ function unselect_default()
 	removes("Language");
 	removes("Skills");
 }
+
+
+
 function send_data()
 {	
 	if(count<2)
@@ -129,6 +132,8 @@ function send_data()
    }
 });
 }
+
+send_data();
 function populate_browse_table(res)
 {	
 	var json = JSON.parse(res);
