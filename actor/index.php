@@ -53,6 +53,7 @@ header("Location:../actor/home.php");
                 <div class="mycontent-right center light-padded">
                     <font class="info dark-gray center"> Log In | <a href="signup.php"><font class="info firstcolor center"> Sign Up! </a></font></font>
                     <form role="form" id="login-form" method="post" >
+                    <p class="text-danger" id="signup-error"></p>
                     <div class="form-group">
                       <input type="email" class="form-control login" id="email" name="email" placeholder= "Email" required />
                     </div>
@@ -83,7 +84,7 @@ header("Location:../actor/home.php");
         <script src="../js/vendor/bootstrap.min.js"></script>
 
         <script src="../js/main.js"></script>
-        <script src="../js/actor_login.js"></script>
+        <!-- <script src="../js/actor_login.js"></script> -->
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

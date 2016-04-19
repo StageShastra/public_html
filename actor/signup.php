@@ -1,17 +1,3 @@
-<?php 
-$invite_flag=0;
-if(isset($_REQUEST['director_id']))
-{
-  $director_id = $_REQUEST['director_id'];  
-  $invite_flag = 1;
-}
-else
-{
-  $director_id = "0";
-}
-
-
-?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -52,23 +38,14 @@ else
               <a href="index.php"><img src="../img/logo.png" class="logo img-fluid"/></a> STAGE<b>SHASTRA</b>
             </div>
             <div class="row center">
-              <div id="pro-bar" class="container col-sm-8 center">
-                      
-                      <div class="progress" style="height:4px;">
-                        <div class="progress-bar progress-bar-success" id="pro-personal"role="progressbar" style="width:33.33%; height:4px; background:#FEE300; "> 
-                        </div>
-                        <div class="progress-bar progress-bar-success hidden" id="pro-bio" role="progressbar" style="width:33.33%; height:4px; background:#FFAA3A;">
-
-                        </div>
-                        <div class="progress-bar progress-bar-danger hidden" id="pro-work" role="progressbar" style="width:33.33%; height:4px;background:#FF003A; ">
-                        </div>
-                      </div>
-                    </div>
               <div class="col-sm-12 light-padded">
                     
                 <div class="col-sm-8 center thinbordered" id="form-div-personal">
-                  <font class="info gray"><span class="glyphicon glyphicon-user firstcolor" aria-hidden="true"></span>  Personal Details<hr></font>
-                      <form role="form" class="col-sm-8 center marginTop" id="signup-form">
+                  <font class="info gray"><span class="glyphicon glyphicon-user firstcolor" aria-hidden="true"></span>  Sign Up<hr></font>
+                      <form role="form" action="#" method="post" class="col-sm-8 center marginTop" id="actor-signup-form">
+
+                      <p class="text-danger" id="signup-error">  </p>
+
                       <div class="form-group">
                         <input type="text" class="form-control login" id="fullname" name="fullname" title="Do not add any titles, like Mr. or Ms., etc" placeholder= "Full Name *" required>
                       </div>
@@ -86,90 +63,13 @@ else
                       </div>
 
                       <div class="form-group">
-                        <input type="hidden" class="form-control login" id="whatsapp" name="whatsapp" title="Do not add zero or +91 before it." placeholder= "Whatsapp No. *" required >
+                        <input type="hidden" class="form-control login" id="whatsapp" name="whatsappNo" title="Do not add zero or +91 before it." placeholder= "Whatsapp No. *"  >
                       </div>
                       <div class="form-group">
                         <input type="password" class="form-control login" id="password" name="password" title="Atleast 8 letters" placeholder= "Choose a password" required>
                       </div>
-                      <button type="button" class="btn submit-btn firstcolor" onclick="showbio()" id="sign-upbtn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Continue</button>
+                      <button type="submit" class="btn submit-btn firstcolor" id="sign-upbtn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign Up</button>
                     </form>
-                </div>
-                <div>
-                  <div class="col-sm-8 center thinbordered hidden" id="form-div-bio">
-                  <font class="info gray"><span class="glyphicon glyphicon-pencil info-small firstcolor" aria-hidden="true"></span> Bio<hr></font>
-                      <form role="form" class="col-sm-8 center marginTop" id="signup-form">
-                      <div class="form-group">
-                        <input type="date" class="form-control login" style="color:#99999B;" id="dob" name="dob" title= "Date of Birth. Be careful to use the right format!" required >
-                      </div>
-                      <div>
-                          <div class="col-sm-6 form-group no-paddinglr">
-                              <input type="text" class="form-control login" onclick="calculateAge()" id="age" name="age" placeholder= "Age(in years) :" required />
-                          </div>
-                          <div class="col-sm-6 form-group no-paddinglr">
-                              <select type="text" class="form-control login" id="sex" name="sex" placeholder= "Sex (M/F) :" required >
-                                <option>M</option>
-                                <option>F</option>
-                              </select>
-                          </div>
-                      </div>
-                      <div>
-                          <div class="col-sm-6 form-group no-paddinglr">
-                              <input type="text" class="form-control login" id="weight" name="weight" placeholder= "W(in kgs) :" required />
-                          </div>
-                          <div class="col-sm-6 form-group no-paddinglr">
-                              <input type="text" class="form-control login" id="height" name="height" placeholder= "H(in cms) :" required />
-                          </div>
-                      </div>
-                      <div class="form-group">
-                        <input type="hidden" class="form-control login"  id="director" name="director" value=<? echo $director_id ?> >
-                      </div>
-                      <button type="button" class="btn submit-btn firstcolor" onclick="showwork()" id="sign-upbtn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Continue</button>
-                    </form>
-                </div>
-                </div>
-                <div>
-                  <div class="col-sm-8 center thinbordered hidden" id="form-div-work">
-                  <font class="info gray"><span class="glyphicon glyphicon-th-list firstcolor" aria-hidden="true"></span> Work<hr></font>
-                      <form role="form" class="col-sm-8 center marginTop" id="signup-form"  style="margin-bottom:50px;">
-                      <div class="form-group" id="lan">
-                        <input type="text" class="form-control login"  data-role="tagsinput" id="language" name="language" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom" title="Add a language, then press enter." placeholder= "Languages you speak" required >
-                      </div>
-                      <div class="form-group">
-                        <input type="text" class="form-control login"  id="experience" name="experience" title="Leave blank  if you don't have any." placeholder= "Work Experience(ads, films etc.)" required >
-                      </div>
-                       <div class="form-group">
-                        <input type="text" class="form-control login"  id="training" name="training" title="Leave blank  if you don't have any." placeholder= "Training(acting school,etc.)" required >
-                      </div>
-                      <div class="form-group">
-                        <input type="text" class="form-control login"  data-role="tagsinput" id="skills" name="skills"  placeholder= "Skills(Swimming etc.)" required >
-                      </div>
-                      <div>
-                          <div class="col-sm-6 form-group no-paddinglr">
-                              <input type="number" class="form-control login" id="agemin" name="agemin" title="What  minimum age would you naturally be able to play on screen/stage?" value="5" required />
-                          </div>
-                          <div class="col-sm-6 form-group no-paddinglr">
-                              <input type="number" class="form-control login" id="agemax" name="agemax" title="What maximum age would you naturally be able to play on screen/stage?" value="45" required />
-                          </div>
-                      </div>
-                      <div>
-                          <div class="col-sm-6 form-group no-paddinglr" style="text-align:left;">
-                             <input type="checkbox" name="passport" id="passport" class="css-checkbox" unchecked /><label for="passport" class="css-label"><span class="info-small dark-gray "> I have a Passport</span></label>
-                          </div>
-                          <div class="col-sm-6 form-group no-paddinglr">
-                              <input type="checkbox" name="actorcard" id="actorcard" class="css-checkbox" unchecked /><label for="actorcard" class="css-label"><span class="info-small dark-gray ">I have an Actor's Card</span></label>
-                          </div>
-                      </div>
-                    </form>
-                    <div class="form-group">
-                           <form action="../resources/actor_upload.php" class="dropzone" id="photo-upload" style="border: 1px dashed #b2b2b2;border-radius: 5px;background: white;margin-top:120px;"></form>
-                    </div>
-                    <button type="submit" class="btn submit-btn firstcolor" id="save-btn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Save</button>
-                </div>
-                </div>
-                 <div class="container-fluid hidden" id="success">
-                  <div class="col-sm-12">
-                    <img src="../img/thanks.png"  style="float:left; height:50%;"/><h1 style="margin-top:15%;" class="firstcolor"> Thank You!</b></h1><br><span class="info">Good to have you onboard!<br> Click <a href="home.php">here</a> to go to your profile.</span>
-                  </div>
                 </div>      
               </div>
               </div>
@@ -189,6 +89,8 @@ else
 
         <script src="../js/actor_signup.js"></script> 
         <script src="../js/main.js"></script>
+
+
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
