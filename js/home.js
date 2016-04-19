@@ -10,7 +10,7 @@ $('#contactmodal').modal('hide');
 //This function populates the table which lets the user to choose categories.
 function populate_cat_table()
 {
-	var list=['Name','Age','Training','Facial-Attribute','Height','Sex','Physical-Attribute','Weight','Projects','Range','Skills','Auditions','Experience','Language','Education'];
+	var list=['Name','Age','Height','Sex','Email','Mobile','Whatsapp','Weight','Range','Skills','Language'];
 	var counter=0;
 	var rows=list.length/3;
 	var div = document.getElementById('categories');
@@ -307,15 +307,15 @@ function populate_browse_table(res)
     content+="</tr></thead>";
     content+="<tbody>";
     var a=select[0].toLowerCase();
-    a="actor_"+a;
+    a="StashActor_"+a;
     var b=select[1].toLowerCase();
-    b="actor_"+b;
+    b="StashActor_"+b;
     var c=select[2].toLowerCase();
-    c="actor_"+c;
+    c="StashActor_"+c;
     var d=select[3].toLowerCase();
-    d="actor_"+d;
+    d="StashActor_"+d;
     var e=select[4].toLowerCase();
-    e="actor_"+e;
+    e="StashActor_"+e;
     console.log(a);
     console.log(b);
     console.log(c);
@@ -327,7 +327,7 @@ function populate_browse_table(res)
                           +'</td>' 
                    		  +'<td style="vertical-align:middle-top;">'
                           +      '<div class="img-div center">'
-						  +			'<img src="'+json[i].actor_profile_photo+'" onclick="show_details('+i+')" />'
+						  +			'<img src="img/'+json[i].StashActor_avatar+'" onclick="show_details('+i+')" />'
 						  +		 '</div>'
                           + '</td>' 
                           +'<td style="vertical-align:middle;">'
@@ -568,18 +568,19 @@ function getCookie(cname) {
 function checkCookie(cookie) {
     var flag=getCookie(cookie);
     if (flag=="") {
-        return 0;
+      return 0;
 
     }else{
         return 1;
-        }
     }
+}
 
 
 if(checkCookie("catset")==0)
 {
   console.log("Populating Categories Table");
   populate_cat_table();
+
 
 }
 else
