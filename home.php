@@ -286,6 +286,7 @@ if(!isset($_SESSION['login_user']))
               url: "resources/sendInvite.php",
               success: function(res){
                //console.log(res);
+               $("#inviteActors").hide();
                $("#success_send").show(); 
                $("#success_send").fadeTo(2000, 500).slideUp(500, function(){
                   $("#success_send").alert('close');
