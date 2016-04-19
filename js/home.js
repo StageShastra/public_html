@@ -292,6 +292,7 @@ function populate_browse_table(res)
 {	
   console.log(res);
 	var json = JSON.parse(res);
+  console.log(json);
 	actor_data=json;
 	var div = document.getElementById('browse-table');
   div.innerHTML="";

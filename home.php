@@ -292,6 +292,7 @@ if(!isset($_SESSION['login_user']))
         <script src="js/vendor/bootstrap.min.js"></script>
          <script src='js/tagsinput.js'></script>
         <script src="js/home.js"></script>
+         <script src="js/categories.js"></script>
         <script src="js/lightbox.js"></script>
         <script src="js/stupidtable.js"></script>
 
