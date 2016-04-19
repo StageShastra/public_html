@@ -15,7 +15,7 @@ $(document).ready(function(){
 		});
 
 		data = {request: "ActorSignUp", data: JSON.stringify(formdata)};
-
+		$("#sign-upbtn").addClass("hidden");
 		$.ajax({
 			url: url,
 			type: type,
@@ -26,6 +26,7 @@ $(document).ready(function(){
 					$("input", $(that)).val("");
 				}
 				$("#signup-error").html(response.message).show(500).delay(3000).hide(500);
+				$("#sign-upbtn").removeClass("hidden");
 				//console.log(response);
 			}
 		});

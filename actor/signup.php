@@ -25,6 +25,14 @@
     .bootstrap-tagsinput {
       background-color: #f2f2f2;
     }
+    .rotate-img {
+            -webkit-animation: rotation 2s infinite linear;
+          }
+
+          @-webkit-keyframes rotation {
+              from {-webkit-transform: rotate(0deg);}
+              to   {-webkit-transform: rotate(359deg);}
+          }
     </style>
     <body>
         <!--[if lt IE 8]>
@@ -70,6 +78,7 @@
                       </div>
                       <input type="hidden" name="refCode" value="<?= ($_GET['refCode']) ? $_GET['refCode'] : 0 ?>">
                       <button type="submit" class="btn submit-btn firstcolor" id="sign-upbtn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign Up</button>
+                      <div class="showwelcome hidden"><center><img src="../img/logo.png" class="rotate-img center" width="50px" height="50px"/><br><font class="info-small gray">We have sent you a mail. Please confirm your mail address!</div>
                     </form>
                 </div>      
               </div>

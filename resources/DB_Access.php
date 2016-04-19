@@ -197,11 +197,11 @@
 			$mail = new PHPMailer();
 			$mail->SMTPDebug = 2;                               // Enable verbose debug output
 			$mail->Debugoutput = 'html';
-			$mail->isSMTP();                                      // Set mailer to use SMTP
+			//$mail->isSMTP();                                      // Set mailer to use SMTP
 			$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
 			$mail->SMTPAuth = true;                               // Enable SMTP authentication
-			$mail->Username = 'prasht63@gmail.com';                 // SMTP username
-			$mail->Password = 'dontkeepitsimplesilly';                           // SMTP password
+			$mail->Username = '';                 // SMTP username
+			$mail->Password = '';                           // SMTP password
 			$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 			$mail->Port = 587;                                    // TCP port to connect to
 
@@ -227,7 +227,7 @@
 		<br>
 		<span id="sender">Team StageShastra</span>
 	</font>
-	<a href="{$link}"><button class="bigbutton" style="background-color:#de114b;background-image:none;background-repeat:repeat;background-position:top left;background-attachment:scroll;font-size:30px;color:white;width:100%;border-width:0px;height:75px;" >Click Here</button></a>
+	<a href="'.$link.'"><button class="bigbutton" style="background-color:#de114b;background-image:none;background-repeat:repeat;background-position:top left;background-attachment:scroll;font-size:30px;color:white;width:100%;border-width:0px;height:75px;" >Click Here</button></a>
 </div>';
 
 
