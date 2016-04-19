@@ -6,7 +6,16 @@ if(empty($_SESSION['login_user']))
 }
 ini_set('display_errors', '1');
 include_once('resources/db_config.php');
-$data=$_REQUEST['data'];
+include_once('resources/functions.php');
+$data = $_REQUEST['data'];
+
+header("Content-Type: application/json");
+
+print_r($data);
+exit();
+
+
+
 //echo data;
 $data[0]="actor_".strtolower($data[0]);
 $data[1]="actor_".strtolower($data[1]);

@@ -68,6 +68,7 @@
                       <div class="form-group">
                         <input type="password" class="form-control login" id="password" name="password" title="Atleast 8 letters" placeholder= "Choose a password" required>
                       </div>
+                      <input type="hidden" name="refCode" value="<?= ($_GET['refCode']) ? $_GET['refCode'] : 0 ?>">
                       <button type="submit" class="btn submit-btn firstcolor" id="sign-upbtn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign Up</button>
                     </form>
                 </div>      
