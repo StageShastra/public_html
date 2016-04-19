@@ -8,47 +8,39 @@ ini_set('display_errors', '1');
 include_once('resources/db_config.php');
 include_once('resources/functions.php');
 
-//echo data;
-$data[0]="actor_".strtolower($data[0]);
-$data[1]="actor_".strtolower($data[1]);
-$data[2]="actor_".strtolower($data[2]);
-$data[3]="actor_".strtolower($data[3]);
-$data[4]="actor_".strtolower($data[4]);
+
+$tag2name = array(
+            'Name' => "name",
+            'Age' => "dob",
+            'Email' => 'email',
+            'Height' => 'height',
+            'Sex' => 'gender',
+            'Mobile' => "mobile",
+            'Weight' => "weight",
+            'Range' => 'range',
+            'Skills' => "skills",
+            'Language' => "language",
+            'Whatsapp' => 'whatsapp'
+        );
+
+$data = $_POST['data'];
+foreach ($data as $key => $value) {
+    $tags[] = 'StashActor_'.$tag2name[$value];
+}
+
 $director_id=$_SESSION['login_user'];
-$sql = "SELECT * FROM actor where director_id='$director_id'";
-//echo $sql;
-$result = mysqli_query($con, $sql);
-$row=array();
-if (mysqli_num_rows($result) > 0) 
-{
-    // output data of each row
-    while($r= mysqli_fetch_assoc($result))
-    {
-        $rows[]=$r;
-        //var_dump($r);
-        //print json_encode($r);
-    }
-}
-function utf8_converter($array)
-{
-    array_walk_recursive($array, function(&$item, $key){
-        if(!mb_detect_encoding($item, 'utf-8', true)){
-                $item = utf8_encode($item);
-        }
-    });
- 
-    return $array;
-}
-if(mysqli_num_rows($result) >0)
-{
-    $rows = utf8_converter($rows);
-    print json_encode($rows);
-    $error = json_last_error();    
-}
-else
-{
+
+$actorsInDirector = getActorWithDirector($director_id);
+$actor_ref_list = arr2csv($actorsInDirector);
+
+$actorProfile = getActorProfileByIds($actor_ref_list);
+if(count($actorProfile)){
+    echo json_encode($actorProfile);
+    exit();
+}else{
     echo "null";
 }
+
 
 //var_dump($json, $error === JSON_ERROR_UTF8);
 ?>
