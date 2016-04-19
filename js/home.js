@@ -499,7 +499,7 @@ function show_no_actor()
 function show_spinner()
 {
   var div = document.getElementById('browse-table');
-  content='</img><div class="showwelcome"><center><img src="img/logo.png" class="rotate-img center" width="80px" height="80px"/><br><font class="info gray">Crunching the latest data for you!</div>';
+  content='</img><div class="showwelcome" id="spinner"><center><img src="img/logo.png" class="rotate-img center" width="80px" height="80px"/><br><font class="info gray">Crunching the latest data for you!</div>';
   div.innerHTML = content; 
 }
 function send_mail()

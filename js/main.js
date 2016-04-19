@@ -5,7 +5,7 @@ $(document).ready(function(){
 		data = {},
 		formdata = {};
 
-
+	
 	$(document).on("submit", "form#actor-signup-form", function(){
 
 		var that = this;
@@ -16,6 +16,7 @@ $(document).ready(function(){
 
 		data = {request: "ActorSignUp", data: JSON.stringify(formdata)};
 		$("#sign-upbtn").addClass("hidden");
+		$("#spinner").removeClass("hidden");
 		$.ajax({
 			url: url,
 			type: type,
@@ -27,6 +28,7 @@ $(document).ready(function(){
 				}
 				$("#signup-error").html(response.message).show(500).delay(3000).hide(500);
 				$("#sign-upbtn").removeClass("hidden");
+				$("#spinner").addClass("hidden");
 				//console.log(response);
 			}
 		});
