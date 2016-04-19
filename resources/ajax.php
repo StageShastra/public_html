@@ -159,7 +159,7 @@
 				$data['ip'] = $_SERVER['REMOTE_ADDR'];
 				if($db->insertNewActor($data)){
 
-					//$db->sendConfirmationLink($data['fullname'], $data['email']);
+					$db->sendConfirmationLink($data['fullname'], $data['email']);
 					$this->response(true, "You are Successfully signed up, please check your email for  confirmation link.");
 				}else{
 					$this->response(false, "Some Error Occured!!!");
@@ -196,10 +196,7 @@
 				$this->response(false, "You are not loggedIn.");
 
 			$db = $this->includeDB(); // including Database Connection.
-			$ref = (int)$data['actor_ref'];
-
-			$data['start'] = strtotime(str_replace("/", "-", $data['start']));
-			$data['end'] = strtotime(str_replace("/", "-", $data['end']));
+			$ref = $this->actor_id;
 			$data['time'] = time();
 
 			if($db->insertActorTraining($ref, $data)){
@@ -208,6 +205,19 @@
 				$this->response(false, "Some Error Occured.");
 			}
 
+		}
+
+		public function addActorExperience($data = ''){
+			if(!$this->actor_login)
+				$this->response(false, "You are not loggedIn.");
+
+			$ref = $this->actor_id;
+			$data['time'] = time();
+			if($db->insertActorExperience($ref, $data)){
+				$this->response(true, "Actor Experience Added");
+			}else{
+				$this->response(false, "Some Error Occured.");
+			}
 		}
 
 		public function editActorExperience($data = []){

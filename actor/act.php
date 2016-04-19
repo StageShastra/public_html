@@ -388,10 +388,10 @@
                             <div id="actor_experience">
 
                                 <span id="experience_add" class="hidden">
-                                    <input type="text" class="editwhite long" id="addtitle" Placeholder="Title of the play, ad, film etc." />
-                                    <input type="text" class="editwhite long" id="addrole" Placeholder="Role e.g. Dad, Mom, Character Name"/>
-                                    <textarea class="editwhite long" id="adddescription" style="height:100px;">A little description about the role and the project.</textarea>
-                                    <br><font class="sortbuttons"><button onclick="add_experience()"  class="btn submit-btn firstcolor center"  ><span class="glyphicon glyphicon-ok"></span></button></font>
+                                    <input type="text" class="editwhite long" name='exp_title' id="addtitle" Placeholder="Title of the play, ad, film etc." />
+                                    <input type="text" class="editwhite long" name='exp_role' id="addrole" Placeholder="Role e.g. Dad, Mom, Character Name"/>
+                                    <textarea class="editwhite long" name='exp_blurb' id="adddescription" style="height:100px;">A little description about the role and the project.</textarea>
+                                    <br><font class="sortbuttons"><button class="btn submit-btn firstcolor center addExperience"  ><span class="glyphicon glyphicon-ok"></span></button></font>
                                 <hr>
                                 </span>
                                 <div id="experiencelist">
@@ -450,14 +450,14 @@
                             </span>
                             <div id="actor_training">
                                 <span id="training_add" class="hidden">
-                                    <input type="text" class="editwhite long" id="addschool" Placeholder="School / Teacher" />
-                                    <input type="text" class="editwhite long" id="addcourse" Placeholder="Course" />
+                                    <input type="text" class="editwhite long" name='trn_title' id="addschool" Placeholder="School / Teacher" />
+                                    <input type="text" class="editwhite long" name='trn_course' id="addcourse" Placeholder="Course" />
                                     <div class="row" style="margin-left:0px;">
-                                        <input type="text" class="editwhite short" id="addstart" Placeholder="Starting Year"/>
-                                        <input type="text" class="editwhite short" id="addend" Placeholder="Ending Year"/>
+                                        <input type="text" class="editwhite short" name='trn_start_time' id="addstart" Placeholder="Starting Year"/>
+                                        <input type="text" class="editwhite short" name='trn_end_time' id="addend" Placeholder="Ending Year"/>
                                     </div>
-                                    <textarea class="editwhite long" id="addtrainingdescription" style="height:100px;">A little description about the course.</textarea>
-                                    <br><font class="sortbuttons"><button onclick="add_training()"  class="btn submit-btn firstcolor center"  ><span class="glyphicon glyphicon-ok"></span></button></font>
+                                    <textarea class="editwhite long" name='trn_blrub' id="addtrainingdescription" style="height:100px;">A little description about the course.</textarea>
+                                    <br><font class="sortbuttons"><button class="btn submit-btn firstcolor center addTraining"  ><span class="glyphicon glyphicon-ok"></span></button></font>
                                 <hr>
                                 </span>
                                 <div id="traininglist">

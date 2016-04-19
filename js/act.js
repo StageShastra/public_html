@@ -111,6 +111,51 @@ $(document).ready(function(){
 
 	});
 
+	$(document).on("click", ".addExperience", function(){
+		var that = this;
+		var title = $("input[name='expl_title']").val();
+		var role = $("input[name='expl_role']").val();
+		var blurb = $("textarea[name='expl_blurb']").val();
+
+		data = {request: "AddExperience", data: JSON.stringify({title: title, role: role, blurb: blurb})};
+		console.log(data);
+		$.ajax({
+			url: "../resources/ajax.php",
+			type: "POST",
+			data: data,
+			success: function(response){
+
+				console.log(response);
+			}
+		});
+
+		return false;
+	});
+
+
+	$(document).on("click", ".addExperience", function(){
+		var that = this;
+		var title = $("input[name='trn_title']").val();
+		var course = $("input[name='trn_course']").val();
+		var blurb = $("textarea[name='trn_blurb']").val();
+		var start = $("input[name='trn_start_time']").val();
+		var end = $("input[name='trn_end_time']").val();
+
+		data = {request: "AddTraining", data: JSON.stringify({title: title, course: course, blurb: blurb, start: start, end: end})};
+		console.log(data);
+		$.ajax({
+			url: "../resources/ajax.php",
+			type: "POST",
+			data: data,
+			success: function(response){
+
+				console.log(response);
+			}
+		});
+
+		return false;
+	});
+
 });
 
 String.prototype.toProperCase = function () {

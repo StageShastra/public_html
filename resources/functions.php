@@ -39,5 +39,23 @@
 		return $years;
 	}
 
+	function confirmActorAccount($email=''){
+		global $connection;
+		$query = "UPDATE beta_actor SET status = '1' WHERE email = '{$email}' LIMIT 1";
+		$runSQL = mysqli_query($connection, $query);
+		if(mysqli_affected_rows($connection))
+			return true;
+		return false;
+	}
+
+	function isActorExist($email = ''){
+		global $connection;
+		$query = "SELECT * FROM beta_actor WHERE email = '{$email}' LIMIT 1";
+		$runSQL = mysqli_query($connection, $query);
+		if(mysqli_affected_rows($connection))
+			return true;
+		return false;
+	}
+
 
 ?>
