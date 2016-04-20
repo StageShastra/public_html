@@ -112,9 +112,8 @@
 		}
 
 		public function insertNewActor($data = []){
-			$query = "INSERT INTO `beta_actor`(`id`, `name`, `email`, `mobile`, `password`, `timetamp`, `status`, `ip`) 
+			$query = "INSERT INTO `beta_actor`(`name`, `email`, `mobile`, `password`, `timetamp`, `status`, `ip`) 
 					VALUES (
-						null,
 						'".$data['fullname']."',
 						'".$data['email']."',
 						'".$data['contact']."',
