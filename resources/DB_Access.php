@@ -220,7 +220,7 @@
 	<font class="info dark-gray" style="font-size:18px;font-weight:10;font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" >
 		Dear Actor,<br><br>
 		<span id="message">
-			Welcome to StageShastra, Click buttun below to confirm account.
+			Welcome to StageShastra, Click button below to confirm your account.
 		</span>
 		<br><br>
 		Regards,
