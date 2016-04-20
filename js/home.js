@@ -321,7 +321,7 @@ function populate_browse_table(res)
                           +'</td>' 
                    		  +'<td style="vertical-align:middle-top;">'
                           +      '<div class="img-div center">'
-						  +			'<img src="'+json[i].StashActor_avatar+'" onclick="show_details('+i+')" />'
+						  +			'<img src="img/'+json[i].StashActor_avatar+'" onclick="show_details('+i+')" />'
 						  +		 '</div>'
                           + '</td>' 
                           +'<td style="vertical-align:middle;">'
