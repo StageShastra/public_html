@@ -69,15 +69,28 @@ $('document').ready(function()
       type: type,
       data: data,
       success: function(response){
-        if(response.status){
+        if(response==1){
           $("#signup-error").removeClass("text-danger").addClass("text-success");
           $("input", $(that)).val("");
 
-          window.location.href = "actor/act.php";
+          window.location.href = "act.php";
         }
-        console.log(response.status);
-        $("#signup-error").html(response.message).show(500).delay(3000).hide(500);
-        //console.log(response);
+        var message;
+        //console.log(response+"jjj");
+        if(response==1)
+        {
+          message="Login Success";
+        }
+        if(response==2)
+        {
+          message="This user does not exist. Please Sign Up!."
+        }
+        if(response==0)
+        {
+          message="Sorry some error occured, please try again."
+        }
+        $("#signup-error").html(message).show(500).delay(3000).hide(500);
+        console.log(response);
       }
     });
 
