@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2016 at 09:56 AM
+-- Generation Time: Apr 20, 2016 at 06:59 AM
 -- Server version: 5.6.25
 -- PHP Version: 5.6.11
 
@@ -136,7 +136,36 @@ CREATE TABLE IF NOT EXISTS `beta_actor` (
   `timetamp` int(15) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `ip` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `beta_actor`
+--
+
+INSERT INTO `beta_actor` (`id`, `name`, `email`, `mobile`, `password`, `timetamp`, `status`, `ip`) VALUES
+(3, 'Dilip Kumar', 'dkp_264@yahoo.com', '08979578267', '7e9a28aa0d4a78ecd59641fdcd7cd930', 1461011432, 1, '::1'),
+(5, 'Dilip Kumar', 'dkp_264@yahoo.co.in', '08979578267', '7e9a28aa0d4a78ecd59641fdcd7cd930', 1461011809, 1, '::1'),
+(6, 'Dilip Kumar', 'dilipkumar.iitr@gmail.com', '08979578267', '7e9a28aa0d4a78ecd59641fdcd7cd930', 1461075523, 1, '::1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `beta_actor_director`
+--
+
+CREATE TABLE IF NOT EXISTS `beta_actor_director` (
+  `id` int(11) NOT NULL,
+  `director_ref` int(11) NOT NULL,
+  `actor_ref` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `beta_actor_director`
+--
+
+INSERT INTO `beta_actor_director` (`id`, `director_ref`, `actor_ref`, `status`) VALUES
+(1, 1, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -156,7 +185,16 @@ CREATE TABLE IF NOT EXISTS `beta_actor_experience` (
   `StashActorExperience_time` int(15) DEFAULT NULL,
   `StashActorExperience_verify` tinyint(1) DEFAULT NULL,
   `StashActorExperience_status` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `beta_actor_experience`
+--
+
+INSERT INTO `beta_actor_experience` (`StashActorExperience_id`, `StashActorExperience_actor_ref`, `StashActorExperience_title`, `StashActorExperience_blurb`, `StashActorExperience_role`, `StashActorExperience_start_time`, `StashActorExperience_end_time`, `StashActorExperience_link`, `StashActorExperience_time`, `StashActorExperience_verify`, `StashActorExperience_status`) VALUES
+(1, 3, 'Head and Shoulder', 'This is test Experience...more testing', 'Lead Role', 0, 0, '', 1461011432, 1, 1),
+(6, 3, 'Title', 'A little description about the role and the project.', 'Roel', 0, 0, '', 1461050821, 0, 1),
+(7, 3, 'Title', 'A little description about the role and the project.', 'Roel', 0, 0, '', 1461050840, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -190,14 +228,17 @@ CREATE TABLE IF NOT EXISTS `beta_actor_profile` (
   `StashActor_last_ip` varchar(15) DEFAULT NULL,
   `StashActor_skills` text NOT NULL,
   `StashActor_language` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `beta_actor_profile`
 --
 
 INSERT INTO `beta_actor_profile` (`StashActor_id`, `StashActor_actor_ref`, `StashActor_name`, `StashActor_email`, `StashActor_mobile`, `StashActor_whatsapp`, `StashActor_dob`, `StashActor_gender`, `StashActor_height`, `StashActor_weight`, `StashActor_avatar`, `StashActor_images`, `StashActor_min_role_age`, `StashActor_max_role_age`, `StashActor_address`, `StashActor_city`, `StashActor_state`, `StashActor_country`, `StashActor_zip`, `StashActor_actor_card`, `StashActor_passport`, `StashActor_last_update`, `StashActor_last_ip`, `StashActor_skills`, `StashActor_language`) VALUES
-(1, 1, 'Sonu Kumar', NULL, NULL, NULL, 756860400, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'coding, swimming, bike, trecking', '');
+(1, 1, 'Sonu Kumar', NULL, NULL, NULL, 756860400, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'coding, swimming, bike, trecking', ''),
+(2, 3, 'Dilip Kumar', 'dkp_264@yahoo.com', '9876543210', '1234567890', 756860400, 1, '174', '72', 'default.png', '', 16, 25, '', '', '', 'India', '', 0, 0, 1461011432, '::1', 'coding, swimming, bike', 'Hindi, English,Bhojpuri'),
+(4, 5, 'Dilip Kumar', 'dkp_264@yahoo.co.in', '08979578267', '08979578267', 0, 0, '', '', 'default.png', '', 0, 0, '', '', '', 'India', '', 0, 0, 1461011809, '::1', '', ''),
+(5, 6, 'Dilip Kumar', 'dilipkumar.iitr@gmail.com', '08979578267', '08979578267', 0, 1, '', '', 'default.png', '', 0, 0, '', '', '', 'India', '', 0, 0, 1461075523, '::1', '', '');
 
 -- --------------------------------------------------------
 
@@ -218,7 +259,16 @@ CREATE TABLE IF NOT EXISTS `beta_actor_training` (
   `StashActorTraining_time` int(15) DEFAULT NULL,
   `StashActorTraining_verify` tinyint(1) DEFAULT NULL,
   `StashActorTraining_status` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `beta_actor_training`
+--
+
+INSERT INTO `beta_actor_training` (`StashActorTraining_id`, `StashActorTraining_actor_ref`, `StashActorTraining_title`, `StashActorTraining_course`, `StashActorTraining_blurb`, `StashActorTraining_intitute_ref`, `StashActorTraining_trainer`, `StashActorTraining_start_time`, `StashActorTraining_end_time`, `StashActorTraining_time`, `StashActorTraining_verify`, `StashActorTraining_status`) VALUES
+(1, 3, 'Baba Training Institute', 'Basic Acting Course', 'This is test..djfdjbf', 1, '', 2015, 2016, 1461011432, 1, 1),
+(2, 3, '', '', '', 0, '', 0, 0, 1461050153, 0, 1),
+(3, 3, '', '', '', 0, '', 0, 0, 1461050257, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -397,6 +447,12 @@ ALTER TABLE `beta_actor`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `beta_actor_director`
+--
+ALTER TABLE `beta_actor_director`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `beta_actor_experience`
 --
 ALTER TABLE `beta_actor_experience`
@@ -491,22 +547,27 @@ ALTER TABLE `actor_skills`
 -- AUTO_INCREMENT for table `beta_actor`
 --
 ALTER TABLE `beta_actor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `beta_actor_director`
+--
+ALTER TABLE `beta_actor_director`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `beta_actor_experience`
 --
 ALTER TABLE `beta_actor_experience`
-  MODIFY `StashActorExperience_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `StashActorExperience_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `beta_actor_profile`
 --
 ALTER TABLE `beta_actor_profile`
-  MODIFY `StashActor_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `StashActor_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `beta_actor_training`
 --
 ALTER TABLE `beta_actor_training`
-  MODIFY `StashActorTraining_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `StashActorTraining_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `beta_invitation_send`
 --
