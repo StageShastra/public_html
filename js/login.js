@@ -73,7 +73,7 @@ $('document').ready(function()
           $("#signup-error").removeClass("text-danger").addClass("text-success");
           $("input", $(that)).val("");
 
-          window.location.href = "act.php";
+          window.location.href = "actor/act.php";
         }
         var message;
         //console.log(response+"jjj");
