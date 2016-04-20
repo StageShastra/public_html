@@ -31,7 +31,7 @@ $(document).ready(function(){
 				//console.log(response+"jjj");
 				if(response==1)
 				{
-					message="You are Successfully signed up, please check your email for  confirmation link.";
+					message="You are Successfully signed up, please check your email for  confirmation link. You can now sign in.";
 				}
 				if(response==2)
 				{
