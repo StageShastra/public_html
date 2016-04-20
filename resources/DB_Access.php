@@ -216,9 +216,9 @@
 	<font class="info gray" style="color:#252323;font-size:18px;font-weight:10;font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" ><span class="pwdby" style="top:-15px;position:relative;" >Powered By :</span> <img src="http://stageshastra.com/img/logo.png" height="50px" width="50px">
 	</div>
 	<font class="info dark-gray" style="font-size:18px;font-weight:10;font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" >
-		Dear Actor,<br><br>
+		Dear Actor,<br>
 		<span id="message">
-			Welcome to StageShastra, Click button below to confirm your account.
+			Welcome to StageShastra, Click the button below to confirm your account.
 		</span>
 		<br><br>
 		Regards,
