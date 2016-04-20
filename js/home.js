@@ -235,43 +235,32 @@ function show_details(i)
                        +'                 <font class="info-medium firstcolor">Phone : <span class="gray">'+ actor_data[i].StashActor_mobile +'</font>'
                        +'             </div>'
                        +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium firstcolor">Age-Range :<span class="gray"> '+ actor_data[i].StashActor_range+'</font>'
+                       +'                 <font class="info-medium firstcolor">Age-Range :<span class="gray"> '+ actor_data[i].StashActor_range+' years</font>'
                        +'             </div>'
                        +'         </div>'
                        +'         <div class="row collapsedetail">'
                        +'             <div class="col-sm-4">'
                        +'                 <div class="col-sm-6 " style="padding-left:0px">'
-                       +'                     <font class="info-medium firstcolor">Height : <span class="gray">'+ actor_data[i].actor_height +'cms</font>'
+                       +'                     <font class="info-medium firstcolor">Height : <span class="gray">'+ actor_data[i].StashActor_height +'cms</font>'
                        +'                 </div>'
                        +'                <div class="col-sm-6">'
-                       +'                    <font class="info-medium firstcolor">Weight :<span class="gray">'+ actor_data[i].actor_weight +'kgs</font>'
+                       +'                    <font class="info-medium firstcolor">Weight :<span class="gray">'+ actor_data[i].StashActor_weight +'kgs</font>'
                        +'                 </div>'
                        +'             </div>'
                        +'             <div class="col-sm-4 scrolr">'
-                       +'                 <font class="info-medium firstcolor">Experience :<span class="gray">'+ actor_data[i].actor_experience +'</font>'
+                       +'                 <font class="info-medium firstcolor">Skills :<span class="gray">'+ actor_data[i].StashActor_skills+'</font>'
                        +'             </div>'
                        +'            <div class="col-sm-4 scrolr">'
-                       +'                 <font class="info-medium firstcolor">Projects : <span class="gray">'+ actor_data[i].actor_projects+'</font>'
-                       +'             </div>'
-                       +'         </div>'
-                       +'         <div class="row collapsedetail">'
-                       +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium firstcolor">Range :<span class="gray"> '+ actor_data[i].actor_range+' years</font>'
-                       +'             </div>'
-                       +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium firstcolor">Training :<span class="gray"> '+ actor_data[i].actor_training+'</font>'
-                       +'             </div>'
-                       +'            <div class="col-sm-4">'
-                       +'                 <font class="info-medium firstcolor">Auditions :<span class="gray"> '+ actor_data[i].actor_auditions+'</font>'
+                       +'                 <font class="info-medium firstcolor">Language : <span class="gray">'+ actor_data[i].StashActor_language+'</font>'
                        +'             </div>'
                        +'         </div>'
                        +'         <div class="row" style="padding-right:15px;">'
                        +'             <div class="DocumentList">'
                        +'                 <ul class="list-inline">';
 
-                       for(var k=0;k<actor_data[i].actor_images;k++)
+                       for(var k=0;k<actor_data[i].StashActor_images;k++)
                        {
-                        var str = actor_data[i].actor_profile_photo;
+                        var str = actor_data[i].StashActor_avatar;
                         var arr = str.split(".");
                         var ext = arr[2];
                         str1 = arr[0];
@@ -281,7 +270,7 @@ function show_details(i)
                         str+=k+'.'+ext;
                         //console.log(str);
                         collapse+='<li class="DocumentItem">'
-                       +'<a href="'+str+'" data-lightbox="'+actor_data[i].actor_name+'"><img class="photo" src='+str+' height="100%" width=auto></img></a>' 
+                       +'<a href="'+str+'" data-lightbox="'+actor_data[i].StashActor_avatar+'"><img class="photo" src='+str+' height="100%" width=auto></img></a>' 
                        +'         </li>';
                       }
                         collapse+='                 </ul>'
@@ -332,7 +321,7 @@ function populate_browse_table(res)
                           +'</td>' 
                    		  +'<td style="vertical-align:middle-top;">'
                           +      '<div class="img-div center">'
-						  +			'<img src="img/'+json[i].StashActor_avatar+'" onclick="show_details('+i+')" />'
+						  +			'<img src="'+json[i].StashActor_avatar+'" onclick="show_details('+i+')" />'
 						  +		 '</div>'
                           + '</td>' 
                           +'<td style="vertical-align:middle;">'
