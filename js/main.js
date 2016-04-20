@@ -44,8 +44,8 @@ $(document).ready(function(){
 				$("#sign-upbtn").removeClass("hidden");
 				$("#spinner").addClass("hidden");
 				$("#signup-error").html(message).show(500).delay(5000).hide(500);
-				
-				//console.log(response);
+				console.log(message);
+				console.log(response);
 			}
 		});
 		return false;
