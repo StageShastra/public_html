@@ -176,6 +176,7 @@ function send_data()
      }
      else
      {
+        console.log("Calling populate");
         populate_browse_table(res);
      }  
      
@@ -210,27 +211,28 @@ function show_details(i)
 {
   var div = document.getElementById('actor_detail');
   div.innerHTML="";
+  console.log(actor_data[i]);
   collapse= '     <div class="center">'
                        +'         <div class="row collapsedetail">'
                        +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium firstcolor">Name :<span class="gray">'+ actor_data[i].actor_name +'</font>'
+                       +'                 <font class="info-medium firstcolor">Name :<span class="gray">'+ actor_data[i].StashActor_name +'</font>'
                        +'             </div>'
                        +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium firstcolor">Email : <span class="gray">'+ actor_data[i].actor_email +'</font>'
+                       +'                 <font class="info-medium firstcolor">Email : <span class="gray">'+ actor_data[i].StashActor_email +'</font>'
                        +'             </div>'
                        +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium firstcolor">Facial Attribute : <span class="gray">'+ actor_data[i]["actor_facial-attribute"] +'</font>'
+                       +'                 <font class="info-medium firstcolor">DOB : <span class="gray">'+ actor_data[i].StashActor_dob +'</font>'
                        +'             </div>'
                        +'         </div>'
                        +'         <div class="row collapsedetail">'
                        +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium firstcolor">DOB :<span class="gray">'+ actor_data[i].actor_dob +'</font>'
+                       +'                 <font class="info-medium firstcolor">Whatsapp :<span class="gray">'+ actor_data[i].StashActor_whatsapp +'</font>'
                        +'             </div>'
                        +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium firstcolor">Phone : <span class="gray">'+ actor_data[i].actor_contact_number +'</font>'
+                       +'                 <font class="info-medium firstcolor">Phone : <span class="gray">'+ actor_data[i].StashActor_mobile +'</font>'
                        +'             </div>'
                        +'             <div class="col-sm-4">'
-                       +'                 <font class="info-medium firstcolor">Physical Attribute :<span class="gray"> '+ actor_data[i]["actor_physical-attribute"] +'</font>'
+                       +'                 <font class="info-medium firstcolor">Age-Range :<span class="gray"> '+ actor_data[i].StashActor_range+'</font>'
                        +'             </div>'
                        +'         </div>'
                        +'         <div class="row collapsedetail">'
@@ -290,9 +292,9 @@ function show_details(i)
 }
 function populate_browse_table(res)
 {	
-  console.log(res);
+  //console.log(res);
 	var json = JSON.parse(res);
-  console.log(json);
+  //console.log(json);
 	actor_data=json;
 	var div = document.getElementById('browse-table');
   div.innerHTML="";
@@ -327,7 +329,7 @@ function populate_browse_table(res)
                           +'</td>' 
                    		  +'<td style="vertical-align:middle-top;">'
                           +      '<div class="img-div center">'
-						  +			'<img src="img/'+json[i].StashActor_avatar+'" onclick="show_details('+i+')" />'
+						  +			'<img src="'+json[i].StashActor_avatar+'" onclick="show_details('+i+')" />'
 						  +		 '</div>'
                           + '</td>' 
                           +'<td style="vertical-align:middle;">'

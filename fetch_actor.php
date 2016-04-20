@@ -4,7 +4,8 @@ if(!isset($_SESSION['login_user']))
 {
     header("Location:index.php");
 }
-ini_set('display_errors', '1');
+error_reporting(E_ERROR);
+//ini_set('display_errors', '1');
 include_once('resources/db_config.php');
 include_once('resources/functions.php');
 
@@ -22,22 +23,24 @@ $tag2name = array(
             'Language' => "language",
             'Whatsapp' => 'whatsapp'
         );
+//echo "assa";
 
-$data = $_POST['data'];
-foreach ($data as $key => $value) {
-    $tags[] = 'StashActor_'.$tag2name[$value];
-}
 
 $director_id=$_SESSION['login_user'];
 
 $actorsInDirector = getActorWithDirector($director_id);
-$actor_ref_list = arr2csv($actorsInDirector);
+if(count($actorsInDirector)!=0)
+{
+  $actor_ref_list = arr2csv($actorsInDirector);
 
 $actorProfile = getActorProfileByIds($actor_ref_list);
 if(count($actorProfile)){
     echo json_encode($actorProfile);
     exit();
-}else{
+}  
+}
+else{
+
     echo "null";
 }
 

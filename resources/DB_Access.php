@@ -161,8 +161,8 @@
 
             $runSql = $this->connection->query($query);
 
-            $query = "INSERT INTO `beta_actor_director`(`id`, `director_ref`, `actor_ref`, `status`) 
-            		VALUES (null, '".$data['refCode']."', '{$ref}', '1')";
+            $query = "INSERT INTO `beta_actor_director`(`director_ref`, `actor_ref`, `status`) 
+            		VALUES ('".$data['refCode']."', '{$ref}', '1')";
             $runSql = $this->connection->query($query);
 
 			return ($this->connection->affected_rows) ? true : false;

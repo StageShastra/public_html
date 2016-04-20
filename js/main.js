@@ -13,8 +13,9 @@ $(document).ready(function(){
 			var $input = $(this);
 			formdata[$input.attr("name")] = $input.val();
 		});
-
+		//alert("x");
 		data = {request: "ActorSignUp", data: JSON.stringify(formdata)};
+		console.log(data);
 		$("#sign-upbtn").addClass("hidden");
 		$("#spinner").removeClass("hidden");
 		$.ajax({
