@@ -163,7 +163,7 @@
 					$db->sendConfirmationLink($data['fullname'], $data['email']);
 					$this->response(true, "You are Successfully signed up, please check your email for  confirmation link.");
 				}else{
-					$this->response(true, "Some Error Occured!!!");
+					$this->response(false, "Some Error Occured!!!");
 				}
 			}else{
 				$this->response(false, "This user already exists. Please login.");

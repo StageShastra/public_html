@@ -112,7 +112,7 @@
 		}
 
 		public function insertNewActor($data = []){
-			$query = "INSERT INTO `beta_actor`(`name`, `email`, `mobile`, `password`, `timetamp`, `status`, `ip`) 
+			$query = "INSERT INTO `beta_actor`( `name`, `email`, `mobile`, `password`, `timetamp`, `status`, `ip`) 
 					VALUES (
 						'".$data['fullname']."',
 						'".$data['email']."',
@@ -129,9 +129,8 @@
             $whatsapp = ($data['whatsappNo'] == '') ? $data['contact'] : $data['whatsappNo'];
 
             //Setting up Profile
-            $query = "INSERT INTO `beta_actor_profile`(`StashActor_id`, `StashActor_actor_ref`, `StashActor_name`, `StashActor_email`, `StashActor_mobile`, `StashActor_whatsapp`, `StashActor_dob`, `StashActor_gender`, `StashActor_height`, `StashActor_weight`, `StashActor_avatar`, `StashActor_images`, `StashActor_min_role_age`, `StashActor_max_role_age`, `StashActor_address`, `StashActor_city`, `StashActor_state`, `StashActor_country`, `StashActor_zip`, `StashActor_actor_card`, `StashActor_passport`, `StashActor_last_update`, `StashActor_last_ip`, `StashActor_skills`, `StashActor_language`) 
+            $query = "INSERT INTO `beta_actor_profile`(`StashActor_actor_ref`, `StashActor_name`, `StashActor_email`, `StashActor_mobile`, `StashActor_whatsapp`, `StashActor_dob`, `StashActor_gender`, `StashActor_height`, `StashActor_weight`, `StashActor_avatar`, `StashActor_images`, `StashActor_min_role_age`, `StashActor_max_role_age`, `StashActor_address`, `StashActor_city`, `StashActor_state`, `StashActor_country`, `StashActor_zip`, `StashActor_actor_card`, `StashActor_passport`, `StashActor_last_update`, `StashActor_last_ip`, `StashActor_skills`, `StashActor_language`) 
             	VALUES (
-            		null,
             		'{$ref}',
             		'".$data['fullname']."',
             		'".$data['email']."',
