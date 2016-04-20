@@ -154,7 +154,7 @@ function populate_browse_table(res)
                           +'</td>' 
                    		  +'<td style="vertical-align:middle-top;">'
                           +      '<div class="img-div center">'
-						  +			'<img src="'+json[i].actor_profile_photo+'"/>'
+						  +			'<img src="img/'+json[i].actor_profile_photo+'"/>'
 						  +		 '</div>'
                           + '</td>' 
                           +'<td style="vertical-align:middle;">'

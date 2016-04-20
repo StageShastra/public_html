@@ -123,6 +123,10 @@
 						$this->actorLogin($data);
 						break;
 
+					case "RemoveActor":
+						$this->removeActorFromDirector($data);
+						break;
+
 					default:
 						$this->response(false, "Invalid Request");
 						break;
@@ -132,6 +136,17 @@
 				$this->response(false, "No Request Token Found!!!");
 			}
 
+		}
+
+		public function removeActorFromDirector($data = []){
+			$db = $this->includeDB();
+			$director = trim($_SESSION['login_user']);
+			$actor = $data['ref'];
+
+			if($db->removeActFromDir($director, $actor))
+				$this->response(true, "Actor removed");
+			else
+				$this->response(false, "Some Error Occured");
 		}
 
 		public function actorLogin($data = []){

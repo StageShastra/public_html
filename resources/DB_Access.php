@@ -240,6 +240,12 @@
 
 		}
 
+		public function removeActFromDir($dir = 0, $act = 0){
+			$query = "UPDATE beta_actor_director SET status = '0' WHERE director_ref = {$dir} AND actor_ref = {$act} LIMIT 1";
+			$runSql = $this->connection->query($query);
+			return ($this->connection->affected_rows) ? true : false;
+		}
+
 	}
 
 

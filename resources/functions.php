@@ -59,7 +59,7 @@
 
 	function getActorWithDirector($ref = 0){
 		global $connection;
-		$query = "SELECT actor_ref FROM beta_actor_director WHERE director_ref = {$ref}";
+		$query = "SELECT actor_ref FROM beta_actor_director WHERE director_ref = {$ref} AND status = 1";
 		$runSQL = mysqli_query($connection, $query);
 		$result = [];
 		while($fetch = mysqli_fetch_assoc($runSQL))

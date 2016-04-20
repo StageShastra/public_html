@@ -48,23 +48,26 @@ function populate_cat_table()
 }
 function delete_actor(i)
 { 
-    var r = confirm("Delete actor "+ actor_data[i].actor_name+" from the database.");
+    var r = confirm("Delete actor "+ actor_data[i].StashActor_name+" from the database.");
     if (r == true) {
-        $.ajax({
-    type: "POST",
-    data: {actor_id:actor_data[i].actor_id},
-    url: "resources/delete.php",
-    success: function(res){
-      //console.log(res);
-      $('#datarow'+i).addClass("animated fadeOut");
-      setTimeout(
-        function() 
-        {
-          //do something special
-           $('#datarow'+i).addClass("hidden");
-        }, 1000);
-   }
-});
+
+      var data = {request: "RemoveActor", data: JSON.stringify({ ref: actor_data[i].StashActor_actor_ref })}
+
+      $.ajax({
+        type: "POST",
+        data: data,
+        url: "resources/ajax.php",
+        success: function(res){
+          if(res.status){
+              $('#datarow'+i).addClass("animated fadeOut");
+              setTimeout(
+                function(){
+                  //do something special
+                  $('#datarow'+i).addClass("hidden");
+                }, 1000);
+          }
+        }
+      });
 
     } else {
         return 0;
@@ -295,6 +298,7 @@ function populate_browse_table(res)
   //console.log(res);
 	var json = JSON.parse(res);
   //console.log(json);
+  var url = '';
 	actor_data=json;
 	var div = document.getElementById('browse-table');
   div.innerHTML="";
@@ -318,18 +322,17 @@ function populate_browse_table(res)
     d="StashActor_"+d;
     var e=select[4].toLowerCase();
     e="StashActor_"+e;
-    console.log(a);
-    console.log(b);
-    console.log(c);
 	for(var i=0;i<json.length;i++)
 	{
+    //console.log(json);
+    url = "actor/profile.php?ref=" + json[i].StashActor_actor_ref;
 		content+='<tr id="datarow'+i+'">'
 						  +'<td id="selectallcheckbox">'
 						  +		'<input type="checkbox" name="checkactor" id="checkactor'+i+'" value='+i+' class="css-checkbox" onclick="actor_check('+i+')" /><label for="checkactor'+i+'" class="css-label"></label>'
                           +'</td>' 
                    		  +'<td style="vertical-align:middle-top;">'
                           +      '<div class="img-div center">'
-						  +			'<img src="'+json[i].StashActor_avatar+'" onclick="show_details('+i+')" />'
+						  +			'<img src="img/'+json[i].StashActor_avatar+'" onclick="show_details('+i+')" />'
 						  +		 '</div>'
                           + '</td>' 
                           +'<td style="vertical-align:middle;">'
@@ -345,7 +348,7 @@ function populate_browse_table(res)
                           +      '<span class="info gray scrolr">'+json[i][d]+'</span>'
                           + '</td>'
                           +'<td style="vertical-align:middle;">'
-                          + 		'<span class="info gray scrolr">'+json[i][e]+'</span><font class="sortbuttons"><button onclick="show_details('+i+')"  class="btn submit-btn firstcolor toggle-btn" style="right:50px;" ><span class="glyphicon glyphicon-share"></span></button><button onclick="delete_actor('+i+')"  class="btn submit-btn firstcolor toggle-btn" ><span class="glyphicon glyphicon-trash"></span></button>'
+                          + 		'<span class="info gray scrolr">'+json[i][e]+'</span><font class="sortbuttons"><a href="'+url+'" target="_blank"  class="btn submit-btn firstcolor toggle-btn" style="right:50px;" ><span class="glyphicon glyphicon-share"></span></a><button onclick="delete_actor('+i+')"  class="btn submit-btn firstcolor toggle-btn" ><span class="glyphicon glyphicon-trash"></span></button>'
                           +'</td></tr>';
                          
 
