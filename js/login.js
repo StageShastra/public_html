@@ -51,7 +51,7 @@ $('document').ready(function()
       
     }
     $("#actor_login-form").submit(function(event){
-      var url = "/resources/ajax.php",
+      var url = "resources/ajax.php",
       type = "POST",
       data = {},
       formdata = {};
