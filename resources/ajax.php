@@ -148,6 +148,7 @@
 			}else{
 				$this->response(false, "This user does not exist.");
 			}
+			echo $this->response;
 		}
 
 		public function actorSignUp($data = []){

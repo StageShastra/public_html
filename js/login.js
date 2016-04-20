@@ -75,6 +75,7 @@ $('document').ready(function()
 
           window.location.href = "actor/act.php";
         }
+        console.log(response.status);
         $("#signup-error").html(response.message).show(500).delay(3000).hide(500);
         //console.log(response);
       }
