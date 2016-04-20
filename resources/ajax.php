@@ -141,12 +141,12 @@
 				$data['password'] = md5($data['password']);
 				if($db->verifyActorLogin($data['email'], $data['password'])){
 					$db->setSession($data['email']);
-					$this->response(true, "Login Success", $_SESSION);
+					echo 1;
 				}else{
-					$this->response(false, "Some Error Occured!!!");
+					echo 0;
 				}
 			}else{
-				$this->response(false, "This user does not exist.");
+				echo 2;
 			}
 			echo $this->response;
 		}
@@ -160,12 +160,12 @@
 				$data['ip'] = $_SERVER['REMOTE_ADDR'];
 				if($db->insertNewActor($data)){
 					$db->sendConfirmationLink($data['fullname'], $data['email']);
-					return $this->response(true, "You are Successfully signed up, please check your email for  confirmation link.");
+					echo 1;
 				}else{
-					$this->response(false, "Some Error Occured!!!");
+					echo 0;
 				}
 			}else{
-				$this->response(false, "This user already exists. Please login.");
+				echo 2;
 			}
 		}
 
