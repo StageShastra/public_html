@@ -133,7 +133,7 @@
                                 <span class="info-small gray center " style="vertical-align:middle;" > Upload Picture </span>
                             </div>
                             <div class="img-div center " id="profile_image">
-                                <img src="img/<?= $actorProfile['StashActor_avatar'] ?>">
+                                <img src="<?= $actorProfile['StashActor_avatar'] ?>">
                                 <input type="hidden" id="image_count" value="<?= $actorProfile['StashActor_images'] ?>">
                                 <input type="hidden" id="profile_pic" value="<?= $actorProfile['StashActor_avatar'] ?>">
                             </div>

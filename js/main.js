@@ -17,7 +17,7 @@ $(document).ready(function(){
 		data = {request: "ActorSignUp", data: JSON.stringify(formdata)};
 		console.log(data);
 		$("#sign-upbtn").addClass("hidden");
-		$("#spinner").removeClass("hidden");
+		//$("#spinner").removeClass("hidden");
 		$.ajax({
 			url: url,
 			type: type,
@@ -41,8 +41,6 @@ $(document).ready(function(){
 				{
 					message="Sorry some error occured, please try again."
 				}
-				$("#sign-upbtn").removeClass("hidden");
-				$("#spinner").addClass("hidden");
 				$("#signup-error").html(message).show(500).delay(5000).hide(500);
 				console.log(message);
 				console.log(response);
