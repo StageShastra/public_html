@@ -151,6 +151,60 @@
 			}
 		}
 
+		public function sendInvitaionMail($msg = '', $emails = '', $project = 0){
+			$plainText = $this->session->userdata("StaSh_User_id") . "_" . $project . "_" . time();
+			$encryptedText = $this->getEncryptedText($plainText);
+
+			$link = base_url() . "home/join/" . $encryptedText;
+
+			$config = array(
+						'protocol' => 'smtp',
+						'smtp_host' => 'tls://smtp.gmail.com',
+						'smtp_port' => 587,
+						'smtp_user' => '',
+						'smtp_pass' => ''
+					);
+			$this->load->library('email', $config);
+			$this->email->set_newline("\r\n");
+
+
+			$this->email->from("no-reply@stageshastra.com", 'StageShastra');
+			$this->email->reply_to("no-reply@stageshastra.com", 'StageShastra');
+			$to = [];
+			$emails = explode(",", $emails);
+			foreach ($emails as $key => $mail) {
+				$to[] = trim($mail);
+			}
+			$this->email->to($to);
+			$name = $this->session->userdata("StaSh_User_name");
+			$this->email->subject("Invitaion | StageShastra");
+			$message = '<div class="center" style="float:none;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" >
+					<div class="logo" style="position:absolute;right:200px;top:10px;" >
+					<font class="info gray" style="color:#252323;font-size:18px;font-weight:10;font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" ><span class="pwdby" style="top:-15px;position:relative;" >Powered By :</span> <img src="http://stageshastra.com/assets/img/logo.png" height="50px" width="50px">
+					</div>
+					<font class="info dark-gray" style="font-size:18px;font-weight:10;font-family:\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif;" >
+						Dear Actor,<br>
+						<span id="message">
+							'.$msg.'
+						</span>
+						<br><br>
+						Regards,
+						<br>
+						<span id="sender">'.$name.'</span>
+					</font>
+					<a href="'.$link.'"><button class="bigbutton" style="background-color:#de114b;background-image:none;background-repeat:repeat;background-position:top left;background-attachment:scroll;font-size:30px;color:white;width:100%;border-width:0px;height:75px;" >Click Here</button></a>
+				</div>';
+			$this->email->message($message);
+
+			if($this->email->send()){
+				return true;
+			}else{
+				// for Developer Only
+				// show_error($this->email->print_debugger());
+				return false;
+			}
+		}
+
 	}
 
 ?>

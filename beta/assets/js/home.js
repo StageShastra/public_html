@@ -8,11 +8,12 @@ $(document).ready(function(){
 		base = "/public_html/beta/",
 		actors = [],
 		actorEmails = [],
-		actorMobile = [];
+		actorMobile = [],
+		actorRef = [];
 
 	$("#success_send").hide();
 	$("#failure_send").hide();  
-	$('#contactmodal').modal('hide');
+	//$('#contactmodal').modal('hide');
 
 	$(document).on("click", ".addToCategories", function(){
 		if(count == 5){
@@ -87,7 +88,7 @@ $(document).ready(function(){
 
 	function showAddActor(){
 		var $div = $("#browse-table");
-  			content = '<div class="showwelcome"><font class="info gray">Ola! It looks like you are new over here. <br>Why don\'t you start with inviting some actors?'
+  			content = '<div class="showwelcome"><font class="info gray">Hola! It looks like you are new over here. <br>Why don\'t you start with inviting some actors?'
   					+ '<br><button type="submit" class="btn submit-btn firstcolor"  data-toggle="modal" data-target="#inviteActors" id="btn-login" ><span class="glyphicon glyphicon-plus"></span> &nbsp;Invite  Actor</button></div>';
   			$div.html(content);
 	}
@@ -118,7 +119,7 @@ $(document).ready(function(){
               		+ '</td>' 
               		+ '<td style="vertical-align:middle-top;">'
                 	+ 	'<div class="img-div center">'
-					+		'<img src="'+base + '/assets/img/' +actorsInfo[i].StashActor_avatar+'" />'
+					+		'<img src="'+base + '/assets/img/' +actorsInfo[i].StashActor_avatar+'" class="showDetails" data-id="'+i+'" />'
 					+	'</div>'
               		+ '</td>';
 
@@ -231,7 +232,7 @@ $(document).ready(function(){
 	$(document).on("click", "#selectallactor", function(){
 		var checked = $(this).is(":checked");
 		var $checkactor = $('input[name="checkactor"]');
-		var id = 0, email = '', mobile = '';
+		var id = 0, email = '', mobile = '', ref = 0;
 
 		$("input[name='checkactor']").each(function(){
 			id = Number($(this).val());
@@ -239,13 +240,16 @@ $(document).ready(function(){
 				$(this).attr('checked', 'true');
 				actorEmails.push(actors[id].StashActor_email);
 				actorMobile.push(actors[id].StashActor_mobile);
+				actorRef.push(actors[id].StashActor_actor_id_ref);
 			}else{
 				$(this).removeAttr("checked");
 				email = actors[id].StashActor_email;
 				mobile = actors[id].StashActor_mobile;
+				ref = actors[id].StashActor_actor_id_ref;
 
 				actorEmails.splice(actorEmails.indexOf(email), 1);
 				actorMobile.splice(actorEmails.indexOf(mobile), 1);
+				actorRef.splice(actorEmails.indexOf(ref), 1);
 			}
 		});
 
@@ -258,12 +262,15 @@ $(document).ready(function(){
 		if(checked){
 			actorEmails.push(actors[id].StashActor_email);
 			actorMobile.push(actors[id].StashActor_mobile);
+			actorRef.push(actors[id].StashActor_actor_id_ref);
 		}else{
 			email = actors[id].StashActor_email;
 			mobile = actors[id].StashActor_mobile;
+			ref = actors[id].StashActor_actor_id_ref;
 
 			actorEmails.splice(actorEmails.indexOf(email), 1);
 			actorMobile.splice(actorEmails.indexOf(mobile), 1);
+			actorRef.splice(actorEmails.indexOf(ref), 1);
 		}
 		//console.log(actorMobile, actorEmails);
 	});
@@ -328,6 +335,7 @@ $(document).ready(function(){
 	$(document).on("click", ".sendMail", function(){
 		var sendVia = $("input[name='sendVia']").val();
 		var contact = {}, tag = '';
+		contact['ref'] = actorRef;
 		if(sendVia == 'email'){
 			tag = 'email';
 			contact['email'] = actorEmails;
@@ -350,7 +358,7 @@ $(document).ready(function(){
 			type: type,
 			data: data,
 			success: function(response){
-				console.log(response);
+				//console.log(response);
 				if(response.status){
      				$('#contactmodal').modal('hide');
      				$("#success_send").show(); 
@@ -368,8 +376,6 @@ $(document).ready(function(){
 		return false;
 	});
 
-
-
 	var checkCat = Cookies.get("isCat");
 
 	if(checkCat){
@@ -378,5 +384,191 @@ $(document).ready(function(){
 	}else{
 		populateCategories();
 	}
+
+
+	/* Advance Search Starts */
+
+	function noActorFound(argument) {
+		var $table = $("#browse-table");
+		var content = '<div class="showwelcome">'
+					+ '<font class="info gray">'
+					+ 'Oops! It looks like no actor match your criteria. <br>Why don\'t you try changing some of the filters?'
+  					+ '<br><button type="button" class="btn submit-btn firstcolor" data-toggle="modal" data-target="#advancedSearch" id="btn-login" >'
+  					+ '<span class="glyphicon glyphicon-filter"></span> &nbsp; Change Filters</button></div>';
+  		$table.html(content);
+	}
+
+	function showSpinner(argument) {
+		var $table = $("#browse-table");
+		var content = '<div class="showwelcome" id="spinner">'
+					+ '<center><img src="'+base+'assets/img/logo.png" class="rotate-img center" width="80px" height="80px"/><br>'
+					+ '<font class="info gray">Crunching the latest data for you!</div>';
+		$table.html(content);
+	}
+
+	$(document).on("submit", "form#advanceSearch", function(){
+		var that = this;
+		$('#advancedSearch').modal('hide');
+		showSpinner();
+		var formdata = {};
+		$("input", $(this)).each(function(){
+			if(typeof $(this).attr("name") != 'undefined' )
+				formdata[$(this).attr("name")] = $(this).val();
+		});
+		data = {request: "AdvanceSearch", data: JSON.stringify(formdata)};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				console.log(response);
+				if(response.status){
+					populateActorList(response.data);
+				}else{
+					noActorFound();
+				}
+			}
+		})
+		return false;
+	});
+
+	$(document).on("click", "img.showDetails", function(){
+		var id = $(this).attr("data-id");
+		var str = '';
+		//console.log(actors[id]);
+		content = '<div class="center">'
+           +'         <div class="row collapsedetail">'
+           +'             <div class="col-sm-4">'
+           +'                 <font class="info-medium firstcolor">Name :<span class="gray">'+ actors[id].StashActor_name +'</font>'
+           +'             </div>'
+           +'             <div class="col-sm-4">'
+           +'                 <font class="info-medium firstcolor">Email : <span class="gray">'+ actors[id].StashActor_email +'</font>'
+           +'             </div>'
+           +'             <div class="col-sm-4">'
+           +'                 <font class="info-medium firstcolor">DOB : <span class="gray">'+ actors[id].StashActor_dob +'</font>'
+           +'             </div>'
+           +'         </div>'
+           +'         <div class="row collapsedetail">'
+           +'             <div class="col-sm-4">'
+           +'                 <font class="info-medium firstcolor">Whatsapp :<span class="gray">'+ actors[id].StashActor_whatsapp +'</font>'
+           +'             </div>'
+           +'             <div class="col-sm-4">'
+           +'                 <font class="info-medium firstcolor">Phone : <span class="gray">'+ actors[id].StashActor_mobile +'</font>'
+           +'             </div>'
+           +'             <div class="col-sm-4">'
+           +'                 <font class="info-medium firstcolor">Age-Range :<span class="gray"> '+ actors[id].StashActor_range+' years</font>'
+           +'             </div>'
+           +'         </div>'
+           +'         <div class="row collapsedetail">'
+           +'             <div class="col-sm-4">'
+           +'                 <div class="col-sm-6 " style="padding-left:0px">'
+           +'                     <font class="info-medium firstcolor">Height : <span class="gray">'+ actors[id].StashActor_height +'cms</font>'
+           +'                 </div>'
+           +'                <div class="col-sm-6">'
+           +'                    <font class="info-medium firstcolor">Weight :<span class="gray">'+ actors[id].StashActor_weight +'kgs</font>'
+           +'                 </div>'
+           +'             </div>'
+           +'             <div class="col-sm-4 scrolr">'
+           +'                 <font class="info-medium firstcolor">Skills :<span class="gray">'+ actors[id].StashActor_skills+'</font>'
+           +'             </div>'
+           +'            <div class="col-sm-4 scrolr">'
+           +'                 <font class="info-medium firstcolor">Language : <span class="gray">'+ actors[id].StashActor_language+'</font>'
+           +'             </div>'
+           +'         </div>'
+           +'         <div class="row" style="padding-right:15px;">'
+           +'             <div class="DocumentList">'
+           +'                 <ul class="list-inline">';
+           images = JSON.parse(actors[id].StashActor_images);
+           for(var k = 0;k < images.length; k++){
+	            image = images[k];
+	            str = base + "assets/img/actors/" + image;
+	            content += '<li class="DocumentItem">'
+	           +'<a href="'+str+'" data-lightbox="'+actors[id].StashActor_name+'"><img class="photo" src='+str+' height="100%" width=auto></img></a>' 
+	           +'         </li>';
+	        }
+	        content += '                 </ul>'
+                       +'             </div>'
+                       +'         </div>'
+                       +'     </div>'
+                       +'</div> ';
+        $("#actor_detail").html(content);
+        $('#detailsActor').modal('show');
+	});
+
+	/*function charCounter(that, action) {
+		var limit = Number($("#sms-char-left").text());
+		var count = Number($("#no-of-sms").text());
+		var cur = Number($(that).val().length);
+		limit -= 1;
+		if(diff == -1){
+			limit = 160;
+			count += 1;
+		}
+
+		$("#sms-char-left").html(limit);
+		$("#no-of-sms").html(count);
+	}
+
+	$("#text-sms").on("keyup", function(){
+		charCounter(this, 'up');
+	});*/
+
+	/*$("#text-sms").on("keydown", function(){
+		charCounter(this, 'down');
+	});*/
+
+	$(document).on("submit", "form#emailInvitationForm", function(){
+		var emails = $("textarea[name='emails']", $(this)).val(),
+			msg = $("textarea[name='email-msg']", $(this)).val(),
+			project_name = $("input[name='project_name']", $(this)).val(),
+			project_date = $("input[name='project_date']", $(this)).val();
+
+		data = {request: "EMailInvitation", data: JSON.stringify({
+			emails: emails,
+			msg: msg,
+			project_name: project_name,
+			project_date: project_date
+		})};
+		console.log(data);
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				if(response.status){
+					$("#invite-error").removeClass("text-danger").addClass("text-success");
+				}
+				$("#invite-error").html(response.message).show().delay(5000).hide();
+			}
+		});
+		return false;
+	});
+
+	$(document).on("submit", "form#smsInvitationForm", function(){
+		var mobiles = $("textarea[name='mobiles']", $(this)).val(),
+			msg = $("textarea[name='sms']", $(this)).val(),
+			project_name = $("input[name='project_name']", $(this)).val(),
+			project_date = $("input[name='project_date']", $(this)).val();
+
+		data = {request: "SMSInvitation", data: JSON.stringify({
+			mobiles: mobiles,
+			msg: msg,
+			project_name: project_name,
+			project_date: project_date
+		})};
+		console.log(data);
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				if(response.status){
+					$("#invite-error").removeClass("text-danger").addClass("text-success");
+				}
+				$("#invite-error").html(response.message).show().delay(5000).hide();
+			}
+		});
+		return false;
+	});
 
 });

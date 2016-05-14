@@ -4,13 +4,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Home extends CI_Controller {
 
 	public function index($value=''){
+		//$pageInfo = array("error" => true, "error_msg" => null);
+		//print_r($this->session->userdata());exit();
+		if($this->session->userdata("StaSh_User_Logged_In"))
+			if($this->session->userdata("StaSh_User_type") == 'actor')
+				redirect(base_url() . "actor/");
+			else
+				redirect(base_url() . "director/");
 		$this->load->view("index");
 	}
 
 	public function register($type = 'director'){
 
 		$pageInfo = array("error" => true, "error_msg" => null);
-		if($this->session->userdata("StaSh_User_logged_in"))
+		if($this->session->userdata("StaSh_User_Logged_In"))
 			if($this->session->userdata("StaSh_User_type") == 'actor')
 				redirect(base_url() . "actor/");
 			else
@@ -50,6 +57,10 @@ class Home extends CI_Controller {
 	    		if($response > 0){
 	    			if($type == 'actor'){
 	    				$this->Auth->setupActorProfile($response);
+	    				if(count($this->session->userdata("Stash_New_User"))){
+	    					$this->Auth->insertActorInProject($response);
+	    					$this->Auth->insertActorInDirectorList($response);
+	    				}
 	    			}else{
 	    				$this->Auth->setupDirectorProfile($response);
 	    			}
@@ -78,6 +89,24 @@ class Home extends CI_Controller {
 
 		$this->load->view("forgotpassword", $pageInfo);
 	}
+
+	public function join($link = ''){
+		$encryptedText = str_replace(" ", "+", $value);
+
+		$this->load->library('encrypt');
+		$info = $this->encrypt->decode($encryptedText);
+		$info = explode("_", $info);
+		$data = array(	
+						'project_ref' => $info[1],
+						'director_ref' => $info[0],
+						'time' => $info[2]
+					);
+
+		$this->session->set_userdata(array("Stash_New_User" => $data));
+		redirect(base_url() . "home/register/actor/");
+	}
+
+
 
 	public function logout($value=''){
 		$this->session->set_userdata(array());

@@ -40,12 +40,9 @@
         <script src="<?= JS ?>/vendor/bootstrap.min.js"></script>
         <script src="<?= JS ?>/vendor/js.cookies.js"></script>
         <script src='<?= JS ?>/tagsinput.js'></script>
+        <script src="<?= JS ?>/home.js"></script>
         <script src="<?= JS ?>/lightbox.js"></script>
         <script src="<?= JS ?>/stupidtable.js"></script>
-        <script src="<?= JS ?>/home.js"></script>
-
-
-
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

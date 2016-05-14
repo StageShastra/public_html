@@ -15,6 +15,15 @@
               to   {-webkit-transform: rotate(359deg);}
           }
 
+          .email-templete {
+            border: 1px dashed #999;
+            padding: 5px;
+          }
+
+          .tab-content {
+            padding: 10px 5px;
+          }
+
 
         </style>
         <!--[if lt IE 8]>
@@ -68,7 +77,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.php">
+                        <a class="navbar-brand" href="<?= base_url() ?>">
                             <img src="<?= IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname">STAGE<b>SHASTRA</b></span><p><span id="tag-line" class="firstcolor info-small">Makes casting easier!</span>
                         </a>
                     </div> 
@@ -80,11 +89,12 @@
                             <a href="#" class="not-active">Discover<span class="info-small"><i>(Coming Soon)</i></span></a>
                         </li>
                         <li >
-                            <a href="#"><span class="firstcolor" data-toggle="modal" data-target="#advancedSearch"> Advanced<sup><span class="info-small">New!</span></sup></span>
+                            <a href="#" data-toggle="modal" data-target="#advancedSearch" ><span class="firstcolor"> Advanced<sup><span class="info-small">New!</span></sup></span>
                             </a>
                         </li>
                         <li >
-                            <a href="#"><span class="firstcolor" data-toggle="modal" data-target="#inviteActors"> Invite </span>
+                            <a href="#" data-toggle="modal" data-target="#inviteActors">
+                              <span class="firstcolor" > Invite </span>
                             </a>
                         </li>
                         <li class="dropdown">
@@ -110,7 +120,7 @@
                       
                 </div>
             </div>
-            <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" onclick="checkboxed()" />
+            <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" />
    
            </div>
            
@@ -127,28 +137,29 @@
                 </div>
                 <div class="modal-body" style="background-color:#f2f2f2;">
                   <div class="container" style="max-width:100%; ">
-                    <div class="row">
-                      <div class="col-sm-6 form-group no-paddinglr">
-                          <span class="info-small gray">Age Range (Min)</span> <input type="text" class="form-control add" id="aagemin" name="agemin"  placeholder= "from age:" required />
-                          <span class="info-small gray">Sex(M/F) </span> <input type="text" class="form-control add" id="asex" name="sex" placeholder= "M/F:" required />
+                    <form action="#" method="post" id="advanceSearch">
+                        <div class="row">
+                          <div class="col-sm-6 form-group no-paddinglr">
+                              <span class="info-small gray">Age Range (Min)</span> <input type="text" class="form-control add" id="aagemin" name="agemin"  placeholder= "from age:"  />
+                              <span class="info-small gray">Sex(M/F) </span> <input type="text" class="form-control add" id="asex" name="sex" placeholder= "M/F:"  />
 
-                      </div>
-                      <div class="col-sm-6 form-group no-paddinglr">
-                          <span class="info-small gray">Age Range (Max) </span> <input type="text" class="form-control add" id="aagemax"  name="agemax" placeholder= "upto age :" required />
-                          <span class="info-small gray">Skills(tag)</span>  <input type="text" data-role="tagsinput" class="form-control add" id="askills" name="skills" placeholder= "Skills :" required />
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-6 form-group no-paddinglr">
-                          <span class="info-small gray">Height (min) </span> <input type="text" class="form-control add" id="aheightmin" name="height" placeholder= "from height (in cms) :" required />
-                          <span class="info-small gray">Projects(tag) <input type="text" data-role="tagsinput" class="form-control add" id="aprojects" name="projects" placeholder= "Projects :" required />
-                      </div>
-                      <div class="col-sm-6 form-group no-paddinglr">
-                          <span class="info-small gray">Height (max) </span> <input type="text" class="form-control add" id="aheightmax"  name="agemax" placeholder= "upto height (in cms) :" required />
-                          <button type="submit" class="btn submit-btn firstcolor" style="margin-top: 20px; margin-left:10px;" onclick="search()" id="btn-search" ><span class="glyphicon glyphicon-filter"></span> &nbsp; Filter</button>
-                      </div>
-                    </div>
-                    </div>
+                          </div>
+                          <div class="col-sm-6 form-group no-paddinglr">
+                              <span class="info-small gray">Age Range (Max) </span> <input type="text" class="form-control add" id="aagemax"  name="agemax" placeholder= "upto age :"  />
+                              <span class="info-small gray">Skills(tag)</span>  <input type="text" data-role="tagsinput" class="form-control add" id="askills" name="skills" placeholder= "Skills :"  />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-6 form-group no-paddinglr">
+                              <span class="info-small gray">Min. Height (in cm) </span> <input type="text" class="form-control add" id="aheightmin" name="heightmin" placeholder= "from height (in cms) :"  />
+                              <!-- <span class="info-small gray">Projects(tag) <input type="text" data-role="tagsinput" class="form-control add" id="aprojects" name="projects" placeholder= "Projects :"  /> -->
+                          </div>
+                          <div class="col-sm-6 form-group no-paddinglr">
+                              <span class="info-small gray">Max. Height (in cm) </span> <input type="text" class="form-control add" id="aheightmax"  name="heightmax" placeholder= "upto height (in cms) :"  />
+                              <button type="submit" class="btn submit-btn firstcolor" style="margin-top: 20px; margin-left:10px;" id="btn-search" ><span class="glyphicon glyphicon-filter"></span> &nbsp; Filter</button>
+                          </div>
+                        </div>
+                    </form>
                   </div>
                 </div>
                 
@@ -169,43 +180,137 @@
                   </div>
                   <div class="modal-body" style="background-color:#f2f2f2;">
                     <div class="container" style="max-width:100%; ">
-                      <form action="resources/sendInvite.php" method="post" id="invitationForm">
-                        <div class="row">
+                      <!-- Nav tabs -->
+                      <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#viaEmail" aria-controls="home" role="tab" data-toggle="tab">Via Email</a></li>
+                        <li role="presentation"><a href="#viaSMS" aria-controls="profile" role="tab" data-toggle="tab">Via SMS</a></li>
+                      </ul>
+                      <div class="clearfix"></div>
+                      <p><b class="text-warning" id="invite-error"></b></p>
 
-                          <div class="col-sm-12 form-group no-paddinglr">
-                            <span class="info-small gray">
-                              Emails (comma seperated)
-                            </span> 
-                            <textarea class="form-control add" name="emails"  placeholder="Add Emails" required rows="3" style="border: 1px solid #999;"></textarea>
-                          </div>
+                      <!-- Tab panes -->
+                      <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="viaEmail">
+                          <form action="resources/sendInvite.php" method="post" id="emailInvitationForm">
+                            <div class="row">
+
+                              <div class="col-sm-12 form-group no-paddinglr">
+                                <!-- <span class="info-small gray">
+                                  Emails (comma seperated)
+                                </span>  -->
+                                <textarea class="form-control add" name="emails"  placeholder="Emails (comma seperated)" required rows="3" style="border: 1px solid #999;"></textarea>
+                              </div>
+
+                            </div>
+                            <!-- <div class="row">
+
+                              <div class="col-sm-12 form-group no-paddinglr">
+                                <span class="info-small gray">
+                                  Mobile Numbers (comma seperated)
+                                </span> 
+                                <textarea class="form-control add" name="mobiles"  placeholder="Add Mobile Numbers" rows="3" required style="border: 1px solid #999;"></textarea>
+                              </div>
+
+                            </div> -->
+                            <div class="row email-templete">
+
+                              <div class="col-sm-12 form-group no-paddinglr">
+                                <span class="info-small">
+                                  Dear Actors,
+                                </span> 
+                                <textarea class="form-control add" name="email-msg"  placeholder="Enter Message" rows="5" required style="border: 1px solid #999;"></textarea>
+                                <span class="info-small">
+                                  Regards,
+                                  </br>
+                                  <?= $this->session->userdata('StaSh_User_name') ?>
+                                </span> 
+                              </div>
+
+                            </div>
+                            <div class="row">
+                              <div class="col-sm-6 form-group no-paddinglr">
+                                <span class="info-small">
+                                  <b></b>
+                                </span>
+                                <span class="info-small gray">
+                                  Project Name:
+                                </span> 
+                                <input type="text" class="form-control add" name="project_name"  placeholder="Project Name" required style="border: 1px solid #999;">
+                              </div>
+                              <div class="col-sm-6 form-group no-paddinglr">
+                                <span class="info-small gray">
+                                  Project Date:
+                                </span> 
+                                <input type="date" class="form-control add" name="project_date" value="<?= date("Y-m-d") ?>" required style="border: 1px solid #999;">
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-sm-6 form-group no-paddinglr">
+                                <button type="submit" class="btn submit-btn firstcolor" style="margin-top: 20px; margin-left:10px;" id="btn-search" ><span class="glyphicon glyphicon-envelope"></span> Invite </button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="viaSMS">
+                            
+                          <form action="resources/sendInvite.php" method="post" id="smsInvitationForm">
+                            <div class="row">
+
+                              <div class="col-sm-12 form-group no-paddinglr">
+                                <!-- <span class="info-small gray">
+                                  Emails (comma seperated)
+                                </span>  -->
+                                <textarea class="form-control add" name="mobiles"   placeholder="Mobile Numbers (comma seperated)" required rows="3" style="border: 1px solid #999;"></textarea>
+                              </div>
+
+                            </div>
+
+                            <div class="row email-templete">
+
+                              <div class="col-sm-12 form-group no-paddinglr">
+                                <span class="info-small">
+                                  Dear Actors,
+                                </span> 
+                                <textarea class="form-control add" name="sms" id="text-sms" placeholder="Enter Message" rows="5" required style="border: 1px solid #999;"></textarea>
+                                <!-- <span class="info-small pull-right">
+                                  <span id="sms-char-left">160</span>/<span id="no-of-sms">1</span>
+                                </span> -->
+                                <span class="info-small">
+                                  <?= $this->session->userdata('StaSh_User_name') ?>
+                                  </br>
+                                  Powered by Castiko
+                                </span> 
+                              </div>
+
+                            </div>
+
+                            <div class="row">
+                              <div class="col-sm-6 form-group no-paddinglr">
+                                <span class="info-small">
+                                  <b></b>
+                                </span>
+                                <span class="info-small gray">
+                                  Project Name:
+                                </span> 
+                                <input type="text" class="form-control add" name="project_name"  placeholder="Project Name" required style="border: 1px solid #999;">
+                              </div>
+                              <div class="col-sm-6 form-group no-paddinglr">
+                                <span class="info-small gray">
+                                  Project Date:
+                                </span> 
+                                <input type="date" class="form-control add" name="project_date" value="<?= date("Y-m-d") ?>" required style="border: 1px solid #999;">
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-sm-6 form-group no-paddinglr">
+                                <button type="submit" class="btn submit-btn firstcolor" style="margin-top: 20px; margin-left:10px;" id="btn-search" ><span class="glyphicon glyphicon-envelope"></span> Invite </button>
+                              </div>
+                            </div>
+                          </form>
 
                         </div>
-                        <div class="row">
-
-                          <div class="col-sm-12 form-group no-paddinglr">
-                            <span class="info-small gray">
-                              Mobile Numbers (comma seperated)
-                            </span> 
-                            <textarea class="form-control add" name="mobiles"  placeholder="Add Mobile Numbers" rows="3" required style="border: 1px solid #999;"></textarea>
-                          </div>
-
-                        </div>
-                        <div class="row">
-
-                          <div class="col-sm-12 form-group no-paddinglr">
-                            <span class="info-small gray">
-                              Enter Message
-                            </span> 
-                            <textarea class="form-control add" name="message"  placeholder="Enter Message" rows="5" required style="border: 1px solid #999;"></textarea>
-                          </div>
-
-                        </div>
-                        <div class="row">
-                          <div class="col-sm-6 form-group no-paddinglr">
-                            <button type="submit" class="btn submit-btn firstcolor" style="margin-top: 20px; margin-left:10px;" id="btn-search" ><span class="glyphicon glyphicon-envelope"></span> Invite </button>
-                        </div>
-                        </div>
-                      </form>
+                      </div>
                     </div>
                   </div>
                 </div>

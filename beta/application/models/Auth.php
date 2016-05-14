@@ -18,7 +18,7 @@
 						'StashUsers_ip' => $this->input->ip_address(),
 						'StashUsers_header' => $this->agent->agent_string()
 					);
-			$response = $this->db->insert("StaSh-Users", $data);
+			$response = $this->db->insert("stash-users", $data);
 			return $this->db->insert_id();
 		}
 
@@ -48,7 +48,7 @@
 						'StashActor_last_update' => time(),
 						'StashActor_last_ip' => $this->input->ip_address()
 					);
-			$response = $this->db->insert("StaSh-actor", $data);
+			$response = $this->db->insert("stash-actor", $data);
 			return $response;
 		}
 
@@ -63,13 +63,13 @@
 						'StashDirector_last_update' => time(),
 						'StashDirector_last_ip' => $this->input->ip_address()
 					);
-			$response = $this->db->insert("StaSh-director", $data);
+			$response = $this->db->insert("stash-director", $data);
 			return $response;
 		}
 
 		public function ifUserExist($email = ''){
 			$this->db->where("StashUsers_email", $email);
-			$query = $this->db->get("StaSh-Users");
+			$query = $this->db->get("stash-users");
 			return $query->num_rows();
 		}
 
@@ -78,7 +78,7 @@
 			$this->db->where("StashUsers_email", trim($data['email']));
 			$this->db->where("StashUsers_password", $pass);
 			$this->db->where("StashUsers_type", $data['type']);
-			$query = $this->db->get("StaSh-Users");
+			$query = $this->db->get("stash-users");
 			return $query->first_row('array');
 		}
 
@@ -100,13 +100,13 @@
 						'StashLogins_time' => time(),
 						'StashLogins_ip' => $this->input->ip_address()
 					);
-			$response = $this->db->insert("StaSh-Logins", $data);
+			$response = $this->db->insert("stash-logins", $data);
 			return $response;
 		}
 
 		public function getUserData($key = '', $value = ''){
 			$this->db->where($key, trim($value));
-			$query = $this->db->get("StaSh-Users");
+			$query = $this->db->get("stash-users");
 			return $query->first_row('array');
 		}
 
@@ -120,7 +120,7 @@
 						'StashForgotPassword_status' => 0,
 						'StashForgotPassword_ip' => $this->input->ip_address()
 					);
-			$response = $this->db->insert("Stash-Forgot-Password", $data);
+			$response = $this->db->insert("stash-forgot-password", $data);
 			return $response;
 		}
 
@@ -128,7 +128,7 @@
 			$this->db->where("StashForgotPassword_user_id_ref", $ref);
 			$this->db->where("StashForgotPassword_code", $code);
 			$this->db->ordeR_by("StashForgotPassword_id", "DESC");
-			$query = $this->db->get("Stash-Forgot-Password", 1);
+			$query = $this->db->get("stash-forgot-password", 1);
 			return $query->first_row('array');
 		}
 
@@ -138,7 +138,7 @@
 						'StashForgotPassword_status' => 1
 					);
 			$this->db->where('StashForgotPassword_id', $id);
-			return $this->db->update('Stash-Forgot-Password', $data);
+			return $this->db->update('stash-forgot-password', $data);
 		}
 
 		public function updatePassword($ref = 0, $pass = ''){
@@ -147,7 +147,32 @@
 						'StashUsers_password' => $pass
 					);
 			$this->db->where('StashUsers_id', $ref);
-			return $this->db->update('StaSh-Users', $data);
+			return $this->db->update('stash-users', $data);
+		}
+
+		public function insertActorInProject($ref = ''){
+			$info = $this->session->userdata("Stash_New_User");
+			$data = array(
+						'StashActorProject_id' => null,
+						'StashActorProject_actor_id_ref' => $ref,
+						'StashActorProject_project_id_ref' => $info['project_ref'],
+						'StashActorProject_time' => time(),
+						'StashActorProject_status' => 1
+					);
+			$this->db->insert("stast-actor-project", $data);
+		}
+
+		public function insertActorInDirectorList($ref = ''){
+			$info = $this->session->userdata("Stash_New_User");
+			$data = array(
+						'StashDirectorActorLink_id' => null,
+						'StashDirectorActorLink_director_id_ref' => $info['director_ref'],
+						'StashDirectorActorLink_actor_id_ref' => $ref,
+						'StashDirectorActorLink_rate' => 5,
+						'StashDirectorActorLink_time' => time(),
+						'StashDirectorActorLink_status' => 1
+					);
+			$this->db->insert("stash-director-actor-link", $data);
 		}
 
 	}

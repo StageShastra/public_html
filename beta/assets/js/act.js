@@ -1,5 +1,12 @@
 $(document).ready(function(){
 
+	var url = "/public_html/beta/actor/ajax",
+		base = "/public_html/beta/",
+		type = "POST",
+		data = {};
+
+	$("#warningmsg").hide();
+
 	$(".toggleEdit").on("click", function(){
 		var unhide = $(this).attr("data-unhide-id");
 		var hide = $(this).attr("data-hide-id");
@@ -9,7 +16,7 @@ $(document).ready(function(){
 		//console.log(hide, unhide);
 
 	});
-	populate_photos();
+	//populate_photos();
 	$(document).on("click", ".updateDataField", function(){
 
 		var that = this;
@@ -18,7 +25,7 @@ $(document).ready(function(){
 		var request = $(this).attr("data-request");
 		var unhide = $(this).attr("data-unhide-id");
 		var hide = $(this).attr("data-hide-id");
-		var form = {actor_ref: $("input[name='actor_ref']").val()};
+		var form = {};
 		$.each( names, function(index, value){
 			name = $.trim(value);
 			form[name] = $('[name="'+name+'"]').val();
@@ -29,8 +36,8 @@ $(document).ready(function(){
 		console.log(data);
 
 		$.ajax({
-			url: "../resources/ajax.php",
-			type: "POST",
+			url: url,
+			type: type,
 			data: data,
 			success: function(response){
 				if(response.status){
@@ -95,8 +102,8 @@ $(document).ready(function(){
 			console.log(data);
 
 			$.ajax({
-				url: "../resources/ajax.php",
-				type: "POST",
+				url: url,
+				type: type,
 				data: data,
 				success: function(response){
 					if(response.status){
@@ -126,8 +133,8 @@ $(document).ready(function(){
 		data = {request: "AddExperience", data: JSON.stringify({title: title, role: role, blurb: blurb, link: link})};
 		console.log(data);
 		$.ajax({
-			url: "../resources/ajax.php",
-			type: "POST",
+			url: url,
+			type: type,
 			data: data,
 			success: function(response){
 				if(response.status)
@@ -147,12 +154,12 @@ $(document).ready(function(){
 		var blurb = $("textarea[name='trn_blurb']").val();
 		var start = $("input[name='trn_start_time']").val();
 		var end = $("input[name='trn_end_time']").val();
-
+		//console.log(blurb);
 		data = {request: "AddTraining", data: JSON.stringify({title: title, course: course, blurb: blurb, start: start, end: end})};
 		console.log(data);
 		$.ajax({
-			url: "../resources/ajax.php",
-			type: "POST",
+			url: url,
+			type: type,
 			data: data,
 			success: function(response){
 				if(response.status)
@@ -230,7 +237,7 @@ Dropzone.options.photoUpload={
     parallelUploads: 100,
     maxFilesize:2,
     addRemoveLinks:true,
-    maxFiles: 100,
+    maxFiles: 10,
     dictDefaultMessage:'Drag or click here to upload <span style="color:#FFAA3A;">at least one picture</span>.<span class="info-small gray"><li>Ideally, keep the image size less than 1.5MB</li><li>You can add more later</li></span>',
     acceptedFiles:'image/*',
     paramName:'file',
@@ -256,7 +263,7 @@ Dropzone.options.photoUpload={
       { 
         //console.log(files);
         console.log(response);
-        if(response == 200)
+        if(response)
         {
          location.reload();
         }

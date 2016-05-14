@@ -1,0 +1,346 @@
+<?php
+    include 'includes/head.php';
+
+    $actorProfile = $profile;
+    $actorExperiences = $experience;
+    $actorTrainings = $training;
+    $actor_ref = $this->session->userdata("StaSh_User_id");
+
+    function calculateAge($dob = 0){
+        $diff = abs(time() - $dob);
+        $years = floor($diff / (365*60*60*24));
+        return $years;
+    }
+
+
+?>
+    <body>
+        <style>
+          body{
+            padding-top: 90px;
+          }
+          .rotate-img {
+            -webkit-animation: rotation 2s infinite linear;
+          }
+
+          @-webkit-keyframes rotation {
+              from {-webkit-transform: rotate(0deg);}
+              to   {-webkit-transform: rotate(359deg);}
+          }
+          .bootstrap-tagsinput {
+            background-color: #f2f2f2;
+        }
+
+
+        </style>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <!-- Modal Section : Contact Form -->
+        <!-- Ths section is pre selection !-->
+        <!--===========================================================================================!-->
+
+        <!-- Ths section is post selection !-->
+        <div class="container-fluid" id="home">
+           
+           
+            <nav class="navbar navbar-default navbar-fixed-top custom-navbar">
+                <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="<?= base_url() ?>">
+                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname">STAGE<b>SHASTRA</b></span><p><span id="tag-line" class="firstcolor info-small">Makes casting easier!</span>
+                        </a>
+                    </div> 
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  
+                      <ul class="nav navbar-nav navbar-right vertical-middle">
+                       
+                        <li >
+                            <a href="<?= base_url() ?>home/logout/"><button type="button" class="btn submit-btn firstcolor" id="btn-logout"  ><span class="glyphicon glyphicon-log-out"></span> &nbsp; Sign Out</button></a>
+                        </li>
+                      </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div>
+            </nav>
+
+           <!-- contact modal toggle -->
+            <div class="container-fluid padded">
+                <div class="alert alert-warning alert-dismissible" id="warningmsg" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <strong>Warning!</strong> Your profile looks empty, we suggest you to complete your profile. It helps you get more auditions.
+                </div>
+
+                <div class="container col-sm-12 center" id="browse-table">
+                    <div class="col-sm-8 mycontent-left marginTop">
+                        <input type="hidden" name="actor_ref" value="<?= $actor_ref ?>">
+                      <div class="col-sm-6 mycontent-left ">
+                        <div class=" container col-sm-7 center" id="actorprofile">
+                            <div id="profile_photo_upload" class="hidden" onclick="upload_picture()">
+                                <span class="info-small gray center " style="vertical-align:middle;" > Upload Picture </span>
+                            </div>
+                            <div class="img-div center " id="profile_image">
+                                <img src="<?= IMG .'/'.$actorProfile['StashActor_avatar'] ?>">
+                            </div>
+                            <div class="col-sm-12 left marginTop " id="name_container">
+                                <span id="actor_name" class="info dark-gray "><?= $actorProfile['StashActor_name'] ?></span>
+                                
+                                <br>
+                                <span id="actor_age" class="info-small black "><?= calculateAge($actorProfile['StashActor_dob']) ?></span>,<span id="actor_sex" class="info-small black"><?= ($actorProfile['StashActor_gender']) ? "Male" : "Female" ?></span>
+                            </div>
+                        </div>   
+                        <div class="col-sm-10 center left marginTop">
+                            <span class="actorlabel" >
+                                Phone No. : 
+                                <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <span id="actor_phone" class="info dark-gray "><?= $actorProfile['StashActor_mobile'] ?></span>
+                            
+                            <br>
+                            <span class="actorlabel" >
+                                Whatsapp No. : 
+                                <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <span id="actor_whatsapp" class="info dark-gray "><?= $actorProfile['StashActor_whatsapp'] ?></span>
+                            
+                            <br>
+                            <hr>
+                        </div>
+                        <div class="col-sm-10 center left marginTop">
+                            <span class="actorlabel" >
+                                Email Id. : <!-- <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#email_edit" data-hide-id="#actor_email" aria-hidden="true"></span> -->
+                                <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <span id="actor_email" class="info dark-gray "><?= $actorProfile['StashActor_email'] ?></span>
+                            <!-- <span id="email_edit" class="left  hidden ">
+                                <input type="text" class="editwhite" value="<?= $actorProfile['StashActor_email'] ?>" id="email"/>
+                                <font class="sortbuttons"><button onclick="update_email()"  class="btn submit-btn firstcolor center tick"  ><span class="glyphicon glyphicon-ok"></span></button></font>
+                            </span> -->
+                        </div>
+                        
+                      </div>
+                      <div class="col-sm-6 marginTop">
+                        <div class="col-sm-10 center left marginTop">
+                            <span class="actorlabel" >
+                                Date of Birth. : 
+                                <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <span id="actor_dob" class="info dark-gray"><?= date("m/d/Y", $actorProfile['StashActor_dob']) ?></span>
+                            
+                            <br>
+                            <hr>
+                        </div>
+                        <div class="col-sm-10 center left marginTop">
+                            <span class="actorlabel" >
+                                Age Range : 
+                                <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <span id="actor_agerange" class="info dark-gray">
+                                <span id="actor_min_age"><?= $actorProfile['StashActor_min_role_age'] ?></span> - 
+                                <span id="actor_max_age"><?= $actorProfile['StashActor_max_role_age'] ?></span> years.
+                            </span>
+                            <br>
+                            <hr>
+                        </div>
+                        <div class="col-sm-10 center left ">
+                            <span class="actorlabel" >
+                                Height. : 
+                                <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <span id="actor_height" class="info dark-gray "><?= $actorProfile['StashActor_height'] ?> cms.</span>
+                            
+                            <br>
+                            <hr>
+                        </div>
+                        <div class="col-sm-10 center left marginTop">
+                            <span class="actorlabel" >
+                                Weight : 
+                                <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <span id="actor_weight" class="info dark-gray"><?= $actorProfile['StashActor_weight'] ?> kgs.</span>
+                            
+                            <br>
+                            <hr>
+                        </div>
+                        <div class="col-sm-10 center left marginTop">
+                            <span class="actorlabel" >
+                                Languages : 
+                                <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <span id="actor_language" class="info dark-gray ">
+                                <?php
+
+                                    $languages = $actorProfile['StashActor_language'];
+
+                                    foreach ($languages as $key => $language) {
+                                ?>
+                                <div class="col-sm-4 vertical-padded">
+                                    <button type="button" class="btn tagp" style="max-width:200%;" aria-label="Left Align" >
+                                        <font class="taga-text"><?= ucfirst(trim($language)) ?></font>
+                                    </button>
+                                </div>  
+                                <?php
+                                    }
+
+                                ?>
+                            </span>
+                            <hr class="taghr">
+                        </div>
+                        <div class="col-sm-10 center left marginTop">
+                            <span class="actorlabel" >
+                                Skills : 
+                                <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <span id="actor_skills" class="info dark-gray">
+                                <?php
+
+                                    $skills = $actorProfile['StashActor_skills'];
+
+                                    foreach ($skills as $key => $skill) {
+                                ?>
+                                <div class="col-sm-4 vertical-padded">
+                                    <button type="button" class="btn tagp" style="max-width:200%;" aria-label="Left Align" >
+                                        <font class="taga-text"><?= ucfirst(trim($skill)) ?></font>
+                                    </button>
+                                </div>  
+                                <?php
+                                    }
+
+                                ?>
+
+                            </span>
+                            
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div class="col-sm-11 center">
+                            <hr>
+                            <span class="actorlabel pull-left" >
+                                    Photos and Videos : 
+                                    <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <div id="photos_videos">
+                                <div class="row" style="padding-right:15px;">
+                                    <div class="DocumentList">
+                                        <ul class="list-inline">
+                                            
+                                        <?php
+                                            $images = json_decode($actorProfile['StashActor_images'], true);
+                                            //print_r($images);
+                                            foreach ($images as $key => $image) {
+                                                echo "<li class='DocumentItem'>"
+                                                    . "<a href='".IMG."/actors/".$image."' data-lightbox='".$actorProfile['StashActor_name']."'>"
+                                                    .   "<img src='".IMG."/actors/".$image."' height='100%' width='auto' class=' img-rounded'>"
+                                                    . "</a>"
+                                                    . "</li>";
+                                            }
+                                        ?>     
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="col-sm-10 center left marginTop">
+                            <span class="actorlabel" >
+                                Experience : 
+                                <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <div id="actor_experience">
+                                <div id="experiencelist" style="max-height:400px; overflow:scroll;">
+                                <?php
+
+                                    foreach ($actorExperiences as $key => $experience) {
+                                ?>
+
+                                    <span id="experience-<?= $key ?>" class="info dark-gray">
+                                        <span class="info black" id="actor_ex_title_<?= $key ?>"><b><?= $experience['StashActorExperience_title'] ?></b></span>
+                                        <span class="glyphicon glyphicon-pencil edit-button  firstcolor toggleEdit" data-unhide-id="#experience-<?= $key ?>_edit" data-hide-id="#experience-<?= $key ?>" aria-hidden="true"></span>
+                                        <br>
+                                        <span class="info black" id="actor_ex_role_<?= $key ?>">
+                                            <i>as</i> <?= $experience['StashActorExperience_role'] ?>
+                                        </span>
+                                        <hr>
+                                        <span class="info-small dark-gray" id="actor_ex_blurb_<?= $key ?>">
+                                            <?= $experience['StashActorExperience_blurb'] ?>
+                                        </span>
+                                        <span >
+                                            <?php
+                                            if($experience['StashActorExperience_link']!="") 
+                                            {
+                                                echo '<br><a class="info-small" href="'.$experience['StashActorExperience_link'].'" target="_blank">Watch Video</a>';
+                                            
+                                            }
+                                            ?>
+                                        </span>
+                                        <br><br>
+                                    </span>
+                                    <br>
+
+                                <?php
+                                    }
+
+                                ?>
+                                </div>
+                            </div>
+                        <hr>
+                        </div>
+                        <div class="col-sm-10 center left marginTop">
+                            <span class="actorlabel" >
+                                Training : 
+                                <hr align="left" width="15px" class="tenth">
+                            </span>
+                            <div id="actor_training">
+                                
+                                <div id="traininglist" style="max-height:400px; overflow:scroll;">
+                                    <?php
+                                        foreach ($actorTrainings as $key => $training) {
+                                    ?>
+
+                                    <span id="training-<?= $key ?>" class="info dark-gray">
+                                        <span class="info black" id="actor_tr_title_<?= $key ?>"><?= $training['StashActorTraining_title'] ?></span>
+                                        <span class="glyphicon glyphicon-pencil edit-button pull-right firstcolor toggleEdit" data-unhide-id="#training-<?= $key ?>_edit" data-hide-id="#training-<?= $key ?>" aria-hidden="true"></span>
+                                        <br>
+                                        <span class="info-small dark-gray" id="actor_tr_course_<?= $key ?>"><?= $training['StashActorTraining_course'] ?></span>
+                                        <br>
+                                        <span class="info-small dark-gray">
+                                        <span id="actor_tr_start_<?= $key ?>"><?= $training['StashActorTraining_start_time'] ?></span> - 
+                                        <span id="actor_tr_end_<?= $key ?>"><?= $training['StashActorTraining_end_time'] ?></span>
+                                        </span>
+                                        <br>
+                                        <span class="info-small dark-gray" id="actor_tr_blurb_<?= $key ?>">
+                                            <?= $training['StashActorTraining_blurb'] ?>
+                                        </span>
+                                        <hr>
+                                    </span>
+
+                                    <?php
+                                        }
+                                    ?>
+                                </div>
+                            </div>
+
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+   
+        </div>
+           
+                    
+        <!--================================== Navigation Ends Here =======================================-!-->
+<?php
+    include 'includes/scripts.php';
+?>
