@@ -101,7 +101,7 @@ $(document).ready(function(){
                		+'<tr><th id="selectallcheckbox"><input type="checkbox" name="selectallactor" id="selectallactor" class="css-checkbox" /><label for="selectallactor" class="css-label"></label></th><th>Profile</th>';
         
         for(var i = 0; i < select.length; i++){
-    		content += '<th data-sort="string">'+select[i]+' <font class="sortbuttons"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span> <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></font></th>';
+    		content += '<th data-sort="string">'+select[i]+' <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>';
     	}
 
     	content += "</tr></thead>";
