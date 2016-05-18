@@ -17,10 +17,10 @@
             <div id="selector">
               <div class="row">
                 <div class="col-sm-6 mycontent-left" style="text-align:center; ">
-                  <button  class="btn submit-btn firstcolor select-btn " data-show="#castingdirector" data-hide="#actor" >CD</button><br><font class="info gray marginTop">I am a Casting Director</font>
+                  <button  class="btn submit-btn firstcolor select-btn" id="cd_icon" data-show="#castingdirector" data-hide="#actor" ></button><br><font class="info gray marginTop">I am a Casting Director</font>
                 </div>
                 <div class="col-sm-6" style="text-align:center;">
-                  <button  class="btn submit-btn firstcolor select-btn " data-show="#actor" data-hide="#castingdirector" >A</button><br><font class="info gray marginTop">I am an Actor</font>
+                  <button  class="btn submit-btn firstcolor select-btn" id="actor_icon" data-show="#actor" data-hide="#castingdirector" ></button><br><font class="info gray marginTop">I am an Actor</font>
                 </div>
               </div>
             </div>
@@ -39,7 +39,7 @@
                   <div class="mycontent-right center light-padded">
                       <font class="info dark-gray center"> Log In | </font><a href="<?= base_url() ?>home/register/director"><font class="info firstcolor center"> Sign Up! </a></font>
                       <form role="form" id="login-form" class="login-forms" method="post" >
-                      <p class="text-danger" id="login-error-director"></p>
+						<b><p class="text-danger" id="login-error-director"></p></b>
                       <div class="form-group">
                         <input type="email" class="form-control login" id="username" name="email" placeholder= "Email" required />
                       </div>
@@ -48,7 +48,7 @@
                         <input type="hidden" name="type" value="director">
                       </div>
                       <div class="checkbox-circle">
-                        <a href="<?= base_url() ?>home/forgotpassword/">Forgot Password? </a>
+                        <a href="<?= base_url() ?>home/forgotpassword/" class="pull-right"><small>Forgot Password?</small></a>
                       </div>
                       <button type="submit" class="btn submit-btn firstcolor" id="btn-login" ><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign In</button>
                       <div class="alert alert-danger margin-top hidden" id="error-alert">
@@ -75,7 +75,7 @@
                 <div class="mycontent-right center light-padded">
                     <font class="info dark-gray center"> Log In | <a href="<?= base_url() ?>home/register/actor"><font class="info firstcolor center"> Sign Up! </a></font></font>
                     <form role="form" id="actor_login-form" class="login-forms" method="post" >
-                    <p class="text-danger" id="login-error-actor"></p>
+                    <b><p class="text-danger" id="login-error-actor"></p></b>
                     <div class="form-group">
                       <input type="email" class="form-control login" id="email" name="email" placeholder= "Email" required />
                     </div>
@@ -84,7 +84,7 @@
                       <input type="hidden" name="type" value="actor">
                     </div>
                     <div class="checkbox-circle">
-                      <a href="<?= base_url() ?>home/forgotpassword/">Forgot Password? </a>
+                      <a href="<?= base_url() ?>home/forgotpassword/" class="pull-right"><small>Forgot Password?</small></a>
                     </div>
                     <button type="submit" class="btn submit-btn firstcolor" id="btn-login" ><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign In</button>
                     <div class="alert alert-danger margin-top hidden" id="error-alert">
