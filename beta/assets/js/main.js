@@ -1,10 +1,10 @@
 $(document).ready(function(){
 
-	var url = "/public_html/beta/ajax/",
+	var url = "/ajax/",
 		type = "POST",
 		data = {},
 		formdata = {},
-		base = "/public_html/beta/"
+		base = "/"
 
 	$(document).on("click", "button.select-btn", function(){
 		var show_div = $(this).attr("data-show"),
@@ -104,8 +104,22 @@ $(document).ready(function(){
 
     	return false;
     });
-
-
+    function casting_director_click(){
+    var image = document.getElementById('cd_icon');
+    if (image.src.match("_on")) {
+        image.src = "../img/cd_off.png";
+    } else {
+        image.src = "../img/cd_on.png";
+    }
+}
+function actor_click(){
+    var image = document.getElementById('actor_icon');
+    if (image.src.match("_on")) {
+        image.src = "../img/actor_off.png";
+    } else {
+        image.src = "../img/actor_on.png";
+    }
+}
 
 
 });
