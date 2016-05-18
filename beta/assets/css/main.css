@@ -305,7 +305,7 @@ td{
     position: relative;
 }
 .sortbuttons{
-	font-size: 8px;
+	font-size: 12px;
 }
 
 /* add actor form css */
@@ -355,13 +355,14 @@ div.img-div{
     width:100px;
     overflow:hidden;
     border-radius:50%;
+	text-align: center;
 }
 
 .img-div img{
     -webkit-transform:translate(-100%);
-    margin-left:100px;
     height:100%;
     width:auto;
+	margin-left: 100px;
 }
 .middle-top{
 	vertical-align:middle;
@@ -808,4 +809,35 @@ button:hover
 
 .a_logo {
 	text-decoration: none;
+}
+#cd_icon{
+	background:url("../img/cd_off.png");
+	background-size: 150px 150px;
+}
+#cd_icon:hover{
+	background:url("../img/cd_on.png");
+	background-size: 150px 150px;
+}
+#cd_icon:focus{
+	background:url("../img/cd_on.png");
+	background-size: 150px 150px;
+
+}
+#actor_icon{
+	background:url("../img/actor_off.png");
+	background-size: 150px 150px;
+}
+#actor_icon:hover{
+	background:url("../img/actor_on.png");
+	background-size: 150px 150px;
+}
+#actor_icon:focus{
+	background:url("../img/actor_on.png");
+	background-size: 150px 150px;
+
+}
+#actor_login-form{
+	margin-top: 5px;
+    padding: 25px;
+}
 }
