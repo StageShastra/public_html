@@ -10,7 +10,7 @@
           </div>
           <div class="container-fluid col-sm-10"> <!--container fluid starts -->
             <div class="center headname">
-              <a href="<?= base_url() ?>" class='a_logo'><img src="<?= IMG ?>/logo.png" class="logo img-fluid"/></a>  STAGE<b>SHASTRA</b>
+              <a href="<?= base_url() ?>" class='a_logo'><img src="<?= IMG ?>/logo.png" class="logo img-fluid"/></a><span class="title big">C A S T I K O</span>
             </div>
             <hr class="thick">
             </hr>
