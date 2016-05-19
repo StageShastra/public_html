@@ -1,6 +1,7 @@
 <?php
     include 'includes/head.php';
-
+	
+	$user = $actor;
     $actorProfile = $profile;
     $actorExperiences = $experience;
     $actorTrainings = $training;
@@ -55,7 +56,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="index.php">
-                            <img src="../img/logo.png" class="brands"/><span class="vertical-middle brandname">STAGE<b>SHASTRA</b></span><p><span id="tag-line" class="firstcolor info-small">Makes casting easier!</span>
+                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname">STAGE<b>SHASTRA</b></span><p><span id="tag-line" class="firstcolor info-small">Makes casting easier!</span>
                         </a>
                     </div> 
 
@@ -70,6 +71,59 @@
                     </div><!-- /.navbar-collapse -->
                 </div>
             </nav>
+			
+			<div id="feetToCMConverterModal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+
+				  <!-- Modal content-->
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <button type="button" class="close" data-dismiss="modal">&times;</button>
+					  <h4 class="modal-title firstcolor info"> Feet to CM converter </h4><span class="info-small gray"></span>
+					</div>
+					<div class="modal-body" style="background-color:#f2f2f2;">
+					  <div class="container" style="max-width:100%; ">
+						<form id="feetToCMConverter" action="#" method="post">
+							<div class="row">
+							  <div class="col-sm-6 form-group no-paddinglr">
+								  <span class="info-small">Feet</span>
+									<select class="form-control add" name="feet">
+										<?php
+											for($i = 0; $i < 11; $i++)
+												echo "<option value='{$i}'>{$i}</option>";
+										?>
+									</select>
+
+							  </div>
+							  <div class="col-sm-6 form-group no-paddinglr">
+								  <span class="info-small gray">Inches </span> 
+								  <select class="form-control add" name="inches">
+										<?php
+											for($i = 1; $i < 13; $i++)
+												echo "<option value='{$i}'>{$i}</option>";
+										?>
+									</select>
+							  </div>
+							</div>
+							<div class="row">
+							  <div class="col-sm-6 form-group no-paddinglr">
+								<button type="submit" class="btn submit-btn firstcolor" style="margin-top: 20px; margin-left:10px;" id="btn-search" >
+									<span class="glyphicon glyphicon-filter"></span> &nbsp; Convert</button>
+							  </div>
+							  <div class="col-sm-6 form-group no-paddinglr">
+								
+							  </div>
+							</div>
+							<div class="jumbotron" id="convertedBox" style="display: none;">
+								<p class="gray"> <span id="converted">120</span> cm</p>
+								<small> Enter this value of height in box. </small>
+							</div>
+						</form>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			</div>
 
            <!-- contact modal toggle -->
             <div class="container-fluid padded">
@@ -77,6 +131,17 @@
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <strong>Warning!</strong> Your profile looks empty, we suggest you to complete your profile. It helps you get more auditions.
                 </div>
+				
+				<?php
+					if($user['StashUsers_status'] == 0){
+				?>
+					<div class="alert alert-warning alert-dismissible" id="warningmsg" role="alert">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong>Warning!</strong> Your Email is not verified, Please check your mail for verification link.
+					</div>
+				<?php
+					}
+				?>
 
                 <div class="container col-sm-12 center" id="browse-table">
                     <div class="col-sm-8 mycontent-left marginTop">
@@ -88,7 +153,7 @@
                             </div>
                             <div class="img-div center " id="profile_image">
                                 <img src="<?= IMG .'/'.$actorProfile['StashActor_avatar'] ?>">
-                                <input type="hidden" id="image_count" value="<?= $actorProfile['StashActor_images'] ?>">
+                                <input type="hidden" id="image_count" value='<?= $actorProfile['StashActor_images'] ?>'>
                                 <input type="hidden" id="profile_pic" value="<?= $actorProfile['StashActor_avatar'] ?>">
                             </div>
                             <div class="col-sm-12 left marginTop " id="name_container">
@@ -119,7 +184,7 @@
                         </div>   
                         <div class="col-sm-10 center left marginTop">
                             <span class="actorlabel" >
-                                Phone No. : <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#phone_edit" data-hide-id="#actor_phone" aria-hidden="true"></span>
+                                Phone No. <small>(10 digit only)</small> : <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#phone_edit" data-hide-id="#actor_phone" aria-hidden="true"></span>
                                 <hr align="left" width="15px" class="tenth">
                             </span>
                             <span id="actor_phone" class="info dark-gray "><?= $actorProfile['StashActor_mobile'] ?></span>
@@ -137,7 +202,7 @@
                             </span>
                             <br>
                             <span class="actorlabel" >
-                                Whatsapp No. : <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#whatsapp_edit" data-hide-id="#actor_whatsapp" aria-hidden="true"></span>
+                                Whatsapp No. <small>(10 digit only)</small> : <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#whatsapp_edit" data-hide-id="#actor_whatsapp" aria-hidden="true"></span>
                                 <hr align="left" width="15px" class="tenth">
                             </span>
                             <span id="actor_whatsapp" class="info dark-gray "><?= $actorProfile['StashActor_whatsapp'] ?></span>
@@ -171,10 +236,17 @@
                       <div class="col-sm-6 marginTop">
                         <div class="col-sm-10 center left marginTop">
                             <span class="actorlabel" >
-                                Date of Birth. : <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#dob_edit" data-hide-id="#actor_dob" aria-hidden="true"></span>
+                                Date of Birth.: <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#dob_edit" data-hide-id="#actor_dob" aria-hidden="true"></span>
                                 <hr align="left" width="15px" class="tenth">
                             </span>
-                            <span id="actor_dob" class="info dark-gray"><?= date("m/d/Y", $actorProfile['StashActor_dob']) ?></span>
+                            <span id="actor_dob" class="info dark-gray"><?php
+								if($actorProfile['StashActor_dob'] == 0){
+									echo '';
+									$actorProfile['StashActor_dob'] = strtotime("-18 years");
+								}else{
+									echo date("m/d/Y", $actorProfile['StashActor_dob']);
+								}
+							?></span>
                             <span id="dob_edit" class="left  hidden ">
                                 <input type="date" name="dob" class="editwhite" value="<?= date("Y-m-d", $actorProfile['StashActor_dob']) ?>" id="dob"/>
                                 <font class="sortbuttons">
@@ -217,7 +289,9 @@
                         </div>
                         <div class="col-sm-10 center left ">
                             <span class="actorlabel" >
-                                Height. : <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#height_edit" data-hide-id="#actor_height" aria-hidden="true"></span>
+                                Height. : 
+								<span class="glyphicon glyphicon-refresh edit-button" title="Convert Feets to CM" data-toggle="modal" data-target="#feetToCMConverterModal"></span>
+								<span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#height_edit" data-hide-id="#actor_height" aria-hidden="true"></span>
                                 <hr align="left" width="15px" class="tenth">
                             </span>
                             <span id="actor_height" class="info dark-gray "><?= $actorProfile['StashActor_height'] ?> cms.</span>

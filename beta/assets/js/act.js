@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
-	var url = "/public_html/beta/actor/ajax",
-		base = "/public_html/beta/",
+	var url = "/actor/ajax",
+		base = "/",
 		type = "POST",
 		data = {};
 
@@ -168,6 +168,18 @@ $(document).ready(function(){
 			}
 		});
 
+		return false;
+	});
+	
+	
+	$(document).on("submit", "form#feetToCMConverter", function(){
+		var that = this;
+		var feet = Number($("select[name='feet']", $(this)).val());
+		var inches = Number($("select[name='inches']", $(this)).val());
+		inches = inches + (feet * 12);
+		var cm = Math.ceil(inches / 0.39370);
+		$("#convertedBox").show();
+		$("span#converted").html(cm);
 		return false;
 	});
 

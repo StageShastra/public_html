@@ -2,10 +2,10 @@ $(document).ready(function(){
 
 	var count = 0,
 		select = [],
-		url = "/public_html/beta/ajax/",
+		url = "/ajax/",
 		type = "POST",
 		data = {},
-		base = "/public_html/beta/",
+		base = "/",
 		actors = [],
 		actorEmails = [],
 		actorMobile = [],
@@ -42,9 +42,8 @@ $(document).ready(function(){
 		event.stopPropagation();
 		return false;
 	});
-
-	$(document).on("click", 'input[name="checkboxG1"]', function(){
-		var checked = $(this).is(":checked");
+	
+	function setDefaultCategory(checked){
 		var list = ['Name','Age','Sex','Email','Mobile'];
 		if(checked){
 			select = [];
@@ -55,6 +54,12 @@ $(document).ready(function(){
 			select = [];
 			count = 0;
 		}
+	}
+
+	$(document).on("click", 'input[name="checkboxG1"]', function(){
+		var checked = $(this).is(":checked");
+		var list = ['Name','Age','Sex','Email','Mobile'];
+		setDefaultCategory(checked);
 	});
 
 	$(document).on("click", ".removeActor", function(){
@@ -92,8 +97,35 @@ $(document).ready(function(){
   					+ '<br><button type="submit" class="btn submit-btn firstcolor"  data-toggle="modal" data-target="#inviteActors" id="btn-login" ><span class="glyphicon glyphicon-plus"></span> &nbsp;Invite  Actor</button></div>';
   			$div.html(content);
 	}
+	
+	function appendPagination(current, total) {
+		var li_1 = "";
+		if(current == 1)
+			li_1 = "<li class='disabled'><span aria-hidden='true'>&laquo;</span></li>"
+		else
+			li_1 = "<li><a href='#' aria-label='Previous' class='"+cls+"' data-page-no='"+(current-1)+"'><span aria-hidden='true'>&laquo;</span></a></li>";
+		var cls = (current == 1) ? "" : "changePage";
+		var content = "	<nav>"
+					+ "		<ul class='pagination pagination-lg'>"
+					+ li_1;
+					for(var p = 1; p <= total; p++){
+						if(current == p)
+							content += "<li class='active'><a href='#'>" + p + "  <span class='sr-only'>(current)</span></a></li>";
+						else
+							content += "<li><a href='#' class='changePage' data-page-no='"+p+"'>" + p + "</a></li>";
+					}
 
-	function populateActorList(actorsInfo){
+					if(current == total)
+						li_1 = "<li class='disabled'><span aria-hidden='true'>&raquo;</span></li>"
+					else
+						li_1 = "<li><a href='#' aria-label='Previous' class='"+cls+"' data-page-no='"+(current+1)+"'><span aria-hidden='true'>&raquo;</span></a></li>";
+					content += li_1 + "</ul>"
+							+ "</nav>";
+		//console.log(current, total);
+		$("#main-container").html(content);
+	}
+
+	function populateActorList(actorsInfo, currentPage){
 		actors = actorsInfo;
 		var $table = $("#browse-table");
 		var content = '<table class="table table-curved display" id="actor_table">'
@@ -107,10 +139,18 @@ $(document).ready(function(){
     	content += "</tr></thead>";
     	content += "<tbody>";
     	var url = '', tag = '';
-
+		
+		var totalActors = Number(actorsInfo.length);
+    	var maxActors = 20;
+    	var totalPages = Math.ceil(totalActors/maxActors);
+    	var init = (currentPage * maxActors) - maxActors;
+    	var actorCovered = (currentPage - 1) * maxActors;
+    	var actorLeft = totalActors - actorCovered;
+    	var final = (actorLeft >= maxActors) ? maxActors : actorLeft;
+		//console.log(init, final);
     	/*Actor Profile displaying goes here*/
-    	for(var i = 0; i < actorsInfo.length; i++){
-
+    	for(var i = init; i < final; i++){
+			//console.log(actorsInfo[i]);
     		url = base + 'director/actor/' + actorsInfo[i].StashActor_actor_id_ref + '/' + actorsInfo[i].StashActor_name.replace(" ", "-");
 
     		content += '<tr id="datarow'+i+'">'
@@ -119,7 +159,7 @@ $(document).ready(function(){
               		+ '</td>' 
               		+ '<td style="vertical-align:middle-top;">'
                 	+ 	'<div class="img-div center">'
-					+		'<img src="'+base + '/assets/img/' +actorsInfo[i].StashActor_avatar+'" class="showDetails" data-id="'+i+'" />'
+					+		'<img src="'+base + 'assets/img/' +actorsInfo[i].StashActor_avatar+'" class="showDetails" data-id="'+i+'" />'
 					+	'</div>'
               		+ '</td>';
 
@@ -145,6 +185,7 @@ $(document).ready(function(){
 
 
     	content += "</tbody></table>";
+		appendPagination(currentPage, totalPages);
 
 
     	$table.html(content);
@@ -155,6 +196,12 @@ $(document).ready(function(){
     		$(this).hide(); 
 		});
 	}
+	
+	$(document).on("click", ".changePage", function(){
+		var page = Number($(this).attr("data-page-no"));
+		populateActorList(actors, page);
+		return false;
+	});
 
 	function getActorProfile(){
 		var selectedCat = JSON.parse(Cookies.get('categories'));
@@ -169,7 +216,7 @@ $(document).ready(function(){
 				$("#prelogin").addClass("hidden");
      			$("#home").removeClass("hidden");
      			if(response.status){
-     				populateActorList(response.data);
+     				populateActorList(response.data, 1);
      			}else{
      				showAddActor();
      			}
@@ -382,6 +429,7 @@ $(document).ready(function(){
 		select = JSON.parse(Cookies.get("categories"));
 		getActorProfile();
 	}else{
+		//setDefaultCategory(true);
 		populateCategories();
 	}
 
@@ -423,7 +471,7 @@ $(document).ready(function(){
 			success: function(response){
 				console.log(response);
 				if(response.status){
-					populateActorList(response.data);
+					populateActorList(response.data, 1);
 				}else{
 					noActorFound();
 				}
@@ -518,6 +566,7 @@ $(document).ready(function(){
 	});*/
 
 	$(document).on("submit", "form#emailInvitationForm", function(){
+		var that = this;
 		var emails = $("textarea[name='emails']", $(this)).val(),
 			msg = $("textarea[name='email-msg']", $(this)).val(),
 			project_name = $("input[name='project_name']", $(this)).val(),
@@ -535,16 +584,23 @@ $(document).ready(function(){
 			type: type,
 			data: data,
 			success: function(response){
-				if(response.status){
-					$("#invite-error").removeClass("text-danger").addClass("text-success");
+				/* if(response.status){
+					//$("#invite-error").removeClass("text-danger").addClass("text-success");
+					$("input, textarea", $(that)).val('');
 				}
-				$("#invite-error").html(response.message).show().delay(5000).hide();
+				//$("#invite-error").html(response.message).show().delay(5000); */
+				if(response.status)
+					$("input, textarea", $(that)).val('');
+				$("#inviteSuccessMsg").html(response.message);
+				$("#inviteActors").hide();
+				$("#inviteSuccess").modal("show");
 			}
 		});
 		return false;
 	});
 
 	$(document).on("submit", "form#smsInvitationForm", function(){
+		var that = this;
 		var mobiles = $("textarea[name='mobiles']", $(this)).val(),
 			msg = $("textarea[name='sms']", $(this)).val(),
 			project_name = $("input[name='project_name']", $(this)).val(),
@@ -562,12 +618,24 @@ $(document).ready(function(){
 			type: type,
 			data: data,
 			success: function(response){
-				if(response.status){
+				/* if(response.status){
 					$("#invite-error").removeClass("text-danger").addClass("text-success");
+					$("input, textarea", $(that)).val('');
 				}
-				$("#invite-error").html(response.message).show().delay(5000).hide();
+				$("#invite-error").html(response.message).show().delay(5000); */
+				if(response.status)
+					$("input, textarea", $(that)).val('');
+				$("#inviteSuccessMsg").html(response.message);
+				$("#inviteActors").hide();
+				$("#inviteSuccess").modal("show");
 			}
 		});
+		return false;
+	});
+	
+	$(document).on("click", "a.changeCategory", function(){
+		Cookies.remove("isCat");
+		location.reload();
 		return false;
 	});
 

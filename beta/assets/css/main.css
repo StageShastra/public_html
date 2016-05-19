@@ -305,7 +305,7 @@ td{
     position: relative;
 }
 .sortbuttons{
-	font-size: 8px;
+	font-size: 12px;
 }
 
 /* add actor form css */
@@ -355,13 +355,14 @@ div.img-div{
     width:100px;
     overflow:hidden;
     border-radius:50%;
+	text-align: center;
 }
 
 .img-div img{
     -webkit-transform:translate(-100%);
-    margin-left:100px;
     height:100%;
     width:auto;
+	margin-left: 100px;
 }
 .middle-top{
 	vertical-align:middle;

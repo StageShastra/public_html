@@ -115,13 +115,13 @@
 
 		public function getSkillIDs($skills = ''){
 			$skills = explode(",", $skills);
-			$this->db->where_in("StashActorSkills_title", $skills);
-			$this->db->select("StashActorSkills_id");
+			$this->db->where_in("StashSkills_title", $skills);
+			$this->db->select("StashSkills_id");
 			$query = $this->db->get("stash-skills");
 			$fetched = $query->result('array');
 			$skillIds = [];
 			foreach ($fetched as $key => $value) 
-				$skillIds[] = $value['StashActorSkills_id'];
+				$skillIds[] = $value['StashSkills_id'];
 			return $skillIds;
 		}
 
@@ -145,7 +145,11 @@
 					);
 			$this->db->where($data);
 			$this->db->like("StashActor_gender", $filter['sex'], 'both');
-			$this->db->where_in('StashActor_actor_id_ref', $filter['skills']);
+			$this->db->where_in('StashActor_actor_id_ref', $filter['in']);
+			$names = explode(',', $filter['names']);
+			foreach($names as $name){
+				$this->db->like("StashActor_name", $name, "both");
+			}
 			//return $query = $this->db->get_compiled_select("stash-actor");
 			$query = $this->db->get("stash-actor");
 			$result = [];
@@ -174,7 +178,7 @@
 			return $this->db->insert_id();
 		}
 
-		public function sendInvitaionMail($data = []){
+		public function insertInvitationMail($data = []){
 			$data = array(
 						'StashEmailInvite_id' => null,
 						'StashEmailInvite_director_id_ref' => $this->session->userdata("StaSh_User_id"),
@@ -191,6 +195,77 @@
 			$this->db->where("StashProject_date", strtotime(trim($data)));
 			$query = $this->db->get("stash-project");
 			return $query->first_row('array');
+		}
+		
+		public function insertInvitationSMS($data = []){
+			$data = array(
+						'StashSMSInvite_id' => null,
+						'StashSMSInvite_director_id_ref' => $this->session->userdata("StaSh_User_id"),
+						'StashSMSInvite_mobiles' => $data['mobiles'],
+						'StashSMSInvite_message' => $data['msg'],
+						'StashSMSInvite_project_id_ref' => $data['project_id'],
+						'StashSMSInvite_time' => time()
+					);
+			return $this->db->insert("stash-sms-invitation", $data);
+		}
+		
+		public function filterByProject($project = ''){
+			$project = explode(",", $project);
+			foreach($project as $proj){
+				$this->db->like("StashProject_name", trim($proj), "both");
+			}
+			$this->db->where("StashProject_director_id_ref", $this->session->userdata("StaSh_User_id"));
+			$query = $this->db->get("stash-project");
+			$result = [];
+			$fetch = $query->result("array");
+			foreach($fetch as $f){
+				$result[] = $f['StashProject_id'];
+			}
+			
+			return $this->getActorWithPorjectTag($result);
+		}
+		
+		public function getActorWithPorjectTag($projects = []){
+			$this->db->where_in("StashActorProject_project_id_ref", $projects);
+			$fetch = $this->db->get("stast-actor-project")->result("array");
+			$result = [];
+			foreach($fetch as $f){
+				$result[] = $f['StashActorProject_actor_id_ref'];
+			}
+			return $result;
+		}
+		
+		public function getAdminConfirmation(){
+			$this->db->where("StashDirectorAllowed_director_id_ref", $this->session->userdata("StaSh_User_id"));
+			$this->db->where("StashDirectorAllowed_status", 1);
+			$query = $this->db->get("stash-direction-allowed");
+			return ($query->num_rows() > 0) ? true : false;
+		}
+		
+		public function getInvitationEmailCount($ref = 0){
+			$this->db->where("StashEmailInvite_director_id_ref", $ref);
+			$query = $this->db->get("stash-email-invitation");
+			$result = [];
+			$fetch = $query->result("array");
+			$count = 0;
+			foreach($fetch as $f){
+				$email = count(explode(",", $f['StashEmailInvite_emails']));
+				$count += $email;
+			}
+			return $count;
+		}
+		
+		public function getInvitationSMSCount($ref = 0){
+			$this->db->where("StashSMSInvite_director_id_ref", $ref);
+			$query = $this->db->get("stash-sms-invitation");
+			$result = [];
+			$fetch = $query->result("array");
+			$count = 0;
+			foreach($fetch as $f){
+				$mob = count(explode(",", $f['StashSMSInvite_mobiles']));
+				$count += $mob;
+			}
+			return $count;
 		}
 	}
 

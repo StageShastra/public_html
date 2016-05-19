@@ -1,41 +1,6 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="<?= JS ?>/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
-        <script type="text/javascript">
-          
-        $(document).ready(function(){
-
-          $(document).on("submit", "form#invitationForm", function(){
-            var that = this;
-            var emails = $("textarea[name='emails']").val();
-            var mobiles = $("textarea[name='mobiles']").val();
-            var message = $("textarea[name='message']").val();
-
-            var data = {emails: emails, mobiles: mobiles, message: message};
-
-            // TODO: Generate a preview of email before sending.
-            $.ajax({
-              type: "POST",
-              data: data,
-              url: "resources/sendInvite.php",
-              success: function(res){
-               //console.log(res);
-               $("#inviteActors").hide();
-               $("#success_send").show(); 
-               $("#success_send").fadeTo(2000, 500).slideUp(500, function(){
-                  $("#success_send").alert('close');
-                          });
-               
-             }
-          });
-
-            console.log(data);
-            return false;
-          });
-
-        });
-
-        </script>
 
         <script src="<?= JS ?>/vendor/bootstrap.min.js"></script>
         <script src="<?= JS ?>/vendor/js.cookies.js"></script>

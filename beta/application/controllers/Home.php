@@ -15,7 +15,7 @@ class Home extends CI_Controller {
 	}
 
 	public function register($type = 'director'){
-
+		//print_r($this->session->userdata("Stash_New_User"));
 		$pageInfo = array("error" => true, "error_msg" => null);
 		if($this->session->userdata("StaSh_User_Logged_In"))
 			if($this->session->userdata("StaSh_User_type") == 'actor')
@@ -33,17 +33,22 @@ class Home extends CI_Controller {
 		                array(
 		                    'field' =>'email',
 		                    'label' =>'Email',
-		                    'rules' => 'required|is_unique[Stash-Users.StashUsers_email]|valid_email'
+		                    'rules' => 'required|is_unique[stash-users.StashUsers_email]|valid_email'
 		                ),
 		                array(
 		                    'field' =>'mobile',
 		                    'label' =>'Mobile',
-		                    'rules' => 'required|is_unique[Stash-Users.StashUsers_mobile]'
+		                    'rules' => 'required|is_unique[stash-users.StashUsers_mobile]'
 		                ),
 		                array(
 		                    'field' =>'name',
 		                    'label' =>'Name',
 		                    'rules' => 'required'
+		                ),
+						array(
+		                    'field' =>'cfn_password',
+		                    'label' =>'Confirm Password',
+		                    'rules' => 'required|min_length[5]|matches[password]'
 		                )
 					);
 
@@ -60,9 +65,11 @@ class Home extends CI_Controller {
 	    				if(count($this->session->userdata("Stash_New_User"))){
 	    					$this->Auth->insertActorInProject($response);
 	    					$this->Auth->insertActorInDirectorList($response);
+							$this->session->set_userdata(array("Stash_New_User" => array()));
 	    				}
 	    			}else{
 	    				$this->Auth->setupDirectorProfile($response);
+						$this->Auth->setupDirectorConfirmation($response);
 	    			}
 	    			
 	    			// Sending Confirmation Mail
@@ -91,18 +98,18 @@ class Home extends CI_Controller {
 	}
 
 	public function join($link = ''){
-		$encryptedText = str_replace(" ", "+", $value);
+		$encryptedText = str_replace(" ", "+", urldecode($link));
 
 		$this->load->library('encrypt');
-		$info = $this->encrypt->decode($encryptedText);
+		$info = $this->encrypt->decode(trim($encryptedText));
 		$info = explode("_", $info);
 		$data = array(	
 						'project_ref' => $info[1],
 						'director_ref' => $info[0],
 						'time' => $info[2]
 					);
-
 		$this->session->set_userdata(array("Stash_New_User" => $data));
+		//print_r($this->session->userdata());
 		redirect(base_url() . "home/register/actor/");
 	}
 
