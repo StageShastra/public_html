@@ -10,24 +10,24 @@
         <div class="container">
           <div class="container-fluid col-sm-10 center"> <!--container fluid starts -->
             <div class="center headname">
-              <a href="<?= base_url() ?>" class='a_logo'><img src="<?= IMG ?>/logo.png" class="logo img-fluid"/></a>  STAGE<b>SHASTRA</b>
+              <a href="<?= base_url() ?>" class='a_logo'><img src="<?= IMG ?>/logo.png" class="logo img-fluid"/></a><span class="title big">C A S T I K O</span>
             </div>
             <hr class="thick">
             </hr>
             <div id="selector">
               <div class="row">
                 <div class="col-sm-6 mycontent-left" style="text-align:center; ">
-                  <button  class="btn submit-btn firstcolor select-btn " data-show="#castingdirector" data-hide="#actor" >CD</button><br><font class="info gray marginTop">I am a Casting Director</font>
+                  <button  class="btn submit-btn firstcolor select-btn" id="cd_icon" data-show="#castingdirector" data-hide="#actor" ></button><br><font class="info gray marginTop">I am a Casting Director</font>
                 </div>
                 <div class="col-sm-6" style="text-align:center;">
-                  <button  class="btn submit-btn firstcolor select-btn " data-show="#actor" data-hide="#castingdirector" >A</button><br><font class="info gray marginTop">I am an Actor</font>
+                  <button  class="btn submit-btn firstcolor select-btn" id="actor_icon" data-show="#actor" data-hide="#castingdirector" ></button><br><font class="info gray marginTop">I am an Actor</font>
                 </div>
               </div>
             </div>
             <div id="castingdirector" class="hidden">
               <div class="row">
                 <div class="col-sm-6 light-padded mycontent-left" style="text-align:left;">
-                  <font class="info gray left padded"><br>Casting Directors use Stage Shastra to:<br>
+                  <font class="info gray left padded"><br>Casting Directors use Castiko to:<br>
                     <ul>
                       <li>Organize their data</li>
                       <li>Seamlessly contact hundreds of actors</li>
@@ -63,9 +63,9 @@
             </div>
             <div id="actor" class="hidden">
                <div class="col-sm-6 light-padded mycontent-left" style="text-align:left;">
-                <font class="info gray left padded"><br>Actors use Stage Shastra to:<br>
+                <font class="info gray left padded"><br>Actors use Castiko to:<br>
                   <ul>
-                    <li> Connect directly with casting directors</li>
+                    <li>Connect directly with casting directors</li>
                     <li>Create detailed profiles</li>
                     <li>Get audition notifications</li>
                   </ul>

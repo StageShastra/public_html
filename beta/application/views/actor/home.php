@@ -56,7 +56,9 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="index.php">
-                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname">STAGE<b>SHASTRA</b></span><p><span id="tag-line" class="firstcolor info-small">Makes casting easier!</span>
+
+                            <img src="<? IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname title">C A S T I K O</span><p><span id="tag-line" class="firstcolor info-small">Makes casting easier!</span>
+
                         </a>
                     </div> 
 

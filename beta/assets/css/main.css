@@ -810,3 +810,34 @@ button:hover
 .a_logo {
 	text-decoration: none;
 }
+#cd_icon{
+	background:url("../img/cd_off.png");
+	background-size: 150px 150px;
+}
+#cd_icon:hover{
+	background:url("../img/cd_on.png");
+	background-size: 150px 150px;
+}
+#cd_icon:focus{
+	background:url("../img/cd_on.png");
+	background-size: 150px 150px;
+
+}
+#actor_icon{
+	background:url("../img/actor_off.png");
+	background-size: 150px 150px;
+}
+#actor_icon:hover{
+	background:url("../img/actor_on.png");
+	background-size: 150px 150px;
+}
+#actor_icon:focus{
+	background:url("../img/actor_on.png");
+	background-size: 150px 150px;
+
+}
+#actor_login-form{
+	margin-top: 5px;
+    padding: 25px;
+}
+}

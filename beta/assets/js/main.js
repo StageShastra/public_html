@@ -104,8 +104,22 @@ $(document).ready(function(){
 
     	return false;
     });
-
-
+    function casting_director_click(){
+    var image = document.getElementById('cd_icon');
+    if (image.src.match("_on")) {
+        image.src = "../img/cd_off.png";
+    } else {
+        image.src = "../img/cd_on.png";
+    }
+}
+function actor_click(){
+    var image = document.getElementById('actor_icon');
+    if (image.src.match("_on")) {
+        image.src = "../img/actor_off.png";
+    } else {
+        image.src = "../img/actor_on.png";
+    }
+}
 
 
 });

@@ -12,7 +12,7 @@
       
         <footer class="footer">
           <foodiv class="container center">
-            <p class="dark-gray info-small center ">© 2016 StageShastra | connect@stageshastra.com</p>
+            <p class="dark-gray info-small center ">© 2016 Castiko | connect@castiko.com</p>
         </footer>
     </body>
 </html>

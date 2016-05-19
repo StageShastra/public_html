@@ -49,7 +49,7 @@
           </div>
           <div class="container-fluid col-sm-10"> <!--container fluid starts -->
             <div class="center headname padded">
-              <img src="<?= IMG ?>/logo.png" class="logo img-fluid"/> STAGE<b>SHASTRA</b>
+              <img src="<?= IMG ?>/logo.png" class="logo img-fluid"/><span class="title">C A S T I K O</span>
             </div>
             <div class="row center light-padded">
               <div class="col-sm-10 center bordered" id="categories">
@@ -78,7 +78,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="<?= base_url() ?>">
-                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname">STAGE<b>SHASTRA</b></span><p><span id="tag-line" class="firstcolor info-small">Makes casting easier!</span>
+                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname title">C A S T I K O</span><p><span id="tag-line" class="firstcolor info-small">Makes casting easier!</span>
                         </a>
                     </div> 
 

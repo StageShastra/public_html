@@ -9,9 +9,9 @@
           <div class="col-sm-1">
           </div>
           <div class="container-fluid col-sm-10"> <!--container fluid starts -->
-            <div class="center headname">
-              <a href="<?= base_url() ?>" class='a_logo'><img src="<?= IMG ?>/logo.png" class="logo img-fluid"/></a> STAGE<b>SHASTRA</b>
-            </div>
+             <div class="center headname">
+              <a href="<?= base_url() ?>" class='a_logo'><img src="<?= IMG ?>/logo.png" class="logo img-fluid"/></a><span class="title big">C A S T I K O</span>
+             </div>
             <div class="row center">
               <div class="col-sm-12 light-padded">
                 <div class="quarter" id="form-div">
@@ -55,7 +55,9 @@
 
                  <div class="container-fluid" id="success">
                   <div class="col-sm-12">
-					<h1 style="margin-top:15%;" class="firstcolor"> Thank You!</b></h1><br><span class="info">You will hear from us within 24 hours.</span></br>
+
+                    <img src="<?= IMG ?>/thanks.png"  style="float:left; height:50%;"/><h1 style="margin-top:15%;" class="firstcolor"> Thank You!</b></h1><br><span class="info">You will listen from us within 24 hours.</span></br>
+
                   </div>
                 </div>      
               </div>
