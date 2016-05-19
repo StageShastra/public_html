@@ -18,8 +18,8 @@ body {
 	text-align: left;
 }
 .logo {
-	height: 22.5%;
-	width: 22.5%; 
+	height: 16.5%;
+	width: 16.5%; 
 }
 .headname {
 	font-size: 65px;
@@ -840,4 +840,7 @@ button:hover
 	margin-top: 5px;
     padding: 25px;
 }
+.title{
+font-family:"Raleway", sans-serif;	
 }
+
