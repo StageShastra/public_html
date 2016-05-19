@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Stage Shastra | Makes Casting easier.</title>
+         <title>Castiko | Makes Casting easier.</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -21,6 +21,7 @@
         <link href="<?= CSS ?>/animate.css" type="text/css" rel="stylesheet" />
         <script src="<?= JS ?>/dropzone.js"></script>
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+        <link href='https://fonts.googleapis.com/css?family=Raleway:400,200,300,100' rel='stylesheet' type='text/css'>
         <script src="<?= JS ?>/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <link rel="stylesheet" type="text/css" href="<?= CSS ?>/tagsinput.css" />
     </head>
