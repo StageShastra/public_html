@@ -79,9 +79,10 @@
 				$projectID = $this->ModelDirector->insertNewPorject($data['project_name'], $data['project_date']);
 			}
 			$data['project_id'] = $projectID;
-			if($this->SMS->sendInvitaionSMS($data['msg'], $data['emails'], $projectID)){
+			if($this->SMS->sendInvitaionSMS($data['msg'], $data['mobiles'], $projectID)){
 				$this->ModelDirector->insertInvitationSMS($data);
-				$this->response(true, "Invitation Email sent");
+				$count = count(explode(",", $data['mobiles']));
+				$this->response(true, "{$count} Invitation SMS sent");
 			}else{
 				$this->response(false, "Email Sending Failed");
 			}
@@ -99,7 +100,8 @@
 			$data['project_id'] = $projectID;
 			if($this->Email->sendInvitaionMail($data['msg'], $data['emails'], $projectID)){
 				$this->ModelDirector->insertInvitationMail($data);
-				$this->response(true, "Invitation Email sent");
+				$count = count(explode(",", $data['emails']));
+				$this->response(true, "{$count} Invitation Emails sent");
 			}else{
 				$this->response(false, "Email Sending Failed");
 			}
@@ -132,16 +134,30 @@
 			if($data['skills'] != ''){
 				$skills = trim($data['skills']);
 			}
+			
+			if($data['projects'] != ''){
+				$projects = trim($data['projects']);
+			}
+			
+			if($data['actor_names'] != ''){
+				$actor_names = trim($data['actor_names']);
+			}
+			
 			$actorsInDirectorList = $this->ModelDirector->getActorsIdWithDirectors($this->session->userdata("StaSh_User_id"));
 			$skillIDs = $this->ModelDirector->getSkillIDs($skills);
 			$filteredBySKills = $this->ModelDirector->filteredBySKill($actorsInDirectorList, $skillIDs);
+			$filteredByProjects = $this->ModelDirector->filterByProject($projects);
+			$diff = array_merge($filteredBySKills, $filteredByProjects);
+			if(count($diff) == 0)
+				$diff = array(0);
 			$searchData = array(
 							'minHeight' => $minHeight,
 							'minAge' => $minAge,
 							'maxHeight' => $maxHeight,
 							'maxAge' => $maxAge,
 							'sex' => $sex,
-							'skills' => $filteredBySKills
+							'in' => $diff,
+							'names' => $data['actor_names']
 						);
 			$finalFilteredActors = $this->ModelDirector->finalFilter($searchData);
 			//print_r($finalFilteredActors);
@@ -243,9 +259,22 @@
 				if(count($profile)){
 					$this->Auth->startLoginSession($profile);
 					$this->Auth->updateUserLogin($profile['StashUsers_id']);
+					if($data['type'] == 'director'){
+						$this->Auth->setDefaultCookies();
+					}else{
+						if(count($this->session->userdata("Stash_New_User"))){
+							$info = $this->session->userdata("Stash_New_User");
+	    					if($this->Auth->checkActorProject($project['StashUsers_id'], $info['project_ref']))
+								$this->Auth->insertActorInProject($profile['StashUsers_id']);
+	    					
+							if($this->Auth->checkActorInDirector($project['StashUsers_id'], $info['director_ref']))
+								$this->Auth->insertActorInDirectorList($profile['StashUsers_id']);
+							$this->session->set_userdata(array("Stash_New_User" => array()));
+	    				}
+					}
 					$this->response(true, "Login Success. Welcome {$data['email']}");
 				}else{
-					$this->response(false, "Email/Password doesn't matched.");
+					$this->response(false, "Email and Password don't match.");
 				}
 			}else{
 				$this->response(false, "This Email/Username doesn't Exist. Please Register first.");

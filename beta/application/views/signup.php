@@ -20,7 +20,7 @@
 
                   <?php echo validation_errors("<p class='text-danger'>"); ?>
 
-                  <?php echo ($error) ? "<p class='text-success'>{$error_msg}</p>" : "<p class='text-danger'>{$error_msg}</p>" ?>
+                  <?php echo ($error) ? "<p class='text-success'><b>{$error_msg}</></p>" : "<p class='text-danger'><b>{$error_msg}</b></p>" ?>
 
 
                       <form role="form" action="<?= $_SERVER['REQUEST_URI'] ?>" method="POST">
@@ -36,17 +36,28 @@
                       <div class="form-group">
                         <input type="password" class="form-control login" id="password" name="password" placeholder= "Password *" required >
                       </div>
+					  <div class="form-group">
+                        <input type="password" class="form-control login" id="password" name="cfn_password" placeholder= "Re Type Password *" required >
+                      </div>
                       <!-- <div class='form-group'>
                         I am <input type="radio" name="type" value="director" checked> Director
                               <input type="radio" name="type" value="actor"> Actor
                       </div> -->
                       <button type="submit" class="btn submit-btn firstcolor" name="submit" id="sign-upbtn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign Up</button>
                     </form>
-                </div>
+					
+					<?php echo validation_errors("<p class='text-danger'>"); ?>
+
+					<?php echo ($error) ? "<p class='text-success'><b>{$error_msg}</></p>" : "<p class='text-danger'><b>{$error_msg}</b></p>" ?>
+                
+					<script> registerSuccess = <?= ($error) ? true : false; ?> </script>
+				</div>
 
                  <div class="container-fluid" id="success">
                   <div class="col-sm-12">
+
                     <img src="<?= IMG ?>/thanks.png"  style="float:left; height:50%;"/><h1 style="margin-top:15%;" class="firstcolor"> Thank You!</b></h1><br><span class="info">You will listen from us within 24 hours.</span></br>
+
                   </div>
                 </div>      
               </div>

@@ -8,6 +8,8 @@
 				redirect(base_url());
 			$pageInfo = [];
 			$this->load->model("ModelActor");
+			$this->load->model("Auth");
+			$pageInfo['actor'] = $this->Auth->getUserData('StashUsers_status', 1);
 			$pageInfo['profile'] = $this->ModelActor->getActorProfileById($this->session->userdata("StaSh_User_id"));
 			$pageInfo['experience'] = $this->ModelActor->getActorExperienceById($this->session->userdata("StaSh_User_id"));
 			$pageInfo['training'] = $this->ModelActor->getActorTrainingById($this->session->userdata("StaSh_User_id"));
@@ -82,10 +84,35 @@
 						$this->editTraining($data);
 						break;
 
+					case "RemoveImage":
+						$this->removeImage($data);
+						break;
+
 					default:
 						$this->response(false, "Invalid Request");
 						break;
 				}
+			}
+		}
+
+		public function removeImage($data = []){
+			$this->load->model("ModelActor");
+			$images = $this->ModelActor->getActorImages($this->session->userdata("StaSh_User_id"));
+			$images = json_decode($images, true);
+			$filter = array();
+			if(in_array($data['image'], $images)){
+				foreach ($images as $key => $img) {
+					if($data['image'] != $img)
+						$filter[] = $img;
+				}
+				$images = $filter;
+				if($this->ModelActor->updateActorImages($images)){
+					$this->response(true, "Images Removed");
+				}else{
+					$this->response(false, "Failed to remove Image");
+				}
+			}else{
+				$this->response(false, "Invalid Images Selected");
 			}
 		}
 

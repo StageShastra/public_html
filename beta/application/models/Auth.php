@@ -174,6 +174,52 @@
 					);
 			$this->db->insert("stash-director-actor-link", $data);
 		}
+		
+		public function setDefaultCookies(){
+			//$this->load->helper('cookie');
+			setcookie("isCat", true, time() + 3600, "/");
+			$cate = json_encode(array('Name','Age','Sex','Email','Mobile'));
+			setcookie("categories", $cate, time() + 3600, "/");
+			//set_cookie("categories", $cate);
+		}
+		
+		public function checkActorProject($ref = 0, $project = 0){
+			$this->db->where("StashActorProject_actor_id_ref", $ref);
+			$this->db->where("StashActorProject_project_id_ref", $project);
+			$query = $this->db->get("stast-actor-project");
+			$result = $query->result("array");
+			if(count($result))
+				return true;
+			else
+				return false;
+		}
+		
+		public function checkActorInDirector($ref = 0, $director = 0){
+			$this->db->where("StashDirectorActorLink_actor_id_ref", $ref);
+			$this->db->where("StashDirectorActorLink_director_id_ref", $director);
+			$query = $this->db->get("stash-director-actor-link");
+			$result = $query->result("array");
+			if(count($result))
+				return true;
+			else
+				return false;
+		}
+		
+		public function confirmEMail($email = ''){
+			$this->db->where("StashUsers_email", $email);
+			return $this->db->update("stash-users", array("StashUsers_status" => 1));
+		}
+		
+		public function setupDirectorConfirmation($ref = 0){
+			$data = array(
+						"StashDirectorAllowed_id" => null,
+						"StashDirectorAllowed_director_id_ref" => $ref,
+						"StashDirectorAllowed_admin_id_ref" => 0,
+						"StashDirectorAllowed_status" => 0,
+						"StashDirectorAllowed_time" => time()
+					);
+			return $this->db->insert("stash-direction-allowed", $data);
+		}
 
 	}
 

@@ -256,6 +256,14 @@
 			return $this->db->update("stash-actor", array("StashActor_images" => json_encode($images)));
 		}
 
+		public function getActorImages($ref = 0){
+			$this->db->select("StashActor_images");
+			$this->db->where("StashActor_actor_id_ref", $this->session->userdata("StaSh_User_id"));
+			$query = $this->db->get("stash-actor");
+			$fetch = $query->first_row('array');
+			return $fetch['StashActor_images'];
+		}
+
 	}
 
 ?>

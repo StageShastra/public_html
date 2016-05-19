@@ -1,9 +1,10 @@
-Options -MultiViews
-RewriteEngine On 
-RewriteBase /public_html/beta/
-
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-l
-
-RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+<IfModule mod_rewrite.c>
+	DirectoryIndex index.php
+	RewriteEngine On
+	RewriteBase /public_html/beta/
+	RewriteCond $1 !^(index\.php|images|css|js|robots\.txt|favicon\.ico)
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-l
+	RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+</IfModule>
