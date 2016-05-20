@@ -30,19 +30,43 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <!-- Modal Section : Contact Form -->
-         <div id="contactmodal" class="col-sm-8 fade contact-form hidden" style="max-width: 550px;">
-              <font class="info dark-gray">Contact</font>
-              <hr>
-              <font class="info-small dark-gray">Selected Contacts</font>
-              <font class="info dark-gray"><span id="receipents"></span></font>
-              <input type="text" class="contact-subject email-field" id="subject" placeholder="Subject"/>
-              <textarea class="contact-message email-field" id="message" placeholder="Type your message here."></textarea>
-              <textarea class="contact-sms hidden sms-field" id="textsms" maxlength=280 placeholder="Type your sms text here."></textarea>
-              <input type="checkbox" name="contact" id="emailcheck" class="css-checkbox contact-checkbox" data-field="email-field" checked /><label for="emailcheck" class="css-label"><span class="info dark-gray formtext">Email</span></label>
-              <input type="checkbox" name="checkboxsms" id="checkboxsms" class="css-checkbox contact-checkbox" data-field="sms-field" /><label for="checkboxsms" class="css-label"><span class="info dark-gray formtext">SMS</span><font class="info-small firstcolor"><sup>New!</sup></font></label><br>
-              <input type="hidden" name="sendVia" value="email">
-              <button type="submit" class="btn submit-btn firstcolor sendMail" id="btn-login" ><span class="glyphicon glyphicon-send"></span> &nbsp; Send</button>
-        </div>
+          <div id="contactmodal" class="col-sm-8 fade contact-form" style="max-width: 550px;max-height:440px;">
+            <div class="row">
+              <div class="col-sm-4">
+                <font class="info dark-gray"> <span id="totalSelected"></span> Selected</font>
+                <hr>
+                <div id="selected-actors"></div>
+                <div id="deleteAllSelected">
+                  <button type="button" title="Remove All" class="btn submit-btn firstcolor " id="deleteAllSelectedBtn"><i class="glyphicon glyphicon-trash"></i></button>
+                </div>
+              </div>
+              <div class="col-sm-8 contact-right">
+                <font class="info dark-gray">Contact</font>
+                <hr>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                  <li role="presentation" class="active"><a href="#contactViaEmail" aria-controls="home" role="tab" data-toggle="tab">Via Email</a></li>
+                  <li role="presentation"><a href="#contactViaSMS" aria-controls="profile" role="tab" data-toggle="tab">Via SMS</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <div role="tabpanel" class="tab-pane active" id="contactViaEmail">
+                    <input type="text" class="contact-subject email-field" id="subject" placeholder="Subject"/>
+                    <textarea class="contact-message email-field" id="message" placeholder="Type your message here."></textarea>
+                    <textarea class="contact-sms hidden sms-field" id="textsms" maxlength=280 placeholder="Type your sms text here."></textarea>
+                    <button type="submit" class="btn submit-btn firstcolor sendMail" id="btn-login" ><span class="glyphicon glyphicon-send"></span> &nbsp; Send Email</button>
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="contactViaSMS">
+                    <textarea class="contact-sms sms-field" id="textsms" maxlength=280 placeholder="Type your sms text here."></textarea>
+                    <button type="submit" class="btn submit-btn firstcolor sendSMS" id="btn-login" ><span class="glyphicon glyphicon-send"></span> &nbsp; Send SMS</button>
+                  </div>
+                </div>
+
+                
+              </div>  
+            </div>  
+          </div>
         <!-- Ths section is pre selection !-->
         <div class="container" id="prelogin">
           <div class="col-sm-1">
@@ -114,13 +138,16 @@
             </nav>
            <!-- contact modal toggle -->
             <div class="container-fluid padded">
-              <button type="submit" class="btn submit-btn firstcolor contact-btn populateContactForm" data-toggle="modal" data-target="#contactmodal"><span class="glyphicon glyphicon-edit"></span></button>
+                <span class="submit-btn firstcolor notice-selected-actors">
+                  <p><span>2</span> Selected</p>
+                </span>
+                <button type="submit" class="btn submit-btn firstcolor contact-btn populateContactForm" data-toggle="modal" data-target="#contactmodal"><span class="glyphicon glyphicon-edit"></span></button>
                 <div class="alert alert-success" id="success_send" role="alert">Mail sent to all the actors.</div>
                 <div class="alert alert-danger"  id="failure_send" role="alert">Error sending mail! Please try again.</div>
                 <div class="container col-sm-12 center" id="browse-table">
                       
                 </div>
-				<div class='container col-sm-12 center' id="main-container"></div>
+				        <div class='container col-sm-12 center' id="main-container"></div>
             </div>
             <input type="checkbox" name="checkboxG1" id="checkboxG1" class="css-checkbox" />
    

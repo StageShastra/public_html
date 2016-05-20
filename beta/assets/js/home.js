@@ -9,10 +9,12 @@ $(document).ready(function(){
 		actors = [],
 		actorEmails = [],
 		actorMobile = [],
-		actorRef = [];
+		actorRef = [],
+		selectAll = false;
 
 	$("#success_send").hide();
-	$("#failure_send").hide();  
+	$("#failure_send").hide();
+	$(".notice-selected-actors").hide();
 	//$('#contactmodal').modal('hide');
 
 	$(document).on("click", ".addToCategories", function(){
@@ -100,11 +102,12 @@ $(document).ready(function(){
 	
 	function appendPagination(current, total) {
 		var li_1 = "";
+		var cls = (current == 1) ? "" : "changePage";
 		if(current == 1)
 			li_1 = "<li class='disabled'><span aria-hidden='true'>&laquo;</span></li>"
 		else
 			li_1 = "<li><a href='#' aria-label='Previous' class='"+cls+"' data-page-no='"+(current-1)+"'><span aria-hidden='true'>&laquo;</span></a></li>";
-		var cls = (current == 1) ? "" : "changePage";
+		
 		var content = "	<nav>"
 					+ "		<ul class='pagination pagination-lg'>"
 					+ li_1;
@@ -114,11 +117,11 @@ $(document).ready(function(){
 						else
 							content += "<li><a href='#' class='changePage' data-page-no='"+p+"'>" + p + "</a></li>";
 					}
-
+					cls = (current == total) ? "" : "changePage";
 					if(current == total)
 						li_1 = "<li class='disabled'><span aria-hidden='true'>&raquo;</span></li>"
 					else
-						li_1 = "<li><a href='#' aria-label='Previous' class='"+cls+"' data-page-no='"+(current+1)+"'><span aria-hidden='true'>&raquo;</span></a></li>";
+						li_1 = "<li><a href='#' aria-label='Next' class='"+cls+"' data-page-no='"+(current+1)+"'><span aria-hidden='true'>&raquo;</span></a></li>";
 					content += li_1 + "</ul>"
 							+ "</nav>";
 		//console.log(current, total);
@@ -127,10 +130,11 @@ $(document).ready(function(){
 
 	function populateActorList(actorsInfo, currentPage){
 		actors = actorsInfo;
+		var ckh = (selectAll) ? "checked" : "";
 		var $table = $("#browse-table");
 		var content = '<table class="table table-curved display" id="actor_table">'
                		+ '<thead center>'
-               		+'<tr><th id="selectallcheckbox"><input type="checkbox" name="selectallactor" id="selectallactor" class="css-checkbox" /><label for="selectallactor" class="css-label"></label></th><th>Profile</th>';
+               		+'<tr><th id="selectallcheckbox"><input type="checkbox" '+ckh+' name="selectallactor" id="selectallactor" class="css-checkbox" /><label for="selectallactor" class="css-label"></label></th><th>Profile</th>';
         
         for(var i = 0; i < select.length; i++){
     		content += '<th data-sort="string">'+select[i]+' <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>';
@@ -141,21 +145,29 @@ $(document).ready(function(){
     	var url = '', tag = '';
 		
 		var totalActors = Number(actorsInfo.length);
-    	var maxActors = 20;
+    	var maxActors = 1;
     	var totalPages = Math.ceil(totalActors/maxActors);
     	var init = (currentPage * maxActors) - maxActors;
     	var actorCovered = (currentPage - 1) * maxActors;
     	var actorLeft = totalActors - actorCovered;
     	var final = (actorLeft >= maxActors) ? maxActors : actorLeft;
-		//console.log(init, final);
+		
+		final = init + final;
     	/*Actor Profile displaying goes here*/
     	for(var i = init; i < final; i++){
 			//console.log(actorsInfo[i]);
     		url = base + 'director/actor/' + actorsInfo[i].StashActor_actor_id_ref + '/' + actorsInfo[i].StashActor_name.replace(" ", "-");
+    		//chk = (selectAll) ? "checked" : "";
+
+    		if($.inArray(i, actorRef) != -1){
+				chk = "checked";
+			}else{
+				chk = "";
+			}
 
     		content += '<tr id="datarow'+i+'">'
     				+ '<td id="selectallcheckbox_">'
-					+ 	'<input type="checkbox" name="checkactor" id="checkactor'+i+'" value='+i+' class="css-checkbox" /><label for="checkactor'+i+'" class="css-label"></label>'
+					+ 	'<input type="checkbox" name="checkactor" '+chk+' id="checkactor'+i+'" value='+i+' class="css-checkbox" /><label for="checkactor'+i+'" class="css-label"></label>'
               		+ '</td>' 
               		+ '<td style="vertical-align:middle-top;">'
                 	+ 	'<div class="img-div center">'
@@ -199,7 +211,9 @@ $(document).ready(function(){
 	
 	$(document).on("click", ".changePage", function(){
 		var page = Number($(this).attr("data-page-no"));
+		console.log("page changed");
 		populateActorList(actors, page);
+		checkContactModal();
 		return false;
 	});
 
@@ -279,82 +293,190 @@ $(document).ready(function(){
 	$(document).on("click", "#selectallactor", function(){
 		var checked = $(this).is(":checked");
 		var $checkactor = $('input[name="checkactor"]');
-		var id = 0, email = '', mobile = '', ref = 0;
-
-		$("input[name='checkactor']").each(function(){
-			id = Number($(this).val());
-			if(checked){
-				$(this).attr('checked', 'true');
-				actorEmails.push(actors[id].StashActor_email);
-				actorMobile.push(actors[id].StashActor_mobile);
-				actorRef.push(actors[id].StashActor_actor_id_ref);
-			}else{
-				$(this).removeAttr("checked");
-				email = actors[id].StashActor_email;
-				mobile = actors[id].StashActor_mobile;
-				ref = actors[id].StashActor_actor_id_ref;
-
-				actorEmails.splice(actorEmails.indexOf(email), 1);
-				actorMobile.splice(actorEmails.indexOf(mobile), 1);
-				actorRef.splice(actorEmails.indexOf(ref), 1);
+		var count = 0;
+		var $noticeBox = $(".notice-selected-actors");
+		actorEmails = [];
+		actorMobile = [];
+		actorRef = [];
+		$noticeBox.show();
+		if(checked){
+			selectAll = true;
+			$checkactor.attr("checked", "true");
+			count = actors.length;
+			for(var i = 0; i < count; i++){
+				actorEmails.push(actors[i].StashActor_email);
+				actorMobile.push(actors[i].StashActor_mobile);
+				actorRef.push(i);
 			}
-		});
+			$("p span", $noticeBox).html(count);
+			$("#totalSelected").html(count);
+			//console.log("All Selected");
+			populateReceipents('name');
+		}else{
+			selectAll = false;
+			$checkactor.removeAttr("checked");
+			$("p span", $noticeBox).html(0);
+			$("#totalSelected").html(0);
+			$("#selected-actors").html("");
 
-		//console.log(actorMobile, actorEmails);
+			setTimeout(function(){
+				$noticeBox.hide();
+			}, 1000);
+		}
+		//console.log(actorMobile, actorEmails, actorRef);
 	});
+
+	function appendReceipents(id) {
+		var content = "";
+
+		content += '<div class="media selected-actors" id="selected-actor-'+id+'">'
+				+  '	<div class="media-left">'
+				+  '		<a href="#" class="selected-act-img">'
+				+  '			<img class="media-object " src="'+base+'assets/img/default.png">'
+				+  ' 		</a>'
+				+  '	</div>'
+				+  '	<div class="media-body selected-act-name">'
+				+  			actors[id].StashActor_name
+				+  '	</div>'
+				+  '	<div class="media-right selected-act-remove" data-actor-id="'+id+'"><a href="#">x</a></div>'
+				+  '</div>';
+		$("#selected-actors").append(content);
+		checkContactModal();
+	}
 
 	$(document).on('click', 'input[name="checkactor"]', function(){
 		var checked = $(this).is(":checked");
 		id = Number($(this).val());
+		var $noticeBox = $(".notice-selected-actors");
+		$noticeBox.show();
 		if(checked){
 			actorEmails.push(actors[id].StashActor_email);
 			actorMobile.push(actors[id].StashActor_mobile);
-			actorRef.push(actors[id].StashActor_actor_id_ref);
+			actorRef.push(id);
+			console.log("append triggered", id);
+			appendReceipents(id);
 		}else{
 			email = actors[id].StashActor_email;
 			mobile = actors[id].StashActor_mobile;
-			ref = actors[id].StashActor_actor_id_ref;
+			ref = id;
 
 			actorEmails.splice(actorEmails.indexOf(email), 1);
-			actorMobile.splice(actorEmails.indexOf(mobile), 1);
-			actorRef.splice(actorEmails.indexOf(ref), 1);
+			actorMobile.splice(actorMobile.indexOf(mobile), 1);
+			actorRef.splice(actorRef.indexOf(ref), 1);
+
+			$("#selected-actor-" + id).addClass("animated fadeOut");
+			setTimeout(function(){
+				$("#selected-actor-" + id).remove();
+			}, 500);
+			console.log("remove append triggered");
 		}
-		//console.log(actorMobile, actorEmails);
+		$("p span", $noticeBox).html(actorRef.length);
+		$("#totalSelected").html(actorRef.length);
+
+		if(actors.length == actorRef.length){
+			$("#selectallactor").attr("checked", "true");
+			selectAll = true;
+		}else{
+			$("#selectallactor").removeAttr("checked");
+			selectAll = false;
+		}
+
+		if(actorRef.length == 0){
+			//$("p span", $noticeBox).html(0);
+			setTimeout(function(){
+				$noticeBox.hide();
+			}, 1000);
+		}
+		//console.log(actorMobile, actorEmails, actorRef);
+
 	});
 
-	function populateReceipents( tag ){
-		var $receipents = $("#receipents");
-		var receipentData = [];
-		if(tag == 'email')
-			receipentData = actorEmails;
-		else
-			receipentData = actorMobile;
-		var total = receipentData.length;
-		var content = '';
-		if(total > 3){
-			var other = total - 2;
-			content = '<br>'+receipentData[0]+', '+receipentData[1]+' and <br><font class="info-small gray">'+other+' others.';
-		}else{
-			content = '<br>';
-			for(var i = 0; i < total; i++){
-				content += receipentData[i];
-				if(total - i != 1)
-					content += ", ";
-				else
-					content += ".";
-			}
+	$(document).on("click", "#deleteAllSelectedBtn", function(){
+		var conf = confirm("Are you sure to remove all selected actors ?");
+		if(conf){
+			$("#selected-actors").html("");
+			actorEmails = [];
+			actorMobile = [];
+			actorRef = [];
+			$('input[name="checkactor"]').removeAttr("checked");
+			$("#selectallactor").removeAttr("checked");
+			selectAll = false;
+			var $noticeBox = $(".notice-selected-actors");
+			$("p span", $noticeBox).html(0);
+			$("#totalSelected").html(0);
+			setTimeout(function(){
+				$noticeBox.hide();
+			}, 1000);
 		}
-
-		$receipents.html(content);
-	}
-
-	$(document).on("click", ".populateContactForm", function(){
-		$('#contactmodal').removeClass("hidden");
-		populateReceipents('email');
 		return false;
 	});
 
-	function updateContactCheckbox() {
+	function populateReceipents( tag ){
+		var id = 0;
+		var content = "";
+		console.log("populateReceipents", actorRef);
+		$("#selected-actors").html("");
+		for(var i = 0; i < actorRef.length; i++){
+			id = actorRef[i];
+			content += '<div class="media selected-actors" id="selected-actor-'+id+'">'
+					+  '	<div class="media-left">'
+					+  '		<a href="#" class="selected-act-img">'
+					+  '			<img class="media-object " src="'+base+'assets/img/default.png">'
+					+  ' 		</a>'
+					+  '	</div>'
+					+  '	<div class="media-body selected-act-name">'
+					+  			actors[id].StashActor_name
+					+  '	</div>'
+					+  '	<div class="media-right selected-act-remove" data-actor-id="'+id+'"><a href="#">x</a></div>'
+					+  '</div>';
+		}
+		$("#selected-actors").html(content);
+		checkContactModal();
+	}
+	$('#contactmodal').modal("show");
+	$(document).on("click", ".populateContactForm", function(){
+		$(".notice-selected-actors").hide();
+		$('#contactmodal').removeClass("hidden");
+		//populateReceipents('email');
+		return false;
+	});
+
+	$(document).on("click", ".selected-act-remove", function(){
+		var id = Number($(this).attr("data-actor-id"));
+		var $noticeBox = $(".notice-selected-actors");
+		email = actors[id].StashActor_email;
+		mobile = actors[id].StashActor_mobile;
+		ref = id;
+
+		actorEmails.splice(actorEmails.indexOf(email), 1);
+		actorMobile.splice(actorMobile.indexOf(mobile), 1);
+		actorRef.splice(actorRef.indexOf(ref), 1);
+
+		$("#selected-actor-" + id).addClass("animated fadeOut");
+		setTimeout(function(){
+			$("#selected-actor-" + id).remove();
+		}, 500);
+
+		$("#checkactor" + id).removeAttr("checked");
+		$("#selectallactor").removeAttr("checked");
+		count = actorRef.length;
+		$("#totalSelected").html(count);
+		$("p span", $noticeBox).html(count);
+
+		selectAll = false;
+
+		return false;
+	});
+
+	function checkContactModal() {
+		var hidden = $("#contactmodal").attr("aria-hidden");
+		if(hidden == 'false'){
+			console.log("Open");
+			$(".notice-selected-actors").hide();
+		}
+	}
+
+	/*function updateContactCheckbox() {
 		var $checkbox = $(".contact-checkbox");
 		var field = '', tag = '';
 		$checkbox.each(function(){
@@ -377,28 +499,58 @@ $(document).ready(function(){
 
 	$(document).on("click", ".contact-checkbox", function(){
 		updateContactCheckbox();
-	});
+	});*/
 
 	$(document).on("click", ".sendMail", function(){
-		var sendVia = $("input[name='sendVia']").val();
-		var contact = {}, tag = '';
-		contact['ref'] = actorRef;
-		if(sendVia == 'email'){
-			tag = 'email';
-			contact['email'] = actorEmails;
-		}else if(sendVia == 'sms'){
-			tag = 'sms';
-			contact['mobile'] = actorMobile;
-		}else{
-			tag = 'both';
-			contact['email'] = actorEmails;
-			contact['mobile'] = actorMobile;
+		var contact = {};
+		var tempRef = [];
+		for(var i = 0; i < actorRef.length; i++){
+			//console.log(actors[actorRef[i]].StashActor_actor_id_ref);
+			tempRef.push(actors[actorRef[i]].StashActor_actor_id_ref);
 		}
+		contact['email'] = actorEmails;
+		contact['ref'] = tempRef;
 
 		var subject = $("#subject").val();
 		var mail_message = $("#message").val();
+		//var sms_message = $("#textsms").val();
+		data = {request: "ContactActorByEmail", data: JSON.stringify({contact: contact, subject: subject, mail: mail_message})};
+
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				//console.log(response);
+				if(response.status){
+     				$('#contactmodal').modal('hide');
+     				$("#success_send").show(); 
+    				$("#success_send").fadeTo(2000, 500).slideUp(500, function(){
+        				$("#success_send").alert('close');
+                	});
+    			}else{
+      				$("#failure_send").show();
+      				$("#failure_send").fadeTo(2000, 500).slideUp(500, function(){
+        				$("#failure_send").alert('close');
+                	});
+    			}
+			}
+		});
+		return false;
+	});
+
+	$(document).on("click", ".sendSMS", function(){
+		var contact = {};
+		var tempRef = [];
+		for(var i = 0; i < actorRef.length; i++){
+			//console.log(actors[actorRef[i]].StashActor_actor_id_ref);
+			tempRef.push(actors[actorRef[i]].StashActor_actor_id_ref);
+		}
+		contact['mobile'] = actorMobile;
+		contact['ref'] = tempRef;
+
 		var sms_message = $("#textsms").val();
-		data = {request: "ContactActors", data: JSON.stringify({contact: contact, subject: subject, mail: mail_message, sms: sms_message, tag: tag})};
+		data = {request: "ContactActorBySMS", data: JSON.stringify({contact: contact, sms: sms_message})};
 
 		$.ajax({
 			url: url,

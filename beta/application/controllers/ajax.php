@@ -43,8 +43,12 @@
 						$this->removeActor($data);
 						break;
 
-					case "ContactActors":
-						$this->contactActors($data);
+					case "ContactActorByEmail":
+						$this->contactActorByEmail($data);
+						break;
+
+					case "ContactActorBySMS":
+						$this->contactActorBySMS($data);
 						break;
 
 					case "AdvanceSearch":
@@ -167,25 +171,17 @@
 				$this->response(false, "0 actors found !");
 		}
 
-		public function contactActors($data = []){
+		public function contactActorBySMS($data = []){
 			$this->load->model("ModelDirector");
-			if($data['tag'] == 'both'){
-				$this->load->model("Email");
-				$this->load->model("SMS");
+			$this->load->model("SMS");
+			$this->SMS->sendAuditionSMS($data['contact']['mobile'], $data['sms']);
+			$this->response(true, "Message sent to all selected actors.");
+		}
 
-				$this->Email->sendAuditionMail($data['contact']['email'], $data['subject'], $data['mail']);
-				$this->SMS->sendAuditionSMS($data['contact']['mobile'], $data['sms']);
-
-				$this->ModelDirector->insertSendMail($data['contact']['ref'], $data['mail'], $data['subject']);
-				$this->ModelDirector->insertSendSMS($data['contact']['ref'], $data['sms']);
-			}elseif($data['tag'] == 'email'){
-				$this->load->model("Email");
-				$this->Email->sendAuditionMail($data['contact']['email'], $data['subject'], $data['mail']);
-			}else{
-				$this->load->model("SMS");
-				$this->SMS->sendAuditionSMS($data['contact']['mobile'], $data['sms']);
-			}
-
+		public function contactActorByEmail($data = []){
+			$this->load->model("ModelDirector");
+			$this->load->model("Email");
+			$this->Email->sendAuditionMail($data['contact']['email'], $data['subject'], $data['mail']);
 			$this->response(true, "Message sent to all selected actors.");
 		}
 

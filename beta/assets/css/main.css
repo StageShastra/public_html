@@ -428,6 +428,30 @@ div.img-div{
     border-color: #FF003A;
     color: #FF003A;
 }
+
+.notice-selected-actors{
+	background-color: #FF003A;
+	color: white;
+	width: auto;
+	padding: 10px;
+	height: 40px;
+	position: fixed;
+	z-index: 998;
+	right: 60px;
+	bottom: 20px;
+	font-size: 15px;
+	-webkit-border-top-left-radius: 20px;
+	-moz-border-top-left-radius: 20px;
+	border-top-left-radius: 20px;
+	-webkit-border-bottom-left-radius: 20px;
+	-moz-border-bottom-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+}
+
+.notice-selected-actors p {
+	margin-right: 30px;
+}
+
 .select-btn {
 	
 	background-color: #a5a5a5;
@@ -459,7 +483,7 @@ div.img-div{
 	z-index: 199;
 	right: 20px;
 	bottom: 20px;
-	padding: 20px 40px 20px 40px !important;
+	padding: 20px !important;
 	border:3px solid #EAEAEA;
 	background-color: rgba(255,255,255,0.95);
 	margin-right: 40px;
@@ -841,6 +865,50 @@ button:hover
     padding: 25px;
 }
 .title{
-font-family:"Raleway", sans-serif;	
+	font-family:"Raleway", sans-serif;	
 }
+
+.contact-right{
+	border-left: 1px solid #bbb;
+}
+
+.selected-actors {
+	padding: 3px;
+	border-bottom: 1px dashed #ccc;
+}
+
+/*.selected-actors .selected-actor{
+	max-width: 140px;
+}*/
+
+.selected-actors .selected-act-img img{
+	max-height: 28px;
+	max-width: 28px;
+}
+
+.selected-actors .selected-act-name {
+	font-size: 12px;
+}
+
+.selected-act-remove a {
+	color: red;
+	margin-left: 5px;
+}
+
+#selected-actors{
+	overflow-y: scroll;
+	overflow-x: hidden;
+	min-height: 260px;
+	max-height: 270px;
+	margin-bottom: 10px;
+}
+
+#deleteAllSelected {
+	border-top: 1px solid #ccc;
+	text-align: center;
+}
+
+/*.selected-actors:hover .selected-act-remove a{
+	display: block;
+}*/
 
