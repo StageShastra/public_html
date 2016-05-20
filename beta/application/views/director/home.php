@@ -100,7 +100,7 @@
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-chevron-down firstcolor" aria-hidden="true"></span></a>
                           <ul class="dropdown-menu">
-							<li><a href="#" class="changeCategory">Change Category</a></li>
+							             <li><a href="#" class="changeCategory">Change Category</a></li>
                             <!--<li><a href="add_actor.php">Add</a></li>
                             <li><a class="not-active" href="#">Import</a></li>
                             <li><a class="not-active" href="#">Export</a></li>

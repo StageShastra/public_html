@@ -2,10 +2,10 @@ $(document).ready(function(){
 
 	var count = 0,
 		select = [],
-		url = "/ajax/",
+		url = "/public_html/beta/ajax/",
 		type = "POST",
 		data = {},
-		base = "/",
+		base = "/public_html/beta/",
 		actors = [],
 		actorEmails = [],
 		actorMobile = [],

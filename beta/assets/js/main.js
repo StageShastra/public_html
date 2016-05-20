@@ -1,10 +1,10 @@
 $(document).ready(function(){
 
-	var url = "/ajax/",
+	var url = "/public_html/beta/ajax/",
 		type = "POST",
 		data = {},
 		formdata = {},
-		base = "/"
+		base = "/public_html/beta/"
 
 	$(document).on("click", "button.select-btn", function(){
 		var show_div = $(this).attr("data-show"),
