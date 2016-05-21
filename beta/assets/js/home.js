@@ -145,7 +145,7 @@ $(document).ready(function(){
     	var url = '', tag = '';
 		
 		var totalActors = Number(actorsInfo.length);
-    	var maxActors = 1;
+    	var maxActors = 20;
     	var totalPages = Math.ceil(totalActors/maxActors);
     	var init = (currentPage * maxActors) - maxActors;
     	var actorCovered = (currentPage - 1) * maxActors;

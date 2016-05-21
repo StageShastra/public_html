@@ -9,11 +9,17 @@
 
 		public function uploadActor($value=''){
 			$this->load->library('upload');
+			$this->load->model("ModelActor");
+			$oldImages = $this->ModelActor->getActorImages($this->session->userdata("StaSh_User_id"));
+			$oldImages = json_decode($oldImages, true);
+			$cOld = count($oldImages);
 			$files = $_FILES;
 			$c = count($_FILES['file']['name']);
-			if($c > 10){
+			
+			if(($c + $cOld) > 10){
 				return false;
 			}
+
 			$error = $images = [];
 			for($i = 0; $i < $c; $i++){
 				$_FILES['file']['name']= $files['file']['name'][$i];
@@ -30,6 +36,8 @@
 		        	$error[] = array('error' => $this->upload->display_errors());
 		        }
 			}
+
+			$images = array_merge($images, $oldImages);
 
 			$this->load->model("ModelActor");
 			if($this->ModelActor->updateActorImages($images)){
