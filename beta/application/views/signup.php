@@ -17,12 +17,6 @@
                 <div class="quarter" id="form-div">
                   <font class="info-small text-primary">Please fill out the form.We promise to get back to you within 24 hours!</font>
                   
-
-                  <?php echo validation_errors("<p class='text-danger'>"); ?>
-
-                  <?php echo ($error) ? "<p class='text-success'><b>{$error_msg}</></p>" : "<p class='text-danger'><b>{$error_msg}</b></p>" ?>
-
-
                       <form role="form" action="<?= $_SERVER['REQUEST_URI'] ?>" method="POST">
                       <div class="form-group">
                         <input type="text" class="form-control login" id="fullname" name="name" placeholder= "Full Name *" required>

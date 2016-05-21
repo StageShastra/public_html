@@ -31,7 +31,7 @@ $(document).ready(function(){
 			success: function(response){
 				if(response.status){
 					$("#login-error-" + user).removeClass("text-danger").addClass("text-success");
-					$("input", $(that)).val("");
+					//$("input", $(that)).val("");
 
 					window.location.href = base + user;
 				}

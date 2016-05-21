@@ -41,7 +41,7 @@
                       <form role="form" id="login-form" class="login-forms" method="post" >
 						<b><p class="text-danger" id="login-error-director"></p></b>
                       <div class="form-group">
-                        <input type="email" class="form-control login" id="username" name="email" placeholder= "Email" required />
+                        <input type="email" class="form-control login" id="username" name="email" placeholder= "Email" required oninvalid="this.setCustomValidity('You appear to have entered an invalid email. Please try again.')" />
                       </div>
                       <div class="form-group">
                         <input type="password" class="form-control login" id="password" name="password" placeholder= "Password" required />
@@ -77,7 +77,7 @@
                     <form role="form" id="actor_login-form" class="login-forms" method="post" >
                     <b><p class="text-danger" id="login-error-actor"></p></b>
                     <div class="form-group">
-                      <input type="email" class="form-control login" id="email" name="email" placeholder= "Email" required />
+                      <input type="email" class="form-control login" id="email" name="email" placeholder= "Email" required oninvalid="this.setCustomValidity('You appear to have entered an invalid email. Please try again.')" />
                     </div>
                     <div class="form-group">
                       <input type="password" class="form-control login" id="actor_password" name="password" placeholder= "Password" required />
