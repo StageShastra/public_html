@@ -34,8 +34,10 @@ $(document).ready(function(){
 					//$("input", $(that)).val("");
 
 					window.location.href = base + user;
-				}
-				$("#login-error-" + user).html(response.message).show(500).delay(5000).hide(500);
+				}else{
+                    $("#login-error-" + user).html(response.message).show(500).delay(5000).hide(500);
+                }
+				
 			}
 
 		});

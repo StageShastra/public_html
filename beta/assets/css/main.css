@@ -833,7 +833,14 @@ button:hover
 
 .a_logo {
 	text-decoration: none;
+	color: #333;
 }
+
+.a_logo:hover{
+	text-decoration: none;
+	color: #333;
+}
+
 #cd_icon{
 	background:url("../img/cd_off.png");
 	background-size: 150px 150px;

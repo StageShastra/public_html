@@ -10,12 +10,13 @@
           </div>
           <div class="container-fluid col-sm-10"> <!--container fluid starts -->
              <div class="center headname">
-              <a href="<?= base_url() ?>" class='a_logo'><img src="<?= IMG ?>/logo.png" class="logo img-fluid"/></a><span class="title big">C A S T I K O</span>
+              <a href="<?= base_url() ?>" class='a_logo'><img src="<?= IMG ?>/logo.png" class="logo img-fluid"/><span class="title big">C A S T I K O</span></a>
              </div>
             <div class="row center">
               <div class="col-sm-12 light-padded">
                 <div class="quarter" id="form-div">
-                  <font class="info-small text-primary">Please fill out the form.We promise to get back to you within 24 hours!</font>
+                <?php if(!$error){ ?>
+                  <font class="info-small text-primary">Please fill out the form. </br> You will hear from us within 24 hours.</font>
                   
                       <form role="form" action="<?= $_SERVER['REQUEST_URI'] ?>" method="POST">
                       <div class="form-group">
@@ -39,6 +40,7 @@
                       </div> -->
                       <button type="submit" class="btn submit-btn firstcolor" name="submit" id="sign-upbtn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign Up</button>
                     </form>
+                <?php } ?>
 					
 					<?php echo validation_errors("<p class='text-danger'>"); ?>
 

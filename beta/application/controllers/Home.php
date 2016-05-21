@@ -16,7 +16,7 @@ class Home extends CI_Controller {
 
 	public function register($type = 'director'){
 		//print_r($this->session->userdata("Stash_New_User"));
-		$pageInfo = array("error" => true, "error_msg" => null);
+		$pageInfo = array("error" => false, "error_msg" => null);
 		if($this->session->userdata("StaSh_User_Logged_In"))
 			if($this->session->userdata("StaSh_User_type") == 'actor')
 				redirect(base_url() . "actor/");
@@ -77,7 +77,7 @@ class Home extends CI_Controller {
 	    			// $this->Email->sendActivationMail($this->input->post('name'), $this->input->post('email'), $response);
 
 	    			$pageInfo['error'] = true;
-	    			$pageInfo['error_msg'] = "Registration Success! Please check email for confirmation Link.";
+	    			$pageInfo['error_msg'] = "You have successfully registered. Please check your email for the confirmation link.";
 	    		}else{
 	    			$pageInfo['error_msg'] = "Something went wronge! We are try to fix it.";
 	    		}
