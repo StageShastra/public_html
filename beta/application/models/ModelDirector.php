@@ -126,6 +126,7 @@
 		}
 
 		public function filteredBySKill($actors = [], $skills = []){
+			$skills = (count($skills)) ? $skills : [''];
 			$this->db->where_in("StashActorSkill_skill_id_ref", $skills);
 			$this->db->where_in("StashActorSkill_actor_id_ref", $actors);
 			$query = $this->db->get("stash-actor-skill");
@@ -137,12 +138,24 @@
 		}
 
 		public function finalFilter($filter = []){
-			$data = array(
-						'StashActor_dob <= ' => $filter['minAge'],
-						'StashActor_dob >= ' => $filter['maxAge'],
-						'StashActor_height >= ' => $filter['minHeight'],
-						'StashActor_height <= ' => $filter['maxHeight']
-					);
+			$data = array();
+
+			if($filter['minAge'] != ''){
+				$data['StashActor_dob <= '] = $filter['minAge'];
+			}
+
+			if($filter['maxAge'] != ''){
+				$data['StashActor_dob >= '] = $filter['maxAge'];
+			}
+
+			if($filter['minHeight'] != ''){
+				$data['StashActor_height >= '] = $filter['minHeight'];
+			}
+
+			if($filter['maxHeight'] != ''){
+				$data['StashActor_height <= '] = $filter['maxHeight'];
+			}
+
 			$this->db->where($data);
 			$this->db->like("StashActor_gender", $filter['sex'], 'both');
 			$this->db->where_in('StashActor_actor_id_ref', $filter['in']);
@@ -150,7 +163,10 @@
 			foreach($names as $name){
 				$this->db->like("StashActor_name", $name, "both");
 			}
+			
 			//return $query = $this->db->get_compiled_select("stash-actor");
+			
+
 			$query = $this->db->get("stash-actor");
 			$result = [];
 			$actors = $query->result('array');

@@ -114,7 +114,7 @@
 		public function advanceSearch($data = []){
 			$this->load->model("ModelDirector");
 			// Santizing data
-			$minAge = $maxAge = $minHeight = $maxHeight = $sex = $skills = '';
+			$minAge = $maxAge = $minHeight = $maxHeight = $sex = $skills = $projects = '';
 			if($data['agemin'] != ''){
 				$minAge = strtotime("-{$data['agemin']} years");
 			}
@@ -153,7 +153,7 @@
 			$filteredByProjects = $this->ModelDirector->filterByProject($projects);
 			$diff = array_merge($filteredBySKills, $filteredByProjects);
 			if(count($diff) == 0)
-				$diff = array(0);
+				$diff = $actorsInDirectorList;
 			$searchData = array(
 							'minHeight' => $minHeight,
 							'minAge' => $minAge,
@@ -238,7 +238,7 @@
 				$userData = $this->Auth->getUserData('StashUsers_email', $data['email']);
 				$this->Auth->insertPassCode($userData['StashUsers_id'], $passCode);
 				if($this->Email->sendPassCode($data['email'], $passCode)){
-					$this->response(true, 'Check Your Email for Pass Code...');
+					$this->response(true, 'We have emailed you a reset code.');
 				}else{
 					$this->response(false, 'Failed to send Passcode. Try Again...');
 				}

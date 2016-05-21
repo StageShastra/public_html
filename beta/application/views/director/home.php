@@ -30,7 +30,7 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <!-- Modal Section : Contact Form -->
-          <div id="contactmodal" class="col-sm-8 fade contact-form" style="max-width: 550px;max-height:440px;">
+          <div id="contactmodal" class="col-sm-8 fade contact-form" style="max-width: 550px;max-height:440px;display:none;">
             <div class="row">
               <div class="col-sm-4">
                 <font class="info dark-gray"> <span id="totalSelected"></span> Selected</font>
@@ -188,12 +188,13 @@
                               <span class="info-small gray">Actor Names(tag) <input type="text" data-role="tagsinput" class="form-control add" id="actr_name" name="actor_names" placeholder= "Actor Names"  />
                           </div>
                         </div>
-						<div class="row">
+						            <div class="row">
                           <div class="col-sm-6 form-group no-paddinglr">
-							<button type="submit" class="btn submit-btn firstcolor" style="margin-top: 20px; margin-left:10px;" id="btn-search" ><span class="glyphicon glyphicon-filter"></span> &nbsp; Search</button>
+							               <button type="submit" class="btn submit-btn firstcolor" style="margin-top: 20px; margin-left:10px;" id="btn-search" ><span class="glyphicon glyphicon-filter"></span> &nbsp; Search</button>
+                             <button type="button" class="btn submit-btn firstcolor" id="resetAll" style="margin-top: 20px; margin-left:10px;" id="btn-search" ><span class="glyphicon glyphicon-repeat"></span> &nbsp; Clear Form</button>
                           </div>
                           <div class="col-sm-6 form-group no-paddinglr">
-							
+							               
                           </div>
                         </div>
                     </form>

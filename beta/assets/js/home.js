@@ -15,7 +15,7 @@ $(document).ready(function(){
 	$("#success_send").hide();
 	$("#failure_send").hide();
 	$(".notice-selected-actors").hide();
-	//$('#contactmodal').modal('hide');
+	$('#contactmodal').modal('hide');
 
 	$(document).on("click", ".addToCategories", function(){
 		if(count == 5){
@@ -274,7 +274,7 @@ $(document).ready(function(){
 				 + '<font class="taga-text">'+categories[i]+'</font>'
 				 + '<span class="glyphicon glyphicon-remove pull-right hidden no-top removeCate" aria-hidden="true" id="'+categories[i]+'-remove" data-cate="'+categories[i]+'"></span>'
 				 + '</button></div>';
-			c++
+			c++;
 		}
 
 		html += '</div><div class="row">'
@@ -301,7 +301,7 @@ $(document).ready(function(){
 		$noticeBox.show();
 		if(checked){
 			selectAll = true;
-			$checkactor.attr("checked", "true");
+			$checkactor.prop("checked", true);
 			count = actors.length;
 			for(var i = 0; i < count; i++){
 				actorEmails.push(actors[i].StashActor_email);
@@ -314,7 +314,7 @@ $(document).ready(function(){
 			populateReceipents('name');
 		}else{
 			selectAll = false;
-			$checkactor.removeAttr("checked");
+			$checkactor.prop("checked", false);
 			$("p span", $noticeBox).html(0);
 			$("#totalSelected").html(0);
 			$("#selected-actors").html("");
@@ -353,7 +353,7 @@ $(document).ready(function(){
 			actorEmails.push(actors[id].StashActor_email);
 			actorMobile.push(actors[id].StashActor_mobile);
 			actorRef.push(id);
-			console.log("append triggered", id);
+			//console.log("append triggered", id);
 			appendReceipents(id);
 		}else{
 			email = actors[id].StashActor_email;
@@ -368,16 +368,16 @@ $(document).ready(function(){
 			setTimeout(function(){
 				$("#selected-actor-" + id).remove();
 			}, 500);
-			console.log("remove append triggered");
+			//console.log("remove append triggered");
 		}
 		$("p span", $noticeBox).html(actorRef.length);
 		$("#totalSelected").html(actorRef.length);
 
 		if(actors.length == actorRef.length){
-			$("#selectallactor").attr("checked", "true");
+			$("#selectallactor").prop("checked", true);
 			selectAll = true;
 		}else{
-			$("#selectallactor").removeAttr("checked");
+			$("#selectallactor").prop("checked", false);
 			selectAll = false;
 		}
 
@@ -398,8 +398,8 @@ $(document).ready(function(){
 			actorEmails = [];
 			actorMobile = [];
 			actorRef = [];
-			$('input[name="checkactor"]').removeAttr("checked");
-			$("#selectallactor").removeAttr("checked");
+			$('input[name="checkactor"]').prop("checked", false);
+			$("#selectallactor").prop("checked", false);
 			selectAll = false;
 			var $noticeBox = $(".notice-selected-actors");
 			$("p span", $noticeBox).html(0);
@@ -414,7 +414,7 @@ $(document).ready(function(){
 	function populateReceipents( tag ){
 		var id = 0;
 		var content = "";
-		console.log("populateReceipents", actorRef);
+		//console.log("populateReceipents", actorRef);
 		$("#selected-actors").html("");
 		for(var i = 0; i < actorRef.length; i++){
 			id = actorRef[i];
@@ -433,7 +433,7 @@ $(document).ready(function(){
 		$("#selected-actors").html(content);
 		checkContactModal();
 	}
-	$('#contactmodal').modal("show");
+	//$('#contactmodal').modal("show");
 	$(document).on("click", ".populateContactForm", function(){
 		$(".notice-selected-actors").hide();
 		$('#contactmodal').removeClass("hidden");
@@ -457,8 +457,8 @@ $(document).ready(function(){
 			$("#selected-actor-" + id).remove();
 		}, 500);
 
-		$("#checkactor" + id).removeAttr("checked");
-		$("#selectallactor").removeAttr("checked");
+		$("#checkactor" + id).prop("checked", false);
+		$("#selectallactor").prop("checked", false);
 		count = actorRef.length;
 		$("#totalSelected").html(count);
 		$("p span", $noticeBox).html(count);
@@ -524,15 +524,15 @@ $(document).ready(function(){
 				//console.log(response);
 				if(response.status){
      				$('#contactmodal').modal('hide');
-     				$("#success_send").show(); 
-    				$("#success_send").fadeTo(2000, 500).slideUp(500, function(){
+     				$("#success_send").show().delay(3000).hide(); 
+    				/*$("#success_send").fadeTo(2000, 500).slideUp(500, function(){
         				$("#success_send").alert('close');
-                	});
+                	});*/
     			}else{
-      				$("#failure_send").show();
-      				$("#failure_send").fadeTo(2000, 500).slideUp(500, function(){
+      				$("#failure_send").show().delay(3000).hide();
+      				/*$("#failure_send").fadeTo(2000, 500).slideUp(500, function(){
         				$("#failure_send").alert('close');
-                	});
+                	});*/
     			}
 			}
 		});
@@ -606,6 +606,13 @@ $(document).ready(function(){
 		$table.html(content);
 	}
 
+	$(document).on("click", "#resetAll", function(){
+		var $form = $("form#advanceSearch");
+		$("input", $form).val("");
+		$("span.label-info").remove(); 
+		return false;
+	});
+
 	$(document).on("submit", "form#advanceSearch", function(){
 		var that = this;
 		$('#advancedSearch').modal('hide');
@@ -625,6 +632,7 @@ $(document).ready(function(){
 				if(response.status){
 					populateActorList(response.data, 1);
 				}else{
+					$("#main-container").html("");
 					noActorFound();
 				}
 			}
