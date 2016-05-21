@@ -79,7 +79,7 @@
 						<span id="message">
 							Please enter the given Code to change Password.
 
-							<p style="color: #666; border: 1px solid #999; padding: 3px 5px;">{$passCode}</p>
+							<p style="color: #666; border: 1px solid #999; padding: 3px 5px;">'.$passCode.'</p>
 
 							<p style="color:#999"><i>Do not share this Code with anyone. If haven\'t asked for forgot password, contact: <b>contact@castiko.com</b> </i></p>
 						</span>
@@ -88,7 +88,7 @@
 						<br>
 						<span id="sender">Team Castiko</span>
 					</font>
-					<a href="#"><button class="bigbutton" style="background-color:#de114b;background-image:none;background-repeat:repeat;background-position:top left;background-attachment:scroll;font-size:30px;color:white;width:100%;border-width:0px;height:75px;" >Code: {$passCode}</button></a>
+					<a href="#"><button class="bigbutton" style="background-color:#de114b;background-image:none;background-repeat:repeat;background-position:top left;background-attachment:scroll;font-size:30px;color:white;width:100%;border-width:0px;height:75px;" >Code: '.$passCode.'</button></a>
 				</div>';
 			$this->email->message($message);
 

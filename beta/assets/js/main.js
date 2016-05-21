@@ -97,8 +97,14 @@ $(document).ready(function(){
     		success: function(response){
     			if(response.status){
     				$("#error-change-password").removeClass("text-warning").addClass("text-success");
-    			}
-    			$("#error-change-password").html(response.message).show(500).delay(5000).hide(500);
+                    $("#error-change-password").html(response.message).show(500).delay(5000).hide(500);
+                    setTimeout(function(){
+                        window.location.href = base;
+                    }, 5000);
+    			}else{
+                    $("#error-change-password").html(response.message).show(500).delay(5000).hide(500);
+                }
+    			
     		}
     	});
 
