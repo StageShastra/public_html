@@ -1,0 +1,78 @@
+[12-May-2016 13:13:29 UTC] PHP Parse error:  syntax error, unexpected 'Confirmation' (T_STRING) in /home/prasht63/public_html/beta/application/controllers/Home.php on line 57
+[14-May-2016 14:24:05 UTC] PHP Fatal error:  Function name must be a string in /home/prasht63/public_html/beta/application/controllers/Home.php on line 9
+[14-May-2016 14:25:07 UTC] PHP Fatal error:  Call to undefined function _uri_string() in /home/prasht63/public_html/beta/application/controllers/Home.php on line 9
+[14-May-2016 14:38:54 UTC] PHP Fatal error:  Call to undefined method ModelDirector::insertInvitationMail() in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 101
+[14-May-2016 20:19:29 Asia/Kolkata] PHP Fatal error:  Call to undefined method ModelDirector::insertInvitationSMS() in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 83
+[14-May-2016 20:19:33 Asia/Kolkata] PHP Fatal error:  Call to undefined method ModelDirector::insertInvitationSMS() in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 83
+[15-May-2016 17:33:45 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}' in /home/prasht63/public_html/beta/application/views/actor/home.php on line 195
+[16-May-2016 19:59:56 Asia/Kolkata] PHP Fatal error:  Cannot redeclare Auth::checkActorProject() in /home/prasht63/public_html/beta/application/models/Auth.php on line 197
+[16-May-2016 20:00:47 Asia/Kolkata] PHP Fatal error:  Call to undefined method Auth::confirmEMail() in /home/prasht63/public_html/beta/application/controllers/Secure.php on line 19
+[16-May-2016 21:52:53 Asia/Kolkata] PHP Fatal error:  Call to a member function getAdminConfirmation() on a non-object in /home/prasht63/public_html/beta/application/controllers/Director.php on line 10
+[17-May-2016 16:49:08 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '$this' (T_VARIABLE) in /home/prasht63/public_html/beta/application/controllers/Director.php on line 14
+[17-May-2016 16:49:28 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '$this' (T_VARIABLE) in /home/prasht63/public_html/beta/application/models/ModelDirector.php on line 245
+[21-May-2016 21:13:22 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '===' (T_IS_IDENTICAL) in /home/prasht63/public_html/beta/application/models/Email.php on line 104
+[21-May-2016 23:17:16 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '===' (T_IS_IDENTICAL) in /home/prasht63/public_html/beta/application/models/Email.php on line 104
+[23-May-2016 17:54:50 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '===' (T_IS_IDENTICAL) in /home/prasht63/public_html/beta/application/models/Email.php on line 104
+[23-May-2016 17:55:07 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '===' (T_IS_IDENTICAL) in /home/prasht63/public_html/beta/application/models/Email.php on line 104
+[23-May-2016 18:11:59 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '===' (T_IS_IDENTICAL) in /home/prasht63/public_html/beta/application/models/Email.php on line 104
+[23-May-2016 18:51:02 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '===' (T_IS_IDENTICAL) in /home/prasht63/public_html/beta/application/models/Email.php on line 104
+[23-May-2016 18:51:36 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '===' (T_IS_IDENTICAL) in /home/prasht63/public_html/beta/application/models/Email.php on line 104
+[23-May-2016 18:55:30 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '===' (T_IS_IDENTICAL) in /home/prasht63/public_html/beta/application/models/Email.php on line 104
+[23-May-2016 18:57:56 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '===' (T_IS_IDENTICAL) in /home/prasht63/public_html/beta/application/models/Email.php on line 104
+[23-May-2016 18:58:04 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '===' (T_IS_IDENTICAL) in /home/prasht63/public_html/beta/application/models/Email.php on line 104
+[23-May-2016 18:58:38 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '===' (T_IS_IDENTICAL) in /home/prasht63/public_html/beta/application/models/Email.php on line 104
+[23-May-2016 19:00:39 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '===' (T_IS_IDENTICAL) in /home/prasht63/public_html/beta/application/models/Email.php on line 104
+[23-May-2016 19:01:43 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '===' (T_IS_IDENTICAL) in /home/prasht63/public_html/beta/application/models/Email.php on line 104
+[23-May-2016 19:01:44 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '===' (T_IS_IDENTICAL) in /home/prasht63/public_html/beta/application/models/Email.php on line 104
+[24-May-2016 01:59:03 Asia/Kolkata] PHP Fatal error:  Call to undefined function explore() in /home/prasht63/public_html/beta/application/controllers/Actor.php on line 97
+[24-May-2016 01:59:23 Asia/Kolkata] PHP Fatal error:  Call to undefined function explore() in /home/prasht63/public_html/beta/application/controllers/Actor.php on line 97
+[24-May-2016 02:05:02 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '$postmessage' (T_VARIABLE), expecting function (T_FUNCTION) in /home/prasht63/public_html/beta/application/models/SMS.php on line 9
+[24-May-2016 02:05:11 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '$postmessage' (T_VARIABLE), expecting function (T_FUNCTION) in /home/prasht63/public_html/beta/application/models/SMS.php on line 9
+[24-May-2016 02:05:15 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '$postmessage' (T_VARIABLE), expecting function (T_FUNCTION) in /home/prasht63/public_html/beta/application/models/SMS.php on line 9
+[24-May-2016 02:05:33 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '$postmessage' (T_VARIABLE), expecting function (T_FUNCTION) in /home/prasht63/public_html/beta/application/models/SMS.php on line 9
+[24-May-2016 02:05:34 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '$postmessage' (T_VARIABLE), expecting function (T_FUNCTION) in /home/prasht63/public_html/beta/application/models/SMS.php on line 9
+[24-May-2016 13:42:24 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '$postmessage' (T_VARIABLE), expecting function (T_FUNCTION) in /home/prasht63/public_html/beta/application/models/SMS.php on line 9
+[24-May-2016 15:30:34 Asia/Kolkata] PHP Fatal error:  Cannot break/continue 1 level in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 90
+[24-May-2016 15:30:53 Asia/Kolkata] PHP Fatal error:  Cannot break/continue 1 level in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 90
+[24-May-2016 18:25:09 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home/prasht63/public_html/beta/application/views/director/home.php on line 281
+[24-May-2016 19:17:55 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ')' in /home/prasht63/public_html/beta/application/models/Auth.php on line 240
+[24-May-2016 19:17:57 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ')' in /home/prasht63/public_html/beta/application/models/Auth.php on line 240
+[24-May-2016 19:17:57 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ')' in /home/prasht63/public_html/beta/application/models/Auth.php on line 240
+[24-May-2016 19:17:58 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ')' in /home/prasht63/public_html/beta/application/models/Auth.php on line 240
+[24-May-2016 19:18:07 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ')' in /home/prasht63/public_html/beta/application/models/Auth.php on line 240
+[24-May-2016 23:16:26 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ')' in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 249
+[24-May-2016 23:16:34 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ')' in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 249
+[24-May-2016 23:16:38 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ')' in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 249
+[24-May-2016 23:16:50 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ')' in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 249
+[25-May-2016 10:49:20 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ')' in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 249
+[25-May-2016 10:49:23 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ')' in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 249
+[25-May-2016 10:49:25 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ')' in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 249
+[25-May-2016 10:49:27 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ')' in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 249
+[25-May-2016 10:49:42 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ')' in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 249
+[25-May-2016 10:49:57 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ')' in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 249
+[25-May-2016 10:50:00 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ')' in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 249
+[25-May-2016 10:50:02 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ')' in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 249
+[25-May-2016 10:50:03 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ')' in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 249
+[25-May-2016 10:50:03 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ')' in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 249
+[25-May-2016 10:50:03 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ')' in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 249
+[25-May-2016 10:50:03 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ')' in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 249
+[25-May-2016 10:50:11 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ')' in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 249
+[25-May-2016 10:50:54 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ')' in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 249
+[25-May-2016 10:51:06 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ')' in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 249
+[25-May-2016 10:51:35 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ')' in /home/prasht63/public_html/beta/application/controllers/Ajax.php on line 249
+[25-May-2016 13:43:49 Asia/Kolkata] PHP Fatal error:  Call to undefined method CI_DB_mysqli_driver::get_compiled_get() in /home/prasht63/public_html/beta/application/models/Auth.php on line 72
+[25-May-2016 15:07:01 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '<' in /home/prasht63/public_html/beta/application/views/actor/home.php on line 777
+[25-May-2016 15:07:39 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '<' in /home/prasht63/public_html/beta/application/views/actor/home.php on line 777
+[25-May-2016 15:07:41 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '<' in /home/prasht63/public_html/beta/application/views/actor/home.php on line 777
+[25-May-2016 21:32:02 Asia/Kolkata] PHP Fatal error:  Call to a member function initialize() on a non-object in /home/prasht63/public_html/application/models/Email.php on line 24
+[25-May-2016 21:50:09 Asia/Kolkata] PHP Parse error:  syntax error, unexpected ';' in /home/prasht63/public_html/application/views/actor/actor_profile.php on line 371
+[27-May-2016 16:18:25 Asia/Kolkata] PHP Fatal error:  Call to a member function getUserData() on a non-object in /home/prasht63/public_html/application/controllers/Actor.php on line 22
+[27-May-2016 17:23:53 Asia/Kolkata] PHP Fatal error:  Call to undefined method Actor::uri_segment() in /home/prasht63/public_html/application/controllers/Actor.php on line 19
+[27-May-2016 17:24:30 Asia/Kolkata] PHP Fatal error:  Call to undefined method Actor::uri_segment() in /home/prasht63/public_html/application/controllers/Actor.php on line 19
+[27-May-2016 17:24:43 Asia/Kolkata] PHP Fatal error:  Call to undefined method Actor::uri_segment() in /home/prasht63/public_html/application/controllers/Actor.php on line 19
+[27-May-2016 17:24:43 Asia/Kolkata] PHP Fatal error:  Call to undefined method Actor::uri_segment() in /home/prasht63/public_html/application/controllers/Actor.php on line 19
+[27-May-2016 17:24:43 Asia/Kolkata] PHP Fatal error:  Call to undefined method Actor::uri_segment() in /home/prasht63/public_html/application/controllers/Actor.php on line 19
+[27-May-2016 17:24:43 Asia/Kolkata] PHP Fatal error:  Call to undefined method Actor::uri_segment() in /home/prasht63/public_html/application/controllers/Actor.php on line 19
+[27-May-2016 17:24:44 Asia/Kolkata] PHP Fatal error:  Call to undefined method Actor::uri_segment() in /home/prasht63/public_html/application/controllers/Actor.php on line 19
+[27-May-2016 17:24:44 Asia/Kolkata] PHP Fatal error:  Call to undefined method Actor::uri_segment() in /home/prasht63/public_html/application/controllers/Actor.php on line 19
+[28-May-2016 21:16:39 Asia/Kolkata] PHP Parse error:  syntax error, unexpected end of file in /home/prasht63/public_html/application/controllers/Actor.php on line 460
