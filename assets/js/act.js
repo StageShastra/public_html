@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
-	var url = "/actor/ajax",
-		base = "/",
+	var url = "/Castiko/actor/ajax",
+		base = "/Castiko/",
 		type = "POST",
 		data = {};
 
@@ -16,7 +16,7 @@ $(document).ready(function(){
 	}
 	removeDefaultCookies();
 
-	$(".toggleEdit").on("click", function(){
+	$(document).on("click", ".toggleEdit", function(){
 		var unhide = $(this).attr("data-unhide-id");
 		var hide = $(this).attr("data-hide-id");
 		$(unhide).removeClass("hidden");
@@ -180,9 +180,14 @@ $(document).ready(function(){
 			data: data,
 			success: function(response){
 				if(response.status){
-					rData = $.parseJSON(response.data);
-					console.log(rData);
-					//$("#experiencelist").html(rData.html);
+					html = response.data.html;
+					//console.log(rData);
+					$("#experiencelist").html(html);
+
+					$("#experience_add").addClass("hidden");
+					$("#closeexperienceicon").addClass("hidden");
+					$("#openexperienceicon").removeClass("hidden");
+
 				}
 				$("#experiencelist").removeClass("hidden");
 				$("#experience_add").addClass("hidden");
@@ -231,9 +236,18 @@ $(document).ready(function(){
 			type: type,
 			data: data,
 			success: function(response){
-				if(response.status)
-					location.reload();
-				//console.log(response);
+				if(response.status){
+					html = response.data.html;
+					//console.log(rData);
+					$("#traininglist").html(html);
+					$("#training_add").addClass("hidden");
+					$("#closetrainingicon").addClass("hidden");
+					$("#opentrainingicon").removeClass("hidden");
+				}
+				$("#traininglist").removeClass("hidden");
+				$("#training_add").addClass("hidden");
+				$("#savedChnagedMsg").html(response.message);
+				$("#savedChnaged").show(500).delay(3000).hide(500);
 			}
 		});
 
@@ -257,6 +271,7 @@ $(document).ready(function(){
 		if(!conf)
 			return false;
 		var that = this;
+		var key = Number($(this).attr("data-key"));
 		var ref = Number($(this).attr("data-id"));
 		var to_do = $(this).attr("data-type");
 		if(to_do == 'experience')
@@ -268,9 +283,28 @@ $(document).ready(function(){
 			type: type,
 			data: data,
 			success: function(response){
-				console.log(response);
+				//console.log(response);
 				if(response.status){
-					location.reload();
+					if(to_do == "experience"){
+						$("#" +  to_do + "-" + key).hide(500).remove();
+						totalExp = $(".actExp").length;
+						current = key + 1;
+						if(totalExp > 0){
+							console.log(key, totalExp);
+							if(totalExp == 1){
+								$(".nav_icons").remove();
+								$(".actExp").removeClass("hidden");
+							}else{
+								prev = key - 1;
+								next = key + 1;
+								$("#experience-" + prev + " .righttnav").attr("data-unhide-id", "#experience-" + next);
+								$("#experience-" + next + " .leftnav").attr("data-unhide-id","#experience-" + prev);
+								$("#experience-" + next).removeClass("hidden");
+							}
+						}
+					}else{
+						$("#" +  to_do + "-" + key).hide(500).remove();
+					}
 				}else{
 					alert("Failed to remove");
 				}

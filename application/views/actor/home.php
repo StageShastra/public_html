@@ -512,7 +512,7 @@ overflow-y:scroll;
                                 ?>
                                 <div class="col-sm-4 vertical-padded">
                                     <button type="button" class="btn language_tag" aria-label="Left Align" >
-                                        <font class="taga-text"><? $lan=ucfirst(trim($language)); if(strlen($lan)>7) {echo substr($lan, 0, 7).'...';} else{echo $lan;}?></font>
+                                        <font class="taga-text"><?php $lan=ucfirst(trim($language)); if(strlen($lan)>7) {echo substr($lan, 0, 7).'...';} else{echo $lan;}?></font>
                                     </button>
                                 </div>  
                                 <?php
@@ -544,7 +544,7 @@ overflow-y:scroll;
                                 ?>
                                 <div class="col-sm-4 vertical-padded">
                                     <button type="button" class="btn skills_tag"  aria-label="Left Align" >
-                                        <font class="taga-text"><? $skill_=ucfirst(trim($skill)); if(strlen($skill_)>7) {echo substr($skill_, 0, 7).'...';} else{echo $skill_;}?></font>
+                                        <font class="taga-text"><?php $skill_=ucfirst(trim($skill)); if(strlen($skill_)>7) {echo substr($skill_, 0, 7).'...';} else{echo $skill_;}?></font>
                                     </button>
                                 </div>  
                                 <?php
@@ -642,7 +642,9 @@ overflow-y:scroll;
                                                 echo '<div class="col-sm-5" style="padding-left:0px; max-height:220px; height:220px;">
                                                         <span class="info black" id="actor_ex_title_'.$key.'"><b>'.$experience['StashActorExperience_title'].'</b></span>
                                                         <span class="glyphicon glyphicon-pencil edit-button  firstcolor toggleEdit" data-unhide-id="#experience-'.$key.'_edit" data-hide-id="#experience-'.$key.'" aria-hidden="true"></span>
-                                                        <span class="glyphicon glyphicon-remove edit-button  firstcolor removeSpanBtn" data-id="'.$experience['StashActorExperience_id'].'" data-type="experience"></span>
+                                                        <span class="glyphicon glyphicon-remove edit-button  firstcolor removeSpanBtn" data-id="'.$experience['StashActorExperience_id'].'" 
+                                                            data-key="'.$key.'"
+                                                            data-type="experience"></span>
                                                         <br>
                                                         <span class="info black" id="actor_ex_role_'.$key.'">
                                                             <i>as </i>'.$experience['StashActorExperience_role'].'
@@ -660,7 +662,9 @@ overflow-y:scroll;
                                             {   
                                                 echo'<span class="info black" style="margin-left:15px;" id="actor_ex_title_'.$key.'"><b>'.$experience['StashActorExperience_title'].'</b></span>
                                                         <span class="glyphicon glyphicon-pencil edit-button  firstcolor toggleEdit" style="margin-left:15px;"  data-unhide-id="#experience-'.$key.'_edit" data-hide-id="#experience-'.$key.'" aria-hidden="true"></span>
-<span class="glyphicon glyphicon-remove edit-button  firstcolor removeSpanBtn" data-id="'.$experience['StashActorExperience_id'].'" data-type="experience"></span>
+                                                            <span class="glyphicon glyphicon-remove edit-button  firstcolor removeSpanBtn" data-id="'.$experience['StashActorExperience_id'].'" 
+                                                                data-key="'.$key.'"
+                                                                data-type="experience"></span>
                                                         <br>
                                                         <span class="info black" id="actor_ex_role_'.$key.'" style="margin-left:15px;" >
                                                             <i>as </i>'.$experience['StashActorExperience_role'].'
@@ -777,7 +781,7 @@ overflow-y:scroll;
                                                 <?= $training['StashActorTraining_course'] ?>
                                             </span>
                                             <span class="glyphicon glyphicon-pencil edit-button firstcolor toggleEdit" data-hide-id="" data-unhide-id="#training-<?= $key ?>_edit" data-hide-id="#training-<?= $key ?>" aria-hidden="true"></span>
-                                            <span class="glyphicon glyphicon-remove edit-button  firstcolor removeSpanBtn" data-id="<?= $training['StashActorTraining_id'] ?>" data-type="training"></span>
+                                            <span class="glyphicon glyphicon-remove edit-button  firstcolor removeSpanBtn" data-id="<?= $training['StashActorTraining_id'] ?>" data-key="<?= $key ?>" data-type="training"></span>
 
                                             
 
