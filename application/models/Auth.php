@@ -24,6 +24,7 @@
 						'StashUsers_type' => trim($type),
 						'StashUsers_time' => time(),
 						'StashUsers_status' => 0,
+						'StashUsers_mobile_status' => 0,
 						'StashUsers_ip' => $this->input->ip_address(),
 						'StashUsers_header' => $this->agent->agent_string()
 					);
@@ -266,6 +267,41 @@
 			}
 			
 			return $result;
+		}
+
+		public function addOTP($otp = 0, $ref = 0){
+			$data = array(
+						'StashMobileOTP_id' => null,
+						'StashMobileOTP_user_id_ref' => $ref,
+						'StashMobileOTP_otp' => $otp,
+						'StashMobileOTP_status' => 0,
+						'StashMobileOTP_time' => time()
+					);
+			$this->db->insert("stash-mobile-otp", $data);
+		}
+
+		public function validateOTP($otp = 0, $ref = 0){
+			$this->db->where("StashMobileOTP_user_id_ref", $ref);
+			$this->db->where("StashMobileOTP_otp", $otp);
+			$query = $this->db->get("stash-mobile-otp", 1);
+			return $query->first_row('array');
+		}
+
+		public function updateMobileVerificationStatus($ref = 0){
+			$data = array(
+						'StashUsers_mobile_status' => 1
+					);
+			$this->db->where('StashUsers_id', $ref);
+			return $this->db->update('stash-users', $data);
+		}
+
+		public function updateOTPStatus($ref = 0, $otp = 0){
+			$data = array(
+						'StashMobileOTP_status' => 1
+					);
+			$this->db->where('StashMobileOTP_user_id_ref', $ref);
+			$this->db->where('StashMobileOTP_otp', $otp);
+			return $this->db->update('stash-mobile-otp', $data);
 		}
 
 	}

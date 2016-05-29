@@ -118,6 +118,29 @@ $(document).ready(function(){
 
     	return false;
     });
+
+    $(document).on("submit", "form#mobileVerfication", function(){
+        var that = this;
+        var otp = $("input[name='otp']", $(this)).val();
+        data = {request: "VerifyOTP", data: JSON.stringify({otp: otp})};
+        $.ajax({
+            url: base + "actor/ajax",
+            type: type,
+            data: data,
+            success: function(response){
+                if(response.status){
+                    $(that).remove();
+                    $("#error-notice").addClass("text-success").html(response.message).show(500);
+                }else{
+                    $("#error-notice").addClass("text-danger").html(response.message).show(500);
+                }
+            }
+        });
+        return false;
+    });
+
+
+
     function casting_director_click(){
     var image = document.getElementById('cd_icon');
     if (image.src.match("_on")) {

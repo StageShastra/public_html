@@ -43,6 +43,33 @@
 			$this->output->set_status_header('404');
 			show_404();
 		}
+
+		public function mobileverify($value=''){
+			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
+				redirect(base_url());
+
+			$pageInfo = array('error' => false, "error_msg" => null, 'form' => true);
+			$this->load->model("Auth");
+			$userdata = $this->Auth->getUserData('StashUsers_id', $this->session->userdata("StaSh_User_id"));
+			if($userdata['StashUsers_mobile_status']){
+				$pageInfo = array("error" => true, "error_msg" => "You mobile number is already verified.", "form" => false);
+			}else{
+				$this->load->model("SMS");
+				$otp = mt_rand(100000, 999999);
+				$res = $this->SMS->sendOTP($otp, $userdata['StashUsers_mobile']);
+				$res = json_decode($res, true);
+				if($res['status'] == "success"){
+					$this->Auth->addOTP($otp, $this->session->userdata("StaSh_User_id"));
+					$m = substr($userdata['StashUsers_mobile'], 0, 2) . "*****" . substr($userdata['StashUsers_mobile'], 7, 3);
+					$pageInfo = array("error" => true, "error_msg" => "Enter the Code you got on you mobile {$m}", 'form' => true);
+				}else{
+					$pageInfo = array("error" => true, "error_msg" => "Sending sms failed. Please try after sometime.", 'form' => true);
+				}
+
+			}
+
+			$this->load->view("mobileVerification", $pageInfo);
+		}
 		
 		public function response($status = false, $msg = null, $data = []){
 			header("Content-Type: application/json");
@@ -54,6 +81,10 @@
 			exit();
 		}
 		public function ajax($value=''){
+			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
+				$this->response(false, "Authentication Failed");
+
+
 			if(count($this->input->post())){
 				$req = trim($this->input->post("request"));
 				$data = json_decode($this->input->post("data"), true);
@@ -122,10 +153,36 @@
 					case "EditUsername":
 						$this->editUsername($data);
 						break;
+
+					case "VerifyOTP":
+						$this->verifyOTP($data);
+						break;
+
 					default:
 						$this->response(false, "Invalid Request");
 						break;
 				}
+			}
+		}
+
+		public function verifyOTP($data = []){
+			$this->load->model("Auth");
+			$userdata = $this->Auth->getUserData('StashUsers_id', $this->session->userdata("StaSh_User_id"));
+			if(!$userdata["StashUsers_mobile_status"]){
+				$otpData = $this->Auth->validateOTP($data['otp'], $this->session->userdata("StaSh_User_id"));
+				if(count($otpData)){
+					if($otpData['StashMobileOTP_status'] == 0){
+						$this->Auth->updateMobileVerificationStatus($this->session->userdata("StaSh_User_id"));
+						$this->Auth->updateOTPStatus($this->session->userdata("StaSh_User_id"), $data['otp']);
+						$this->response(true, "Your mobile is successfully verified.");
+					}else{
+						$this->response(true, "You are using an old otp.");
+					}
+				}else{
+					$this->response(false, "Invalid OTP.");
+				}
+			}else{
+				$this->response(false, "You mobile number is already verified.");
 			}
 		}
 		
