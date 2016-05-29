@@ -16,6 +16,7 @@
     $title_exp = "Showing your video work is the best way to showcase your talent. If you don't have any video work to show yet, just record yourself acting out a favorite scene and put that here.";
     $warning_cnf = "Please verify your email address so that casting directors can contact you easily. We've sent you a link to your email.";
     $warning_cnf .= "<br> If you have not received it, click <a href='#' class='text-info' id='resendConfirmationLink'>here</a> to resend the verification email.";
+    $title_verify = "Your mobile number is not verified. Please verify your mobile number to recieve messages on your phone.";
 ?>
     <body>
         <style>
@@ -261,6 +262,10 @@ overflow-y:scroll;
 			color: #9b9b9b;
 			text-decoration: none;
 		}
+
+        .notVerified {
+            color: red;
+        }
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -459,7 +464,15 @@ overflow-y:scroll;
                                 }
                             ?></span><br>
                                 <span class="elements_label">Email: </span><span class="elements"> <?= $actorProfile['StashActor_email'] ?></span><br>
-                                <span class="elements_label">Phone:</span><span class="elements" id="actor_phone"> <?= $actorProfile['StashActor_mobile'] ?></span><br>
+                                <span class="elements_label">Phone:</span>
+                                
+                                <span class="text-danger elements" id="actor_phone"> <?= $actorProfile['StashActor_mobile'] ?> 
+                                <?php if($user["StashUsers_mobile_status"] == 0){ ?>
+                                <a href="#" data-toggle="tooltip" data-placement="right" title="<?= $title_verify ?>" class="text-danger"><i class="fa fa-exclamation"></i></a>
+                                <?php } ?>
+                                </span>
+
+                                <br>
                                 <span class="elements_label">WhatsApp: </span><span class="elements" id="actor_whatsapp"><?= $actorProfile['StashActor_whatsapp'] ?></span><br>
                             </div>
                             <div id="actor_details_edit" class="hidden">

@@ -344,9 +344,7 @@ overflow-y:scroll;
                                     echo date("m/d/Y", $actorProfile['StashActor_dob']);
                                 }
                             ?></span><br>
-                                <span class="elements_label">Email: </span><span class="elements"> <?= $actorProfile['StashActor_email'] ?></span><br>
-                                <span class="elements_label">Phone: </span><span class="elements" id="actor_phone"> <?= $actorProfile['StashActor_mobile'] ?></span><br>
-                                <span class="elements_label">WhatsApp: </span><span class="elements" id="actor_whatsapp"><?= $actorProfile['StashActor_whatsapp'] ?></span><br>
+                                
                             </div>
 						</div>
                         <div class="row">

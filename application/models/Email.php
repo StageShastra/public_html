@@ -162,11 +162,8 @@
 				                                    </td>
 				                                </tr>
 				                                <tr style=\"margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;box-sizing:border-box;font-size:14px;\" >
-				                                    <td class=\"content-block\" style=\"margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;box-sizing:border-box;font-size:14px;vertical-align:top;padding-top:0;padding-bottom:20px;padding-right:0;padding-left:0;\" >
-				                                        
-				                                        ".$sender."
-				                                        <br>
-				                                        <span style='color:#9b9b9b;'>Powered By CASTIKO</span>
+				                                    <td class=\"content-block\" style=\"margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;box-sizing:border-box;font-size:14px;vertical-align:top;padding-top:0;padding-bottom:20px;padding-right:0;padding-left:0;\" >".$sender."
+				                                        <br><span style='color:#9b9b9b;'>Powered By CASTIKO</span>
 				                                    </td>
 				                                </tr>";
 				                            if($link != ''){

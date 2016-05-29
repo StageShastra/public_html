@@ -75,5 +75,29 @@
 					
 			return $this->sendCurlSMS($data);
 		}
+
+		public function sendOTP($otp = '', $numbers = ''){
+			//$len = strlen($msg);
+			$postmessage = "\nPowered By. Castiko";
+			
+			$msg = $this->prefix;
+
+			$msg .= " " . $otp . ": Enter this OTP to verify your mobile number.";
+
+			$msg .= $postmessage;
+			
+			$msg = rawurlencode($msg);
+			$numbers = $this->numImpode(explode(",", $numbers));
+			$data = array(
+						'username' => $this->username, 
+						'hash' => $this->password, 
+						'numbers' => $numbers, 
+						"sender" => urlencode($this->sender), 
+						"message" => $msg,
+						"test" => $this->test
+					);
+					
+			return $this->sendCurlSMS($data);
+		}
 	}
 ?>
