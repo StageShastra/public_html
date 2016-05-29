@@ -1,8 +1,3 @@
-/uploads
-/resources/db_config.php
-resources/constants.php
-/ resources/constants.php
-/beta/.htaccess
-/beta/application/config/config.php
-/beta/application/config/database.php
+/assets/img
+/application/config
 /beta/application/config/constants.php
