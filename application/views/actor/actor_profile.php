@@ -274,9 +274,7 @@ overflow-y:scroll;
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  
                       <ul class="nav navbar-nav navbar-right vertical-middle">
                        
-                        <li>
-                            <a href="<?= base_url() ?>home/logout/"><button type="button" class="btn submit-btn firstcolor" id="btn-logout"  ><span class="glyphicon glyphicon-log-out"></span> &nbsp; Sign Out</button></a>
-                        </li>
+                        
                       </ul>
                     </div><!-- /.navbar-collapse -->
                 </div>
@@ -304,10 +302,6 @@ overflow-y:scroll;
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  
                       <ul class="nav navbar-nav navbar-right vertical-middle">
-                       
-                        <li>
-                            <a href="<?= base_url() ?>home/logout/"><button type="button" class="btn submit-btn firstcolor" id="btn-logout"  ><span class="glyphicon glyphicon-log-out"></span> &nbsp; Sign Out</button></a>
-                        </li>
                       </ul>
                     </div><!-- /.navbar-collapse -->
                 </div>
@@ -365,7 +359,7 @@ overflow-y:scroll;
                                 ?>
                                 <div class="col-sm-4 vertical-padded">
                                     <button type="button" class="btn language_tag" aria-label="Left Align" >
-                                        <font class="taga-text"><? $lan=ucfirst(trim($language)); if(strlen($lan)>7) {echo substr($lan, 0, 7).'...';} else{echo $lan;}?></font>
+                                        <font class="taga-text"><?php $lan=ucfirst(trim($language)); if(strlen($lan)>7) {echo substr($lan, 0, 7).'...';} else{echo $lan;}?></font>
                                     </button>
                                 </div>  
                                 <?php
@@ -383,7 +377,7 @@ overflow-y:scroll;
                                 ?>
                                 <div class="col-sm-4 vertical-padded">
                                     <button type="button" class="btn skills_tag" aria-label="Left Align" >
-                                        <font class="taga-text"><? $skill_=ucfirst(trim($skill)); if(strlen($skill_)>7) {echo substr($skill_, 0, 7).'...';} else{echo $skill_;}?></font>
+                                        <font class="taga-text"><?php $skill_=ucfirst(trim($skill)); if(strlen($skill_)>7) {echo substr($skill_, 0, 7).'...';} else{echo $skill_;}?></font>
                                     </button>
                                 </div>  
                                 <?php
@@ -587,7 +581,7 @@ overflow-y:scroll;
                                         ?>
                                         <div class="col-sm-12 vertical-padded">
                                             <button type="button" class="btn project_tag" style="max-width:200%;" aria-label="Left Align" >
-                                                <font class="taga-text"><? $proj=ucfirst(trim($project)); if(strlen($proj)>20) {echo substr($proj, 0, 20).'...';} else{echo $proj;}?></font>
+                                                <font class="taga-text"><?php $proj=ucfirst(trim($project)); if(strlen($proj)>20) {echo substr($proj, 0, 20).'...';} else{echo $proj;}?></font>
                                             </button>
                                         </div>  
                                         <?php

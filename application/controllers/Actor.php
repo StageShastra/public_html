@@ -16,11 +16,13 @@
 		}
 		
 		public function profile($username = ''){
-			$username = ($username == '') ? trim(str_replace("/", "",$_SERVER['REQUEST_URI'])) : $username;
+			$username = explode("/", rtrim($_SERVER['REQUEST_URI'], "/"));
+			$username = trim($username[count($username) - 1]);
 			$pageInfo = [];
 			$this->load->model("ModelActor");
 			$this->load->model("Auth");
 			$userdata = $this->Auth->getUserData('StashUsers_username', $username);
+			
 			if(count($userdata) == 0){
 				$this->displayPageNotFound();
 			}
@@ -188,7 +190,6 @@
 			}
 		}
 		public function removeExperience($data = []){
-			//print_r($data);
 			$this->load->model("ModelActor");
 			if($this->ModelActor->deleteExperience($data['experience_ref'])){
 				$this->response(true, "Experience Removed");
@@ -254,10 +255,74 @@
 				$this->response(false, "Failed");
 			}
 		}
+		
+		public function parseTraining(){
+			$this->load->model("ModelActor");
+			$trainings = $this->ModelActor->getActorTrainingById($this->session->userdata("StaSh_User_id"));
+			$html = "";
+			foreach($trainings as $key => $training){
+				$html .= '<span id="training-'.$key.'" class="info dark-gray">
+							<div class="row">
+								
+								<span class="training_title col-sm-4" id="actor_tr_title_'.$key.'">
+									<span class="training-plus toggleEdit" id="actor_tr_plus_'.$key.'" data-hide-id="#actor_tr_plus_'.$key.'" data-unhide-id="#actor_tr_minus_'.$key.',#actor_tr_detail_'.$key.'">+</span>
+									<span  id="actor_tr_minus_'.$key.'" class="toggleEdit training-minus hidden" data-hide-id="#actor_tr_minus_'.$key.',#actor_tr_detail_'.$key.' data-unhide-id="#actor_tr_plus_'.$key.'" >-</span>
+									'.$training['StashActorTraining_title'].'
+								</span>
+								<span class="info-small dark-gray col-sm-4" id="actor_tr_course_'.$key.'">
+									'.$training['StashActorTraining_course'].'
+								</span>
+								<span class="glyphicon glyphicon-pencil edit-button firstcolor toggleEdit" data-hide-id="" data-unhide-id="#training-'.$key.'_edit" data-hide-id="#training-'.$key.'" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-remove edit-button  firstcolor removeSpanBtn" data-key="'.$key.'" data-id="'.$training['StashActorTraining_id'].'" data-type="training"></span>
+
+								
+
+							</div>
+							<div id="actor_tr_detail_'.$key.'" class="hidden toggleEdit training_details">
+								<span class="info-small dark-gray" id="actor_tr_start_'.$key.'">'.$training['StashActorTraining_start_time'].'</span> - 
+								<span class="info-small dark-gray" id="actor_tr_end_'.$key.'">'.$training['StashActorTraining_end_time'].'</span>
+								<br>
+								<span class="info-small dark-gray" id="actor_tr_blurb_'.$key.'">
+									'.$training['StashActorTraining_blurb'].'
+								</span>
+							</div>
+							<hr>
+						</span>
+
+						<span id="training-'.$key.'_edit" class="hidden">
+							<input type="text" class="editwhite long" id="editschooli" name="tr_title_'.$key.'" value="'.$training['StashActorTraining_title'].'" Placeholder="School / Teacher" />
+							<input type="text" class="editwhite long" name="tr_course_'.$key.'" id="editcoursei" value="'.$training['StashActorTraining_course'].'" Placeholder="Course" />
+							<div class="row" style="margin-left:0px;">
+								<input type="text" class="editwhite short" id="editstarti" name="tr_start_'.$key.'" value="'.$training['StashActorTraining_start_time'].'" Placeholder="Starting Year"/>
+								<input type="text" class="editwhite short" id="editendi" name="tr_end_'.$key.'" value="'.$training['StashActorTraining_end_time'].'" Placeholder="Ending Year"/>
+							</div>
+							<textarea class="editwhite long" name="tr_blurb_'.$key.'" id="edittrainingdescriptioni" style="height:100px;">'.$training['StashActorTraining_blurb'].'</textarea>
+							<br>
+							<font class="sortbuttons">
+								<button class="btn submit-btn firstcolor center btnExpAndTraining"
+										data-input-names="tr_title_'.$key.', tr_course_'.$key.', tr_start_'.$key.', tr_end_'.$key.', tr_blurb_'.$key.'"
+										data-key="'.$key.'"
+										data-table-id="'.$training['StashActorTraining_id'].'"
+										data-request="EditTraining"
+										data-hide-id="#training-'.$key.'_edit" 
+										data-unhide-id="#training-'.$key.'">
+									<span class="glyphicon glyphicon-ok"></span>
+								</button>
+							</font>
+							<hr>
+						</span>';
+			}
+			
+			$html = str_replace('"', "'", $html);
+			$html = str_replace("\n", "", $html);
+			$html = str_replace("\t", "", $html);
+			return array('html' => trim($html));
+		}
+		
 		public function addTraining($data = []){
 			$this->load->model("ModelActor");
 			if($this->ModelActor->insertTraining($data)){
-				$this->response(true, "Training Added");
+				$this->response(true, "Training Added", $this->parseTraining());
 			}else{
 				$this->response(false, "Failed");
 			}
@@ -265,7 +330,7 @@
 		public function editExperience($data = []){
 			$this->load->model("ModelActor");
 			if($this->ModelActor->updateExperience($data)){
-				$this->response(true, "Experience Updated", $this->parseExperience());
+				$this->response(true, "Experience Updated");
 			}else{
 				$this->response(false, "Failed");
 			}
@@ -305,7 +370,7 @@
 					$utube_link = "https://www.youtube.com/embed/" . $utube_link;
 				}
 				
-				if($index == 1)
+				if($index == $totalExp)
 					$html .= '<span id="experience-'.$key.'" class="info dark-gray actExp">';
 				else
 					$html .= '<span id="experience-'.$key.'" class="info dark-gray hidden actExp">';
@@ -315,7 +380,7 @@
 					$html .= '<div class="col-sm-5" style="padding-left:0px; max-height:220px; height:220px;">
 								<span class="info black" id="actor_ex_title_'.$key.'"><b>'.$exp['StashActorExperience_title'].'</b></span>
 								<span class="glyphicon glyphicon-pencil edit-button  firstcolor toggleEdit" data-unhide-id="#experience-'.$key.'_edit" data-hide-id="#experience-'.$key.'" aria-hidden="true"></span>
-								<span class="glyphicon glyphicon-remove edit-button  firstcolor removeSpanBtn" data-id="'.$exp['StashActorExperience_id'].'" data-type="experience"></span>
+								<span class="glyphicon glyphicon-remove edit-button  firstcolor removeSpanBtn" data-key="'.$key.'" data-id="'.$exp['StashActorExperience_id'].'" data-type="experience"></span>
 								<br>
 								<span class="info black" id="actor_ex_role_'.$key.'">
 									<i>as </i>'.$exp['StashActorExperience_role'].'
@@ -330,7 +395,7 @@
 				}else{
 					$html .= '<span class="info black" style="margin-left:15px;" id="actor_ex_title_'.$key.'"><b>'.$exp['StashActorExperience_title'].'</b></span>
 							<span class="glyphicon glyphicon-pencil edit-button  firstcolor toggleEdit" style="margin-left:15px;"  data-unhide-id="#experience-'.$key.'_edit" data-hide-id="#experience-'.$key.'" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-remove edit-button  firstcolor removeSpanBtn" data-id="'.$exp['StashActorExperience_id'].'" data-type="experience"></span>
+							<span class="glyphicon glyphicon-remove edit-button  firstcolor removeSpanBtn" data-key="'.$key.'" data-id="'.$exp['StashActorExperience_id'].'" data-type="experience"></span>
 							<br>
 							<span class="info black" id="actor_ex_role_'.$key.'" style="margin-left:15px;" >
 								<i>as </i>'.$exp['StashActorExperience_role'].'
@@ -349,7 +414,7 @@
 							</span></div>';
 				}
 				
-				$html .= '<span id="experience-'.$key.'_edit" class="hidden">
+				$html .= '</span><span id="experience-'.$key.'_edit" class="hidden">
 							<input type="text" name="ex_title_'.$key.'" class="editwhite long" id="edittitlei" value="'.$exp['StashActorExperience_title'].'" Placeholder="Title of the play, ad, film etc." required/>
 							<input type="text" name="ex_role_'.$key.'" class="editwhite long" id="editrolei" value="'.$exp['StashActorExperience_role'].'" Placeholder="Role e.g. Dad, Mom, Character Name" required/>
 							<input type="text" name="ex_link_'.$key.'" class="editwhite long" id="editlinki" value="'.$exp['StashActorExperience_link'].'" Placeholder="Youtube"/>
@@ -369,8 +434,10 @@
 							<hr>
 						</span>';
 			}
-			
-			return array('html' => $html);
+			$html = str_replace('"', "'", $html);
+			$html = str_replace("\n", "", $html);
+			$html = str_replace("\t", "", $html);
+			return array('html' => trim($html));
 		}
 		
 		public function addExperience($data = []){
