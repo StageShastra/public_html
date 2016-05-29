@@ -47,7 +47,6 @@
 		public function mobileverify($value=''){
 			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
 				redirect(base_url());
-
 			$pageInfo = array('error' => false, "error_msg" => null, 'form' => true);
 			$this->load->model("Auth");
 			$userdata = $this->Auth->getUserData('StashUsers_id', $this->session->userdata("StaSh_User_id"));
