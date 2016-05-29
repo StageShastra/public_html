@@ -468,7 +468,7 @@ overflow-y:scroll;
                                 
                                 <span class="text-danger elements" id="actor_phone"> <?= $actorProfile['StashActor_mobile'] ?> 
                                 <?php if($user["StashUsers_mobile_status"] == 0){ ?>
-                                <a href="#" data-toggle="tooltip" data-placement="right" title="<?= $title_verify ?>" class="text-danger"><i class="fa fa-exclamation"></i></a>
+                                <a href="<?= base_url() ?>actor/mobileverify" data-toggle="tooltip" data-placement="right" title="<?= $title_verify ?>" class="text-danger"><i class="fa fa-exclamation"></i></a>
                                 <?php } ?>
                                 </span>
 
