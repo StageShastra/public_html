@@ -183,6 +183,11 @@ $(document).ready(function(){
 					html = response.data.html;
 					//console.log(rData);
 					$("#experiencelist").html(html);
+
+					$("#experience_add").addClass("hidden");
+					$("#closeexperienceicon").addClass("hidden");
+					$("#openexperienceicon").removeClass("hidden");
+
 				}
 				$("#experiencelist").removeClass("hidden");
 				$("#experience_add").addClass("hidden");
@@ -235,6 +240,9 @@ $(document).ready(function(){
 					html = response.data.html;
 					//console.log(rData);
 					$("#traininglist").html(html);
+					$("#training_add").addClass("hidden");
+					$("#closetrainingicon").addClass("hidden");
+					$("#opentrainingicon").removeClass("hidden");
 				}
 				$("#traininglist").removeClass("hidden");
 				$("#training_add").addClass("hidden");
