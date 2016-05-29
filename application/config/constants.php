@@ -106,7 +106,7 @@ defined("FONTS") OR define("FONTS", ASSETS . "fonts");
 */
 // Main / Global
 define("M_Title", "C A S T I K O");
-define("M_TagLine", "Makes casting easier!");
+define("M_TagLine", "Making casting easier!");
 define("M_Copyright", "&copy; ".date('Y')." Castiko | connect@castiko.com");
 define("M_Register1", "Please fill out the form.");
 define("M_Register2", "You will hear from us within 24 hours.");
