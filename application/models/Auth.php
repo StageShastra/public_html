@@ -313,6 +313,17 @@
 			return $this->db->update('stash-users', $data);
 		}
 
+		public function addDeliveryReport($num = '', $status = '', $customId = ''){
+			$data = array(
+						"id" => null,
+						"numbers" => $num,
+						"status" => $status,
+						"customId" => $customId,
+						"time" => time()
+					);
+			$this->db->insert("tl_delivery_report", $data);
+		}
+
 	}
 
 ?>
