@@ -325,6 +325,36 @@
 			return $this->db->update("stash-users", array("StashUsers_username" => $username));
 		}
 
+		public function getSkillName($name = ''){
+			$this->db->like("StashSkills_title", $name, "after");
+			$this->db->where("StashSkills_status", 1);
+			$query = $this->db->get("stash-skills");
+			$fetch = $query->result("array");
+			$result = [];
+			foreach ($fetch as $key => $f) {
+				$v['label'] = $f['StashSkills_title'];
+				$v['value'] = $f['StashSkills_title'];
+				$result[] = $v;
+			}
+
+			return $result;
+		}
+
+		public function getLanguageName($name = ''){
+			$this->db->like("StashLanguages_title", $name, "after");
+			$this->db->where("StashLanguages_status", 1);
+			$query = $this->db->get("stash-languages");
+			$fetch = $query->result("array");
+			$result = [];
+			foreach ($fetch as $key => $f) {
+				$v['label'] = $f['StashLanguages_title'];
+				$v['value'] = $f['StashLanguages_title'];
+				$result[] = $v;
+			}
+
+			return $result;
+		}
+
 	}
 
 ?>

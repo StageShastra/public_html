@@ -932,6 +932,10 @@ button:hover
 	cursor: pointer;
 }
 
+#actor_pro_pic:hover .removeImage{
+	display: block;
+}
+
 .DocumentItem:hover .removeImage{
 	display: block;
 }

@@ -14,6 +14,7 @@
         <link rel="icon" href="<?= IMG ?>/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="<?= CSS ?>/bootstrap.min.css">
         <link rel="stylesheet" href="<?= CSS ?>/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="<?= CSS ?>/jquery-ui.css">
         <link rel="stylesheet" href="<?= CSS ?>/main.css">
         <link rel="stylesheet" href="<?= CSS ?>/lightbox.css">
         <link rel="stylesheet" href="<?= CSS ?>/datatable.css">

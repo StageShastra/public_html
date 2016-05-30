@@ -43,6 +43,15 @@
 			
 			$this->load->view("confirm", $pageInfo);
 		}
+
+		public function deliveryReport($value=''){
+			$number = $_REQUEST['number'];
+			$status = $_REQUEST['status'];
+			$customID = $_REQUEST['customID'];
+
+			$this->load->model("Auth");
+			$this->Auth->addDeliveryReport($number, $status, $customID);
+		}
 		
 	}
 

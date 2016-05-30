@@ -6,6 +6,7 @@
         <script src="<?= JS ?>/vendor/bootstrap.min.js"></script>
         <script src='<?= JS ?>/tagsinput.js'></script>
 		<script src="<?= JS ?>/vendor/js.cookies.js"></script>
+		<script src="<?= JS ?>/vendor/jquery-ui.js"></script>
         <script src="<?= JS ?>/act.js"></script>
         <script src="<?= JS ?>/lightbox.js"></script>
         <script src="<?= JS ?>/stupidtable.js"></script>
@@ -18,7 +19,7 @@
 				shareIn: "popup",
 				text: "<?= $actorProfile['StashActor_name'] ?> | Actor | Castiko",
 				url: "<?= base_url() . $user["StashUsers_username"] ?>",
-				shares: ["email", "twitter", "facebook", "googleplus", "linkedin"]
+				shares: ["twitter", "facebook", "googleplus", "linkedin"]
 			});
 		</script>
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

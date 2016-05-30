@@ -304,6 +304,26 @@
 			return $this->db->update('stash-mobile-otp', $data);
 		}
 
+		public function updateUserMobile($ref = 0, $mobile = 0){
+			$data = array(
+						'StashUsers_mobile_status' => 1,
+						'StashUsers_mobile' => $mobile
+					);
+			$this->db->where('StashUsers_id', $ref);
+			return $this->db->update('stash-users', $data);
+		}
+
+		public function addDeliveryReport($num = '', $status = '', $customId = ''){
+			$data = array(
+						"id" => null,
+						"numbers" => $num,
+						"status" => $status,
+						"customId" => $customId,
+						"time" => time()
+					);
+			$this->db->insert("tl_delivery_report", $data);
+		}
+
 	}
 
 ?>
