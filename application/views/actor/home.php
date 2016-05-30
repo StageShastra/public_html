@@ -482,7 +482,7 @@ overflow-y:scroll;
                                     <input type="date" name="dob" class="editwhite edit_inputs_basics col-sm-7"  value="<?= date("Y-m-d", $actorProfile['StashActor_dob']) ?>" id="dob"/>
                                 <br>
                                 <span id="phone_edit" class="left paddingTop">
-                                <span class="elements_label col-sm-5">Phone:</span><input type="text" class="editwhite edit_inputs_basics col-sm-7" name="phone" value="<?= $actorProfile['StashActor_mobile'] ?>" id="phone"/>
+                                <span class="elements_label col-sm-5">Phone:</span><input type="text" class="editwhite edit_inputs_basics col-sm-7" name="phone" value="<?= $actorProfile['StashActor_mobile'] ?>" maxlength='10' id="phone"/>
                                 <br>
                                 <span id="whatsapp_edit" class="left paddingTop">
                                 <span class="elements_label col-sm-5">WhatsApp:</span><input type="text" class="editwhite edit_inputs_basics col-sm-7" name="whatsapp" value="<?= $actorProfile['StashActor_whatsapp'] ?>" id="whatsapp"/>

@@ -67,6 +67,12 @@
                   </div>
                   <div role="tabpanel" class="tab-pane" id="contactViaSMS">
                     <textarea class="contact-sms sms-field" id="textsms" maxlength=280 placeholder="Type your sms text here."></textarea>
+
+                    <span class="info-small gray pull-right">
+                      ( <span id="audi-charCounter">160</span> / 
+                      <span id="audi-msgCounter">0</span> )
+                    </span>
+
                     <button type="submit" class="btn submit-btn firstcolor sendSMS" id="btn-login" ><span class="glyphicon glyphicon-send"></span> &nbsp; Send SMS</button>
                   </div>
                 </div>
@@ -336,16 +342,6 @@
                               </div>
 
                             </div>
-                            <!-- <div class="row">
-
-                              <div class="col-sm-12 form-group no-paddinglr">
-                                <span class="info-small gray">
-                                  Mobile Numbers (comma seperated)
-                                </span> 
-                                <textarea class="form-control add" name="mobiles"  placeholder="Add Mobile Numbers" rows="3" required style="border: 1px solid #999;"></textarea>
-                              </div>
-
-                            </div> -->
                             <div class="row email-templete">
 
                               <div class="col-sm-12 form-group no-paddinglr">
@@ -406,6 +402,12 @@
                                   Dear Actor, <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= $title_text ?>"></i>
                                 </span> 
                                 <textarea class="form-control add" name="sms" id="text-sms" placeholder="Message Text" rows="5" required style="border: 1px solid #999;"></textarea>
+
+                                <span class="info-small gray pull-right">
+                                  ( <span id="invite-charCounter">160</span> / 
+                                  <span id="invite-msgCounter">0</span> )
+                                </span>
+
                                 <button type="button" class="btn submit-btn firstcolor pull-right addSuggestionText" data-name="sms" data-add="Please click this link and follow the steps to share your details with us." style="margin-top: 20px; margin-left:10px;" id="btn-search" > Suggested Text </button>
                                 <span class="info-small">
                                   

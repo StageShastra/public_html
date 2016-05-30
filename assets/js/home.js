@@ -725,27 +725,36 @@ $(document).ready(function(){
         $('#detailsActor').modal('show');
 	});
 
-	/*function charCounter(that, action) {
-		var limit = Number($("#sms-char-left").text());
-		var count = Number($("#no-of-sms").text());
-		var cur = Number($(that).val().length);
-		limit -= 1;
-		if(diff == -1){
-			limit = 160;
-			count += 1;
+	function smsCharCounter(textbox, countID, msgID) {
+		txt = $.trim($(textbox).val());
+		len = txt.length;
+		if(len >= 280){
+			$(textbox).val(txt.substring(0, 280));
+			alert("character limit exceed.");
+			return;
 		}
-
-		$("#sms-char-left").html(limit);
-		$("#no-of-sms").html(count);
+		reminder = 160 - (len % 160);
+		numMsg = Math.ceil(len / 160);
+		$(countID).html(reminder);
+		$(msgID).html(numMsg);
+		console.log(txt, len, reminder, numMsg);
 	}
 
 	$("#text-sms").on("keyup", function(){
-		charCounter(this, 'up');
-	});*/
+		smsCharCounter("#text-sms", "#invite-charCounter", "#invite-msgCounter");
+	});
 
-	/*$("#text-sms").on("keydown", function(){
-		charCounter(this, 'down');
-	});*/
+	$("#text-sms").on("change", function(){
+		smsCharCounter("#text-sms", "#invite-charCounter", "#invite-msgCounter");
+	});
+
+	$("#textsms").on("keyup", function(){
+		smsCharCounter("#textsms", "#audi-charCounter", "#audi-msgCounter");
+	});
+
+	$("#textsms").on("change", function(){
+		smsCharCounter("#textsms", "#audi-charCounter", "#audi-msgCounter");
+	});
 
 	$(document).on("submit", "form#emailInvitationForm", function(){
 		var conf = confirm("Are you sure you want to send this message ?");
@@ -800,7 +809,7 @@ $(document).ready(function(){
 			project_name: project_name,
 			project_date: project_date
 		})};
-		console.log(data);
+		//console.log(data);
 		$.ajax({
 			url: url,
 			type: type,
@@ -848,7 +857,8 @@ $(document).ready(function(){
 		var add = $(this).attr("data-add");
 		txt += " " + add;
 		$("textarea[name='"+name+"']").val(txt);
-		console.log(txt, name);
+		smsCharCounter("#text-sms", "#invite-charCounter", "#invite-msgCounter");
+		//console.log(txt, name);
 		return false;
 	});
 

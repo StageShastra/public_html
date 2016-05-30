@@ -271,6 +271,13 @@
 			$this->load->model("Auth");
 			$ref = $this->session->userdata("StaSh_User_id");
 			$userdata = $this->Auth->getUserData('StashUsers_id', $ref);
+			if(strlen($data['phone']) != 10)
+				$this->response(false, "Mobile is invalid.");
+
+			if(strlen($data['whatsapp']) != 10)
+				$this->response(false, "Whatsapp number is invalid.");
+
+
 			$dob = strtotime(trim($data['dob']));
 			$d = array(
 						"StashActor_dob" => $dob,
