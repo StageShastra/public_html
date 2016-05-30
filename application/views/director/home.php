@@ -32,6 +32,14 @@
 			z-index: 1200;
 		  }
 
+        #emailPreview, #previewSMS{
+          z-index: 1200;
+        }
+
+        iframe#emailPreviewiFrame{
+          border: none;
+        }
+
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -64,6 +72,7 @@
 					<textarea class="contact-message email-field" id="message" placeholder="Type your message here."></textarea>
 						
 					<button type="submit" class="btn submit-btn firstcolor sendMail" id="btn-login" ><span class="glyphicon glyphicon-send"></span> &nbsp; Send Email</button>
+          <button type="button" class="btn submit-btn firstcolor previewEmailBtn" data-id="#message" style="margin-top: 20px; margin-left:10px;" ><span class="glyphicon glyphicon-camera "></span> &nbsp; Preview</button>
                   </div>
                   <div role="tabpanel" class="tab-pane" id="contactViaSMS">
                     <textarea class="contact-sms sms-field" id="textsms" maxlength=280 placeholder="Type your sms text here."></textarea>
@@ -74,6 +83,7 @@
                     </span>
 
                     <button type="submit" class="btn submit-btn firstcolor sendSMS" id="btn-login" ><span class="glyphicon glyphicon-send"></span> &nbsp; Send SMS</button>
+                    <button type="button" class="btn submit-btn firstcolor previewSMSBtn" data-id="#textsms" style="margin-top: 20px; margin-left:10px;" ><span class="glyphicon glyphicon-camera "></span> &nbsp; Preview</button>
                   </div>
                 </div>
 
@@ -221,6 +231,56 @@
             </div>
 		</div>
 		
+
+      <!-- Preview  Email start-->
+      <div id="emailPreview" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content" style="min-width: 680px;">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title firstcolor info"> Email Preview </h4>
+            <span class="info-small gray"></span>
+          </div>
+          <div class="modal-body" style="background-color:#f2f2f2;">
+            <div class="container" style="max-width:100%; ">
+            <iframe src="#" id="emailPreviewiFrame" width="600" height="520">
+              
+            </iframe>
+            </div>
+          </div>
+          
+          </div>
+
+        </div>
+      </div>
+      <!-- Preview Email End -->
+
+      <!-- Preview  SMS start-->
+      <div id="previewSMS" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title firstcolor info"> SMS Preview </h4>
+            <span class="info-small gray"></span>
+          </div>
+          <div class="modal-body" style="background-color:#f2f2f2;">
+            <div class="container" style="max-width:100%; ">
+              <p id="previewSMSTxt"></p>
+            </div>
+          </div>
+          
+          </div>
+
+        </div>
+      </div>
+      <!-- Preview SMS End -->
+
+
 			<div id="notAllowedModal" class="modal fade" role="dialog">
 				<div class="modal-dialog">
 
@@ -349,7 +409,7 @@
                                   Dear Actor, <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= $title_text ?>"></i>
 											
                                 </span> 
-                                <textarea class="form-control add" name="email-msg"  placeholder="Message Text" rows="5" required style="border: 1px solid #999;"></textarea>
+                                <textarea class="form-control add" name="email-msg" id="emailtxtMsg"  placeholder="Message Text" rows="5" required style="border: 1px solid #999;"></textarea>
                                 <button type="button" class="btn submit-btn firstcolor pull-right addSuggestionText" data-name="email-msg" data-add="Please click the button below and follow the steps to share your details with us." style="margin-top: 20px; margin-left:10px;" id="btn-search" > Suggested Text </button>
                               </div>
 
@@ -358,8 +418,10 @@
                             <div class="row">
                               <div class="col-sm-6 form-group no-paddinglr">
                                 <button type="submit" class="btn submit-btn firstcolor" style="margin-top: 20px; margin-left:10px;" id="btn-search" ><span class="glyphicon glyphicon-envelope"></span> Send </button>
-								<button type="button" class="btn submit-btn firstcolor resetAll" data-form="emailInvitationForm" style="margin-top: 20px; margin-left:10px;" ><span class="glyphicon glyphicon-repeat"></span> &nbsp; Clear Form</button>
-							  </div>
+								                <button type="button" class="btn submit-btn firstcolor resetAll" data-form="emailInvitationForm" style="margin-top: 20px; margin-left:10px;" ><span class="glyphicon glyphicon-repeat"></span> &nbsp; Clear Form</button>
+                                
+                                <button type="button" class="btn submit-btn firstcolor previewEmailBtn" data-id="#emailtxtMsg" style="margin-top: 20px; margin-left:10px;" ><span class="glyphicon glyphicon-camera "></span> &nbsp; Preview</button>
+							               </div>
                             </div>
                           </form>
                         </div>
@@ -409,6 +471,7 @@
                                 </span>
 
                                 <button type="button" class="btn submit-btn firstcolor pull-right addSuggestionText" data-name="sms" data-add="Please click this link and follow the steps to share your details with us." style="margin-top: 20px; margin-left:10px;" id="btn-search" > Suggested Text </button>
+
                                 <span class="info-small">
                                   
                                   Powered by Castiko
@@ -419,7 +482,11 @@
                             <div class="row">
                               <div class="col-sm-6 form-group no-paddinglr">
                                 <button type="submit" class="btn submit-btn firstcolor" style="margin-top: 20px; margin-left:10px;" id="btn-search" ><span class="glyphicon glyphicon-envelope"></span> Send </button>
-								<button type="button" class="btn submit-btn firstcolor resetAll" data-form="smsInvitationForm" style="margin-top: 20px; margin-left:10px;" ><span class="glyphicon glyphicon-repeat"></span> &nbsp; Clear Form</button>
+								                <button type="button" class="btn submit-btn firstcolor resetAll" data-form="smsInvitationForm" style="margin-top: 20px; margin-left:10px;" ><span class="glyphicon glyphicon-repeat"></span> &nbsp; Clear Form</button>
+
+                                <button type="button" class="btn submit-btn firstcolor previewSMSBtn" data-id="#text-sms" style="margin-top: 20px; margin-left:10px;" ><span class="glyphicon glyphicon-camera "></span> &nbsp; Preview</button>
+
+
 							  </div>
                             </div>
                           </form>

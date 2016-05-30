@@ -183,7 +183,7 @@
 
 		public function removeProfilePic($data = []){
 			$this->load->model("ModelActor");
-			$d = array("StashActor_avatar" => "default.png";
+			$d = array("StashActor_avatar" => "default.png");
 			if($this->ModelActor->updateActorProfile($d)){
 				$this->response(true, "Update Success");
 			}else{

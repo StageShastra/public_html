@@ -737,7 +737,7 @@ $(document).ready(function(){
 		numMsg = Math.ceil(len / 160);
 		$(countID).html(reminder);
 		$(msgID).html(numMsg);
-		console.log(txt, len, reminder, numMsg);
+		//console.log(txt, len, reminder, numMsg);
 	}
 
 	$("#text-sms").on("keyup", function(){
@@ -859,6 +859,41 @@ $(document).ready(function(){
 		$("textarea[name='"+name+"']").val(txt);
 		smsCharCounter("#text-sms", "#invite-charCounter", "#invite-msgCounter");
 		//console.log(txt, name);
+		return false;
+	});
+
+	$(document).on("click", ".previewEmailBtn", function(){
+		txtId = $(this).attr("data-id");
+		txt = $(txtId).val();
+		txt = encodeURI(txt);
+		src = base + "director/emailPreview/?msg=" + txt;
+		if(txtId == "#emailtxtMsg"){
+			src += "&link=%23&linkname=Accept+Invitation";	
+		}
+		$("#emailPreviewiFrame").attr("src", src);
+		$("#emailPreview").modal("show");
+		return false;
+	});
+
+	$(document).on("click", ".previewSMSBtn", function(){
+		txtId = $(this).attr("data-id");
+		msg = $(txtId).val();
+		msg = msg.split("\n");
+		txt = "Dear Actor, ";
+		for(var i = 0; i < msg.length; i++){
+			txt += msg[i];
+			txt += "<br>";
+			if($.trim(msg[i]) == '')
+				txt += "<br>";
+		}
+
+		if(txtId == "#text-sms"){
+			txt = txt + "<br>http://invite.castiko.com/AG8hik";
+		}
+
+		txt = txt + "<br>Powered By Castiko";
+		$("#previewSMSTxt").html(txt);
+		$("#previewSMS").modal("show");
 		return false;
 	});
 
