@@ -60,7 +60,7 @@
 				if($res['status'] == "success"){
 					$this->Auth->addOTP($otp, $this->session->userdata("StaSh_User_id"));
 					$m = substr($userdata['StashUsers_mobile'], 0, 2) . "*****" . substr($userdata['StashUsers_mobile'], 7, 3);
-					$pageInfo = array("error" => true, "error_msg" => "Enter the Code you got on you mobile {$m}", 'form' => true);
+					$pageInfo = array("error" => true, "error_msg" => "Enter the Code you got on your number {$m}", 'form' => true);
 				}else{
 					$pageInfo = array("error" => true, "error_msg" => "Sending sms failed. Please try after sometime.", 'form' => true);
 				}
