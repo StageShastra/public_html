@@ -19,6 +19,8 @@
             <div id="getcodediv">
                <div class="col-sm-6 center">
                 <div class="mycontent-right center light-padded">
+                    <img src="<?= IMG ?>/mobile_logo.png" class="logo img-fluid center" width=100px/>
+                    <br>
                     <font class="info firstcolor center"> Mobile Number Verification </font>
                     <br>
                     <font class="info-small" id="error-notice" style="display:<?= ($form) ? "none" : "block" ?>;">
@@ -28,6 +30,7 @@
                 <?php
                     if($form){
                 ?>
+
                     <form role="form" class="vertical-padded" id="mobileVerfication" method="post" >
                     <font class="info-small text-primary">
                       <?= $error_msg  ?>

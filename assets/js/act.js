@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
-	var url = "/actor/ajax",
-		base = "/",
+	var url = "/public_html/actor/ajax",
+		base = "/public_html/actor/",
 		type = "POST",
 		data = {};
 

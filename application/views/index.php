@@ -18,7 +18,7 @@
             <div id="selector">
               <div class="row">
                 <div class="col-sm-6 mycontent-left" style="text-align:center; ">
-                  <button  class="btn submit-btn firstcolor select-btn" id="cd_icon" data-show="#castingdirector" data-hide="#actor" ></button><br><font class="info gray marginTop">I am a Casting Director</font>
+                  <button  class="btn submit-btn firstcolor select-btn" id="cd_icon" data-show="#castingdirector" data-hide="#actor" href="#castingdirector" ></button><br><font class="info gray marginTop">I am a Casting Director</font>
                 </div>
                 <div class="col-sm-6" style="text-align:center;">
                   <button  class="btn submit-btn firstcolor select-btn" id="actor_icon" data-show="#actor" data-hide="#castingdirector" ></button><br><font class="info gray marginTop">I am an Actor</font>
