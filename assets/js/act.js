@@ -42,7 +42,7 @@ $(document).ready(function(){
 
 		data = {request: request, data: JSON.stringify(form)};
 
-		console.log(data);
+		//console.log(data);
 
 		$.ajax({
 			url: url,
@@ -80,6 +80,13 @@ $(document).ready(function(){
 									value = "Female";
 							$("#actor_" + index).html(value);
 						});
+					}
+
+					if(response.message.match(/changed your mobile number/)){
+						$(".otpLink").remove();
+						txt = "Your mobile number is not verified. Please verify your mobile number to receive messages on your phone.";
+						html = '<a href="'+base+'actor/mobileverify" data-toggle="tooltip" data-placement="right" title="'+txt+'" class="text-danger otpLink"><i class="fa fa-exclamation"></i></a>';
+						$("#actor_phone").after(html);
 					}
 
 					
@@ -387,6 +394,71 @@ $(document).ready(function(){
 		}
 		return false;
 	});
+
+	$(".bootstrap-tagsinput input").addClass("autoCompleteSkill");
+
+	/*$(".autoCompleteSkill").autocomplete({
+		source: base + "actor/skillSuggestions",
+		minLength: 2,
+		select: function(ev, info){
+			$(".bootstrap-tagsinput input").before('<span class="tag label label-info">'+info.item.value+'<span data-role="remove"></span></span>');
+			$("input.autoCompleteSkill").val("");
+			sk = $("input#skills").val();
+			sk += ","+info.item.value;
+			$("input#skills").val(sk);
+
+			console.log(sk, $("input#skills"), $("input.autoCompleteSkill"));
+		}
+	});*/
+
+	var ac = "";
+
+	function split( val ) {
+      return val.split( /,\s*/ );
+    }
+
+	function extractList(term) {
+		return split( term ).pop();
+	}
+
+	$(".autoCompleteSkill")
+		.bind( "keydown", function(event){
+			if( event.keyCode === $.ui.keyCode.TAB && $(this).autocomplete("instance").menu.active ){
+				event.preventDefault();
+			}
+
+			plc = $(this).attr("placeholder").replace(":", "");
+			ac = plc.toLowerCase();
+		})
+		.autocomplete({
+			minLength: 1,
+			source: function(request, response){
+				$.getJSON(base + "actor/skillSuggestions/" + ac, {
+					term: extractList(request.term)
+				}, response);
+			},
+			search: function(){
+				var term = extractList(this.value);
+				if(term.length < 2){
+					return false;
+				}
+			},
+			focus: function(){
+				return false;
+			},
+			select: function(event, ui){
+				var terms = split($("input#"+ac).val());
+				console.log(terms);
+				//terms.pop();
+				terms.push(ui.item.value);
+				$("#"+ac+"_edit "+ ".bootstrap-tagsinput input").before('<span class="tag label label-info">'+ui.item.value+'<span data-role="remove"></span></span>');
+				//terms.push("");
+				this.value = '';
+				$("input#" + ac).val(terms);
+				console.log(terms);
+				return false;
+			}
+		});
 
 });
 

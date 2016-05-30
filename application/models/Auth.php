@@ -304,6 +304,15 @@
 			return $this->db->update('stash-mobile-otp', $data);
 		}
 
+		public function updateUserMobile($ref = 0, $mobile = 0){
+			$data = array(
+						'StashUsers_mobile_status' => 1,
+						'StashUsers_mobile' => $mobile
+					);
+			$this->db->where('StashUsers_id', $ref);
+			return $this->db->update('stash-users', $data);
+		}
+
 	}
 
 ?>

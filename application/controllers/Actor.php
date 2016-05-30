@@ -69,6 +69,19 @@
 
 			$this->load->view("mobileVerification", $pageInfo);
 		}
+
+		public function skillSuggestions($value=''){
+			$t = trim($_REQUEST['term']);
+			$this->load->model("ModelActor");
+			if($value == 'language'){
+				$data = $this->ModelActor->getLanguageName($t);
+			}else{
+				$data = $this->ModelActor->getSkillName($t);
+			}
+			header("Content-Type: application/json");
+			echo json_encode($data);
+			exit();
+		}
 		
 		public function response($status = false, $msg = null, $data = []){
 			header("Content-Type: application/json");
@@ -255,14 +268,25 @@
 		}
 		public function editContactsDetails($data = []){
 			$this->load->model("ModelActor");
+			$this->load->model("Auth");
+			$ref = $this->session->userdata("StaSh_User_id");
+			$userdata = $this->Auth->getUserData('StashUsers_id', $ref);
 			$dob = strtotime(trim($data['dob']));
 			$d = array(
 						"StashActor_dob" => $dob,
 						"StashActor_mobile" => $data['phone'],
 						"StashActor_whatsapp" => $data['whatsapp']
 					);
+
+			if($userdata['StashUsers_mobile'] != $data['phone']){
+				$this->Auth->updateUserMobile($ref, $data['phone']);
+				$msg = "Update Success. You changed your mobile number. You need to verify it.";
+			}else{
+				$msg = "Update Success";
+			}
+
 			if($this->ModelActor->updateActorProfile($d)){
-				$this->response(true, "Update Success");
+				$this->response(true, $msg);
 			}else{
 				$this->response(false, "Update Failed");
 			}
