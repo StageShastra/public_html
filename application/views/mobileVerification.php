@@ -18,6 +18,7 @@
             <div class="row">
             <div id="getcodediv">
                <div class="col-sm-6 center">
+                <img src="<?= IMG ?>/mobile.png" width=125px/>
                 <div class="mycontent-right center light-padded">
                     <font class="info firstcolor center"> Mobile Number Verification </font>
                     <br>

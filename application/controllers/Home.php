@@ -41,7 +41,7 @@ class Home extends CI_Controller {
 		                array(
 		                    'field' =>'mobile',
 		                    'label' =>'mobile',
-		                    'rules' => 'required|is_unique[stash-users.StashUsers_mobile]'
+		                    'rules' => 'required|is_unique[stash-users.StashUsers_mobile]|min_length[10]'
 		                ),
 		                array(
 		                    'field' =>'name',

@@ -16,7 +16,7 @@
     $title_exp = "Showing your video work is the best way to showcase your talent. If you don't have any video work to show yet, just record yourself acting out a favorite scene and put that here.";
     $warning_cnf = "Please verify your email address so that casting directors can contact you easily. We've sent you a link to your email.";
     $warning_cnf .= "<br> If you have not received it, click <a href='#' class='text-info' id='resendConfirmationLink'>here</a> to resend the verification email.";
-    $title_verify = "Your mobile number is not verified. Please verify your mobile number to recieve messages on your phone.";
+    $title_verify = "Your mobile number is not verified. Please verify your mobile number to receive messages on your phone.";
 ?>
     <body>
         <style>
@@ -390,6 +390,7 @@ overflow-y:scroll;
                         <div class = "row" id="actor_basics">
                             <div class=" col-sm-4 col-lg-4 col-md-4  a_pic" id="actor_pro_pic">
                                 <span class="glyphicon glyphicon-camera  toggleEdit overlay_edit" data-toggle="modal" data-target="#set_profile_photo" aria-hidden="true"></span>
+                                
                                 <img src="<?= IMG .'/actors/'.$actorProfile['StashActor_avatar'] ?>" id="actorAvatar" class="pro-pic"></img> 
                                  <input type="hidden" id="image_count" value='<?= $actorProfile['StashActor_images'] ?>'>
                                 <input type="hidden" id="profile_pic" value="<?= $actorProfile['StashActor_avatar'] ?>">
@@ -468,7 +469,7 @@ overflow-y:scroll;
                                 
                                 <span class="text-danger elements" id="actor_phone"> <?= $actorProfile['StashActor_mobile'] ?> 
                                 <?php if($user["StashUsers_mobile_status"] == 0){ ?>
-                                <a href="<?= base_url() ?>actor/mobileverify" data-toggle="tooltip" data-placement="right" title="<?= $title_verify ?>" class="text-danger"><i class="fa fa-exclamation"></i></a>
+                                <a href="<?= base_url() ?>actor/mobileverify" data-toggle="tooltip" data-placement="right" title="<?= $title_verify ?>" class="text-danger otpLink"><i class="fa fa-exclamation"></i></a>
                                 <?php } ?>
                                 </span>
 
@@ -482,7 +483,7 @@ overflow-y:scroll;
                                     <input type="date" name="dob" class="editwhite edit_inputs_basics col-sm-7"  value="<?= date("Y-m-d", $actorProfile['StashActor_dob']) ?>" id="dob"/>
                                 <br>
                                 <span id="phone_edit" class="left paddingTop">
-                                <span class="elements_label col-sm-5">Phone:</span><input type="text" class="editwhite edit_inputs_basics col-sm-7" name="phone" value="<?= $actorProfile['StashActor_mobile'] ?>" id="phone"/>
+                                <span class="elements_label col-sm-5">Phone:</span><input type="text" class="editwhite edit_inputs_basics col-sm-7" name="phone" value="<?= $actorProfile['StashActor_mobile'] ?>" maxlength='10' id="phone"/>
                                 <br>
                                 <span id="whatsapp_edit" class="left paddingTop">
                                 <span class="elements_label col-sm-5">WhatsApp:</span><input type="text" class="editwhite edit_inputs_basics col-sm-7" name="whatsapp" value="<?= $actorProfile['StashActor_whatsapp'] ?>" id="whatsapp"/>
@@ -566,7 +567,7 @@ overflow-y:scroll;
 
                             </span>
                             <span id="skills_edit" class="left hidden ">
-                                 <input type="text" class="form-control login" value="<?= implode(",", $actorProfile['StashActor_skills']) ?>" id="skills" data-role="tagsinput" name="skills" placeholder= "Skills:" />
+                                 <input type="text" class="form-control login" value="<?= implode(",", $actorProfile['StashActor_skills']).", " ?>" data-role="tagsinput" id="skills" name="skills" placeholder= "Skills:" />
                                  <br><font class="sortbuttons">
                                     <button type="button" class="btn submit-btn firstcolor center updateDataField"
                                             data-input-names="skills"
@@ -747,8 +748,7 @@ overflow-y:scroll;
                                                     . "</a>"
                                                     . "</li>";
                                                     $counter++;
-                                                        if($counter%5==0)
-                                                        {
+                                                        if($counter%5==0){
                                                             echo '<br>';
                                                         }
                                             }
@@ -857,9 +857,11 @@ overflow-y:scroll;
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title firstcolor info">Upload Photos</h4><span class="info-small gray">You can upload multiple pictures at a time.</span><? $images = json_decode($actorProfile['StashActor_images'], true);
-$count_image=sizeof($images);
-if($count_image>=10){
+                  <h4 class="modal-title firstcolor info">Upload Photos</h4><span class="info-small gray">You can upload multiple pictures at a time.</span>
+
+                  <?php $images = json_decode($actorProfile['StashActor_images'], true);
+                    $count_image=sizeof($images);
+                    if($count_image>=10){
                     echo "<div class='alert alert-danger' role='alert'>
                               <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
                               <span class='sr-only'>Warning:</span>

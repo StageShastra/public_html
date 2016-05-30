@@ -725,27 +725,36 @@ $(document).ready(function(){
         $('#detailsActor').modal('show');
 	});
 
-	/*function charCounter(that, action) {
-		var limit = Number($("#sms-char-left").text());
-		var count = Number($("#no-of-sms").text());
-		var cur = Number($(that).val().length);
-		limit -= 1;
-		if(diff == -1){
-			limit = 160;
-			count += 1;
+	function smsCharCounter(textbox, countID, msgID) {
+		txt = $.trim($(textbox).val());
+		len = txt.length;
+		if(len >= 579){
+			$(textbox).val(txt.substring(0, 280));
+			alert("character limit exceed.");
+			return;
 		}
-
-		$("#sms-char-left").html(limit);
-		$("#no-of-sms").html(count);
+		reminder = 160 - (len % 160);
+		numMsg = Math.ceil(len / 160);
+		$(countID).html(reminder);
+		$(msgID).html(numMsg);
+		//console.log(txt, len, reminder, numMsg);
 	}
 
 	$("#text-sms").on("keyup", function(){
-		charCounter(this, 'up');
-	});*/
+		smsCharCounter("#text-sms", "#invite-charCounter", "#invite-msgCounter");
+	});
 
-	/*$("#text-sms").on("keydown", function(){
-		charCounter(this, 'down');
-	});*/
+	$("#text-sms").on("change", function(){
+		smsCharCounter("#text-sms", "#invite-charCounter", "#invite-msgCounter");
+	});
+
+	$("#textsms").on("keyup", function(){
+		smsCharCounter("#textsms", "#audi-charCounter", "#audi-msgCounter");
+	});
+
+	$("#textsms").on("change", function(){
+		smsCharCounter("#textsms", "#audi-charCounter", "#audi-msgCounter");
+	});
 
 	$(document).on("submit", "form#emailInvitationForm", function(){
 		var conf = confirm("Are you sure you want to send this message ?");
@@ -800,7 +809,7 @@ $(document).ready(function(){
 			project_name: project_name,
 			project_date: project_date
 		})};
-		console.log(data);
+		//console.log(data);
 		$.ajax({
 			url: url,
 			type: type,
@@ -848,7 +857,43 @@ $(document).ready(function(){
 		var add = $(this).attr("data-add");
 		txt += " " + add;
 		$("textarea[name='"+name+"']").val(txt);
-		console.log(txt, name);
+		smsCharCounter("#text-sms", "#invite-charCounter", "#invite-msgCounter");
+		//console.log(txt, name);
+		return false;
+	});
+
+	$(document).on("click", ".previewEmailBtn", function(){
+		txtId = $(this).attr("data-id");
+		txt = $(txtId).val();
+		txt = encodeURI(txt);
+		src = base + "director/emailPreview/?msg=" + txt;
+		if(txtId == "#emailtxtMsg"){
+			src += "&link=%23&linkname=Accept+Invitation";	
+		}
+		$("#emailPreviewiFrame").attr("src", src);
+		$("#emailPreview").modal("show");
+		return false;
+	});
+
+	$(document).on("click", ".previewSMSBtn", function(){
+		txtId = $(this).attr("data-id");
+		msg = $(txtId).val();
+		msg = msg.split("\n");
+		txt = "Dear Actor,<br>";
+		for(var i = 0; i < msg.length; i++){
+			txt += msg[i];
+			txt += "<br>";
+			if($.trim(msg[i]) == '')
+				txt += "<br>";
+		}
+
+		if(txtId == "#text-sms"){
+			txt = txt + "<br>http://invite.castiko.com/AG8hik";
+		}
+
+		txt = txt + "<br>Powered By Castiko";
+		$("#previewSMSTxt").html(txt);
+		$("#previewSMS").modal("show");
 		return false;
 	});
 
