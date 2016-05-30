@@ -397,20 +397,6 @@ $(document).ready(function(){
 
 	$(".bootstrap-tagsinput input").addClass("autoCompleteSkill");
 
-	/*$(".autoCompleteSkill").autocomplete({
-		source: base + "actor/skillSuggestions",
-		minLength: 2,
-		select: function(ev, info){
-			$(".bootstrap-tagsinput input").before('<span class="tag label label-info">'+info.item.value+'<span data-role="remove"></span></span>');
-			$("input.autoCompleteSkill").val("");
-			sk = $("input#skills").val();
-			sk += ","+info.item.value;
-			$("input#skills").val(sk);
-
-			console.log(sk, $("input#skills"), $("input.autoCompleteSkill"));
-		}
-	});*/
-
 	var ac = "";
 
 	function split( val ) {
@@ -459,6 +445,30 @@ $(document).ready(function(){
 				return false;
 			}
 		});
+
+
+
+	// To Remove Profile Image
+	$(document).on("click", ".removeDP", function(){
+		var conf = confirm("Are you sure you want to remove profile image ?");
+		if(!conf)
+			return false;
+
+		data = {request: "RemoveProfilePic", data: JSON.stringify({})};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				if(response.status){
+					$("#actorAvatar").attr("src", base + "assets/img/actors/default.png");
+				}
+				$("#savedChnagedMsg").html(response.message);
+				$("#savedChnaged").show(500).delay(3000).hide(500);
+			}
+		});
+		return false;
+	});
 
 });
 

@@ -390,6 +390,7 @@ overflow-y:scroll;
                         <div class = "row" id="actor_basics">
                             <div class=" col-sm-4 col-lg-4 col-md-4  a_pic" id="actor_pro_pic">
                                 <span class="glyphicon glyphicon-camera  toggleEdit overlay_edit" data-toggle="modal" data-target="#set_profile_photo" aria-hidden="true"></span>
+                                
                                 <img src="<?= IMG .'/actors/'.$actorProfile['StashActor_avatar'] ?>" id="actorAvatar" class="pro-pic"></img> 
                                  <input type="hidden" id="image_count" value='<?= $actorProfile['StashActor_images'] ?>'>
                                 <input type="hidden" id="profile_pic" value="<?= $actorProfile['StashActor_avatar'] ?>">

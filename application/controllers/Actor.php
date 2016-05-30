@@ -170,10 +170,24 @@
 						$this->verifyOTP($data);
 						break;
 
+					case "RemoveProfilePic":
+						$this->removeProfilePic($data);
+						break;
+
 					default:
 						$this->response(false, "Invalid Request");
 						break;
 				}
+			}
+		}
+
+		public function removeProfilePic($data = []){
+			$this->load->model("ModelActor");
+			$d = array("StashActor_avatar" => "default.png";
+			if($this->ModelActor->updateActorProfile($d)){
+				$this->response(true, "Update Success");
+			}else{
+				$this->response(false, "Update Failed");
 			}
 		}
 
