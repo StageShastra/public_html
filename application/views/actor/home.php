@@ -14,7 +14,7 @@
     
     $title_cd = "When you accept a casting director's invitation to join their database, their name will show up here. This means that they will see all the changes you make to your profile instantly.";
     $title_exp = "Showing your video work is the best way to showcase your talent. If you don't have any video work to show yet, just record yourself acting out a favorite scene and put that here.";
-    $warning_cnf = "Please verify your email address so that casting directors can contact you easily. We've sent you a link to your email.";
+    $warning_cnf = "Please verify your email address so that casting directors can contact you easily. We've sent a link to your email.";
     $warning_cnf .= "<br> If you have not received it, click <a href='#' class='text-info' id='resendConfirmationLink'>here</a> to resend the verification email.";
     $title_verify = "Your mobile number is not verified. Please verify your mobile number to recieve messages on your phone.";
 ?>
@@ -35,12 +35,14 @@
         }
         /* AKASH SINGH: */
         .a_name{
-            font-family: AvenirNext-Bold;
-            font-size: 30px;
+            font-family: 'Raleway', sans-serif, AvenirNext-Regular;
+            font-size: 20px;
             color: #4A4A4A;
             text-align: left;
             margin-bottom: 15px;
+            margin-left: -15px;
         }
+        
         .a_pic{
             /* Rectangle 1: */
             margin-top: 15px;
@@ -65,8 +67,8 @@
         .category_heading{
             font-family: Raleway;
             font-weight: 400;
-            font-size: 20px;
-            color: #C9C9C9;
+            font-size: 15px;
+            color: #FFB600;
             
         }
         .elements{
@@ -216,45 +218,45 @@
         .edit-button{
             right:0px;
         }
-.DocumentItem
-{
-    max-width: 150px;
-    height: 150px;
-    overflow: hidden;
-    position: relative;
-    border-radius: 10px;
-}
-.crop {
-    position:absolute;
-    left: -100%;
-    right: -100%;
-    top: -100%;
-    bottom: -100%;
-    margin: auto;
-    width: auto;
-    height: auto;
-}
-#actor_pro_pic{
-    width: 105px;
-    height: 105px;
-    overflow: hidden;
-    margin-top:20px;
-    margin-right: 5px;
-    position: relative;
-    border-radius: 10px;
-}
-.hidden_scroll{
-overflow-y:hidden;
-}
-.hidden_scroll:hover{
-overflow-y:scroll;
-}
+        .DocumentItem
+        {
+            max-width: 150px;
+            height: 150px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 10px;
+        }
+        .crop {
+            position:absolute;
+            left: -100%;
+            right: -100%;
+            top: -100%;
+            bottom: -100%;
+            margin: auto;
+            width: auto;
+            height: auto;
+        }
+        #actor_pro_pic{
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            margin-right: 5px;
+            position: relative;
+            border-radius: 10px
+        }
+        .hidden_scroll{
+        overflow-y:hidden;
+        }
+        .hidden_scroll:hover{
+        overflow-y:scroll;
+        }
 
 		.actor_link {
-			padding: 3px;
+			padding: 0px;
 			color: #9b9b9b;
 			font-size: 12px;
 			cursor: text;
+            margin-left: -15px;
 			
 		}
 		
@@ -265,6 +267,92 @@ overflow-y:scroll;
 
         .notVerified {
             color: red;
+        }
+        /*mobileresponsiveness*/
+        #home{
+            padding-left:0px;
+            padding-right: 0px;
+        }
+        .custom-navbar{
+            padding-top: 0px;
+            margin-bottom: 0px;
+
+        }
+        /* xs */
+        @media screen and (max-width: 767px) {
+            body {
+                font-size: 0.9em;
+            }
+            .container-fluid{
+                padding:0px;
+            }
+            .navbar-fixed-top{
+                margin-left: 0%;
+                margin-right: 0%;
+            }
+        
+        }
+
+        /* sm */
+        @media screen and (min-width: 768px) {
+            body {
+                font-size: 1em;
+            }
+            .container-fluid{
+                padding:0px;
+            }
+            .navbar-fixed-top{
+                margin-left: 0%;
+                margin-right: 0%;
+            }
+        }
+
+        /* md */
+        @media screen and (min-width: 992px) {
+            body {
+                font-size: 1.1em;
+            }
+            .navbar-fixed-top{
+                margin-left: 3%;
+                margin-right: 3%;
+            }
+        }
+
+        /* lg */
+        @media screen and (min-width: 1200px) {
+            body {
+                font-size: 1.2em;
+            }
+            .padded{
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            #home{
+            padding-left:15px;
+            padding-right: 15px;
+            }
+            .navbar-fixed-top{
+                margin-left: 3%;
+                margin-right: 3%;
+            }
+        }
+        #actor_basics{
+           
+        }
+        #socialShare{
+            padding: 0px;
+            margin-left: -15px;
+        }
+        .collapse
+        {
+            height: 75px !important;
+        }
+        .custom-navbar{
+            padding-bottom: 0px;
+        }
+        iframe{
+            width: 100%;
+            box-shadow: gray 5px 3px 10px 2px;
         }
         </style>
         <!--[if lt IE 8]>
@@ -289,13 +377,13 @@ overflow-y:scroll;
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="index.php">
-                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname">C A S T I K O</b></span><p><span id="tag-line" class="firstcolor info-small">Makes casting easier!</span>
+                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="headname"><span >C A S T I K O</span><br><span class="firstcolor info-small"><?= M_TagLine?></span></b></span>
                         </a>
                     </div> 
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  
-                      <ul class="nav navbar-nav navbar-right vertical-middle">
+                      <ul class="nav navbar-nav navbar-right" style="text-align:right;">
                        
                         <li>
                             <a href="<?= base_url() ?>home/logout/"><button type="button" class="btn submit-btn firstcolor" id="btn-logout"  ><span class="glyphicon glyphicon-log-out"></span> &nbsp; Sign Out</button></a>
@@ -306,38 +394,10 @@ overflow-y:scroll;
             </nav>
 
            <!-- contact modal toggle -->
-            <div class="container-fluid" id="home">
            
-           
-            <nav class="navbar navbar-default navbar-fixed-top custom-navbar">
-                <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="index.php">
-                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname">C A S T I K O</b></span><p><span id="tag-line" class="firstcolor info-small">Makes casting easier!</span>
-                        </a>
-                    </div> 
-
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  
-                      <ul class="nav navbar-nav navbar-right vertical-middle">
-                       
-                        <li>
-                            <a href="<?= base_url() ?>home/logout/"><button type="button" class="btn submit-btn firstcolor" id="btn-logout"  ><span class="glyphicon glyphicon-log-out"></span> &nbsp; Sign Out</button></a>
-                        </li>
-                      </ul>
-                    </div><!-- /.navbar-collapse -->
-                </div>
-            </nav>
 
            <!-- contact modal toggle -->
-             <div class="container-fluid padded">
+             <div class="container-fluid">
                 <?php
                     if($user["StashUsers_status"] == 0){
                 ?>
@@ -353,7 +413,7 @@ overflow-y:scroll;
                 </div>
 
                 <div class="container col-sm-12 center" id="browse-table">
-                    <div class="col-sm-3 light-padded mycontent-left left">
+                    <div class="col-sm-3 light-padded left">
                         <span class="a_name"><?= $actorProfile['StashActor_name'] ?></span>
 						
 						
@@ -363,11 +423,11 @@ overflow-y:scroll;
 							<i>&emsp;</i>
 							<span class="fa fa-share-alt edit-button shareButton" data-open="false" style="cursor:pointer;" ></span>
 							<i>&emsp;</i>
-							<span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#actor_username_edit" data-hide-id="#actor_username" aria-hidden="true" style="cursor:pointer;"></span>
+							<span class="glyphicon glyphicon-pencil edit-button  toggleEdit" data-unhide-id="#actor_username_edit" data-hide-id="#actor_username" aria-hidden="true" style="cursor:pointer;"></span>
 							
 						</p>
 						
-						<div id="socialShare"></div>
+						<div id="socialShare" ></div>
 						
 						<div id="actor_username_edit" class="hidden">
 							<div class="category_heading no_left_margin"></div>
@@ -388,22 +448,22 @@ overflow-y:scroll;
 						</div>
 						
                         <div class = "row" id="actor_basics">
-                            <div class=" col-sm-4 col-lg-4 col-md-4  a_pic" id="actor_pro_pic">
+                            <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#actor_basics_edit" data-hide-id="#actor_basics" aria-hidden="true" ></span>
+                            <div class=" col-sm-3 col-lg-4 col-md-4  a_pic" id="actor_pro_pic">
                                 <span class="glyphicon glyphicon-camera  toggleEdit overlay_edit" data-toggle="modal" data-target="#set_profile_photo" aria-hidden="true"></span>
                                 <img src="<?= IMG .'/actors/'.$actorProfile['StashActor_avatar'] ?>" id="actorAvatar" class="pro-pic"></img> 
                                  <input type="hidden" id="image_count" value='<?= $actorProfile['StashActor_images'] ?>'>
                                 <input type="hidden" id="profile_pic" value="<?= $actorProfile['StashActor_avatar'] ?>">
                             </div>
-                            <div class="basics col-sm-6 col-lg-6 col-md-8" style="padding-left:0px;padding-right:0px;">
+                            <div class="basics col-sm-6 col-lg-7 col-md-7" style="padding-left:0px;padding-right:0px;">
                                 <div class="category_heading ">BASICS
-                                    <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#actor_basics_edit" data-hide-id="#actor_basics" aria-hidden="true" style="position:absolute; right:-6px;"></span>
 								</div>
                                 <div class="elements">
                                     <span class="elements_label">Sex: </span><span id="actor_sex"><?= ($actorProfile['StashActor_gender']) ? "Male" : "Female" ?></span>
                                     <br>
-                                    <span class="elements_label">Age Range:</span><span id="actor_min_age"><?= $actorProfile['StashActor_min_role_age'] ?></span>-<span id="actor_max_age"><?= $actorProfile['StashActor_max_role_age'] ?></span><span style="font-size:9px;"> y</span><br>
-                                   <span class="elements_label">Weight:</span><span id="actor_weight"><?= $actorProfile['StashActor_weight'] ?></span> kgs<br>
-                                    <span class="elements_label">Height</span><span id="actor_height"><?= $actorProfile['StashActor_height'] ?></span> cms<br>
+                                    <span class="elements_label">Age Range:</span><span id="actor_min_age" ><?= $actorProfile['StashActor_min_role_age'] ?></span>-<span id="actor_max_age"><?= $actorProfile['StashActor_max_role_age'] ?></span><span style="font-size:9px;"> years</span><br>
+                                   <span class="elements_label ">Weight:</span><span id="actor_weight" ><?= $actorProfile['StashActor_weight'] ?></span> kgs<br>
+                                    <span class="elements_label ">Height: </span><span id="actor_height" ><?= $actorProfile['StashActor_height'] ?></span> cms<br>
                                 </div>
                             </div>
 
