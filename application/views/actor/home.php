@@ -366,6 +366,7 @@
             	max-height:auto;
             	height:auto;
             	overflow-y:auto;
+            	overflow-x:hidden;
             }
 
             
@@ -1000,9 +1001,9 @@
                                                     . "</a>"
                                                     . "</li>";
                                                     $counter++;
-                                                        //if($counter%5==0){
-                                                          //  echo '<br>';
-                                                        //}
+                                                        if($counter%5==0){
+                                                            echo '<br>';
+                                                        do}
                                             }
                                         ?>     
 
