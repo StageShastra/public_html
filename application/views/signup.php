@@ -6,16 +6,15 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <div class="container">
-          <div class="col-sm-1">
-          </div>
-          <div class="container-fluid col-sm-10"> <!--container fluid starts -->
+          <div class="container-fluid center col-sm-10 col-xs-12"> <!--container fluid starts -->
              <div class="center headname">
               <a href="<?= base_url() ?>" class='a_logo'><img src="<?= IMG ?>/logo.png" class="logo img-fluid"/>
 			  <span class="title big"><?= M_Title ?></span></a>
+             <hr>
              </div>
             <div class="row center">
               <div class="col-sm-12 light-padded">
-                <div class="quarter" id="form-div">
+                <div class="col-lg-6 col-sm-8 col-xs-12 center" id="form-div">
                 <?php if(!$error){ ?>
                   <font class="info-small text-primary"> <?= M_Register1 ?> </br> <?= ($page == 'director') ? M_Register2 : "" ?></font>
                   
@@ -39,8 +38,10 @@
                         I am <input type="radio" name="type" value="director" checked> Director
                               <input type="radio" name="type" value="actor"> Actor
                       </div> -->
+
 					  <a href="<?= base_url() ?>" class="pull-right"><small><?= M_AlreadyRegistered ?></small></a>
                       <button type="submit" class="btn submit-btn firstcolor" name="submit" id="sign-upbtn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign Up</button>
+
                     </form>
                 <?php } ?>
 					
@@ -71,7 +72,6 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-1">
           </div>
         </div>
 <?php
