@@ -299,6 +299,17 @@
                 position: relative;
                 top: -10px;
             }
+        .alertbox{
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(22, 122, 198, 0.83);
+            border-radius: 4px;
+            margin-top: 20px;
+            background:#F05759;
+            color: white; 
+            font-size: 22px;
+        }
+           
         /* xs */
         @media screen and (max-width: 767px) {
             body {
@@ -353,17 +364,7 @@
                 position: absolute;
                 top:10px;
             }
-            .alert{
-                padding: 15px;
-                margin-bottom: 20px;
-                border: 1px solid rgba(22, 122, 198, 0.83);
-                border-radius: 4px;
-                margin-top: 20px;
-                background:#F05759;
-                color: white; 
-                font-size: 22px;
-            }
-           
+            
 
             
         }
@@ -579,7 +580,7 @@
                 </div>
                 <?php } ?>
                 
-                <div class="alert alert-primary alert-dismissible" id="savedChnaged" style="display:none;" role="alert">
+                <div class="alert alert-primary alert-dismissible alertbox" id="savedChnaged" style="display:none;" role="alert">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <span id="savedChnagedMsg"></span>
                 </div>
@@ -620,7 +621,7 @@
 						</div>
                         <div class = "row" id="actor_basics">
                             <div class=" col-sm-3 col-lg-4 col-md-4  a_pic" id="actor_pro_pic">
-                               <span class="glyphicon glyphicon-renove  toggleEdit overlay_edit removeDP" style="left:5px;" aria-hidden="true"></span> <span class="glyphicon glyphicon-camera  toggleEdit overlay_edit" data-toggle="modal" data-target="#set_profile_photo" aria-hidden="true"></span>
+                               <span class="glyphicon glyphicon-remove  toggleEdit overlay_edit removeDP" style="left:5px; right:0px" aria-hidden="true"></span> <span class="glyphicon glyphicon-camera  toggleEdit overlay_edit" data-toggle="modal" data-target="#set_profile_photo" aria-hidden="true"></span>
                                 
                                 <img src="<?= IMG .'/actors/'.$actorProfile['StashActor_avatar'] ?>" id="actorAvatar" class="pro-pic"></img> 
                                  <input type="hidden" id="image_count" value='<?= $actorProfile['StashActor_images'] ?>'>
