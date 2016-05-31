@@ -422,6 +422,10 @@
             #browse-table{
                 margin-top: 20px;
             }
+            .DocumentItem{
+            	width:115px;
+            	height:115px;
+            }
         }
 
         /* lg */
@@ -456,6 +460,10 @@
             }
             .#browse-table{
                 margin-top: 25px;
+            }
+            .DocumentItem{
+            	width:125px;
+            	height:125px;
             }
         }
         .videoWrapper {
@@ -755,7 +763,7 @@
                             <span id="language_edit" class="left hidden ">
                                  <input type="text" class="form-control login" value="<?= implode(",", $actorProfile['StashActor_language']) ?>" id="language" data-role="tagsinput" name="language" placeholder= "Language:" />
                                  <br><font class="sortbuttons">
-                                    <button type="button" class="btn submit-btn firstcolor center updateDataField"
+                                    <button type="button" class="btn submit-btn firstcolor center updateDataField tick"
                                             data-input-names="language"
                                             data-request="EditLanguage"
                                             data-hide-id="#language_edit" 
@@ -788,7 +796,7 @@
                             <span id="skills_edit" class="left hidden ">
                                  <input type="text" class="form-control login" value="<?= implode(",", $actorProfile['StashActor_skills']).", " ?>" data-role="tagsinput" id="skills" name="skills" placeholder= "Skills:" />
                                  <br><font class="sortbuttons">
-                                    <button type="button" class="btn submit-btn firstcolor center updateDataField"
+                                    <button type="button" class="btn submit-btn firstcolor center updateDataField tick"
                                             data-input-names="skills"
                                             data-request="EditSkills"
                                             data-hide-id="#skills_edit" 
@@ -1005,7 +1013,7 @@
                                         <input type="text" class="editwhite short" name='trn_end_time' id="addend" Placeholder="Ending Year"/>
                                     </div>
                                     <textarea class="editwhite long" name='trn_blurb' id="addtrainingdescription" placeholder="A little description about the course." style="height:80px;"></textarea>
-                                    <br><font class="sortbuttons"><button class="btn submit-btn firstcolor center addTraining"  ><span class="glyphicon glyphicon-ok"></span></button></font>
+                                    <br><font class="sortbuttons"><button class="btn submit-btn firstcolor center addTraining tick"  ><span class="glyphicon glyphicon-ok"></span></button></font>
                                 <hr>
                                 </span>
                                 <div id="traininglist" style="max-height:300px;">
@@ -1052,7 +1060,7 @@
                                         <textarea class="editwhite long" name="tr_blurb_<?= $key ?>" id="edittrainingdescriptioni" style="height:100px;"><?= $training['StashActorTraining_blurb'] ?></textarea>
                                         <br>
                                         <font class="sortbuttons">
-                                            <button class="btn submit-btn firstcolor center btnExpAndTraining"
+                                            <button class="btn submit-btn firstcolor center btnExpAndTraining tick"
                                                     data-input-names="tr_title_<?= $key ?>, tr_course_<?= $key ?>, tr_start_<?= $key ?>, tr_end_<?= $key ?>, tr_blurb_<?= $key ?>"
                                                     data-key="<?= $key ?>"
                                                     data-table-id="<?= $training['StashActorTraining_id'] ?>"
