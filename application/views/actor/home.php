@@ -40,12 +40,10 @@
             color: #4A4A4A;
             text-align: left;
             margin-bottom: 15px;
-            margin-left: -15px;
         }
         
         .a_pic{
             /* Rectangle 1: */
-            margin-top: 15px;
             border-radius: 10px;
             height: 130px;
             width: 130px;
@@ -62,7 +60,6 @@
         }
         .basics{
             text-align: left;
-            margin-top: 15px;
         }
         .category_heading{
             font-family: Raleway;
@@ -82,7 +79,8 @@
             font-size: 14px;
             color: #9B9B9B;
             letter-spacing: 0px;
-            text-shadow: 0px 1px 0px #FFFFFF;
+            text-shadow: 1px 1px 1px #FFFFFF;
+            
         }
         .language_tag{
             border: 1px solid #FBB515;
@@ -94,6 +92,10 @@
             padding-left:0px;
              width:100%;
             overflow-x:hidden;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
         }
         .project_tag{
             border: 1px solid #FBB515;
@@ -105,6 +107,10 @@
             padding-left:0px;
             width:100%;
             overflow-x:hidden;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
         }
          .skills_tag{
             border: 1px solid #F05759;
@@ -115,7 +121,19 @@
             max-width: 100%;
             padding-left:0px;
              width:100%;
-            overflow-x:hidden;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+        }
+        .ellipsis{
+             -webkit-transition: width 1s ease-in-out;
+            -moz-transition: width 1s ease-in-out;
+            -o-transition: width 1s ease-in-out;
+            transition: width 1s ease-in-out;
+        }
+        .ellipsis:hover{
+            width: auto;
         }
         .taga-text {
             padding-left: 3px !important;
@@ -136,7 +154,7 @@
             border-radius: 3px;
         }
         #second_column_actor{
-            margin-left: 30px; 
+            margin-left: 20px; 
         }
         .training-plus{
             font-family: AvenirNext-Regular;
@@ -261,7 +279,6 @@
 		}
 		
 		.actor_link a{
-			color: #9b9b9b;
 			text-decoration: none;
 		}
 
@@ -278,6 +295,10 @@
             margin-bottom: 0px;
 
         }
+        .tagline{
+                position: relative;
+                top: -10px;
+            }
         /* xs */
         @media screen and (max-width: 767px) {
             body {
@@ -290,9 +311,47 @@
                 margin-left: 0%;
                 margin-right: 0%;
             }
-        
-        }
+            .navbar-header{
+                height: 75px;
+            }
+            .headname{
+                position: relative;
+                top:15px;
+                font-size: 20px;
+            }
+            .brands{
+                width: 55px;
+                height: auto;
+            }
+            .navbar-toggle{
+                margin-right: 20px;
+                position: relative;
+                top:20px;
+                margin-top: 0px;
 
+            }
+             .tagline{
+                font-size: 9px;
+            }
+            .light-padded
+            {
+                padding: 0px 5px 0px 10px !important;
+            }
+            .no_padding_small{
+            padding-left: 0px;
+            padding-right: 0px;
+            }
+            #second_column_actor{
+            margin-left: -15px; 
+            margin-right: -15px;
+            }
+            .DocumentItem{
+                width:60px;
+                height: 60px;
+            }
+
+            
+        }
         /* sm */
         @media screen and (min-width: 768px) {
             body {
@@ -305,6 +364,30 @@
                 margin-left: 0%;
                 margin-right: 0%;
             }
+            .headname{
+                position: relative;
+                top:15px;
+                font-size: 22px;
+            }
+            .brands{
+                width: 60px;
+                height: auto;
+            }
+            .tagline{
+                font-size: 9px;
+            }
+            .navbar-toggle{
+                margin-right: 20px;
+
+            }
+            .no_padding_small{
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        .DocumentItem{
+                width:75px;
+                height: 75px;
+            }
         }
 
         /* md */
@@ -315,6 +398,25 @@
             .navbar-fixed-top{
                 margin-left: 3%;
                 margin-right: 3%;
+            }
+            .headname{
+                position: relative;
+                top:18px;
+                font-size: 22px;
+            }
+            .brands{
+                width: 65px;
+                height: auto;
+            }
+            .info-small{
+                font-size: 12px;
+            }
+            .light-padded
+            {
+                padding-left: 10px;
+            }
+            #browse-table{
+                margin-top: 20px;
             }
         }
 
@@ -335,13 +437,42 @@
                 margin-left: 3%;
                 margin-right: 3%;
             }
+            .headname{
+                position: relative;
+                top:20px;
+                font-size: 24px;
+            }
+            .brands{
+                width: 85px;
+                height: auto;
+            }
+            .light-padded
+            {
+                padding-left: 10px;
+            }
+            .#browse-table{
+                margin-top: 25px;
+            }
         }
+        .videoWrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 */
+        padding-top: 25px;
+        height: 0;
+    }
+    .videoWrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
         #actor_basics{
            
         }
         #socialShare{
             padding: 0px;
-            margin-left: -15px;
+            margin-top: -15px;
         }
         .collapse
         {
@@ -354,6 +485,25 @@
             width: 100%;
             box-shadow: gray 5px 3px 10px 2px;
         }
+        .light-padded{
+            padding: 15px 5px 0px 15px;
+        }
+        #profile_link{
+            font-size: 9px;
+            position: relative;
+            top:-10px;
+            margin-left: 15px;
+        }
+        .tick{
+                border-radius: 30px;
+                font-size: 20px;
+                padding: 5px 10px !important;
+        }
+        .tick:hover{
+            background: red;
+            color: white;
+        }
+
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -376,8 +526,8 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.php">
-                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="headname"><span >C A S T I K O</span><br><span class="firstcolor info-small"><?= M_TagLine?></span></b></span>
+                        <a class="navbar-brand" href="<?= base_url() ?>">
+                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="headname"><span >C A S T I K O</span><br><span class="firstcolor info-small tagline"><?= M_TagLine?></span></b></span>
                         </a>
                     </div> 
 
@@ -414,18 +564,17 @@
 
                 <div class="container col-sm-12 center" id="browse-table">
                     <div class="col-sm-3 light-padded left">
+                    <div class="row">
                         <span class="a_name"><?= $actorProfile['StashActor_name'] ?></span>
+						 <span class="fa fa-share-alt edit-button  shareButton" data-open="false" style="cursor:pointer;" ></span>
+                            <i>&emsp;</i>
+                    <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#actor_username_edit" data-hide-id="#actor_username" aria-hidden="true" style="cursor:pointer;"></span>
 						
-						
-						
-						<p class="actor_link" id="actor_username">
-							<span ><a href="<?= base_url() . $user['StashUsers_username'] ?>" id="actor_username_txt" target="_blank"><?= base_url() . $user['StashUsers_username'] ?></a></span>
+						<br>
+						<span class="actor_link" id="actor_username">
+							<span id="profile_link" ><a href="<?= base_url() . $user['StashUsers_username'] ?>" id="actor_username_txt" target="_blank"><?= base_url() . $user['StashUsers_username'] ?></a></span>
 							<i>&emsp;</i>
-							<span class="fa fa-share-alt edit-button shareButton" data-open="false" style="cursor:pointer;" ></span>
-							<i>&emsp;</i>
-							<span class="glyphicon glyphicon-pencil edit-button  toggleEdit" data-unhide-id="#actor_username_edit" data-hide-id="#actor_username" aria-hidden="true" style="cursor:pointer;"></span>
-							
-						</p>
+						</span>
 						
 						<div id="socialShare" ></div>
 						
@@ -446,9 +595,8 @@
 									</button>
 							</font>
 						</div>
-						
+						</div>
                         <div class = "row" id="actor_basics">
-                            <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#actor_basics_edit" data-hide-id="#actor_basics" aria-hidden="true" ></span>
                             <div class=" col-sm-3 col-lg-4 col-md-4  a_pic" id="actor_pro_pic">
                                 <span class="glyphicon glyphicon-camera  toggleEdit overlay_edit" data-toggle="modal" data-target="#set_profile_photo" aria-hidden="true"></span>
                                 
@@ -456,8 +604,9 @@
                                  <input type="hidden" id="image_count" value='<?= $actorProfile['StashActor_images'] ?>'>
                                 <input type="hidden" id="profile_pic" value="<?= $actorProfile['StashActor_avatar'] ?>">
                             </div>
-                            <div class="basics col-sm-6 col-lg-7 col-md-7" style="padding-left:0px;padding-right:0px;">
+                            <div class="basics col-sm-12 col-lg-7 col-md-7" style="padding-left:0px;padding-right:0px;">
                                 <div class="category_heading ">BASICS
+                                    <span class="glyphicon glyphicon-pencil edit-button  toggleEdit" data-unhide-id="#actor_basics_edit" data-hide-id="#actor_basics" aria-hidden="true" ></span>
 								</div>
                                 <div class="elements">
                                     <span class="elements_label">Sex: </span><span id="actor_sex"><?= ($actorProfile['StashActor_gender']) ? "Male" : "Female" ?></span>
@@ -471,40 +620,40 @@
 
                         </div>
 							<div id="actor_basics_edit" class="hidden">
-                                <div class="category_heading no_left_margin">BASICS</div>
+                                <div class="category_heading row" >BASICS</div>
                                 
-                                    <div class="row no_left_margin">
-                                        <select type="text" class="editwhite edit_inputs_basics col-sm-2" name="sex" value="<?= ($actorProfile['StashActor_gender']) ? "M" : "F" ?>" id="sex" placeholder="Sex">
+                                    <div class="row">
+                                        <select type="text" class="editwhite edit_inputs_basics col-sm-2 col-xs-12" name="sex" value="<?= ($actorProfile['StashActor_gender']) ? "M" : "F" ?>" id="sex" placeholder="Sex">
                                         <option value="M">M</option>
                                         <option value="F">F</option>
                                         </select>
                                     </div>
-                                    <div class="row no_left_margin">
-                                        <div class="col-sm-2" style="padding-left:0px;padding-right:0px;">
+                                    <div class="row">
+                                        <div class="col-sm-2 col-xs-2" style="padding-left:0px;padding-right:0px;">
                                          <input type="text" name='min_age' class="editwhite edit_inputs_basics "  style="padding-left:5px; max-width:100%" value="<?= $actorProfile['StashActor_min_role_age'] ?>" title="What  minimum age would you naturally be able to play on screen/stage?" id="agemin"/>
                                         </div>
-                                        <div class="col-sm-1" style="padding-left:2px; padding-right:0px;text-align:center">
-                                              -
+                                        <div class="col-sm-1 col-xs-1" style="padding-left:0px; padding-right:0px;text-align:center">
+                                              --
                                         </div>
-                                        <div class="col-sm-2" style="padding-left:0px;padding-right:0px;">
+                                        <div class="col-sm-2 col-xs-2" style="padding-left:0px;padding-right:0px;">
                                          <input type="text" name='max_age' class="editwhite edit_inputs_basics "  style="padding-left:5px; max-width:100%" value="<?= $actorProfile['StashActor_max_role_age'] ?>" title="What  maximum age would you naturally be able to play on screen/stage?" id="agemax"/> 
                                         </div>
                                         <span class="edit_basics_labels"> years </span>
                                     </div>
-                                    <div class="row no_left_margin">
-                                        <input type="text" class="editwhite edit_inputs_basics col-sm-4" name='weight'  placeholder="Weight in kgs" value="<?= $actorProfile['StashActor_weight'] ?>" id="weight"/>  <span class="edit_basics_labels">kgs</span>
+                                    <div class="row">
+                                        <input type="text" class="editwhite edit_inputs_basics col-sm-4 col-xs-12" name='weight'  placeholder="Weight in kgs" value="<?= $actorProfile['StashActor_weight'] ?>" id="weight"/>  <span class="edit_basics_labels">kgs</span>
                                     </div>
-                                    <div class="row no_left_margin">
-                                        <input type="text" class="editwhite edit_inputs_basics col-sm-2" name='height'  placeholder="Height in cms" value="<?= $actorProfile['StashActor_height'] ?>" id="height"/>  <span class="edit_basics_labels">cms</span>
+                                    <div class="row">
+                                        <input type="text" class="editwhite edit_inputs_basics col-sm-2 col-xs-12" name='height'  placeholder="Height in cms" value="<?= $actorProfile['StashActor_height'] ?>" id="height"/>  <span class="edit_basics_labels">cms</span>
                                         <i class="glyphicon glyphicon-filter" data-toggle="modal" data-target="#feetToCmConverterModal"></i>
                                     </div>
                                 
                                 <font class="sortbuttons">
-                                        <button type="button" class="btn submit-btn firstcolor center tick updateDataField"
+                                        <button type="button" class="btn submit-btn firstcolor tick updateDataField"
                                                 data-input-names="sex,min_age,max_age,weight,height"
                                                 data-request="EditBasics"
                                                 data-hide-id="#actor_basics_edit" 
-                                                data-unhide-id="#actor_basics">
+                                                data-unhide-id="#actor_basics" style="margin-left: -15px;">
                                             <span class="glyphicon glyphicon-ok"></span>
                                         </button>
                                 </font>
@@ -539,14 +688,13 @@
                             <div id="actor_details_edit" class="hidden">
                                 <span id="dob_edit" class="left paddingTop ">
                                 <div class="row">
-                                    <span class="elements_label col-sm-5">Date of Birth: </span>
-                                    <input type="date" name="dob" class="editwhite edit_inputs_basics col-sm-7"  value="<?= date("Y-m-d", $actorProfile['StashActor_dob']) ?>" id="dob"/>
+                                    <span class="elements_label col-sm-5 col-xs-4">Date of Birth: </span>
+                                    <input type="date" name="dob" class="editwhite edit_inputs_basics col-sm-8"  value="<?= date("Y-m-d", $actorProfile['StashActor_dob']) ?>" id="dob"/>
                                 <br>
-                                <span id="phone_edit" class="left paddingTop">
-                                <span class="elements_label col-sm-5">Phone:</span><input type="text" class="editwhite edit_inputs_basics col-sm-7" name="phone" value="<?= $actorProfile['StashActor_mobile'] ?>" maxlength='10' id="phone"/>
+                                <span class="elements_label col-sm-5 col-xs-4">Phone:</span><input type="text" class="editwhite edit_inputs_basics col-sm-8" name="phone" value="<?= $actorProfile['StashActor_mobile'] ?>" maxlength='10' id="phone"/>
+                                </span>
                                 <br>
-                                <span id="whatsapp_edit" class="left paddingTop">
-                                <span class="elements_label col-sm-5">WhatsApp:</span><input type="text" class="editwhite edit_inputs_basics col-sm-7" name="whatsapp" value="<?= $actorProfile['StashActor_whatsapp'] ?>" id="whatsapp"/>
+                                <span class="elements_label col-sm-5 col-xs-4">WhatsApp:</span><input type="text" class="editwhite edit_inputs_basics col-sm-7 col-xs-8" name="whatsapp" value="<?= $actorProfile['StashActor_whatsapp'] ?>" id="whatsapp"/>
                                 </span>
                                 </div>
                                 <font class="sortbuttons">
@@ -584,9 +732,9 @@
                                     $languages = $actorProfile['StashActor_language'];
                                     foreach ($languages as $key => $language) {
                                 ?>
-                                <div class="col-sm-4 vertical-padded">
+                                <div class="col-sm-6 col-xs-4 col-lg-4 col-md-6 vertical-padded ellipsis">
                                     <button type="button" class="btn language_tag" aria-label="Left Align" >
-                                        <font class="taga-text"><?php $lan=ucfirst(trim($language)); if(strlen($lan)>7) {echo substr($lan, 0, 7).'...';} else{echo $lan;}?></font>
+                                        <font class="taga-text"><?php $lan=ucfirst(trim($language)); if(strlen($lan)>7) {echo $lan;} else{echo $lan;}?></font>
                                     </button>
                                 </div>  
                                 <?php
@@ -616,9 +764,9 @@
                                     $skills = $actorProfile['StashActor_skills'];
                                     foreach ($skills as $key => $skill) {
                                 ?>
-                                <div class="col-sm-4 vertical-padded">
+                                <div class="col-sm-6 col-xs-4 col-lg-4 col-md-6 vertical-padded ellipsis">
                                     <button type="button" class="btn skills_tag"  aria-label="Left Align" >
-                                        <font class="taga-text"><?php $skill_=ucfirst(trim($skill)); if(strlen($skill_)>7) {echo substr($skill_, 0, 7).'...';} else{echo $skill_;}?></font>
+                                        <font class="taga-text"><?php $skill_=ucfirst(trim($skill)); if(strlen($skill_)>7) {echo $skill_;} else{echo $skill_;}?></font>
                                     </button>
                                 </div>  
                                 <?php
@@ -643,7 +791,7 @@
 
                     </div>
                     <div class="col-sm-8 left" id="second_column_actor">
-                         <div class="row col-sm-12" >
+                         <div class="col-sm-12 no_padding_small" >
                             <br>
                             <div class="category_heading">EXPERIENCE <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= $title_exp ?>"></i>
                                 <span id="openexperienceicon" class="glyphicon glyphicon-plus edit-button pull-right firstcolor toggleEdit" data-unhide-id="#experience_add, #closeexperienceicon" data-hide-id="#openexperienceicon" aria-hidden="true"></span>
@@ -656,9 +804,9 @@
                                     <input type="text" class="editwhite long" name='exp_link' id="addlink" Placeholder="Youtube Video Link"/>
                                     <textarea class="editwhite long" name='exp_blurb' id="adddescription" placeholder="A little description about the role and the project." style="height:80px;"></textarea>
                                     <br><font class="sortbuttons"><button type="submit" class="btn submit-btn firstcolor center addExperience"  ><span class="glyphicon glyphicon-ok"></span></button></font>
-                                <hr>
+                                
                                 </span>
-                                <div id="experiencelist" style="max-height:250px; overflow:hidden;">
+                                <div id="experiencelist" style="overflow:hidden;">
                                 <?php
                                     $count_experience=sizeof($actorExperiences);
                                     $counter_exp=0;
@@ -712,8 +860,8 @@
                                             if($youtube_flag==1) 
                                             {    
                                                 
-                                                echo '<div class="col-sm-7" style="padding-left:0px;"><iframe style="width:100%;" height="189px" src="'.$youtube.'" frameborder="0" allowfullscreen></iframe></div>';
-                                                echo '<div class="col-sm-5" style="padding-left:0px; max-height:220px; height:220px;">
+                                                echo '<div class="col-sm-7" style="padding-left:0px;padding-right:0px"><div class="videoWrapper"><iframe width="560" height="349" src="'.$youtube.'" frameborder="0" allowfullscreen></iframe></div></div>';
+                                                echo '<div class="col-sm-5"">
                                                         <span class="info black" id="actor_ex_title_'.$key.'"><b>'.$experience['StashActorExperience_title'].'</b></span>
                                                         <span class="glyphicon glyphicon-pencil edit-button  firstcolor toggleEdit" data-unhide-id="#experience-'.$key.'_edit" data-hide-id="#experience-'.$key.'" aria-hidden="true"></span>
                                                         <span class="glyphicon glyphicon-remove edit-button  firstcolor removeSpanBtn" data-id="'.$experience['StashActorExperience_id'].'" 
@@ -725,7 +873,7 @@
                                                         </span>
                                                         <br>
                                                             <div style="height:100%;overflow:hidden;">
-                                                            <div class="info-small dark-gray hidden_scroll" id="actor_ex_blurb_'.$key.'" style=" height:140px;">
+                                                            <div class="info-small dark-gray hidden_scroll" id="actor_ex_blurb_'.$key.'">
                                                             '.$experience['StashActorExperience_blurb'].'
                                                             </div>
                                                             </div>
@@ -780,7 +928,6 @@
                                                 <span class="glyphicon glyphicon-ok"></span>
                                             </button>
                                         </font>
-                                        <hr>
                                     </span>
                                     
 
@@ -818,6 +965,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <hr>
                         </div>
                         <div class="category_heading">TRAINING
                             <span id="opentrainingicon" class="glyphicon glyphicon-plus edit-button pull-right firstcolor toggleEdit" data-unhide-id="#training_add, #closetrainingicon" data-hide-id="#opentrainingicon" aria-hidden="true"></span>
@@ -845,17 +993,18 @@
                                     <span id="training-<?= $key ?>" class="info dark-gray">
                                         <div class="row">
                                             
-                                            <span class="training_title col-sm-4" id="actor_tr_title_<?= $key ?>">
+                                            <span class="training_title col-sm-4 col-xs-4" id="actor_tr_title_<?= $key ?>">
                                                 <span class="training-plus toggleEdit" id="actor_tr_plus_<?= $key ?>" data-hide-id="#actor_tr_plus_<?= $key ?>" data-unhide-id="#actor_tr_minus_<?= $key ?>,#actor_tr_detail_<?= $key ?>">+</span>
                                                 <span  id="actor_tr_minus_<?= $key ?>" class="toggleEdit training-minus hidden" data-hide-id="#actor_tr_minus_<?= $key ?>,#actor_tr_detail_<?= $key ?>" data-unhide-id="#actor_tr_plus_<?= $key ?>" >-</span>
                                                 <?= $training['StashActorTraining_title'] ?>
                                             </span>
-                                            <span class="info-small dark-gray col-sm-4" id="actor_tr_course_<?= $key ?>">
+                                            <span class="info-small dark-gray col-sm-4 col-xs-4" id="actor_tr_course_<?= $key ?>">
                                                 <?= $training['StashActorTraining_course'] ?>
                                             </span>
-                                            <span class="glyphicon glyphicon-pencil edit-button firstcolor toggleEdit" data-hide-id="" data-unhide-id="#training-<?= $key ?>_edit" data-hide-id="#training-<?= $key ?>" aria-hidden="true"></span>
-                                            <span class="glyphicon glyphicon-remove edit-button  firstcolor removeSpanBtn" data-id="<?= $training['StashActorTraining_id'] ?>" data-key="<?= $key ?>" data-type="training"></span>
-
+                                            <span class="info-small dark-gray col-sm-4 col-xs-4" style="text-align:right;" >
+                                                <span class="glyphicon glyphicon-pencil edit-button firstcolor edit-button toggleEdit" data-hide-id="" data-unhide-id="#training-<?= $key ?>_edit" data-hide-id="#training-<?= $key ?>" aria-hidden="true"></span>
+                                                <span class="glyphicon glyphicon-remove edit-button  firstcolor edit-button removeSpanBtn" data-id="<?= $training['StashActorTraining_id'] ?>" data-key="<?= $key ?>" data-type="training"></span>
+                                            </span>
                                             
 
                                         </div>
