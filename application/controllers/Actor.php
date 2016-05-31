@@ -60,11 +60,8 @@
 				if($res['status'] == "success"){
 					$this->Auth->addOTP($otp, $this->session->userdata("StaSh_User_id"));
 					$m = substr($userdata['StashUsers_mobile'], 0, 2) . "*****" . substr($userdata['StashUsers_mobile'], 7, 3);
-<<<<<<< HEAD
 					$pageInfo = array("error" => true, "error_msg" => Ac_MobVer_EnterCode ." {$m}", 'form' => true);
-=======
-					$pageInfo = array("error" => true, "error_msg" => "Enter the Code you got on your number {$m}", 'form' => true);
->>>>>>> bdb08f26fbc84a12c741aa12b6ba147755affd7f
+
 				}else{
 					$pageInfo = array("error" => true, "error_msg" => Ac_MobVer_SendFailed, 'form' => true);
 				}
