@@ -349,6 +349,10 @@
                 width:60px;
                 height: 60px;
             }
+            .nav_icons{
+                position: absolute;
+                top:10px;
+            }
 
             
         }
@@ -812,7 +816,7 @@
                                     <textarea class="editwhite long" name='exp_blurb' id="adddescription" placeholder="A little description about the role and the project." style="height:80px;"></textarea>
                                     <br><font class="sortbuttons">
                                     <button type="submit" class="btn submit-btn firstcolor center addExperience toggleEdit tick" id="add_exp_btn" data-hide-id="#add_exp_btn" data-unhide-id="#add_exp_btn_load" ><span class="glyphicon glyphicon-ok"></span></button>
-                                    <button type="submit" class="btn submit-btn firstcolor center addExperience tick hidden" id="add_exp_btn_load" ><span class="glyphicon glyphicon-share img-rotate"></span></button></font>
+                                    <button type="submit" class="btn submit-btn firstcolor center addExperience tick hidden rotate-img" id="add_exp_btn_load" ><span class="glyphicon glyphicon-refresh"></span></button></font>
                                 
                                 </span>
                                 <div id="experiencelist" style="overflow:hidden;">
@@ -901,9 +905,9 @@
                                                             <i>as </i>'.$experience['StashActorExperience_role'].'
                                                         </span>
                                                     <br>
-                                                        <span class="info-small dark-gray" id="actor_ex_blurb_'.$key.'" style="margin-left:15px;" >
+                                                        <div class="info-small dark-gray" id="actor_ex_blurb_'.$key.'" style="margin-left:15px;" >
                                                             '.$experience['StashActorExperience_blurb'].'
-                                                        </span>';
+                                                        </div>';
                                                 
                                             }
                                             if($onlyone!=1)
