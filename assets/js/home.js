@@ -172,8 +172,8 @@ $(document).ready(function(){
     	/*Actor Profile displaying goes here*/
     	for(var i = init; i < final; i++){
 			
-			username = $.trim(actorsInfo[i].StashActor_email.split("@")[0]);
-			link = base + username;
+			//username = $.trim(actorsInfo[i].StashActor_email.split("@")[0]);
+			link = base + actorsInfo[i].StashActor_username;
 
     		if($.inArray(i, actorRef) != -1){
 				chk = "checked";
@@ -227,7 +227,7 @@ $(document).ready(function(){
 	
 	$(document).on("click", ".changePage", function(){
 		var page = Number($(this).attr("data-page-no"));
-		console.log("page changed");
+		//console.log("page changed");
 		populateActorList(actors, page);
 		checkContactModal();
 		return false;
@@ -344,7 +344,8 @@ $(document).ready(function(){
 
 	function appendReceipents(id) {
 		var content = "";
-		username = $.trim(actors[id].StashActor_email.split("@")[0]);
+		//username = $.trim(actors[id].StashActor_email.split("@")[0]);
+		username = actor[id].StashActor_username;
 		link = base + username;
 		content += '<div class="media selected-actors" id="selected-actor-'+id+'">'
 				+  '	<div class="media-left">'
@@ -435,7 +436,8 @@ $(document).ready(function(){
 		$("#selected-actors").html("");
 		for(var i = 0; i < actorRef.length; i++){
 			id = actorRef[i];
-			username = $.trim(actors[id].StashActor_email.split("@")[0]);
+			//username = $.trim(actors[id].StashActor_email.split("@")[0]);
+			username = actors[id].StashActor_username;
 			link = base + username;
 			content += '<div class="media selected-actors" id="selected-actor-'+id+'">'
 					+  '	<div class="media-left">'

@@ -1,9 +1,5 @@
 <?php
   include 'includes/head.php';
-  
-  $title_text = "Write your message in this box. The actors will also see a button (or a link in SMS), asking them to create their profiles. This helps us keep track of whether they have seen your message or not.";
-  $title_project = "All actors who will receive this message will automatically be tagged with this Project Name, so you can find them easily.";
-  $title_date = "If you choose an already existing Project Name, this date will update automatically. You may still change it, but that will create a new project with the same name and a different date.";
  ?>
     <body>
         <style>
@@ -365,6 +361,11 @@
                   </div>
                   <div class="modal-body" style="background-color:#fff;">
                     <div class="container" style="max-width:100%; ">
+<<<<<<< HEAD
+					<div class="alert alert-info" role="alert">
+            <?= "You have sent " .$count_emails." Emails and ". $count_sms ." SMS till today."; ?>
+					  </div>
+=======
           <div class="alert alert-info" role="alert">
             <?
               if($count_emails==1)
@@ -377,6 +378,7 @@
               }
             ?>
             </div>
+>>>>>>> bdb08f26fbc84a12c741aa12b6ba147755affd7f
                       <!-- Nav tabs -->
                       <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" id="#emailtab" class="active"><a href="#viaEmail" aria-controls="home" role="tab" data-toggle="tab">Via Email</a></li>
@@ -395,14 +397,14 @@
                                   <b></b>
                                 </span>
                                 <span class="info-small gray">
-                                  Project Name: <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= $title_project ?>"></i>
+                                  Project Name: <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= CD_ProjTitle ?>"></i>
                                 </span> 
                                 <input type="text" class="form-control  contact_inputs"  name="project_name"  placeholder="Project Name" required/>
                 
                 </div>
                               <div class="col-sm-6 form-group no-paddinglr">
                                 <span class="info-small gray">
-                                  Project Date: <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= $title_date ?>"></i>
+                                  Project Date: <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= CD_TitleDate ?>"></i>
                                 </span> 
                                 <input type="date" class="form-control contact_inputs" name="project_date" value="<?= date("Y-m-d") ?>" required />
                               </div>
@@ -427,12 +429,21 @@
                             <div class="row email-templete">
 
                               <div class="col-sm-12 form-group no-paddinglr">
+<<<<<<< HEAD
+                                <span class="info-small">
+                                  Dear Actor, <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= CD_TitleTxt ?>"></i>
+											
+                                </span> 
+                                <textarea class="form-control add" name="email-msg" id="emailtxtMsg"  placeholder="Message Text" rows="5" required style="border: 1px solid #999;"></textarea>
+                                <button type="button" class="btn submit-btn firstcolor pull-right addSuggestionText" data-name="email-msg" data-add="<?= CD_SuggTxt ?>" style="margin-top: 20px; margin-left:10px;" id="btn-search" > Suggested Text </button>
+=======
                                 <span class="info-small gray">
                                   Dear Actor, <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= $title_text ?>"></i>
                       
                                 </span> 
                                 <textarea class="form-control contact_inputs contact_textareas" name="email-msg" id="emailtxtMsg"  placeholder="Message Text" rows="5" required /></textarea>
                                 <button type="button" class="btn submit-btn firstcolor pull-right addSuggestionText" data-name="email-msg" data-add="Please click the button below and follow the steps to share your details with us." style="margin-top: 20px; margin-left:10px;" id="btn-search" > Suggested Text </button>
+>>>>>>> bdb08f26fbc84a12c741aa12b6ba147755affd7f
                               </div>
 
                             </div>
@@ -456,13 +467,13 @@
                                   <b></b>
                                 </span>
                                 <span class="info-small gray">
-                                  Project Name: <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= $title_project ?>"></i>
+                                  Project Name: <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= CD_ProjTitle ?>"></i>
                                 </span> 
                                 <input type="text" class="form-control contact_inputs" name="project_name" placeholder="Project Name" required />
                               </div>
                               <div class="col-sm-6 form-group no-paddinglr">
                                 <span class="info-small gray">
-                                  Project Date: <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= $title_date ?>"></i>
+                                  Project Date: <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= CD_TitleDate ?>"></i>
                                 </span> 
                                 <input type="date" class="form-control contact_inputs" name="project_date" value="<?= date("Y-m-d") ?>" required>
                               </div>
@@ -482,8 +493,13 @@
                             <div class="row email-templete">
 
                               <div class="col-sm-12 form-group no-paddinglr">
+<<<<<<< HEAD
+                                <span class="info-small">
+                                  Dear Actor, <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= CD_TitleTxt ?>"></i>
+=======
                                 <span class="info-small gray">
                                   Dear Actor, <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= $title_text ?>"></i>
+>>>>>>> bdb08f26fbc84a12c741aa12b6ba147755affd7f
                                 </span> 
                                 <textarea class="form-control contact_inputs" name="sms" id="text-sms" placeholder="Message Text" rows="3" required ></textarea>
 
@@ -492,7 +508,7 @@
                                   <span id="invite-msgCounter">0</span> )
                                 </span>
 
-                                <button type="button" class="btn submit-btn firstcolor pull-right addSuggestionText" data-name="sms" data-add="Please click this link and follow the steps to share your details with us." style="margin-top: 20px; margin-left:10px;" id="btn-search" > Suggested Text </button>
+                                <button type="button" class="btn submit-btn firstcolor pull-right addSuggestionText" data-name="sms" data-add="<?= CD_SuggTxt ?>" style="margin-top: 20px; margin-left:10px;" id="btn-search" > Suggested Text </button>
 
                                 <span class="info-small">
                                   Powered by Castiko

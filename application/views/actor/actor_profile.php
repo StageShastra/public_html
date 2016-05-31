@@ -14,235 +14,235 @@
 ?>
     <body>
         <style>
-          body{
-            padding-top: 90px;
-          }
-          .rotate-img {
-            -webkit-animation: rotation 2s infinite linear;
-          }
-          @-webkit-keyframes rotation {
-              from {-webkit-transform: rotate(0deg);}
-              to   {-webkit-transform: rotate(359deg);}
-          }
-          .bootstrap-tagsinput {
-            background-color: #f2f2f2;
-        }
-        /* AKASH SINGH: */
-        .a_name{
-            font-family: AvenirNext-Bold;
-            font-size: 30px;
-            color: #4A4A4A;
-            text-align: left;
-            margin-bottom: 15px;
-        }
-        .a_pic{
-            /* Rectangle 1: */
-            margin-top: 15px;
-            border-radius: 10px;
-            height: 130px;
-            width: 130px;
-            float: left;
-            padding-left: 0px !important;
-        }
-        .pro-pic{
-            border-radius: 10px;
-            height: 100%;
-            width: auto;
-        }
-        .left{
-            text-align: left;
-        }
-        .basics{
-            text-align: left;
-            margin-top: 15px;
-        }
-        .category_heading{
-            font-family: Raleway;
-            font-weight: 400;
-            font-size: 20px;
-            color: #C9C9C9;
-            
-        }
-        .elements{
-            font-family: AvenirNext-Regular;
-            font-size: 14px;
-            color: #4A4A4A;
-            
-        }
-        .elements_label{
-            font-family: AvenirNext-Bold;
-            font-size: 14px;
-            color: #9B9B9B;
-            letter-spacing: 0px;
-            text-shadow: 0px 1px 0px #FFFFFF;
-        }
-        .language_tag{
-            border: 1px solid #FBB515;
-            border-radius: 3px;
-            background: transparent;
-            font-family: AvenirNext-Regular;
-            font-size: 14px;
-            max-width: 100%; 
-            padding-left:0px;
-             width:100%;
-            overflow-x:hidden;
-        }
-        .project_tag{
-            border: 1px solid #FBB515;
-            border-radius: 3px;
-            background: transparent;
-            font-family: AvenirNext-Regular;
-            font-size: 14px;
-            max-width: 100%; 
-            padding-left:0px;
-            width:100%;
-            overflow-x:hidden;
-        }
-         .skills_tag{
-            border: 1px solid #F05759;
-            border-radius: 3px;
-            background: transparent;
-            font-family: AvenirNext-Regular;
-            font-size: 14px;
-            max-width: 100%;
-            padding-left:0px;
-             width:100%;
-            overflow-x:hidden;
-        }
-        .taga-text {
-            padding-left: 3px !important;
-            padding-right: 3px !important;
-        }
-        .video_frame{
-            border: 0px;
-        }
-        .overlay_edit
-        {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            background: rgba(0,0,0,0.5);
-            padding: 3px;
-            color: white;
-            z-index:999;
-            border-radius: 3px;
-        }
-        #second_column_actor{
-            margin-left: 30px; 
-        }
-        .training-plus{
-            font-family: AvenirNext-Regular;
-            font-size: 18px;
-            color: #FBB515;
-        }
-        .training-minus{
-            font-family: AvenirNext-Regular;
-            font-size: 18px;
-            color: #F05759;
-        }
-        .training_title{
-            font-family: AvenirNext-Bold;
-            font-size: 18px;
-            color: #9B9B9B;
-            letter-spacing: 0px;
-            text-shadow: 0px 1px 0px #FFFFFF;
-        }
-        .training_details{
-            background: #EBEBEB;
-            border-radius: 9px;
-            font-size: 16px;
-            color: black;
-            padding-left: 15px;
-            padding: 15px;
-            width: 75%;
-        }
-        .edit_inputs_basics{
-            margin-bottom: 10px;
-        }
-        .edit_basics_labels{
-            vertical-align: middle;
-            color: #FFB600;
-            font-family: Raleway;
-            font-size: 14px;
-            margin-left: 4px;
-        }
-        .nav_icons{
-            position: absolute;
-            top: 15px;
-            left: 50%;
-            padding: 2px;
-           
-        }   
-        .leftnav{
-            margin-right: 5px;
-            border-right: 1px;
-        }
-        .no_left_margin{
-            margin-left: 0px;
-        }
-        .edit_inputs_basics{
-            margin-bottom: 10px;
-        }
-        .edit_basics_labels{
-            vertical-align: middle;
-            color: #FFB600;
-            font-family: Raleway;
-            font-size: 14px;
-            margin-left: 4px;
-        }
-        .nav_icons{
-            position: absolute;
-            top: 15px;
-            left: 50%;
-            padding: 2px;
-           
-        }   
-        .leftnav{
-            margin-right: 5px;
-            border-right: 1px;
-        }
-        .col-sm-*{
-            margin-left:0px;
-        }
-        .DocumentList{
-            background: none;
-        }
-        .edit-button{
-            right:0px;
-        }
-.DocumentItem
-{
-    max-width: 150px;
-    height: 150px;
-    overflow: hidden;
-    position: relative;
-    border-radius: 10px;
-}
-.crop {
-    position:absolute;
-    left: -100%;
-    right: -100%;
-    top: -100%;
-    bottom: -100%;
-    margin: auto;
-    width: auto;
-    height: auto;
-}
-#actor_pro_pic{
-    width: 105px;
-    height: 105px;
-    overflow: hidden;
-    margin-top:20px;
-    margin-right: 5px;
-    position: relative;
-    border-radius: 10px;
-}
-.hidden_scroll{
-overflow-y:hidden;
-}
-.hidden_scroll:hover{
-overflow-y:scroll;
-}
+            body{
+                padding-top: 90px;
+            }
+            .rotate-img {
+                -webkit-animation: rotation 2s infinite linear;
+            }
+            @-webkit-keyframes rotation {
+                from {-webkit-transform: rotate(0deg);}
+                to   {-webkit-transform: rotate(359deg);}
+            }
+            .bootstrap-tagsinput {
+                background-color: #f2f2f2;
+            }
+            /* AKASH SINGH: */
+            .a_name{
+                font-family: AvenirNext-Bold;
+                font-size: 30px;
+                color: #4A4A4A;
+                text-align: left;
+                margin-bottom: 15px;
+            }
+            .a_pic{
+                /* Rectangle 1: */
+                margin-top: 15px;
+                border-radius: 10px;
+                height: 130px;
+                width: 130px;
+                float: left;
+                padding-left: 0px !important;
+            }
+            .pro-pic{
+                border-radius: 10px;
+                height: 100%;
+                width: auto;
+            }
+            .left{
+                text-align: left;
+            }
+            .basics{
+                text-align: left;
+                margin-top: 15px;
+            }
+            .category_heading{
+                font-family: Raleway;
+                font-weight: 400;
+                font-size: 20px;
+                color: #C9C9C9;
+
+            }
+            .elements{
+                font-family: AvenirNext-Regular;
+                font-size: 14px;
+                color: #4A4A4A;
+
+            }
+            .elements_label{
+                font-family: AvenirNext-Bold;
+                font-size: 14px;
+                color: #9B9B9B;
+                letter-spacing: 0px;
+                text-shadow: 0px 1px 0px #FFFFFF;
+            }
+            .language_tag{
+                border: 1px solid #FBB515;
+                border-radius: 3px;
+                background: transparent;
+                font-family: AvenirNext-Regular;
+                font-size: 14px;
+                max-width: 100%; 
+                padding-left:0px;
+                width:100%;
+                overflow-x:hidden;
+            }
+            .project_tag{
+                border: 1px solid #FBB515;
+                border-radius: 3px;
+                background: transparent;
+                font-family: AvenirNext-Regular;
+                font-size: 14px;
+                max-width: 100%; 
+                padding-left:0px;
+                width:100%;
+                overflow-x:hidden;
+            }
+            .skills_tag{
+                border: 1px solid #F05759;
+                border-radius: 3px;
+                background: transparent;
+                font-family: AvenirNext-Regular;
+                font-size: 14px;
+                max-width: 100%;
+                padding-left:0px;
+                width:100%;
+                overflow-x:hidden;
+            }
+            .taga-text {
+                padding-left: 3px !important;
+                padding-right: 3px !important;
+            }
+            .video_frame{
+                border: 0px;
+            }
+            .overlay_edit
+            {
+                position: absolute;
+                top: 5px;
+                right: 10px;
+                background: rgba(0,0,0,0.5);
+                padding: 3px;
+                color: white;
+                z-index:999;
+                border-radius: 3px;
+            }
+            #second_column_actor{
+                margin-left: 30px; 
+            }
+            .training-plus{
+                font-family: AvenirNext-Regular;
+                font-size: 18px;
+                color: #FBB515;
+            }
+            .training-minus{
+                font-family: AvenirNext-Regular;
+                font-size: 18px;
+                color: #F05759;
+            }
+            .training_title{
+                font-family: AvenirNext-Bold;
+                font-size: 18px;
+                color: #9B9B9B;
+                letter-spacing: 0px;
+                text-shadow: 0px 1px 0px #FFFFFF;
+            }
+            .training_details{
+                background: #EBEBEB;
+                border-radius: 9px;
+                font-size: 16px;
+                color: black;
+                padding-left: 15px;
+                padding: 15px;
+                width: 75%;
+            }
+            .edit_inputs_basics{
+                margin-bottom: 10px;
+            }
+            .edit_basics_labels{
+                vertical-align: middle;
+                color: #FFB600;
+                font-family: Raleway;
+                font-size: 14px;
+                margin-left: 4px;
+            }
+            .nav_icons{
+                position: absolute;
+                top: 15px;
+                left: 50%;
+                padding: 2px;
+
+            }   
+            .leftnav{
+                margin-right: 5px;
+                border-right: 1px;
+            }
+            .no_left_margin{
+                margin-left: 0px;
+            }
+            .edit_inputs_basics{
+                margin-bottom: 10px;
+            }
+            .edit_basics_labels{
+                vertical-align: middle;
+                color: #FFB600;
+                font-family: Raleway;
+                font-size: 14px;
+                margin-left: 4px;
+            }
+            .nav_icons{
+                position: absolute;
+                top: 15px;
+                left: 50%;
+                padding: 2px;
+
+            }   
+            .leftnav{
+                margin-right: 5px;
+                border-right: 1px;
+            }
+            .col-sm-*{
+                margin-left:0px;
+            }
+            .DocumentList{
+                background: none;
+            }
+            .edit-button{
+                right:0px;
+            }
+            .DocumentItem
+            {
+                max-width: 150px;
+                height: 150px;
+                overflow: hidden;
+                position: relative;
+                border-radius: 10px;
+            }
+            .crop {
+                position:absolute;
+                left: -100%;
+                right: -100%;
+                top: -100%;
+                bottom: -100%;
+                margin: auto;
+                width: auto;
+                height: auto;
+            }
+            #actor_pro_pic{
+                width: 105px;
+                height: 105px;
+                overflow: hidden;
+                margin-top:20px;
+                margin-right: 5px;
+                position: relative;
+                border-radius: 10px;
+            }
+            .hidden_scroll{
+                overflow-y:hidden;
+            }
+            .hidden_scroll:hover{
+                overflow-y:scroll;
+            }
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -266,7 +266,7 @@ overflow-y:scroll;
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="index.php">
-                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname">C A S T I K O</b></span><p><span id="tag-line" class="firstcolor info-small">Makes casting easier!</span>
+                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname"><?= M_Title ?></b></span><p><span id="tag-line" class="firstcolor info-small"><?= M_TagLine ?></span>
                         </a>
                     </div> 
 
@@ -295,7 +295,7 @@ overflow-y:scroll;
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="index.php">
-                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname">C A S T I K O</b></span><p><span id="tag-line" class="firstcolor info-small">Makes casting easier!</span>
+                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname"><?= M_Title ?></b></span><p><span id="tag-line" class="firstcolor info-small"><?= M_TagLine ?></span>
                         </a>
                     </div> 
 

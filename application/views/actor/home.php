@@ -11,7 +11,7 @@
         $years = floor($diff / (365*60*60*24));
         return $years;
     }
-    
+
     $title_cd = "When you accept a casting director's invitation to join their database, their name will show up here. This means that they will see all the changes you make to your profile instantly.";
     $title_exp = "Showing your video work is the best way to showcase your talent. If you don't have any video work to show yet, just record yourself acting out a favorite scene and put that here.";
     $warning_cnf = "Please verify your email address so that casting directors can contact you easily. We've sent a link to your email.";
@@ -514,8 +514,6 @@
 
         <!-- Ths section is post selection !-->
         <div class="container-fluid" id="home">
-           
-           
             <nav class="navbar navbar-default navbar-fixed-top custom-navbar">
                 <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -526,14 +524,14 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="<?= base_url() ?>">
-                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="headname"><span >C A S T I K O</span><br><span class="firstcolor info-small tagline"><?= M_TagLine?></span></b></span>
+                        <a class="navbar-brand" href="index.php">
+                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname"><?= M_Title ?></b></span><p><span id="tag-line" class="firstcolor info-small"><?= M_TagLine ?></span>
                         </a>
                     </div> 
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  
-                      <ul class="nav navbar-nav navbar-right" style="text-align:right;">
+                      <ul class="nav navbar-nav navbar-right vertical-middle">
                        
                         <li>
                             <a href="<?= base_url() ?>home/logout/"><button type="button" class="btn submit-btn firstcolor" id="btn-logout"  ><span class="glyphicon glyphicon-log-out"></span> &nbsp; Sign Out</button></a>
@@ -544,16 +542,13 @@
             </nav>
 
            <!-- contact modal toggle -->
-           
-
-           <!-- contact modal toggle -->
              <div class="container-fluid">
                 <?php
                     if($user["StashUsers_status"] == 0){
                 ?>
                 <div class="alert alert-warning alert-dismissible" id="warningmsg" role="alert">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <strong>Warning!</strong> <?= $warning_cnf ?>
+                  <strong>Warning!</strong> <?= AC_ActivationWarning ?>
                 </div>
                 <?php } ?>
                 
@@ -678,7 +673,7 @@
                                 
                                 <span class="text-danger elements" id="actor_phone"> <?= $actorProfile['StashActor_mobile'] ?> 
                                 <?php if($user["StashUsers_mobile_status"] == 0){ ?>
-                                <a href="<?= base_url() ?>actor/mobileverify" data-toggle="tooltip" data-placement="right" title="<?= $title_verify ?>" class="text-danger otpLink"><i class="fa fa-exclamation"></i></a>
+                                <a href="<?= base_url() ?>actor/mobileverify" data-toggle="tooltip" data-placement="right" title="<?= AC_MobileVerifyTxt ?>" class="text-danger otpLink"><i class="fa fa-exclamation"></i></a>
                                 <?php } ?>
                                 </span>
 
@@ -712,7 +707,7 @@
                          <div class="row">
                             <br>
                             <div class="category_heading">CASTING DIRECTORS 
-                                <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= $title_cd ?>"></i>
+                                <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= AC_CDHelpTxt ?>"></i>
                             </div>
                             <?php
                                     foreach ($directors as $key => $director) {
@@ -793,7 +788,7 @@
                     <div class="col-sm-8 left" id="second_column_actor">
                          <div class="col-sm-12 no_padding_small" >
                             <br>
-                            <div class="category_heading">EXPERIENCE <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= $title_exp ?>"></i>
+                            <div class="category_heading">EXPERIENCE <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= AC_ExpHelpTxt ?>"></i>
                                 <span id="openexperienceicon" class="glyphicon glyphicon-plus edit-button pull-right firstcolor toggleEdit" data-unhide-id="#experience_add, #closeexperienceicon" data-hide-id="#openexperienceicon" aria-hidden="true"></span>
                                 <span id="closeexperienceicon" class="glyphicon glyphicon-minus pull-right hidden toggleEdit" data-hide-id="#experience_add, #closeexperienceicon" data-unhide-id="#openexperienceicon" aria-hidden="true"></span>
                             </div>
@@ -1066,7 +1061,7 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title firstcolor info">Upload Photos</h4><span class="info-small gray">You can upload multiple pictures at a time.</span>
+                  <h4 class="modal-title firstcolor info">Upload Photos</h4><span class="info-small gray"><?= AC_UploadHelpTxt ?></span>
 
                   <?php $images = json_decode($actorProfile['StashActor_images'], true);
                     $count_image=sizeof($images);
@@ -1074,7 +1069,7 @@
                     echo "<div class='alert alert-danger' role='alert'>
                               <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
                               <span class='sr-only'>Warning:</span>
-                              You have already reached the maximum limit of uploads. Please delete some photos to upload new. 
+                              ".AC_MaxLimitWarn." 
                             </div>";
                   }?>
                 </div>
@@ -1116,7 +1111,7 @@
                                             $number_of_images=sizeof($images);
                                             if($number_of_images==0)
                                             {
-                                                echo '<div class="info gray">Hola! It looks like you have not uploaded any photos yet. <br>Why don\'t you start with uploading some photos?<br><button type="submit" class="btn submit-btn firstcolor toggleEdit"  data-toggle="modal" data-target="#photosupload" data-hide-id="#set_profile_photo" id="btn-login" ><span class="glyphicon glyphicon-plus"></span> &nbsp;Upload Photos</button></div>';
+                                                echo '<div class="info gray">'.AC_NoImage.'<br><button type="submit" class="btn submit-btn firstcolor toggleEdit"  data-toggle="modal" data-target="#photosupload" data-hide-id="#set_profile_photo" id="btn-login" ><span class="glyphicon glyphicon-plus"></span> &nbsp;Upload Photos</button></div>';
                                             }
                                             else
                                             {
@@ -1218,7 +1213,7 @@
                     <div class="container" style="max-width:100%; ">
                         <div class="jumbotron">
                             <p id="resendCnfLnk-msg">
-                                A confirmation link has been send to you email. Check it and confirm your email address.
+                                <?= AC_ConfLinkSent ?>
                             </p>
                         </div>
                       </div>

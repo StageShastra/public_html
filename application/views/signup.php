@@ -38,8 +38,10 @@
                         I am <input type="radio" name="type" value="director" checked> Director
                               <input type="radio" name="type" value="actor"> Actor
                       </div> -->
-					  <a href="<?= base_url() ?>" ><small>Already registered? Sign in here.</small></a><br>
-                      <button type="submit" class="btn submit-btn firstcolor center" name="submit" id="sign-upbtn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign Up</button>
+
+					  <a href="<?= base_url() ?>" class="pull-right"><small><?= M_AlreadyRegistered ?></small></a>
+                      <button type="submit" class="btn submit-btn firstcolor" name="submit" id="sign-upbtn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign Up</button>
+
                     </form>
                 <?php } ?>
 					

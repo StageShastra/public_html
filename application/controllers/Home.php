@@ -4,8 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Home extends CI_Controller {
 
 	public function index($value=''){
-		//$pageInfo = array("error" => true, "error_msg" => null);
-		//print_r($this->session->userdata());exit();
 		if($this->session->userdata("StaSh_User_Logged_In"))
 			if($this->session->userdata("StaSh_User_type") == 'actor')
 				redirect(base_url() . "actor/");
@@ -15,16 +13,12 @@ class Home extends CI_Controller {
 	}
 
 	public function register($type = 'director'){
-		//print_r($this->session->userdata("Stash_New_User"));
-		//print_r($this->input->cookie());
 		$pageInfo = array("error" => false, "error_msg" => null);
 		if($this->session->userdata("StaSh_User_Logged_In"))
 			if($this->session->userdata("StaSh_User_type") == 'actor')
 				redirect(base_url() . "actor/");
 			else
 				redirect(base_url() . "director/");
-			
-		//print_r($this->session->userdata());
 
 		if(count($this->input->post())){
 			$config = array(
@@ -89,9 +83,9 @@ class Home extends CI_Controller {
 	    			$this->Email->sendActivationMail($this->input->post('name'), $this->input->post('email'), $response);
 
 	    			$pageInfo['error'] = true;
-	    			$pageInfo['error_msg'] = "You have successfully registered. You will get a confirmation link in your email. </br>This can take a few minutes.</br> Meanwhile, <a href='/'>click here</a> to sign in and get started.";
+	    			$pageInfo['error_msg'] = Ho_Reg_SuccMsg;
 	    		}else{
-	    			$pageInfo['error_msg'] = "Something went wronge! We are try to fix it.";
+	    			$pageInfo['error_msg'] = Ho_Reg_ErrMsg;
 	    		}
 	    	}
 		}
@@ -154,8 +148,6 @@ class Home extends CI_Controller {
 			setcookie("project_ref", trim($linkDetails['StashSMSInviteLink_project']), time() + 3600, "/");
 			setcookie("director_ref", trim($linkDetails['StashSMSInviteLink_director_id_ref']), time() + 3600, "/");
 			setcookie("newInvite", true, time() + 3600, "/");
-			//$this->session->set_userdata(array("Stash_New_User" => $data));
-			//print_r($this->session->userdata());
 			
 			redirect(base_url() . "home/register/actor/");
 		}else{
