@@ -21,18 +21,18 @@
 					if($this->Auth->confirmEMail($data['email'])){
 						$pageInfo['title'] = "Account Activated";
 						$pageInfo['body'] = "Your email {$data['email']} is confirmed now. You will be redirected to the login page in 10 seconds.";
-						$pageInfo['body'] .= "<p style='color:#666;'> <i> If you are not redirected automatically,  <a href='".base_url()."'>click here</a>. </i> </p>";
+						$pageInfo['body'] .= Se_Cnf_RedirectLink;
 						$pageInfo['redirect'] = true;
 					}else{
 						$pageInfo['title'] = "Already Confirmed";
-						$pageInfo['body'] = "Your email is already confirmed. Login to access your account.";
-						$pageInfo['body'] .= "<p style='color:#666;'> <i> If you are not redirected automatically,  <a href='".base_url()."'>click here</a>. </i> </p>";
+						$pageInfo['body'] = Se_Cnf_AlreadyConfirmed;
+						$pageInfo['body'] .= Se_Cnf_RedirectLink;
 						$pageInfo['redirect'] = true;
 					}
 				}else{
 					$pageInfo['title'] = "Already Confirmed";
-					$pageInfo['body'] = "Your email is already confirmed. Login to access your account.";
-					$pageInfo['body'] .= "<p style='color:#666;'> <i> If you are not redirected automatically,  <a href='".base_url()."'>click here</a>. </i> </p>";
+					$pageInfo['body'] = Se_Cnf_AlreadyConfirmed;
+					$pageInfo['body'] .= Se_Cnf_RedirectLink;
 					$pageInfo['redirect'] = true;
 				}
 			}else{

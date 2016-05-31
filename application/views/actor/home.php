@@ -11,261 +11,255 @@
         $years = floor($diff / (365*60*60*24));
         return $years;
     }
-    
-    $title_cd = "When you accept a casting director's invitation to join their database, their name will show up here. This means that they will see all the changes you make to your profile instantly.";
-    $title_exp = "Showing your video work is the best way to showcase your talent. If you don't have any video work to show yet, just record yourself acting out a favorite scene and put that here.";
-    $warning_cnf = "Please verify your email address so that casting directors can contact you easily. We've sent you a link to your email.";
-    $warning_cnf .= "<br> If you have not received it, click <a href='#' class='text-info' id='resendConfirmationLink'>here</a> to resend the verification email.";
-    $title_verify = "Your mobile number is not verified. Please verify your mobile number to receive messages on your phone.";
 ?>
     <body>
         <style>
-          body{
-            padding-top: 90px;
-          }
-          .rotate-img {
-            -webkit-animation: rotation 2s infinite linear;
-          }
-          @-webkit-keyframes rotation {
-              from {-webkit-transform: rotate(0deg);}
-              to   {-webkit-transform: rotate(359deg);}
-          }
-          .bootstrap-tagsinput {
-            background-color: #f2f2f2;
-        }
-        /* AKASH SINGH: */
-        .a_name{
-            font-family: AvenirNext-Bold;
-            font-size: 30px;
-            color: #4A4A4A;
-            text-align: left;
-            margin-bottom: 15px;
-        }
-        .a_pic{
-            /* Rectangle 1: */
-            margin-top: 15px;
-            border-radius: 10px;
-            height: 130px;
-            width: 130px;
-            float: left;
-            padding-left: 0px !important;
-        }
-        .pro-pic{
-            border-radius: 10px;
-            height: 100%;
-            width: auto;
-        }
-        .left{
-            text-align: left;
-        }
-        .basics{
-            text-align: left;
-            margin-top: 15px;
-        }
-        .category_heading{
-            font-family: Raleway;
-            font-weight: 400;
-            font-size: 20px;
-            color: #C9C9C9;
-            
-        }
-        .elements{
-            font-family: AvenirNext-Regular;
-            font-size: 14px;
-            color: #4A4A4A;
-            
-        }
-        .elements_label{
-            font-family: AvenirNext-Bold;
-            font-size: 14px;
-            color: #9B9B9B;
-            letter-spacing: 0px;
-            text-shadow: 0px 1px 0px #FFFFFF;
-        }
-        .language_tag{
-            border: 1px solid #FBB515;
-            border-radius: 3px;
-            background: transparent;
-            font-family: AvenirNext-Regular;
-            font-size: 14px;
-            max-width: 100%; 
-            padding-left:0px;
-             width:100%;
-            overflow-x:hidden;
-        }
-        .project_tag{
-            border: 1px solid #FBB515;
-            border-radius: 3px;
-            background: transparent;
-            font-family: AvenirNext-Regular;
-            font-size: 14px;
-            max-width: 100%; 
-            padding-left:0px;
-            width:100%;
-            overflow-x:hidden;
-        }
-         .skills_tag{
-            border: 1px solid #F05759;
-            border-radius: 3px;
-            background: transparent;
-            font-family: AvenirNext-Regular;
-            font-size: 14px;
-            max-width: 100%;
-            padding-left:0px;
-             width:100%;
-            overflow-x:hidden;
-        }
-        .taga-text {
-            padding-left: 3px !important;
-            padding-right: 3px !important;
-        }
-        .video_frame{
-            border: 0px;
-        }
-        .overlay_edit
-        {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            background: rgba(0,0,0,0.5);
-            padding: 3px;
-            color: white;
-            z-index:999;
-            border-radius: 3px;
-        }
-        #second_column_actor{
-            margin-left: 30px; 
-        }
-        .training-plus{
-            font-family: AvenirNext-Regular;
-            font-size: 18px;
-            color: #FBB515;
-        }
-        .training-minus{
-            font-family: AvenirNext-Regular;
-            font-size: 18px;
-            color: #F05759;
-        }
-        .training_title{
-            font-family: AvenirNext-Bold;
-            font-size: 18px;
-            color: #9B9B9B;
-            letter-spacing: 0px;
-            text-shadow: 0px 1px 0px #FFFFFF;
-        }
-        .training_details{
-            background: #EBEBEB;
-            border-radius: 9px;
-            font-size: 16px;
-            color: black;
-            padding-left: 15px;
-            padding: 15px;
-            width: 75%;
-        }
-        .edit_inputs_basics{
-            margin-bottom: 10px;
-        }
-        .edit_basics_labels{
-            vertical-align: middle;
-            color: #FFB600;
-            font-family: Raleway;
-            font-size: 14px;
-            margin-left: 4px;
-        }
-        .nav_icons{
-            position: absolute;
-            top: 15px;
-            left: 50%;
-            padding: 2px;
-           
-        }   
-        .leftnav{
-            margin-right: 5px;
-            border-right: 1px;
-        }
-        .no_left_margin{
-            margin-left: 0px;
-        }
-        .edit_inputs_basics{
-            margin-bottom: 10px;
-        }
-        .edit_basics_labels{
-            vertical-align: middle;
-            color: #FFB600;
-            font-family: Raleway;
-            font-size: 14px;
-            margin-left: 4px;
-        }
-        .nav_icons{
-            position: absolute;
-            top: 15px;
-            left: 50%;
-            padding: 2px;
-           
-        }   
-        .leftnav{
-            margin-right: 5px;
-            border-right: 1px;
-        }
-        .col-sm-*{
-            margin-left:0px;
-        }
-        .DocumentList{
-            background: none;
-        }
-        .edit-button{
-            right:0px;
-        }
-.DocumentItem
-{
-    max-width: 150px;
-    height: 150px;
-    overflow: hidden;
-    position: relative;
-    border-radius: 10px;
-}
-.crop {
-    position:absolute;
-    left: -100%;
-    right: -100%;
-    top: -100%;
-    bottom: -100%;
-    margin: auto;
-    width: auto;
-    height: auto;
-}
-#actor_pro_pic{
-    width: 105px;
-    height: 105px;
-    overflow: hidden;
-    margin-top:20px;
-    margin-right: 5px;
-    position: relative;
-    border-radius: 10px;
-}
-.hidden_scroll{
-overflow-y:hidden;
-}
-.hidden_scroll:hover{
-overflow-y:scroll;
-}
+            body{
+                padding-top: 90px;
+            }
+            .rotate-img {
+                -webkit-animation: rotation 2s infinite linear;
+            }
+            @-webkit-keyframes rotation {
+                from {-webkit-transform: rotate(0deg);}
+                to   {-webkit-transform: rotate(359deg);}
+            }
+            .bootstrap-tagsinput {
+                background-color: #f2f2f2;
+            }
+            /* AKASH SINGH: */
+            .a_name{
+                font-family: AvenirNext-Bold;
+                font-size: 30px;
+                color: #4A4A4A;
+                text-align: left;
+                margin-bottom: 15px;
+            }
+            .a_pic{
+                /* Rectangle 1: */
+                margin-top: 15px;
+                border-radius: 10px;
+                height: 130px;
+                width: 130px;
+                float: left;
+                padding-left: 0px !important;
+            }
+            .pro-pic{
+                border-radius: 10px;
+                height: 100%;
+                width: auto;
+            }
+            .left{
+                text-align: left;
+            }
+            .basics{
+                text-align: left;
+                margin-top: 15px;
+            }
+            .category_heading{
+                font-family: Raleway;
+                font-weight: 400;
+                font-size: 20px;
+                color: #C9C9C9;
 
-		.actor_link {
-			padding: 3px;
-			color: #9b9b9b;
-			font-size: 12px;
-			cursor: text;
-			
-		}
-		
-		.actor_link a{
-			color: #9b9b9b;
-			text-decoration: none;
-		}
+            }
+            .elements{
+                font-family: AvenirNext-Regular;
+                font-size: 14px;
+                color: #4A4A4A;
 
-        .notVerified {
-            color: red;
-        }
+            }
+            .elements_label{
+                font-family: AvenirNext-Bold;
+                font-size: 14px;
+                color: #9B9B9B;
+                letter-spacing: 0px;
+                text-shadow: 0px 1px 0px #FFFFFF;
+            }
+            .language_tag{
+                border: 1px solid #FBB515;
+                border-radius: 3px;
+                background: transparent;
+                font-family: AvenirNext-Regular;
+                font-size: 14px;
+                max-width: 100%; 
+                padding-left:0px;
+                width:100%;
+                overflow-x:hidden;
+            }
+            .project_tag{
+                border: 1px solid #FBB515;
+                border-radius: 3px;
+                background: transparent;
+                font-family: AvenirNext-Regular;
+                font-size: 14px;
+                max-width: 100%; 
+                padding-left:0px;
+                width:100%;
+                overflow-x:hidden;
+            }
+            .skills_tag{
+                border: 1px solid #F05759;
+                border-radius: 3px;
+                background: transparent;
+                font-family: AvenirNext-Regular;
+                font-size: 14px;
+                max-width: 100%;
+                padding-left:0px;
+                width:100%;
+                overflow-x:hidden;
+            }
+            .taga-text {
+                padding-left: 3px !important;
+                padding-right: 3px !important;
+            }
+            .video_frame{
+                border: 0px;
+            }
+            .overlay_edit
+            {
+                position: absolute;
+                top: 5px;
+                right: 10px;
+                background: rgba(0,0,0,0.5);
+                padding: 3px;
+                color: white;
+                z-index:999;
+                border-radius: 3px;
+            }
+            #second_column_actor{
+                margin-left: 30px; 
+            }
+            .training-plus{
+                font-family: AvenirNext-Regular;
+                font-size: 18px;
+                color: #FBB515;
+            }
+            .training-minus{
+                font-family: AvenirNext-Regular;
+                font-size: 18px;
+                color: #F05759;
+            }
+            .training_title{
+                font-family: AvenirNext-Bold;
+                font-size: 18px;
+                color: #9B9B9B;
+                letter-spacing: 0px;
+                text-shadow: 0px 1px 0px #FFFFFF;
+            }
+            .training_details{
+                background: #EBEBEB;
+                border-radius: 9px;
+                font-size: 16px;
+                color: black;
+                padding-left: 15px;
+                padding: 15px;
+                width: 75%;
+            }
+            .edit_inputs_basics{
+                margin-bottom: 10px;
+            }
+            .edit_basics_labels{
+                vertical-align: middle;
+                color: #FFB600;
+                font-family: Raleway;
+                font-size: 14px;
+                margin-left: 4px;
+            }
+            .nav_icons{
+                position: absolute;
+                top: 15px;
+                left: 50%;
+                padding: 2px;
+
+            }   
+            .leftnav{
+                margin-right: 5px;
+                border-right: 1px;
+            }
+            .no_left_margin{
+                margin-left: 0px;
+            }
+            .edit_inputs_basics{
+                margin-bottom: 10px;
+            }
+            .edit_basics_labels{
+                vertical-align: middle;
+                color: #FFB600;
+                font-family: Raleway;
+                font-size: 14px;
+                margin-left: 4px;
+            }
+            .nav_icons{
+                position: absolute;
+                top: 15px;
+                left: 50%;
+                padding: 2px;
+
+            }   
+            .leftnav{
+                margin-right: 5px;
+                border-right: 1px;
+            }
+            .col-sm-*{
+                margin-left:0px;
+            }
+            .DocumentList{
+                background: none;
+            }
+            .edit-button{
+                right:0px;
+            }
+            .DocumentItem
+            {
+                max-width: 150px;
+                height: 150px;
+                overflow: hidden;
+                position: relative;
+                border-radius: 10px;
+            }
+            .crop {
+                position:absolute;
+                left: -100%;
+                right: -100%;
+                top: -100%;
+                bottom: -100%;
+                margin: auto;
+                width: auto;
+                height: auto;
+            }
+            #actor_pro_pic{
+                width: 105px;
+                height: 105px;
+                overflow: hidden;
+                margin-top:20px;
+                margin-right: 5px;
+                position: relative;
+                border-radius: 10px;
+            }
+            .hidden_scroll{
+                overflow-y:hidden;
+            }
+            .hidden_scroll:hover{
+                overflow-y:scroll;
+            }
+
+            .actor_link {
+                padding: 3px;
+                color: #9b9b9b;
+                font-size: 12px;
+                cursor: text;
+
+            }
+
+            .actor_link a{
+                color: #9b9b9b;
+                text-decoration: none;
+            }
+
+            .notVerified {
+                color: red;
+            }
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -289,7 +283,7 @@ overflow-y:scroll;
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="index.php">
-                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname">C A S T I K O</b></span><p><span id="tag-line" class="firstcolor info-small">Makes casting easier!</span>
+                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname"><?= M_Title ?></b></span><p><span id="tag-line" class="firstcolor info-small"><?= M_TagLine ?></span>
                         </a>
                     </div> 
 
@@ -320,7 +314,7 @@ overflow-y:scroll;
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="index.php">
-                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname">C A S T I K O</b></span><p><span id="tag-line" class="firstcolor info-small">Makes casting easier!</span>
+                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname"><?= M_Title ?></b></span><p><span id="tag-line" class="firstcolor info-small"><?= M_TagLine ?></span>
                         </a>
                     </div> 
 
@@ -343,7 +337,7 @@ overflow-y:scroll;
                 ?>
                 <div class="alert alert-warning alert-dismissible" id="warningmsg" role="alert">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <strong>Warning!</strong> <?= $warning_cnf ?>
+                  <strong>Warning!</strong> <?= AC_ActivationWarning ?>
                 </div>
                 <?php } ?>
                 
@@ -469,7 +463,7 @@ overflow-y:scroll;
                                 
                                 <span class="text-danger elements" id="actor_phone"> <?= $actorProfile['StashActor_mobile'] ?> 
                                 <?php if($user["StashUsers_mobile_status"] == 0){ ?>
-                                <a href="<?= base_url() ?>actor/mobileverify" data-toggle="tooltip" data-placement="right" title="<?= $title_verify ?>" class="text-danger otpLink"><i class="fa fa-exclamation"></i></a>
+                                <a href="<?= base_url() ?>actor/mobileverify" data-toggle="tooltip" data-placement="right" title="<?= AC_MobileVerifyTxt ?>" class="text-danger otpLink"><i class="fa fa-exclamation"></i></a>
                                 <?php } ?>
                                 </span>
 
@@ -504,7 +498,7 @@ overflow-y:scroll;
                          <div class="row">
                             <br>
                             <div class="category_heading">CASTING DIRECTORS 
-                                <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= $title_cd ?>"></i>
+                                <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= AC_CDHelpTxt ?>"></i>
                             </div>
                             <?php
                                     foreach ($directors as $key => $director) {
@@ -585,7 +579,7 @@ overflow-y:scroll;
                     <div class="col-sm-8 left" id="second_column_actor">
                          <div class="row col-sm-12" >
                             <br>
-                            <div class="category_heading">EXPERIENCE <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= $title_exp ?>"></i>
+                            <div class="category_heading">EXPERIENCE <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= AC_ExpHelpTxt ?>"></i>
                                 <span id="openexperienceicon" class="glyphicon glyphicon-plus edit-button pull-right firstcolor toggleEdit" data-unhide-id="#experience_add, #closeexperienceicon" data-hide-id="#openexperienceicon" aria-hidden="true"></span>
                                 <span id="closeexperienceicon" class="glyphicon glyphicon-minus pull-right hidden toggleEdit" data-hide-id="#experience_add, #closeexperienceicon" data-unhide-id="#openexperienceicon" aria-hidden="true"></span>
                             </div>
@@ -857,7 +851,7 @@ overflow-y:scroll;
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title firstcolor info">Upload Photos</h4><span class="info-small gray">You can upload multiple pictures at a time.</span>
+                  <h4 class="modal-title firstcolor info">Upload Photos</h4><span class="info-small gray"><?= AC_UploadHelpTxt ?></span>
 
                   <?php $images = json_decode($actorProfile['StashActor_images'], true);
                     $count_image=sizeof($images);
@@ -865,7 +859,7 @@ overflow-y:scroll;
                     echo "<div class='alert alert-danger' role='alert'>
                               <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>
                               <span class='sr-only'>Warning:</span>
-                              You have already reached the maximum limit of uploads. Please delete some photos to upload new. 
+                              ".AC_MaxLimitWarn." 
                             </div>";
                   }?>
                 </div>
@@ -907,7 +901,7 @@ overflow-y:scroll;
                                             $number_of_images=sizeof($images);
                                             if($number_of_images==0)
                                             {
-                                                echo '<div class="info gray">Hola! It looks like you have not uploaded any photos yet. <br>Why don\'t you start with uploading some photos?<br><button type="submit" class="btn submit-btn firstcolor toggleEdit"  data-toggle="modal" data-target="#photosupload" data-hide-id="#set_profile_photo" id="btn-login" ><span class="glyphicon glyphicon-plus"></span> &nbsp;Upload Photos</button></div>';
+                                                echo '<div class="info gray">'.AC_NoImage.'<br><button type="submit" class="btn submit-btn firstcolor toggleEdit"  data-toggle="modal" data-target="#photosupload" data-hide-id="#set_profile_photo" id="btn-login" ><span class="glyphicon glyphicon-plus"></span> &nbsp;Upload Photos</button></div>';
                                             }
                                             else
                                             {
@@ -1009,7 +1003,7 @@ overflow-y:scroll;
                     <div class="container" style="max-width:100%; ">
                         <div class="jumbotron">
                             <p id="resendCnfLnk-msg">
-                                A confirmation link has been send to you email. Check it and confirm your email address.
+                                <?= AC_ConfLinkSent ?>
                             </p>
                         </div>
                       </div>

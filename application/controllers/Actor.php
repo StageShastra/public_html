@@ -51,7 +51,7 @@
 			$this->load->model("Auth");
 			$userdata = $this->Auth->getUserData('StashUsers_id', $this->session->userdata("StaSh_User_id"));
 			if($userdata['StashUsers_mobile_status']){
-				$pageInfo = array("error" => true, "error_msg" => "You mobile number is already verified.", "form" => false);
+				$pageInfo = array("error" => true, "error_msg" => Ac_MobVer_AlreadyVerified, "form" => false);
 			}else{
 				$this->load->model("SMS");
 				$otp = mt_rand(100000, 999999);
@@ -60,9 +60,9 @@
 				if($res['status'] == "success"){
 					$this->Auth->addOTP($otp, $this->session->userdata("StaSh_User_id"));
 					$m = substr($userdata['StashUsers_mobile'], 0, 2) . "*****" . substr($userdata['StashUsers_mobile'], 7, 3);
-					$pageInfo = array("error" => true, "error_msg" => "Enter the Code you got on you mobile {$m}", 'form' => true);
+					$pageInfo = array("error" => true, "error_msg" => Ac_MobVer_EnterCode ." {$m}", 'form' => true);
 				}else{
-					$pageInfo = array("error" => true, "error_msg" => "Sending sms failed. Please try after sometime.", 'form' => true);
+					$pageInfo = array("error" => true, "error_msg" => Ac_MobVer_SendFailed, 'form' => true);
 				}
 
 			}
@@ -94,7 +94,7 @@
 		}
 		public function ajax($value=''){
 			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
-				$this->response(false, "Authentication Failed");
+				$this->response(false, Ac_Ajx_AuthFail);
 
 
 			if(count($this->input->post())){
@@ -185,9 +185,9 @@
 			$this->load->model("ModelActor");
 			$d = array("StashActor_avatar" => "default.png");
 			if($this->ModelActor->updateActorProfile($d)){
-				$this->response(true, "Update Success");
+				$this->response(true, Ac_Ajx_GenSucc);
 			}else{
-				$this->response(false, "Update Failed");
+				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
 
@@ -200,15 +200,15 @@
 					if($otpData['StashMobileOTP_status'] == 0){
 						$this->Auth->updateMobileVerificationStatus($this->session->userdata("StaSh_User_id"));
 						$this->Auth->updateOTPStatus($this->session->userdata("StaSh_User_id"), $data['otp']);
-						$this->response(true, "Your mobile is successfully verified.");
+						$this->response(true, Ac_VerOTP_Success);
 					}else{
-						$this->response(true, "You are using an old otp.");
+						$this->response(true, Ac_VerOTP_OldOTP);
 					}
 				}else{
-					$this->response(false, "Invalid OTP.");
+					$this->response(false, Ac_VerOTP_Invalid);
 				}
 			}else{
-				$this->response(false, "You mobile number is already verified.");
+				$this->response(false, Ac_MobVer_AlreadyVerified);
 			}
 		}
 		
@@ -221,21 +221,21 @@
 					if($this->ModelActor->updateUsername($username, $this->session->userdata("StaSh_User_id"))){
 						$this->response(true, "Username Updated");
 					}else{
-						$this->response(false, "Update Failed");
+						$this->response(false, Ac_Ajx_GenFailed);
 					}
 				}elseif($users == 1){
 					$this->load->model("Auth");
 					$userdata = $this->Auth->getUserData('StashUsers_username', $username);
 					if($userdata["StashUsers_id"] == $this->session->userdata("StaSh_User_id")){
-						$this->response(false, "Nothing Changed");
+						$this->response(false, Ac_eUsrName_Nochange);
 					}else{
-						$this->response(false, "Already Taken!");
+						$this->response(false, Ac_eUsrName_Taken);
 					}
 				}else{
-					$this->response(false, "Already Taken!");
+					$this->response(false, Ac_eUsrName_Taken);
 				}
 			}else{
-				$this->response(false, "Invalid Characters. Username only can have A-Z, a-z, 0-9 and ( .-_ ). No white space allowed.");
+				$this->response(false, Ac_eUsrName_Invalid);
 			}
 		}
 		
@@ -247,9 +247,9 @@
 			$name = $user['StashUsers_name'];
 			$id = $this->session->userdata("StaSh_User_id");
 			if($this->Email->sendActivationMail($name, $email, $id)){
-				$this->response(true, "A confirmation link has been sent to your email.");
+				$this->response(true, Ac_ReConf_Sent);
 			}else{
-				$this->response(false, "Sending email failed. Try again later.");
+				$this->response(false, Ac_ReConf_Fail);
 			}
 		}
 		
@@ -258,9 +258,9 @@
 			$img = explode("/", $data['img']);
 			$d = array("StashActor_avatar" => trim($img[count($img)-1]));
 			if($this->ModelActor->updateActorProfile($d)){
-				$this->response(true, "Update Success");
+				$this->response(true, Ac_Ajx_GenSucc);
 			}else{
-				$this->response(false, "Update Failed");
+				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
 		public function removeTraining($data = []){
@@ -269,7 +269,7 @@
 			if($this->ModelActor->deleteTraining($data['training_ref'])){
 				$this->response(true, "Training Removed");
 			}else{
-				$this->response(false, "Action Failed");
+				$this->response(false, Ac_Ajx_ActFailed);
 			}
 		}
 		public function removeExperience($data = []){
@@ -277,7 +277,7 @@
 			if($this->ModelActor->deleteExperience($data['experience_ref'])){
 				$this->response(true, "Experience Removed");
 			}else{
-				$this->response(false, "Action Failed");
+				$this->response(false, Ac_Ajx_ActFailed);
 			}
 		}
 		public function editContactsDetails($data = []){
@@ -301,15 +301,15 @@
 
 			if($userdata['StashUsers_mobile'] != $data['phone']){
 				$this->Auth->updateUserMobile($ref, $data['phone']);
-				$msg = "Update Success. You changed your mobile number. You need to verify it.";
+				$msg = Ac_Ajx_GenSucc . Ac_eContDet_Mobchanged;
 			}else{
-				$msg = "Update Success";
+				$msg = Ac_Ajx_GenSucc;
 			}
 
 			if($this->ModelActor->updateActorProfile($d)){
 				$this->response(true, $msg);
 			}else{
-				$this->response(false, "Update Failed");
+				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
 		public function editBasicDetails($data = []){
@@ -323,9 +323,9 @@
 						"StashActor_max_role_age" => $data['max_age']
 					);
 			if($this->ModelActor->updateActorProfile($d)){
-				$this->response(true, "Update Success");
+				$this->response(true, Ac_Ajx_GenSucc);
 			}else{
-				$this->response(false, "Update Failed");
+				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
 		public function removeImage($data = []){
@@ -353,7 +353,7 @@
 			if($this->ModelActor->updateTraining($data)){
 				$this->response(true, "Training Updated");
 			}else{
-				$this->response(false, "Failed");
+				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
 		
@@ -425,15 +425,15 @@
 			if($this->ModelActor->insertTraining($data)){
 				$this->response(true, "Training Added", $this->parseTraining());
 			}else{
-				$this->response(false, "Failed");
+				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
 		public function editExperience($data = []){
 			$this->load->model("ModelActor");
 			if($this->ModelActor->updateExperience($data)){
-				$this->response(true, "Experience Updated");
+				$this->response(true, Ac_Ajx_GenSucc);
 			}else{
-				$this->response(false, "Failed");
+				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
 		
@@ -546,7 +546,7 @@
 			if($this->ModelActor->insertExperience($data)){
 				$this->response(true, "Experience Added", $this->parseExperience());
 			}else{
-				$this->response(false, "Failed");
+				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
 		
@@ -558,9 +558,9 @@
 			$newLang = array_diff($langs, $actorLang);
 			if(count($newLang)){
 				if($this->ModelActor->updateActorSkill($newLang)){
-					$this->response(true, "Skill Updated");
+					$this->response(true, Ac_Ajx_GenSucc);
 				}else{
-					$this->response(false, "Udpate Failed");
+					$this->response(false, Ac_Ajx_GenFailed);
 				}
 			}else{
 				$this->response(false, "Nothing to Updated");
@@ -574,9 +574,9 @@
 			$newLang = array_diff($langs, $actorLang);
 			if(count($newLang)){
 				if($this->ModelActor->updateActorLanguage($newLang)){
-					$this->response(true, "Language Updated");
+					$this->response(true, Ac_Ajx_GenSucc);
 				}else{
-					$this->response(false, "Udpate Failed");
+					$this->response(false, Ac_Ajx_GenFailed);
 				}
 			}else{
 				$this->response(false, "Nothing to Updated");
@@ -586,18 +586,18 @@
 			$this->load->model("ModelActor");
 			$data = array('StashActor_weight' => (int)trim($data['weight']));
 			if($this->ModelActor->updateActorProfile($data)){
-				$this->response(true, "Weight Updated");
+				$this->response(true, Ac_Ajx_GenSucc);
 			}else{
-				$this->response(false, "Update Failed");
+				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
 		public function editHeight($data = []){
 			$this->load->model("ModelActor");
 			$data = array('StashActor_height' => (int)trim($data['height']));
 			if($this->ModelActor->updateActorProfile($data)){
-				$this->response(true, "Height Updated");
+				$this->response(true, Ac_Ajx_GenSucc);
 			}else{
-				$this->response(false, "Update Failed");
+				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
 		public function editMinMaxAge($data = []){
@@ -607,9 +607,9 @@
 					'StashActor_max_role_age' => (int)trim($data['max_age'])
 				);
 			if($this->ModelActor->updateActorProfile($data)){
-				$this->response(true, "Age Range Updated");
+				$this->response(true, Ac_Ajx_GenSucc);
 			}else{
-				$this->response(false, "Update Failed");
+				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
 		public function editDOB($data = []){
@@ -617,9 +617,9 @@
 			$dob = strtotime(trim($data['dob']));
 			$data = array('StashActor_dob' => $dob);
 			if($this->ModelActor->updateActorProfile($data)){
-				$this->response(true, "Date of Birth Updated");
+				$this->response(true, Ac_Ajx_GenSucc);
 			}else{
-				$this->response(false, "Update Failed");
+				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
 		public function editWhatsApp($data = []){
@@ -627,9 +627,9 @@
 			$mobile = trim($data['whatsapp']);
 			$data = array('StashActor_whatsapp' => $mobile);
 			if($this->ModelActor->updateActorProfile($data)){
-				$this->response(true, "Phone Number Updated");
+				$this->response(true, Ac_Ajx_GenSucc);
 			}else{
-				$this->response(false, "Update Failed");
+				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
 		public function editActorMobile($data = []){
@@ -638,9 +638,9 @@
 			$data = array('StashActor_mobile' => $mobile);
 			if($this->ModelActor->updateActorProfile($data)){
 				$this->ModelActor->updateUserProfile(array("StashUsers_mobile" => $mobile));
-				$this->response(true, "Phone Number Updated");
+				$this->response(true, Ac_Ajx_GenSucc);
 			}else{
-				$this->response(false, "Update Failed");
+				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
 		public function editActorName($data = []){
@@ -650,9 +650,9 @@
 			$update = array('StashActor_name' => $name, "StashActor_gender" => $sex);
 			if($this->ModelActor->updateActorProfile($update)){
 				$this->ModelActor->updateUserProfile(array("StashUsers_name" => $name));
-				$this->response(true, "Name Updated");
+				$this->response(true, Ac_Ajx_GenSucc);
 			}else{
-				$this->response(false, "Update Failed");
+				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
 	}

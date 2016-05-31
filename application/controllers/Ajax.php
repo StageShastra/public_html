@@ -59,7 +59,7 @@
 						break;
 				}
 			}else{
-				$this->response(false, "Sorry! No form data received.");
+				$this->response(false, Aj_Req_NoData);
 			}
 		}
 		
@@ -91,7 +91,7 @@
 				$this->ModelDirector->updateCountAudSMS($count, $id, "invite", "sms");
 				$this->response(true, "{$count} Invitation SMS sent");
 			}else{
-				$this->response(false, "Email Sending Failed");
+				$this->response(false, "Email".Aj_Gen_Failed);
 			}
 		}
 		public function eMailInvitation($data = []){
@@ -111,7 +111,7 @@
 				$this->ModelDirector->updateCountAudSMS($count, $id, "invite", "email");
 				$this->response(true, "{$count} Invitation Emails sent");
 			}else{
-				$this->response(false, "Email Sending Failed");
+				$this->response(false, "SMS".Aj_Gen_Failed);
 			}
 		}
 		public function advanceSearch($data = []){
@@ -185,7 +185,7 @@
 				$this->ModelDirector->updateCountAudSMS($response['cost'], $id, "contact", "sms");
 				$this->response(true, $response['cost'] . " SMS sent successfully.");
 			}else{
-				$this->response(false, "SMS sending failed. ");
+				$this->response(false, "SMS ". Aj_Gen_Failed);
 			}
 			//$this->response(true, count($data['contact']['mobile']) . " SMS sent");
 		}
@@ -199,7 +199,7 @@
 				$this->ModelDirector->updateCountAudSMS(count($data['contact']['ref']), $id, "contact", "email");
 				$this->response(true, count($data['contact']['ref']) . " Emails sent successfully.");
 			}else{
-				$this->response(false, "Email sending failed.");
+				$this->response(false, "Email " . Aj_Gen_Failed);
 			}
 			//$this->response(true, count($data['contact']['email']) . " Emails sent.");
 		}
@@ -217,7 +217,7 @@
 			if(count($actorsInDirectorList)){
 				$this->response(true, "Actor Found", $actorsInDirectorList);
 			}else{
-				$this->response(false, "You don't have any actor added in you List. Please Add actors.");
+				$this->response(false, Aj_FetAct_NoActor);
 			}
 		}
 		public function changePassword($data = []){
@@ -230,18 +230,18 @@
 					if($timeExp > time()){
 						if($this->Auth->updatePassword($userData['StashUsers_id'], $data['password'])){
 							$this->Auth->updatePassCodeUses($passCodeData['StashForgotPassword_id']);
-							$this->response(true, "Password Changed Successfully");
+							$this->response(true, Aj_ChangePass_Succ);
 						}else{
-							$this->response(false, "Failed to change password.");
+							$this->response(false, Aj_ChangePass_Fail);
 						}
 					}else{
-						$this->response(false, "Pass Code Expired. Try to get new one.");
+						$this->response(false, Aj_ChangePass_CodeExp);
 					}
 				}else{
-					$this->response(false, "This Pass Code is already used.");
+					$this->response(false, Aj_ChangePass_Used);
 				}
 			}else{
-				$this->response(false, "Invalid/Old Pass Code...");
+				$this->response(false, Aj_ChangePass_Invalid);
 			}
 		}
 		public function forgotPassword($data = []){
@@ -253,12 +253,12 @@
 				$userData = $this->Auth->getUserData('StashUsers_email', $data['email']);
 				$this->Auth->insertPassCode($userData['StashUsers_id'], $passCode);
 				if($this->Email->sendPassCode($data['email'], $passCode)){
-					$this->response(true, 'We have emailed you a reset code.');
+					$this->response(true, Aj_FrgtPass_Sent);
 				}else{
-					$this->response(false, 'Failed to send Passcode. Try Again...');
+					$this->response(false, Aj_FrgtPass_Failed);
 				}
 			}else{
-				$this->response(false, "This Email/Username doesn't Exist. Please Register first.");
+				$this->response(false, Aj_FrgtPass_Invalid);
 			}
 		}
 		public function userLogin($data = []){
@@ -289,12 +289,12 @@
 							setcookie('director_ref', null, -1, '/');
 	    				}
 					}
-					$this->response(true, "Login Success. Welcome {$data['email']}");
+					$this->response(true, Aj_Login_Succ . " {$data['email']}");
 				}else{
-					$this->response(false, "Email and Password don't match.");
+					$this->response(false, Aj_Login_Failed);
 				}
 			}else{
-				$this->response(false, "This Email/Username doesn't Exist. Please Register first.");
+				$this->response(false, Aj_Login_Invalid);
 			}
 		}
 	}
