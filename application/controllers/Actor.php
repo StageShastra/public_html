@@ -370,7 +370,7 @@
 								
 								<span class="training_title col-sm-4" id="actor_tr_title_'.$key.'">
 									<span class="training-plus toggleEdit" id="actor_tr_plus_'.$key.'" data-hide-id="#actor_tr_plus_'.$key.'" data-unhide-id="#actor_tr_minus_'.$key.',#actor_tr_detail_'.$key.'">+</span>
-									<span  id="actor_tr_minus_'.$key.'" class="toggleEdit training-minus hidden" data-hide-id="#actor_tr_minus_'.$key.',#actor_tr_detail_'.$key.' data-unhide-id="#actor_tr_plus_'.$key.'" >-</span>
+									<span  id="actor_tr_minus_'.$key.'" class="toggleEdit training-minus hidden" data-hide-id="#actor_tr_minus_'.$key.', #actor_tr_detail_'.$key.'"  data-unhide-id="#actor_tr_plus_'.$key.'" >-</span>
 									'.$training['StashActorTraining_title'].'
 								</span>
 								<span class="info-small dark-gray col-sm-4" id="actor_tr_course_'.$key.'">
