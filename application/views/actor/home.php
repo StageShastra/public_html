@@ -362,7 +362,11 @@
                 position: absolute;
                 top:10px;
             }
-            
+            .DocumentList{
+            	max-height:auto;
+            	height:auto;
+            	overflow-y:auto;
+            }
 
             
         }
@@ -996,9 +1000,9 @@
                                                     . "</a>"
                                                     . "</li>";
                                                     $counter++;
-                                                        if($counter%5==0){
-                                                            echo '<br>';
-                                                        }
+                                                        //if($counter%5==0){
+                                                          //  echo '<br>';
+                                                        //}
                                             }
                                         ?>     
 
