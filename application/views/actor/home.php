@@ -302,7 +302,6 @@
         .alertbox{
             padding: 15px;
             margin-bottom: 20px;
-            border: 1px solid rgba(22, 122, 198, 0.83);
             border-radius: 4px;
             margin-top: 20px;
             background:#FFB600;
@@ -433,6 +432,10 @@
             #browse-table{
                 margin-top: 20px;
             }
+            .DocumentItem{
+                width:120px;
+                height: 120px;
+            }
         }
 
         /* lg */
@@ -467,6 +470,10 @@
             }
             .#browse-table{
                 margin-top: 25px;
+            }
+            .DocumentItem{
+                width:150px;
+                height: 150px;
             }
         }
         .videoWrapper {
