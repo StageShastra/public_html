@@ -35,7 +35,7 @@
         }
         /* AKASH SINGH: */
         .a_name{
-            font-family: 'Raleway', sans-serif, AvenirNext-Regular;
+            font-family: 'AvenirNext-Bold', sans-serif, AvenirNext-Regular;
             font-size: 20px;
             color: #4A4A4A;
             text-align: left;
@@ -353,6 +353,17 @@
                 position: absolute;
                 top:10px;
             }
+            .alert{
+                padding: 15px;
+                margin-bottom: 20px;
+                border: 1px solid rgba(22, 122, 198, 0.83);
+                border-radius: 4px;
+                margin-top: 20px;
+                background:#F05759;
+                color: white; 
+                font-size: 22px;
+            }
+           
 
             
         }
@@ -422,10 +433,6 @@
             #browse-table{
                 margin-top: 20px;
             }
-            .DocumentItem{
-            	width:115px;
-            	height:115px;
-            }
         }
 
         /* lg */
@@ -460,10 +467,6 @@
             }
             .#browse-table{
                 margin-top: 25px;
-            }
-            .DocumentItem{
-            	width:125px;
-            	height:125px;
             }
         }
         .videoWrapper {
@@ -601,7 +604,7 @@
 							<div class="category_heading no_left_margin"></div>
 							
 							<div class="row no_left_margin">
-								<input type="text" class="editwhite edit_inputs_basics col-sm-4" name="username" value="<?= $user["StashUsers_username"] ?>" id="username"/>
+								<input type="text" class="editwhite edit_inputs_basics col-sm-6" style="padding:10px;" name="username" value="<?= $user["StashUsers_username"] ?>" id="username"/>
 							</div>
 							
 							<font class="sortbuttons">
@@ -617,7 +620,7 @@
 						</div>
                         <div class = "row" id="actor_basics">
                             <div class=" col-sm-3 col-lg-4 col-md-4  a_pic" id="actor_pro_pic">
-                                <span class="glyphicon glyphicon-camera  toggleEdit overlay_edit" data-toggle="modal" data-target="#set_profile_photo" aria-hidden="true"></span>
+                               <span class="glyphicon glyphicon-renove  toggleEdit overlay_edit removeDP" style="left:5px;" aria-hidden="true"></span> <span class="glyphicon glyphicon-camera  toggleEdit overlay_edit" data-toggle="modal" data-target="#set_profile_photo" aria-hidden="true"></span>
                                 
                                 <img src="<?= IMG .'/actors/'.$actorProfile['StashActor_avatar'] ?>" id="actorAvatar" class="pro-pic"></img> 
                                  <input type="hidden" id="image_count" value='<?= $actorProfile['StashActor_images'] ?>'>
@@ -763,7 +766,7 @@
                             <span id="language_edit" class="left hidden ">
                                  <input type="text" class="form-control login" value="<?= implode(",", $actorProfile['StashActor_language']) ?>" id="language" data-role="tagsinput" name="language" placeholder= "Language:" />
                                  <br><font class="sortbuttons">
-                                    <button type="button" class="btn submit-btn firstcolor center updateDataField tick"
+                                    <button type="button" class="btn submit-btn firstcolor center updateDataField"
                                             data-input-names="language"
                                             data-request="EditLanguage"
                                             data-hide-id="#language_edit" 
@@ -796,7 +799,7 @@
                             <span id="skills_edit" class="left hidden ">
                                  <input type="text" class="form-control login" value="<?= implode(",", $actorProfile['StashActor_skills']).", " ?>" data-role="tagsinput" id="skills" name="skills" placeholder= "Skills:" />
                                  <br><font class="sortbuttons">
-                                    <button type="button" class="btn submit-btn firstcolor center updateDataField tick"
+                                    <button type="button" class="btn submit-btn firstcolor center updateDataField"
                                             data-input-names="skills"
                                             data-request="EditSkills"
                                             data-hide-id="#skills_edit" 
@@ -1013,7 +1016,7 @@
                                         <input type="text" class="editwhite short" name='trn_end_time' id="addend" Placeholder="Ending Year"/>
                                     </div>
                                     <textarea class="editwhite long" name='trn_blurb' id="addtrainingdescription" placeholder="A little description about the course." style="height:80px;"></textarea>
-                                    <br><font class="sortbuttons"><button class="btn submit-btn firstcolor center addTraining tick"  ><span class="glyphicon glyphicon-ok"></span></button></font>
+                                    <br><font class="sortbuttons"><button class="btn submit-btn firstcolor center addTraining"  ><span class="glyphicon glyphicon-ok"></span></button></font>
                                 <hr>
                                 </span>
                                 <div id="traininglist" style="max-height:300px;">
@@ -1060,7 +1063,7 @@
                                         <textarea class="editwhite long" name="tr_blurb_<?= $key ?>" id="edittrainingdescriptioni" style="height:100px;"><?= $training['StashActorTraining_blurb'] ?></textarea>
                                         <br>
                                         <font class="sortbuttons">
-                                            <button class="btn submit-btn firstcolor center btnExpAndTraining tick"
+                                            <button class="btn submit-btn firstcolor center btnExpAndTraining"
                                                     data-input-names="tr_title_<?= $key ?>, tr_course_<?= $key ?>, tr_start_<?= $key ?>, tr_end_<?= $key ?>, tr_blurb_<?= $key ?>"
                                                     data-key="<?= $key ?>"
                                                     data-table-id="<?= $training['StashActorTraining_id'] ?>"
