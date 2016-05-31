@@ -467,6 +467,13 @@
     width: 100%;
     height: 100%;
 }
+ .rotate-img {
+            -webkit-animation: rotation 2s infinite linear;
+          }
+          @-webkit-keyframes rotation {
+              from {-webkit-transform: rotate(0deg);}
+              to   {-webkit-transform: rotate(359deg);}
+          }
         #actor_basics{
            
         }
@@ -803,7 +810,9 @@
                                     <input type="text" class="editwhite long" name='exp_role' id="addrole" Placeholder="Role e.g. Dad, Mom, Character Name" required/>
                                     <input type="text" class="editwhite long" name='exp_link' id="addlink" Placeholder="Youtube Video Link"/>
                                     <textarea class="editwhite long" name='exp_blurb' id="adddescription" placeholder="A little description about the role and the project." style="height:80px;"></textarea>
-                                    <br><font class="sortbuttons"><button type="submit" class="btn submit-btn firstcolor center addExperience"  ><span class="glyphicon glyphicon-ok"></span></button></font>
+                                    <br><font class="sortbuttons">
+                                    <button type="submit" class="btn submit-btn firstcolor center addExperience toggleEdit tick" id="add_exp_btn" data-hide-id="#add_exp_btn" data-unhide-id="#add_exp_btn_load" ><span class="glyphicon glyphicon-ok"></span></button>
+                                    <button type="submit" class="btn submit-btn firstcolor center addExperience tick hidden" id="add_exp_btn_load" ><span class="glyphicon glyphicon-share img-rotate"></span></button></font>
                                 
                                 </span>
                                 <div id="experiencelist" style="overflow:hidden;">
@@ -918,14 +927,24 @@
                                         <textarea class="editwhite long" name="ex_blurb_<?= $key ?>" id="editdescriptioni" style="height:80px;overflow:auto;"><?= $experience['StashActorExperience_blurb'] ?></textarea>
                                         <br>
                                         <font class="sortbuttons">
-                                            <button type="button" class="btn submit-btn firstcolor center btnExpAndTraining"
+                                            <button type="button" class="btn submit-btn firstcolor center btnExpAndTraining tick toggleEdit"
+                                                    id="edit_exp_btn"
+                                                    data-input-names="ex_title_<?= $key ?>, ex_role_<?= $key ?>,ex_link_<?= $key ?>,ex_blurb_<?= $key ?>"
+                                                    data-key="<?= $key ?>"
+                                                    data-table-id="<?= $experience['StashActorExperience_id'] ?>"
+                                                    data-request="EditExperience"
+                                                    data-hide-id="#experience-<?= $key ?>_edit,#edit_exp_btn " 
+                                                    data-unhide-id="#experience-<?= $key ?>,#edit_exp_btn_load ">
+                                                <span class="glyphicon glyphicon-ok"></span>
+                                            </button>
+                                            <button type="button" class="btn submit-btn firstcolor center btnExpAndTraining tick hidden" id="edit_exp_btn_load"
                                                     data-input-names="ex_title_<?= $key ?>, ex_role_<?= $key ?>,ex_link_<?= $key ?>,ex_blurb_<?= $key ?>"
                                                     data-key="<?= $key ?>"
                                                     data-table-id="<?= $experience['StashActorExperience_id'] ?>"
                                                     data-request="EditExperience"
                                                     data-hide-id="#experience-<?= $key ?>_edit" 
                                                     data-unhide-id="#experience-<?= $key ?>">
-                                                <span class="glyphicon glyphicon-ok"></span>
+                                                <span class="glyphicon glyphicon-refresh rotate-img "></span>
                                             </button>
                                         </font>
                                     </span>
