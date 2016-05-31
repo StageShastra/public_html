@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	//For Main Sevrer
-	var url = "/ajax/",
-		base = "/";
+	var url = "/public_html/ajax/",
+		base = "/public_html/";
 		
 	//For Localhost
 	/*var url = "/public_html/beta/ajax/",
@@ -157,6 +157,19 @@ function actor_click(){
         image.src = "../img/actor_on.png";
     }
 }
-
+  $(function() {
+    $('a[href*="#"]:not([href="#"])').click(function() {
+      if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+        if (target.length) {
+          $('html, body').animate({
+            scrollTop: target.offset().top
+          }, 1000);
+          return false;
+        }
+      }
+    });
+  });
 
 });

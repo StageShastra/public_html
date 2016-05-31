@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	var url = "/actor/ajax",
-		base = "/",
+		base = "/actor/",
 		type = "POST",
 		data = {};
 
@@ -58,8 +58,8 @@ $(document).ready(function(){
 								$.each( value.split(","), function(index, value){
 									name = $.trim(value);
 									name = name.toProperCase();
-									html +='<div class="col-sm-4 vertical-padded">'
-	                                    	+'<button type="button" class="btn tagp" style="max-width:auto;"aria-label="Left Align" >'
+									html +='<div class="col-sm-4 vertical-padded ellipsis">'
+	                                    	+'<button type="button" class="btn skillstag" style="max-width:auto;"aria-label="Left Align" >'
 	                                        	+'<font class="taga-text">'+name+'</font>'
 	                                    	+'</button>'
 	                                		+'</div> ';

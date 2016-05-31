@@ -11,255 +11,499 @@
         $years = floor($diff / (365*60*60*24));
         return $years;
     }
+
+    $title_cd = "When you accept a casting director's invitation to join their database, their name will show up here. This means that they will see all the changes you make to your profile instantly.";
+    $title_exp = "Showing your video work is the best way to showcase your talent. If you don't have any video work to show yet, just record yourself acting out a favorite scene and put that here.";
+    $warning_cnf = "Please verify your email address so that casting directors can contact you easily. We've sent a link to your email.";
+    $warning_cnf .= "<br> If you have not received it, click <a href='#' class='text-info' id='resendConfirmationLink'>here</a> to resend the verification email.";
+    $title_verify = "Your mobile number is not verified. Please verify your mobile number to receive messages on your phone.";
 ?>
     <body>
         <style>
-            body{
-                padding-top: 90px;
-            }
-            .rotate-img {
-                -webkit-animation: rotation 2s infinite linear;
-            }
-            @-webkit-keyframes rotation {
-                from {-webkit-transform: rotate(0deg);}
-                to   {-webkit-transform: rotate(359deg);}
-            }
-            .bootstrap-tagsinput {
-                background-color: #f2f2f2;
-            }
-            /* AKASH SINGH: */
-            .a_name{
-                font-family: AvenirNext-Bold;
-                font-size: 30px;
-                color: #4A4A4A;
-                text-align: left;
-                margin-bottom: 15px;
-            }
-            .a_pic{
-                /* Rectangle 1: */
-                margin-top: 15px;
-                border-radius: 10px;
-                height: 130px;
-                width: 130px;
-                float: left;
-                padding-left: 0px !important;
-            }
-            .pro-pic{
-                border-radius: 10px;
-                height: 100%;
-                width: auto;
-            }
-            .left{
-                text-align: left;
-            }
-            .basics{
-                text-align: left;
-                margin-top: 15px;
-            }
-            .category_heading{
-                font-family: Raleway;
-                font-weight: 400;
-                font-size: 20px;
-                color: #C9C9C9;
+          body{
+            padding-top: 90px;
+          }
+          .rotate-img {
+            -webkit-animation: rotation 2s infinite linear;
+          }
+          @-webkit-keyframes rotation {
+              from {-webkit-transform: rotate(0deg);}
+              to   {-webkit-transform: rotate(359deg);}
+          }
+          .bootstrap-tagsinput {
+            background-color: #f2f2f2;
+        }
+        /* AKASH SINGH: */
+        .a_name{
+            font-family: 'Raleway', sans-serif, AvenirNext-Regular;
+            font-size: 20px;
+            color: #4A4A4A;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+        
+        .a_pic{
+            /* Rectangle 1: */
+            border-radius: 10px;
+            height: 130px;
+            width: 130px;
+            float: left;
+            padding-left: 0px !important;
+        }
+        .pro-pic{
+            border-radius: 10px;
+            height: 100%;
+            width: auto;
+        }
+        .left{
+            text-align: left;
+        }
+        .basics{
+            text-align: left;
+        }
+        .category_heading{
+            font-family: Raleway;
+            font-weight: 400;
+            font-size: 15px;
+            color: #FFB600;
+            
+        }
+        .elements{
+            font-family: AvenirNext-Regular;
+            font-size: 14px;
+            color: #4A4A4A;
+            
+        }
+        .elements_label{
+            font-family: AvenirNext-Bold;
+            font-size: 14px;
+            color: #9B9B9B;
+            letter-spacing: 0px;
+            text-shadow: 1px 1px 1px #FFFFFF;
+            
+        }
+        .language_tag{
+            border: 1px solid #FBB515;
+            border-radius: 3px;
+            background: transparent;
+            font-family: AvenirNext-Regular;
+            font-size: 14px;
+            max-width: 100%; 
+            padding-left:0px;
+             width:100%;
+            overflow-x:hidden;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+        }
+        .project_tag{
+            border: 1px solid #FBB515;
+            border-radius: 3px;
+            background: transparent;
+            font-family: AvenirNext-Regular;
+            font-size: 14px;
+            max-width: 100%; 
+            padding-left:0px;
+            width:100%;
+            overflow-x:hidden;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+        }
+         .skills_tag{
+            border: 1px solid #F05759;
+            border-radius: 3px;
+            background: transparent;
+            font-family: AvenirNext-Regular;
+            font-size: 14px;
+            max-width: 100%;
+            padding-left:0px;
+             width:100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+        }
+        .ellipsis{
+             -webkit-transition: width 1s ease-in-out;
+            -moz-transition: width 1s ease-in-out;
+            -o-transition: width 1s ease-in-out;
+            transition: width 1s ease-in-out;
+        }
+        .ellipsis:hover{
+            width: auto;
+        }
+        .taga-text {
+            padding-left: 3px !important;
+            padding-right: 3px !important;
+        }
+        .video_frame{
+            border: 0px;
+        }
+        .overlay_edit
+        {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: rgba(0,0,0,0.5);
+            padding: 3px;
+            color: white;
+            z-index:999;
+            border-radius: 3px;
+        }
+        #second_column_actor{
+            margin-left: 20px; 
+        }
+        .training-plus{
+            font-family: AvenirNext-Regular;
+            font-size: 18px;
+            color: #FBB515;
+        }
+        .training-minus{
+            font-family: AvenirNext-Regular;
+            font-size: 18px;
+            color: #F05759;
+        }
+        .training_title{
+            font-family: AvenirNext-Bold;
+            font-size: 18px;
+            color: #9B9B9B;
+            letter-spacing: 0px;
+            text-shadow: 0px 1px 0px #FFFFFF;
+        }
+        .training_details{
+            background: #EBEBEB;
+            border-radius: 9px;
+            font-size: 16px;
+            color: black;
+            padding-left: 15px;
+            padding: 15px;
+            width: 75%;
+        }
+        .edit_inputs_basics{
+            margin-bottom: 10px;
+        }
+        .edit_basics_labels{
+            vertical-align: middle;
+            color: #FFB600;
+            font-family: Raleway;
+            font-size: 14px;
+            margin-left: 4px;
+        }
+        .nav_icons{
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            padding: 2px;
+           
+        }   
+        .leftnav{
+            margin-right: 5px;
+            border-right: 1px;
+        }
+        .no_left_margin{
+            margin-left: 0px;
+        }
+        .edit_inputs_basics{
+            margin-bottom: 10px;
+        }
+        .edit_basics_labels{
+            vertical-align: middle;
+            color: #FFB600;
+            font-family: Raleway;
+            font-size: 14px;
+            margin-left: 4px;
+        }
+        .nav_icons{
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            padding: 2px;
+           
+        }   
+        .leftnav{
+            margin-right: 5px;
+            border-right: 1px;
+        }
+        .col-sm-*{
+            margin-left:0px;
+        }
+        .DocumentList{
+            background: none;
+        }
+        .edit-button{
+            right:0px;
+        }
+        .DocumentItem
+        {
+            max-width: 150px;
+            height: 150px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 10px;
+        }
+        .crop {
+            position:absolute;
+            left: -100%;
+            right: -100%;
+            top: -100%;
+            bottom: -100%;
+            margin: auto;
+            width: auto;
+            height: auto;
+        }
+        #actor_pro_pic{
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            margin-right: 5px;
+            position: relative;
+            border-radius: 10px
+        }
+        .hidden_scroll{
+        overflow-y:hidden;
+        }
+        .hidden_scroll:hover{
+        overflow-y:scroll;
+        }
 
-            }
-            .elements{
-                font-family: AvenirNext-Regular;
-                font-size: 14px;
-                color: #4A4A4A;
+		.actor_link {
+			padding: 0px;
+			color: #9b9b9b;
+			font-size: 12px;
+			cursor: text;
+            margin-left: -15px;
+			
+		}
+		
+		.actor_link a{
+			text-decoration: none;
+		}
 
-            }
-            .elements_label{
-                font-family: AvenirNext-Bold;
-                font-size: 14px;
-                color: #9B9B9B;
-                letter-spacing: 0px;
-                text-shadow: 0px 1px 0px #FFFFFF;
-            }
-            .language_tag{
-                border: 1px solid #FBB515;
-                border-radius: 3px;
-                background: transparent;
-                font-family: AvenirNext-Regular;
-                font-size: 14px;
-                max-width: 100%; 
-                padding-left:0px;
-                width:100%;
-                overflow-x:hidden;
-            }
-            .project_tag{
-                border: 1px solid #FBB515;
-                border-radius: 3px;
-                background: transparent;
-                font-family: AvenirNext-Regular;
-                font-size: 14px;
-                max-width: 100%; 
-                padding-left:0px;
-                width:100%;
-                overflow-x:hidden;
-            }
-            .skills_tag{
-                border: 1px solid #F05759;
-                border-radius: 3px;
-                background: transparent;
-                font-family: AvenirNext-Regular;
-                font-size: 14px;
-                max-width: 100%;
-                padding-left:0px;
-                width:100%;
-                overflow-x:hidden;
-            }
-            .taga-text {
-                padding-left: 3px !important;
-                padding-right: 3px !important;
-            }
-            .video_frame{
-                border: 0px;
-            }
-            .overlay_edit
-            {
-                position: absolute;
-                top: 5px;
-                right: 10px;
-                background: rgba(0,0,0,0.5);
-                padding: 3px;
-                color: white;
-                z-index:999;
-                border-radius: 3px;
-            }
-            #second_column_actor{
-                margin-left: 30px; 
-            }
-            .training-plus{
-                font-family: AvenirNext-Regular;
-                font-size: 18px;
-                color: #FBB515;
-            }
-            .training-minus{
-                font-family: AvenirNext-Regular;
-                font-size: 18px;
-                color: #F05759;
-            }
-            .training_title{
-                font-family: AvenirNext-Bold;
-                font-size: 18px;
-                color: #9B9B9B;
-                letter-spacing: 0px;
-                text-shadow: 0px 1px 0px #FFFFFF;
-            }
-            .training_details{
-                background: #EBEBEB;
-                border-radius: 9px;
-                font-size: 16px;
-                color: black;
-                padding-left: 15px;
-                padding: 15px;
-                width: 75%;
-            }
-            .edit_inputs_basics{
-                margin-bottom: 10px;
-            }
-            .edit_basics_labels{
-                vertical-align: middle;
-                color: #FFB600;
-                font-family: Raleway;
-                font-size: 14px;
-                margin-left: 4px;
-            }
-            .nav_icons{
-                position: absolute;
-                top: 15px;
-                left: 50%;
-                padding: 2px;
+        .notVerified {
+            color: red;
+        }
+        /*mobileresponsiveness*/
+        #home{
+            padding-left:0px;
+            padding-right: 0px;
+        }
+        .custom-navbar{
+            padding-top: 0px;
+            margin-bottom: 0px;
 
-            }   
-            .leftnav{
-                margin-right: 5px;
-                border-right: 1px;
-            }
-            .no_left_margin{
-                margin-left: 0px;
-            }
-            .edit_inputs_basics{
-                margin-bottom: 10px;
-            }
-            .edit_basics_labels{
-                vertical-align: middle;
-                color: #FFB600;
-                font-family: Raleway;
-                font-size: 14px;
-                margin-left: 4px;
-            }
-            .nav_icons{
-                position: absolute;
-                top: 15px;
-                left: 50%;
-                padding: 2px;
-
-            }   
-            .leftnav{
-                margin-right: 5px;
-                border-right: 1px;
-            }
-            .col-sm-*{
-                margin-left:0px;
-            }
-            .DocumentList{
-                background: none;
-            }
-            .edit-button{
-                right:0px;
-            }
-            .DocumentItem
-            {
-                max-width: 150px;
-                height: 150px;
-                overflow: hidden;
+        }
+        .tagline{
                 position: relative;
-                border-radius: 10px;
+                top: -10px;
             }
-            .crop {
-                position:absolute;
-                left: -100%;
-                right: -100%;
-                top: -100%;
-                bottom: -100%;
-                margin: auto;
-                width: auto;
+        /* xs */
+        @media screen and (max-width: 767px) {
+            body {
+                font-size: 0.9em;
+            }
+            .container-fluid{
+                padding:0px;
+            }
+            .navbar-fixed-top{
+                margin-left: 0%;
+                margin-right: 0%;
+            }
+            .navbar-header{
+                height: 75px;
+            }
+            .headname{
+                position: relative;
+                top:15px;
+                font-size: 20px;
+            }
+            .brands{
+                width: 55px;
                 height: auto;
             }
-            #actor_pro_pic{
-                width: 105px;
-                height: 105px;
-                overflow: hidden;
-                margin-top:20px;
-                margin-right: 5px;
+            .navbar-toggle{
+                margin-right: 20px;
                 position: relative;
-                border-radius: 10px;
+                top:20px;
+                margin-top: 0px;
+
             }
-            .hidden_scroll{
-                overflow-y:hidden;
+             .tagline{
+                font-size: 9px;
             }
-            .hidden_scroll:hover{
-                overflow-y:scroll;
+            .light-padded
+            {
+                padding: 0px 5px 0px 10px !important;
+            }
+            .no_padding_small{
+            padding-left: 0px;
+            padding-right: 0px;
+            }
+            #second_column_actor{
+            margin-left: -15px; 
+            margin-right: -15px;
+            }
+            .DocumentItem{
+                width:60px;
+                height: 60px;
             }
 
-            .actor_link {
-                padding: 3px;
-                color: #9b9b9b;
+            
+        }
+        /* sm */
+        @media screen and (min-width: 768px) {
+            body {
+                font-size: 1em;
+            }
+            .container-fluid{
+                padding:0px;
+            }
+            .navbar-fixed-top{
+                margin-left: 0%;
+                margin-right: 0%;
+            }
+            .headname{
+                position: relative;
+                top:15px;
+                font-size: 22px;
+            }
+            .brands{
+                width: 60px;
+                height: auto;
+            }
+            .tagline{
+                font-size: 9px;
+            }
+            .navbar-toggle{
+                margin-right: 20px;
+
+            }
+            .no_padding_small{
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        .DocumentItem{
+                width:75px;
+                height: 75px;
+            }
+        }
+
+        /* md */
+        @media screen and (min-width: 992px) {
+            body {
+                font-size: 1.1em;
+            }
+            .navbar-fixed-top{
+                margin-left: 3%;
+                margin-right: 3%;
+            }
+            .headname{
+                position: relative;
+                top:18px;
+                font-size: 22px;
+            }
+            .brands{
+                width: 65px;
+                height: auto;
+            }
+            .info-small{
                 font-size: 12px;
-                cursor: text;
-
             }
-
-            .actor_link a{
-                color: #9b9b9b;
-                text-decoration: none;
+            .light-padded
+            {
+                padding-left: 10px;
             }
-
-            .notVerified {
-                color: red;
+            #browse-table{
+                margin-top: 20px;
             }
+        }
+
+        /* lg */
+        @media screen and (min-width: 1200px) {
+            body {
+                font-size: 1.2em;
+            }
+            .padded{
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            #home{
+            padding-left:15px;
+            padding-right: 15px;
+            }
+            .navbar-fixed-top{
+                margin-left: 3%;
+                margin-right: 3%;
+            }
+            .headname{
+                position: relative;
+                top:20px;
+                font-size: 24px;
+            }
+            .brands{
+                width: 85px;
+                height: auto;
+            }
+            .light-padded
+            {
+                padding-left: 10px;
+            }
+            .#browse-table{
+                margin-top: 25px;
+            }
+        }
+        .videoWrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 */
+        padding-top: 25px;
+        height: 0;
+    }
+    .videoWrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+        #actor_basics{
+           
+        }
+        #socialShare{
+            padding: 0px;
+            margin-top: -15px;
+        }
+        .collapse
+        {
+            height: 75px !important;
+        }
+        .custom-navbar{
+            padding-bottom: 0px;
+        }
+        iframe{
+            width: 100%;
+            box-shadow: gray 5px 3px 10px 2px;
+        }
+        .light-padded{
+            padding: 15px 5px 0px 15px;
+        }
+        #profile_link{
+            font-size: 9px;
+            position: relative;
+            top:-10px;
+            margin-left: 15px;
+        }
+        .tick{
+                border-radius: 30px;
+                font-size: 20px;
+                padding: 5px 10px !important;
+        }
+        .tick:hover{
+            background: red;
+            color: white;
+        }
+
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -282,14 +526,15 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.php">
-                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname"><?= M_Title ?></b></span><p><span id="tag-line" class="firstcolor info-small"><?= M_TagLine ?></span>
+
+                        <a class="navbar-brand" href="<?= base_url() ?>">
+                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="headname"><span >C A S T I K O</span><br><span class="firstcolor info-small tagline"><?= M_TagLine?></span></b></span>
                         </a>
                     </div> 
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  
-                      <ul class="nav navbar-nav navbar-right vertical-middle">
+                      <ul class="nav navbar-nav navbar-right" style="text-align:right;">
                        
                         <li>
                             <a href="<?= base_url() ?>home/logout/"><button type="button" class="btn submit-btn firstcolor" id="btn-logout"  ><span class="glyphicon glyphicon-log-out"></span> &nbsp; Sign Out</button></a>
@@ -300,38 +545,9 @@
             </nav>
 
            <!-- contact modal toggle -->
-            <div class="container-fluid" id="home">
-           
-           
-            <nav class="navbar navbar-default navbar-fixed-top custom-navbar">
-                <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="index.php">
-                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname"><?= M_Title ?></b></span><p><span id="tag-line" class="firstcolor info-small"><?= M_TagLine ?></span>
-                        </a>
-                    </div> 
-
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  
-                      <ul class="nav navbar-nav navbar-right vertical-middle">
-                       
-                        <li>
-                            <a href="<?= base_url() ?>home/logout/"><button type="button" class="btn submit-btn firstcolor" id="btn-logout"  ><span class="glyphicon glyphicon-log-out"></span> &nbsp; Sign Out</button></a>
-                        </li>
-                      </ul>
-                    </div><!-- /.navbar-collapse -->
-                </div>
-            </nav>
 
            <!-- contact modal toggle -->
-             <div class="container-fluid padded">
+             <div class="container-fluid">
                 <?php
                     if($user["StashUsers_status"] == 0){
                 ?>
@@ -347,21 +563,20 @@
                 </div>
 
                 <div class="container col-sm-12 center" id="browse-table">
-                    <div class="col-sm-3 light-padded mycontent-left left">
+                    <div class="col-sm-3 light-padded left">
+                    <div class="row">
                         <span class="a_name"><?= $actorProfile['StashActor_name'] ?></span>
+						 <span class="fa fa-share-alt edit-button  shareButton" data-open="false" style="cursor:pointer;" ></span>
+                            <i>&emsp;</i>
+                    <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#actor_username_edit" data-hide-id="#actor_username" aria-hidden="true" style="cursor:pointer;"></span>
 						
-						
-						
-						<p class="actor_link" id="actor_username">
-							<span ><a href="<?= base_url() . $user['StashUsers_username'] ?>" id="actor_username_txt" target="_blank"><?= base_url() . $user['StashUsers_username'] ?></a></span>
+						<br>
+						<span class="actor_link" id="actor_username">
+							<span id="profile_link" ><a href="<?= base_url() . $user['StashUsers_username'] ?>" id="actor_username_txt" target="_blank"><?= base_url() . $user['StashUsers_username'] ?></a></span>
 							<i>&emsp;</i>
-							<span class="fa fa-share-alt edit-button shareButton" data-open="false" style="cursor:pointer;" ></span>
-							<i>&emsp;</i>
-							<span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#actor_username_edit" data-hide-id="#actor_username" aria-hidden="true" style="cursor:pointer;"></span>
-							
-						</p>
+						</span>
 						
-						<div id="socialShare"></div>
+						<div id="socialShare" ></div>
 						
 						<div id="actor_username_edit" class="hidden">
 							<div class="category_heading no_left_margin"></div>
@@ -380,65 +595,65 @@
 									</button>
 							</font>
 						</div>
-						
+						</div>
                         <div class = "row" id="actor_basics">
-                            <div class=" col-sm-4 col-lg-4 col-md-4  a_pic" id="actor_pro_pic">
+                            <div class=" col-sm-3 col-lg-4 col-md-4  a_pic" id="actor_pro_pic">
                                 <span class="glyphicon glyphicon-camera  toggleEdit overlay_edit" data-toggle="modal" data-target="#set_profile_photo" aria-hidden="true"></span>
                                 
                                 <img src="<?= IMG .'/actors/'.$actorProfile['StashActor_avatar'] ?>" id="actorAvatar" class="pro-pic"></img> 
                                  <input type="hidden" id="image_count" value='<?= $actorProfile['StashActor_images'] ?>'>
                                 <input type="hidden" id="profile_pic" value="<?= $actorProfile['StashActor_avatar'] ?>">
                             </div>
-                            <div class="basics col-sm-6 col-lg-6 col-md-8" style="padding-left:0px;padding-right:0px;">
+                            <div class="basics col-sm-12 col-lg-7 col-md-7" style="padding-left:0px;padding-right:0px;">
                                 <div class="category_heading ">BASICS
-                                    <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#actor_basics_edit" data-hide-id="#actor_basics" aria-hidden="true" style="position:absolute; right:-6px;"></span>
+                                    <span class="glyphicon glyphicon-pencil edit-button  toggleEdit" data-unhide-id="#actor_basics_edit" data-hide-id="#actor_basics" aria-hidden="true" ></span>
 								</div>
                                 <div class="elements">
                                     <span class="elements_label">Sex: </span><span id="actor_sex"><?= ($actorProfile['StashActor_gender']) ? "Male" : "Female" ?></span>
                                     <br>
-                                    <span class="elements_label">Age Range:</span><span id="actor_min_age"><?= $actorProfile['StashActor_min_role_age'] ?></span>-<span id="actor_max_age"><?= $actorProfile['StashActor_max_role_age'] ?></span><span style="font-size:9px;"> y</span><br>
-                                   <span class="elements_label">Weight:</span><span id="actor_weight"><?= $actorProfile['StashActor_weight'] ?></span> kgs<br>
-                                    <span class="elements_label">Height</span><span id="actor_height"><?= $actorProfile['StashActor_height'] ?></span> cms<br>
+                                    <span class="elements_label">Age Range:</span><span id="actor_min_age" ><?= $actorProfile['StashActor_min_role_age'] ?></span>-<span id="actor_max_age"><?= $actorProfile['StashActor_max_role_age'] ?></span><span style="font-size:9px;"> years</span><br>
+                                   <span class="elements_label ">Weight:</span><span id="actor_weight" ><?= $actorProfile['StashActor_weight'] ?></span> kgs<br>
+                                    <span class="elements_label ">Height: </span><span id="actor_height" ><?= $actorProfile['StashActor_height'] ?></span> cms<br>
                                 </div>
                             </div>
 
 
                         </div>
 							<div id="actor_basics_edit" class="hidden">
-                                <div class="category_heading no_left_margin">BASICS</div>
+                                <div class="category_heading row" >BASICS</div>
                                 
-                                    <div class="row no_left_margin">
-                                        <select type="text" class="editwhite edit_inputs_basics col-sm-2" name="sex" value="<?= ($actorProfile['StashActor_gender']) ? "M" : "F" ?>" id="sex" placeholder="Sex">
+                                    <div class="row">
+                                        <select type="text" class="editwhite edit_inputs_basics col-sm-2 col-xs-12" name="sex" value="<?= ($actorProfile['StashActor_gender']) ? "M" : "F" ?>" id="sex" placeholder="Sex">
                                         <option value="M">M</option>
                                         <option value="F">F</option>
                                         </select>
                                     </div>
-                                    <div class="row no_left_margin">
-                                        <div class="col-sm-2" style="padding-left:0px;padding-right:0px;">
+                                    <div class="row">
+                                        <div class="col-sm-2 col-xs-2" style="padding-left:0px;padding-right:0px;">
                                          <input type="text" name='min_age' class="editwhite edit_inputs_basics "  style="padding-left:5px; max-width:100%" value="<?= $actorProfile['StashActor_min_role_age'] ?>" title="What  minimum age would you naturally be able to play on screen/stage?" id="agemin"/>
                                         </div>
-                                        <div class="col-sm-1" style="padding-left:2px; padding-right:0px;text-align:center">
-                                              -
+                                        <div class="col-sm-1 col-xs-1" style="padding-left:0px; padding-right:0px;text-align:center">
+                                              --
                                         </div>
-                                        <div class="col-sm-2" style="padding-left:0px;padding-right:0px;">
+                                        <div class="col-sm-2 col-xs-2" style="padding-left:0px;padding-right:0px;">
                                          <input type="text" name='max_age' class="editwhite edit_inputs_basics "  style="padding-left:5px; max-width:100%" value="<?= $actorProfile['StashActor_max_role_age'] ?>" title="What  maximum age would you naturally be able to play on screen/stage?" id="agemax"/> 
                                         </div>
                                         <span class="edit_basics_labels"> years </span>
                                     </div>
-                                    <div class="row no_left_margin">
-                                        <input type="text" class="editwhite edit_inputs_basics col-sm-4" name='weight'  placeholder="Weight in kgs" value="<?= $actorProfile['StashActor_weight'] ?>" id="weight"/>  <span class="edit_basics_labels">kgs</span>
+                                    <div class="row">
+                                        <input type="text" class="editwhite edit_inputs_basics col-sm-4 col-xs-12" name='weight'  placeholder="Weight in kgs" value="<?= $actorProfile['StashActor_weight'] ?>" id="weight"/>  <span class="edit_basics_labels">kgs</span>
                                     </div>
-                                    <div class="row no_left_margin">
-                                        <input type="text" class="editwhite edit_inputs_basics col-sm-2" name='height'  placeholder="Height in cms" value="<?= $actorProfile['StashActor_height'] ?>" id="height"/>  <span class="edit_basics_labels">cms</span>
+                                    <div class="row">
+                                        <input type="text" class="editwhite edit_inputs_basics col-sm-2 col-xs-12" name='height'  placeholder="Height in cms" value="<?= $actorProfile['StashActor_height'] ?>" id="height"/>  <span class="edit_basics_labels">cms</span>
                                         <i class="glyphicon glyphicon-filter" data-toggle="modal" data-target="#feetToCmConverterModal"></i>
                                     </div>
                                 
                                 <font class="sortbuttons">
-                                        <button type="button" class="btn submit-btn firstcolor center tick updateDataField"
+                                        <button type="button" class="btn submit-btn firstcolor tick updateDataField"
                                                 data-input-names="sex,min_age,max_age,weight,height"
                                                 data-request="EditBasics"
                                                 data-hide-id="#actor_basics_edit" 
-                                                data-unhide-id="#actor_basics">
+                                                data-unhide-id="#actor_basics" style="margin-left: -15px;">
                                             <span class="glyphicon glyphicon-ok"></span>
                                         </button>
                                 </font>
@@ -473,14 +688,13 @@
                             <div id="actor_details_edit" class="hidden">
                                 <span id="dob_edit" class="left paddingTop ">
                                 <div class="row">
-                                    <span class="elements_label col-sm-5">Date of Birth: </span>
-                                    <input type="date" name="dob" class="editwhite edit_inputs_basics col-sm-7"  value="<?= date("Y-m-d", $actorProfile['StashActor_dob']) ?>" id="dob"/>
+                                    <span class="elements_label col-sm-5 col-xs-4">Date of Birth: </span>
+                                    <input type="date" name="dob" class="editwhite edit_inputs_basics col-sm-8"  value="<?= date("Y-m-d", $actorProfile['StashActor_dob']) ?>" id="dob"/>
                                 <br>
-                                <span id="phone_edit" class="left paddingTop">
-                                <span class="elements_label col-sm-5">Phone:</span><input type="text" class="editwhite edit_inputs_basics col-sm-7" name="phone" value="<?= $actorProfile['StashActor_mobile'] ?>" maxlength='10' id="phone"/>
+                                <span class="elements_label col-sm-5 col-xs-4">Phone:</span><input type="text" class="editwhite edit_inputs_basics col-sm-8" name="phone" value="<?= $actorProfile['StashActor_mobile'] ?>" maxlength='10' id="phone"/>
+                                </span>
                                 <br>
-                                <span id="whatsapp_edit" class="left paddingTop">
-                                <span class="elements_label col-sm-5">WhatsApp:</span><input type="text" class="editwhite edit_inputs_basics col-sm-7" name="whatsapp" value="<?= $actorProfile['StashActor_whatsapp'] ?>" id="whatsapp"/>
+                                <span class="elements_label col-sm-5 col-xs-4">WhatsApp:</span><input type="text" class="editwhite edit_inputs_basics col-sm-7 col-xs-8" name="whatsapp" value="<?= $actorProfile['StashActor_whatsapp'] ?>" id="whatsapp"/>
                                 </span>
                                 </div>
                                 <font class="sortbuttons">
@@ -518,9 +732,9 @@
                                     $languages = $actorProfile['StashActor_language'];
                                     foreach ($languages as $key => $language) {
                                 ?>
-                                <div class="col-sm-4 vertical-padded">
+                                <div class="col-sm-6 col-xs-4 col-lg-4 col-md-6 vertical-padded ellipsis">
                                     <button type="button" class="btn language_tag" aria-label="Left Align" >
-                                        <font class="taga-text"><?php $lan=ucfirst(trim($language)); if(strlen($lan)>7) {echo substr($lan, 0, 7).'...';} else{echo $lan;}?></font>
+                                        <font class="taga-text"><?php $lan=ucfirst(trim($language)); if(strlen($lan)>7) {echo $lan;} else{echo $lan;}?></font>
                                     </button>
                                 </div>  
                                 <?php
@@ -550,9 +764,9 @@
                                     $skills = $actorProfile['StashActor_skills'];
                                     foreach ($skills as $key => $skill) {
                                 ?>
-                                <div class="col-sm-4 vertical-padded">
+                                <div class="col-sm-6 col-xs-4 col-lg-4 col-md-6 vertical-padded ellipsis">
                                     <button type="button" class="btn skills_tag"  aria-label="Left Align" >
-                                        <font class="taga-text"><?php $skill_=ucfirst(trim($skill)); if(strlen($skill_)>7) {echo substr($skill_, 0, 7).'...';} else{echo $skill_;}?></font>
+                                        <font class="taga-text"><?php $skill_=ucfirst(trim($skill)); if(strlen($skill_)>7) {echo $skill_;} else{echo $skill_;}?></font>
                                     </button>
                                 </div>  
                                 <?php
@@ -577,7 +791,7 @@
 
                     </div>
                     <div class="col-sm-8 left" id="second_column_actor">
-                         <div class="row col-sm-12" >
+                         <div class="col-sm-12 no_padding_small" >
                             <br>
                             <div class="category_heading">EXPERIENCE <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= AC_ExpHelpTxt ?>"></i>
                                 <span id="openexperienceicon" class="glyphicon glyphicon-plus edit-button pull-right firstcolor toggleEdit" data-unhide-id="#experience_add, #closeexperienceicon" data-hide-id="#openexperienceicon" aria-hidden="true"></span>
@@ -590,9 +804,9 @@
                                     <input type="text" class="editwhite long" name='exp_link' id="addlink" Placeholder="Youtube Video Link"/>
                                     <textarea class="editwhite long" name='exp_blurb' id="adddescription" placeholder="A little description about the role and the project." style="height:80px;"></textarea>
                                     <br><font class="sortbuttons"><button type="submit" class="btn submit-btn firstcolor center addExperience"  ><span class="glyphicon glyphicon-ok"></span></button></font>
-                                <hr>
+                                
                                 </span>
-                                <div id="experiencelist" style="max-height:250px; overflow:hidden;">
+                                <div id="experiencelist" style="overflow:hidden;">
                                 <?php
                                     $count_experience=sizeof($actorExperiences);
                                     $counter_exp=0;
@@ -646,8 +860,8 @@
                                             if($youtube_flag==1) 
                                             {    
                                                 
-                                                echo '<div class="col-sm-7" style="padding-left:0px;"><iframe style="width:100%;" height="189px" src="'.$youtube.'" frameborder="0" allowfullscreen></iframe></div>';
-                                                echo '<div class="col-sm-5" style="padding-left:0px; max-height:220px; height:220px;">
+                                                echo '<div class="col-sm-7" style="padding-left:0px;padding-right:0px"><div class="videoWrapper"><iframe width="560" height="349" src="'.$youtube.'" frameborder="0" allowfullscreen></iframe></div></div>';
+                                                echo '<div class="col-sm-5"">
                                                         <span class="info black" id="actor_ex_title_'.$key.'"><b>'.$experience['StashActorExperience_title'].'</b></span>
                                                         <span class="glyphicon glyphicon-pencil edit-button  firstcolor toggleEdit" data-unhide-id="#experience-'.$key.'_edit" data-hide-id="#experience-'.$key.'" aria-hidden="true"></span>
                                                         <span class="glyphicon glyphicon-remove edit-button  firstcolor removeSpanBtn" data-id="'.$experience['StashActorExperience_id'].'" 
@@ -659,7 +873,7 @@
                                                         </span>
                                                         <br>
                                                             <div style="height:100%;overflow:hidden;">
-                                                            <div class="info-small dark-gray hidden_scroll" id="actor_ex_blurb_'.$key.'" style=" height:140px;">
+                                                            <div class="info-small dark-gray hidden_scroll" id="actor_ex_blurb_'.$key.'">
                                                             '.$experience['StashActorExperience_blurb'].'
                                                             </div>
                                                             </div>
@@ -714,7 +928,6 @@
                                                 <span class="glyphicon glyphicon-ok"></span>
                                             </button>
                                         </font>
-                                        <hr>
                                     </span>
                                     
 
@@ -752,6 +965,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <hr>
                         </div>
                         <div class="category_heading">TRAINING
                             <span id="opentrainingicon" class="glyphicon glyphicon-plus edit-button pull-right firstcolor toggleEdit" data-unhide-id="#training_add, #closetrainingicon" data-hide-id="#opentrainingicon" aria-hidden="true"></span>
@@ -779,17 +993,18 @@
                                     <span id="training-<?= $key ?>" class="info dark-gray">
                                         <div class="row">
                                             
-                                            <span class="training_title col-sm-4" id="actor_tr_title_<?= $key ?>">
+                                            <span class="training_title col-sm-4 col-xs-4" id="actor_tr_title_<?= $key ?>">
                                                 <span class="training-plus toggleEdit" id="actor_tr_plus_<?= $key ?>" data-hide-id="#actor_tr_plus_<?= $key ?>" data-unhide-id="#actor_tr_minus_<?= $key ?>,#actor_tr_detail_<?= $key ?>">+</span>
                                                 <span  id="actor_tr_minus_<?= $key ?>" class="toggleEdit training-minus hidden" data-hide-id="#actor_tr_minus_<?= $key ?>,#actor_tr_detail_<?= $key ?>" data-unhide-id="#actor_tr_plus_<?= $key ?>" >-</span>
                                                 <?= $training['StashActorTraining_title'] ?>
                                             </span>
-                                            <span class="info-small dark-gray col-sm-4" id="actor_tr_course_<?= $key ?>">
+                                            <span class="info-small dark-gray col-sm-4 col-xs-4" id="actor_tr_course_<?= $key ?>">
                                                 <?= $training['StashActorTraining_course'] ?>
                                             </span>
-                                            <span class="glyphicon glyphicon-pencil edit-button firstcolor toggleEdit" data-hide-id="" data-unhide-id="#training-<?= $key ?>_edit" data-hide-id="#training-<?= $key ?>" aria-hidden="true"></span>
-                                            <span class="glyphicon glyphicon-remove edit-button  firstcolor removeSpanBtn" data-id="<?= $training['StashActorTraining_id'] ?>" data-key="<?= $key ?>" data-type="training"></span>
-
+                                            <span class="info-small dark-gray col-sm-4 col-xs-4" style="text-align:right;" >
+                                                <span class="glyphicon glyphicon-pencil edit-button firstcolor edit-button toggleEdit" data-hide-id="" data-unhide-id="#training-<?= $key ?>_edit" data-hide-id="#training-<?= $key ?>" aria-hidden="true"></span>
+                                                <span class="glyphicon glyphicon-remove edit-button  firstcolor edit-button removeSpanBtn" data-id="<?= $training['StashActorTraining_id'] ?>" data-key="<?= $key ?>" data-type="training"></span>
+                                            </span>
                                             
 
                                         </div>
