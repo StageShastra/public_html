@@ -426,7 +426,7 @@
                               <div class="col-sm-12 form-group no-paddinglr">
 
                                 <span class="info-small gray">
-                                  Dear Actor, <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= $title_text ?>"></i>
+                                  Dear Actor, <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= CD_TitleTxt ?>"></i>
                       
                                 </span> 
                                 <textarea class="form-control contact_inputs contact_textareas" name="email-msg" id="emailtxtMsg"  placeholder="Message Text" rows="5" required /></textarea>
