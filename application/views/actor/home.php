@@ -1003,7 +1003,7 @@
                                                     $counter++;
                                                         if($counter%5==0){
                                                             echo '<br>';
-                                                        do}
+                                                        }
                                             }
                                         ?>     
 
