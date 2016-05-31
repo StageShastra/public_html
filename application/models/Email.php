@@ -97,7 +97,37 @@
 				return false;
 			}
 		}
-		public function sendInvitaionMail($msg = '', $emails = '', $project = 0, $sub = 'Invitation'){
+
+		public function sendInvitationToInDB($msg = '', $to = [], $project = 0, $sub = "Connect to Casting Director"){
+			$plainText = $this->session->userdata("StaSh_User_id") . "_" . $project . "_" . time();
+			$encryptedText = $this->getEncryptedText($plainText);
+			$link = base_url() . "home/coonect/" . urlencode($encryptedText);
+			
+    
+			$this->load->library('email', $this->config());
+			$this->email->set_newline("\n");
+			$this->email->from("no-reply@castiko.com", 'Castiko');
+			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
+			
+
+			$this->email->to("connect@castiko.com");
+			$this->email->bcc($to);
+			$name = $this->session->userdata("StaSh_User_name");
+			$this->email->subject("{$sub} | Castiko");
+			$message = $this->defaultTemplete("Dear Actor, <br>".$msg, $link, "Connect", "");
+                        $message = preg_replace('~\\\r\\\n~',"<br>", $message);
+			$this->email->message($message);
+			if($this->email->send()){
+				return true;
+			}else{
+				// for Developer Only
+				// show_error($this->email->print_debugger());
+				return false;
+			}
+		}
+
+
+		public function sendInvitationToNotInDB($msg = '', $to = [], $project = 0, $sub = "Invitation "){
 			$plainText = $this->session->userdata("StaSh_User_id") . "_" . $project . "_" . time();
 			$encryptedText = $this->getEncryptedText($plainText);
 			$link = base_url() . "home/join/" . urlencode($encryptedText);
@@ -107,11 +137,8 @@
 			$this->email->set_newline("\n");
 			$this->email->from("no-reply@castiko.com", 'Castiko');
 			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
-			$to = [];
-			$emails = explode(",", $emails);
-			foreach ($emails as $key => $mail) {
-				$to[] = trim($mail);
-			}
+			
+			
 			$this->email->to("connect@castiko.com");
 			$this->email->bcc($to);
 			$name = $this->session->userdata("StaSh_User_name");
@@ -126,7 +153,22 @@
 				// show_error($this->email->print_debugger());
 				return false;
 			}
+		}		
+
+
+
+		public function sendInvitaionMail($msg = '', $emails = [], $project = 0, $sub = 'Invitation'){
+			$inDB = $this->sendInvitationToInDB($msg, $emails['inDB'], $project);
+			$notInDB = $this->sendInvitationToNotInDB($msg, $emails['notInDB'], $project);
+
+			if($inDB && $notInDB){
+				return true;
+			}else{
+				return false;
+			}
 		}
+
+
 		public function defaultTemplete($msg = '', $link = '', $linkname = '', $sender = ''){
 			$mail = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
 				<html xmlns=\"http://www.w3.org/1999/xhtml\" style=\"margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;box-sizing:border-box;font-size:14px;\" >

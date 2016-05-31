@@ -350,6 +350,17 @@
 			else
 				return false;
 		}
+
+		public function checkRegsiteredEmails($emails = []){
+			$this->db->where_in("StashUsers_email", $emails);
+			$query = $this->get("stash-users");
+			$fetch = $query->result('array');
+			$result = [];
+			foreach ($fetch as $key => $f) {
+				$result[] = $f['StashUsers_email'];
+			}
+			return $result;
+		}
 	}
 
 ?>
