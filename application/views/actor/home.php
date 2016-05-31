@@ -514,6 +514,8 @@
 
         <!-- Ths section is post selection !-->
         <div class="container-fluid" id="home">
+           
+           
             <nav class="navbar navbar-default navbar-fixed-top custom-navbar">
                 <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -524,14 +526,15 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.php">
-                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="vertical-middle brandname"><?= M_Title ?></b></span><p><span id="tag-line" class="firstcolor info-small"><?= M_TagLine ?></span>
+
+                        <a class="navbar-brand" href="<?= base_url() ?>">
+                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="headname"><span >C A S T I K O</span><br><span class="firstcolor info-small tagline"><?= M_TagLine?></span></b></span>
                         </a>
                     </div> 
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  
-                      <ul class="nav navbar-nav navbar-right vertical-middle">
+                      <ul class="nav navbar-nav navbar-right" style="text-align:right;">
                        
                         <li>
                             <a href="<?= base_url() ?>home/logout/"><button type="button" class="btn submit-btn firstcolor" id="btn-logout"  ><span class="glyphicon glyphicon-log-out"></span> &nbsp; Sign Out</button></a>
@@ -540,6 +543,8 @@
                     </div><!-- /.navbar-collapse -->
                 </div>
             </nav>
+
+           <!-- contact modal toggle -->
 
            <!-- contact modal toggle -->
              <div class="container-fluid">
