@@ -1,8 +1,8 @@
 $(document).ready(function(){
 	
 	//For Main Sevrer
-	var url = "/Castiko/ajax/",
-		base = "/Castiko/";
+	var url = "/ajax/",
+		base = "/";
 		
 	//For Localhost
 	/*var url = "/public_html/beta/ajax/",
@@ -728,7 +728,7 @@ $(document).ready(function(){
 	function smsCharCounter(textbox, countID, msgID) {
 		txt = $.trim($(textbox).val());
 		len = txt.length;
-		if(len >= 280){
+		if(len >= 579){
 			$(textbox).val(txt.substring(0, 280));
 			alert("character limit exceed.");
 			return;
@@ -879,7 +879,7 @@ $(document).ready(function(){
 		txtId = $(this).attr("data-id");
 		msg = $(txtId).val();
 		msg = msg.split("\n");
-		txt = "Dear Actor, ";
+		txt = "Dear Actor,<br>";
 		for(var i = 0; i < msg.length; i++){
 			txt += msg[i];
 			txt += "<br>";
