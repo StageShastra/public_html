@@ -26,6 +26,7 @@
 		public function sendActivationMail($name = '', $email = '', $ref = ''){
 			// Generate Confirmation Links....
 			$cipher_text = $this->getEncryptedText($email . '=' . $ref);
+			$cipher_text = str_replace("/", "_", $cipher_text);
 			$link = base_url() . "secure/confirm/" . urlencode($cipher_text);
 			
 
@@ -101,6 +102,7 @@
 		public function sendInvitationToInDB($msg = '', $to = [], $project = 0, $sub = "Connect to Casting Director"){
 			$plainText = $this->session->userdata("StaSh_User_id") . "_" . $project . "_" . time();
 			$encryptedText = $this->getEncryptedText($plainText);
+			$encryptedText = str_replace("/", "_", $encryptedText);
 			$link = base_url() . "home/coonect/" . urlencode($encryptedText);
 			
     
@@ -130,6 +132,7 @@
 		public function sendInvitationToNotInDB($msg = '', $to = [], $project = 0, $sub = "Invitation "){
 			$plainText = $this->session->userdata("StaSh_User_id") . "_" . $project . "_" . time();
 			$encryptedText = $this->getEncryptedText($plainText);
+			$encryptedText = str_replace("/", "_", $encryptedText);
 			$link = base_url() . "home/join/" . urlencode($encryptedText);
 			
     

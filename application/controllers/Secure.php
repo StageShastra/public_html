@@ -5,9 +5,12 @@
 		
 		public function confirm($link = ''){
 			$encryptedText = str_replace(" ", "+", urldecode($link));
+			$encryptedText = str_replace("_", "/", $encryptedText);
 
 			$this->load->library('encrypt');
 			$info = $this->encrypt->decode(trim($encryptedText));
+			echo $info;
+			exit();
 			$info = explode("=", $info);
 			$data = array(
 						"email" => trim($info[0]),

@@ -107,7 +107,7 @@ class Home extends CI_Controller {
 
 	public function parseInvitaionLink($link = ''){
 		$encryptedText = str_replace(" ", "+", urldecode($link));
-		
+		$encryptedText = str_replace("_", "/", $encryptedText);
 		$this->session->set_userdata(array());
 		$this->session->sess_destroy();
 		$this->load->helper('cookie');
