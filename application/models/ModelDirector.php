@@ -63,7 +63,7 @@
 		public function getActorUsername($ref = 0){
 			$this->db->where("StashUsers_id", $ref);
 			$query = $this->db->get("stash-users");
-			$result = $query->result("array");
+			$result = $query->first_row("array");
 			return trim($result['StashUsers_username']);
 		}
 
