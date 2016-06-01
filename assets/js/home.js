@@ -243,6 +243,7 @@ $(document).ready(function(){
 			data: data,
 			success: function(response){
 				//console.log(response);
+				$("#logo_start").removeClass("rotate-img");
 				$("#prelogin").addClass("hidden");
      			$("#home").removeClass("hidden");
      			if(response.status){
@@ -267,6 +268,7 @@ $(document).ready(function(){
 		var selectedCat = JSON.stringify(select);
 		Cookies.set("isCat", true);
 		Cookies.set("categories", selectedCat);
+		$("#logo_start").addClass("rotate-img");
 		getActorProfile();
 		return false;
 	});
@@ -831,6 +833,7 @@ $(document).ready(function(){
 	});
 	
 	$(document).on("click", "a.changeCategory", function(){
+		
 		Cookies.remove("isCat");
 		location.reload();
 		return false;
