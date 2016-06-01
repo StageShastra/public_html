@@ -26,6 +26,7 @@
 		public function sendActivationMail($name = '', $email = '', $ref = ''){
 			// Generate Confirmation Links....
 			$cipher_text = $this->getEncryptedText($email . '=' . $ref);
+			$cipher_text = str_replace("/", "_", $cipher_text);
 			$link = base_url() . "secure/confirm/" . urlencode($cipher_text);
 			
 
@@ -101,7 +102,7 @@
 			$plainText = $this->session->userdata("StaSh_User_id") . "_" . $project . "_" . time();
 			$encryptedText = $this->getEncryptedText($plainText);
 			$link = base_url() . "home/join/" . urlencode($encryptedText);
-			
+			$encryptedText = str_replace("/", "_", $encryptedText);
     
 			$this->load->library('email', $this->config());
 			$this->email->set_newline("\n");
