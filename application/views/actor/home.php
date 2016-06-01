@@ -180,7 +180,7 @@
             color: black;
             padding-left: 15px;
             padding: 15px;
-            width: 75%;
+            width: 100%;
         }
         .edit_inputs_basics{
             margin-bottom: 10px;
@@ -778,7 +778,7 @@
                             <span id="language_edit" class="left hidden ">
                                  <input type="text" class="form-control login" value="<?= implode(",", $actorProfile['StashActor_language']) ?>" id="language" data-role="tagsinput" name="language" placeholder= "Language:" />
                                  <br><font class="sortbuttons">
-                                    <button type="button" class="btn submit-btn firstcolor center updateDataField"
+                                    <button type="button" class="btn submit-btn firstcolor center tick updateDataField"
                                             data-input-names="language"
                                             data-request="EditLanguage"
                                             data-hide-id="#language_edit" 
@@ -811,7 +811,7 @@
                             <span id="skills_edit" class="left hidden ">
                                  <input type="text" class="form-control login" value="<?= implode(",", $actorProfile['StashActor_skills']).", " ?>" data-role="tagsinput" id="skills" name="skills" placeholder= "Skills:" />
                                  <br><font class="sortbuttons">
-                                    <button type="button" class="btn submit-btn firstcolor center updateDataField"
+                                    <button type="button" class="btn submit-btn firstcolor center tick updateDataField"
                                             data-input-names="skills"
                                             data-request="EditSkills"
                                             data-hide-id="#skills_edit" 
@@ -964,11 +964,8 @@
                                                     data-unhide-id="#experience-<?= $key ?>,#edit_exp_btn_load ">
                                                 <span class="glyphicon glyphicon-ok"></span>
                                             </button>
-                                            <button type="button" class="btn submit-btn firstcolor center btnExpAndTraining tick hidden" id="edit_exp_btn_load"
+                                            <button type="button" class="btn submit-btn firstcolor center tick hidden" id="edit_exp_btn_load"
                                                     data-input-names="ex_title_<?= $key ?>, ex_role_<?= $key ?>,ex_link_<?= $key ?>,ex_blurb_<?= $key ?>"
-                                                    data-key="<?= $key ?>"
-                                                    data-table-id="<?= $experience['StashActorExperience_id'] ?>"
-                                                    data-request="EditExperience"
                                                     data-hide-id="#experience-<?= $key ?>_edit" 
                                                     data-unhide-id="#experience-<?= $key ?>">
                                                 <span class="glyphicon glyphicon-refresh rotate-img "></span>
@@ -1075,7 +1072,7 @@
                                         <textarea class="editwhite long" name="tr_blurb_<?= $key ?>" id="edittrainingdescriptioni" style="height:100px;"><?= $training['StashActorTraining_blurb'] ?></textarea>
                                         <br>
                                         <font class="sortbuttons">
-                                            <button class="btn submit-btn firstcolor center btnExpAndTraining"
+                                            <button class="btn submit-btn firstcolor center tick btnExpAndTraining"
                                                     data-input-names="tr_title_<?= $key ?>, tr_course_<?= $key ?>, tr_start_<?= $key ?>, tr_end_<?= $key ?>, tr_blurb_<?= $key ?>"
                                                     data-key="<?= $key ?>"
                                                     data-table-id="<?= $training['StashActorTraining_id'] ?>"
