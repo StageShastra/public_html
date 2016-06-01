@@ -235,6 +235,7 @@ $(document).ready(function(){
 
 	function getActorProfile(){
 		var selectedCat = JSON.parse(Cookies.get('categories'));
+		$("#logo_start").addClass("rotate-img");
 		data = {request: "FetchActors", data: JSON.stringify(selectedCat)};
 		//console.log(data);
 		$.ajax({
@@ -268,7 +269,6 @@ $(document).ready(function(){
 		var selectedCat = JSON.stringify(select);
 		Cookies.set("isCat", true);
 		Cookies.set("categories", selectedCat);
-		$("#logo_start").addClass("rotate-img");
 		getActorProfile();
 		return false;
 	});
