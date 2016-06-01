@@ -585,7 +585,7 @@
                 <?php
                     if($user["StashUsers_status"] == 0){
                 ?>
-                <div class="alert alert-warning alert-dismissible" id="warningmsg" role="alert">
+                <div class="alert alert-box alert-warning alert-dismissible" id="warningmsg" role="alert">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <strong>Warning!</strong> <?= AC_ActivationWarning ?>
                 </div>
