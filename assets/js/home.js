@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	
 	//For Main Sevrer
-	var url = "/ajax",
+	var url = "/ajax/",
 		base = "/";
 		
 	//For Localhost
