@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
-	var url = "/actor/ajax",
-		base = "/actor/",
+	var url = "/Castiko/actor/ajax",
+		base = "/Castiko/actor/",
 		type = "POST",
 		data = {};
 

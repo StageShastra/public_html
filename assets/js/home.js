@@ -1,8 +1,8 @@
 $(document).ready(function(){
 	
 	//For Main Sevrer
-	var url = "/public_html/ajax",
-		base = "/public_html/";
+	var url = "/Castiko/ajax",
+		base = "/Castiko/";
 		
 	//For Localhost
 	/*var url = "/public_html/beta/ajax/",
@@ -345,7 +345,7 @@ $(document).ready(function(){
 	function appendReceipents(id) {
 		var content = "";
 		//username = $.trim(actors[id].StashActor_email.split("@")[0]);
-		username = actor[id].StashActor_username;
+		username = actors[id].StashActor_username;
 		link = base + username;
 		content += '<div class="media selected-actors" id="selected-actor-'+id+'">'
 				+  '	<div class="media-left">'
