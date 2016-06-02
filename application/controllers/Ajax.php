@@ -91,7 +91,7 @@
 				$this->ModelDirector->updateCountAudSMS($count, $id, "invite", "sms");
 				$this->response(true, "{$count} Invitation SMS sent");
 			}else{
-				$this->response(false, "Email".Aj_Gen_Failed);
+				$this->response(false, "SMS ".Aj_Gen_Failed);
 			}
 		}
 		public function eMailInvitation($data = []){
@@ -105,14 +105,37 @@
 			}
 			$data['msg'] = str_replace("\n", "<br>", $data['msg']);
 			$data['project_id'] = $projectID;
+			$emails = $this->csv2array($data['emails']);
+			$emailInDB = $this->ModelDirector->checkRegsiteredEmails($emails);
+			$emailNotInDB = array_diff($emails, $emailInDB);
+			$mail = ['inDB' => $emailInDB, 'notInDB' => $emailNotInDB];
+
 			if($this->Email->sendInvitaionMail($data['msg'], $data['emails'], $projectID, $data['subject'])){
 				$id = $this->ModelDirector->insertInvitationMail($data);
-				$count = count(explode(",", $data['emails']));
+				$count = count($emails);
 				$this->ModelDirector->updateCountAudSMS($count, $id, "invite", "email");
 				$this->response(true, "{$count} Invitation Emails sent");
 			}else{
-				$this->response(false, "SMS".Aj_Gen_Failed);
+				$this->response(false, "Email".Aj_Gen_Failed);
 			}
+		}
+		public function csv2array($value = ''){
+			$array = [];
+			$values = explode(",", $values);
+			foreach ($values as $key => $value) {
+				if($value != '')
+					$array[] = trim($value);
+			}
+			return $array;
+		}
+		public function getCSVList($values = []){
+			$csv = '';
+			//$values = explode(",", $values);
+			foreach ($values as $key => $value) {
+				if($value != '')
+					$csv .= "'" . trim($value) . "',";
+			}
+			return rtrim($csv, ",");
 		}
 		public function advanceSearch($data = []){
 			$this->load->model("ModelDirector");

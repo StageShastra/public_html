@@ -105,7 +105,7 @@ class Home extends CI_Controller {
 		$this->load->view("forgotpassword", $pageInfo);
 	}
 
-	public function join($link = ''){
+	public function parseInvitaionLink($link = ''){
 		$encryptedText = str_replace(" ", "+", urldecode($link));
 		$encryptedText = str_replace("_", "/", $encryptedText);
 		$this->session->set_userdata(array());
@@ -126,7 +126,14 @@ class Home extends CI_Controller {
 		setcookie("project_ref", trim($info[1]), time() + 3600, "/");
 		setcookie("director_ref", trim($info[0]), time() + 3600, "/");
 		setcookie("newInvite", true, time() + 3600, "/");
+	}
+	public function join($link = ''){
+		$this->parseInvitaionLink($link);
 		redirect(base_url() . "home/register/actor/");
+	}
+	public function connect($link = ''){
+		$this->parseInvitaionLink($link);
+		redirect(base_url() . "home/");
 	}
 	
 	public function joinBySMS($value = ''){

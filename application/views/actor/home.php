@@ -11,7 +11,6 @@
         $years = floor($diff / (365*60*60*24));
         return $years;
     }
-
     $title_cd = "When you accept a casting director's invitation to join their database, their name will show up here. This means that they will see all the changes you make to your profile instantly.";
     $title_exp = "Showing your video work is the best way to showcase your talent. If you don't have any video work to show yet, just record yourself acting out a favorite scene and put that here.";
     $warning_cnf = "Please verify your email address so that casting directors can contact you easily. We've sent a link to your email.";
@@ -268,20 +267,18 @@
         .hidden_scroll:hover{
         overflow-y:scroll;
         }
-
-		.actor_link {
-			padding: 0px;
-			color: #9b9b9b;
-			font-size: 12px;
-			cursor: text;
+        .actor_link {
+            padding: 0px;
+            color: #9b9b9b;
+            font-size: 12px;
+            cursor: text;
             margin-left: -15px;
-			
-		}
-		
-		.actor_link a{
-			text-decoration: none;
-		}
-
+            
+        }
+        
+        .actor_link a{
+            text-decoration: none;
+        }
         .notVerified {
             color: red;
         }
@@ -293,7 +290,6 @@
         .custom-navbar{
             padding-top: 0px;
             margin-bottom: 0px;
-
         }
         .tagline{
                 position: relative;
@@ -337,7 +333,6 @@
                 position: relative;
                 top:20px;
                 margin-top: 0px;
-
             }
              .tagline{
                 font-size: 9px;
@@ -363,12 +358,11 @@
                 top:10px;
             }
             .DocumentList{
-            	max-height:auto;
-            	height:auto;
-            	overflow-y:auto;
-            	overflow-x:hidden;
+                max-height:auto;
+                height:auto;
+                overflow-y:auto;
+                overflow-x:hidden;
             }
-
             
         }
         /* sm */
@@ -397,7 +391,6 @@
             }
             .navbar-toggle{
                 margin-right: 20px;
-
             }
             .no_padding_small{
             padding-left: 0px;
@@ -408,7 +401,6 @@
                 height: 75px;
             }
         }
-
         /* md */
         @media screen and (min-width: 992px) {
             body {
@@ -442,7 +434,6 @@
                 height: 120px;
             }
         }
-
         /* lg */
         @media screen and (min-width: 1200px) {
             body {
@@ -537,7 +528,6 @@
             background: red;
             color: white;
         }
-
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -600,36 +590,36 @@
                     <div class="col-sm-3 light-padded left">
                     <div class="row">
                         <span class="a_name"><?= $actorProfile['StashActor_name'] ?></span>
-						 <span class="fa fa-share-alt edit-button  shareButton" data-open="false" style="cursor:pointer;" ></span>
+                         <span class="fa fa-share-alt edit-button  shareButton" data-open="false" style="cursor:pointer;" ></span>
                             <i>&emsp;</i>
                     <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#actor_username_edit" data-hide-id="#actor_username" aria-hidden="true" style="cursor:pointer;"></span>
-						
-						<br>
-						<span class="actor_link" id="actor_username">
-							<span id="profile_link" ><a href="<?= base_url() . $user['StashUsers_username'] ?>" id="actor_username_txt" target="_blank"><?= base_url() . $user['StashUsers_username'] ?></a></span>
-							<i>&emsp;</i>
-						</span>
-						
-						<div id="socialShare" ></div>
-						
-						<div id="actor_username_edit" class="hidden">
-							<div class="category_heading no_left_margin"></div>
-							
-							<div class="row no_left_margin">
-								<input type="text" class="editwhite edit_inputs_basics col-sm-6" style="padding:10px;" name="username" value="<?= $user["StashUsers_username"] ?>" id="username"/>
-							</div>
-							
-							<font class="sortbuttons">
-									<button type="button" class="btn submit-btn firstcolor center tick updateDataField"
-											data-input-names="username"
-											data-request="EditUsername"
-											data-hide-id="#actor_username_edit" 
-											data-unhide-id="#actor_username">
-										<span class="glyphicon glyphicon-ok"></span>
-									</button>
-							</font>
-						</div>
-						</div>
+                        
+                        <br>
+                        <span class="actor_link" id="actor_username">
+                            <span id="profile_link" ><a href="<?= base_url() . $user['StashUsers_username'] ?>" id="actor_username_txt" target="_blank"><?= base_url() . $user['StashUsers_username'] ?></a></span>
+                            <i>&emsp;</i>
+                        </span>
+                        
+                        <div id="socialShare" ></div>
+                        
+                        <div id="actor_username_edit" class="hidden">
+                            <div class="category_heading no_left_margin"></div>
+                            
+                            <div class="row no_left_margin">
+                                <input type="text" class="editwhite edit_inputs_basics col-sm-6" style="padding:10px;" name="username" value="<?= $user["StashUsers_username"] ?>" id="username"/>
+                            </div>
+                            
+                            <font class="sortbuttons">
+                                    <button type="button" class="btn submit-btn firstcolor center tick updateDataField"
+                                            data-input-names="username"
+                                            data-request="EditUsername"
+                                            data-hide-id="#actor_username_edit" 
+                                            data-unhide-id="#actor_username">
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                    </button>
+                            </font>
+                        </div>
+                        </div>
                         <div class = "row" id="actor_basics">
                             <div class=" col-sm-3 col-lg-4 col-md-4  a_pic" id="actor_pro_pic">
                                <span class="glyphicon glyphicon-remove  toggleEdit overlay_edit removeDP" style="left:8px; right:0px; width:18px;" aria-hidden="true"></span> <span class="glyphicon glyphicon-camera  toggleEdit overlay_edit" data-toggle="modal" data-target="#set_profile_photo" aria-hidden="true"></span>
@@ -641,7 +631,7 @@
                             <div class="basics col-sm-12 col-lg-7 col-md-7" style="padding-left:0px;padding-right:0px;">
                                 <div class="category_heading ">BASICS
                                     <span class="glyphicon glyphicon-pencil edit-button  toggleEdit" data-unhide-id="#actor_basics_edit" data-hide-id="#actor_basics" aria-hidden="true" ></span>
-								</div>
+                                </div>
                                 <div class="elements">
                                     <span class="elements_label">Sex: </span><span id="actor_sex"><?= ($actorProfile['StashActor_gender']) ? "Male" : "Female" ?></span>
                                     <br>
@@ -653,7 +643,7 @@
 
 
                         </div>
-							<div id="actor_basics_edit" class="hidden">
+                            <div id="actor_basics_edit" class="hidden">
                                 <div class="category_heading row" >BASICS</div>
                                 
                                     <div class="row">
@@ -741,8 +731,8 @@
                                         </button>
                                 </font>
                            
-							</div>
-						</div>
+                            </div>
+                        </div>
                          <div class="row">
                             <br>
                             <div class="category_heading">CASTING DIRECTORS 
