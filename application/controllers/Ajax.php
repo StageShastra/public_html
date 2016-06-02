@@ -106,17 +106,17 @@
 			$data['msg'] = str_replace("\n", "<br>", $data['msg']);
 			$data['project_id'] = $projectID;
 			$emails = $this->csv2array($data['emails']);
+			//$csvEmail = "(" . $this->getCSVList($emails) . ")";
 			$emailInDB = $this->ModelDirector->checkRegsiteredEmails($emails);
 			$emailNotInDB = array_diff($emails, $emailInDB);
 			$mail = ['inDB' => $emailInDB, 'notInDB' => $emailNotInDB];
-
-			if($this->Email->sendInvitaionMail($data['msg'], $data['emails'], $projectID, $data['subject'])){
+			if($this->Email->sendInvitaionMail($data['msg'], $mail, $projectID, $data['subject'])){
 				$id = $this->ModelDirector->insertInvitationMail($data);
 				$count = count($emails);
 				$this->ModelDirector->updateCountAudSMS($count, $id, "invite", "email");
 				$this->response(true, "{$count} Invitation Emails sent");
 			}else{
-				$this->response(false, "Email".Aj_Gen_Failed);
+				$this->response(false, "Email ".Aj_Gen_Failed);
 			}
 		}
 		public function csv2array($value = ''){
