@@ -134,8 +134,23 @@ class Home extends CI_Controller {
 	}
 
 	public function connect($link = ''){
-		$this->parseInvitaionLink($link);
-		redirect(base_url() . "home/");
+		//$this->parseInvitaionLink($link);
+		$encryptedText = str_replace(" ", "+", urldecode($link));
+		$encryptedText = str_replace("_", "/", $encryptedText);
+
+		$this->load->library('encrypt');
+		$info = $this->encrypt->decode(trim($encryptedText));
+		$info = explode("_", $info);
+
+		$this->load->model("Auth");
+
+		$userdata = $this->Auth->getUserData("StashUsers_email", trim(end($info)));
+		if(count($userdata)){
+			$this->Auth->insertActorInProject($userdata['StashUsers_id'], $info[1]);
+	    	$this->Auth->insertActorInDirectorList($userdata['StashUsers_id'], $info[0]);
+		}
+
+		redirect(base_url() . "home/actor/");
 	}
 	
 	public function joinBySMS($value = ''){

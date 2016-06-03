@@ -168,8 +168,8 @@
 			return $this->db->update('stash-users', $data);
 		}
 
-		public function insertActorInProject($ref = 0){
-			$info = $this->input->cookie("project_ref");
+		public function insertActorInProject($ref = 0, $proj = 0){
+			$info = ($proj == 0) ? $this->input->cookie("project_ref") : $proj;
 			$data = array(
 						'StashActorProject_id' => null,
 						'StashActorProject_actor_id_ref' => $ref,
@@ -181,8 +181,8 @@
 			$this->db->insert("stash-actor-project", $data);
 		}
 
-		public function insertActorInDirectorList($ref = 0){
-			$info = $this->input->cookie("director_ref");
+		public function insertActorInDirectorList($ref = 0, $dir = 0){
+			$info = ($dir == 0) ? $this->input->cookie("director_ref") : $dir;
 			$data = array(
 						'StashDirectorActorLink_id' => null,
 						'StashDirectorActorLink_director_id_ref' => $info,
