@@ -1,4 +1,5 @@
 application/config/config.php
 application/config/constants.php
 application/config/database.php
+assets/img/actors
 beta/application/config/constants.php
