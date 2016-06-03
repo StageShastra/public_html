@@ -29,7 +29,6 @@
 			$cipher_text = str_replace("/", "_", $cipher_text);
 			$link = base_url() . "secure/confirm/" . urlencode($cipher_text);
 			
-
 			$this->load->library('email', $this->config());
 			$this->email->set_newline("\n");
 			$this->email->from("no-reply@castiko.com", 'Castiko');
@@ -101,8 +100,9 @@
 		public function sendInvitationToInDB($msg = '', $to = [], $project = 0, $sub = "Connect to Casting Director"){
 			$plainText = $this->session->userdata("StaSh_User_id") . "_" . $project . "_" . time();
 			$encryptedText = $this->getEncryptedText($plainText);
-			$link = base_url() . "home/coonect/" . urlencode($encryptedText);
-			$cipher_text = str_replace("/", "_", $cipher_text);
+			$encryptedText = str_replace("/", "_", $encryptedText);
+			$link = base_url() . "home/connect/" . urlencode($encryptedText);
+			
     
 			$this->load->library('email', $this->config());
 			$this->email->set_newline("\n");
@@ -127,13 +127,13 @@
 		public function sendInvitationToNotInDB($msg = '', $to = [], $project = 0, $sub = "Invitation "){
 			$plainText = $this->session->userdata("StaSh_User_id") . "_" . $project . "_" . time();
 			$encryptedText = $this->getEncryptedText($plainText);
+			$encryptedText = str_replace("/", "_", $encryptedText);
 			$link = base_url() . "home/join/" . urlencode($encryptedText);
 			
     
 			$this->load->library('email', $this->config());
 			$this->email->set_newline("\n");
 			$this->email->from("no-reply@castiko.com", 'Castiko');
-			$encryptedText = str_replace("/", "_", $encryptedText);
 			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
 			
 			
@@ -161,7 +161,6 @@
 				return false;
 			}
 		}
-
 		public function defaultTemplete($msg = '', $link = '', $linkname = '', $sender = ''){
 			$mail = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
 				<html xmlns=\"http://www.w3.org/1999/xhtml\" style=\"margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;box-sizing:border-box;font-size:14px;\" >
