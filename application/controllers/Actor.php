@@ -270,8 +270,8 @@
 				if($x < 0 || $y < 0){
 					$this->response(false, "Image is not cropped properly.");
 				}
-				$width = $data['imageWidth'] / 0.3;
-				$height = $data['imageHeight'] / 0.3;
+				$width = $data['imageWidth'];
+				$height = $data['imageHeight'];
 				$ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
 				$imageData = file_get_contents($imagefile);
 				$virtualImage = imagecreatefromstring($imageData);

@@ -469,6 +469,37 @@ $(document).ready(function(){
 		});
 		return false;
 	});
+	$(document).on("click", ".cropProfilePic", function(e){
+		e.preventDefault();
+    	e.stopPropagation();
+    	$form = $("form#cropperForm");
+		img = $("img", $(this)).attr("src");
+		$("input[name='imageName']", $form).val(img);
+		img = "http://localhost" + img;
+
+		$("#cropThisImage").attr("src", img);
+
+		$('#cropThisImage').cropper({
+		  aspectRatio: 1/1,
+		  minCropBoxHeight: 150,
+		  maxCropBoxHeight: 200,
+		  minCropBoxWidth: 150,
+		  maxCropBoxWidth: 200,
+		  zoomable: false,
+		  zoomOnTouch: false, 
+		  zoomOnWheel: false,
+		  crop: function(e) {
+		    // Output the result data for cropping image.
+		    //console.log(e);
+		    $("input[name='imageX']", $form).val(e.x);
+		    $("input[name='imageY']", $form).val(e.y);
+		    $("input[name='imageWidth']", $form).val(e.width);
+		    $("input[name='imageHeight']", $form).val(e.height);
+		    $("input[name='imageRotate']", $form).val(e.rotate);
+		    $("input[name='imageScaleX']", $form).val(e.scaleX);
+		    $("input[name='imageScaleY']", $form).val(e.scaleY);
+		  }
+		});
 
 });
 
