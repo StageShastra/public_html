@@ -352,7 +352,7 @@
 		}
 		public function checkRegsiteredEmails($emails = []){
 			$this->db->where_in("StashUsers_email", $emails);
-			$query = $this->get("stash-users");
+			$query = $this->db->get("stash-users");
 			$fetch = $query->result('array');
 			$result = [];
 			foreach ($fetch as $key => $f) {

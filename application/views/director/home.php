@@ -394,7 +394,7 @@
                                 <span class="info-small gray">
                                   Project Name: <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= CD_ProjTitle ?>"></i>
                                 </span> 
-                                <input type="text" class="form-control  contact_inputs"  name="project_name"  placeholder="Project Name" required/>
+                                <input type="text" class="form-control  contact_inputs projectName"  name="project_name"  placeholder="Project Name" required/>
                 
                 </div>
                               <div class="col-sm-6 form-group no-paddinglr">
@@ -456,7 +456,7 @@
                                 <span class="info-small gray">
                                   Project Name: <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= CD_ProjTitle ?>"></i>
                                 </span> 
-                                <input type="text" class="form-control contact_inputs" name="project_name" placeholder="Project Name" required />
+                                <input type="text" class="form-control contact_inputs projectName" name="project_name" placeholder="Project Name" required />
                               </div>
                               <div class="col-sm-6 form-group no-paddinglr">
                                 <span class="info-small gray">
@@ -538,7 +538,7 @@
             </div>
           </div>
       <script>
-      var isAllowed = <?= ($isAllowed) ? true : false; ?>;
+      var isAllowed = <?= ($isAllowed) ? 1 : 0; ?>;
       </script>
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php

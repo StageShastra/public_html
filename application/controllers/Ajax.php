@@ -121,7 +121,7 @@
 		}
 		public function csv2array($value = ''){
 			$array = [];
-			$values = explode(",", $values);
+			$values = explode(",", $value);
 			foreach ($values as $key => $value) {
 				if($value != '')
 					$array[] = trim($value);
