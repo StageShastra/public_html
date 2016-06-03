@@ -103,7 +103,7 @@
 			$plainText = $this->session->userdata("StaSh_User_id") . "_" . $project . "_" . time();
 			$encryptedText = $this->getEncryptedText($plainText);
 			$encryptedText = str_replace("/", "_", $encryptedText);
-			$link = base_url() . "home/coonect/" . urlencode($encryptedText);
+			$link = base_url() . "home/connect/" . urlencode($encryptedText);
 			
     
 			$this->load->library('email', $this->config());
