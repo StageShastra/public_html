@@ -528,6 +528,105 @@
             background: red;
             color: white;
         }
+        
+.avatar-upload {
+  overflow: hidden;
+}
+
+.avatar-upload label {
+  display: block;
+  float: left;
+  clear: left;
+  width: 100px;
+}
+
+.avatar-upload input {
+  display: block;
+  margin-left: 110px;
+}
+
+.avatar-alert {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.avatar-wrapper {
+  height: 364px;
+  width: 100%;
+  margin-top: 15px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,.25);
+  background-color: #fcfcfc;
+  overflow: hidden;
+}
+
+.avatar-wrapper img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.avatar-preview {
+  float: left;
+  margin-top: 15px;
+  margin-right: 15px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.avatar-preview:hover {
+  border-color: #ccf;
+  box-shadow: 0 0 5px rgba(0,0,0,.15);
+}
+
+.avatar-preview img {
+  width: 100%;
+}
+
+.preview-lg {
+  height: 184px;
+  width: 184px;
+  margin-top: 15px;
+}
+
+.preview-md {
+  height: 100px;
+  width: 100px;
+}
+
+.preview-sm {
+  height: 50px;
+  width: 50px;
+}
+
+@media (min-width: 992px) {
+  .avatar-preview {
+    float: none;
+  }
+}
+
+.avatar-btns {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.avatar-btns .btn-group {
+  margin-right: 5px;
+}
+
+.loading {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #fff url("../img/loading.gif") no-repeat center center;
+  opacity: .75;
+  filter: alpha(opacity=75);
+  z-index: 20140628;
+}
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -1118,7 +1217,7 @@
                            <form action="<?= base_url() ?>upload/" class="dropzone" id="photo-upload" style="border: 1px dashed #b2b2b2;border-radius: 5px;background: white;margin-top:120px;"></form>
                     </div>
                     <button type="submit" class="btn submit-btn firstcolor disabled" id="upload-btn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Upload</button>
-                    <button type="submit" class="btn submit-btn firstcolor" onclick="location.reload()" id="upload-btn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Done</button>
+                    <button type="submit" class="btn submit-btn firstcolor disabled"  onclick="location.reload()" id="done-btn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Done</button>
                 
                   </div>
                   </div>
@@ -1137,43 +1236,9 @@
                   <h4 class="modal-title firstcolor info">Choose Profile Photo</h4><span class="info-small gray"></span>
                 </div>
                 <div class="modal-body" style="background-color:#f2f2f2;">
-                  <div class="container" style="max-width:100%; ">
-                   
-                   <div class="row" style="padding-right:15px;">
-                                    <div class="DocumentList" style="text-align:center">
-                                        <ul class="list-inline center" style="vertical-align:middle;">
-                                            
-                                        <?php
-                                            $images = json_decode($actorProfile['StashActor_images'], true);
-                                            //print_r($images);
-                                            $number_of_images=sizeof($images);
-                                            if($number_of_images==0)
-                                            {
-                                                echo '<div class="info gray">'.AC_NoImage.'<br><button type="submit" class="btn submit-btn firstcolor toggleEdit"  data-toggle="modal" data-target="#photosupload" data-hide-id="#set_profile_photo" id="btn-login" ><span class="glyphicon glyphicon-plus"></span> &nbsp;Upload Photos</button></div>';
-                                            }
-                                            else
-                                            {
-                                                $counter=0;
-                                                foreach ($images as $key => $image) {
-                                                    echo "<li class='DocumentItem toggleEdit cropProfilePic' data-unhide-id='#photoCropping' data-hide-id='#displayGallery'>"
-                                                        . "<a href='#' >"
-                                                        .   "<img src='".IMG."/actors/".$image."' height='100%' width='auto' style='border-radius:10px;'>"
-                                                        . "</a>"
-                                                        . "</li>";
-                                                        $counter++;
-                                                        if($counter%3==0)
-                                                        {
-                                                            echo '<br>';
-                                                        }
-                                                }
-                                            }
-                                        ?>     
-
-                                        </ul>
-                                    </div>
-                                    <div class="photoCropping hidden" id='photoCropping'> 
+                    <div class="photoCropping hidden" id='photoCropping'> 
                                         <div class="text-info">
-                                            <p id="cropperInfo" style="display:none;">  </p>
+                                            <p id="cropperInfo" class="info-small gray center" style="display:none;margin-bottom:10px; font-family:Raleway;">  </p>
                                         </div>
                                         <div class="cropper-container">
                                             <img src="#" id="cropThisImage">
@@ -1189,10 +1254,50 @@
                                                 <input type="hidden" name="imageRotate" value="">
                                                 <input type="hidden" name="imageScaleX" value="">
                                                 <input type="hidden" name="imageScaleY" value="">
-                                                <button type="submit" class="btn submit-btn firstcolor "> Crop and Submit </button>
-                                            </form>
+                                                <div class="row avatar-btns">
+                                                  
+                                                 <div class="col-md-3 center">
+                                                    <button type="submit" class="btn btn-primary btn-block avatar-save">Crop and Save</button>
+                                                 </div>
+                                                </div>
                                         </div>
+                                    </div> 
+                      
+                  <div class="container" style="max-width:100%; ">
+                   
+                   <div class="row" style="padding-right:15px;">
+                                    <div class="DocumentList" id="displayGallery" style="text-align:center; height:auto;">
+                                        <ul class="list-inline center" style="vertical-align:middle;">
+                                            
+                                        <?php
+                                            $images = json_decode($actorProfile['StashActor_images'], true);
+                                            //print_r($images);
+                                            $number_of_images=sizeof($images);
+                                            if($number_of_images==0)
+                                            {
+                                                echo '<div class="info gray">'.AC_NoImage.'<br><button type="submit" class="btn submit-btn firstcolor toggleEdit"  data-toggle="modal" data-target="#photosupload" data-hide-id="#set_profile_photo" id="btn-login" ><span class="glyphicon glyphicon-plus"></span> &nbsp;Upload Photos</button></div>';
+                                            }
+                                            else
+                                            {
+                                                $counter=0;
+                                                foreach ($images as $key => $image) {
+                                                    echo "<li class='DocumentItem toggleEdit cropProfilePic'   data-hide-id='#displayGallery'>"
+                                                        . "<a href='".IMG."/actors/".$image."' >"
+                                                        .   "<img src='".IMG."/actors/".$image."' height='100%' width='auto' style='border-radius:10px;'>"
+                                                        . "</a>"
+                                                        . "</li>";
+                                                        $counter++;
+                                                        if($counter%3==0)
+                                                        {
+                                                            echo '<br>';
+                                                        }
+                                                }
+                                            }
+                                        ?>     
+
+                                        </ul>
                                     </div>
+                                    
                                 </div>
                   </div>
                   </div>
@@ -1259,7 +1364,13 @@
                 </div>
             </div>
             
-            
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div> -->
+          </form>
+        </div>
+      </div>
+    </div><!-- /.modal -->
             <div id="resendConfirmationModal" class="modal fade" role="dialog">
               <div class="modal-dialog">
 

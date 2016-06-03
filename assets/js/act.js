@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
-	var url = "/actor/ajax",
-		base = "/",
+	var url = "/public_html/actor/ajax",
+		base = "/public_html/",
 		type = "POST",
 		data = {};
 
@@ -268,8 +268,9 @@ $(document).ready(function(){
 		var inches = Number($("select[name='inches']", $(this)).val());
 		inches = inches + (feet * 12);
 		var cm = Math.ceil(inches / 0.39370);
+		console.log(cm);
 		$("span#converted").html(cm);
-		//$("#convertedBox").show();
+		$("#convertedBox").show();
 		return false;
 	});
 
@@ -469,21 +470,26 @@ $(document).ready(function(){
 		});
 		return false;
 	});
+
 	$(document).on("click", ".cropProfilePic", function(e){
 		e.preventDefault();
     	e.stopPropagation();
+    	$("#photoCropping").removeClass("hidden");
+    	$("#photoCropping").addClass("animated bounceIn");
     	$form = $("form#cropperForm");
 		img = $("img", $(this)).attr("src");
 		$("input[name='imageName']", $form).val(img);
-		img = "http://localhost" + img;
+		img =  img;
 
 		$("#cropThisImage").attr("src", img);
 
 		$('#cropThisImage').cropper({
 		  aspectRatio: 1/1,
-		  minCropBoxHeight: 150,
+		  scaleX:1,
+		  scaleY:1,
+		  minCropBoxHeight: 50,
 		  maxCropBoxHeight: 200,
-		  minCropBoxWidth: 150,
+		  minCropBoxWidth: 50,
 		  maxCropBoxWidth: 200,
 		  zoomable: false,
 		  zoomOnTouch: false, 
@@ -500,6 +506,39 @@ $(document).ready(function(){
 		    $("input[name='imageScaleY']", $form).val(e.scaleY);
 		  }
 		});
+
+	});
+
+	$(document).on("submit", "form#cropperForm", function(){
+		var form = {};
+		$("input", $(this)).each(function(index, value){
+			if($(this).attr('name') == "imageName"){
+				form[$(this).attr('name')] = $(this).val();
+			}else{
+				form[$(this).attr('name')] = Number($(this).val());
+			}
+		});
+
+		data = {request: "UpdateProfileImage", data: JSON.stringify(form)};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				$("#cropperInfo").html(response.message).show(500);
+				if(response.status){
+					$("#actorAvatar").attr("src", base + "assets/img/actors/" + response.data.image);
+					setTimeout(function(){
+						$("#set_profile_photo").modal("hide");
+					}, 3000);
+					$("#photoCropping").addClass("hidden");
+					$("#displayGallery").removeClass("hidden");
+				}
+			}
+		});
+		return false;
+
+	});
 
 });
 
@@ -618,17 +657,17 @@ Dropzone.options.photoUpload={
       this.on("drop", function()
       {
        $("#upload-btn").removeClass("disabled");
-       console.log("Aa");
+       
       });
       this.on("addedfile", function(file)
       {
        $("#upload-btn").removeClass("disabled");
-       console.log("Aa");
+       
       });
       this.on("successmultiple", function(files, response)
       { 
         //console.log(files);
-        location.reload();
+        $("#done-btn").removeClass("disabled");
         console.log(response);
         
         // Gets triggered when the files have successfully been sent.

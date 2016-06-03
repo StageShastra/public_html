@@ -31,7 +31,6 @@
         <script src="<?= JS ?>/dropzone.js"></script>
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
         <link href='https://fonts.googleapis.com/css?family=Raleway:400,200,300,100' rel='stylesheet' type='text/css'>
-        <script src="<?= JS ?>/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <link rel="stylesheet" type="text/css" href="<?= CSS ?>/tagsinput.css" />
 
 		  <script type="text/javascript">

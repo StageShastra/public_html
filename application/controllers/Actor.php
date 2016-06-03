@@ -267,6 +267,9 @@
 				//print_r($imageSize);
 				$x = $data['imageX'];
 				$y = $data['imageY'];
+				$scalex=$data['imageScaleX'];
+				$scaley=$data['imageScaleY'];
+
 				if($x < 0 || $y < 0){
 					$this->response(false, "Image is not cropped properly.");
 				}
@@ -275,8 +278,8 @@
 				$ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
 				$imageData = file_get_contents($imagefile);
 				$virtualImage = imagecreatefromstring($imageData);
-				$distImage = imagecreatetruecolor(200, 200);
-				imagecopyresampled($distImage, $virtualImage, 0, 0, $x, $y, $imageSize[0], $imageSize[1], $width, $height);
+				$distImage = imagecreatetruecolor($width,$height);
+				imagecopyresampled($distImage, $virtualImage, 0, 0, $x, $y, $width, $height, $width, $height);
 				//print_r($data);
 				$image = md5(microtime() . $this->session->userdata("StaSh_User_id") . microtime()) . '.' . $ext;
 				$imageName = $folder . $image;

@@ -1,7 +1,5 @@
 <?php
-
 	class Auth extends CI_Model {
-
 		public function insertUser($type = ''){
 			$this->load->library('user_agent');
 			$pass = hash_hmac('sha512', $this->input->post('password'), $this->config->item("encryption_key"));
@@ -31,7 +29,6 @@
 			$response = $this->db->insert("stash-users", $data);
 			return $this->db->insert_id();
 		}
-
 		public function setupActorProfile($ref = 0){
 			$data = array(
 						'StashActor_id' => null,
@@ -61,7 +58,6 @@
 			$response = $this->db->insert("stash-actor", $data);
 			return $response;
 		}
-
 		public function setupDirectorProfile($ref = 0){
 			$data = array(
 						'StashDirector_id' => null,
@@ -76,14 +72,12 @@
 			$response = $this->db->insert("stash-director", $data);
 			return $response;
 		}
-
 		public function ifUserExist($email = ''){
 			$this->db->where("StashUsers_email", $email);
 			//return $query = $this->db->get_compiled_select("stash-users");
 			$query = $this->db->get("stash-users");
 			return $query->num_rows();
 		}
-
 		public function verifyLoginCredentials($data = []){
 			$pass = hash_hmac('sha512', $data['password'], $this->config->item("encryption_key"));
 			$this->db->where("StashUsers_email", trim($data['email']));
@@ -92,9 +86,7 @@
 			$query = $this->db->get("stash-users");
 			return $query->first_row('array');
 		}
-
 		public function startLoginSession($profile = []){
-
 			$session_data = array(
 								'StaSh_User_Logged_In' => true,
 								'StaSh_User_id' => $profile['StashUsers_id'],
@@ -103,7 +95,6 @@
 							);
 	    	$this->session->set_userdata($session_data);
 		}
-
 		public function updateUserLogin($ref = 0){
 			$data = array(
 						'StashLogins_id' => null,
@@ -114,7 +105,6 @@
 			$response = $this->db->insert("stash-logins", $data);
 			return $response;
 		}
-
 		public function getUserData($key = '', $value = ''){
 			$this->db->where($key, trim($value));
 			$query = $this->db->get("stash-users");
@@ -127,7 +117,6 @@
 			$query = $this->db->get("stash-users");
 			return $query->num_rows();
 		}
-
 		public function insertPassCode($ref = 0, $passCode = 0){
 			$data = array(
 						'StashForgotPassword_id' => null,
@@ -141,7 +130,6 @@
 			$response = $this->db->insert("stash-forgot-password", $data);
 			return $response;
 		}
-
 		public function getPassCodeData($ref = 0, $code = 0){
 			$this->db->where("StashForgotPassword_user_id_ref", $ref);
 			$this->db->where("StashForgotPassword_code", $code);
@@ -149,7 +137,6 @@
 			$query = $this->db->get("stash-forgot-password", 1);
 			return $query->first_row('array');
 		}
-
 		public function updatePassCodeUses($id = 0){
 			$data = array(
 						'StashForgotPassword_used_time' => time(),
@@ -158,7 +145,6 @@
 			$this->db->where('StashForgotPassword_id', $id);
 			return $this->db->update('stash-forgot-password', $data);
 		}
-
 		public function updatePassword($ref = 0, $pass = ''){
 			$pass = hash_hmac('sha512', $pass, $this->config->item("encryption_key"));
 			$data = array(
@@ -167,9 +153,8 @@
 			$this->db->where('StashUsers_id', $ref);
 			return $this->db->update('stash-users', $data);
 		}
-
-		public function insertActorInProject($ref = 0){
-			$info = $this->input->cookie("project_ref");
+		public function insertActorInProject($ref = 0, $proj = 0){
+			$info = ($proj == 0) ? $this->input->cookie("project_ref") : $proj;
 			$data = array(
 						'StashActorProject_id' => null,
 						'StashActorProject_actor_id_ref' => $ref,
@@ -180,9 +165,8 @@
 			//return $query = $this->db->get_compiled_insert("stash-actor-project", $data);
 			$this->db->insert("stash-actor-project", $data);
 		}
-
-		public function insertActorInDirectorList($ref = 0){
-			$info = $this->input->cookie("director_ref");
+		public function insertActorInDirectorList($ref = 0, $dir = 0){
+			$info = ($dir == 0) ? $this->input->cookie("director_ref") : $dir;
 			$data = array(
 						'StashDirectorActorLink_id' => null,
 						'StashDirectorActorLink_director_id_ref' => $info,
@@ -268,7 +252,6 @@
 			
 			return $result;
 		}
-
 		public function addOTP($otp = 0, $ref = 0){
 			$data = array(
 						'StashMobileOTP_id' => null,
@@ -279,14 +262,12 @@
 					);
 			$this->db->insert("stash-mobile-otp", $data);
 		}
-
 		public function validateOTP($otp = 0, $ref = 0){
 			$this->db->where("StashMobileOTP_user_id_ref", $ref);
 			$this->db->where("StashMobileOTP_otp", $otp);
 			$query = $this->db->get("stash-mobile-otp", 1);
 			return $query->first_row('array');
 		}
-
 		public function updateMobileVerificationStatus($ref = 0){
 			$data = array(
 						'StashUsers_mobile_status' => 1
@@ -294,7 +275,6 @@
 			$this->db->where('StashUsers_id', $ref);
 			return $this->db->update('stash-users', $data);
 		}
-
 		public function updateOTPStatus($ref = 0, $otp = 0){
 			$data = array(
 						'StashMobileOTP_status' => 1
@@ -303,7 +283,6 @@
 			$this->db->where('StashMobileOTP_otp', $otp);
 			return $this->db->update('stash-mobile-otp', $data);
 		}
-
 		public function updateUserMobile($ref = 0, $mobile = 0){
 			$data = array(
 						'StashUsers_mobile_status' => 1,
@@ -312,7 +291,6 @@
 			$this->db->where('StashUsers_id', $ref);
 			return $this->db->update('stash-users', $data);
 		}
-
 		public function addDeliveryReport($num = '', $status = '', $customId = ''){
 			$data = array(
 						"id" => null,
@@ -323,7 +301,5 @@
 					);
 			$this->db->insert("tl_delivery_report", $data);
 		}
-
 	}
-
 ?>
