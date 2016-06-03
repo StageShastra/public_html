@@ -504,6 +504,32 @@
             color: white;
         }
 
+
+        /* Translucent background image */
+        .cropit-image-preview {
+          /* You can specify preview size in CSS */
+          width: 200px;
+          height: 200px;
+          display: block;
+        }
+
+        .cropit-preview-background {
+          opacity: .2;
+        }
+
+        /*
+         * If the slider or anything else is covered by the background image,
+         * use relative or absolute position on it
+         */
+        input.cropit-image-zoom-input {
+          position: relative;
+        }
+
+        /* Limit the background image by adding overflow: hidden */
+        #image-cropper {
+          overflow: hidden;
+        }
+
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -1107,38 +1133,52 @@
                   <div class="container" style="max-width:100%; ">
                    
                    <div class="row" style="padding-right:15px;">
-                                    <div class="DocumentList" style="text-align:center">
-                                        <ul class="list-inline center" style="vertical-align:middle;">
-                                            
-                                        <?php
-                                            $images = json_decode($actorProfile['StashActor_images'], true);
-                                            //print_r($images);
-                                            $number_of_images=sizeof($images);
-                                            if($number_of_images==0)
-                                            {
-                                                echo '<div class="info gray">'.AC_NoImage.'<br><button type="submit" class="btn submit-btn firstcolor toggleEdit"  data-toggle="modal" data-target="#photosupload" data-hide-id="#set_profile_photo" id="btn-login" ><span class="glyphicon glyphicon-plus"></span> &nbsp;Upload Photos</button></div>';
-                                            }
-                                            else
-                                            {
-                                                $counter=0;
-                                                foreach ($images as $key => $image) {
-                                                    echo "<li class='DocumentItem setProfilePic'>"
-                                                        . "<a href='".IMG."/actors/".$image."' >"
-                                                        .   "<img src='".IMG."/actors/".$image."' height='100%' width='auto' style='border-radius:10px;'>"
-                                                        . "</a>"
-                                                        . "</li>";
-                                                        $counter++;
-                                                        if($counter%3==0)
-                                                        {
-                                                            echo '<br>';
-                                                        }
+                            <div class="DocumentList" id='displayGallery' style="text-align:center">
+                                <ul class="list-inline center" style="vertical-align:middle;">
+                                    
+                                <?php
+                                    $images = json_decode($actorProfile['StashActor_images'], true);
+                                    //print_r($images);
+                                    $number_of_images=sizeof($images);
+                                    if($number_of_images==0)
+                                    {
+                                        echo '<div class="info gray">'.AC_NoImage.'<br><button type="submit" class="btn submit-btn firstcolor toggleEdit"  data-toggle="modal" data-target="#photosupload" data-hide-id="#set_profile_photo" id="btn-login" ><span class="glyphicon glyphicon-plus"></span> &nbsp;Upload Photos</button></div>';
+                                    }
+                                    else
+                                    {
+                                        $counter=0;
+                                        foreach ($images as $key => $image) {
+                                            echo "<li class='DocumentItem setProfilePic' >"
+                                                . "<a href='".IMG."/actors/".$image."'>"
+                                                .   "<img src='".IMG."/actors/".$image."' height='100%' width='auto' style='border-radius:10px;'>"
+                                                . "</a>"
+                                                . "</li>";
+                                                $counter++;
+                                                if($counter%3==0)
+                                                {
+                                                    echo '<br>';
                                                 }
-                                            }
-                                        ?>     
+                                        }
+                                    }
+                                ?>     
 
-                                        </ul>
-                                    </div>
+                                </ul>
+                            </div>
+
+                            <div class="photoCropping hidden" id='photoCropping'> 
+                                <div id="image-cropper">
+                                  <div class="cropit-image-preview-container">
+                                    <div class="cropit-image-preview" id="cropit-image-preview"></div>
+                                  </div>
+                                  
+                                  <input type="range" id="hidden-field" class="cropit-image-zoom-input" />
+                                  <input type="hidden" name="offset-x" class="hidden-image-data">
+                                  <input type="hidden" name="offset-y" class="hidden-image-data">
+                                  <input type="hidden" name="zoom" class="hidden-image-data">
+                                  <input type="submit" value="CropIT" name="cropPic" id="hidden-field" class="hidden-Cropit">
                                 </div>
+                            </div>
+                        </div>
                   </div>
                   </div>
                 </div>

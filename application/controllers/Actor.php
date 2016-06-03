@@ -177,11 +177,23 @@
 						$this->removeProfilePic($data);
 						break;
 
+					case "ImageToEncode":
+						$this->imageToEncode($data);
+						break;
+
 					default:
 						$this->response(false, "Invalid Request");
 						break;
 				}
 			}
+		}
+
+		public function imageToEncode($data = []){
+			$img = $data['img'];
+			$ext = pathinfo($img, PATHINFO_EXTENSION);
+			$data = file_get_contents($img);
+			$dataUrl = 'data:image/' . $ext . ';base64,' . base64_encode($data);
+			$this->response(true, "Image Converted", ['dataURL' => $dataUrl]);
 		}
 
 		public function removeProfilePic($data = []){

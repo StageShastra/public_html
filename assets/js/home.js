@@ -90,7 +90,7 @@ $(document).ready(function(){
 				type: type,
 				data: data,
 				success: function(response){
-					console.log(data);
+					//console.log(data);
 					if(response.status){
 						$('#datarow'+actorRef).addClass("animated fadeOut");
 						setTimeout(
@@ -492,7 +492,7 @@ $(document).ready(function(){
 	function checkContactModal() {
 		var hidden = $("#contactmodal").attr("aria-hidden");
 		if(hidden == 'false'){
-			console.log("Open");
+			//console.log("Open");
 			$(".notice-selected-actors").hide();
 		}
 	}
@@ -647,7 +647,7 @@ $(document).ready(function(){
 			type: type,
 			data: data,
 			success: function(response){
-				console.log(response);
+				//console.log(response);
 				if(response.status){
 					populateActorList(response.data, 1);
 				}else{
@@ -776,7 +776,7 @@ $(document).ready(function(){
 			project_date: project_date,
 			subject: subject
 		})};
-		console.log(data);
+		//console.log(data);
 		$.ajax({
 			url: url,
 			type: type,
@@ -844,10 +844,10 @@ $(document).ready(function(){
 	});
 	
 	$(".projectName").autocomplete({
-		source: "/home/autoComplete/",
+		source: "/Castiko/home/autoComplete/",
 		minLenght: 2,
 		select: function(ev, ui){
-			console.log(ui);
+			//console.log(ui);
 			$("input[name='project_date']").val(ui.item.date);
 		}
 	}); 
@@ -855,7 +855,7 @@ $(document).ready(function(){
 	$(document).on("click", ".addSuggestionText", function(){
 		var name = $(this).attr("data-name");
 		var txt = $("textarea[name='"+name+"']").val();
-		console.log(txt);
+		//console.log(txt);
 		var add = $(this).attr("data-add");
 		txt += " " + add;
 		$("textarea[name='"+name+"']").val(txt);
