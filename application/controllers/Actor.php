@@ -43,7 +43,6 @@
 			$this->output->set_status_header('404');
 			show_404();
 		}
-
 		public function mobileverify($value=''){
 			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
 				redirect(base_url());
@@ -61,16 +60,13 @@
 					$this->Auth->addOTP($otp, $this->session->userdata("StaSh_User_id"));
 					$m = substr($userdata['StashUsers_mobile'], 0, 2) . "*****" . substr($userdata['StashUsers_mobile'], 7, 3);
 					$pageInfo = array("error" => true, "error_msg" => Ac_MobVer_EnterCode ." {$m}", 'form' => true);
-
+					$pageInfo = array("error" => true, "error_msg" => "Enter the Code you got on your number {$m}", 'form' => true);
 				}else{
 					$pageInfo = array("error" => true, "error_msg" => Ac_MobVer_SendFailed, 'form' => true);
 				}
-
 			}
-
 			$this->load->view("mobileVerification", $pageInfo);
 		}
-
 		public function skillSuggestions($value=''){
 			$t = trim($_REQUEST['term']);
 			$this->load->model("ModelActor");
@@ -96,8 +92,6 @@
 		public function ajax($value=''){
 			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
 				$this->response(false, Ac_Ajx_AuthFail);
-
-
 			if(count($this->input->post())){
 				$req = trim($this->input->post("request"));
 				$data = json_decode($this->input->post("data"), true);
@@ -166,22 +160,28 @@
 					case "EditUsername":
 						$this->editUsername($data);
 						break;
-
 					case "VerifyOTP":
 						$this->verifyOTP($data);
 						break;
-
 					case "RemoveProfilePic":
 						$this->removeProfilePic($data);
 						break;
-
+					case "ImageToEncode":
+						$this->imageToEncode($data);
+						break;
 					default:
 						$this->response(false, "Invalid Request");
 						break;
 				}
 			}
 		}
-
+		public function imageToEncode($data = []){
+			$img = $data['img'];
+			$ext = pathinfo($img, PATHINFO_EXTENSION);
+			$data = file_get_contents($img);
+			$dataUrl = 'data:image/' . $ext . ';base64,' . base64_encode($data);
+			$this->response(true, "Image Converted", ['dataURL' => $dataUrl]);
+		}
 		public function removeProfilePic($data = []){
 			$this->load->model("ModelActor");
 			$d = array("StashActor_avatar" => "default.png");
@@ -191,7 +191,6 @@
 				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
-
 		public function verifyOTP($data = []){
 			$this->load->model("Auth");
 			$userdata = $this->Auth->getUserData('StashUsers_id', $this->session->userdata("StaSh_User_id"));
@@ -256,10 +255,54 @@
 		
 		public function updateProfileImage($data = []){
 			$this->load->model("ModelActor");
-			$img = explode("/", $data['img']);
-			$d = array("StashActor_avatar" => trim($img[count($img)-1]));
+			$folder = __DIR__ . "/../../assets/img/actors/";
+			
+			$img = $data['imageName'];
+			$imagefile = explode("/", $img);
+			$imagefile = trim($imagefile[count($imagefile) - 1]);
+			$imagefile = __DIR__ . "/../../assets/img/actors/" . $imagefile;
+			//echo $imagefile;
+			if(file_exists( $imagefile )){
+				$imageSize = getimagesize($imagefile);
+				//print_r($imageSize);
+				$x = $data['imageX'];
+				$y = $data['imageY'];
+				if($x < 0 || $y < 0){
+					$this->response(false, "Image is not cropped properly.");
+				}
+				$width = $data['imageWidth'] / 0.3;
+				$height = $data['imageHeight'] / 0.3;
+				$ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
+				$imageData = file_get_contents($imagefile);
+				$virtualImage = imagecreatefromstring($imageData);
+				$distImage = imagecreatetruecolor(200, 200);
+				imagecopyresampled($distImage, $virtualImage, 0, 0, $x, $y, $imageSize[0], $imageSize[1], $width, $height);
+				//print_r($data);
+				$image = md5(microtime() . $this->session->userdata("StaSh_User_id") . microtime()) . '.' . $ext;
+				$imageName = $folder . $image;
+				if($ext == "jpg" || $ext == "jpeg"){
+					if(imagejpeg($distImage, $imageName)){
+						imagedestroy($distImage);
+						//$this->response(true, Ac_Ajx_GenSucc);
+					}else{
+						$this->response(false, "Failed to crop Image.");
+					}
+				}elseif($ext == "png"){
+					if(imagepng($distImage, $imageName)){
+						imagedestroy($distImage);
+						//$this->response(true, Ac_Ajx_GenSucc);
+					}else{
+						$this->response(false, "Failed to crop Image.");
+					}
+				}else{
+					$this->response(false, "Unsupported Image Format!");
+				}
+			}else{
+				$this->response(false, "Image does found!");
+			}
+			$d = array("StashActor_avatar" => $image);
 			if($this->ModelActor->updateActorProfile($d)){
-				$this->response(true, Ac_Ajx_GenSucc);
+				$this->response(true, Ac_Ajx_GenSucc, ['image' => $image]);
 			}else{
 				$this->response(false, Ac_Ajx_GenFailed);
 			}
@@ -288,25 +331,20 @@
 			$userdata = $this->Auth->getUserData('StashUsers_id', $ref);
 			if(strlen($data['phone']) != 10)
 				$this->response(false, "Mobile is invalid.");
-
 			if(strlen($data['whatsapp']) != 10)
 				$this->response(false, "Whatsapp number is invalid.");
-
-
 			$dob = strtotime(trim($data['dob']));
 			$d = array(
 						"StashActor_dob" => $dob,
 						"StashActor_mobile" => $data['phone'],
 						"StashActor_whatsapp" => $data['whatsapp']
 					);
-
 			if($userdata['StashUsers_mobile'] != $data['phone']){
 				$this->Auth->updateUserMobile($ref, $data['phone']);
 				$msg = Ac_Ajx_GenSucc . Ac_eContDet_Mobchanged;
 			}else{
 				$msg = Ac_Ajx_GenSucc;
 			}
-
 			if($this->ModelActor->updateActorProfile($d)){
 				$this->response(true, $msg);
 			}else{
@@ -368,7 +406,7 @@
 								
 								<span class="training_title col-sm-4" id="actor_tr_title_'.$key.'">
 									<span class="training-plus toggleEdit" id="actor_tr_plus_'.$key.'" data-hide-id="#actor_tr_plus_'.$key.'" data-unhide-id="#actor_tr_minus_'.$key.',#actor_tr_detail_'.$key.'">+</span>
-									<span  id="actor_tr_minus_'.$key.'" class="toggleEdit training-minus hidden" data-hide-id="#actor_tr_minus_'.$key.',#actor_tr_detail_'.$key.'" data-unhide-id="#actor_tr_plus_'.$key.'" >-</span>
+									<span  id="actor_tr_minus_'.$key.'" class="toggleEdit training-minus hidden" data-hide-id="#actor_tr_minus_'.$key.', #actor_tr_detail_'.$key.'"  data-unhide-id="#actor_tr_plus_'.$key.'" >-</span>
 									'.$training['StashActorTraining_title'].'
 								</span>
 								<span class="info-small dark-gray col-sm-4" id="actor_tr_course_'.$key.'">
@@ -376,9 +414,7 @@
 								</span>
 								<span class="glyphicon glyphicon-pencil edit-button firstcolor toggleEdit" data-hide-id="" data-unhide-id="#training-'.$key.'_edit" data-hide-id="#training-'.$key.'" aria-hidden="true"></span>
 								<span class="glyphicon glyphicon-remove edit-button  firstcolor removeSpanBtn" data-key="'.$key.'" data-id="'.$training['StashActorTraining_id'].'" data-type="training"></span>
-
 								
-
 							</div>
 							<div id="actor_tr_detail_'.$key.'" class="hidden toggleEdit training_details">
 								<span class="info-small dark-gray" id="actor_tr_start_'.$key.'">'.$training['StashActorTraining_start_time'].'</span> - 
@@ -390,7 +426,6 @@
 							</div>
 							<hr>
 						</span>
-
 						<span id="training-'.$key.'_edit" class="hidden">
 							<input type="text" class="editwhite long" id="editschooli" name="tr_title_'.$key.'" value="'.$training['StashActorTraining_title'].'" Placeholder="School / Teacher" />
 							<input type="text" class="editwhite long" name="tr_course_'.$key.'" id="editcoursei" value="'.$training['StashActorTraining_course'].'" Placeholder="Course" />
