@@ -117,7 +117,7 @@
 			$name = $this->session->userdata("StaSh_User_name");
 			$this->email->subject("{$sub} | Castiko");
 			$message = $this->defaultTemplete("Dear Actor, <br>".$msg, $link, "Connect", "");
-                        $message = preg_replace('~\\\r\\\n~',"<br>", $message);
+            $message = preg_replace('~\\\r\\\n~',"<br>", $message);
 			$this->email->message($message);
 			if($this->email->send()){
 				return true;

@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="<?= CSS ?>/bootstrap-theme.min.css">
         <link rel="stylesheet" href="<?= CSS ?>/jquery-ui.css">
         <link rel="stylesheet" href="<?= CSS ?>/main.css">
+        <link rel="stylesheet" href="<?= CSS ?>/cropper.css">
         <link rel="stylesheet" href="<?= CSS ?>/lightbox.css">
         <link rel="stylesheet" href="<?= CSS ?>/datatable.css">
         <link href="<?= CSS ?>/dropzone.css" type="text/css" rel="stylesheet" />

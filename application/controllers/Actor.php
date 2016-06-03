@@ -270,10 +270,61 @@
 		
 		public function updateProfileImage($data = []){
 			$this->load->model("ModelActor");
-			$img = explode("/", $data['img']);
-			$d = array("StashActor_avatar" => trim($img[count($img)-1]));
+			$folder = __DIR__ . "/../../assets/img/actors/";
+			
+			$img = $data['imageName'];
+			$imagefile = explode("/", $img);
+			$imagefile = trim($imagefile[count($imagefile) - 1]);
+			$imagefile = __DIR__ . "/../../assets/img/actors/" . $imagefile;
+			//echo $imagefile;
+			if(file_exists( $imagefile )){
+
+				$imageSize = getimagesize($imagefile);
+				//print_r($imageSize);
+				$x = $data['imageX'];
+				$y = $data['imageY'];
+
+				if($x < 0 || $y < 0){
+					$this->response(false, "Image is not cropped properly.");
+				}
+
+				$width = $data['imageWidth'] / 0.3;
+				$height = $data['imageHeight'] / 0.3;
+
+				$ext = strtolower(pathinfo($img, PATHINFO_EXTENSION));
+				$imageData = file_get_contents($imagefile);
+				$virtualImage = imagecreatefromstring($imageData);
+				$distImage = imagecreatetruecolor(200, 200);
+				imagecopyresampled($distImage, $virtualImage, 0, 0, $x, $y, $imageSize[0], $imageSize[1], $width, $height);
+				//print_r($data);
+				$image = md5(microtime() . $this->session->userdata("StaSh_User_id") . microtime()) . '.' . $ext;
+				$imageName = $folder . $image;
+
+				if($ext == "jpg" || $ext == "jpeg"){
+					if(imagejpeg($distImage, $imageName)){
+						imagedestroy($distImage);
+						//$this->response(true, Ac_Ajx_GenSucc);
+					}else{
+						$this->response(false, "Failed to crop Image.");
+					}
+				}elseif($ext == "png"){
+					if(imagepng($distImage, $imageName)){
+						imagedestroy($distImage);
+						//$this->response(true, Ac_Ajx_GenSucc);
+					}else{
+						$this->response(false, "Failed to crop Image.");
+					}
+				}else{
+					$this->response(false, "Unsupported Image Format!");
+				}
+
+			}else{
+				$this->response(false, "Image does found!");
+			}
+
+			$d = array("StashActor_avatar" => $image);
 			if($this->ModelActor->updateActorProfile($d)){
-				$this->response(true, Ac_Ajx_GenSucc);
+				$this->response(true, Ac_Ajx_GenSucc, ['image' => $image]);
 			}else{
 				$this->response(false, Ac_Ajx_GenFailed);
 			}

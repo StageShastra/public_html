@@ -1148,8 +1148,8 @@
                                     {
                                         $counter=0;
                                         foreach ($images as $key => $image) {
-                                            echo "<li class='DocumentItem setProfilePic' >"
-                                                . "<a href='".IMG."/actors/".$image."'>"
+                                            echo "<li class='DocumentItem toggleEdit cropProfilePic' data-unhide-id='#photoCropping' data-hide-id='#displayGallery'>"
+                                                . "<a href='#' >"
                                                 .   "<img src='".IMG."/actors/".$image."' height='100%' width='auto' style='border-radius:10px;'>"
                                                 . "</a>"
                                                 . "</li>";
@@ -1166,16 +1166,25 @@
                             </div>
 
                             <div class="photoCropping hidden" id='photoCropping'> 
-                                <div id="image-cropper">
-                                  <div class="cropit-image-preview-container">
-                                    <div class="cropit-image-preview" id="cropit-image-preview"></div>
-                                  </div>
-                                  
-                                  <input type="range" id="hidden-field" class="cropit-image-zoom-input" />
-                                  <input type="hidden" name="offset-x" class="hidden-image-data">
-                                  <input type="hidden" name="offset-y" class="hidden-image-data">
-                                  <input type="hidden" name="zoom" class="hidden-image-data">
-                                  <input type="submit" value="CropIT" name="cropPic" id="hidden-field" class="hidden-Cropit">
+                                <div class="text-info">
+                                    <p id="cropperInfo" style="display:none;">  </p>
+                                </div>
+                                <div class="cropper-container">
+                                    <img src="#" id="cropThisImage">
+                                </div>
+
+                                <div class="cropperDatadiv">
+                                    <form accept="#" method="post" id='cropperForm'>
+                                        <input type="hidden" name="imageName" value="">
+                                        <input type="hidden" name="imageX" value="">
+                                        <input type="hidden" name="imageY" value="">
+                                        <input type="hidden" name="imageWidth" value="">
+                                        <input type="hidden" name="imageHeight" value="">
+                                        <input type="hidden" name="imageRotate" value="">
+                                        <input type="hidden" name="imageScaleX" value="">
+                                        <input type="hidden" name="imageScaleY" value="">
+                                        <button type="submit" class="btn submit-btn firstcolor "> Crop and Submit </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
