@@ -59,7 +59,7 @@ $(document).ready(function(){
 									name = $.trim(value);
 									name = name.toProperCase();
 									html +='<div class="col-sm-4 vertical-padded ellipsis">'
-	                                    	+'<button type="button" class="btn skillstag" style="max-width:auto;"aria-label="Left Align" >'
+	                                    	+'<button type="button" class="btn skills_tag" style="max-width:auto;"aria-label="Left Align" >'
 	                                        	+'<font class="taga-text">'+name+'</font>'
 	                                    	+'</button>'
 	                                		+'</div> ';
@@ -268,8 +268,9 @@ $(document).ready(function(){
 		var inches = Number($("select[name='inches']", $(this)).val());
 		inches = inches + (feet * 12);
 		var cm = Math.ceil(inches / 0.39370);
+		console.log(cm);
 		$("span#converted").html(cm);
-		//$("#convertedBox").show();
+		$("#convertedBox").show();
 		return false;
 	});
 
@@ -473,18 +474,22 @@ $(document).ready(function(){
 	$(document).on("click", ".cropProfilePic", function(e){
 		e.preventDefault();
     	e.stopPropagation();
+    	$("#photoCropping").removeClass("hidden");
+    	$("#photoCropping").addClass("animated bounceIn");
     	$form = $("form#cropperForm");
 		img = $("img", $(this)).attr("src");
 		$("input[name='imageName']", $form).val(img);
-		img = "http://localhost" + img;
+		img =  img;
 
 		$("#cropThisImage").attr("src", img);
 
 		$('#cropThisImage').cropper({
 		  aspectRatio: 1/1,
-		  minCropBoxHeight: 150,
+		  scaleX:1,
+		  scaleY:1,
+		  minCropBoxHeight: 50,
 		  maxCropBoxHeight: 200,
-		  minCropBoxWidth: 150,
+		  minCropBoxWidth: 50,
 		  maxCropBoxWidth: 200,
 		  zoomable: false,
 		  zoomOnTouch: false, 
@@ -652,17 +657,17 @@ Dropzone.options.photoUpload={
       this.on("drop", function()
       {
        $("#upload-btn").removeClass("disabled");
-       console.log("Aa");
+       
       });
       this.on("addedfile", function(file)
       {
        $("#upload-btn").removeClass("disabled");
-       console.log("Aa");
+       
       });
       this.on("successmultiple", function(files, response)
       { 
         //console.log(files);
-        location.reload();
+        $("#done-btn").removeClass("disabled");
         console.log(response);
         
         // Gets triggered when the files have successfully been sent.

@@ -107,13 +107,9 @@
 			$data['project_id'] = $projectID;
 			$emails = $this->csv2array($data['emails']);
 			//$csvEmail = "(" . $this->getCSVList($emails) . ")";
-
 			$emailInDB = $this->ModelDirector->checkRegsiteredEmails($emails);
-
 			$emailNotInDB = array_diff($emails, $emailInDB);
-
 			$mail = ['inDB' => $emailInDB, 'notInDB' => $emailNotInDB];
-
 			if($this->Email->sendInvitaionMail($data['msg'], $mail, $projectID, $data['subject'])){
 				$id = $this->ModelDirector->insertInvitationMail($data);
 				$count = count($emails);
@@ -123,7 +119,6 @@
 				$this->response(false, "Email ".Aj_Gen_Failed);
 			}
 		}
-
 		public function csv2array($value = ''){
 			$array = [];
 			$values = explode(",", $value);
@@ -133,7 +128,6 @@
 			}
 			return $array;
 		}
-
 		public function getCSVList($values = []){
 			$csv = '';
 			//$values = explode(",", $values);
@@ -143,7 +137,6 @@
 			}
 			return rtrim($csv, ",");
 		}
-
 		public function advanceSearch($data = []){
 			$this->load->model("ModelDirector");
 			// Santizing data

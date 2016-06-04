@@ -29,7 +29,6 @@
 			$cipher_text = str_replace("/", "_", $cipher_text);
 			$link = base_url() . "secure/confirm/" . urlencode($cipher_text);
 			
-
 			$this->load->library('email', $this->config());
 			$this->email->set_newline("\n");
 			$this->email->from("no-reply@castiko.com", 'Castiko');
@@ -98,36 +97,29 @@
 				return false;
 			}
 		}
-
 		public function sendInvitationToInDB($msg = '', $to = [], $project = 0, $sub = "Connect to Casting Director"){
 			$this->load->library('email', $this->config());
-
 			$failedEmails = [];
 			foreach ($to as $key => $mail) {
 				$plainText = $this->session->userdata("StaSh_User_id") . "_" . $project . "_" . time() . "_" . $mail;
 				$encryptedText = $this->getEncryptedText($plainText);
 				$encryptedText = str_replace("/", "_", $encryptedText);
 				$link = base_url() . "home/connect/" . urlencode($encryptedText);
-
 				$message = $this->defaultTemplete("Dear Actor, <br>".$msg, $link, "Connect", "");
-            	$message = preg_replace('~\\\r\\\n~',"<br>", $message);
-
-            	$this->email->clear();
-            	$this->email->set_newline("\n");
+		            	$message = preg_replace('~\\\r\\\n~',"<br>", $message);
+		            	$this->email->clear();
+		            	$this->email->set_newline("\n");
 				$this->email->from("no-reply@castiko.com", 'Castiko');
 				$this->email->reply_to("no-reply@castiko.com", 'Castiko');
 				$this->email->subject("{$sub} | Castiko");
-            	$this->to($mail);
-            	$this->email->message($message);
-            	if(!$this->email->send()){
-            		$failedEmails[] = $mail;
-            	}
+		            	$this->email->to($mail);
+		            	$this->email->message($message);
+		            	if(!$this->email->send()){
+		            		$failedEmails[] = $mail;
+		            	}
 			}
-
 			return $failedEmails;
 		}
-
-
 		public function sendInvitationToNotInDB($msg = '', $to = [], $project = 0, $sub = "Invitation "){
 			$this->load->library('email', $this->config());
 			$failedEmails = [];
@@ -136,55 +128,40 @@
 				$encryptedText = $this->getEncryptedText($plainText);
 				$encryptedText = str_replace("/", "_", $encryptedText);
 				$link = base_url() . "home/join/" . urlencode($encryptedText);
-
 				$message = $this->defaultTemplete("Dear Actor, <br>".$msg, $link, "Accept Invitation", "");
-            	$message = preg_replace('~\\\r\\\n~',"<br>", $message);
-
-
-            	$this->email->clear();
-            	$this->email->set_newline("\n");
+		            	$message = preg_replace('~\\\r\\\n~',"<br>", $message);
+		            	$this->email->clear();
+		            	$this->email->set_newline("\n");
 				$this->email->from("no-reply@castiko.com", 'Castiko');
 				$this->email->reply_to("no-reply@castiko.com", 'Castiko');
 				$this->email->subject("{$sub} | Castiko");
-
-            	$this->to($mail);
-            	$this->email->message($message);
-            	if(!$this->email->send()){
-            		$failedEmails[] = $mail;
-            	}
+		            	$this->email->to($mail);
+		            	$this->email->message($message);
+		            	if(!$this->email->send()){
+		            		$failedEmails[] = $mail;
+		            	}
 			}
-
 			return $failedEmails;
 		}		
-
-
-
 		public function sendInvitaionMail($msg = '', $emails = [], $project = 0, $sub = 'Invitation'){
 			$inDB = $this->sendInvitationToInDB($msg, $emails['inDB'], $project);
 			$notInDB = $this->sendInvitationToNotInDB($msg, $emails['notInDB'], $project);
-
 			$failInDB = count($inDB);
 			$failnotInDB = count($notInDB);
 			$totalFailed = $failnotInDB + $failInDB;
 			$mergeFailed = array("inDB" => $failInDB, "notInDB" => $failnotInDB);
-
 			$mailInDB = count($emails['inDB']);
 			$mailnotInDB = count($emails['notInDB']);
 			$totalEmails = $mailInDB + $mailnotInDB;
-
 			if($totalEmails == $totalFailed){
 				return false;
 			}else{
 				if($totalFailed){
 					$this->insertFailedInvitations($mergeFailed, $msg, $project);
 				}
-
 				return true;
 			}
-
-
 		}
-
 		public function insertFailedInvitations($emails = [], $msg = '', $project = 0){
 			$data = array(
 						'StashFailedInvite_id' => null,
@@ -196,8 +173,6 @@
 					);
 			$this->db->insert("stash-failed-invitation", $data);
 		}
-
-
 		public function defaultTemplete($msg = '', $link = '', $linkname = '', $sender = ''){
 			$mail = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
 				<html xmlns=\"http://www.w3.org/1999/xhtml\" style=\"margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;box-sizing:border-box;font-size:14px;\" >
@@ -275,3 +250,4 @@
 		}
 	}
 ?>
+

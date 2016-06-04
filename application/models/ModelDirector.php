@@ -350,7 +350,6 @@
 			else
 				return false;
 		}
-
 		public function checkRegsiteredEmails($emails = []){
 			$this->db->where_in("StashUsers_email", $emails);
 			$query = $this->db->get("stash-users");

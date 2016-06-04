@@ -16,9 +16,9 @@
         <link rel="stylesheet" href="<?= CSS ?>/bootstrap-theme.min.css">
         <link rel="stylesheet" href="<?= CSS ?>/jquery-ui.css">
         <link rel="stylesheet" href="<?= CSS ?>/main.css">
-        <link rel="stylesheet" href="<?= CSS ?>/cropper.css">
         <link rel="stylesheet" href="<?= CSS ?>/lightbox.css">
         <link rel="stylesheet" href="<?= CSS ?>/datatable.css">
+        <link rel="stylesheet" href="<?= CSS ?>/cropper.css">
         <link href="<?= CSS ?>/dropzone.css" type="text/css" rel="stylesheet" />
         <link href="<?= CSS ?>/animate.css" type="text/css" rel="stylesheet" />
 		<link href="<?= CSS ?>/font-awesome.css" type="text/css" rel="stylesheet" />
@@ -31,7 +31,6 @@
         <script src="<?= JS ?>/dropzone.js"></script>
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
         <link href='https://fonts.googleapis.com/css?family=Raleway:400,200,300,100' rel='stylesheet' type='text/css'>
-        <script src="<?= JS ?>/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <link rel="stylesheet" type="text/css" href="<?= CSS ?>/tagsinput.css" />
 
 		  <script type="text/javascript">

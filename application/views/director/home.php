@@ -117,9 +117,9 @@
         <div class="container" id="prelogin">
           <div class="col-sm-1">
           </div>
-          <div class="container-fluid col-sm-10"> <!--container fluid starts -->
+          <div class="container-fluid col-sm-10 center"> <!--container fluid starts -->
             <div class="center headname padded">
-              <img src="<?= IMG ?>/logo.png" class="logo img-fluid rotate-img"/><span class="title"><?= M_Title ?></span>
+              <img src="<?= IMG ?>/logo.png" class="logo img-fluid center" id="logo_start"/><br><span class="title"><?= M_Title ?></span>
             </div>
             <div class="row center light-padded">
               <div class="col-sm-10 center" id="categories">

@@ -11,7 +11,6 @@
         $years = floor($diff / (365*60*60*24));
         return $years;
     }
-
     $title_cd = "When you accept a casting director's invitation to join their database, their name will show up here. This means that they will see all the changes you make to your profile instantly.";
     $title_exp = "Showing your video work is the best way to showcase your talent. If you don't have any video work to show yet, just record yourself acting out a favorite scene and put that here.";
     $warning_cnf = "Please verify your email address so that casting directors can contact you easily. We've sent a link to your email.";
@@ -35,7 +34,7 @@
         }
         /* AKASH SINGH: */
         .a_name{
-            font-family: 'Raleway', sans-serif, AvenirNext-Regular;
+            font-family: 'AvenirNext-Bold', sans-serif, AvenirNext-Regular;
             font-size: 20px;
             color: #4A4A4A;
             text-align: left;
@@ -180,7 +179,7 @@
             color: black;
             padding-left: 15px;
             padding: 15px;
-            width: 75%;
+            width: 100%;
         }
         .edit_inputs_basics{
             margin-bottom: 10px;
@@ -268,20 +267,18 @@
         .hidden_scroll:hover{
         overflow-y:scroll;
         }
-
-		.actor_link {
-			padding: 0px;
-			color: #9b9b9b;
-			font-size: 12px;
-			cursor: text;
+        .actor_link {
+            padding: 0px;
+            color: #9b9b9b;
+            font-size: 12px;
+            cursor: text;
             margin-left: -15px;
-			
-		}
-		
-		.actor_link a{
-			text-decoration: none;
-		}
-
+            
+        }
+        
+        .actor_link a{
+            text-decoration: none;
+        }
         .notVerified {
             color: red;
         }
@@ -293,12 +290,20 @@
         .custom-navbar{
             padding-top: 0px;
             margin-bottom: 0px;
-
         }
         .tagline{
                 position: relative;
                 top: -10px;
             }
+        .alertbox{
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            margin-top: 20px;
+            background:#FFB600;
+            color: white; 
+        }
+           
         /* xs */
         @media screen and (max-width: 767px) {
             body {
@@ -328,7 +333,6 @@
                 position: relative;
                 top:20px;
                 margin-top: 0px;
-
             }
              .tagline{
                 font-size: 9px;
@@ -349,7 +353,16 @@
                 width:60px;
                 height: 60px;
             }
-
+            .nav_icons{
+                position: absolute;
+                top:10px;
+            }
+            .DocumentList{
+                max-height:auto;
+                height:auto;
+                overflow-y:auto;
+                overflow-x:hidden;
+            }
             
         }
         /* sm */
@@ -378,7 +391,6 @@
             }
             .navbar-toggle{
                 margin-right: 20px;
-
             }
             .no_padding_small{
             padding-left: 0px;
@@ -389,7 +401,6 @@
                 height: 75px;
             }
         }
-
         /* md */
         @media screen and (min-width: 992px) {
             body {
@@ -418,8 +429,11 @@
             #browse-table{
                 margin-top: 20px;
             }
+            .DocumentItem{
+                width:120px;
+                height: 120px;
+            }
         }
-
         /* lg */
         @media screen and (min-width: 1200px) {
             body {
@@ -453,6 +467,10 @@
             .#browse-table{
                 margin-top: 25px;
             }
+            .DocumentItem{
+                width:150px;
+                height: 150px;
+            }
         }
         .videoWrapper {
         position: relative;
@@ -467,6 +485,13 @@
     width: 100%;
     height: 100%;
 }
+ .rotate-img {
+            -webkit-animation: rotation 2s infinite linear;
+          }
+          @-webkit-keyframes rotation {
+              from {-webkit-transform: rotate(0deg);}
+              to   {-webkit-transform: rotate(359deg);}
+          }
         #actor_basics{
            
         }
@@ -503,33 +528,105 @@
             background: red;
             color: white;
         }
+        
+.avatar-upload {
+  overflow: hidden;
+}
 
+.avatar-upload label {
+  display: block;
+  float: left;
+  clear: left;
+  width: 100px;
+}
 
-        /* Translucent background image */
-        .cropit-image-preview {
-          /* You can specify preview size in CSS */
-          width: 200px;
-          height: 200px;
-          display: block;
-        }
+.avatar-upload input {
+  display: block;
+  margin-left: 110px;
+}
 
-        .cropit-preview-background {
-          opacity: .2;
-        }
+.avatar-alert {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
-        /*
-         * If the slider or anything else is covered by the background image,
-         * use relative or absolute position on it
-         */
-        input.cropit-image-zoom-input {
-          position: relative;
-        }
+.avatar-wrapper {
+  height: 364px;
+  width: 100%;
+  margin-top: 15px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,.25);
+  background-color: #fcfcfc;
+  overflow: hidden;
+}
 
-        /* Limit the background image by adding overflow: hidden */
-        #image-cropper {
-          overflow: hidden;
-        }
+.avatar-wrapper img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
 
+.avatar-preview {
+  float: left;
+  margin-top: 15px;
+  margin-right: 15px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.avatar-preview:hover {
+  border-color: #ccf;
+  box-shadow: 0 0 5px rgba(0,0,0,.15);
+}
+
+.avatar-preview img {
+  width: 100%;
+}
+
+.preview-lg {
+  height: 184px;
+  width: 184px;
+  margin-top: 15px;
+}
+
+.preview-md {
+  height: 100px;
+  width: 100px;
+}
+
+.preview-sm {
+  height: 50px;
+  width: 50px;
+}
+
+@media (min-width: 992px) {
+  .avatar-preview {
+    float: none;
+  }
+}
+
+.avatar-btns {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.avatar-btns .btn-group {
+  margin-right: 5px;
+}
+
+.loading {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #fff url("../img/loading.gif") no-repeat center center;
+  opacity: .75;
+  filter: alpha(opacity=75);
+  z-index: 20140628;
+}
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -577,13 +674,13 @@
                 <?php
                     if($user["StashUsers_status"] == 0){
                 ?>
-                <div class="alert alert-warning alert-dismissible" id="warningmsg" role="alert">
+                <div class="alert alertbox alert-warning alert-dismissible" id="warningmsg" role="alert">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <strong>Warning!</strong> <?= AC_ActivationWarning ?>
                 </div>
                 <?php } ?>
                 
-                <div class="alert alert-primary alert-dismissible" id="savedChnaged" style="display:none;" role="alert">
+                <div class="alert alert-primary alert-dismissible alertbox" id="savedChnaged" style="display:none;" role="alert">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <span id="savedChnagedMsg"></span>
                 </div>
@@ -592,39 +689,39 @@
                     <div class="col-sm-3 light-padded left">
                     <div class="row">
                         <span class="a_name"><?= $actorProfile['StashActor_name'] ?></span>
-						 <span class="fa fa-share-alt edit-button  shareButton" data-open="false" style="cursor:pointer;" ></span>
+                         <span class="fa fa-share-alt edit-button  shareButton" data-open="false" style="cursor:pointer;" ></span>
                             <i>&emsp;</i>
                     <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#actor_username_edit" data-hide-id="#actor_username" aria-hidden="true" style="cursor:pointer;"></span>
-						
-						<br>
-						<span class="actor_link" id="actor_username">
-							<span id="profile_link" ><a href="<?= base_url() . $user['StashUsers_username'] ?>" id="actor_username_txt" target="_blank"><?= base_url() . $user['StashUsers_username'] ?></a></span>
-							<i>&emsp;</i>
-						</span>
-						
-						<div id="socialShare" ></div>
-						
-						<div id="actor_username_edit" class="hidden">
-							<div class="category_heading no_left_margin"></div>
-							
-							<div class="row no_left_margin">
-								<input type="text" class="editwhite edit_inputs_basics col-sm-4" name="username" value="<?= $user["StashUsers_username"] ?>" id="username"/>
-							</div>
-							
-							<font class="sortbuttons">
-									<button type="button" class="btn submit-btn firstcolor center tick updateDataField"
-											data-input-names="username"
-											data-request="EditUsername"
-											data-hide-id="#actor_username_edit" 
-											data-unhide-id="#actor_username">
-										<span class="glyphicon glyphicon-ok"></span>
-									</button>
-							</font>
-						</div>
-						</div>
+                        
+                        <br>
+                        <span class="actor_link" id="actor_username">
+                            <span id="profile_link" ><a href="<?= base_url() . $user['StashUsers_username'] ?>" id="actor_username_txt" target="_blank"><?= base_url() . $user['StashUsers_username'] ?></a></span>
+                            <i>&emsp;</i>
+                        </span>
+                        
+                        <div id="socialShare" ></div>
+                        
+                        <div id="actor_username_edit" class="hidden">
+                            <div class="category_heading no_left_margin"></div>
+                            
+                            <div class="row no_left_margin">
+                                <input type="text" class="editwhite edit_inputs_basics col-sm-6" style="padding:10px;" name="username" value="<?= $user["StashUsers_username"] ?>" id="username"/>
+                            </div>
+                            
+                            <font class="sortbuttons">
+                                    <button type="button" class="btn submit-btn firstcolor center tick updateDataField"
+                                            data-input-names="username"
+                                            data-request="EditUsername"
+                                            data-hide-id="#actor_username_edit" 
+                                            data-unhide-id="#actor_username">
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                    </button>
+                            </font>
+                        </div>
+                        </div>
                         <div class = "row" id="actor_basics">
                             <div class=" col-sm-3 col-lg-4 col-md-4  a_pic" id="actor_pro_pic">
-                                <span class="glyphicon glyphicon-camera  toggleEdit overlay_edit" data-toggle="modal" data-target="#set_profile_photo" aria-hidden="true"></span>
+                               <span class="glyphicon glyphicon-remove  toggleEdit overlay_edit removeDP" style="left:8px; right:0px; width:18px;" aria-hidden="true"></span> <span class="glyphicon glyphicon-camera  toggleEdit overlay_edit" data-toggle="modal" data-target="#set_profile_photo" aria-hidden="true"></span>
                                 
                                 <img src="<?= IMG .'/actors/'.$actorProfile['StashActor_avatar'] ?>" id="actorAvatar" class="pro-pic"></img> 
                                  <input type="hidden" id="image_count" value='<?= $actorProfile['StashActor_images'] ?>'>
@@ -633,7 +730,7 @@
                             <div class="basics col-sm-12 col-lg-7 col-md-7" style="padding-left:0px;padding-right:0px;">
                                 <div class="category_heading ">BASICS
                                     <span class="glyphicon glyphicon-pencil edit-button  toggleEdit" data-unhide-id="#actor_basics_edit" data-hide-id="#actor_basics" aria-hidden="true" ></span>
-								</div>
+                                </div>
                                 <div class="elements">
                                     <span class="elements_label">Sex: </span><span id="actor_sex"><?= ($actorProfile['StashActor_gender']) ? "Male" : "Female" ?></span>
                                     <br>
@@ -645,7 +742,7 @@
 
 
                         </div>
-							<div id="actor_basics_edit" class="hidden">
+                            <div id="actor_basics_edit" class="hidden">
                                 <div class="category_heading row" >BASICS</div>
                                 
                                     <div class="row">
@@ -733,8 +830,8 @@
                                         </button>
                                 </font>
                            
-							</div>
-						</div>
+                            </div>
+                        </div>
                          <div class="row">
                             <br>
                             <div class="category_heading">CASTING DIRECTORS 
@@ -770,7 +867,7 @@
                             <span id="language_edit" class="left hidden ">
                                  <input type="text" class="form-control login" value="<?= implode(",", $actorProfile['StashActor_language']) ?>" id="language" data-role="tagsinput" name="language" placeholder= "Language:" />
                                  <br><font class="sortbuttons">
-                                    <button type="button" class="btn submit-btn firstcolor center updateDataField"
+                                    <button type="button" class="btn submit-btn firstcolor center tick updateDataField"
                                             data-input-names="language"
                                             data-request="EditLanguage"
                                             data-hide-id="#language_edit" 
@@ -803,7 +900,7 @@
                             <span id="skills_edit" class="left hidden ">
                                  <input type="text" class="form-control login" value="<?= implode(",", $actorProfile['StashActor_skills']).", " ?>" data-role="tagsinput" id="skills" name="skills" placeholder= "Skills:" />
                                  <br><font class="sortbuttons">
-                                    <button type="button" class="btn submit-btn firstcolor center updateDataField"
+                                    <button type="button" class="btn submit-btn firstcolor center tick updateDataField"
                                             data-input-names="skills"
                                             data-request="EditSkills"
                                             data-hide-id="#skills_edit" 
@@ -829,7 +926,9 @@
                                     <input type="text" class="editwhite long" name='exp_role' id="addrole" Placeholder="Role e.g. Dad, Mom, Character Name" required/>
                                     <input type="text" class="editwhite long" name='exp_link' id="addlink" Placeholder="Youtube Video Link"/>
                                     <textarea class="editwhite long" name='exp_blurb' id="adddescription" placeholder="A little description about the role and the project." style="height:80px;"></textarea>
-                                    <br><font class="sortbuttons"><button type="submit" class="btn submit-btn firstcolor center addExperience"  ><span class="glyphicon glyphicon-ok"></span></button></font>
+                                    <br><font class="sortbuttons">
+                                    <button type="submit" class="btn submit-btn firstcolor center addExperience toggleEdit tick" id="add_exp_btn" data-hide-id="#add_exp_btn" data-unhide-id="#add_exp_btn_load" ><span class="glyphicon glyphicon-ok"></span></button>
+                                    <button type="submit" class="btn submit-btn firstcolor center addExperience tick hidden rotate-img" id="add_exp_btn_load" ><span class="glyphicon glyphicon-refresh"></span></button></font>
                                 
                                 </span>
                                 <div id="experiencelist" style="overflow:hidden;">
@@ -886,7 +985,7 @@
                                             if($youtube_flag==1) 
                                             {    
                                                 
-                                                echo '<div class="col-sm-7" style="padding-left:0px;padding-right:0px"><div class="videoWrapper"><iframe width="560" height="349" src="'.$youtube.'" frameborder="0" allowfullscreen></iframe></div></div>';
+                                                echo '<div class="col-sm-7" style="padding-left:0px;padding-right:0px"><div class="videoWrapper"><iframe width="482" height="300" src="'.$youtube.'" frameborder="0" allowfullscreen></iframe></div></div>';
                                                 echo '<div class="col-sm-5"">
                                                         <span class="info black" id="actor_ex_title_'.$key.'"><b>'.$experience['StashActorExperience_title'].'</b></span>
                                                         <span class="glyphicon glyphicon-pencil edit-button  firstcolor toggleEdit" data-unhide-id="#experience-'.$key.'_edit" data-hide-id="#experience-'.$key.'" aria-hidden="true"></span>
@@ -918,9 +1017,9 @@
                                                             <i>as </i>'.$experience['StashActorExperience_role'].'
                                                         </span>
                                                     <br>
-                                                        <span class="info-small dark-gray" id="actor_ex_blurb_'.$key.'" style="margin-left:15px;" >
+                                                        <div class="info-small dark-gray" id="actor_ex_blurb_'.$key.'" style="margin-left:15px;" >
                                                             '.$experience['StashActorExperience_blurb'].'
-                                                        </span>';
+                                                        </div>';
                                                 
                                             }
                                             if($onlyone!=1)
@@ -944,14 +1043,21 @@
                                         <textarea class="editwhite long" name="ex_blurb_<?= $key ?>" id="editdescriptioni" style="height:80px;overflow:auto;"><?= $experience['StashActorExperience_blurb'] ?></textarea>
                                         <br>
                                         <font class="sortbuttons">
-                                            <button type="button" class="btn submit-btn firstcolor center btnExpAndTraining"
+                                            <button type="button" class="btn submit-btn firstcolor center btnExpAndTraining tick toggleEdit"
+                                                    id="edit_exp_btn"
                                                     data-input-names="ex_title_<?= $key ?>, ex_role_<?= $key ?>,ex_link_<?= $key ?>,ex_blurb_<?= $key ?>"
                                                     data-key="<?= $key ?>"
                                                     data-table-id="<?= $experience['StashActorExperience_id'] ?>"
                                                     data-request="EditExperience"
+                                                    data-hide-id="#experience-<?= $key ?>_edit,#edit_exp_btn " 
+                                                    data-unhide-id="#experience-<?= $key ?>,#edit_exp_btn_load ">
+                                                <span class="glyphicon glyphicon-ok"></span>
+                                            </button>
+                                            <button type="button" class="btn submit-btn firstcolor center tick hidden" id="edit_exp_btn_load"
+                                                    data-input-names="ex_title_<?= $key ?>, ex_role_<?= $key ?>,ex_link_<?= $key ?>,ex_blurb_<?= $key ?>"
                                                     data-hide-id="#experience-<?= $key ?>_edit" 
                                                     data-unhide-id="#experience-<?= $key ?>">
-                                                <span class="glyphicon glyphicon-ok"></span>
+                                                <span class="glyphicon glyphicon-refresh rotate-img "></span>
                                             </button>
                                         </font>
                                     </span>
@@ -1055,7 +1161,7 @@
                                         <textarea class="editwhite long" name="tr_blurb_<?= $key ?>" id="edittrainingdescriptioni" style="height:100px;"><?= $training['StashActorTraining_blurb'] ?></textarea>
                                         <br>
                                         <font class="sortbuttons">
-                                            <button class="btn submit-btn firstcolor center btnExpAndTraining"
+                                            <button class="btn submit-btn firstcolor center tick btnExpAndTraining"
                                                     data-input-names="tr_title_<?= $key ?>, tr_course_<?= $key ?>, tr_start_<?= $key ?>, tr_end_<?= $key ?>, tr_blurb_<?= $key ?>"
                                                     data-key="<?= $key ?>"
                                                     data-table-id="<?= $training['StashActorTraining_id'] ?>"
@@ -1111,7 +1217,7 @@
                            <form action="<?= base_url() ?>upload/" class="dropzone" id="photo-upload" style="border: 1px dashed #b2b2b2;border-radius: 5px;background: white;margin-top:120px;"></form>
                     </div>
                     <button type="submit" class="btn submit-btn firstcolor disabled" id="upload-btn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Upload</button>
-                    <button type="submit" class="btn submit-btn firstcolor" onclick="location.reload()" id="upload-btn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Done</button>
+                    <button type="submit" class="btn submit-btn firstcolor disabled"  onclick="location.reload()" id="done-btn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Done</button>
                 
                   </div>
                   </div>
@@ -1130,64 +1236,69 @@
                   <h4 class="modal-title firstcolor info">Choose Profile Photo</h4><span class="info-small gray"></span>
                 </div>
                 <div class="modal-body" style="background-color:#f2f2f2;">
+                    <div class="photoCropping hidden" id='photoCropping'> 
+                                        <div class="text-info">
+                                            <p id="cropperInfo" class="info-small gray center" style="display:none;margin-bottom:10px; font-family:Raleway;">  </p>
+                                        </div>
+                                        <div class="cropper-container">
+                                            <img src="#" id="cropThisImage">
+                                        </div>
+
+                                        <div class="cropperDatadiv">
+                                            <form accept="#" method="post" id='cropperForm'>
+                                                <input type="hidden" name="imageName" value="">
+                                                <input type="hidden" name="imageX" value="">
+                                                <input type="hidden" name="imageY" value="">
+                                                <input type="hidden" name="imageWidth" value="">
+                                                <input type="hidden" name="imageHeight" value="">
+                                                <input type="hidden" name="imageRotate" value="">
+                                                <input type="hidden" name="imageScaleX" value="">
+                                                <input type="hidden" name="imageScaleY" value="">
+                                                <div class="row avatar-btns">
+                                                  
+                                                 <div class="col-md-3 center">
+                                                    <button type="submit" class="btn btn-primary btn-block avatar-save">Crop and Save</button>
+                                                 </div>
+                                                </div>
+                                        </div>
+                                    </div> 
+                      
                   <div class="container" style="max-width:100%; ">
                    
                    <div class="row" style="padding-right:15px;">
-                            <div class="DocumentList" id='displayGallery' style="text-align:center">
-                                <ul class="list-inline center" style="vertical-align:middle;">
-                                    
-                                <?php
-                                    $images = json_decode($actorProfile['StashActor_images'], true);
-                                    //print_r($images);
-                                    $number_of_images=sizeof($images);
-                                    if($number_of_images==0)
-                                    {
-                                        echo '<div class="info gray">'.AC_NoImage.'<br><button type="submit" class="btn submit-btn firstcolor toggleEdit"  data-toggle="modal" data-target="#photosupload" data-hide-id="#set_profile_photo" id="btn-login" ><span class="glyphicon glyphicon-plus"></span> &nbsp;Upload Photos</button></div>';
-                                    }
-                                    else
-                                    {
-                                        $counter=0;
-                                        foreach ($images as $key => $image) {
-                                            echo "<li class='DocumentItem toggleEdit cropProfilePic' data-unhide-id='#photoCropping' data-hide-id='#displayGallery'>"
-                                                . "<a href='#' >"
-                                                .   "<img src='".IMG."/actors/".$image."' height='100%' width='auto' style='border-radius:10px;'>"
-                                                . "</a>"
-                                                . "</li>";
-                                                $counter++;
-                                                if($counter%3==0)
-                                                {
-                                                    echo '<br>';
+                                    <div class="DocumentList" id="displayGallery" style="text-align:center; height:auto;">
+                                        <ul class="list-inline center" style="vertical-align:middle;">
+                                            
+                                        <?php
+                                            $images = json_decode($actorProfile['StashActor_images'], true);
+                                            //print_r($images);
+                                            $number_of_images=sizeof($images);
+                                            if($number_of_images==0)
+                                            {
+                                                echo '<div class="info gray">'.AC_NoImage.'<br><button type="submit" class="btn submit-btn firstcolor toggleEdit"  data-toggle="modal" data-target="#photosupload" data-hide-id="#set_profile_photo" id="btn-login" ><span class="glyphicon glyphicon-plus"></span> &nbsp;Upload Photos</button></div>';
+                                            }
+                                            else
+                                            {
+                                                $counter=0;
+                                                foreach ($images as $key => $image) {
+                                                    echo "<li class='DocumentItem toggleEdit cropProfilePic'   data-hide-id='#displayGallery'>"
+                                                        . "<a href='".IMG."/actors/".$image."' >"
+                                                        .   "<img src='".IMG."/actors/".$image."' height='100%' width='auto' style='border-radius:10px;'>"
+                                                        . "</a>"
+                                                        . "</li>";
+                                                        $counter++;
+                                                        if($counter%3==0)
+                                                        {
+                                                            echo '<br>';
+                                                        }
                                                 }
-                                        }
-                                    }
-                                ?>     
+                                            }
+                                        ?>     
 
-                                </ul>
-                            </div>
-
-                            <div class="photoCropping hidden" id='photoCropping'> 
-                                <div class="text-info">
-                                    <p id="cropperInfo" style="display:none;">  </p>
+                                        </ul>
+                                    </div>
+                                    
                                 </div>
-                                <div class="cropper-container">
-                                    <img src="#" id="cropThisImage">
-                                </div>
-
-                                <div class="cropperDatadiv">
-                                    <form accept="#" method="post" id='cropperForm'>
-                                        <input type="hidden" name="imageName" value="">
-                                        <input type="hidden" name="imageX" value="">
-                                        <input type="hidden" name="imageY" value="">
-                                        <input type="hidden" name="imageWidth" value="">
-                                        <input type="hidden" name="imageHeight" value="">
-                                        <input type="hidden" name="imageRotate" value="">
-                                        <input type="hidden" name="imageScaleX" value="">
-                                        <input type="hidden" name="imageScaleY" value="">
-                                        <button type="submit" class="btn submit-btn firstcolor "> Crop and Submit </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
                   </div>
                   </div>
                 </div>
@@ -1253,7 +1364,13 @@
                 </div>
             </div>
             
-            
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div> -->
+          </form>
+        </div>
+      </div>
+    </div><!-- /.modal -->
             <div id="resendConfirmationModal" class="modal fade" role="dialog">
               <div class="modal-dialog">
 

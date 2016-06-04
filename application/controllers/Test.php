@@ -28,13 +28,6 @@
 		public function myIP(){
 			echo $this->input->ip_address();
 		}
-
-		public function getEncryptedText($text = 'This is My Name'){
-			$this->load->library('encrypt');
-			$cipher = $this->encrypt->encode($text);
-			echo $cipher . "</br>";
-			echo urlencode(str_replace("/", "_", $cipher));
-		}
 		
 	}
 

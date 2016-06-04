@@ -118,7 +118,7 @@ define("CD_AdvSearch", "Advanced Search");
 define("CD_AdvSearchSmall", "Search actors based on specific criteria.");
 define("CD_ModWaitingAct", "Awaiting Activation");
 define("CD_ModWaitingActMsg", "To use this feature, your account needs to be activated.</br> Please contact us at: <a href='mailto:connect@castiko.com'>connect@castiko.com</a> if this is wrong.");
-define("CD_InviteSuc", "Invitation successfully sent!");
+define("CD_InviteSuc", "Email / SMS sent successfully!");
 define("CD_InviteSucMsg", "Invitation has been sent to all the selected actors.");
 define("CD_InviteActMsg", "Invite actors to share their information with you. Just enter their emails or mobile numbers.");
 define('CD_SuggTxt', 'Please click the button below and follow the steps to share your details with us.');
