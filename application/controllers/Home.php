@@ -144,7 +144,7 @@ class Home extends CI_Controller {
 			$this->Auth->insertActorInProject($userdata['StashUsers_id'], $info[1]);
 	    	$this->Auth->insertActorInDirectorList($userdata['StashUsers_id'], $info[0]);
 		}
-		redirect(base_url() . "/actor/");
+		redirect(base_url() . "actor/");
 	}
 	
 	public function joinBySMS($value = ''){
