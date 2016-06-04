@@ -106,17 +106,17 @@
 				$encryptedText = str_replace("/", "_", $encryptedText);
 				$link = base_url() . "home/connect/" . urlencode($encryptedText);
 				$message = $this->defaultTemplete("Dear Actor, <br>".$msg, $link, "Connect", "");
-            	$message = preg_replace('~\\\r\\\n~',"<br>", $message);
-            	$this->email->clear();
-            	$this->email->set_newline("\n");
+		            	$message = preg_replace('~\\\r\\\n~',"<br>", $message);
+		            	$this->email->clear();
+		            	$this->email->set_newline("\n");
 				$this->email->from("no-reply@castiko.com", 'Castiko');
 				$this->email->reply_to("no-reply@castiko.com", 'Castiko');
 				$this->email->subject("{$sub} | Castiko");
-            	$this->to($mail);
-            	$this->email->message($message);
-            	if(!$this->email->send()){
-            		$failedEmails[] = $mail;
-            	}
+		            	$this->email->to($mail);
+		            	$this->email->message($message);
+		            	if(!$this->email->send()){
+		            		$failedEmails[] = $mail;
+		            	}
 			}
 			return $failedEmails;
 		}
@@ -129,17 +129,17 @@
 				$encryptedText = str_replace("/", "_", $encryptedText);
 				$link = base_url() . "home/join/" . urlencode($encryptedText);
 				$message = $this->defaultTemplete("Dear Actor, <br>".$msg, $link, "Accept Invitation", "");
-            	$message = preg_replace('~\\\r\\\n~',"<br>", $message);
-            	$this->email->clear();
-            	$this->email->set_newline("\n");
+		            	$message = preg_replace('~\\\r\\\n~',"<br>", $message);
+		            	$this->email->clear();
+		            	$this->email->set_newline("\n");
 				$this->email->from("no-reply@castiko.com", 'Castiko');
 				$this->email->reply_to("no-reply@castiko.com", 'Castiko');
 				$this->email->subject("{$sub} | Castiko");
-            	$this->to($mail);
-            	$this->email->message($message);
-            	if(!$this->email->send()){
-            		$failedEmails[] = $mail;
-            	}
+		            	$this->email->to($mail);
+		            	$this->email->message($message);
+		            	if(!$this->email->send()){
+		            		$failedEmails[] = $mail;
+		            	}
 			}
 			return $failedEmails;
 		}		
