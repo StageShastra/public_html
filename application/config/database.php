@@ -77,13 +77,8 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'root',
-<<<<<<< HEAD
 	'password' => '',
 	'database' => 'db_stash',
-=======
-	'password' => '1q2w3e4rA',
-	'database' => 'stage_stastra_beta',
->>>>>>> c0e17094409aeca495f5bbdf85bdb17be8a1519b
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => TRUE,

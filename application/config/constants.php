@@ -188,6 +188,32 @@ define("Aj_Login_Failed", "Email and Password don't match.");
 define("Aj_Login_Invalid", "This Email/Username doesn't Exist. Please Register first.");
 
 
+// Page Modeal: Email.php suffix: Em
+define('Em_ActMail_subject', 'Thank You for Signing Up | Confirmation Link | Castiko');
+define('Em_ActMail_msg', 'Dear user, <br>Welcome to Castiko! Click the button below to confirm your account.');
+
+define('Em_PassCode_subject', 'Password Reset Code | Castiko');
+
+
+define('Em_ResetSucc_subject', 'Password Reset Success | Castiko');
+define('Em_ResetSucc_msg', 'Dear User, <br>Your password has been reset. If you did not reset this password then file a complain at <a href=\'mailto:connect@castiko.com\'>connect@castiko.com</a> and reset you account password.');
+
+define('Em_Welcome_subject', "Welcome to Castiko | Castiko");
+define('Em_Welcome_msg_director', 'Welcome to Castiko. We have lots of exciting feature for Casting Directors.');
+define('Em_Welcome_msg_actor', 'Welcome to Castiko. We have lots of exciting feature for Actor.');
+
+define('Em_Reminder_subject', 'Reminder | Castiko');
+define('Em_Reminder_msg', "Dear User <br> You account seems inactive from a long time. You might be missing lot of audition invitation and excited feature of Castiko. <a href='http://castiko.com/'>Login</a> to your account and checkout what's new.");
+
+
+
+
+
+
+
+
+
+
 
 
 

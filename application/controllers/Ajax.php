@@ -84,10 +84,15 @@
 			}
 			$linkId = $this->ModelDirector->insertSMSInviteLink($projectID, $rand);
 			$link = "http://invite.castiko.com/{$rand}";
+
+			$mobiles = $this->csv2array($data['mobiles']);
+			$mobileIndirectorDB = $this->ModelDirector->getMobileFromDirectorDB();
+			$mobileNotInDB = array_diff($mobiles, $mobileIndirectorDB);
+			$filteredMobileNums = $this->getCSVList($mobileNotInDB);
 			
-			if($this->SMS->sendInvitaionSMS($data['msg'], $data['mobiles'], $link)){
+			if($this->SMS->sendInvitaionSMS($data['msg'], $filteredMobileNums, $link)){
 				$id = $this->ModelDirector->insertInvitationSMS($data);
-				$count = count(explode(",", $data['mobiles']));
+				$count = count($filteredMobileNums);
 				$this->ModelDirector->updateCountAudSMS($count, $id, "invite", "sms");
 				$this->response(true, "{$count} Invitation SMS sent");
 			}else{
@@ -107,12 +112,20 @@
 			$data['project_id'] = $projectID;
 			$emails = $this->csv2array($data['emails']);
 			//$csvEmail = "(" . $this->getCSVList($emails) . ")";
+			// Checking email in Castiko Registered Actor DB
 			$emailInDB = $this->ModelDirector->checkRegsiteredEmails($emails);
+
+			// Checking email in already added in Director DB
+			$emailInDirectorDB = $this->ModelDirector->getEmailFromDirectorDB();
+
+			// Getting Intersection of both above email list
+			$emailInDB = array_diff($emailInDB, $emailInDirectorDB);
 			$emailNotInDB = array_diff($emails, $emailInDB);
+
 			$mail = ['inDB' => $emailInDB, 'notInDB' => $emailNotInDB];
 			if($this->Email->sendInvitaionMail($data['msg'], $mail, $projectID, $data['subject'])){
 				$id = $this->ModelDirector->insertInvitationMail($data);
-				$count = count($emails);
+				$count = count($emailInDB) + count($emailNotInDB);
 				$this->ModelDirector->updateCountAudSMS($count, $id, "invite", "email");
 				$this->response(true, "{$count} Invitation Emails sent");
 			}else{
@@ -253,6 +266,10 @@
 					if($timeExp > time()){
 						if($this->Auth->updatePassword($userData['StashUsers_id'], $data['password'])){
 							$this->Auth->updatePassCodeUses($passCodeData['StashForgotPassword_id']);
+							// Sending a password reset Mail
+							$this->load->model("Email");
+							$this->Email->sendPasswordResetMail( $userData['StashUsers_email'], $this->input->ip_address() );
+
 							$this->response(true, Aj_ChangePass_Succ);
 						}else{
 							$this->response(false, Aj_ChangePass_Fail);
@@ -267,6 +284,8 @@
 				$this->response(false, Aj_ChangePass_Invalid);
 			}
 		}
+
+
 		public function forgotPassword($data = []){
 			$this->load->model("Auth");
 			$this->load->model("Email");
@@ -284,6 +303,8 @@
 				$this->response(false, Aj_FrgtPass_Invalid);
 			}
 		}
+
+		
 		public function userLogin($data = []){
 			$this->load->model("Auth");
 			if($this->Auth->ifUserExist($data['email'])){
