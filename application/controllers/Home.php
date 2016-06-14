@@ -4,6 +4,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Home extends CI_Controller {
 
 	public function index($value=''){
+		$this->landingpage();
+	}
+
+	public function landingpage($value=''){
+		$this->load->view("landingpage");
+	}
+
+	public function login($value=''){
 		if($this->session->userdata("StaSh_User_Logged_In"))
 			if($this->session->userdata("StaSh_User_type") == 'actor')
 				redirect(base_url() . "actor/");
