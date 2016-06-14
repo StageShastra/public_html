@@ -28,6 +28,10 @@
 		public function myIP(){
 			echo $this->input->ip_address();
 		}
+
+		public function password( $pass = '' ){
+			echo $pass = hash_hmac('sha512', $pass, $this->config->item("encryption_key"));
+		}
 		
 	}
 
