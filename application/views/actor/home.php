@@ -11,12 +11,7 @@
         $years = floor($diff / (365*60*60*24));
         return $years;
     }
-    $title_cd = "When you accept a casting director's invitation to join their database, their name will show up here. This means that they will see all the changes you make to your profile instantly.";
-    $title_exp = "Showing your video work is the best way to showcase your talent. If you don't have any video work to show yet, just record yourself acting out a favorite scene and put that here.";
-    $warning_cnf = "Please verify your email address so that casting directors can contact you easily. We've sent a link to your email.";
-    $warning_cnf .= "<br> If you have not received it, click <a href='#' class='text-info' id='resendConfirmationLink'>here</a> to resend the verification email.";
-    $title_verify = "Your mobile number is not verified. Please verify your mobile number to receive messages on your phone.";
-?>
+  ?>
     <body>
         <style>
           body{
