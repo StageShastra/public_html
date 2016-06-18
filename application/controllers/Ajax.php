@@ -139,6 +139,7 @@
 		}
 		public function advanceSearch($data = []){
 			$this->load->model("ModelDirector");
+			$actorsInDirectorList = $this->ModelDirector->getActorsIdWithDirectors($this->session->userdata("StaSh_User_id"));
 			// Santizing data
 			$minAge = $maxAge = $minHeight = $maxHeight = $sex = $skills = $projects = '';
 			if($data['agemin'] != ''){
@@ -176,7 +177,7 @@
 				$actor_names = trim($data['actor_names']);
 			}
 			
-			$actorsInDirectorList = $this->ModelDirector->getActorsIdWithDirectors($this->session->userdata("StaSh_User_id"));
+			
 			$diff = array_merge($filteredBySKills, $filteredByProjects);
 			//print_r($filteredByProjects);
 			if(count($diff) == 0)
