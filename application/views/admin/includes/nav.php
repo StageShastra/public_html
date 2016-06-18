@@ -42,6 +42,18 @@
                             <li class="<?= ($nav_sh == 'actors') ? 'active' : '' ?>"><a href="<?= base_url() . "admin/actors/" ?>">Actors</a></li>
                         </ul>
                     </li>
+                    <li class="<?= ($nav_h == 'admin') ? 'active' : '' ?>">
+                        <a href="#">
+                            <i class="fa fa-user-secret"></i> 
+                            <span class="nav-label">Admin</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse">
+                            <li class=""><a href="#">Profile</a></li>
+                            <li class=""><a href="#">All Admins</a></li>
+                            <li class=""><a href="#">Add Admin</a></li>
+                        </ul>
+                    </li>
                     <li class="">
                         <a href="<?= base_url() ?>admin/logout/">
                             <i class="fa fa-sign-out"></i> 

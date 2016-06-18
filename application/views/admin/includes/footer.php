@@ -7,6 +7,9 @@
 
         </div>
     </div>
+    <script type="text/javascript">
+        var base_url = '<?= base_url() ?>';
+    </script>
     <!-- Mainly scripts -->
     <script src="<?= ADMIN ?>/js/jquery-2.1.1.js"></script>
     <script src="<?= ADMIN ?>/js/bootstrap.min.js"></script>

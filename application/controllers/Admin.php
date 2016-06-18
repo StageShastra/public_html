@@ -131,6 +131,70 @@
 
 		}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		/*
+			Ajax Call: 
+				{
+					request: "TheRequest",
+					data: { key: "Value" }
+				}
+
+			Response:
+				{
+					status: true/false,
+					message: "message related to request process",
+					data: {key: "Value"}
+				}
+		*/
+
+		public function response($s = false, $m = null, $d = []){
+			header("Content-Type: application/json");
+			echo json_encode(array(
+							'status' => $s,
+							'message' => $m,
+							'data' => $d
+						));
+			exit();
+		}
+
+		public function ajax($value=''){
+			
+			if( !$this->session->userdata("CSTKO_Admin_login") )
+				$this->response(false, "You are not logged in.");
+
+			if(count($this->input->post())){
+				$req = trim($this->input->post("request"));
+				$data = json_decode($this->input->post("data"), true);
+
+				switch ($req) {
+					case '':
+						# code...
+						break;
+					
+					default:
+						# code...
+						break;
+				}
+
+			}else{
+				$this->response(false, "Form is empty.");
+			}
+
+		}
+
 	}
 
 ?>
