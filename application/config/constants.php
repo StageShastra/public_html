@@ -92,6 +92,8 @@ defined("JS") OR define("JS", ASSETS . "js");
 defined("IMG") OR define("IMG", ASSETS . "img");
 defined("CSS") OR define("CSS", ASSETS . "css");
 defined("FONTS") OR define("FONTS", ASSETS . "fonts");
+defined("ADMIN") OR define("ADMIN", ASSETS . "admin");
+
 
 /*
 	Custom Constants for all string used in website.
