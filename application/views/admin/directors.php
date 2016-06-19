@@ -69,7 +69,7 @@
                                     <td><?= $director['StashUsers_name']?></td>
                                     <td><?= $director['StashUsers_email']?></td>
                                     <td><?= $director['StashUsers_mobile']?></td>
-                                    <td><?= date("Y-m-d h:i a", (int)$director['StashUsers_time'])?></td>
+                                    <td><?= $this->ModelAdmin->timeElapsedString($director['StashUsers_time'])?></td>
                                     <td><?= $director['StashUsers_ip']?></td>
                                     <td><label class='label label-<?= ($director['StashUsers_status']) ? "primary" : "warning" ?>'><?= ($director['StashUsers_status']) ? "active" : "pending" ?></label></td>
                                     <td><label class='label label-<?= ($director['StashUsers_mobile_status']) ? "primary" : "warning" ?>'><?= ($director['StashUsers_mobile_status']) ? "verified" : "pending" ?></label></td>

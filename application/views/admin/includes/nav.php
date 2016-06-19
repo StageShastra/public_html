@@ -25,38 +25,63 @@
                             </a>
                         </div>
                     </li>
-                    <li class="special_link">
-                        <a href="#">
-                            <i class="fa fa-th-large"></i> 
-                            <span class="nav-label">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="<?= ($nav_h == 'users') ? 'active' : '' ?>">
-                        <a href="#">
-                            <i class="fa fa-users"></i> 
-                            <span class="nav-label">Users</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level collapse">
-                            <li class="<?= ($nav_sh == 'directors') ? 'active' : '' ?>"><a href="<?= base_url() . "admin/directors/" ?>">Casting Directors</a></li>
-                            <li class="<?= ($nav_sh == 'actors') ? 'active' : '' ?>"><a href="<?= base_url() . "admin/actors/" ?>">Actors</a></li>
-                        </ul>
-                    </li>
+                    <?php
+                        function getFaIcon($identifier = ''){
+                            $fa = "dashboard";
+                            if( $identifier == 'dashboard' )
+                                $fa = "dashboard";
+                            elseif( $identifier == 'users' )
+                                $fa = "users";
+                            elseif( $identifier == 'projects' )
+                                $fa = "briefcase";
+                            else
+                                $fa = "user-secret";
+                            return $fa;
+                        }
+
+                        $authPages = json_decode($adminDetail['CstkoAdmins_pages'], 1);
+                        foreach ($authPages as $key => $pages) {
+                            $splink = ($pages['identifier'] == "dashboard") ? "special_link" : "";
+                            $arrow = (count($pages['pages']))? "<span class='fa arrow'></span>" : "";
+                            $activeLi = ( $nav_h == $pages['identifier'] ) ? " active" : "";
+                            $fa = getFaIcon( $pages['identifier'] );
+                            $a = ($pages['identifier'] == "dashboard") ? base_url() . "admin/dashboard/" : "#";
+                            echo "<li class='{$splink} {$activeLi}'>
+                                    <a href='{$a}'>
+                                        <i class='fa fa-{$fa}'></i>
+                                        <span class='nav-label'>{$pages['name']}</span>
+                                        {$arrow}
+                                    </a>";
+                                    if(count($pages['pages'])){
+                                        echo "<ul class='nav nav-second-level'>";
+                                        foreach ($pages['pages'] as $key => $page) {
+                                            $activeN = ($nav_sh == $page['method']) ? " active" : "";
+                                            if($page['view'] == 0)
+                                                continue;
+                                            echo "<li class='{$activeN}'><a href='".base_url()."admin/{$page['method']}'> {$page['name']} </a></li>";
+                                        }
+                                        echo "</ul>";
+                                    }
+                                echo "</li>";
+                        }
+                    ?>
                     <li class="<?= ($nav_h == 'admin') ? 'active' : '' ?>">
                         <a href="#">
-                            <i class="fa fa-user-secret"></i> 
+                            <i class="fa fa-user-secret"></i>
                             <span class="nav-label">Admin</span>
                             <span class="fa arrow"></span>
                         </a>
-                        <ul class="nav nav-second-level collapse">
-                            <li class=""><a href="#">Profile</a></li>
-                            <li class=""><a href="#">All Admins</a></li>
-                            <li class=""><a href="#">Add Admin</a></li>
+                        <ul class="nav nav-second-level">
+                            <li><a href="<?= base_url() . "admin/profile/" . $adminDetail['CstkoAdmins_username'] ?>">Profile</a></li>
+                            <?php if($adminDetail['CstkoAdmins_auth'] == 1){ ?>
+                            <li><a href="<?= base_url() . "admin/admins" ?>">All Admins</a></li>
+                            <li><a href="<?= base_url() . "admin/addAdmin" ?>">Add Admin</a></li>
+                            <?php } ?>
                         </ul>
                     </li>
-                    <li class="">
-                        <a href="<?= base_url() ?>admin/logout/">
-                            <i class="fa fa-sign-out"></i> 
+                    <li>
+                        <a href="<? base_url() ?>home/logout">
+                            <i class="fa fa-sign-out"></i>
                             <span class="nav-label">Logout</span>
                         </a>
                     </li>

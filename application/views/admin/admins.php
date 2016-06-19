@@ -49,31 +49,31 @@
                                     <th data-toggle="true">#</th>
                                     <th>Id</th>
                                     <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Mobile</th>
-                                    <th>Registered</th>
-                                    <th>IP</th>
-                                    <th>Account</th>
-                                    <th>Mobile</th>
+                                    <th>Designation</th>
+                                    <th>Added By</th>
+                                    <th>Last Login</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                     
-                                    foreach($directors as $key => $director){
+                                    foreach($admins as $key => $admin){
                                 ?>
                                 <tr>
                                     <td><?= ++$key ?></td>
                                     <!-- <td class="client-avatar"> <a href="#"> <img src="#" height="64" width="64" > </a> </td> -->
-                                    <td> <a href="<?= base_url() ?>admin/director/<?= $director['StashUsers_id']?>"><?= sprintf("%05d", $director['StashUsers_id'])  ?></a></td>
-                                    <td><?= $director['StashUsers_name']?></td>
-                                    <td><?= $director['StashUsers_email']?></td>
-                                    <td><?= $director['StashUsers_mobile']?></td>
-                                    <td><?= date("Y-m-d h:i a", (int)$director['StashUsers_time'])?></td>
-                                    <td><?= $director['StashUsers_ip']?></td>
-                                    <td><label class='label label-<?= ($director['StashUsers_status']) ? "primary" : "warning" ?>'><?= ($director['StashUsers_status']) ? "active" : "pending" ?></label></td>
-                                    <td><label class='label label-<?= ($director['StashUsers_mobile_status']) ? "primary" : "warning" ?>'><?= ($director['StashUsers_mobile_status']) ? "verified" : "pending" ?></label></td>
-                                    <td></td>
+                                    <td> <a href="<?= base_url() ?>admin/profile/<?= $admin['CstkoAdmins_username']?>"><?= sprintf("%05d", $admin['CstkoAdmins_id'])  ?></a></td>
+                                    <td><?= $admin['CstkoAdmins_name']?></td>
+                                    <td><?= $admin['CstkoAdmins_designation']?></td>
+                                    <td><a href="<?= base_url() ?>admin/profile/<?= $admin['AddedBy'] ?>" title="<?= $admin['AddedByName'] ?>"><?= $admin['AddedBy'] ?></a></td>
+                                    <td><?= $this->ModelAdmin->timeElapsedString($admin['CstkoAdmins_last_login']) ?></td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <!-- <button class="btn-warning btn btn-xs">View</button> -->
+                                            <button class="btn-danger btn btn-xs">Block</button>
+                                        </div>
+                                    </td>
                                 </tr>
 
                                 <?php } ?>

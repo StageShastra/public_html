@@ -40,10 +40,10 @@
                             <p><i class="fa fa-mobile"></i>  <?= $profile['StashDirector_mobile'] ?></p>
                             <p><i class="fa fa-envelope"></i>  <?= $profile['StashDirector_email'] ?></p>
 
-                            <p><b>Registered On: </b><i class="fa fa-clock-o"> <?= date('Y-m-d h:i a', $profile['StashUsers_time'])?></i> </p>
+                            <p><b>Registered On: </b><i class="fa fa-clock-o"> <?= $this->ModelAdmin->timeElapsedString($profile['StashUsers_time'])?></i> </p>
                             
-                            <p><b>Last Profile Update: </b><i class="fa fa-clock-o"> <?= date('Y-m-d h:i a', $profile['StashDirector_last_update'])?></i> </p>
-                            <p><b>Last Login: </b><i class="fa fa-clock-o"> <?= date('Y-m-d h:i a', end($lastLogin)['StashLogins_time'] )?></i> </p>
+                            <p><b>Last Profile Update: </b><i class="fa fa-clock-o"> <?= $this->ModelAdmin->timeElapsedString($profile['StashDirector_last_update'])?></i> </p>
+                            <p><b>Last Login: </b><i class="fa fa-clock-o"> <?= $this->ModelAdmin->timeElapsedString(end($lastLogin)['StashLogins_time'] )?></i> </p>
                             <p><b>Last Login IP : </b><?= end($lastLogin)['StashLogins_ip']  ?></i> </p>
                             <p><b>Email Confirmation: </b> <span class='label label-<?= ($profile['StashUsers_status']) ? 'success' : 'warning' ?>'><?= ($profile['StashUsers_status']) ? 'Active' : 'Pending' ?></span> </p>
                             <p><b>Mobile Confirmation: </b> <span class='label label-<?= ($profile['StashUsers_mobile_status']) ? 'success' : 'warning' ?>'><?= ($profile['StashUsers_mobile_status']) ? 'Verified' : 'Pending' ?></span> </p>
@@ -76,8 +76,8 @@
                     	<div>
                     		<p><b>Actors in List: </b> <?= $actors['count'] ?> <a href="#actorsInList">show</a></p>
                     		<p><b>Projects: </b> <?= $projects['count'] ?> <a href="#cdProjects">show</a></p>
-                    		<p><b>Invitation Sent: </b> <i class="fa fa-comment"></i> 100, <i class="fa fa-envelope"></i> 100 </p>
-                    		<p><b>Message Sent: </b> <i class="fa fa-comment"></i> 100, <i class="fa fa-envelope"></i> 100 </p>
+                    		<p><b>Invitation Sent: </b> <i class="fa fa-comment"></i> <a href="#" title="View All SMSs"><?= $invitation['sms'] ?></a>, <i class="fa fa-envelope"></i> <a href="#" title="View All Emails"><?= $invitation['email'] ?></a> </p>
+                    		<p><b>Message Sent: </b> <i class="fa fa-comment"></i> <a href="#" title="View All SMS"><?= $messages['sms'] ?></a>, <i class="fa fa-envelope"></i> <a href="#" title="View All SMS"><?= $messages['email'] ?></a> </p>
                     		<!-- <p><b>Pin: </b> <?= $address['pin']?></p> -->
                     	</div>
                     </div>
@@ -104,7 +104,7 @@
                                     ?>
                                     <tr>
                                         <td><?= ++$key ?></td>
-                                        <td><?= date("Y-m-d h:i a", (int)$login['StashLogins_time'])?></td>
+                                        <td><?= $this->ModelAdmin->timeElapsedString($login['StashLogins_time'])?></td>
                                         <td><?= $login['StashLogins_ip'] ?></td>
                                     </tr>
 
@@ -215,7 +215,7 @@
                                         <td><?= $actor['StashActor_name']?></td>
                                         <td><?= $actor['StashActor_email']?></td>
                                         <td><?= $actor['StashActor_mobile']?></td>
-                                        <td><?= date("Y-m-d h:i a", (int)$actor['StashDirectorActorLink_time'])?></td>
+                                        <td><?= $this->ModelAdmin->timeElapsedString($actor['StashDirectorActorLink_time'])?></td>
                                         <td><label class='label label-<?= ($actor['StashDirectorActorLink_status']) ? "primary" : "warning" ?>'><?= ($actor['StashDirectorActorLink_status']) ? "In List" : "Removed" ?></label></td>
                                         
                                     </tr>
@@ -257,10 +257,10 @@
                                         <td><?= ++$key ?></td>
                                         <td> <a href="#"><?= sprintf("%05d", $project['StashProject_id'])  ?></a></td>
                                         <td><?= $project['StashProject_name']?></td>
-                                        <td><?= date("Y-m-d h:i a", (int)$project['StashProject_date'])?></td>
+                                        <td><?= $this->ModelAdmin->timeElapsedString($project['StashProject_date'])?></td>
                                         <td><?= $project['StashProject_tag']?></td>
                                         <td><?= count($list['actors'])?></td>
-                                        <td><?= date("Y-m-d h:i a", (int)$project['StashProject_time'])?></td>
+                                        <td><?= $this->ModelAdmin->timeElapsedString($project['StashProject_time'])?></td>
                                         <td><label class='label label-<?= ($project['StashProject_status']) ? "primary" : "warning" ?>'><?= ($project['StashProject_status']) ? "Active" : "Over" ?></label></td>
                                         
                                     </tr>
