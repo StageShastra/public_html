@@ -306,6 +306,19 @@
 			$this->load->view("admin/sendMail", $pageInfo);
 		}
 
+		public function invitation($page = 'email', $ref = 0){
+			if( $page == '' || $ref == 0)
+				$this->load->view("admin/404", $pageInfo);
+
+			if($page == 'email')
+				$invites = $this->ModelAdmin->allEmailInvitations( $ref );
+			else
+				$invites = $this->ModelAdmin->allSMSInvitations( $ref );
+
+			$pageInfo['invites'] = $invites;
+			$this->load->view("admin/invitation", $pageInfo);
+		}
+
 
 
 

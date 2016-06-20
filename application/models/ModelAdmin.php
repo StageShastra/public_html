@@ -236,6 +236,16 @@
 			return $count;
 		}
 
+		public function allEmailInvitations($ref = 0){
+			$this->db->where("StashEmailInvite_director_id_ref", $ref);
+			return $this->db->get("stash-email-invitation")->result("array");
+		}
+
+		public function allSMSInvitations($ref = 0){
+			$this->db->where("StashSMSInvite_director_id_ref", $ref);
+			return $this->db->get("stash-sms-invitation")->result("array");
+		}
+
 	}
 
 ?>
