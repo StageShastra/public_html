@@ -17,6 +17,7 @@
     <!-- Custom CSS -->
     <link href="<?= CSS ?>/landingpage.css" rel="stylesheet">
 
+
     <!-- Custom Fonts -->
     <link href="<?= CSS ?>/font-awesome.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -49,29 +50,40 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#page-top">C A S T I K O</a>
+                <a class="navbar-brand" href="<?= base_url() ?>">
+                            <img src="<?= IMG ?>/logo.png" class="brands "/>
+                            <span class="vertical-middle brandname title">
+                                <?= M_Title ?>
+                            </span><p>
+                            <span id="tag-line" class="firstcolor info-small">
+                            Making Casting easier!                            </span>
+                </a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right ul_list">
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#forActor">For Actor</a>
+                        <a href="#forActor">For Actors</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#forDirector">For Casting Director</a>
+                        <a href="#forDirector">For Casting Directors</a>
                     </li>
-                    <li class="page-scroll">
+                   <!-- <li class="page-scroll">
                         <a href="#about">Video</a>
                     </li>
                     <li class="page-scroll">
                         <a href="#contact">FAQ</a>
                     </li>
+                    -->
                     <li class="page-scroll">
                         <a href="#contact">Contact</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a data-target="#loginModal" data-toggle="modal">Login</a>
                     </li>
                 </ul>
             </div>
@@ -84,16 +96,24 @@
     <header>
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <div class="intro-text">
                         <span class="name">Making casting easier.</span>
-                        <span class="skills">Castiko makes it easier for actors and casting directors to work together.</span>
+                        <span class="skills">Castiko makes it easier for actors and<br> casting directors to work together.</span>
                         <div><a href="<?= base_url() . "home/login" ?>" class="btn btn-custom">I'm an Actor</a>
                         <a href="<?= base_url() . "home/login" ?>" class="btn btn-custom">I'm a Casting Director</a></div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <img src="">
+                <div class="col-md-4 col-xs-12" style="text-align:center;">
+                    <div class="col-sm-3 col-xs-4">
+                        <img src="<?= IMG ?>/camera.png" class="header_icons">
+                    </div>
+                    <div class="col-sm-3 col-xs-4">
+                        <img src="<?= IMG ?>/roll.png" class="header_icons">
+                    </div>
+                    <div class="col-sm-3 col-xs-4">
+                        <img src="<?= IMG ?>/film.png" class="header_icons">
+                    </div>
                 </div>
             </div>
         </div>
@@ -118,11 +138,13 @@
                         <span class="info-item-desc">Casting Directors are updated instantly when you add new work.</span>
                     </div>
                     <div>
-                        <a href="<?= base_url() . "home/login" ?>" class="btn btn-custom-outlined">Sign up now</a>
+                        <a href="<?= base_url() . "home/login" ?>" class="btn btn-custom-outlined"  onmouseover='show_time_taken("a")' onmouseout='hide_time_taken("a")'>Sign up now</a>
                         <a href="#" class="btn btn-custom-outlined">See Pricing</a>
                     </div>
+                    <div id="time_taken_a" class="time_taken hidden">Just takes 2 mins</div>
                 </div>
                 <div class="col-md-6">
+                    <img src="<?= IMG ?>/macbook.png" class="animation-element slide-right img-responsive" >
                 </div>
             </div>
         </div>
@@ -133,6 +155,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
+                    <img src="<?= IMG ?>/macbook.png" class="animation-element slide-left  img-responsive" >
                 </div>
                 <div class="col-md-6">
                     <h3>For Casting Directors</h3>
@@ -149,8 +172,9 @@
                         <span class="info-item-desc">Track responses, attendance and shortlists with ease.</span>
                     </div>
                     <div>
-                        <a href="<?= base_url() . "home/login" ?>" class="btn btn-custom-outlined">Sign up now</a>
+                        <span  onmouseover='show_time_taken("cd")' onmouseout='hide_time_taken("cd")'><a href="<?= base_url() . "home/login" ?>" class="btn btn-custom-outlined" >Sign up now</a></span>
                         <a href="#" class="btn btn-custom-outlined">See Pricing</a>
+                        <div id="time_taken_cd" class="time_taken hidden">Just takes 2 mins</div>
                     </div>
                 </div>
             </div>
@@ -158,17 +182,17 @@
     </section>
 
     <!-- About Section -->
-    <section class="success" id="about">
+    <!--<section class="success" id="about">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Meet the Product</h2>
-                    <hr class="star-light">
+                    <hr style="width:25%;">
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
-                    <!-- 16:9 aspect ratio -->
+                    
                     <div class="embed-responsive embed-responsive-16by9">
                       <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/mk48xRzuNvA" frameborder="0" allowfullscreen></iframe>
                     </div>
@@ -179,13 +203,19 @@
             </div>
         </div>
     </section>
+-->
 
     <!-- Contact Section -->
     <section id="contact">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Contact</h2>
+                    <h2>Say, Ola!</h2>
+                    <div style="text-align:center;">
+                                Its good to see you here!<br>
+                            Want to say Hi ? Have some feedback?<br>
+                        Leave a message and We promise to get back to you!
+                    </div>
                     <hr class="star-primary">
                 </div>
             </div>
@@ -218,7 +248,7 @@
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Message</label>
-                                <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                                <textarea rows="3" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -240,30 +270,30 @@
         <div class="footer-above">
             <div class="container">
                 <div class="row">
-                    <div class="footer-col col-md-4">
-                        <h3>Location</h3>
-                        <p>C-411, Kailash Business Park<br>Vikhroli(West) 400079</p>
+                    <div class="footer-col col-md-3 col-xs-12">
+                        <spn style="color:white; font-size:20px;">C A S T I K O </span><br>
+                        <h4><span class="glyphicon glyphicon-map-marker"><span style="font-family:Raleway;font-size:13px;"><br>C-411, Kailash Business Park<br>Vikhroli(West) 400079</span></span></h4>
+                       
                     </div>
-                    <div class="footer-col col-md-4">
-                        <h3>Around the Web</h3>
-                        <ul class="list-inline">
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
-                            </li>
-                        </ul>
+                    <div class="footer-col col-md-5 col-xs-12">
+                        <div class="col-md-6 col-xs-5">
+                            <ul style="list-style-type:none;margin-top:15px; text-align:left;">
+                                <li class="footer-items"><i class="fa fa-inr" aria-hidden="true" style="font-size:12px;width:12px;"></i><a href="#"><span style="font-family:Raleway;font-size:13px;margin-left:5px;">Pricing</span></a></li>
+                                <li class="footer-items"><i class="fa fa-user-plus" aria-hidden="true" style="font-size:12px;width:12px;"></i><a href="#"><span style="font-family:Raleway;font-size:13px;margin-left:5px;">Sign Up</span></a></li>
+                                <li class="footer-items"><i class="fa fa-pencil" aria-hidden="true" style="font-size:12px;width:12px;"></i><a href="#"><span style="font-family:Raleway;font-size:13px;margin-left:5px;">Write to Us!</span></a></li>
+                            <ul>
+                        </div>
+                        <div class="col-md-6 col-xs-7">
+                            <ul style="list-style-type:none;margin-top:15px; text-align:left;">
+                                <li class="footer-items"><i class="fa fa-phone" aria-hidden="true" style="font-size:12px;width:12px;"></i><a href="#"><span style="font-family:Raleway;font-size:13px;margin-left:5px;">9911992211</span></a></li>
+                                <li class="footer-items"><i class="fa fa-envelope" aria-hidden="true" style="font-size:12px;width:12px;"></i><a href="#"><span style="font-family:Raleway;font-size:13px;margin-left:5px;">connect@castiko.com</span></a></li>
+                                <li class="footer-items"><i class="fa fa-map-marker" aria-hidden="true" style="font-size:12px;width:12px;"></i><a href="#"><span style="font-family:Raleway;font-size:13px;margin-left:5px;">Mumbai</span></a></li>
+                            <ul>
+                        </div>
                     </div>
-                    <div class="footer-col col-md-4">
-                        <h3>About Castiko</h3>
-                        <p>Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus </p>
+                    <div class="footer-col col-md-4 col-xs-12">
+                        <span style="font-size:16px;">About Castiko</span>
+                        <h5 style="font-family:Raleway;font-size:13px;">Casting Directors use Castiko to manage their data and stay in touch with the actors.</h5>
                     </div>
                 </div>
             </div>
@@ -278,13 +308,83 @@
             </div>
         </div>
     </footer>
+    <!-- Modal -->
+    <div id="loginModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
 
-    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-    <div class="scroll-top page-scroll visible-xs visible-sm">
-        <a class="btn btn-primary" href="#page-top">
-            <i class="fa fa-chevron-up"></i>
-        </a>
+        <!-- Modal content-->
+        <div class="modal-content col-lg-8 center"  style="padding:0px;">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Login</h4>
+          </div>
+          <div class="modal-body">
+            <ul class="nav nav-tabs">
+              <li class="tabs-left active"><a data-toggle="tab" href="#home">Actors</a></li>
+              <li class="tabs-right"><a data-toggle="tab" href="#menu1">Casting Directors</a></li>
+            </ul>
+
+            <div class="tab-content">
+              <div id="home" class="tab-pane fade in active">
+                <p class="login_form">
+                  <font class="info dark-gray center"> Log In | </font><a href="<?= base_url() ?>home/register/director"><font class="info firstcolor center"> Sign Up! </a></font>
+                      <form role="form" id="login-form" class="login-forms" method="post" >
+                        <b><p class="text-danger" id="login-error-director"></p></b>
+                      <div class="form-group col-lg-8 col-md-6 col-xs-12 center">
+                        <input type="email" class="form-control login " id="username" name="email" placeholder= "Email" required oninvalid="this.setCustomValidity('You appear to have entered an invalid email. Please try again.')" />
+                      </div>
+                      <div class="form-group col-lg-8 col-md-6 col-xs-12 center">
+                        <input type="password" class="form-control login " id="password" name="password" placeholder= "Password" required />
+                        <input type="hidden" name="type" value="director">
+                      </div>
+                      <div class="checkbox-circle">
+                        <a href="<?= base_url() ?>home/forgotpassword/" class="pull-right" style="color:blue;font-weight: 800;"><small>Forgot Password?</small></a>
+                      </div><br>
+                      <center><button type="submit" class="btn submit-btn firstcolor center" id="btn-login" ><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign In</button></center>
+                      <div class="alert alert-danger margin-top hidden" id="error-alert">
+                       <button type="button" class="close" data-dismiss="alert">x</button>
+                        <strong>Error! </strong>
+                         Please enter a valid Username and Password
+                      </div>
+                    </form>
+                </p>
+              </div>
+              <div id="menu1" class="tab-pane fade">
+                <p class="login_form">
+                <font class="info dark-gray  center"> Log In | <a href="<?= base_url() ?>home/register/actor"><font class="info firstcolor center"> Sign Up! </a></font></font>
+                    <form role="form" id="actor_login-form" class="login-forms" method="post" >
+                    <b><p class="text-danger" id="login-error-actor"></p></b>
+                    <div class="form-group col-lg-8 col-md-6 col-xs-12 center">
+                      <input type="email" class="form-control login" id="email" name="email" placeholder= "Email" required oninvalid="this.setCustomValidity('You appear to have entered an invalid email. Please try again.')" />
+                    </div>
+                    <div class="form-group col-lg-8 col-md-6 col-xs-12 center">
+                      <input type="password" class="form-control login" id="actor_password" name="password" placeholder= "Password" required />
+                      <input type="hidden" name="type" value="actor">
+                    </div>
+                    <div class="checkbox-circle">
+                        <a href="<?= base_url() ?>home/forgotpassword/" class="pull-right" style="color:blue;font-weight: 800;"><small>Forgot Password?</small></a>
+                    </div><br>
+                    <center>
+                        <button type="submit" class="btn submit-btn firstcolor center" id="btn-login" ><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign In</button>
+                    </center>
+                    <div class="alert alert-danger margin-top hidden" id="error-alert">
+                      <button type="button" class="close" data-dismiss="alert">x</button>
+                      <strong>Error! </strong>
+                       Please enter a valid Username and Password
+                    </div>
+                  </form>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
     </div>
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+   
 
     <script src="<?= JS ?>/vendor/jquery-1.11.2.min.js"></script>
     <script src="<?= JS ?>/vendor/bootstrap.min.js"></script>

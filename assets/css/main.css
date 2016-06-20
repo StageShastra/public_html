@@ -191,12 +191,12 @@ input[type=checkbox].css-checkbox {
 /* home css */
 .brands{
 	float: left;
-	width: 75px;
-	height: 75px;
-    margin-top:auto;
-    margin-bottom: auto;
-    margin-left: 5px;
-    margin-right: 10px;
+	width: 60px;
+	/* height: 75px; */
+	margin-top:auto;
+	margin-bottom: auto;
+	margin-left: 5px;
+	margin-right: 10px;
 }
 
 .navbar-fixed-top {
@@ -221,8 +221,8 @@ input[type=checkbox].css-checkbox {
 .custom-navbar{
 	background: none;
 	background-color: #fff;
-	padding-top: 20px;
-	padding-bottom:20px; 
+	/* padding-top: 20px; */
+	/* padding-bottom:20px; */
 	margin-bottom: 30px;
 }
 .navbar-header{
@@ -241,7 +241,7 @@ input[type=checkbox].css-checkbox {
 }
 .vertical-middle{
 	position: relative;
-    top: 25px
+	top: 13px;
 }
 .brandname{
 	font-size: 25px;
