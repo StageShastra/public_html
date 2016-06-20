@@ -89,6 +89,7 @@
 			$mobileIndirectorDB = $this->ModelDirector->getMobileFromDirectorDB();
 			$mobileNotInDB = array_diff($mobiles, $mobileIndirectorDB);
 			$filteredMobileNums = $this->getCSVList($mobileNotInDB);
+			$data['mobiles'] = $filteredMobileNums;
 			
 			if($this->SMS->sendInvitaionSMS($data['msg'], $filteredMobileNums, $link)){
 				$id = $this->ModelDirector->insertInvitationSMS($data);

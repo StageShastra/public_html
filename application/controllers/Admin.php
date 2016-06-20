@@ -144,6 +144,8 @@
 
 		}
 
+		/* Admin Block Start */
+
 		public function admins($value=''){
 			$pageInfo['nav_h'] = "admin";
 			$pageInfo['nav_sh'] = "alladmin";
@@ -222,6 +224,86 @@
 			$pageInfo['nav_sh'] = "addAdmin";
 			$pageInfo['adminPages'] = $this->adminPages;
 			$this->load->view("admin/addAdmin", $pageInfo);
+		}
+
+		/* Admin Block End */
+
+		public function sendMail($email = 'connect@castiko.com'){
+			$pageInfo = array("error" => false, 'error_msg' => null, 'success' => "text-danger");
+			$pageInfo['nav_h'] = "dashboard";
+			$pageInfo['nav_sh'] = "dashboard";
+			$pageInfo['email'] = urldecode($email);
+			if( count($this->input->post()) ){
+				$pageInfo['error'] = true;
+
+				$config = array(
+		                array(
+		                    'field' =>'to',
+		                    'label' =>'Receiver Email',
+		                    'rules' => 'required'
+		                ),
+		                array(
+		                    'field' =>'subject',
+		                    'label' =>'Subject',
+		                    'rules' => 'required'
+		                ),
+		                array(
+		                    'field' =>'message',
+		                    'label' =>'Message',
+		                    'rules' => 'required'
+		                ),
+					);
+
+				$this->load->library('form_validation');
+		    	$this->form_validation->set_rules($config);
+
+		    	if($this->form_validation->run()){
+		    		$this->load->model("Email");//sendAdminPanelMail
+					$data = [];
+					if(trim($this->input->post('to')) != ''){
+						$to = explode(",", $this->input->post('to'));
+						if( count($to) > 1 ){
+							foreach ($to as $key => $mail) {
+								$data['to'][] = trim($mail);
+							}
+						}else{
+							$data['to'] = trim($this->input->post('to'));
+						}
+
+						$pageInfo['email'] = $this->input->post('to');
+					}
+
+					$cc = explode(",", $this->input->post('cc'));
+					if( count($cc) > 1 ){
+						foreach ($cc as $key => $mail) {
+							$data['cc'][] = trim($mail);
+						}
+					}else{
+						$data['cc'] = trim($this->input->post('cc'));
+					}
+
+					$bcc = explode(",", $this->input->post('bcc'));
+					if( count($bcc) > 1 ){
+						foreach ($bcc as $key => $mail) {
+							$data['bcc'][] = trim($mail);
+						}
+					}else{
+						$data['bcc'] = trim($this->input->post('bcc'));
+					}
+
+					$data['subject'] = $this->input->post('subject');
+					$data['message'] = $this->input->post('message');
+
+					if( $this->Email->sendAdminPanelMail( $data ) ){
+						$pageInfo['error_msg'] = "Email Sent!";
+						$pageInfo['success'] = "text-success";
+					}else{
+						$pageInfo['error_msg'] = "Email Failed!!!";
+					}
+		    	}
+
+			}
+			$this->load->view("admin/sendMail", $pageInfo);
 		}
 
 

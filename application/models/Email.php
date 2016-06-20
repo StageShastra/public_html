@@ -234,12 +234,36 @@
 			$this->email->from("no-reply@castiko.com", 'Castiko');
 			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
 			$this->email->to("connect@castiko.com");
-			$this->email->bcc($emails)
+			$this->email->bcc($emails);
 			$this->email->subject(Em_Reminder_subject);
 
 			$msg = Em_Reminder_msg;
 			
 			$message = $this->defaultTemplete($msg);
+			$this->email->message($message);
+			if($this->email->send()){
+				return true;
+			}else{
+				// for Developer Only
+				//echo $this->email->print_debugger();
+				return false;
+			}
+		}
+
+		public function sendAdminPanelMail($data = []){
+			$this->load->library('email', $this->config());
+			$this->email->set_newline("\n");
+			$this->email->from("no-reply@castiko.com", 'Castiko');
+			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
+			$this->email->to( $data['to'] );
+			if(!empty($data['cc']))
+				$this->email->cc($data['cc']);
+			if(!empty($data['bcc']))
+				$this->email->cc($data['bcc']);
+			$this->email->subject($data['subject']);
+
+			$message = $this->defaultTemplete($data['message']);
+			
 			$this->email->message($message);
 			if($this->email->send()){
 				return true;
