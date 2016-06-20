@@ -1,8 +1,8 @@
 $(document).ready(function(){
 	
 	//For Main Sevrer
-	var url = "/Castiko/ajax/",
-		base = "/Castiko/";
+	var url = "/public_html/ajax/",
+		base = "/public_html/";
 		
 	//For Localhost
 	/*var url = "/public_html/beta/ajax/",
@@ -847,7 +847,7 @@ $(document).ready(function(){
 	});
 	
 	$(".projectName").autocomplete({
-		source: base + "home/autoComplete/",
+		source: "/home/autoComplete/",
 		minLenght: 2,
 		select: function(ev, ui){
 			console.log(ui);

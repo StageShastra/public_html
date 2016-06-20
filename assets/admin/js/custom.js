@@ -139,6 +139,7 @@ $(document).ready(function(){
 		return true;
 	});
 
+
 	$(document).on("click", ".sendMail", function(){
 		message = $(".summernote").code();
 		$(".summernote").destroy();

@@ -226,6 +226,7 @@
 			$this->load->view("admin/addAdmin", $pageInfo);
 		}
 
+
 		/* Admin Block End */
 
 		public function sendMail($email = 'connect@castiko.com'){
@@ -318,6 +319,7 @@
 			$pageInfo['invites'] = $invites;
 			$this->load->view("admin/invitation", $pageInfo);
 		}
+
 
 
 

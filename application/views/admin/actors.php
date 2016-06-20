@@ -43,7 +43,11 @@
                         </div>
                     </div>
                     <div class="table-responsive">
+<<<<<<< HEAD
                         <table class="footable table table-stripped toggle-arrow-tiny" id="tableData" data-page-size='10'>
+=======
+                        <table class="footable table table-stripped toggle-arrow-tiny" id="tableData" data-page-size='20'>
+>>>>>>> master
                             <thead>
                                 <tr>
                                     <th data-toggle="true">#</th>
@@ -78,6 +82,7 @@
 
         						<?php } ?>
         					</tbody>
+<<<<<<< HEAD
                             <tfoot class="hide-if-no-paging">
                                 <tr>
                                     <td colspan="10">
@@ -85,6 +90,8 @@
                                     </td>
                                 </tr>
                             </tfoot>
+=======
+>>>>>>> master
                         </table>
                     </div>
 

@@ -52,6 +52,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <a href="<?= base_url() ?>admin/sendMail/<?= urlencode($profile['StashDirector_email']) ?>/" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> Send Message</a>
+
                                     </div>
                                     <!-- IF Have Permission. -->
                                     <!-- <div class="col-md-6">
