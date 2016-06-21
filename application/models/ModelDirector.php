@@ -249,7 +249,7 @@
 			return $this->db->insert_id();
 		}*/
 
-		public function insertInvitationMail( $e = '', $m = 0, $p = 0, $t = 'invite' ){
+		public function insertInvitationMail( $e = '', $m = 0, $p = 0, $t = 'invite', $l = '' ){
 			$d = array(
 						'StashEmailInvite_id' => null,
 						'StashEmailInvite_director_id_ref' => $this->session->userdata("StaSh_User_id"),
@@ -257,6 +257,7 @@
 						'StashEmailInvite_msg_id_ref' => $m,
 						'StashEmailInvite_project_id_ref' => $p,
 						'StashEmailInvite_time' => time(),
+						'StashEmailInvite_link' => $l,
 						'StashEmailInvite_type' => $t,
 						'StashEmailInvite_status' => 0,
 						'StashEmailInvite_opened' => 0
@@ -397,9 +398,16 @@
 		
 		public function checkRandLink($link = ''){
 			$this->db->where("StashSMSInvites_link", $link);
+			$query = $this->db->get("stash-email-invites");
+			return $query->num_rows();
+		}
+
+		public function checkEmailRandLink($link = ''){
+			$this->db->where("StashEmailInvite_link", $link);
 			$query = $this->db->get("stash-sms-invites");
 			return $query->num_rows();
 		}
+
 		public function checkRegsiteredEmails($emails = []){
 			$this->db->where_in("StashUsers_email", $emails);
 			$query = $this->db->get("stash-users");

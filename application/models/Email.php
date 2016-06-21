@@ -101,10 +101,10 @@
 				return false;
 			}
 		}
-		public function sendInvitationToInDB($msg = '', $to = '', $project = 0, $sub = "Connect to Casting Director"){
+		public function sendInvitationToInDB($msg = '', $to = '', $project = 0, $sub = "Connect to Casting Director", $rand = ''){
 			$this->load->library('email', $this->config());
 			$failedEmails = [];
-			$plainText = json_encode(array($this->session->userdata("StaSh_User_id"), $project, time(), $to));
+			$plainText = json_encode(array($this->session->userdata("StaSh_User_id"), $project, time(), $to, $rand));
 			$encryptedText = $this->getEncryptedText($plainText);
 			$encryptedText = str_replace("/", "_", $encryptedText);
 			$link = base_url() . "home/connect/" . urlencode($encryptedText);
@@ -122,10 +122,10 @@
 			}
 			return true;
 		}
-		public function sendInvitationToNotInDB($msg = '', $to = '', $project = 0, $sub = "Invitation "){
+		public function sendInvitationToNotInDB($msg = '', $to = '', $project = 0, $sub = "Invitation ", $rand = ''){
 			$this->load->library('email', $this->config());
 			$failedEmails = [];
-			$plainText = json_encode(array($this->session->userdata("StaSh_User_id"), $project, time(), $to));
+			$plainText = json_encode(array($this->session->userdata("StaSh_User_id"), $project, time(), $to, $rand));
 			$encryptedText = $this->getEncryptedText($plainText);
 			$encryptedText = str_replace("/", "_", $encryptedText);
 			$link = base_url() . "home/join/" . urlencode($encryptedText);

@@ -160,26 +160,34 @@
 			$sent = $fail = 0;
 
 			foreach ($emailFresh as $key => $fe) {
-				$failed = $this->Email->sendInvitationToNotInDB( $data['msg'], $fe, $projectID );
+				$rand = substr(base64_encode(md5(microtime() . $fe . microtime())), 0, 8);
+				while($this->ModelDirector->checkEmailRandLink($rand))
+					$rand = substr(base64_encode(md5(microtime() . $fe . microtime())), 0, 8);
+
+				$failed = $this->Email->sendInvitationToNotInDB( $data['msg'], $fe, $projectID, $rand );
 				if( $failed !== true ){
 					// Sending Mail Failed. do something here.
 					$failedEmailFresh[] = $failed;
 					$fail++;
 				}else{
 					$sent++;
-					$this->ModelDirector->insertInvitationMail( $fe, $msgId, $projectID, 'invite' );
+					$this->ModelDirector->insertInvitationMail( $fe, $msgId, $projectID, 'invite', $rand );
 				}
 			}
 
 			// Sending Connect Mail to already registered Email.
 			foreach ($emailInMainDB as $key => $fe) {
-				$failed = $this->Email->sendInvitationToInDB( $data['msg'], $fe, $projectID );
+				$rand = substr(base64_encode(md5(microtime() . $fe . microtime())), 0, 8);
+				while($this->ModelDirector->checkEmailRandLink($rand))
+					$rand = substr(base64_encode(md5(microtime() . $fe . microtime())), 0, 8);
+
+				$failed = $this->Email->sendInvitationToInDB( $data['msg'], $fe, $projectID, $rand );
 				if( $failed !== true ){
 					// Sending Mail Failed. do something here.
 					$failedEmailConnect[] = $failed;
 					$fail++;
 				}else{
-					$this->ModelDirector->insertInvitationMail( $fe, $msgId, $projectID, 'connect' );
+					$this->ModelDirector->insertInvitationMail( $fe, $msgId, $projectID, 'connect', $rand );
 					$sent++;
 				}
 			}

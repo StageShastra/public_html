@@ -23,23 +23,26 @@
                         <input type="text" class="form-control login" id="fullname" name="name" placeholder= "Full Name *" required>
                       </div>
                       <div class="form-group">
-                        <input type="email" class="form-control login" id="email" name="email" placeholder= "Email *" required >
+                        <input type="email" class="form-control login" id="email" name="email" placeholder= "Email *" value="<?= $email ?>" <?= ($email != '') ? "readonly" : "" ?> required >
                       </div>
                       <div class="form-group">
-                        <input type="text" class="form-control login" id="contact" name="mobile" placeholder= "Mobile No. *" required >
+                        <input type="text" class="form-control login" id="contact" name="mobile" placeholder= "Mobile No. *" value="<?= $mobile ?>" <?= ($mobile != '') ? "readonly" : "" ?> required >
                       </div>
                       <div class="form-group">
                         <input type="password" class="form-control login" id="password" name="password" placeholder= "Password *" required >
                       </div>
-					  <div class="form-group">
+					            <div class="form-group">
                         <input type="password" class="form-control login" id="password" name="cfn_password" placeholder= "Re Type Password *" required >
                       </div>
                       <!-- <div class='form-group'>
                         I am <input type="radio" name="type" value="director" checked> Director
                               <input type="radio" name="type" value="actor"> Actor
                       </div> -->
+                      <input type='hidden' name='director' value="<?= $director ?>">
+                      <input type='hidden' name='project' value="<?= $project ?>">
+                      <input type='hidden' name='link_id' value="<?= $link_id ?>">
 
-					  <a href="<?= base_url() ?>" class="pull-right"><small><?= M_AlreadyRegistered ?></small></a>
+					             <a href="<?= base_url() ?>" class="pull-right"><small><?= M_AlreadyRegistered ?></small></a>
                       <button type="submit" class="btn submit-btn firstcolor" name="submit" id="sign-upbtn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign Up</button>
 
                     </form>

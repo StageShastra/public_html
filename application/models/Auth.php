@@ -1,6 +1,6 @@
 <?php
 	class Auth extends CI_Model {
-		public function insertUser($type = ''){
+		public function insertUser($type = '', $refer = 'direct', $refer_id = 0){
 			$this->load->library('user_agent');
 			$pass = hash_hmac('sha512', $this->input->post('password'), $this->config->item("encryption_key"));
 			// check username
@@ -24,7 +24,9 @@
 						'StashUsers_status' => 0,
 						'StashUsers_mobile_status' => 0,
 						'StashUsers_ip' => $this->input->ip_address(),
-						'StashUsers_header' => $this->agent->agent_string()
+						'StashUsers_header' => $this->agent->agent_string(),
+						'StashUsers_refer' => $refer,
+						'StashUsers_refer_id' => $refer_id
 					);
 			$response = $this->db->insert("stash-users", $data);
 			return $this->db->insert_id();
@@ -202,11 +204,7 @@
 			$this->db->where("StashDirectorActorLink_actor_id_ref", $ref);
 			$this->db->where("StashDirectorActorLink_director_id_ref", $director);
 			$query = $this->db->get("stash-director-actor-link");
-			$result = $query->result("array");
-			if(count($result))
-				return true;
-			else
-				return false;
+			$result = $query->num_rows();
 		}
 		
 		public function confirmEMail($email = ''){
@@ -226,9 +224,16 @@
 		}
 		
 		public function getLinkDetails($link = ''){
-			$this->db->where("StashSMSInviteLink_link", $link);
-			$this->db->where("StashSMSInviteLink_status", 0);
-			$query = $this->db->get("stash-sms-invite-link", 1);
+			$this->db->where("StashSMSInvites_link", $link);
+			$this->db->where("StashSMSInvites_status", 0);
+			$query = $this->db->get("stash-sms-invites", 1);
+			return $query->first_row('array');
+		}
+
+		public function getEmailLinkDetails($link = ''){
+			$this->db->where("StashEmailInvite_link", $link);
+			$this->db->where("StashEmailInvite_status", 0);
+			$query = $this->db->get("stash-email-invites", 1);
 			return $query->first_row('array');
 		}
 		
@@ -349,6 +354,26 @@
 					);
 				$this->db->insert("stash-inactivity-mail", $d);
 			}
+		}
+
+		public function updateSMSLinkOpened($id = 0){
+			$this->db->where("StashSMSInvites_id", $id);
+			$this->db->update("stash-sms-invites", array('StashSMSInvites_opened' => time()));
+		}
+
+		public function updateSMSLinkUsed($id = 0){
+			$this->db->where("StashSMSInvites_id", $id);
+			$this->db->update("stash-sms-invites", array('StashSMSInvites_status' => 1));
+		}
+
+		public function updateEmailLinkOpened($id = ''){
+			$this->db->where("StashEmailInvite_id", $id);
+			$this->db->update("stash-email-invites", array('StashEmailInvite_opened' => time()));
+		}
+
+		public function updateEmailLinkUsed($id = ''){
+			$this->db->where("StashEmailInvite_id", $id);
+			$this->db->update("stash-email-invites", array('StashEmailInvite_status' => 1));
 		}
 	}
 ?>

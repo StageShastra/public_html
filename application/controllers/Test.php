@@ -67,6 +67,14 @@
 		        }
 		    }
 		}
+
+		public function getEncryptedText($text = ''){
+			$plainText = json_encode(array(1, 8, time(), 'sonukues@iitr.ac.in', 'VU1Lhl7E'));
+			$this->load->library('encrypt');
+			$encryptedText = $this->encrypt->encode($plainText);
+			$encryptedText = str_replace("/", "_", $encryptedText);
+			echo urldecode($encryptedText);
+		}
 		
 	}
 
