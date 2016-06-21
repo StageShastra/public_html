@@ -360,6 +360,36 @@
 			}
 			return $result;
 		}
+
+		public function getEmailFromDirectorDB(){
+			$this->db->select("StashUsers_email");
+			$this->db->from("stash-users as Users");
+			$this->db->join("stash-director-actor-link as DALink", "DALink.StashDirectorActorLink_actor_id_ref = Users.StashUsers_id");
+			$this->db->where("DALink.StashDirectorActorLink_director_id_ref", $this->session->userdata("StaSh_User_id"));
+			$query = $this->db->get();
+			$result = [];
+			$fetch = $query->result('array');
+			foreach ($fetch as $key => $f) {
+				$result[] = $f['StashUsers_email'];
+			}
+
+			return $result;
+		}
+
+		public function getMobileFromDirectorDB(){
+			$this->db->select("StashUsers_mobile");
+			$this->db->from("stash-users as Users");
+			$this->db->join("stash-director-actor-link as DALink", "DALink.StashDirectorActorLink_actor_id_ref = Users.StashUsers_id");
+			$this->db->where("DALink.StashDirectorActorLink_director_id_ref", $this->session->userdata("StaSh_User_id"));
+			$query = $this->db->get();
+			$result = [];
+			$fetch = $query->result('array');
+			foreach ($fetch as $key => $f) {
+				$result[] = $f['StashUsers_mobile'];
+			}
+
+			return $result;
+		}
 	}
 
 ?>

@@ -139,4 +139,14 @@ $(document).ready(function(){
 		return true;
 	});
 
+
+	$(document).on("click", ".sendMail", function(){
+		message = $(".summernote").code();
+		$(".summernote").destroy();
+		$("textarea#mailMessage").val(message);
+		//console.log(message);
+		$("form#composeMail").submit();
+		return false;
+	});
+
 });

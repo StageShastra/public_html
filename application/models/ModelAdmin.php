@@ -32,6 +32,7 @@
 
 		public function getUserDetails($type = ''){
 			$this->db->where("StashUsers_type", $type);
+			$this->db->order_by("StashUsers_id", "DESC");
 			$this->db->limit(20, 0);
 			$query = $this->db->get("stash-users");
 			return $query->result('array');
@@ -235,6 +236,18 @@
 			}
 			return $count;
 		}
+
+
+		public function allEmailInvitations($ref = 0){
+			$this->db->where("StashEmailInvite_director_id_ref", $ref);
+			return $this->db->get("stash-email-invitation")->result("array");
+		}
+
+		public function allSMSInvitations($ref = 0){
+			$this->db->where("StashSMSInvite_director_id_ref", $ref);
+			return $this->db->get("stash-sms-invitation")->result("array");
+		}
+
 
 	}
 

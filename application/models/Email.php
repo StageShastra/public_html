@@ -34,8 +34,9 @@
 			$this->email->from("no-reply@castiko.com", 'Castiko');
 			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
 			$this->email->to($email);
-			$this->email->subject("Thank You for Signing Up | Confirmation Link | Castiko");
-			$message = $this->defaultTemplete("Dear user, <br>Welcome to Castiko! Click the button below to confirm your account.", $link, "Confirm Email");
+			$this->email->subject(Em_ActMail_subject);
+			$msg = Em_ActMail_msg;
+			$message = $this->defaultTemplete($msg, $link, "Confirm Email");
 			
 			$this->email->message($message);
 			if($this->email->send()){
@@ -60,11 +61,14 @@
 			$this->email->from("no-reply@castiko.com", 'Castiko');
 			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
 			$this->email->to($email);
-			$this->email->subject("Password Reset Code | Castiko");
+			$this->email->subject(Em_PassCode_subject);
+
 			$msg = "Dear user, <br>please enter code below to change password.
 					<center><b>".$passCode."</b></center>";
 			$msg .= "<p>Do not share this Code with anyone. </p>";
 			$msg .= "<p>If you have any questions, please email us at <b>connect@castiko.com</b></p>";
+
+
 			$message = $this->defaultTemplete($msg);
 			$this->email->message($message);
 			if($this->email->send()){
@@ -173,6 +177,104 @@
 					);
 			$this->db->insert("stash-failed-invitation", $data);
 		}
+
+
+		public function sendPasswordResetMail($email = '', $ip = ''){
+			
+			$this->load->library('email', $this->config());
+			$this->email->set_newline("\n");
+			$this->email->from("no-reply@castiko.com", 'Castiko');
+			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
+			$this->email->to($email);
+			$this->email->subject(Em_ResetSucc_subject);
+
+			$msg = Em_ResetSucc_msg . "This reset is done from IP: {$ip}.";
+			$message = $this->defaultTemplete($msg);
+			$this->email->message($message);
+			if($this->email->send()){
+				return true;
+			}else{
+				// for Developer Only
+				//echo $this->email->print_debugger();
+				return false;
+			}
+
+		}
+
+		public function sendWelcomeMail($email = '', $name = '', $type = ''){
+			
+			$this->load->library('email', $this->config());
+			$this->email->set_newline("\n");
+			$this->email->from("no-reply@castiko.com", 'Castiko');
+			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
+			$this->email->to($email);
+			$this->email->subject(Em_Welcome_subject);
+
+			if($type == 'director'){
+				$msg = "Hello {$name}, <br>" . Em_Welcome_msg_director;
+			}else{
+				$msg = "Hello {$name}, <br>" . Em_Welcome_msg_actor;
+			}
+			
+			$message = $this->defaultTemplete($msg);
+			$this->email->message($message);
+			if($this->email->send()){
+				return true;
+			}else{
+				// for Developer Only
+				//echo $this->email->print_debugger();
+				return false;
+			}
+
+		}
+
+		public function sendReminderMail($emails = []){
+			$this->load->library('email', $this->config());
+			$this->email->set_newline("\n");
+			$this->email->from("no-reply@castiko.com", 'Castiko');
+			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
+			$this->email->to("connect@castiko.com");
+			$this->email->bcc($emails);
+			$this->email->subject(Em_Reminder_subject);
+
+			$msg = Em_Reminder_msg;
+			
+			$message = $this->defaultTemplete($msg);
+			$this->email->message($message);
+			if($this->email->send()){
+				return true;
+			}else{
+				// for Developer Only
+				//echo $this->email->print_debugger();
+				return false;
+			}
+		}
+
+		public function sendAdminPanelMail($data = []){
+			$this->load->library('email', $this->config());
+			$this->email->set_newline("\n");
+			$this->email->from("no-reply@castiko.com", 'Castiko');
+			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
+			$this->email->to( $data['to'] );
+			if(!empty($data['cc']))
+				$this->email->cc($data['cc']);
+			if(!empty($data['bcc']))
+				$this->email->cc($data['bcc']);
+			$this->email->subject($data['subject']);
+
+			$message = $this->defaultTemplete($data['message']);
+			
+			$this->email->message($message);
+			if($this->email->send()){
+				return true;
+			}else{
+				// for Developer Only
+				//echo $this->email->print_debugger();
+				return false;
+			}
+		}
+
+
 		public function defaultTemplete($msg = '', $link = '', $linkname = '', $sender = ''){
 			$mail = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
 				<html xmlns=\"http://www.w3.org/1999/xhtml\" style=\"margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;box-sizing:border-box;font-size:14px;\" >
@@ -250,4 +352,3 @@
 		}
 	}
 ?>
-

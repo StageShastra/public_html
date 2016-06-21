@@ -15,7 +15,7 @@
 					);
 			$this->load->model("Auth");
 			$pageInfo = array();
-			//print_r($this->Auth->ifUserExist($data['email']));exit();
+			$userData = $this->Auth->getUserData('StashUsers_email', $data['email']);
 			if($this->Auth->ifUserExist($data['email'])){
 				if(!$this->Auth->isConfirmedUser("StashUsers_email", $data['email'])){
 					if($this->Auth->confirmEMail($data['email'])){
@@ -23,6 +23,10 @@
 						$pageInfo['body'] = "Your email {$data['email']} is confirmed now. You will be redirected to the login page in 10 seconds.";
 						$pageInfo['body'] .= Se_Cnf_RedirectLink;
 						$pageInfo['redirect'] = true;
+
+
+						// Sending Welcome Message.
+						$this->Email->sendWelcomeMail($userData['StashUsers_email'], $userData['StashUsers_name'], $userData['StashUsers_type']);
 					}else{
 						$pageInfo['title'] = "Already Confirmed";
 						$pageInfo['body'] = Se_Cnf_AlreadyConfirmed;

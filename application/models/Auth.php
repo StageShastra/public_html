@@ -301,5 +301,54 @@
 					);
 			$this->db->insert("tl_delivery_report", $data);
 		}
+
+		public function getLastReminderData($time = 0){
+			$this->db->distinct();
+			$this->db->select("StashInactivityMail_user_id_ref");
+			$this->db->where("StashInactivityMail_time > {$time}");
+			$query = $this->db->get("stash-inactivity-mail");
+			$fetch = $query->result('array');
+			$result = [];
+			foreach ($fetch as $key => $f) {
+				$result[] = $f['StashInactivityMail_user_id_ref'];
+			}
+			return $result;
+		}
+
+		public function getInactiveUsers($time = 0){
+			$this->db->distinct();
+			$this->db->select("StashLogins_user_id_ref");
+			$this->db->where("StashLogins_time < {$time}");
+			$query = $this->db->get("stash-logins");
+			$fetch = $query->result('array');
+			$result = [];
+			foreach ($fetch as $key => $f) {
+				$result[] = $f['StashLogins_user_id_ref'];
+			}
+			return $result;
+		}
+
+		public function getEmailByIds($ids = []){
+			$this->db->select("StashUsers_email");
+			$this->db->where_in("StashUsers_id", $ids);
+			$query = $this->db->get("stash-users");
+			$fetch = $query->result('array');
+			$result = [];
+			foreach ($fetch as $key => $f) {
+				$result[] = $f['StashUsers_email'];
+			}
+			return $result;
+		}
+
+		public function insertLastReminderSent($users = []){
+			foreach ($users as $key => $user) {
+				$d = array(
+						"StashInactivityMail_user_id_ref" => $user,
+						"StashInactivityMail_time" => time(),
+						"StashInactivityMail_id" => null
+					);
+				$this->db->insert("stash-inactivity-mail", $d);
+			}
+		}
 	}
 ?>

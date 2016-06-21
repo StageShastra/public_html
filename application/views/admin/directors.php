@@ -73,11 +73,17 @@
                                     <td><?= $director['StashUsers_ip']?></td>
                                     <td><label class='label label-<?= ($director['StashUsers_status']) ? "primary" : "warning" ?>'><?= ($director['StashUsers_status']) ? "active" : "pending" ?></label></td>
                                     <td><label class='label label-<?= ($director['StashUsers_mobile_status']) ? "primary" : "warning" ?>'><?= ($director['StashUsers_mobile_status']) ? "verified" : "pending" ?></label></td>
-                                    <td></td>
                                 </tr>
 
                                 <?php } ?>
                             </tbody>
+                            <tfoot class="hide-if-no-paging">
+                                <tr>
+                                    <td colspan="9">
+                                        <ul class="pagination pagination-centered hide-if-no-paging"></ul>
+                                    </td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
 

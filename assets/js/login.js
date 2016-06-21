@@ -24,7 +24,7 @@ $('document').ready(function()
       var data = $("#login-form").serialize();
       $.ajax({
         type : 'POST',
-        url  : '/public_html/beta/ajax/',
+        url  : '/public_html/ajax/',
         data : data,
         success :  function(response)
         {  
