@@ -43,7 +43,8 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="footable table table-stripped toggle-arrow-tiny" id="tableData" data-page-size='10'>
+                        <table class="footable table table-stripped toggle-arrow-tiny" id="tableData" data-page-size='20'>
+
                             <thead>
                                 <tr>
                                     <th data-toggle="true">#</th>

@@ -246,7 +246,6 @@
 			$this->db->where("StashSMSInvite_director_id_ref", $ref);
 			return $this->db->get("stash-sms-invitation")->result("array");
 		}
-
 	}
 
 ?>
