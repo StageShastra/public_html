@@ -78,22 +78,60 @@
 			}
 			$data['project_id'] = $projectID;
 			// Generating Link.
-			$rand = substr(base64_encode(md5(microtime() . mt_rand(100000, 999999) . microtime())), 0, 6);
-			while($this->ModelDirector->checkRandLink($rand)){
-				$rand = substr(base64_encode(md5(microtime() . mt_rand(100000, 999999) . microtime())), 0, 6);
+
+			$filterNumbers = $this->filterMobile( $data['mobiles'] );
+			$mobiles = $filterNumbers['numbers'];
+			$invalid = $filterNumbers['invalid'];
+			$mobileIndirectorDB = $this->ModelDirector->getMobileFromDirectorDB();
+			$mobileNotInDB = array_diff($mobiles, $mobileIndirectorDB);
+			$duplicate = array_intersect($mobiles, $mobileIndirectorDB);
+
+			$msgId = $this->ModelDirector->insertSMSMsg($data['msg'], 'sms');
+
+			foreach ($mobileNotInDB as $key => $notInDB) {
+
+				$rand = substr(base64_encode(md5(microtime() . $notInDB . microtime())), 0, 6);
+				while($this->ModelDirector->checkRandLink($rand))
+					$rand = substr(base64_encode(md5(microtime() . $notInDB . microtime())), 0, 6);
+				
+				$link = "http://castiko.com/invite/{$rand}";
+				$this->SMS->sendInvitaionSMS( $data['msg'], $notInDB, $link );
+				$this->ModelDirector->insertInvitationSMS($msgId, $rand, $projectID, $notInDB);
+
 			}
-			$linkId = $this->ModelDirector->insertSMSInviteLink($projectID, $rand);
-			$link = "http://invite.castiko.com/{$rand}";
+
+			$r = array( 'sent' => count($mobileNotInDB), 'invalid' => count($invalid), 'invalidNums' => $invalid, 'duplicate' => count($duplicate), "duplicateNums" => $duplicate );
+			$this->ModelDirector->updateCountAudSMS(count($mobileNotInDB), "invite", "sms");
 			
-			if($this->SMS->sendInvitaionSMS($data['msg'], $data['mobiles'], $link)){
-				$id = $this->ModelDirector->insertInvitationSMS($data);
-				$count = count(explode(",", $data['mobiles']));
-				$this->ModelDirector->updateCountAudSMS($count, $id, "invite", "sms");
-				$this->response(true, "{$count} Invitation SMS sent");
-			}else{
-				$this->response(false, "SMS ".Aj_Gen_Failed);
-			}
+			$this->response(true, "Invitation SMS Sent", $r);
 		}
+
+		public function filterMobile($mobiles = ''){
+			$mobiles = explode(",", $mobiles);
+			$numbers = []; $invalid = [];
+			foreach ($mobiles as $key => $mobile) {
+				$mobile = trim($mobile);
+				if( strlen($mobile) >= 10 && is_numeric($mobile)){
+					$numbers[] = $mobile;
+				}else{
+					if( strpos($mobile, "/") ){
+						$mobile = explode("/", $mobile);
+						foreach ($mobile as $k => $m) {
+							$m = trim($m);
+							if( strlen($m) >= 10 && is_numeric($m) )
+								$numbers[] = $m;
+							else
+								$invalid[] = $m;
+						}
+					}else{
+						$invalid[] = $mobile;
+					}
+				}
+			}
+
+			return ['numbers' => $numbers, 'invalid' => $invalid];
+		}
+
 		public function eMailInvitation($data = []){
 			$this->load->model("ModelDirector");
 			$this->load->model("Email");
@@ -105,20 +143,86 @@
 			}
 			$data['msg'] = str_replace("\n", "<br>", $data['msg']);
 			$data['project_id'] = $projectID;
-			$emails = $this->csv2array($data['emails']);
-			//$csvEmail = "(" . $this->getCSVList($emails) . ")";
-			$emailInDB = $this->ModelDirector->checkRegsiteredEmails($emails);
-			$emailNotInDB = array_diff($emails, $emailInDB);
-			$mail = ['inDB' => $emailInDB, 'notInDB' => $emailNotInDB];
-			if($this->Email->sendInvitaionMail($data['msg'], $mail, $projectID, $data['subject'])){
-				$id = $this->ModelDirector->insertInvitationMail($data);
-				$count = count($emails);
-				$this->ModelDirector->updateCountAudSMS($count, $id, "invite", "email");
-				$this->response(true, "{$count} Invitation Emails sent");
-			}else{
-				$this->response(false, "Email ".Aj_Gen_Failed);
+
+			$msgId = $this->ModelDirector->insertSMSMsg($data['msg'], 'email');
+
+			$filterEmails = $this->filterEmail( $data['emails'] );
+			$emails = $filterEmails[0];
+			$invalid = $filterEmails[1];
+			$emailInDB = $this->ModelDirector->checkRegsiteredEmails($emails); // Emails Registered with Castiko
+			$emailInDirectorDB = $this->ModelDirector->getEmailFromDirectorDB(); // Email already added in CD Db
+			$emailInMainDB = array_diff($emailInDB, $emailInDirectorDB); // Email to be send  Connect mail as they are in Castiko Db but not in CD Db.
+			$emailFresh = array_diff($emails, $emailInDB); // Very Fresh Emails, not registered to Castiko
+			$emailInCDdb = array_intersect($emails, $emailInDirectorDB); // Duplicate Email, Already in CD db.
+
+			// Sending Invitation to fresh emails.
+			$failedEmailFresh = $failedEmailConnect = [];
+			$sent = $fail = 0;
+
+			foreach ($emailFresh as $key => $fe) {
+				$failed = $this->Email->sendInvitationToNotInDB( $data['msg'], $fe, $projectID );
+				if( $failed !== true ){
+					// Sending Mail Failed. do something here.
+					$failedEmailFresh[] = $failed;
+					$fail++;
+				}else{
+					$sent++;
+					$this->ModelDirector->insertInvitationMail( $fe, $msgId, $projectID, 'invite' );
+				}
 			}
+
+			// Sending Connect Mail to already registered Email.
+			foreach ($emailInMainDB as $key => $fe) {
+				$failed = $this->Email->sendInvitationToInDB( $data['msg'], $fe, $projectID );
+				if( $failed !== true ){
+					// Sending Mail Failed. do something here.
+					$failedEmailConnect[] = $failed;
+					$fail++;
+				}else{
+					$this->ModelDirector->insertInvitationMail( $fe, $msgId, $projectID, 'connect' );
+					$sent++;
+				}
+			}
+
+			$this->ModelDirector->insertFailedInvitations( $failedEmailFresh, $msgId, $projectID, 'invite' );
+			$this->ModelDirector->insertFailedInvitations( $failedEmailConnect, $msgId, $projectID, 'connect' );
+
+			$this->ModelDirector->updateCountAudSMS($sent, "invite", "email");
+			$r = array( 'sent' => $sent, 'invalid' => count($invalid), 'failed' => $fail, 'invalidEmails' => $invalid, 'duplicate' => count($emailInCDdb), "duplicateEmail" => $emailInCDdb );
+			$this->response(true, "{$sent} Invitation Emails sent", $r);
 		}
+
+		public function filterEmail($emails = ''){
+			$emails = explode(",", $emails);
+			$invalid = $valid = [];
+			foreach ($emails as $key => $email) {
+				if( strpos($email, "/") ){
+					$email = explode("/", $email);
+					foreach ($email as $key => $mail) {
+						$m = $this->sanitizeEmail($mail);
+						if( $m != '')
+							$valid[] = $m;
+						else
+							$invalid[] = $mail;
+					}
+				}else{
+					$m = $this->sanitizeEmail($email);
+					if( $m != '')
+						$valid[] = $m;
+					else
+						$invalid[] = $email;
+				}
+			}
+
+			return [$valid, $invalid];
+		}
+
+		public function sanitizeEmail($email = ''){
+			$email = filter_var($email, FILTER_SANITIZE_EMAIL);
+			return trim(filter_var($email, FILTER_VALIDATE_EMAIL));
+		}
+
+
 		public function csv2array($value = ''){
 			$array = [];
 			$values = explode(",", $value);
@@ -128,6 +232,8 @@
 			}
 			return $array;
 		}
+
+
 		public function getCSVList($values = []){
 			$csv = '';
 			//$values = explode(",", $values);
@@ -139,7 +245,6 @@
 		}
 		public function advanceSearch($data = []){
 			$this->load->model("ModelDirector");
-			$actorsInDirectorList = $this->ModelDirector->getActorsIdWithDirectors($this->session->userdata("StaSh_User_id"));
 			// Santizing data
 			$minAge = $maxAge = $minHeight = $maxHeight = $sex = $skills = $projects = '';
 			if($data['agemin'] != ''){
@@ -177,7 +282,7 @@
 				$actor_names = trim($data['actor_names']);
 			}
 			
-			
+			$actorsInDirectorList = $this->ModelDirector->getActorsIdWithDirectors($this->session->userdata("StaSh_User_id"));
 			$diff = array_merge($filteredBySKills, $filteredByProjects);
 			//print_r($filteredByProjects);
 			if(count($diff) == 0)
@@ -254,6 +359,10 @@
 					if($timeExp > time()){
 						if($this->Auth->updatePassword($userData['StashUsers_id'], $data['password'])){
 							$this->Auth->updatePassCodeUses($passCodeData['StashForgotPassword_id']);
+							// Sending a password reset Mail
+							$this->load->model("Email");
+							$this->Email->sendPasswordResetMail( $userData['StashUsers_email'], $this->input->ip_address() );
+
 							$this->response(true, Aj_ChangePass_Succ);
 						}else{
 							$this->response(false, Aj_ChangePass_Fail);
@@ -268,6 +377,8 @@
 				$this->response(false, Aj_ChangePass_Invalid);
 			}
 		}
+
+
 		public function forgotPassword($data = []){
 			$this->load->model("Auth");
 			$this->load->model("Email");
@@ -285,6 +396,8 @@
 				$this->response(false, Aj_FrgtPass_Invalid);
 			}
 		}
+
+		
 		public function userLogin($data = []){
 			$this->load->model("Auth");
 			if($this->Auth->ifUserExist($data['email'])){

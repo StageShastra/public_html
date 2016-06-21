@@ -86,12 +86,13 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 
 /* Custom Constants */
-define("BASE_URL", "http://castiko.com/");
-defined("ASSETS") OR define("ASSETS", "/assets/");
+define("BASE_URL", "/Castiko/");
+defined("ASSETS") OR define("ASSETS", "/Castiko/assets/");
 defined("JS") OR define("JS", ASSETS . "js");
 defined("IMG") OR define("IMG", ASSETS . "img");
 defined("CSS") OR define("CSS", ASSETS . "css");
 defined("FONTS") OR define("FONTS", ASSETS . "fonts");
+defined("ADMIN") OR define("ADMIN", ASSETS . "admin");
 
 /*
 	Custom Constants for all string used in website.
@@ -186,6 +187,32 @@ define('Aj_FrgtPass_Invalid', "This Email/Username doesn't Exist. Please Registe
 define("Aj_Login_Succ", "Login Success. Welcome ");
 define("Aj_Login_Failed", "Email and Password don't match.");
 define("Aj_Login_Invalid", "This Email/Username doesn't Exist. Please Register first.");
+
+
+// Page Modeal: Email.php suffix: Em
+define('Em_ActMail_subject', 'Thank You for Signing Up | Confirmation Link | Castiko');
+define('Em_ActMail_msg', 'Dear user, <br>Welcome to Castiko! Click the button below to confirm your account.');
+
+define('Em_PassCode_subject', 'Password Reset Code | Castiko');
+
+
+define('Em_ResetSucc_subject', 'Password Reset Success | Castiko');
+define('Em_ResetSucc_msg', 'Dear User, <br>Your password has been reset. If you did not reset this password then file a complain at <a href=\'mailto:connect@castiko.com\'>connect@castiko.com</a> and reset you account password.');
+
+define('Em_Welcome_subject', "Welcome to Castiko | Castiko");
+define('Em_Welcome_msg_director', 'Welcome to Castiko. We have lots of exciting feature for Casting Directors.');
+define('Em_Welcome_msg_actor', 'Welcome to Castiko. We have lots of exciting feature for Actor.');
+
+define('Em_Reminder_subject', 'Reminder | Castiko');
+define('Em_Reminder_msg', "Dear User <br> You account seems inactive from a long time. You might be missing lot of audition invitation and excited feature of Castiko. <a href='http://castiko.com/'>Login</a> to your account and checkout what's new.");
+
+
+
+
+
+
+
+
 
 
 

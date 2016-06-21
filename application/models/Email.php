@@ -34,8 +34,9 @@
 			$this->email->from("no-reply@castiko.com", 'Castiko');
 			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
 			$this->email->to($email);
-			$this->email->subject("Thank You for Signing Up | Confirmation Link | Castiko");
-			$message = $this->defaultTemplete("Dear user, <br>Welcome to Castiko! Click the button below to confirm your account.", $link, "Confirm Email");
+			$this->email->subject(Em_ActMail_subject);
+			$msg = Em_ActMail_msg;
+			$message = $this->defaultTemplete($msg, $link, "Confirm Email");
 			
 			$this->email->message($message);
 			if($this->email->send()){
@@ -60,11 +61,14 @@
 			$this->email->from("no-reply@castiko.com", 'Castiko');
 			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
 			$this->email->to($email);
-			$this->email->subject("Password Reset Code | Castiko");
+			$this->email->subject(Em_PassCode_subject);
+
 			$msg = "Dear user, <br>please enter code below to change password.
 					<center><b>".$passCode."</b></center>";
 			$msg .= "<p>Do not share this Code with anyone. </p>";
 			$msg .= "<p>If you have any questions, please email us at <b>connect@castiko.com</b></p>";
+
+
 			$message = $this->defaultTemplete($msg);
 			$this->email->message($message);
 			if($this->email->send()){
@@ -97,51 +101,47 @@
 				return false;
 			}
 		}
-		public function sendInvitationToInDB($msg = '', $to = [], $project = 0, $sub = "Connect to Casting Director"){
+		public function sendInvitationToInDB($msg = '', $to = '', $project = 0, $sub = "Connect to Casting Director"){
 			$this->load->library('email', $this->config());
 			$failedEmails = [];
-			foreach ($to as $key => $mail) {
-				$plainText = $this->session->userdata("StaSh_User_id") . "_" . $project . "_" . time() . "_" . $mail;
-				$encryptedText = $this->getEncryptedText($plainText);
-				$encryptedText = str_replace("/", "_", $encryptedText);
-				$link = base_url() . "home/connect/" . urlencode($encryptedText);
-				$message = $this->defaultTemplete("Dear Actor, <br>".$msg, $link, "Connect", "");
-		            	$message = preg_replace('~\\\r\\\n~',"<br>", $message);
-		            	$this->email->clear();
-		            	$this->email->set_newline("\n");
-				$this->email->from("no-reply@castiko.com", 'Castiko');
-				$this->email->reply_to("no-reply@castiko.com", 'Castiko');
-				$this->email->subject("{$sub} | Castiko");
-		            	$this->email->to($mail);
-		            	$this->email->message($message);
-		            	if(!$this->email->send()){
-		            		$failedEmails[] = $mail;
-		            	}
+			$plainText = json_encode(array($this->session->userdata("StaSh_User_id"), $project, time(), $to));
+			$encryptedText = $this->getEncryptedText($plainText);
+			$encryptedText = str_replace("/", "_", $encryptedText);
+			$link = base_url() . "home/connect/" . urlencode($encryptedText);
+			$message = $this->defaultTemplete("Dear Actor, <br>".$msg, $link, "Connect", "");
+			$message = preg_replace('~\\\r\\\n~',"<br>", $message);
+			$this->email->clear();
+			$this->email->set_newline("\n");
+			$this->email->from("no-reply@castiko.com", 'Castiko');
+			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
+			$this->email->subject("{$sub} | Castiko");
+			$this->email->to($to);
+			$this->email->message($message);
+			if(!$this->email->send()){
+				return $to;
 			}
-			return $failedEmails;
+			return true;
 		}
-		public function sendInvitationToNotInDB($msg = '', $to = [], $project = 0, $sub = "Invitation "){
+		public function sendInvitationToNotInDB($msg = '', $to = '', $project = 0, $sub = "Invitation "){
 			$this->load->library('email', $this->config());
 			$failedEmails = [];
-			foreach ($to as $key => $mail) {
-				$plainText = $this->session->userdata("StaSh_User_id") . "_" . $project . "_" . time() . "_" . $mail;
-				$encryptedText = $this->getEncryptedText($plainText);
-				$encryptedText = str_replace("/", "_", $encryptedText);
-				$link = base_url() . "home/join/" . urlencode($encryptedText);
-				$message = $this->defaultTemplete("Dear Actor, <br>".$msg, $link, "Accept Invitation", "");
-		            	$message = preg_replace('~\\\r\\\n~',"<br>", $message);
-		            	$this->email->clear();
-		            	$this->email->set_newline("\n");
-				$this->email->from("no-reply@castiko.com", 'Castiko');
-				$this->email->reply_to("no-reply@castiko.com", 'Castiko');
-				$this->email->subject("{$sub} | Castiko");
-		            	$this->email->to($mail);
-		            	$this->email->message($message);
-		            	if(!$this->email->send()){
-		            		$failedEmails[] = $mail;
-		            	}
+			$plainText = json_encode(array($this->session->userdata("StaSh_User_id"), $project, time(), $to));
+			$encryptedText = $this->getEncryptedText($plainText);
+			$encryptedText = str_replace("/", "_", $encryptedText);
+			$link = base_url() . "home/join/" . urlencode($encryptedText);
+			$message = $this->defaultTemplete("Dear Actor, <br>".$msg, $link, "Accept Invitation", "");
+			$message = preg_replace('~\\\r\\\n~',"<br>", $message);
+			$this->email->clear();
+			$this->email->set_newline("\n");
+			$this->email->from("no-reply@castiko.com", 'Castiko');
+			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
+			$this->email->subject("{$sub} | Castiko");
+			$this->email->to($to);
+			$this->email->message($message);
+			if(!$this->email->send()){
+				return $to;
 			}
-			return $failedEmails;
+			return true;
 		}		
 		public function sendInvitaionMail($msg = '', $emails = [], $project = 0, $sub = 'Invitation'){
 			$inDB = $this->sendInvitationToInDB($msg, $emails['inDB'], $project);
@@ -169,10 +169,109 @@
 						'StashFailedInvite_msg' => $msg,
 						'StashFailedInvite_project' => $project,
 						'StashFailedInvite_emails' => json_encode($emails),
+						'StashFailedInvite_type' => $type,
 						'StashFailedInvite_time' => time()
 					);
 			$this->db->insert("stash-failed-invitation", $data);
 		}
+
+
+		public function sendPasswordResetMail($email = '', $ip = ''){
+			
+			$this->load->library('email', $this->config());
+			$this->email->set_newline("\n");
+			$this->email->from("no-reply@castiko.com", 'Castiko');
+			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
+			$this->email->to($email);
+			$this->email->subject(Em_ResetSucc_subject);
+
+			$msg = Em_ResetSucc_msg . "This reset is done from IP: {$ip}.";
+			$message = $this->defaultTemplete($msg);
+			$this->email->message($message);
+			if($this->email->send()){
+				return true;
+			}else{
+				// for Developer Only
+				//echo $this->email->print_debugger();
+				return false;
+			}
+
+		}
+
+		public function sendWelcomeMail($email = '', $name = '', $type = ''){
+			
+			$this->load->library('email', $this->config());
+			$this->email->set_newline("\n");
+			$this->email->from("no-reply@castiko.com", 'Castiko');
+			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
+			$this->email->to($email);
+			$this->email->subject(Em_Welcome_subject);
+
+			if($type == 'director'){
+				$msg = "Hello {$name}, <br>" . Em_Welcome_msg_director;
+			}else{
+				$msg = "Hello {$name}, <br>" . Em_Welcome_msg_actor;
+			}
+			
+			$message = $this->defaultTemplete($msg);
+			$this->email->message($message);
+			if($this->email->send()){
+				return true;
+			}else{
+				// for Developer Only
+				//echo $this->email->print_debugger();
+				return false;
+			}
+
+		}
+
+		public function sendReminderMail($emails = []){
+			$this->load->library('email', $this->config());
+			$this->email->set_newline("\n");
+			$this->email->from("no-reply@castiko.com", 'Castiko');
+			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
+			$this->email->to("connect@castiko.com");
+			$this->email->bcc($emails);
+			$this->email->subject(Em_Reminder_subject);
+
+			$msg = Em_Reminder_msg;
+			
+			$message = $this->defaultTemplete($msg);
+			$this->email->message($message);
+			if($this->email->send()){
+				return true;
+			}else{
+				// for Developer Only
+				//echo $this->email->print_debugger();
+				return false;
+			}
+		}
+
+		public function sendAdminPanelMail($data = []){
+			$this->load->library('email', $this->config());
+			$this->email->set_newline("\n");
+			$this->email->from("no-reply@castiko.com", 'Castiko');
+			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
+			$this->email->to( $data['to'] );
+			if(!empty($data['cc']))
+				$this->email->cc($data['cc']);
+			if(!empty($data['bcc']))
+				$this->email->cc($data['bcc']);
+			$this->email->subject($data['subject']);
+
+			$message = $this->defaultTemplete($data['message']);
+			
+			$this->email->message($message);
+			if($this->email->send()){
+				return true;
+			}else{
+				// for Developer Only
+				//echo $this->email->print_debugger();
+				return false;
+			}
+		}
+
+
 		public function defaultTemplete($msg = '', $link = '', $linkname = '', $sender = ''){
 			$mail = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
 				<html xmlns=\"http://www.w3.org/1999/xhtml\" style=\"margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;box-sizing:border-box;font-size:14px;\" >

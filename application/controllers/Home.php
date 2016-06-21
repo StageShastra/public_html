@@ -4,6 +4,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Home extends CI_Controller {
 
 	public function index($value=''){
+		$this->login();
+	}
+
+	public function landingpage($value=''){
+		$this->load->view("landingpage");
+	}
+
+	public function login($value=''){
 		if($this->session->userdata("StaSh_User_Logged_In"))
 			if($this->session->userdata("StaSh_User_type") == 'actor')
 				redirect(base_url() . "actor/");
@@ -138,11 +146,24 @@ class Home extends CI_Controller {
 		$this->load->library('encrypt');
 		$info = $this->encrypt->decode(trim($encryptedText));
 		$info = explode("_", $info);
+
+		/*
+			$info[0] => director_id,
+			$info[1] => project_id,
+			$info[2] => timestamp of mail send,
+			$info[3] => actor email
+		*/
+
+
 		$this->load->model("Auth");
 		$userdata = $this->Auth->getUserData("StashUsers_email", trim(end($info)));
 		if(count($userdata)){
-			$this->Auth->insertActorInProject($userdata['StashUsers_id'], $info[1]);
-	    	$this->Auth->insertActorInDirectorList($userdata['StashUsers_id'], $info[0]);
+			if($this->Auth->checkActorProject($userdata['StashUsers_id'], $info[1]))
+				$this->Auth->insertActorInProject($userdata['StashUsers_id'], $info[1]);
+			
+			if($this->Auth->checkActorInDirector($userdata['StashUsers_id'], $info[0]))
+				$this->Auth->insertActorInDirectorList($userdata['StashUsers_id'], $info[0]);
+
 		}
 		redirect(base_url() . "actor/");
 	}
