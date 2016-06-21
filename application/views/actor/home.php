@@ -27,7 +27,10 @@
           .bootstrap-tagsinput {
             background-color: #f2f2f2;
         }
-        /* AKASH SINGH: */
+        .blurb{
+            font-family: AvenirNext-Regular;
+            color:#4A4A4A;
+        }
         .a_name{
             font-family: 'AvenirNext-Bold', sans-serif, AvenirNext-Regular;
             font-size: 20px;
@@ -165,7 +168,7 @@
         }
         .training_title{
             font-family: AvenirNext-Bold;
-            font-size: 18px;
+            font-size: 15px;
             color: #9B9B9B;
             letter-spacing: 0px;
             text-shadow: 0px 1px 0px #FFFFFF;
@@ -173,7 +176,7 @@
         .training_details{
             background: #EBEBEB;
             border-radius: 9px;
-            font-size: 16px;
+            font-size: 15px;
             color: black;
             padding-left: 15px;
             padding: 15px;
@@ -365,6 +368,9 @@
                 overflow-y:auto;
                 overflow-x:hidden;
             }
+            .blurb{
+                font-size: 14px;
+            }
             
         }
         /* sm */
@@ -402,6 +408,9 @@
                 width:75px;
                 height: 75px;
             }
+            .blurb{
+                font-size: 14px;
+            }
         }
         /* md */
         @media screen and (min-width: 992px) {
@@ -434,6 +443,9 @@
             .DocumentItem{
                 width:120px;
                 height: 120px;
+            }
+            .blurb{
+                font-size: 15px;
             }
         }
         /* lg */
@@ -472,6 +484,9 @@
             .DocumentItem{
                 width:150px;
                 height: 150px;
+            }
+            .blurb{
+                font-size: 15px;
             }
         }
         .videoWrapper {
@@ -874,7 +889,7 @@ textarea{
                                 ?>
                             </span>
                             <span id="language_edit" class="left hidden ">
-                                 <input type="text" class="form-control login" value="<?= implode(",", $actorProfile['StashActor_language']) ?>" id="language" data-role="tagsinput" name="language" placeholder= "Language:" />
+                                 <input type="text" class="form-control login" value="<?= implode(",", $actorProfile['StashActor_language']) ?>" id="language" data-role="tagsinput" name="language" placeholder= "Language:(comma separated)" />
                                  <br><font class="sortbuttons">
                                     <button type="button" class="btn submit-btn firstcolor center tick updateDataField"
                                             data-input-names="language"
@@ -907,7 +922,7 @@ textarea{
 
                             </span>
                             <span id="skills_edit" class="left hidden ">
-                                 <input type="text" class="form-control login" value="<?= implode(",", $actorProfile['StashActor_skills']).", " ?>" data-role="tagsinput" id="skills" name="skills" placeholder= "Skills:" />
+                                 <input type="text" class="form-control login" value="<?= implode(",", $actorProfile['StashActor_skills']).", " ?>" data-role="tagsinput" id="skills" name="skills" placeholder= "Skills:(comma separated)" />
                                  <br><font class="sortbuttons">
                                     <button type="button" class="btn submit-btn firstcolor center tick updateDataField"
                                             data-input-names="skills"

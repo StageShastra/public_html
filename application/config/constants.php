@@ -87,7 +87,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 /* Custom Constants */
 define("BASE_URL", "http://castiko.com/");
-defined("ASSETS") OR define("ASSETS", "/assets/");
+defined("ASSETS") OR define("ASSETS", "/public_html/assets/");
 defined("JS") OR define("JS", ASSETS . "js");
 defined("IMG") OR define("IMG", ASSETS . "img");
 defined("CSS") OR define("CSS", ASSETS . "css");

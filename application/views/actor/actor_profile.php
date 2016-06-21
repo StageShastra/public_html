@@ -13,7 +13,7 @@
     }
   ?>
     <body>
-    <style>
+          <style>
           body{
             padding-top: 90px;
           }
@@ -27,7 +27,10 @@
           .bootstrap-tagsinput {
             background-color: #f2f2f2;
         }
-        /* AKASH SINGH: */
+        .blurb{
+            font-family: AvenirNext-Regular;
+            color: #4A4A4A;
+        }
         .a_name{
             font-family: 'AvenirNext-Bold', sans-serif, AvenirNext-Regular;
             font-size: 20px;
@@ -365,6 +368,9 @@
                 overflow-y:auto;
                 overflow-x:hidden;
             }
+            .blurb{
+                font-size: 14px;
+            }
             
         }
         /* sm */
@@ -402,6 +408,9 @@
                 width:75px;
                 height: 75px;
             }
+            .blurb{
+                font-size: 14px;
+            }
         }
         /* md */
         @media screen and (min-width: 992px) {
@@ -434,6 +443,9 @@
             .DocumentItem{
                 width:120px;
                 height: 120px;
+            }
+            .blurb{
+                font-size: 15px;
             }
         }
         /* lg */
@@ -472,6 +484,9 @@
             .DocumentItem{
                 width:150px;
                 height: 150px;
+            }
+            .blurb{
+                font-size: 15px;
             }
         }
         .videoWrapper {
@@ -636,10 +651,7 @@ textarea{
     margin-left: 2px;
     margin-right: 2px;
 }
-.blurb
-{
-    font-size: 16px;
-}
+   
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -831,7 +843,7 @@ textarea{
                                                         </span>
                                                         <br>
                                                             <div style="height:100%;overflow:hidden;">
-                                                            <div class="info-small dark-gray hidden_scroll" id="actor_ex_blurb_'.$key.'">
+                                                            <div class="info-small dark-gray hidden_scroll blurb" id="actor_ex_blurb_'.$key.'">
                                                             '.ucfirst($experience['StashActorExperience_blurb']).'
                                                             </div>
                                                             </div>
@@ -847,7 +859,7 @@ textarea{
                                                             <i>as </i>'.ucfirst($experience['StashActorExperience_role']).'
                                                         </span>
                                                     <br>
-                                                        <div class="info-small dark-gray" id="actor_ex_blurb_'.$key.'" style="margin-left:15px;" >
+                                                        <div class="info-small dark-gray blurb" id="actor_ex_blurb_'.$key.'" style="margin-left:15px;" >
                                                             '.ucfirst($experience['StashActorExperience_blurb']).'
                                                         </div>';
                                                 
