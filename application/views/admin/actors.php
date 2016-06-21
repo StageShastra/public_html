@@ -69,7 +69,7 @@
                                     <td><?= $actor['StashUsers_name']?></td>
                                     <td><?= $actor['StashUsers_email']?></td>
                                     <td><?= $actor['StashUsers_mobile']?></td>
-        							<td><?= date("Y-m-d h:i a", (int)$actor['StashUsers_time'])?></td>
+        							<td><?= $this->ModelAdmin->timeElapsedString($actor['StashUsers_time'])?></td>
                                     <td><?= $actor['StashUsers_ip']?></td>
                                     <td><label class='label label-<?= ($actor['StashUsers_status']) ? "primary" : "warning" ?>'><?= ($actor['StashUsers_status']) ? "active" : "pending" ?></label></td>
                                     <td><label class='label label-<?= ($actor['StashUsers_mobile_status']) ? "primary" : "warning" ?>'><?= ($actor['StashUsers_mobile_status']) ? "verified" : "pending" ?></label></td>
@@ -78,6 +78,14 @@
 
         						<?php } ?>
         					</tbody>
+                            <tfoot class="hide-if-no-paging">
+                                <tr>
+                                    <td colspan="10">
+                                        <ul class="pagination pagination-centered hide-if-no-paging"></ul>
+                                    </td>
+                                </tr>
+                            </tfoot>
+
                         </table>
                     </div>
 

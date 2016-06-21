@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
-	var url = "/Castiko/actor/ajax",
-		base = "/Castiko/",
+	var url = "/actor/ajax",
+		base = "/",
 		type = "POST",
 		data = {};
 
@@ -190,10 +190,15 @@ $(document).ready(function(){
 					html = response.data.html;
 					//console.log(rData);
 					$("#experiencelist").html(html);
-
+					$("input[name='exp_title']").val("");
+					$("input[name='exp_role']").val("");
+					$("input[name='exp_link']").val("");
+					$("textarea[name='exp_blurb']").val("");
 					$("#experience_add").addClass("hidden");
 					$("#closeexperienceicon").addClass("hidden");
 					$("#openexperienceicon").removeClass("hidden");
+					$("#add_exp_btn").removeClass("hidden");
+					$("#add_exp_btn_load").addClass("hidden");
 
 				}
 				$("#experiencelist").removeClass("hidden");
@@ -250,6 +255,11 @@ $(document).ready(function(){
 					$("#training_add").addClass("hidden");
 					$("#closetrainingicon").addClass("hidden");
 					$("#opentrainingicon").removeClass("hidden");
+					$("input[name='trn_title']").val("");
+					$("input[name='trn_course']").val("");
+					$("input[name='trn_start_time']").val("");
+					$("input[name='trn_end_time']").val("");
+					$("textarea[name='trn_blurb']").val("");
 				}
 				$("#traininglist").removeClass("hidden");
 				$("#training_add").addClass("hidden");
@@ -262,17 +272,7 @@ $(document).ready(function(){
 	});
 	
 	
-	$(document).on("submit", "form#feetToCMConverter", function(){
-		var that = this;
-		var feet = Number($("select[name='feet']", $(this)).val());
-		var inches = Number($("select[name='inches']", $(this)).val());
-		inches = inches + (feet * 12);
-		var cm = Math.ceil(inches / 0.39370);
-		console.log(cm);
-		$("span#converted").html(cm);
-		$("#convertedBox").show();
-		return false;
-	});
+	
 
 	$(document).on("click", ".removeSpanBtn", function(){
 		var conf = confirm("Are you sure you want to remove this ?");
@@ -681,7 +681,14 @@ Dropzone.options.photoUpload={
   }
 
 }
-
+function feet_to_cm()
+{
+	var feet = $("#feet").val();
+	var inches = $("#inches").val();
+	var measurement = Math.round((feet*12*2.54) + inches*2.54);
+	$("#height").val(measurement);
+	$("#feetToCmConverterModal").hide();
+}
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })

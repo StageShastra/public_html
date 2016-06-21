@@ -6,13 +6,13 @@
 ?>
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>All Casting Directors</h2>
+            <h2>All Actors</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="<?= base_url() ?>admin/home/">Home</a>
                 </li>
                 <li class="active">
-                    <strong>Casting Directors</strong>
+                    <strong>Actors</strong>
                 </li>
             </ol>
         </div>
@@ -20,12 +20,12 @@
 
         </div>
     </div>
-    <div class="row">
+	<div class="row">
 
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5> Director List </h5>
+                    <h5> Actors List </h5>
                     
                 </div>
                 <div class="ibox-content">
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="footable table table-stripped toggle-arrow-tiny" id="tableData" data-page-size='20'>
+                        <table class="footable table table-stripped toggle-arrow-tiny" id="tableData" data-page-size='10'>
                             <thead>
                                 <tr>
                                     <th data-toggle="true">#</th>
@@ -58,28 +58,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                    
-                                    foreach($directors as $key => $director){
-                                ?>
-                                <tr>
+        						<?php
+        							
+        							foreach($actors as $key => $actor){
+        						?>
+        						<tr>
                                     <td><?= ++$key ?></td>
-                                    <!-- <td class="client-avatar"> <a href="#"> <img src="#" height="64" width="64" > </a> </td> -->
-                                    <td> <a href="<?= base_url() ?>admin/director/<?= $director['StashUsers_id']?>"><?= sprintf("%05d", $director['StashUsers_id'])  ?></a></td>
-                                    <td><?= $director['StashUsers_name']?></td>
-                                    <td><?= $director['StashUsers_email']?></td>
-                                    <td><?= $director['StashUsers_mobile']?></td>
-                                    <td><?= $this->ModelAdmin->timeElapsedString($director['StashUsers_time'])?></td>
-                                    <td><?= $director['StashUsers_ip']?></td>
-                                    <td><label class='label label-<?= ($director['StashUsers_status']) ? "primary" : "warning" ?>'><?= ($director['StashUsers_status']) ? "active" : "pending" ?></label></td>
-                                    <td><label class='label label-<?= ($director['StashUsers_mobile_status']) ? "primary" : "warning" ?>'><?= ($director['StashUsers_mobile_status']) ? "verified" : "pending" ?></label></td>
-                                </tr>
+        							<!-- <td class="client-avatar"> <a href="#"> <img src="#" height="64" width="64" > </a> </td> -->
+        							<td> <a href="<?= base_url() ?>admin/actor/<?= $actor['StashUsers_id']?>"><?= sprintf("%05d", $actor['StashUsers_id'])  ?></a></td>
+                                    <td><?= $actor['StashUsers_name']?></td>
+                                    <td><?= $actor['StashUsers_email']?></td>
+                                    <td><?= $actor['StashUsers_mobile']?></td>
+        							<td><?= $this->ModelAdmin->timeElapsedString($actor['StashUsers_time'])?></td>
+                                    <td><?= $actor['StashUsers_ip']?></td>
+                                    <td><label class='label label-<?= ($actor['StashUsers_status']) ? "primary" : "warning" ?>'><?= ($actor['StashUsers_status']) ? "active" : "pending" ?></label></td>
+                                    <td><label class='label label-<?= ($actor['StashUsers_mobile_status']) ? "primary" : "warning" ?>'><?= ($actor['StashUsers_mobile_status']) ? "verified" : "pending" ?></label></td>
+                                    <td></td>
+        						</tr>
 
-                                <?php } ?>
-                            </tbody>
+        						<?php } ?>
+        					</tbody>
                             <tfoot class="hide-if-no-paging">
                                 <tr>
-                                    <td colspan="9">
+                                    <td colspan="5">
                                         <ul class="pagination pagination-centered hide-if-no-paging"></ul>
                                     </td>
                                 </tr>
@@ -91,6 +92,6 @@
             </div>
         </div>
     </div>
-    
-    
+	
+	
 <?php include 'includes/footer.php';?>

@@ -6,13 +6,13 @@
 ?>
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>All Casting Directors</h2>
+            <h2>All Admins</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="<?= base_url() ?>admin/home/">Home</a>
                 </li>
                 <li class="active">
-                    <strong>Casting Directors</strong>
+                    <strong>Admins</strong>
                 </li>
             </ol>
         </div>
@@ -25,7 +25,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5> Director List </h5>
+                    <h5> Admin List </h5>
                     
                 </div>
                 <div class="ibox-content">
@@ -49,41 +49,35 @@
                                     <th data-toggle="true">#</th>
                                     <th>Id</th>
                                     <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Mobile</th>
-                                    <th>Registered</th>
-                                    <th>IP</th>
-                                    <th>Account</th>
-                                    <th>Mobile</th>
+                                    <th>Designation</th>
+                                    <th>Added By</th>
+                                    <th>Last Login</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                     
-                                    foreach($directors as $key => $director){
+                                    foreach($admins as $key => $admin){
                                 ?>
                                 <tr>
                                     <td><?= ++$key ?></td>
                                     <!-- <td class="client-avatar"> <a href="#"> <img src="#" height="64" width="64" > </a> </td> -->
-                                    <td> <a href="<?= base_url() ?>admin/director/<?= $director['StashUsers_id']?>"><?= sprintf("%05d", $director['StashUsers_id'])  ?></a></td>
-                                    <td><?= $director['StashUsers_name']?></td>
-                                    <td><?= $director['StashUsers_email']?></td>
-                                    <td><?= $director['StashUsers_mobile']?></td>
-                                    <td><?= $this->ModelAdmin->timeElapsedString($director['StashUsers_time'])?></td>
-                                    <td><?= $director['StashUsers_ip']?></td>
-                                    <td><label class='label label-<?= ($director['StashUsers_status']) ? "primary" : "warning" ?>'><?= ($director['StashUsers_status']) ? "active" : "pending" ?></label></td>
-                                    <td><label class='label label-<?= ($director['StashUsers_mobile_status']) ? "primary" : "warning" ?>'><?= ($director['StashUsers_mobile_status']) ? "verified" : "pending" ?></label></td>
+                                    <td> <a href="<?= base_url() ?>admin/profile/<?= $admin['CstkoAdmins_username']?>"><?= sprintf("%05d", $admin['CstkoAdmins_id'])  ?></a></td>
+                                    <td><?= $admin['CstkoAdmins_name']?></td>
+                                    <td><?= $admin['CstkoAdmins_designation']?></td>
+                                    <td><a href="<?= base_url() ?>admin/profile/<?= $admin['AddedBy'] ?>" title="<?= $admin['AddedByName'] ?>"><?= $admin['AddedBy'] ?></a></td>
+                                    <td><?= $this->ModelAdmin->timeElapsedString($admin['CstkoAdmins_last_login']) ?></td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <!-- <button class="btn-warning btn btn-xs">View</button> -->
+                                            <button class="btn-danger btn btn-xs">Block</button>
+                                        </div>
+                                    </td>
                                 </tr>
 
                                 <?php } ?>
                             </tbody>
-                            <tfoot class="hide-if-no-paging">
-                                <tr>
-                                    <td colspan="9">
-                                        <ul class="pagination pagination-centered hide-if-no-paging"></ul>
-                                    </td>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
 

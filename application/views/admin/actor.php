@@ -42,8 +42,8 @@
 
                             <p><b>Registered On: </b><i class="fa fa-clock-o"> <?= date('Y-m-d h:i a', $profile['StashUsers_time'])?></i> </p>
                             
-                            <p><b>Last Profile Update: </b><i class="fa fa-clock-o"> <?= date('Y-m-d h:i a', $profile['StashActor_last_update'])?></i> </p>
-                            <p><b>Last Login: </b><i class="fa fa-clock-o"> <?= date('Y-m-d h:i a', end($lastLogin)['StashLogins_time'] )?></i> </p>
+                            <p><b>Last Profile Update: </b><i class="fa fa-clock-o"> <?= $this->ModelAdmin->timeElapsedString($profile['StashActor_last_update'])?></i> </p>
+                            <p><b>Last Login: </b><i class="fa fa-clock-o"> <?= $this->ModelAdmin->timeElapsedString(end($lastLogin)['StashLogins_time'] )?></i> </p>
                             <p><b>Last Login IP : </b><?= end($lastLogin)['StashLogins_ip']  ?></i> </p>
                             <p><b>Email Confirmation: </b> <span class='label label-<?= ($profile['StashUsers_status']) ? 'success' : 'warning' ?>'><?= ($profile['StashUsers_status']) ? 'Active' : 'Pending' ?></span> </p>
                             <p><b>Mobile Confirmation: </b> <span class='label label-<?= ($profile['StashUsers_mobile_status']) ? 'success' : 'warning' ?>'><?= ($profile['StashUsers_mobile_status']) ? 'Verified' : 'Pending' ?></span> </p>
@@ -51,7 +51,7 @@
                             <div class="user-button">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <a href="<?= base_url() ?>admin/compose_mail/<?= urldecode($profile['StashActor_email']) ?>/" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> Send Message</a>
+                                        <a href="<?= base_url() ?>admin/sendMail/<?= urlencode($profile['StashActor_email']) ?>/" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> Send Message</a>
                                     </div>
                                     <!-- IF Have Permission. -->
                                     <!-- <div class="col-md-6">
@@ -96,7 +96,7 @@
                                         <td><?= ++$key ?></td>
                                         <td> <a href="<?= base_url() . "admin/director/" . $director['StashDirector_director_id_ref'] ?>"><?= sprintf("%05d", $director['StashDirector_director_id_ref'])  ?></a></td>
                                         <td><?= $director['StashDirector_name']?></td>
-                                        <td><?= date("Y/m/d h:i a", $director['StashDirectorActorLink_time'])?></td>
+                                        <td><?= $this->ModelAdmin->timeElapsedString($director['StashDirectorActorLink_time'])?></td>
                                         <td><label class='label label-<?= ($director['StashDirectorActorLink_status']) ? "primary" : "warning" ?>'><?= ($director['StashDirectorActorLink_status']) ? "In List" : "Removed" ?></label></td>
                                     </tr>
 
@@ -130,7 +130,7 @@
                                     ?>
                                     <tr>
                                         <td><?= ++$key ?></td>
-                                        <td><?= date("Y-m-d h:i a", (int)$login['StashLogins_time'])?></td>
+                                        <td><?= $this->ModelAdmin->timeElapsedString($login['StashLogins_time'])?></td>
                                         <td><?= $login['StashLogins_ip'] ?></td>
                                     </tr>
 
@@ -264,7 +264,7 @@
                                         <td><?= $experience['StashActorExperience_role']?></td>
                                         <td><?= $experience['StashActorExperience_blurb']?></td>
                                         <td><a href='<?= $experience['StashActorExperience_link']?>' target='_blank'> view </a></td>
-                                        <td><?= date("Y/m/d h:i a", $experience['StashActorExperience_time'])?></td>
+                                        <td><?= $this->ModelAdmin->timeElapsedString($experience['StashActorExperience_time'])?></td>
                                     </tr>
 
                                     <?php } ?>
@@ -306,7 +306,7 @@
                                         <td><?= $training['StashActorTraining_course']?></td>
                                         <td><?= $training['StashActorTraining_start_time'] . " - " . $training['StashActorTraining_end_time']?></td>
                                         <td><?= $training['StashActorTraining_blurb']?></td>
-                                        <td><?= date("Y/m/d h:i a", $training['StashActorTraining_time'])?></td>
+                                        <td><?= $this->ModelAdmin->timeElapsedString($training['StashActorTraining_time'])?></td>
                                     </tr>
 
                                     <?php } ?>

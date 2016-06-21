@@ -13,15 +13,16 @@
 
     <!-- Morris -->
     <link href="<?= ADMIN ?>/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <!-- FooTable -->
+    <link href="<?= ADMIN ?>/css/plugins/footable/footable.core.css" rel="stylesheet">
 	
 	<link href="<?= ADMIN ?>/css/plugins/summernote/summernote.css" rel="stylesheet">
     <link href="<?= ADMIN ?>/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
 
     <link href="<?= ADMIN ?>/css/animate.css" rel="stylesheet">
     <link href="<?= ADMIN ?>/css/style.css" rel="stylesheet">
-    <!-- FooTable -->
-    <link href="<?= ADMIN ?>/css/plugins/footable/footable.core.css" rel="stylesheet">
-	
+
 	<!-- Sweet Alert -->
     <link href="<?= ADMIN ?>/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
