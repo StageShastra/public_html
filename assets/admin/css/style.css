@@ -7491,3 +7491,7 @@ body.skin-3 {
   width: 200px;
   height: 200px;
 }
+
+.ui-front {
+  z-index: 2060;
+}

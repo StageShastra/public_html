@@ -39,30 +39,38 @@ class Home extends CI_Controller {
 		$refer = 'direct';
 
 		$link = (isset($_SESSION['Cstko_link'])) ? trim($_SESSION['Cstko_link']) : trim($this->input->cookie("Cstko_link"));
-		if( $link != '' ){
-			if(strlen($link) == 6){
-				$linkDetails = $this->Auth->getLinkDetails($link);
-				$pageInfo['mobile'] = $linkDetails['StashSMSInvites_mobile'];
-				$pageInfo['director'] = $linkDetails['StashSMSInvites_director_id_ref'];
-				$pageInfo['project'] = $linkDetails['StashSMSInvites_project_id_ref'];
-				$pageInfo['link_id'] = $linkDetails['StashSMSInvites_id'];
+		if(!is_numeric($link)){
+			if( $link != '' ){
+				if(strlen($link) == 6){
+					$linkDetails = $this->Auth->getLinkDetails($link);
+					$pageInfo['mobile'] = $linkDetails['StashSMSInvites_mobile'];
+					$pageInfo['director'] = $linkDetails['StashSMSInvites_director_id_ref'];
+					$pageInfo['project'] = $linkDetails['StashSMSInvites_project_id_ref'];
+					$pageInfo['link_id'] = $linkDetails['StashSMSInvites_id'];
 
-				$refer = 'sms';
-				$refer_id = $linkDetails['StashSMSInvites_id'];
-			}elseif(strlen($link) == 8){
-				// email...
-				$linkDetails = $this->Auth->getEmailLinkDetails($link);
-				$pageInfo['email'] = $linkDetails['StashEmailInvite_email'];
-				$pageInfo['director'] = $linkDetails['StashEmailInvite_director_id_ref'];
-				$pageInfo['project'] = $linkDetails['StashEmailInvite_project_id_ref'];
-				$pageInfo['link_id'] = $linkDetails['StashEmailInvite_id'];
+					$refer = 'sms';
+					$refer_id = $linkDetails['StashSMSInvites_id'];
+				}elseif(strlen($link) == 8){
+					// email...
+					$linkDetails = $this->Auth->getEmailLinkDetails($link);
+					$pageInfo['email'] = $linkDetails['StashEmailInvite_email'];
+					$pageInfo['director'] = $linkDetails['StashEmailInvite_director_id_ref'];
+					$pageInfo['project'] = $linkDetails['StashEmailInvite_project_id_ref'];
+					$pageInfo['link_id'] = $linkDetails['StashEmailInvite_id'];
 
-				$refer = 'email';
-				$refer_id = $linkDetails['StashEmailInvite_id'];
-			}else{
-				// Adv referal
+					$refer = 'email';
+					$refer_id = $linkDetails['StashEmailInvite_id'];
+				}
+				
 			}
-			
+		}else{
+			$link = (int)$link;
+			if( $link ){
+				$pageInfo['link_id'] = $link;
+
+				$refer = 'refer';
+				$refer_id = $link;
+			}
 		}
 
 		/*print_r($this->input->post());
@@ -116,14 +124,46 @@ class Home extends CI_Controller {
 	    						$this->Auth->updateSMSLinkUsed( $this->input->post("link_id") );
 	    					elseif($refer == 'email')
 	    						$this->Auth->updateEmailLinkUsed( $this->input->post("link_id") );
-	    					else
-	    						// referal link
+	    					
 	    					if(isset($_SESSION['Cstko_link']))
 	    						unset($_SESSION['Cstko_link']);
 
 	    					if(isset($_COOKIE['Cstko_link']))
 	    						unset($_COOKIE['Cstko_link']);
 	    					setcookie('Cstko_link', null, -1, '/');
+	    				}else{
+
+	    					// check for referal
+
+	    					if( $refer = 'refer' ){
+
+	    						$linkDetails = $this->Auth->getPromoLinkDetailsById( $refer_id );
+	    						if( count($linkDetails) ){
+
+	    							$directors = json_decode($linkDetails['StashPromo_directors'], true);
+	    							$projects = json_decode($linkDetails['StashPromo_projects'], true);
+
+	    							foreach ($directors as $key => $director) {
+	    								$this->Auth->insertActorInDirectorList($response, $director);
+	    							}
+
+	    							foreach ($projects as $key => $project) {
+	    								$this->Auth->insertActorInProject($response, $project);
+	    							}
+
+	    							$this->Auth->updatePromoUsed( $refer_id, $response );
+
+	    						}
+
+	    						if(isset($_SESSION['Cstko_link']))
+		    						unset($_SESSION['Cstko_link']);
+
+		    					if(isset($_COOKIE['Cstko_link']))
+		    						unset($_COOKIE['Cstko_link']);
+		    					setcookie('Cstko_link', null, -1, '/');
+
+	    					}
+
 	    				}
 	    			}else{
 	    				$this->Auth->setupDirectorProfile($response);
@@ -216,6 +256,10 @@ class Home extends CI_Controller {
 	public function joinBySMS($value = ''){
 		$this->load->model("Auth");
 		$link = trim($value);
+
+		if( $this->Auth->promoExist( $link ) )
+			redirect( base_url() . "home/promo/{$link}" );
+
 		$linkDetails = $this->Auth->getLinkDetails($link);
 		if(count($linkDetails)){
 			$this->Auth->updateSMSLinkOpened( $linkDetails['StashSMSInvites_id'] );		
@@ -238,6 +282,25 @@ class Home extends CI_Controller {
 			}
 		}else{
 			redirect(base_url());
+		}
+	}
+
+	public function promo($link = ''){
+		$link = trim($link);
+		
+		if( strlen($link) ){
+			$this->load->model("Auth");
+			$linkDetails = $this->Auth->getPromoLinkDetails( $link );
+			if( !count($linkDetails) )
+				redirect( base_url() );
+			$this->Auth->promoLinkOpened($linkDetails['StashPromo_id']);
+			$l = $linkDetails['StashPromo_id'];
+			setcookie("Cstko_link", $l, time() + 3600, "/");
+			$_SESSION['Cstko_link'] = $l;
+			redirect( base_url() . "home/register/actor" );
+
+		}else{
+			redirect( base_url() );
 		}
 	}
 	

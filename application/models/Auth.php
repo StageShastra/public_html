@@ -236,6 +236,20 @@
 			$query = $this->db->get("stash-email-invites", 1);
 			return $query->first_row('array');
 		}
+
+		public function getPromoLinkDetails($link = ''){
+			$this->db->where("StashPromo_code", $link);
+			$this->db->where("StashPromo_status", 1);
+			$query = $this->db->get("stash-promo", 1);
+			return $query->first_row('array');
+		}
+
+		public function getPromoLinkDetailsById($ref = 0){
+			$this->db->where("StashPromo_id", $ref);
+			$this->db->where("StashPromo_status", 1);
+			$query = $this->db->get("stash-promo", 1);
+			return $query->first_row('array');
+		}
 		
 		public function getProjectNameForAC($t = ''){
 			$this->db->like("StashProject_name", $t, "after");
@@ -374,6 +388,33 @@
 		public function updateEmailLinkUsed($id = ''){
 			$this->db->where("StashEmailInvite_id", $id);
 			$this->db->update("stash-email-invites", array('StashEmailInvite_status' => 1));
+		}
+
+		public function promoLinkOpened($ref = 0){
+			$d = array(
+						'StashPromoOpen_id' => null,
+						'StashPromoOpen_promo_id_ref' => $ref,
+						'StashPromoOpen_ip' => $this->input->ip_address(),
+						'StashPromoOpen_user_agent' => $this->agent->agent_string(),
+						'StashPromoOpen_time' => time()
+					);
+			$this->db->insert("stash-promo-opened", $d);
+		}
+
+		public function updatePromoUsed($p = 0, $r = 0){
+			$d = array(
+						'StashPromoUsed_id' => null,
+						'StashPromoUsed_promo_id_ref' => $p,
+						'StashPromoUsed_user_id_ref' => $r,
+						'StashPromoUsed_time' => time()
+					);
+			$this->db->insert("stash-promo-used", $d);
+		}
+
+		public function promoExist($l = ''){
+			$this->db->where("StashPromo_code", $l);
+			$this->db->where("StashPromo_status", 1);
+			return $this->db->get("stash-promo", 1)->num_rows();
 		}
 	}
 ?>

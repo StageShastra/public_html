@@ -148,4 +148,168 @@ $(document).ready(function(){
 		return false;
 	});
 
+	$(document).on("change", "input#promoCode", function(){
+		$that = $(this);
+		term = $(this).val();
+		data = {request: "CheckPromo", data: JSON.stringify({term: term})};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				if(response.status){
+					$that.parent().parent().addClass("has-error");
+					$that.after("<i class='help-block m-b-none'> this promocode already used. </i>");
+				}else{
+					$("i.help-block").remove();
+				}
+			}
+		});
+	});
+
+
+	$("#modelDisplay").modal("hide");
+	modalType = '';
+	autoLink_base = base_url + "admin/autoComplete/";
+	director_ids = [], project_ids = [];
+
+	$(document).on("click", ".toggleAddModal", function(){
+		type = $(this).attr("data-for");
+		mfor = $("#modelTBody").attr("data-for");
+		if(type != mfor){
+			$("#modelTBody").html("");
+		}
+		$("input#searchTableRefer").val("");
+		modalType = type;
+		autoLink = '';
+
+		updateTableList(modalType);
+
+		if( type == 'director' ){
+			$(".updateModelTitle").html("Director");
+			$("#searchTableRefer").attr("placeholder", "Type Director Name, Email, Mobile here...");
+			autoLink = autoLink_base + type;
+			$("#modelTBody").attr("data-for", 'director');
+		}else{
+			$(".updateModelTitle").html("Project");
+			$("#searchTableRefer").attr("placeholder", "Type Project Name here...");
+			autoLink = autoLink_base + type;
+			autoLink += "?director=" + encodeURI($("input[name='director_ids']").val());
+			$("#modelTBody").attr("data-for", 'project');
+		}
+
+		$("#modelDisplay").modal("show");
+
+		$("#searchTableRefer").autocomplete({
+			source: autoLink,
+			minLenght: 2,
+			select: function(ev, ui){
+				
+				id = Number(ui.item.id);
+				name = ui.item.value;
+				obj = {name: name, id: id};
+				if( !alreadySelected( id, type ) ){
+					if(type == 'director'){
+						director_ids.push(obj);
+						$("#modelTBody").append( "<tr> <td><a href='"+base_url+"admin/director/"+id+"'> "+name+" </a></td> <td><a href='#' class='btn-danger btn btn-xs removeFromTd' data-for='director' data-id='"+id+"'><i class='fa fa-ban'></i></a></td> </tr>" );
+					}else{
+						project_ids.push(obj);
+						$("#modelTBody").append( "<tr> <td><a href='"+base_url+"admin/project/"+id+"'> "+name+" </a></td> <td><a href='#' class='btn-danger btn btn-xs removeFromTd' data-for='project' data-id='"+id+"'><i class='fa fa-ban'></i></a></td> </tr>" );
+					}
+				}else{
+					alert("Already Selected...");
+				}
+			}
+		});
+
+		return false;
+	});
+
+	function alreadySelected(id, ty) {
+		if(ty == 'director')
+			arr = director_ids;
+		else
+			arr = project_ids;
+
+		for( i = 0; i < arr.length; i++ ){
+			if(arr[i].id == id)
+				return true;
+		}
+		return false;
+	}
+
+	function updateTableList( arg ) {
+		if(arg == 'director')
+			arr = director_ids;
+		else
+			arr = project_ids;
+
+		$("#modelTBody").html("");
+		for( i = 0; i < arr.length; i++ ){
+			name = arr[i].name;
+			id = arr[i].id;
+			$("#modelTBody").append( "<tr> <td><a href='"+base_url+"admin/"+arg+"/"+id+"'> "+name+" </a></td> <td><a href='#' class='btn-danger btn btn-xs removeFromTd' data-for='"+arg+"' data-id='"+id+"'><i class='fa fa-ban'></i></a></td> </tr>" );
+		}
+	}
+
+	$(document).on("click", ".saveChanges", function(){
+		txt = "Not Selected";
+		ids = [];
+		if( modalType == 'director'){
+			len = director_ids.length;
+			if(len){
+				txt = "";
+				for( i = 0; i < len; i++ ){
+					txt += director_ids[i].name + ", ";
+					ids.push(director_ids[i].id);
+				}
+				txt += len + " directors selected";
+				$(".addOrUpdate").html("Change");
+			}else{
+				$(".addOrUpdate").html("Add");
+			}
+			$("#director_list").html(txt);
+			$("input[name='director_ids']").val(JSON.stringify(ids));
+		}else{
+			len = project_ids.length;
+			if(len){
+				txt = "";
+				for( i = 0; i < len; i++ ){
+					txt += project_ids[i].name + ", ";
+					ids.push(project_ids[i].id);
+				}
+				txt += len + " projects selected";
+				$(".addOrUpdate").html("Change");
+			}else{
+				$(".addOrUpdate").html("Add");
+			}
+			$("#project_list").html(txt);
+			$("input[name='project_ids']").val(JSON.stringify(ids));
+		}
+		$("#modelDisplay").modal("hide");
+		return false;
+	});
+
+	$(document).on("click", ".removeFromTd", function(){
+		ty = $(this).attr("data-for");
+		id = $(this).attr("data-id");
+		if(ty == 'director')
+			arr = director_ids;
+		else
+			arr = project_ids;
+
+		
+		for( i = 0; i < arr.length; i++ ){
+			if(arr[i].id == id){
+				arr.splice(i, 1);
+				break;
+			}
+		}
+
+		$(this).parent().parent().remove();
+		return false;
+	});
+
+	
+
 });

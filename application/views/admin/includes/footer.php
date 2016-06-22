@@ -12,6 +12,7 @@
     </script>
     <!-- Mainly scripts -->
     <script src="<?= ADMIN ?>/js/jquery-2.1.1.js"></script>
+    <script src="<?= ADMIN ?>/js/jquery-ui-1.11.4.min.js"></script>
     <script src="<?= ADMIN ?>/js/bootstrap.min.js"></script>
     <script src="<?= ADMIN ?>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="<?= ADMIN ?>/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
@@ -30,6 +31,8 @@
     <script src="<?= ADMIN ?>/js/demo/peity-demo.js"></script>
 	
 	<script src="<?= ADMIN ?>/js/plugins/sweetalert/sweetalert.min.js"></script>
+
+    <script src="<?= ADMIN ?>/js/plugins/tag/tags.js"></script>
 
     <!-- Custom and plugin javascript -->
     <script src="<?= ADMIN ?>/js/inspinia.js"></script>
