@@ -139,6 +139,9 @@ class Home extends CI_Controller {
 		$this->parseInvitaionLink($link);
 		redirect(base_url() . "home/register/actor/");
 	}
+	public function pricing($link = ''){
+		$this->load->view("pricing");
+	}
 	public function connect($link = ''){
 		//$this->parseInvitaionLink($link);
 		$encryptedText = str_replace(" ", "+", urldecode($link));

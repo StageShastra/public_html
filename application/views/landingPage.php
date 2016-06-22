@@ -343,8 +343,9 @@
                       <center><button type="submit" class="btn submit-btn firstcolor center" id="btn-login" ><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign In</button></center>
                       <div class="alert alert-danger margin-top hidden" id="error-alert">
                        <button type="button" class="close" data-dismiss="alert">x</button>
-                        <strong>Error! </strong>
+                        <center><strong>Error! </strong>
                          Please enter a valid Username and Password
+                        </center>
                       </div>
                     </form>
                 </p>

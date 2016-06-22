@@ -951,3 +951,7 @@ button:hover
 	font-size: 8px;
 	display: none;
 }
+.navbar-brand
+{
+	width:275px;
+}
