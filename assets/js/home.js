@@ -1,8 +1,8 @@
 $(document).ready(function(){
 	
 	//For Main Sevrer
-	var url = "/public_html/ajax/",
-		base = "/public_html/";
+	var url = "/Castiko/ajax/",
+		base = "/Castiko/";
 		
 	//For Localhost
 	/*var url = "/public_html/beta/ajax/",
@@ -905,6 +905,27 @@ $(document).ready(function(){
 		var unhide = $(this).attr("data-unhide-id");
 		if($(unhide).toggle('slow'));
 		//console.log(hide, unhide);
+	});
+
+	var contactList = {};
+
+	function contactListAjax( req ) {
+		data = {request: "ContactList", data: JSON.stringify({ for: req })};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			async: false,
+			success: function(response){
+				contactList = response.data;
+			}
+		});
+	}
+
+	$(document).on("click", "a.contactListNav", function(){
+		thisfor = $(this).attr("data-for");
+		contactListAjax( thisfor );
+		console.log(contactList);
 	});
 
 });

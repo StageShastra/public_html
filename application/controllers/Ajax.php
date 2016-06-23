@@ -50,8 +50,8 @@
 					case "SMSInvitation":
 						$this->SMSInvitation($data);
 						break;
-					case "testAttachment":
-						$this->testAttachment($data);
+					case "ContactList":
+						$this->contactLits($data);
 						break;
 					
 					default:
@@ -63,8 +63,22 @@
 			}
 		}
 		
-		public function testAttachment($data){
-			print_r($data);
+
+		public function contactLits($data = []){
+			$this->load->model("ModelDirector");
+			$d = [];
+			if( $data['for'] == 'iEmail' )
+				$d = $this->ModelDirector->inviteEmailList( $this->session->userdata("StaSh_User_id") );
+			elseif( $data['for'] == 'iSMS' )
+				$d = $this->ModelDirector->inviteEmailList( $this->session->userdata("StaSh_User_id") );
+			elseif( $data['for'] == 'cEmail' )
+				$d = $this->ModelDirector->inviteEmailList( $this->session->userdata("StaSh_User_id") );
+			elseif( $data['for'] == 'cSMS' )
+				$d = $this->ModelDirector->inviteEmailList( $this->session->userdata("StaSh_User_id") );
+			else
+				$this->response(false, "Invalid Selection.{$data['for']}");
+			
+			$this->response(true, "List", $d);
 		}
 		
 		public function SMSInvitation($data = []){
@@ -144,7 +158,7 @@
 			$data['msg'] = str_replace("\n", "<br>", $data['msg']);
 			$data['project_id'] = $projectID;
 
-			$msgId = $this->ModelDirector->insertSMSMsg($data['msg'], 'email');
+			$msgId = $this->ModelDirector->insertSMSMsg($data['msg'], 'email', $data['subject']);
 
 			$filterEmails = $this->filterEmail( $data['emails'] );
 			$emails = $filterEmails[0];
@@ -330,7 +344,18 @@
 			$this->load->model("ModelDirector");
 			$this->load->model("Email");
 			$data['mail'] = str_replace("\n", "<br>", $data['mail']);
-			$sent = $this->Email->sendAuditionMail($data['contact']['email'], $data['subject'], $data['mail']);
+			$msgId = $this->ModelDirector->insertSMSMsg($data['msg'], 'email', $data['subject']);
+			$emails = $data['contact']['email'];
+
+			$isQues = 1;//$data['isQues'];
+			$time = time();
+
+			foreach ($emails as $key => $email) {
+				if( $this->Email->sendAuditionMailUpdated( $email, $time, $msgId ) ){
+					
+				}
+			}
+
 			if($sent){
 				$id = $this->ModelDirector->insertSendMail($data['contact']['ref'], $data['mail'], $data['subject']);
 				$this->ModelDirector->updateCountAudSMS(count($data['contact']['ref']), $id, "contact", "email");

@@ -314,9 +314,10 @@
 			$this->db->insert("stash-sms-invites", $d);
 		}
 
-		public function insertSMSMsg($msg = '', $type = 'sms'){
+		public function insertSMSMsg($msg = '', $type = 'sms', $sub = "SMS Invitation."){
 			$d = array(
 						'StashInviteMsg_id' => null,
+						'StashInviteMsg_subject' => $sub,
 						'StashInviteMsg_message' => $msg,
 						'StashInviteMsg_type' => $type,
 						'StashInviteMsg_status' => 1
@@ -446,6 +447,27 @@
 				$result[] = $f['StashUsers_mobile'];
 			}
 
+			return $result;
+		}
+
+		public function getUserBascis($field = 'StashActor_email', $val, $select = "*"){
+			$this->db->select( $select );
+			$this->db->from("stash-actor");
+			$this->db->where($field, $val);
+			return $this->db->get()->first_row();
+		}
+
+		public function inviteEmailList($ref = 0){
+			$this->db->where("StashEmailInvite_director_id_ref", $ref);
+			$fetch = $this->db->get("stash-email-invites")->result("array");
+			$result = [];
+			foreach ($fetch as $key => $f) {
+				if( $f['StashEmailInvite_status'] == 0)
+					$f['user'] = $this->getUserBascis("StashActor_email", $f['StashEmailInvite_email'], "StashActor_actor_id_ref, StashActor_name, StashActor_email, StashActor_avatar");
+				else
+					$f['user'] = array();
+				$result[] = $f;
+			}
 			return $result;
 		}
 	}

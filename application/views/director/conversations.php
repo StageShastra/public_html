@@ -208,10 +208,10 @@
             </nav>
             <div class="container-fluid margintop80 conversation_container">
               <ul class="nav nav-tabs nav-justified">
-                <li class="active"><a data-toggle="tab" href="#email">Email</a></li>
-                <li><a data-toggle="tab" href="#sms">SMS</a></li>
-                <li><a data-toggle="tab" href="#email-invites">Email Invites</a></li>
-                <li><a data-toggle="tab" href="#sms-invites">Email Invites</a></li>
+                <li ><a data-toggle="tab" href="#email" class="contactListNav" data-for="cEmail">Email</a></li>
+                <li><a data-toggle="tab" href="#sms" class="contactListNav" data-for="cSMS">SMS</a></li>
+                <li class="active"><a data-toggle="tab" href="#email-invites" class="contactListNav" data-for="iEmail">Email Invites</a></li>
+                <li><a data-toggle="tab" href="#sms-invites" class="contactListNav" data-for="iSMS">SMS Invites</a></li>
               </ul>
 
               <div class="tab-content">
@@ -228,7 +228,7 @@
                       <tr class="toggleview" data-unhide-id="#test1">
                         <td class="col-sm-3">
                           <div class="addresse_details">
-                            <img src="http://localhost:8888/public_html/assets/img/actors/5cc3650da2aa782ea3052bd7b240fa9c.jpg" class="thumbnails" data-id="'+i+'" />
+                            <img src="<?= IMG ?>/actors/5cc3650da2aa782ea3052bd7b240fa9c.jpg" class="thumbnails" data-id="'+i+'" />
                             <span class="row_text">Prashant Kiran </span>
                           </div>
                         </td>
@@ -243,7 +243,7 @@
                                 <tbody>
                                   <tr>
                                     <td class="col-sm-2 vertical_middle">
-                                      <img src="http://localhost:8888/public_html/assets/img/actors/5cc3650da2aa782ea3052bd7b240fa9c.jpg" class="thumbnails_small" data-id="'+i+'" />
+                                      <img src="<?= IMG ?>/actors/5cc3650da2aa782ea3052bd7b240fa9c.jpg" class="thumbnails_small"/>
                                     </td>
                                     <td class="col-sm-4 row_text vertical_middle">
                                       Prashant Kiran
@@ -258,7 +258,7 @@
                                   </tr>
                                   <tr>
                                     <td class="col-sm-2 vertical_middle">
-                                      <img src="http://localhost:8888/public_html/assets/img/actors/5cc3650da2aa782ea3052bd7b240fa9c.jpg" class="thumbnails_small" data-id="'+i+'" />
+                                      <img src="<?= IMG ?>/actors/5cc3650da2aa782ea3052bd7b240fa9c.jpg" class="thumbnails_small" data-id="'+i+'" />
                                     </td>
                                     <td class="col-sm-4 row_text vertical_middle">
                                       Martin Brown
@@ -272,7 +272,7 @@
                                   </tr>
                                   <tr>
                                     <td class="col-sm-2 vertical_middle">
-                                      <img src="http://localhost:8888/public_html/assets/img/actors/5cc3650da2aa782ea3052bd7b240fa9c.jpg" class="thumbnails_small" data-id="'+i+'" />
+                                      <img src="<?= IMG ?>/actors/5cc3650da2aa782ea3052bd7b240fa9c.jpg" class="thumbnails_small" data-id="'+i+'" />
                                     </td>
                                     <td class="col-sm-4 row_text vertical_middle">
                                       Dev Anand
@@ -286,7 +286,7 @@
                                   </tr>
                                   <tr>
                                     <td class="col-sm-2 vertical_middle">
-                                      <img src="http://localhost:8888/public_html/assets/img/actors/5cc3650da2aa782ea3052bd7b240fa9c.jpg" class="thumbnails_small" data-id="'+i+'" />
+                                      <img src="<?= IMG ?>/actors/5cc3650da2aa782ea3052bd7b240fa9c.jpg" class="thumbnails_small" data-id="'+i+'" />
                                     </td>
                                     <td class="col-sm-4 row_text vertical_middle">
                                       Annie Besant
@@ -303,7 +303,7 @@
                               </table>
                             </div>
                             <div class="col-sm-6">
-                               <iframe src="http://localhost:8888/public_html/director/emailPreview/?msg=dsnakjdkjahskdjhaksjhdkjhas" class="center" id="emailPreviewiFrame" width="600" height="500"></iframe>
+                               <iframe src="<?= base_url() ?>director/emailPreview/?msg=dsnakjdkjahskdjhaksjhdkjhas" class="center" id="emailPreviewiFrame" width="600" height="500"></iframe>
                             </div>
                             <div class="col-sm-3">
                               <div class="conversation_summary">
