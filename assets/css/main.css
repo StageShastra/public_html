@@ -249,10 +249,6 @@ input[type=checkbox].css-checkbox {
 .navbar-nav {
     margin: 0px;
 }
-#tag-line{
-	position: relative;
-	margin-left: 90px;
-}
 .dropdown-menu > li > a:hover {
     background-color: #ffd6d9;
     background-image: none;

@@ -317,31 +317,6 @@
             .container-fluid{
                 padding:0px;
             }
-            .navbar-fixed-top{
-                margin-left: 0%;
-                margin-right: 0%;
-            }
-            .navbar-header{
-                height: 75px;
-            }
-            .headname{
-                position: relative;
-                top:15px;
-                font-size: 20px;
-            }
-            .brands{
-                width: 55px;
-                height: auto;
-            }
-            .navbar-toggle{
-                margin-right: 20px;
-                position: relative;
-                top:20px;
-                margin-top: 0px;
-            }
-             .tagline{
-                font-size: 9px;
-            }
             .light-padded
             {
                 padding: 0px 5px 0px 10px !important;
@@ -381,25 +356,6 @@
             .container-fluid{
                 padding:0px;
             }
-            .navbar-fixed-top{
-                margin-left: 0%;
-                margin-right: 0%;
-            }
-            .headname{
-                position: relative;
-                top:15px;
-                font-size: 22px;
-            }
-            .brands{
-                width: 60px;
-                height: auto;
-            }
-            .tagline{
-                font-size: 9px;
-            }
-            .navbar-toggle{
-                margin-right: 20px;
-            }
             .no_padding_small{
             padding-left: 0px;
             padding-right: 0px;
@@ -416,19 +372,6 @@
         @media screen and (min-width: 992px) {
             body {
                 font-size: 1.1em;
-            }
-            .navbar-fixed-top{
-                margin-left: 0%;
-                margin-right: 0%;
-            }
-            .headname{
-                position: relative;
-                top:18px;
-                font-size: 22px;
-            }
-            .brands{
-                width: 65px;
-                height: auto;
             }
             .info-small{
                 font-size: 12px;
@@ -460,19 +403,6 @@
             #home{
             padding-left:15px;
             padding-right: 15px;
-            }
-            .navbar-fixed-top{
-                margin-left: 0%;
-                margin-right: 0%;
-            }
-            .headname{
-                position: relative;
-                top:20px;
-                font-size: 24px;
-            }
-            .brands{
-                width: 85px;
-                height: auto;
             }
             .light-padded
             {
@@ -667,16 +597,23 @@ textarea{
                 <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-
-                        <a class="navbar-brand" href="<?= base_url() ?>">
-                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="headname"><span >C A S T I K O</span><br><span class="firstcolor info-small tagline"><?= M_TagLine?></span></b></span>
-                        </a>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="<?= base_url() ?>">
+                            <img src="<?= IMG ?>/logo.png" class="brands "/>
+                            <div class="vertical-middle brandname title">
+                                <?= M_Title ?>
+                                <br>
+                                <span id="tag-line" class="firstcolor info-small">
+                                Making Casting easier!                      
+                                </span>
+                            </div>
+                            
+                </a>
                     </div> 
 
                     <!-- Collect the nav links, forms, and other content for toggling -->

@@ -117,7 +117,7 @@
     margin-right: 15px;
     margin-bottom: 8px;
     background-image: none;
-    border: 1px solid #fc0;
+    border: 1px solid #fc0 !important;
     border-radius: 4px;
 }
 .navbar-toggle .icon-bar {
@@ -125,7 +125,7 @@
     width: 22px;
     height: 2px;
     border-radius: 1px;
-    background-color: #fc0 /* change this to any color you want! */;
+    background-color: #fc0 !important; /* change this to any color you want! */;
 }
 .page-scroll > a:hover{
     color: #fff;
