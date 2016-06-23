@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	//For Main Sevrer
-	var url = "/Castiko/ajax/",
-		base = "/Castiko/";
+	var url = "/public_html/ajax/",
+		base = "/public_html/";
 		
 	//For Localhost
 	/*var url = "/public_html/beta/ajax/",
@@ -29,7 +29,8 @@ $(document).ready(function(){
 		});
 		var user = formdata['type'];
 		data = {request: "UserLogin", data: JSON.stringify(formdata)};
-
+        console.log(that);
+        console.log(user);
 		$.ajax({
 			url: url,
 			type: type,
@@ -41,6 +42,7 @@ $(document).ready(function(){
 
 					window.location.href = base + user;
 				}else{
+                    console.log(data);
                     $("#login-error-" + user).html(response.message).show(500).delay(5000).hide(500);
                 }
 				
@@ -157,19 +159,15 @@ function actor_click(){
         image.src = "../img/actor_on.png";
     }
 }
-  $(function() {
-    $('a[href*="#"]:not([href="#"])').click(function() {
-      if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-        var target = $(this.hash);
-        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-        if (target.length) {
-          $('html, body').animate({
-            scrollTop: target.offset().top
-          }, 1000);
-          return false;
-        }
-      }
+$(document).on("click", ".toggleEdit", function(){
+        var unhide = $(this).attr("data-unhide-id");
+        var hide = $(this).attr("data-hide-id");
+        $(unhide).removeClass("hidden");
+        $(hide).addClass("hidden");
+
+        //console.log(hide, unhide);
+
     });
-  });
+ 
 
 });
