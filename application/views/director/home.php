@@ -188,7 +188,25 @@
                 <span class="submit-btn firstcolor notice-selected-actors">
                   <p><span>2</span> Selected</p>
                 </span>
+
+
+                <!---floating buttons -->
+                <div>
+                  <button type="submit" class="btn submit-btn firstcolor bulk-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><span class="glyphicon glyphicon-pencil"></span></button>
+
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </div>
+
                 <button type="submit" class="btn submit-btn firstcolor contact-btn populateContactForm" data-toggle="modal" data-target="#<?= ($isAllowed) ? "contactmodal" : "notAllowedModal" ?>"><span class="glyphicon glyphicon-edit"></span></button>
+                <!--floating buttons end-->
+
+
                 <div class="alert alert-success" id="success_send" role="alert">Mail sent to all the actors.</div>
                 <div class="alert alert-danger"  id="failure_send" role="alert">Error sending mail! Please try again.</div>
                 <div class="container col-sm-12 center" id="browse-table">

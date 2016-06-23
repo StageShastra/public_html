@@ -436,6 +436,33 @@ div.img-div{
     border-color: #FF003A;
     color: #FF003A;
 }
+.bulk-btn {
+	
+	background-color: #ebab18;
+	color: white;
+	width: 80px;
+	height: 80px;
+	//text-indent: -9999px;
+	position: fixed;
+	z-index: 999;
+	right: 20px;
+	bottom: 110px;
+	font-size: 25px;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+}
+.bulk-btn:hover{
+	background-color: #fff;
+    border-color: #ebab18;
+    color: #ebab18;
+}
+.bulk-btn:focus{
+	background-color: #fff;
+    border-color: #ebab18;
+    color: #ebab18;
+}
+
 
 .notice-selected-actors{
 	background-color: #FF003A;
