@@ -229,14 +229,6 @@ class Home extends CI_Controller {
 	public function pricing($link = ''){
 		$this->load->view("pricing");
 	}
-	public function connect($link = ''){
-		//$this->parseInvitaionLink($link);
-		$encryptedText = str_replace(" ", "+", urldecode($link));
-		$encryptedText = str_replace("_", "/", $encryptedText);
-		$this->load->library('encrypt');
-		$info = $this->encrypt->decode(trim($encryptedText));
-		$info = explode("_", $info);
-
 
 	public function connect($link = ''){
 		
