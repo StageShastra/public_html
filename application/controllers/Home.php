@@ -99,8 +99,15 @@ class Home extends CI_Controller {
 		}
 		
 		$pageInfo['page'] = $type;
-
-		$this->load->view("signup", $pageInfo);
+		if($type =="director")
+		{
+			$this->load->view("signup_director", $pageInfo);	
+		}
+		if($type =="actor")
+		{
+			$this->load->view("signup_actor", $pageInfo);	
+		}
+		
 	}
 
 	public function forgotpassword($value=''){

@@ -189,24 +189,8 @@ input[type=checkbox].css-checkbox {
 				user-select: none;
 			}
 /* home css */
-.brands{
-	float: left;
-	width: 60px;
-	/* height: 75px; */
-	margin-top:auto;
-	margin-bottom: auto;
-	margin-left: 5px;
-	margin-right: 10px;
-}
 
-.navbar-fixed-top {
-    min-height: 70px;
-    background-color: white;
-    padding-top: 10px;
-    margin-left:3%;
-    margin-right:3%;  
 
-}
 .navbar-default{
    -webkit-box-shadow: inset 0 0px 0 rgba(255,255,255,.15),0 0px 0px rgba(0,0,0,.075); 
 	box-shadow: inset 0 0px 0 rgba(255,255,255,.15),0 0px 0px rgba(0,0,0,.075);
@@ -221,8 +205,8 @@ input[type=checkbox].css-checkbox {
 .custom-navbar{
 	background: none;
 	background-color: #fff;
-	/* padding-top: 20px; */
-	/* padding-bottom:20px; */
+	padding-top: 20px;
+	padding-bottom:20px; 
 	margin-bottom: 30px;
 }
 .navbar-header{
@@ -241,14 +225,13 @@ input[type=checkbox].css-checkbox {
 }
 .vertical-middle{
 	position: relative;
-	top: 13px;
+    top: 25px
 }
-.brandname{
-	font-size: 25px;
-}
+
 .navbar-nav {
     margin: 0px;
 }
+
 .dropdown-menu > li > a:hover {
     background-color: #ffd6d9;
     background-image: none;
@@ -720,7 +703,7 @@ div.img-div{
 	padding: 75px;
 }
 .edit-button{
-	color: gray;
+	color: rgba(128, 128, 128, 0.43);
 	font-size: 14px;
 	position: relative;
 	right: -25px;
@@ -946,8 +929,4 @@ button:hover
 	padding: 3px;
 	font-size: 8px;
 	display: none;
-}
-.navbar-brand
-{
-	width:275px;
 }

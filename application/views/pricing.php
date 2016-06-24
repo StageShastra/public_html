@@ -136,7 +136,10 @@ a.anchor {
     padding-left: 0px;
     padding-right: 0px;
 }
-
+a:hover, a:focus {
+    color: #23527c;
+    text-decoration: none;
+}
 </style>
 <body id="page-top" class="index">
 
@@ -152,11 +155,11 @@ a.anchor {
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="<?= base_url() ?>">
-                            <img src="<?= IMG ?>/logo.png" class="brands "/>
+                            <img src="<?= IMG ?>/logo.png" class="brands img-responsive "/>
                             <div class="vertical-middle brandname title">
                                 <?= M_Title ?>
                                 <br>
-                                <span id="tag-line" class="firstcolor info-small">
+                                <span id="tag-line" class="firstcolor info-small hidden-xs">
                                 Making Casting easier!                      
                                 </span>
                             </div>
@@ -215,7 +218,7 @@ a.anchor {
                             <hr>
                             <div class="left_aligned">
                                 <div class="expandButton">
-                                    <span class="plus toggleEdit" id="plus1" data-hide-id="#plus1" data-unhide-id="#basic1,#minus1" >+</span><span id="minus1" data-hide-id="#minus1,#basic1" data-unhide-id="#plus1" class="plus toggleEdit hidden">x</span>
+                                    <span class="plus toggleEdit" id="plus1" data-hide-id="#plus1" data-unhide-id="#basic1,#minus1" >+</span><span id="minus1" data-hide-id="#minus1,#basic1" data-unhide-id="#plus1" class="plus toggleEdit hidden">o</span>
                                     <span class="subtext black"> Public profile with Photos and Videos. </span>
                                     <div id="basic1" class="inner hidden">
                                         <span class="glyphicon glyphicon-triangle-right green subtext"></span>The Castiko Profile is designed to showcase your talents. Add photos, videos, training and experience. Your unique link lets you share it with anyone - even outside Castiko.
@@ -229,7 +232,7 @@ a.anchor {
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn"><span class="button_text black">GO BASIC</span></button>
+                            <button  class="btn"><a href="<?= base_url() . "home/register/actor?plan=basic" ?>" class="button_text black">GO BASIC</a></button>
                         </div>
                     </div>
                     <div class="col-lg-6 col-xs-12 col-md-6 col-sm-12 topmargin35">
@@ -255,7 +258,7 @@ a.anchor {
                                 </div>
                                 <span class="glyphicon glyphicon-ok plus" style="font-size:10px;"></span>  <span class="button_text black"><b>Plus all the features in the basic </b></span>
                             </div>
-                            <button type="button" class="btn"><span class="button_text black">GO PRO</span></button>
+                            <button type="button" class="btn"><a href="<?= base_url() . "home/register/actor?plan=pro" ?>" class="button_text black">GO PRO</a></button>
                         </div>
                     </div>
                 </div>
@@ -289,7 +292,7 @@ a.anchor {
                             <br>
                             <span class="subtext green">+ 100 SMS free</span>
                             <br>
-                            <button type="button" class="btn"><span class="button_text black">GO BASIC</span></button>
+                            <button type="button" class="btn"><a href="<?= base_url() . "home/register/director?plan=basic" ?>" class="button_text black">GO BASIC</a></button>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 topmargin35">
@@ -308,7 +311,7 @@ a.anchor {
                             <br>
                             <span class="subtext green">+ 200 SMS free</span>
                             <br>
-                            <button type="button" class="btn"><span class="button_text black">GO PRO</span></button>
+                            <button type="button" class="btn"><a href="<?= base_url() . "home/register/director?plan=pro" ?>" class="button_text black">GO PRO</a></button>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 topmargin35">
@@ -327,7 +330,7 @@ a.anchor {
                             <br>
                             <span class="subtext green">+ 500 SMS free</span>
                             <br>
-                            <button type="button" class="btn"><span class="button_text black">GO PRO-PLUS</span></button>
+                            <button type="button" class="btn"><a href="<?= base_url() . "home/register/director?plan=pro-plus" ?>"class="button_text black">GO PRO-PLUS</a></button>
                         </div>
                     </div>
                 </div>
@@ -351,6 +354,7 @@ a.anchor {
 
     <!-- Custom Theme JavaScript -->
     <script src="<?= JS ?>/main.js"></script>
+    <script src="<?= JS ?>/landingpage.js"></script>
 </body>
 
 </html>

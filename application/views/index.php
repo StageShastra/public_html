@@ -14,6 +14,7 @@
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
     <link href="<?= CSS ?>/bootstrap.min.css" rel="stylesheet">
     <link href="<?= CSS ?>/landingpage.css" rel="stylesheet">
+    <link href="<?= CSS ?>/animate.css" rel="stylesheet">
     <link href="<?= CSS ?>/font-awesome.css" rel="stylesheet" type="text/css">
     <link href="<?= CSS ?>/navbar.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
@@ -38,10 +39,16 @@
     body{
         overflow-x:hidden; 
     }
+    a.anchor {
+    display: block;
+    position: relative;
+    top: -70px;
+    visibility: hidden;
+}
   }
 </style>
     <!-- Navigation -->
-    <nav class="navbar navbar-custom ">
+    <nav class="navbar navbar-custom navbar-fixed-top ">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
@@ -52,11 +59,11 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="<?= base_url() ?>">
-                            <img src="<?= IMG ?>/logo.png" class="brands "/>
-                            <div class="vertical-middle brandname title">
+                            <img src="<?= IMG ?>/logo.png" class="brands img-responsive "/>
+                            <div class="vertical-middle brandname title ">
                                 <?= M_Title ?>
                                 <br>
-                                <span id="tag-line" class="firstcolor info-small">
+                                <span id="tag-line" class="firstcolor info-small hidden-xs">
                                 Making Casting easier!                      
                                 </span>
                             </div>
@@ -104,8 +111,8 @@
                     <div class="intro-text">
                         <span class="name">Making casting easier.</span>
                         <span class="skills">Castiko makes it easier for actors and<br> casting directors to work together.</span>
-                        <div><a href="<?= base_url() . "" ?>" class="btn btn-custom">I'm an Actor</a>
-                        <a href="<?= base_url() . "home/login" ?>" class="btn btn-custom">I'm a Casting Director</a></div>
+                        <div><a href="#forActor" class="btn btn-custom">I'm an Actor</a>
+                        <a href="#forDirector" class="btn btn-custom">I'm a Casting Director</a></div>
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-12" style="text-align:center;">
@@ -124,6 +131,7 @@
     </header>
 
     <!-- For Actor Grid Section -->
+    <a class="anchor" id="forActor"></a>
     <section id="forActor">
         <div class="container">
           <center><h3>For Actors</h3></center>
@@ -156,18 +164,19 @@
     </section>
 
     <!-- For Casting Director Grid Section -->
+     <a class="anchor" id="forDirector"></a>
     <section id="forDirector">
         <div class="container">
             <div class="row">
               <center>
                 <h3>For Casting Directors</h3>
               </center>
-                <div class="col-md-6 col-xs-12">
-                    <img src="<?= IMG ?>/macbook.png" class="animation-element slide-left  img-responsive laptoponly" >
-                    <img src="<?= IMG ?>/ipad.png" class="animation-element slide-left  img-responsive mobileonly" >
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <img src="<?= IMG ?>/macbook_cd.png" class="animation-element slide-left  img-responsive laptoponly" >
+                    <img src="<?= IMG ?>/ipadcd.png" class="animation-element slide-left  img-responsive mobileonly" >
 
                 </div>
-                <div class="col-md-6 col-xs-12">
+                <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="info-item">
                         <span class="info-item-title">Organize</span>
                         <span class="info-item-desc">All your actors in one searchable database.</span>
@@ -215,6 +224,7 @@
 -->
 
     <!-- Contact Section -->
+     <a class="anchor" id="contact"></a>
     <section id="contact">
         <div class="container">
             <div class="row">
@@ -236,21 +246,21 @@
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Name</label>
-                                <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
+                                <input type="text" class="form-control" placeholder="Name" id="name_sender" required data-validation-required-message="Please enter your name.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Email Address</label>
-                                <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
+                                <input type="email" class="form-control" placeholder="Email Address" id="email_sender" required data-validation-required-message="Please enter your email address.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Phone Number</label>
-                                <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
+                                <input type="tel" class="form-control" placeholder="Phone Number" id="phone_sender" required data-validation-required-message="Please enter your phone number.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -262,10 +272,14 @@
                             </div>
                         </div>
                         <br>
-                        <div id="success"></div>
+                        <div id="success" class="hidden">
+                            <span class="firstcolor title"> Thank You! </span>
+                            <br>
+                            <span> We will get back to you soon! </span>
+                        </div>
                         <div class="row">
                             <div class="form-group col-xs-12">
-                                <button type="submit" class="btn btn-custom-outlined">Send</button>
+                                <button type="click" id="submit_contact_message" class="btn btn-custom-outlined">Send</button>
                             </div>
                         </div>
                     </form>
@@ -288,7 +302,7 @@
           </div>
           <div class="modal-body">
             <ul class="nav nav-tabs">
-              <li class="tabs-left active"><a data-toggle="tab" href="#actor">Casting Directors</a></li>
+              <li class="tabs-left active"><a data-toggle="tab" href="#actor">Directors</a></li>
               <li class="tabs-right"><a data-toggle="tab" href="#cd">Actors</a></li>
             </ul>
 

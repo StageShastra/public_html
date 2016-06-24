@@ -7,7 +7,7 @@
                         <h4><span class="glyphicon glyphicon-map-marker"><span style="font-family:Raleway;font-size:13px;"><br>C-411, Kailash Business Park<br>Vikhroli(West) 400079</span></span></h4>
                        
                     </div>
-                    <div class="footer-col col-md-6 col-xs-12">
+                    <div class="footer-col col-md-6 col-xs-12 minlrpadding">
                         <div class="col-md-6 col-xs-6 nolrpadding">
                             <ul style="list-style-type:none;margin-top:15px;padding:0px; text-align:left;">
                                 <li class="footer-items"><i class="fa fa-inr" aria-hidden="true" style="font-size:12px;width:12px;"></i><a href="<?= base_url() ?>home/pricing/"><span style="font-family:Raleway;font-size:13px;margin-left:5px;">Pricing</span></a></li>

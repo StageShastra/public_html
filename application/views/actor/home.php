@@ -123,6 +123,10 @@
             text-overflow: ellipsis;
             -o-text-overflow: ellipsis;
         }
+        .skills_tag:
+        {
+
+        }
         .ellipsis{
              -webkit-transition: width 1s ease-in-out;
             -moz-transition: width 1s ease-in-out;
@@ -133,6 +137,9 @@
             width: auto;
         }
         .ellipsis:active{
+            width: auto;
+        }
+        .ellipsis:visited{
             width: auto;
         }
         .taga-text {
@@ -243,6 +250,7 @@
             overflow: hidden;
             position: relative;
             border-radius: 10px;
+            float: left
         }
         .crop {
             position:absolute;
@@ -330,7 +338,7 @@
             margin-right: -15px;
             }
             .DocumentItem{
-                width:60px;
+                width:auto;
                 height: 60px;
             }
             .nav_icons{
@@ -361,7 +369,7 @@
             padding-right: 0px;
         }
         .DocumentItem{
-                width:75px;
+                width:auto;
                 height: 75px;
             }
             .blurb{
@@ -384,7 +392,7 @@
                 margin-top: 20px;
             }
             .DocumentItem{
-                width:120px;
+                width:auto;
                 height: 120px;
             }
             .blurb{
@@ -412,7 +420,7 @@
                 margin-top: 25px;
             }
             .DocumentItem{
-                width:150px;
+                width:auto;
                 height: 150px;
             }
             .blurb{
@@ -984,10 +992,10 @@ textarea{
                                                 
                                             }
                                             if($onlyone!=1)
-                                            {
+                                            {   $index=$key+1;
                                                 echo '<div class="nav_icons">
                                                 <span class="leftnav center edit-button toggleEdit glyphicon glyphicon-chevron-left gray" data-hide-id="#experience-'.$key.'" data-unhide-id=#experience-'.$previous.'>
-                                                </span>
+                                                </span><span class="info-small firstcolor center">'.$index.' of '.$count_experience.' experiences</span>
                                                 <span class="righttnav edit-button toggleEdit center glyphicon glyphicon-chevron-right gray" data-hide-id="#experience-'.$key.'" data-unhide-id=#experience-'.$next.' >
                                                 </span></div>';
                                             }
@@ -1048,9 +1056,7 @@ textarea{
                                                     . "</a>"
                                                     . "</li>";
                                                     $counter++;
-                                                        if($counter%5==0){
-                                                            echo '<br>';
-                                                        }
+                                                        
                                             }
                                         ?>     
 

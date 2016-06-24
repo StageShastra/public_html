@@ -23,6 +23,7 @@
         <link href="<?= CSS ?>/animate.css" type="text/css" rel="stylesheet" />
 		<link href="<?= CSS ?>/font-awesome.css" type="text/css" rel="stylesheet" />
 		<link href="<?= CSS ?>/navbar.css" type="text/css" rel="stylesheet" />
+        
 		<!-- jsSocial CSS -->
 		<link type="text/css" rel="stylesheet" href="<?= CSS ?>/jsSocial.min.css" />
 		<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials-theme-plain.css" />

@@ -350,5 +350,18 @@
 				$this->db->insert("stash-inactivity-mail", $d);
 			}
 		}
+		public function insert_contact_message($d){
+
+			$data = array(
+						'StashContactMessage_id' => null,
+						'StashContactMessage_name' => $d["name"],
+						'StashContactMessage_phone' => $d["phone"],
+						'StashContactMessage_email' => $d["email"],
+						'StashContactMessage_message' => $d["message"],
+						'StashContactMessage_ip' => $this->input->ip_address(),
+						'StashContactMessage_time' => time()
+					);
+			$this->db->insert("stash-contact-message", $data);
+		}
 	}
 ?>

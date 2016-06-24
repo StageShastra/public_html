@@ -1,21 +1,37 @@
 .navbar-brand
 {
     font-family: "Raleway" , "Open sans";
+    width: 260px;
 }
-.brands{
-    float: left;
-    width: 60px;
-    /* height: 75px; */
-    margin-top:auto;
-    margin-bottom: auto;
-    margin-left: 5px;
-    margin-right: 10px;
+.navbar-brand:hover, .navbar-brand:focus {
+    text-decoration: none;
+    background: none !important;
+    color:#444 !important;
 }
-
+.vertical-middle {
+    position: relative;
+    top: 13px;
+}
 .navbar-fixed-top {
     min-height: 70px;
     background-color: white;
     padding-top: 10px; 
+    box-shadow: 1px 1px 10px black;
+}
+.brands {
+    float: left;
+    width: 60px;
+    /* height: 75px; */
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 5px;
+    margin-right: 10px;
+}
+.title {
+    font-family: "Raleway", sans-serif;
+}
+.brandname {
+    font-size: 25px;
 }
 .navbar-default{
    -webkit-box-shadow: inset 0 0px 0 rgba(255,255,255,.15),0 0px 0px rgba(0,0,0,.075); 
@@ -42,7 +58,18 @@
     height:90px;
     overflow: hidden;
 }
-
+/*small screens*/
+ @media screen and (max-width: 235px) {
+            .navbar-brand{
+                width:160px;
+            }
+            .title{
+                font-size: 14px;
+            }
+            #tag-line{
+                display: none;
+            }
+ }
  /* xs */
         @media screen and (max-width: 767px) {
            .navbar-brand{
@@ -52,31 +79,31 @@
                 font-size: 20px;
             }
             #tag-line{
-                font-size: 12px;
+                display: none;
             }
         }
         /* sm */
         @media screen and (min-width: 768px) {
             .navbar-brand{
-                width:280px;
+                width:340px;
             }
             .title{
                 font-size: 22px;
             }
             #tag-line{
-                font-size: 14px;
+                font-size: 12px;
             }
         }
         /* md */
         @media screen and (min-width: 992px) {
             .navbar-brand{
-                width:280px;
+                width:340px;
             }
             .title{
                 font-size: 24px;
             }
             #tag-line{
-                font-size: 14px;
+                font-size: 12px;
             }
             .ul_list{
                 margin-top: 18px;
@@ -86,13 +113,13 @@
         /* lg */
         @media screen and (min-width: 1200px) {
             .navbar-brand{
-                width:280px;
+                width:340px;
             }
             .title{
                 font-size: 24px;
             }
             #tag-line{
-                font-size: 14px;
+                font-size: 12px;
             }
             .ul_list{
                 margin-top: 18px;
@@ -119,6 +146,9 @@
     background-image: none;
     border: 1px solid #fc0 !important;
     border-radius: 4px;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background-color: white !important;
 }
 .navbar-toggle .icon-bar {
     display: block;
