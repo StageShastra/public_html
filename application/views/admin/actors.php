@@ -79,7 +79,7 @@
 
         						<?php } ?>
         					</tbody>
-                            <tfoot class="hide-if-no-paging">
+                            <tfoot>
                                 <tr>
                                     <td colspan="10">
                                         <ul class="pagination pagination-centered hide-if-no-paging"></ul>
