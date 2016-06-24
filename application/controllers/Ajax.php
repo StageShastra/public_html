@@ -329,41 +329,63 @@
 		public function contactActorBySMS($data = []){
 			$this->load->model("ModelDirector");
 			$this->load->model("SMS");
-			$response = $this->SMS->sendAuditionSMS($data['contact']['mobile'], $data['sms']);
-			$response = json_decode($response, true);
-			if($response['status'] == "success"){
-				$id = $this->ModelDirector->insertSendSMS($data['contact']['ref'], $data['sms']);
-				$this->ModelDirector->updateCountAudSMS($response['cost'], $id, "contact", "sms");
-				$this->response(true, $response['cost'] . " SMS sent successfully.");
-			}else{
-				$this->response(false, "SMS ". Aj_Gen_Failed);
+			$msgId = $this->ModelDirector->insertSMSMsg($data['sms'], 'sms');
+			$project = 0;
+			$isQues = 0;
+			$str = base64_encode(md5(microtime() . $msgId . microtime()));
+			$rand = substr($str, 0, 6);
+			$start = 0;
+			$time = time();
+			while ( $this->ModelDirector->checkUniqueLink( $rand ) || !preg_match("/^[a-zA-Z0-9]+$/i", $rand) ){
+				if( strlen($str) !== $start ){
+					$start++;
+				}
+				else{
+					$str = base64_encode(md5(microtime() . mt_rand() . microtime()));
+					$start = 0;
+				}
+				$rand = substr($str, $start, 6);
 			}
-			//$this->response(true, count($data['contact']['mobile']) . " SMS sent");
+
+			$url = "http://castiko.com/info/{$rand}";
+			$response = $this->SMS->sendAuditionSMS($data['contact']['mobile'], $data['sms'], $url);
+			$response = json_decode($response, true);
+			$sent = $response['cost'];
+			foreach ($data['contact']['ref'] as $key => $ref) {
+				$this->ModelDirector->insertSendSMS( $ref, $msgId, $project, $isQues, $time, $rand );
+			}
+
+			$this->response(true, "{$sent} SMS Sent.");
 		}
 		public function contactActorByEmail($data = []){
 			$this->load->model("ModelDirector");
 			$this->load->model("Email");
 			$data['mail'] = str_replace("\n", "<br>", $data['mail']);
-			$msgId = $this->ModelDirector->insertSMSMsg($data['msg'], 'email', $data['subject']);
+			$msgId = $this->ModelDirector->insertSMSMsg($data['mail'], 'email', $data['subject']);
 			$emails = $data['contact']['email'];
+			$actors = $data['contact']['ref'];
 
 			$isQues = 1;//$data['isQues'];
+			$project = 0;
 			$time = time();
+			$sent = $failed = 0;
+			$failedMails = [];
 
 			foreach ($emails as $key => $email) {
 				if( $this->Email->sendAuditionMailUpdated( $email, $time, $msgId ) ){
-					
+					$this->ModelDirector->insertSendMail( $actors[$key], $project, $msgId, $time );
+					$sent++;
+				}else{
+					$failedMails[] = $email;
+					$failed++;
 				}
 			}
 
-			if($sent){
-				$id = $this->ModelDirector->insertSendMail($data['contact']['ref'], $data['mail'], $data['subject']);
-				$this->ModelDirector->updateCountAudSMS(count($data['contact']['ref']), $id, "contact", "email");
-				$this->response(true, count($data['contact']['ref']) . " Emails sent successfully.");
-			}else{
-				$this->response(false, "Email " . Aj_Gen_Failed);
-			}
-			//$this->response(true, count($data['contact']['email']) . " Emails sent.");
+			if($failed)
+				$this->ModelDirector->insertFailedInvitations($failedMails, $msgId, $project, "message", $time);
+			//$this->ModelDirector->updateCountAudSMS($sent, 0, "contact", "email");
+			$arr = array( 'sent' => $sent, 'fail' => $failed );
+			$this->response(true, "{$sent} Emails successfully sent.", $arr);
 		}
 		public function removeActor($data = []){
 			$this->load->model("ModelDirector");

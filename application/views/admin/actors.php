@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="footable table table-stripped toggle-arrow-tiny" id="tableData" data-page-size='20'>
+                        <table class="footable table table-stripped toggle-arrow-tiny" id="tableData" data-page-size='10'>
 
                             <thead>
                                 <tr>
@@ -79,7 +79,7 @@
 
         						<?php } ?>
         					</tbody>
-                            <tfoot class="hide-if-no-paging">
+                            <tfoot>
                                 <tr>
                                     <td colspan="10">
                                         <ul class="pagination pagination-centered hide-if-no-paging"></ul>

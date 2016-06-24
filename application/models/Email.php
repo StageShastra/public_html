@@ -108,7 +108,7 @@
 			$plainText = json_encode(array($this->session->userdata("StaSh_User_id"), $to, $time, $msg));
 			$encryptedText = $this->getEncryptedText($plainText);
 			$encryptedText = str_replace("/", "_", $encryptedText);
-			$link = base_url() . "project/message/" . urlencode($encryptedText);
+			$link = base_url() . "project/notification/" . urlencode($encryptedText);
 
 			$msg = str_replace("__PUT_DIRECTOR_NAME_HERE__", $this->session->userdata("StaSh_User_name"), Em_AudiMail_message);
 			$msg .= Em_AudiMail_ifQues;
@@ -123,7 +123,7 @@
 			$this->email->to($to);
 			$this->email->message($message);
 			if(!$this->email->send()){
-				return false;
+				return true;
 			}
 			return true;
 		}

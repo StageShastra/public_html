@@ -112,7 +112,7 @@
 			return $result;
 		}
 
-		public function insertSendMail($refs = [], $msg = '', $sub = ''){
+		/*public function insertSendMail($refs = [], $msg = '', $sub = ''){
 			$data = array(
 						'StashEMail_id' => null,
 						'StashEMail_send_by' => $this->session->userdata("StaSh_User_id"),
@@ -124,9 +124,25 @@
 					);
 			$this->db->insert("stash-email", $data);
 			return $this->db->insert_id();
+		}*/
+
+		public function insertSendMail($a = 0, $p = 0, $m = 0, $t = 0, $q = 0){
+			$d = array(
+						'StashEmailMsg_id' => null,
+						'StashEmailMsg_director_id_ref' => $this->session->userdata("StaSh_User_id"),
+						'StashEmailMsg_actor_id_ref' => $a,
+						'StashEmailMsg_project_id_ref' => $p,
+						'StashEmailMsg_msg_id_ref' => $m,
+						'StashEmailMsg_has_ques' => $q,
+						'StashEmailMsg_time' => $t,
+						'StashEmailMsg_opened' => 0,
+						'StashEmailMsg_response' => 0,
+						'StashEmailMsg_status' => 1
+					);
+			$this->db->insert("stash-email-message", $d);
 		}
 
-		public function insertSendSMS($refs = [], $msg = ''){
+		/*public function insertSendSMS($refs = [], $msg = ''){
 			$data = array(
 						'StashSMS_id' => null,
 						'StashSMS_send_by' => $this->session->userdata("StaSh_User_id"),
@@ -137,6 +153,28 @@
 					);
 			$this->db->insert("stash-sms", $data);
 			return $this->db->insert_id();
+		}*/
+
+		public function insertSendSMS($a = 0, $m = 0, $p = 0, $q = 0, $t = 0, $l = ''){
+			$d = array(
+						'StashSMSMsg_id' => null,
+						'StashSMSMsg_director_id_ref' => $this->session->userdata("StaSh_User_id"),
+						'StashSMSMsg_actor_id_ref' => $a,
+						'StashSMSMsg_msg_id_ref' => $m,
+						'StashSMSMsg_project_id_ref' => $p,
+						'StashSMSMsg_has_ques' => $q,
+						'StashSMSMsg_link' => $l,
+						'StashSMSMsg_time' => $t,
+						'StashSMSMsg_opened' => 0,
+						'StashSMSMsg_response' => 0,
+						'StashSMSMsg_status' => 1
+					);
+			$this->db->insert("stash-sms-message", $d);
+		}
+
+		public function checkUniqueLink($l = ''){
+			$this->db->where("StashSMSMsg_link", $l);
+			return $this->db->get("stash-sms-message", 1)->num_rows();
 		}
 		
 		public function updateCountAudSMS($count = 0, $type = 'invite', $mode = 'email'){
@@ -265,7 +303,8 @@
 			$this->db->insert("stash-email-invites", $d);
 		}
 
-		public function insertFailedInvitations($e = [], $m = 0, $p = 0, $t = 'invite'){
+		public function insertFailedInvitations($e = [], $m = 0, $p = 0, $t = 'invite', $ti = 0){
+			$time = ($ti) ? $ti : time();
 			$data = array(
 						'StashFailedInvite_id' => null,
 						'StashFailedInvite_director_id_ref' => $this->session->userdata("StaSh_User_id"),
@@ -273,7 +312,7 @@
 						'StashFailedInvite_project' => $p,
 						'StashFailedInvite_emails' => json_encode($e),
 						'StashFailedInvite_type' => $t,
-						'StashFailedInvite_time' => time()
+						'StashFailedInvite_time' => $time
 					);
 			$this->db->insert("stash-failed-invitation", $data);
 		}
