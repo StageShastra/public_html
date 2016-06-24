@@ -1,8 +1,9 @@
 $(document).ready(function(){
 	
 	//For Main Sevrer
-	var url = "/Castiko/ajax/",
-		base = "/Castiko/";
+
+	var url = "/public_html/ajax/",
+		base = "/public_html/";
 		
 	//For Localhost
 	/*var url = "/public_html/beta/ajax/",
@@ -901,6 +902,87 @@ $(document).ready(function(){
 		$("#previewSMS").modal("show");
 		return false;
 	});
+	$(document).on("click", ".toggleview", function(){
+		var unhide = $(this).attr("data-unhide-id");
+		if($(unhide).toggle('slow'));
+		//console.log(hide, unhide);
+	});
+
+	$(document).on("click", ".addPrevMessage", function(){
+		$that = $(this);
+		from = $(this).attr("data-from");
+		offset = parseInt($(this).attr("data-offset"));
+		data = {request: "LastMessages", data: JSON.stringify({ from: from, offset: offset })};
+		name = $(this).attr("data-name");
+		
+
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				if( response.status ){
+					$("textarea[name='"+name+"']").val( response.data.msg );
+					//offset += 1;
+					$that.attr("data-offset", response.data.offset);
+				}
+				$("#displaydate-" + from).html(response.message);
+
+			}
+		});
+
+		return false;
+	});
+
+	$(document).on("click", "a.contactListNav", function(){
+		$that = $(this);
+		thisfor = $(this).attr("data-for");
+		target = $(this).attr("href");
+		data = {request: "ContactList", data: JSON.stringify({ for: thisfor })};
+		$(target + " table tbody").html("");
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				data = response.data;
+				for( i = 0; i < data.length; i++ ){
+					txt1 = ( data[i].others != 0 ) ? " and " + data[i].others + " others" : "";
+
+					txt2 = "<button class='sentto'> "+ data[i].first.charAt(0).toUpperCase() +" </button>";
+					txt2 += "			<span class='row_text'> "+ data[i].first + txt1 +"</span>";
+
+					if(typeof data[i].firstUser != "undefined"){
+						if(data[i].firstUser.avatar){
+							txt2 = "<img src='"+base+"assets/img/actors/"+ data[i].firstUser.avatar +"' class='thumbnails'>";
+							txt2 += "			<span class='row_text'> "+ data[i].firstUser.name + txt1 +"</span>";
+						}
+					}
+
+
+					tr = "";
+					tr += "<tr class='nextRowData' data-id='"+data[i].id+"' data-for='"+thisfor+"'>"
+					   + "	<td class='col-sm-3'>"
+					   + "		<div class='addresse_details'>"
+					   + 			txt2
+					   + "	</div></td>"
+					   + "	<td class='col-sm-8 subject'>"+data[i].subject[1]+"</td>"
+					   + "	<td class='col-sm-1 sent_on'> "+ data[i].date +" </td>"
+					   + "</tr>";
+
+					$(target + " table tbody").append(tr);
+					console.log(target + " table tbody");
+
+				}
+			}
+		});
+	});
+
+	if( typeof convo != 'undefined' ){
+		if( convo ){
+			$("#clickFirst").trigger("click");
+		}
+	}
 
 	$(document).on("click", ".bulkUserRemove", function(){
 		

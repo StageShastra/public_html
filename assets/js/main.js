@@ -1,7 +1,12 @@
+if(window.location.hash== "#login")
+{
+    $("#loginModal").modal("show");
+    console.log(window.location);
+}
 $(document).ready(function(){
 	//For Main Sevrer
-	var url = "/Castiko/ajax/",
-		base = "/Castiko/";
+	var url = "/public_html/ajax/",
+		base = "/public_html/";
 		
 	//For Localhost
 	/*var url = "/public_html/beta/ajax/",
@@ -29,7 +34,8 @@ $(document).ready(function(){
 		});
 		var user = formdata['type'];
 		data = {request: "UserLogin", data: JSON.stringify(formdata)};
-
+        console.log(that);
+        console.log(user);
 		$.ajax({
 			url: url,
 			type: type,
@@ -41,6 +47,7 @@ $(document).ready(function(){
 
 					window.location.href = base + user;
 				}else{
+                    console.log(data);
                     $("#login-error-" + user).html(response.message).show(500).delay(5000).hide(500);
                 }
 				
@@ -157,19 +164,55 @@ function actor_click(){
         image.src = "../img/actor_on.png";
     }
 }
-  $(function() {
-    $('a[href*="#"]:not([href="#"])').click(function() {
-      if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-        var target = $(this.hash);
-        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-        if (target.length) {
-          $('html, body').animate({
-            scrollTop: target.offset().top
-          }, 1000);
-          return false;
-        }
-      }
+$(document).on("click", ".toggleEdit", function(){
+        var unhide = $(this).attr("data-unhide-id");
+        var hide = $(this).attr("data-hide-id");
+        $(unhide).removeClass("hidden");
+        $(hide).addClass("hidden");
+
+        //console.log(hide, unhide);
+
     });
-  });
+
+
+$(document).on("click", "#submit_contact_message", function(){
+    var data={};
+    var name = $("#name_sender").val();
+    var email = $("#email_sender").val();
+    var phone = $("#phone_sender").val();
+    var message = $("#message").val();
+    data.request = "save_contact_message";
+    data.data = JSON.stringify({name:name,email:email,phone:phone,message:message});
+    $.ajax({
+            url: url,
+            type:type,
+            data: data,
+            success: function(response){
+                if(response.status){
+                    $("#contactForm").addClass("animated rubberband");
+                    $("#name_sender").val("");
+                    $("#email_sender").val("");
+                    $("#name_sender").val("");
+                    $("#phone_sender").val("");
+                    $("#message").val("");
+                    $("#success").removeClass("hidden");
+                    setTimeout(function(){
+                        $("#success").addClass("animated fadeOut");
+                    }, 5000);
+                }else{
+                    console.log(response);
+                }
+                
+            }
+        });
+
+        return false;
+});
+  
+
+ 
 
 });
+
+
+

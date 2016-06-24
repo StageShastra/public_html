@@ -123,6 +123,10 @@
             text-overflow: ellipsis;
             -o-text-overflow: ellipsis;
         }
+        .skills_tag:
+        {
+
+        }
         .ellipsis{
              -webkit-transition: width 1s ease-in-out;
             -moz-transition: width 1s ease-in-out;
@@ -133,6 +137,9 @@
             width: auto;
         }
         .ellipsis:active{
+            width: auto;
+        }
+        .ellipsis:visited{
             width: auto;
         }
         .taga-text {
@@ -243,6 +250,7 @@
             overflow: hidden;
             position: relative;
             border-radius: 10px;
+            float: left
         }
         .crop {
             position:absolute;
@@ -317,31 +325,6 @@
             .container-fluid{
                 padding:0px;
             }
-            .navbar-fixed-top{
-                margin-left: 0%;
-                margin-right: 0%;
-            }
-            .navbar-header{
-                height: 75px;
-            }
-            .headname{
-                position: relative;
-                top:15px;
-                font-size: 20px;
-            }
-            .brands{
-                width: 55px;
-                height: auto;
-            }
-            .navbar-toggle{
-                margin-right: 20px;
-                position: relative;
-                top:20px;
-                margin-top: 0px;
-            }
-             .tagline{
-                font-size: 9px;
-            }
             .light-padded
             {
                 padding: 0px 5px 0px 10px !important;
@@ -355,7 +338,7 @@
             margin-right: -15px;
             }
             .DocumentItem{
-                width:60px;
+                width:auto;
                 height: 60px;
             }
             .nav_icons{
@@ -381,31 +364,12 @@
             .container-fluid{
                 padding:0px;
             }
-            .navbar-fixed-top{
-                margin-left: 0%;
-                margin-right: 0%;
-            }
-            .headname{
-                position: relative;
-                top:15px;
-                font-size: 22px;
-            }
-            .brands{
-                width: 60px;
-                height: auto;
-            }
-            .tagline{
-                font-size: 9px;
-            }
-            .navbar-toggle{
-                margin-right: 20px;
-            }
             .no_padding_small{
             padding-left: 0px;
             padding-right: 0px;
         }
         .DocumentItem{
-                width:75px;
+                width:auto;
                 height: 75px;
             }
             .blurb{
@@ -416,19 +380,6 @@
         @media screen and (min-width: 992px) {
             body {
                 font-size: 1.1em;
-            }
-            .navbar-fixed-top{
-                margin-left: 0%;
-                margin-right: 0%;
-            }
-            .headname{
-                position: relative;
-                top:18px;
-                font-size: 22px;
-            }
-            .brands{
-                width: 65px;
-                height: auto;
             }
             .info-small{
                 font-size: 12px;
@@ -441,7 +392,7 @@
                 margin-top: 20px;
             }
             .DocumentItem{
-                width:120px;
+                width:auto;
                 height: 120px;
             }
             .blurb{
@@ -461,19 +412,6 @@
             padding-left:15px;
             padding-right: 15px;
             }
-            .navbar-fixed-top{
-                margin-left: 0%;
-                margin-right: 0%;
-            }
-            .headname{
-                position: relative;
-                top:20px;
-                font-size: 24px;
-            }
-            .brands{
-                width: 85px;
-                height: auto;
-            }
             .light-padded
             {
                 padding-left: 10px;
@@ -482,7 +420,7 @@
                 margin-top: 25px;
             }
             .DocumentItem{
-                width:150px;
+                width:auto;
                 height: 150px;
             }
             .blurb{
@@ -667,16 +605,23 @@ textarea{
                 <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-
-                        <a class="navbar-brand" href="<?= base_url() ?>">
-                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="headname"><span >C A S T I K O</span><br><span class="firstcolor info-small tagline"><?= M_TagLine?></span></b></span>
-                        </a>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="<?= base_url() ?>">
+                            <img src="<?= IMG ?>/logo.png" class="brands "/>
+                            <div class="vertical-middle brandname title">
+                                <?= M_Title ?>
+                                <br>
+                                <span id="tag-line" class="firstcolor info-small">
+                                Making Casting easier!                      
+                                </span>
+                            </div>
+                            
+                </a>
                     </div> 
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -1047,10 +992,10 @@ textarea{
                                                 
                                             }
                                             if($onlyone!=1)
-                                            {
+                                            {   $index=$key+1;
                                                 echo '<div class="nav_icons">
                                                 <span class="leftnav center edit-button toggleEdit glyphicon glyphicon-chevron-left gray" data-hide-id="#experience-'.$key.'" data-unhide-id=#experience-'.$previous.'>
-                                                </span>
+                                                </span><span class="info-small firstcolor center">'.$index.' of '.$count_experience.' experiences</span>
                                                 <span class="righttnav edit-button toggleEdit center glyphicon glyphicon-chevron-right gray" data-hide-id="#experience-'.$key.'" data-unhide-id=#experience-'.$next.' >
                                                 </span></div>';
                                             }
@@ -1111,9 +1056,7 @@ textarea{
                                                     . "</a>"
                                                     . "</li>";
                                                     $counter++;
-                                                        if($counter%5==0){
-                                                            echo '<br>';
-                                                        }
+                                                        
                                             }
                                         ?>     
 

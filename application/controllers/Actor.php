@@ -43,6 +43,8 @@
 			$this->output->set_status_header('404');
 			show_404();
 		}
+
+
 		public function mobileverify($value=''){
 			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
 				redirect(base_url());
@@ -67,6 +69,8 @@
 			}
 			$this->load->view("mobileVerification", $pageInfo);
 		}
+
+
 		public function skillSuggestions($value=''){
 			$t = trim($_REQUEST['term']);
 			$this->load->model("ModelActor");
@@ -89,6 +93,8 @@
 						));
 			exit();
 		}
+
+
 		public function ajax($value=''){
 			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
 				$this->response(false, Ac_Ajx_AuthFail);
@@ -618,7 +624,7 @@
 					$this->response(false, Ac_Ajx_GenFailed);
 				}
 			}else{
-				$this->response(false, "Nothing to Updated");
+				$this->response(true, Ac_Ajx_GenSucc);
 			}
 		}
 		public function editWeight($data = []){
