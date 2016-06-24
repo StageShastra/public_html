@@ -59,6 +59,9 @@
 					case "save_contact_message":
 						$this->save_contact_message($data);
 						break;
+					case "BulkRemove":
+						$this->bulkRemove($data);
+						break;
 					
 					default:
 						$this->response(false, "Invalid Request");
@@ -68,6 +71,28 @@
 				$this->response(false, Aj_Req_NoData);
 			}
 		}
+
+
+		public function bulkRemove($data = []){
+			$this->load->model("ModelDirector");
+			$list = $data['list'];
+			$listid = $data['listid'];
+			$c = 0;$r = [];
+			foreach ($list as $key => $value) {
+				if( $this->ModelDirector->deleteActorFromDirector( $value ) ){
+					$c++;
+					$r[] = $listid[$key];
+				}
+			}
+
+			if($c)
+				$this->response(true, "{$c} selected actor removed from your list.", ["removed" => $r]);
+			else
+				$this->response(false, "something went wrong. try again later.");
+		}
+		
+		public function testAttachment($data){
+			print_r($data);
 
 		public function contactLits($data = []){
 			$this->load->model("ModelDirector");
@@ -98,6 +123,7 @@
 					$this->response(false, "No last message found.");
 				}
 			}
+
 		}
 		
 		public function SMSInvitation($data = []){

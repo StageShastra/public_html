@@ -984,6 +984,38 @@ $(document).ready(function(){
 		}
 	}
 
+	$(document).on("click", ".bulkUserRemove", function(){
+		
+		conf = confirm( "Are you sure to remove selected Actor from your list ?" );
+		if(!conf)
+			return false;
+
+		toRemove = [];
+		for(i = 0; i < actorRef.length; i++){
+			id = actorRef[i];
+			toRemove.push(Number(actors[id].StashActor_actor_id_ref));
+		}
+
+		data = {request: "BulkRemove", data: JSON.stringify({list: toRemove, listid: actorRef})};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				if( response.status ){
+					removed = response.data.removed;
+					for( i = 0; i < removed.length; i++ ){
+						//console.log('#datarow'+removed[i]);
+						$('#datarow'+removed[i]).remove();
+					}
+				}else{
+					alert(response.message);
+				}
+			}
+		});
+
+	});
+
 });
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
