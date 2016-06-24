@@ -174,6 +174,7 @@ $(document).on("click", ".toggleEdit", function(){
 
     });
 
+
 $(document).on("click", "#submit_contact_message", function(){
     var data={};
     var name = $("#name_sender").val();
@@ -208,6 +209,7 @@ $(document).on("click", "#submit_contact_message", function(){
         return false;
 });
   
+
  
 
 });

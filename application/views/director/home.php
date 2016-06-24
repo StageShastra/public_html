@@ -396,7 +396,7 @@
                                 </span> 
                                 <input type="text" class="form-control  contact_inputs projectName"  name="project_name"  placeholder="Project Name" required/>
                 
-                </div>
+                              </div>
                               <div class="col-sm-6 form-group no-paddinglr">
                                 <span class="info-small gray">
                                   Project Date: <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= CD_TitleDate ?>"></i>
@@ -414,7 +414,7 @@
                               </div>
 
                             </div>
-              <div class="row">
+                            <div class="row">
 
                               <div class="col-sm-12 form-group no-paddinglr">
                                 <input class="form-control contact_inputs" name="subject"  placeholder="Subject" required  />
@@ -430,7 +430,12 @@
                       
                                 </span> 
                                 <textarea class="form-control contact_inputs contact_textareas" name="email-msg" id="emailtxtMsg"  placeholder="Message Text" rows="5" required /></textarea>
+
                                 <button type="button" class="btn submit-btn firstcolor pull-right addSuggestionText" data-name="email-msg" data-add="Please click the button below and follow the steps to share your details with us." style="margin-top: 20px; margin-left:10px;" id="btn-search" > Suggested Text </button>
+
+                                <button type="button" class="btn submit-btn firstcolor pull-right addPrevMessage" data-name="email-msg" data-from="email" data-offset="0" style="margin-top: 20px; margin-left:10px;" id="btn-search" > Previous Messages </button>
+                                <br>
+                                <p class="firstcolor pull-right" id="displaydate-email"></p>
                               </div>
 
                             </div>
@@ -473,7 +478,7 @@
                                 </span>  -->
                                 <textarea class="form-control contact_inputs contact_textareas" name="mobiles"   placeholder="Mobile Numbers (comma seperated)" required rows="3" ></textarea>
                 
-                </div>
+                              </div>
 
                             </div>
 
@@ -492,6 +497,10 @@
                                 </span>
 
                                 <button type="button" class="btn submit-btn firstcolor pull-right addSuggestionText" data-name="sms" data-add="<?= CD_SuggTxt ?>" style="margin-top: 20px; margin-left:10px;" id="btn-search" > Suggested Text </button>
+
+                                <button type="button" class="btn submit-btn firstcolor pull-right addPrevMessage" data-name="sms" data-from="sms" data-offset="0" style="margin-top: 20px; margin-left:10px;" id="btn-search" > Previous Messages </button>
+                                <br>
+                                <p class="firstcolor pull-right" id="displaydate-sms"></p>
 
                                 <span class="info-small">
                                   Powered by Castiko

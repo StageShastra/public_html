@@ -101,6 +101,33 @@
 				return false;
 			}
 		}
+
+		public function sendAuditionMailUpdated($to = '', $time = 0, $msg = 0){
+			$this->load->library('email', $this->config());
+			$failedEmails = [];
+			$plainText = json_encode(array($this->session->userdata("StaSh_User_id"), $to, $time, $msg));
+			$encryptedText = $this->getEncryptedText($plainText);
+			$encryptedText = str_replace("/", "_", $encryptedText);
+			$link = base_url() . "project/notification/" . urlencode($encryptedText);
+
+			$msg = str_replace("__PUT_DIRECTOR_NAME_HERE__", $this->session->userdata("StaSh_User_name"), Em_AudiMail_message);
+			$msg .= Em_AudiMail_ifQues;
+
+			$message = $this->defaultTemplete("Dear Actor, <br>".$msg, $link, "Connect", "");
+			$message = preg_replace('~\\\r\\\n~',"<br>", $message);
+			$this->email->clear();
+			$this->email->set_newline("\n");
+			$this->email->from("no-reply@castiko.com", 'Castiko');
+			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
+			$this->email->subject(Em_AudiMail_subject . " | Castiko");
+			$this->email->to($to);
+			$this->email->message($message);
+			if(!$this->email->send()){
+				return true;
+			}
+			return true;
+		}
+
 		public function sendInvitationToInDB($msg = '', $to = '', $project = 0, $sub = "Connect to Casting Director", $rand = ''){
 			$this->load->library('email', $this->config());
 			$failedEmails = [];

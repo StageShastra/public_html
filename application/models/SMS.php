@@ -33,10 +33,13 @@
 			return $response;
 		}
 		
-		public function sendAuditionSMS($numbers = [], $msg = ''){
+		public function sendAuditionSMS($numbers = [], $msg = '', $link = ''){
 			//$len = strlen($msg);
 			$postmessage = "\nPowered By. Castiko";
 			$msg = $this->prefix.$msg;
+
+			$msg .= "\nFor more detail: {$link}";
+
 			$msg .= $postmessage;
 			$msg = rawurlencode($msg);
 			
