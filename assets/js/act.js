@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	var url = "/public_html/actor/ajax",
-		base = "/",
+		base = "/public_html/",
 		type = "POST",
 		data = {};
 
@@ -56,6 +56,8 @@ $(document).ready(function(){
 						$.each( form, function(index, value){
 							if(index == "language" || index == "skills"){
 								$.each( value.split(","), function(index, value){
+									console.log(data);
+									console.log(value);
 									name = $.trim(value);
 									name = name.toProperCase();
 									html +='<div class="col-sm-4 vertical-padded ellipsis">'

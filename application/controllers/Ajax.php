@@ -56,6 +56,9 @@
 					case "ContactList":
 						$this->contactLits($data);
 						break;
+					case "save_contact_message":
+						$this->save_contact_message($data);
+						break;
 					
 					default:
 						$this->response(false, "Invalid Request");
@@ -504,6 +507,12 @@
 			}else{
 				$this->response(false, Aj_Login_Invalid);
 			}
+		}
+		public function save_contact_message($data){
+			$this->load->model("Auth");
+			$this->Auth->insert_contact_message($data);
+			$this->response(true, "200");
+
 		}
 	}
 ?>

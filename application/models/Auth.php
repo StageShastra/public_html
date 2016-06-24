@@ -370,6 +370,19 @@
 			}
 		}
 
+		public function insert_contact_message($d){
+
+			$data = array(
+						'StashContactMessage_id' => null,
+						'StashContactMessage_name' => $d["name"],
+						'StashContactMessage_phone' => $d["phone"],
+						'StashContactMessage_email' => $d["email"],
+						'StashContactMessage_message' => $d["message"],
+						'StashContactMessage_ip' => $this->input->ip_address(),
+						'StashContactMessage_time' => time()
+					);
+			$this->db->insert("stash-contact-message", $data);
+
 		public function updateSMSLinkOpened($id = 0){
 			$this->db->where("StashSMSInvites_id", $id);
 			$this->db->update("stash-sms-invites", array('StashSMSInvites_opened' => time()));
@@ -415,6 +428,7 @@
 			$this->db->where("StashPromo_code", $l);
 			$this->db->where("StashPromo_status", 1);
 			return $this->db->get("stash-promo", 1)->num_rows();
+
 		}
 	}
 ?>

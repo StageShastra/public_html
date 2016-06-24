@@ -1,3 +1,8 @@
+if(window.location.hash== "#login")
+{
+    $("#loginModal").modal("show");
+    console.log(window.location);
+}
 $(document).ready(function(){
 	//For Main Sevrer
 	var url = "/public_html/ajax/",
@@ -168,6 +173,46 @@ $(document).on("click", ".toggleEdit", function(){
         //console.log(hide, unhide);
 
     });
+
+
+$(document).on("click", "#submit_contact_message", function(){
+    var data={};
+    var name = $("#name_sender").val();
+    var email = $("#email_sender").val();
+    var phone = $("#phone_sender").val();
+    var message = $("#message").val();
+    data.request = "save_contact_message";
+    data.data = JSON.stringify({name:name,email:email,phone:phone,message:message});
+    $.ajax({
+            url: url,
+            type:type,
+            data: data,
+            success: function(response){
+                if(response.status){
+                    $("#contactForm").addClass("animated rubberband");
+                    $("#name_sender").val("");
+                    $("#email_sender").val("");
+                    $("#name_sender").val("");
+                    $("#phone_sender").val("");
+                    $("#message").val("");
+                    $("#success").removeClass("hidden");
+                    setTimeout(function(){
+                        $("#success").addClass("animated fadeOut");
+                    }, 5000);
+                }else{
+                    console.log(response);
+                }
+                
+            }
+        });
+
+        return false;
+});
+  
+
  
 
 });
+
+
+
