@@ -149,15 +149,15 @@ $(document).ready(function(){
 		actors = actorsInfo;
 		var ckh = (selectAll) ? "checked" : "";
 		var $table = $("#browse-table");
-		var content = '<table class="table table-curved display" id="actor_table">'
+		var content = '<table class="table table-striped display" id="actor_table">'
                		+ '<thead center>'
-               		+'<tr><th id="selectallcheckbox"><input type="checkbox" '+ckh+' name="selectallactor" id="selectallactor" class="css-checkbox" /><label for="selectallactor" class="css-label"></label></th><th>Profile</th>';
+               		+ '<tr><th id="selectallcheckbox"><input type="checkbox" '+ckh+' name="selectallactor" id="selectallactor" class="css-checkbox" /><label for="selectallactor" class="css-label"></label></th><th>Profile</th>';
         
         for(var i = 0; i < select.length; i++){
     		content += '<th data-sort="string">'+select[i]+' <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>';
     	}
 
-    	content += "</tr></thead>";
+    	content += "<th>Link</th></tr></thead>";
     	content += "<tbody>";
     	var link = '', tag = '';
 		
@@ -187,8 +187,8 @@ $(document).ready(function(){
 					+ 	'<input type="checkbox" name="checkactor" '+chk+' id="checkactor'+i+'" value='+i+' class="css-checkbox" /><label for="checkactor'+i+'" class="css-label"></label>'
               		+ '</td>' 
               		+ '<td style="vertical-align:middle-top;">'
-                	+ 	'<div class="img-div center">'
-					+		'<img src="'+base + 'assets/img/actors/' +actorsInfo[i].StashActor_avatar+'" class="showDetails" data-id="'+i+'" />'
+                	+ 	'<div class="center">'
+					+		'<img src="'+base + 'assets/img/actors/' +actorsInfo[i].StashActor_avatar+'" class="showDetails profile_image" data-id="'+i+'" />'
 					+	'</div>'
               		+ '</td>';
 
@@ -201,12 +201,9 @@ $(document).ready(function(){
 
             content += '<td style="vertical-align:middle;">'
                     +      '<font class="sortbuttons">'
-                    + 			'<a href="'+link+'" target="_blank"  class="btn submit-btn firstcolor toggle-btn" style="right:50px;" >'
-                    + 				'<span class="glyphicon glyphicon-share"></span>'
+                    + 			'<a href="'+link+'" target="_blank"> <span class="glyphicon glyphicon-share row_btn"></span>'
                     +			'</a>'
-                    +			'<button  class="btn submit-btn firstcolor toggle-btn removeActor" data-actor-id="'+i+'">'
-                    +				'<span class="glyphicon glyphicon-trash"></span>'
-                    +			'</button>'
+                    +				'<span class="glyphicon glyphicon-trash removeActor row_btn" data-actor-id="'+i+'"></span>'
                     + 		'</font>'
                     + '</td></tr>';
 

@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="<?= CSS ?>/lightbox.css">
         <link rel="stylesheet" href="<?= CSS ?>/animate.css">
         <link rel="stylesheet" href="<?= CSS ?>/datatable.css">
+        <link rel="stylesheet" href="<?= CSS ?>/navbar.css">
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
         <link href='https://fonts.googleapis.com/css?family=Raleway:400,200,300,100' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="<?= CSS ?>/tagsinput.css" />

@@ -417,7 +417,7 @@ div.img-div{
 }
 .bulk-btn {
 	
-	background-color: #ebab18;
+	background-color: #FF9800;
 	color: white;
 	width: 80px;
 	height: 80px;
@@ -430,16 +430,17 @@ div.img-div{
 	-webkit-border-radius: 40px;
 	-moz-border-radius: 40px;
 	border-radius: 40px;
+	border-color: #FF9800;
 }
 .bulk-btn:hover{
 	background-color: #fff;
-    border-color: #ebab18;
-    color: #ebab18;
+    border-color: #FF9800;
+    color: #FF9800;
 }
 .bulk-btn:focus{
 	background-color: #fff;
-    border-color: #ebab18;
-    color: #ebab18;
+    border-color: #FF9800;
+    color: #FF9800;
 }
 
 

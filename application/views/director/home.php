@@ -62,6 +62,48 @@
       .form-group{
         margin-bottom: 0px;
       }
+      .info{
+        font-family: "Raleway","Open Sans";
+        font-weight: 400;
+        font-size: 15px;
+      }
+      .profile_image{
+        height: 75px;
+        width: 75px;
+        border-radius: 50%;
+        box-shadow: 2px 2px 10px gray;
+        border: 2px solid white;
+
+      }
+      thead{
+        font-family: "Open Sans";
+        font-size: 16px;
+        font-weight: 600;
+        background: white;
+        
+      }
+      th{
+        color: #FF9800;
+      }
+      table{
+        border: 1px solid #ddd;
+      }
+      .row_btn{
+        color:#FF9800;
+        margin-left: 5px;
+      }
+      .row_btn:hover{
+        color: #F44336;
+      }
+      .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+    
+        border-color: #ddd;
+        box-shadow:none; 
+    }
+    .submit-btn {
+    padding: 4px 8px;
+    }
+
               </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -148,8 +190,15 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="<?= base_url() ?>">
-                            <img src="<?= IMG ?>/logo.png" class="brands "/>
-              <span class="vertical-middle brandname title"><?= M_Title ?></span><p><span id="tag-line" class="firstcolor info-small"><?= M_TagLine?></span>
+                            <img src="<?= IMG ?>/logo.png" class="brands img-responsive "/>
+                            <div class="vertical-middle brandname title">
+                                <?= M_Title ?>
+                                <br>
+                                <span id="tag-line" class="firstcolor info-small hidden-xs">
+                                Making Casting easier!                      
+                                </span>
+                            </div>
+                            
                         </a>
                     </div> 
 
@@ -185,7 +234,7 @@
             </nav>
            <!-- contact modal toggle -->
             <div class="container-fluid padded">
-                <span class="submit-btn firstcolor notice-selected-actors">
+                <span class="firstcolor notice-selected-actors">
                   <p><span>2</span> Selected</p>
                 </span>
 
