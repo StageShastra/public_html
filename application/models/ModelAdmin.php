@@ -237,7 +237,6 @@
 			return $count;
 		}
 
-
 		public function allEmailInvitations($ref = 0){
 			$this->db->where("StashEmailInvite_director_id_ref", $ref);
 			return $this->db->get("stash-email-invitation")->result("array");
@@ -248,7 +247,113 @@
 			return $this->db->get("stash-sms-invitation")->result("array");
 		}
 
+		public function getAllPromos($value=''){
+			$result = [];
+			$fetch = $this->db->get("stash-promo")->result("array");
+			foreach ($fetch as $key => $f) {
+				$f['opened'] = $this->countPromoOpened($f['StashPromo_id']);
+				$f['used'] = $this->countPromoUsed($f['StashPromo_id']);
+				$a = $this->getAdminName( $f['StashPromo_admin_id_ref'] );
+				$f['AddedByName'] = $a['CstkoAdmins_name'];
+				$f['AddedBy'] = $a['CstkoAdmins_username'];
+				$result[] = $f;
+			}
+			return $result;
+		}
 
+		public function countPromoOpened($ref = 0){
+			$this->db->where("StashPromoOpen_promo_id_ref", $ref);
+			return $this->db->get("stash-promo-opened")->num_rows();
+		}
+
+		public function countPromoUsed($ref = 0){
+			$this->db->where("StashPromoUsed_promo_id_ref", $ref);
+			return $this->db->get("stash-promo-used")->num_rows();
+		}
+
+		public function promoExist($l = ''){
+			$this->db->where("StashPromo_code", $l);
+			//$this->db->where("StashPromo_status", 1);
+			return $this->db->get("stash-promo", 1)->num_rows();
+		}
+
+		public function getDirectorForAutoC($t = ''){
+			$this->db->like("StashDirector_name", $t, "both");
+			$this->db->or_like("StashDirector_email", $t, "both");
+			$this->db->or_like("StashDirector_mobile", $t, "both");
+			$fetch = $this->db->get("stash-director")->result("array");
+			$result = [];
+			foreach ($fetch as $key => $f) {
+				$r['id'] = $f['StashDirector_director_id_ref'];
+				$r['label'] = $r['value'] = $f['StashDirector_name'];
+				$result[] = $r;
+			}
+			return $result;
+		}
+
+		public function getProjectsForAutoC($t = '', $in = []){
+			$this->db->like("StashProject_name", $t, "both");
+			if( count($in) )
+				$this->db->where_in('StashProject_director_id_ref', $in);
+			$fetch = $this->db->get("stash-project")->result("array");
+			$result = [];
+			foreach ($fetch as $key => $f) {
+				$r['id'] = $f['StashProject_id'];
+				$r['label'] = $r['value'] = $f['StashProject_name'] . " (" . date("d/M/Y", $f['StashProject_date']) . ")";
+				$result[] = $r;
+			}
+			return $result;
+		}
+
+		public function addReferalCode($value=''){
+			$d = array(
+						'StashPromo_id' => null,
+						'StashPromo_code' => $this->input->post("code"),
+						'StashPromo_directors' => $this->input->post("director_ids"),
+						'StashPromo_projects' => $this->input->post("project_ids"),
+						'StashPromo_admin_id_ref' => $this->session->userdata("CSTKO_Admin_id"),
+						'StashPromo_time' => time(),
+						'StashPromo_status' => $this->input->post("live"),
+					);
+			return $this->db->insert("stash-promo", $d);
+		}
+
+		public function getThisPromo($ref = 0){
+			$this->db->where("StashPromo_id", $ref);
+			$query = $this->db->get("stash-promo", 1);
+			return $query->first_row('array');
+		}
+
+		public function getPromoOpenedData($ref = 0){
+			$this->db->where("StashPromoOpen_promo_id_ref", $ref);
+			return $this->db->get("stash-promo-opened")->result("array");
+		}
+
+		public function getPromoUsedData($ref = 0){
+			$this->db->select("*");
+			$this->db->from("stash-promo-used as Used");
+			$this->db->join("stash-users as Users", "Users.StashUsers_id = Used.StashPromoUsed_user_id_ref");
+			$this->db->where("Used.StashPromoUsed_promo_id_ref", $ref);
+			return $this->db->get()->result("array");
+		}
+
+		public function getDirectorInList($d = []){
+			if(count($d)){
+				$this->db->select("StashDirector_name, StashDirector_director_id_ref");
+				$this->db->from("stash-director");
+				$this->db->where_in("StashDirector_director_id_ref", $d);
+				return $this->db->get()->result("array");
+			}
+			return array();
+		}
+
+		public function getProjectInList($d = []){
+			if(count($d)){
+				$this->db->where_in("StashProject_id", $d);
+				return $this->db->get("stash-project")->result("array");
+			}
+			return array();
+		}
 	}
 
 ?>

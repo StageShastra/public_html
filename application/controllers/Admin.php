@@ -226,7 +226,6 @@
 			$this->load->view("admin/addAdmin", $pageInfo);
 		}
 
-
 		/* Admin Block End */
 
 		public function sendMail($email = 'connect@castiko.com'){
@@ -252,7 +251,7 @@
 		                    'field' =>'message',
 		                    'label' =>'Message',
 		                    'rules' => 'required'
-		                ),
+		                )
 					);
 
 				$this->load->library('form_validation');
@@ -320,6 +319,80 @@
 			$this->load->view("admin/invitation", $pageInfo);
 		}
 
+		public function allPromo($value=''){
+			
+			$pageInfo['nav_h'] = "promo";
+			$pageInfo['nav_sh'] = "allPromo";
+			$pageInfo['promos'] = $this->ModelAdmin->getAllPromos();
+
+			$this->load->view("admin/promos", $pageInfo);
+
+		}
+
+		public function createPromo($value=''){
+			$pageInfo = array("error" => false, 'error_msg' => null, 'success' => "text-danger");
+			if( count($this->input->post()) ){
+				$pageInfo['error'] = true;
+				$config = array(
+		                array(
+		                    'field' =>'code',
+		                    'label' =>'Refer Code',
+		                    'rules' => 'required'
+		                ),
+		                array(
+		                    'field' =>'live',
+		                    'label' =>'Live Status',
+		                    'rules' => 'required'
+		                )
+					);
+
+				$this->load->library('form_validation');
+		    	$this->form_validation->set_rules($config);
+
+		    	if($this->form_validation->run()){
+		    		if(!$this->ModelAdmin->promoExist( $this->input->post("code") )){
+		    			if( $this->ModelAdmin->addReferalCode() ){
+		    				redirect(base_url() . "admin/allPromo");
+		    			}else{
+		    				$pageInfo['error_msg'] = "Connection Error. try again.";
+		    			}
+		    		}else{
+		    			$pageInfo['error_msg'] = "Referal code used already.";
+		    		}
+		    	}
+
+			}
+			$pageInfo['nav_h'] = "promo";
+			$pageInfo['nav_sh'] = "createPromo";
+			$this->load->view("admin/addPromo", $pageInfo);
+		}
+
+		public function autoComplete($for = ''){
+			$t = trim($_REQUEST['term']);
+			if( trim($for) == 'director' )
+				$data = $this->ModelAdmin->getDirectorForAutoC($t);
+			else{
+				$d = json_decode(trim($_GET['director']), 1);
+				$data = $this->ModelAdmin->getProjectsForAutoC($t, $d);
+			}
+			header("Content-Type: application/json");
+			echo json_encode($data);
+			exit();
+		}
+
+		public function promo($refer = 0){
+			if($refer){
+				$pageInfo['nav_h'] = "promo";
+				$pageInfo['nav_sh'] = "allPromo";
+
+				$pageInfo['promo'] = $this->ModelAdmin->getThisPromo($refer);
+				$pageInfo['used'] = $this->ModelAdmin->getPromoUsedData($refer);
+				$pageInfo['opened'] = $this->ModelAdmin->getPromoOpenedData($refer);
+				$this->load->view("admin/promo", $pageInfo);
+			}else{
+				redirect(base_url() . "admin/promos/");
+			}
+		}
 
 
 
@@ -373,9 +446,13 @@
 					case 'ChangePassword':
 						$this->changePassword($data);
 						break;
+
+					case 'CheckPromo':
+						$this->checkPromo($data);
+						break;
 					
 					default:
-						# code...
+						$this->response(false, "Invalid Request.");
 						break;
 				}
 
@@ -383,6 +460,14 @@
 				$this->response(false, "Form is empty.");
 			}
 
+		}
+
+		public function checkPromo($data = []){
+			if( $this->ModelAdmin->promoExist( trim($data['term']) ) ){
+				$this->response(true, "found");
+			}else{
+				$this->response(false, "Not found.");
+			}
 		}
 
 		public function changePassword($data = []){

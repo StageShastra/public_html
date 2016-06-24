@@ -14,6 +14,7 @@
   ?>
     <body>
           <style>
+
           body{
             padding-top: 90px;
           }
@@ -27,10 +28,12 @@
           .bootstrap-tagsinput {
             background-color: #f2f2f2;
         }
+
         .blurb{
             font-family: AvenirNext-Regular;
             color: #4A4A4A;
         }
+
         .a_name{
             font-family: 'AvenirNext-Bold', sans-serif, AvenirNext-Regular;
             font-size: 20px;
@@ -129,12 +132,11 @@
             -o-transition: width 1s ease-in-out;
             transition: width 1s ease-in-out;
         }
-        .ellipsis:focus{
+
+        .ellipsis:focus, .ellipsis:hover, .ellipsis:active{
             width: auto;
         }
-        .ellipsis:active{
-            width: auto;
-        }
+
         .taga-text {
             padding-left: 3px !important;
             padding-right: 3px !important;
@@ -304,10 +306,12 @@
             background:#FFB600;
             color: white; 
         }
+
         .navbar-fixed-top{
                 margin-left: 0%;
                 margin-right: 0%;
             }
+
            
         /* xs */
         @media screen and (max-width: 767px) {
@@ -324,6 +328,7 @@
             .navbar-header{
                 height: 75px;
             }
+
             .headname{
                 position: relative;
                 top:15px;
@@ -474,6 +479,46 @@
                 width: 85px;
                 height: auto;
             }
+
+            .light-padded
+            {
+                padding-left: 10px;
+            }
+
+            #browse-table{
+                margin-top: 20px;
+            }
+            .DocumentItem{
+                width:120px;
+                height: 120px;
+            }
+        }
+        /* lg */
+        @media screen and (min-width: 1200px) {
+            body {
+                font-size: 1.2em;
+            }
+            .padded{
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            #home{
+            padding-left:15px;
+            padding-right: 15px;
+            }
+            .navbar-fixed-top{
+                margin-left: 3%;
+                margin-right: 3%;
+            }
+            .headname{
+                position: relative;
+                top:20px;
+                font-size: 24px;
+            }
+            .brands{
+                width: 85px;
+                height: auto;
+            }
             .light-padded
             {
                 padding-left: 10px;
@@ -485,9 +530,7 @@
                 width:150px;
                 height: 150px;
             }
-            .blurb{
-                font-size: 15px;
-            }
+
         }
         .videoWrapper {
         position: relative;
@@ -668,6 +711,14 @@ textarea{
                 <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
+
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
                         <a class="navbar-brand" href="<?= base_url() ?>">
                             <img src="<?= IMG ?>/logo.png" class="brands"/><span class="headname"><span >C A S T I K O</span><br><span class="firstcolor info-small tagline"><?= M_TagLine?></span></b></span>
                         </a>
@@ -728,6 +779,19 @@ textarea{
                                     echo date("m/d/Y", $actorProfile['StashActor_dob']);
                                 }
                             ?></span><br>
+
+                                <span class="elements_label">Email: </span><span class="elements"> <?= $actorProfile['StashActor_email'] ?></span><br>
+                                <span class="elements_label">Phone:</span>
+                                
+                                <span class="text-danger elements" id="actor_phone"> <?= $actorProfile['StashActor_mobile'] ?> 
+                                <?php if($user["StashUsers_mobile_status"] == 0){ ?>
+                                <a href="<?= base_url() ?>actor/mobileverify" data-toggle="tooltip" data-placement="right" title="<?= AC_MobileVerifyTxt ?>" class="text-danger otpLink"><i class="fa fa-exclamation"></i></a>
+                                <?php } ?>
+                                </span>
+
+                                <br>
+                                <span class="elements_label">WhatsApp: </span><span class="elements" id="actor_whatsapp"><?= $actorProfile['StashActor_whatsapp'] ?></span><br>
+
                             </div>
                         </div>
                         <div class="row">
@@ -835,7 +899,9 @@ textarea{
                                                 
                                                 echo '<div class="col-sm-7" style="padding-left:0px;padding-right:0px"><div class="videoWrapper"><iframe width="482" height="300" src="'.$youtube.'" frameborder="0" allowfullscreen></iframe></div></div>';
                                                 echo '<div class="col-sm-5"">
+
                                                         <span class="info black" id="actor_ex_title_'.$key.'"><b>'.ucfirst($experience['StashActorExperience_title']).'</b></span>
+
                                                         
                                                         <br>
                                                         <span class="info black" id="actor_ex_role_'.$key.'">
@@ -843,6 +909,7 @@ textarea{
                                                         </span>
                                                         <br>
                                                             <div style="height:100%;overflow:hidden;">
+
                                                             <div class="info-small dark-gray hidden_scroll blurb" id="actor_ex_blurb_'.$key.'">
                                                             '.ucfirst($experience['StashActorExperience_blurb']).'
                                                             </div>
@@ -859,6 +926,7 @@ textarea{
                                                             <i>as </i>'.ucfirst($experience['StashActorExperience_role']).'
                                                         </span>
                                                     <br>
+
                                                         <div class="info-small dark-gray blurb" id="actor_ex_blurb_'.$key.'" style="margin-left:15px;" >
                                                             '.ucfirst($experience['StashActorExperience_blurb']).'
                                                         </div>';
@@ -896,6 +964,7 @@ textarea{
                                             //print_r($images);
                                             $counter=0;
                                             foreach ($images as $key => $image) {
+
                                                 echo "<li class='DocumentItem' id='DocumentItem_{$key}'>"
                                                     . "<a href='".IMG."/actors/".$image."' data-lightbox='".$actorProfile['StashActor_name']."'>"
                                                     .   "<img src='".IMG."/actors/".$image."' height='100%' width='auto' class=' img-rounded'>"
@@ -932,12 +1001,14 @@ textarea{
                                                 <span  id="actor_tr_minus_<?= $key ?>" class="toggleEdit training-minus hidden" data-hide-id="#actor_tr_minus_<?= $key ?>,#actor_tr_detail_<?= $key ?>" data-unhide-id="#actor_tr_plus_<?= $key ?>" >-</span>
                                                 <?= ucfirst($training['StashActorTraining_title']) ?>
                                             </span>
+
                                             <span class="info-small dark-gray col-sm-4 col-xs-8" id="actor_tr_course_<?= $key ?>">
                                                 <?= ucfirst($training['StashActorTraining_course']) ?>
                                             </span>
                                             <span class="info-small dark-gray col-sm-4 col-xs-4" style="text-align:right;" >
                                                 
                                             </span>
+
                                             
 
                                         </div>

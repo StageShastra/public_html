@@ -34,7 +34,7 @@
 		}
 		
 		public function sendAuditionSMS($numbers = [], $msg = ''){
-			$len = strlen($msg);
+			//$len = strlen($msg);
 			$postmessage = "\nPowered By. Castiko";
 			$msg = $this->prefix.$msg;
 			$msg .= $postmessage;
@@ -54,26 +54,24 @@
 			return $this->sendCurlSMS($data);
 		}
 		
-		public function sendInvitaionSMS($msg = '', $numbers = '', $link = ''){
-			$len = strlen($msg);
+		public function sendInvitaionSMS( $msg = '', $number = '', $link = '' ){
 			$postmessage = "\nPowered By. Castiko";
-			
+				
 			$msg = $this->prefix.$msg;
 			$msg .= "\n".$link;
 			$msg .= $postmessage;
 			
 			$msg = rawurlencode($msg);
-			$numbers = $this->numImpode(explode(",", $numbers));
+
 			$data = array(
-						'username' => $this->username, 
-						'hash' => $this->password, 
-						'numbers' => $numbers, 
-						"sender" => urlencode($this->sender), 
-						"message" => $msg,
-						"test" => $this->test
-					);
-					
-			return $this->sendCurlSMS($data);
+					'username' => $this->username, 
+					'hash' => $this->password, 
+					'numbers' => $number, 
+					"sender" => urlencode($this->sender), 
+					"message" => $msg,
+					"test" => $this->test
+				);
+			return $curl = $this->sendCurlSMS($data);
 		}
 
 		public function sendOTP($otp = '', $numbers = ''){

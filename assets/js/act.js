@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+
 	var url = "/public_html/actor/ajax",
 		base = "/public_html/",
 		type = "POST",

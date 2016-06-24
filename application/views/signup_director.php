@@ -80,10 +80,10 @@
                         <input type="text" class="form-control login" id="fullname" name="name" placeholder= "Full Name *" required>
                       </div>
                       <div class="form-group">
-                        <input type="email" class="form-control login" id="email" name="email" placeholder= "Email *" required >
+                        <input type="email" class="form-control login" id="email" name="email" placeholder= "Email *" value="<?= $email ?>" <?= ($email != '') ? "readonly" : "" ?> required >
                       </div>
                       <div class="form-group">
-                        <input type="text" class="form-control login" id="contact" name="mobile" placeholder= "Mobile No. *" required >
+                        <input type="text" class="form-control login" id="contact" name="mobile" placeholder= "Mobile No. *" value="<?= $mobile ?>" <?= ($mobile != '') ? "readonly" : "" ?> required >
                       </div>
                       <div class="form-group">
                         <input type="password" class="form-control login" id="password" name="password" placeholder= "Password *" required >
@@ -95,6 +95,7 @@
                         I am <input type="radio" name="type" value="director" checked> Director
                               <input type="radio" name="type" value="actor"> Actor
                       </div> -->
+					             <a href="<?= base_url() ?>" class="pull-right"><small><?= M_AlreadyRegistered ?></small></a>
                       <button type="submit" class="btn submit-btn firstcolor" name="submit" id="sign-upbtn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign Up</button>
                       <center><a href="<?= base_url() ?>" class="already"><small><?= M_AlreadyRegistered ?></small></a></center>
                     </form>

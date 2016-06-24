@@ -88,6 +88,9 @@
 					            <div class="form-group">
                         <input type="password" class="form-control login" id="password" name="cfn_password" placeholder= "Re Type Password *" required >
                       </div>
+                      <input type='hidden' name='director' value="<?= $director ?>">
+                      <input type='hidden' name='project' value="<?= $project ?>">
+                      <input type='hidden' name='link_id' value="<?= $link_id ?>">
                       <!-- <div class='form-group'>
                         I am <input type="radio" name="type" value="director" checked> Director
                               <input type="radio" name="type" value="actor"> Actor

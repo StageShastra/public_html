@@ -34,6 +34,8 @@
                                 $fa = "users";
                             elseif( $identifier == 'projects' )
                                 $fa = "briefcase";
+                            elseif( $identifier == 'promo' )
+                                $fa = "tags";
                             else
                                 $fa = "user-secret";
                             return $fa;

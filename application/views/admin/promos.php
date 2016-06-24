@@ -6,13 +6,13 @@
 ?>
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>All Actors</h2>
+            <h2>All Promos</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="<?= base_url() ?>admin/home/">Home</a>
                 </li>
                 <li class="active">
-                    <strong>Actors</strong>
+                    <strong>Promos</strong>
                 </li>
             </ol>
         </div>
@@ -25,7 +25,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5> Actors List </h5>
+                    <h5> Promo List </h5>
                     
                 </div>
                 <div class="ibox-content">
@@ -49,39 +49,37 @@
                                 <tr>
                                     <th data-toggle="true">#</th>
                                     <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Mobile</th>
+                                    <th>Code</th>
+                                    <th>Created</th>
+                                    <th>Created By</th>
+                                    <th>Opened</th>
                                     <th>Registered</th>
-                                    <th>IP</th>
-                                    <th>Account</th>
-                                    <th>Mobile</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
         						<?php
         							
-        							foreach($actors as $key => $actor){
+        							foreach($promos as $key => $promo){
         						?>
         						<tr>
                                     <td><?= ++$key ?></td>
         							<!-- <td class="client-avatar"> <a href="#"> <img src="#" height="64" width="64" > </a> </td> -->
-        							<td> <a href="<?= base_url() ?>admin/actor/<?= $actor['StashUsers_id']?>"><?= sprintf("%05d", $actor['StashUsers_id'])  ?></a></td>
-                                    <td><?= $actor['StashUsers_name']?></td>
-                                    <td><?= $actor['StashUsers_email']?></td>
-                                    <td><?= $actor['StashUsers_mobile']?></td>
-        							<td><?= $this->ModelAdmin->timeElapsedString($actor['StashUsers_time'])?></td>
-                                    <td><?= $actor['StashUsers_ip']?></td>
-                                    <td><label class='label label-<?= ($actor['StashUsers_status']) ? "primary" : "warning" ?>'><?= ($actor['StashUsers_status']) ? "active" : "pending" ?></label></td>
-                                    <td><label class='label label-<?= ($actor['StashUsers_mobile_status']) ? "primary" : "warning" ?>'><?= ($actor['StashUsers_mobile_status']) ? "verified" : "pending" ?></label></td>
-                                    <td></td>
+        							<td> <a href="<?= base_url() ?>admin/promo/<?= $promo['StashPromo_id']?>"><?= sprintf("%05d", $promo['StashPromo_id'])  ?></a></td>
+                                    <td><?= $promo['StashPromo_code']?></td>
+        							<td><?= $this->ModelAdmin->timeElapsedString($promo['StashPromo_time'])?></td>
+                                    <td><a href="<?= base_url() ?>admin/profile/<?= $promo['AddedBy'] ?>" title="<?= $promo['AddedByName'] ?>"><?= $promo['AddedBy'] ?></a></td>
+                                    
+                                    <td><?= $promo['opened'] ?></td>
+                                    <td><?= $promo['used'] ?></td>
+                                    <td><label class='label label-<?= ($promo['StashPromo_status']) ? "primary" : "warning" ?>'><?= ($promo['StashPromo_status']) ? "active" : "pending" ?></label></td>
         						</tr>
 
         						<?php } ?>
         					</tbody>
                             <tfoot class="hide-if-no-paging">
                                 <tr>
-                                    <td colspan="10">
+                                    <td colspan="8">
                                         <ul class="pagination pagination-centered hide-if-no-paging"></ul>
                                     </td>
                                 </tr>

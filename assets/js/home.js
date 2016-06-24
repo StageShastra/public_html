@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	
 	//For Main Sevrer
+
 	var url = "/public_html/ajax/",
 		base = "/public_html/";
 		
@@ -847,7 +848,7 @@ $(document).ready(function(){
 	});
 	
 	$(".projectName").autocomplete({
-		source: "/home/autoComplete/",
+		source: base + "home/autoComplete/",
 		minLenght: 2,
 		select: function(ev, ui){
 			console.log(ui);
