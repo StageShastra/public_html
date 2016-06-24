@@ -93,6 +93,7 @@
 		
 		public function testAttachment($data){
 			print_r($data);
+		}
 
 		public function contactLits($data = []){
 			$this->load->model("ModelDirector");
