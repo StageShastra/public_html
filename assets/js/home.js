@@ -928,6 +928,32 @@ $(document).ready(function(){
 		console.log(contactList);
 	});
 
+	$(document).on("click", ".addPrevMessage", function(){
+		$that = $(this);
+		from = $(this).attr("data-from");
+		offset = parseInt($(this).attr("data-offset"));
+		data = {request: "LastMessages", data: JSON.stringify({ from: from, offset: offset })};
+		name = $(this).attr("data-name");
+		
+
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				if( response.status ){
+					$("textarea[name='"+name+"']").val( response.data.msg );
+					//offset += 1;
+					$that.attr("data-offset", response.data.offset);
+				}
+				$("#displaydate-" + from).html(response.message);
+
+			}
+		});
+
+		return false;
+	});
+
 });
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()

@@ -53,6 +53,9 @@
 					case "ContactList":
 						$this->contactLits($data);
 						break;
+					case "LastMessages":
+						$this->lastMessages($data);
+						break;
 					
 					default:
 						$this->response(false, "Invalid Request");
@@ -60,6 +63,22 @@
 				}
 			}else{
 				$this->response(false, Aj_Req_NoData);
+			}
+		}
+
+		public function lastMessages($data = []){
+			$this->load->model("ModelDirector");
+			$msgData = $this->ModelDirector->getLastMessage( $data['from'], $this->session->userdata("StaSh_User_id"), $data['offset'] );
+			if($msgData){
+				$o = (int)$data['offset'] + 1;
+				$this->response(true, $msgData['date'], array("msg" => $msgData['msg'], 'offset' => $o));
+			}else{
+				if($data['offset'] != 0){
+					$msgData = $this->ModelDirector->getLastMessage( $data['from'], $this->session->userdata("StaSh_User_id"), 0 );
+					$this->response(true, $msgData['date'], array("msg" => $msgData['msg'], 'offset' => 1));
+				}else{
+					$this->response(false, "No last message found.");
+				}
 			}
 		}
 		

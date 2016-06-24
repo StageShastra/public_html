@@ -509,6 +509,51 @@
 			}
 			return $result;
 		}
+
+		public function getLastMessage($from = 'email', $ref = 0, $offset = 0){
+			$result = [];
+			if( $from == 'email' ){
+				$data = $this->lastInviteEmails( $ref, $offset );
+				if(count($data)){
+					$msg = $this->getThisMessage($data['StashEmailInvite_msg_id_ref']);
+					$result['msg'] = $msg['StashInviteMsg_message'];
+					$result['date'] = "Sent on: " . date("d/m/Y", $data['StashEmailInvite_time']);
+				}
+			}else{
+				$data = $this->lastInviteSMS( $ref, $offset );
+				if(count($data)){
+					$msg = $this->getThisMessage($data['StashSMSInvites_msg_id']);
+					$result['msg'] = $msg['StashInviteMsg_message'];// . "__" . $msg['StashInviteMsg_id'];
+					$result['date'] = "Sent on: " . date("d/m/Y", $data['StashSMSInvites_time']);
+				}
+			}
+			return $result;
+		}
+
+		public function lastInviteSMS($ref = 0, $off = 0){
+			$this->db->distinct();
+			$this->db->select("StashSMSInvites_msg_id, StashSMSInvites_time");
+			$this->db->from("stash-sms-invites");
+			$this->db->where("StashSMSInvites_director_id_ref", $ref);
+			$this->db->order_by("StashSMSInvites_id", "DESC");
+			$this->db->limit(1, $off);
+			return $fetch = $this->db->get()->first_row('array');
+		}
+
+		public function lastInviteEmails($ref = 0, $off = 0){
+			$this->db->distinct();
+			$this->db->select("StashEmailInvite_msg_id_ref, StashEmailInvite_time");
+			$this->db->from("stash-email-invites");
+			$this->db->where("StashEmailInvite_director_id_ref", $ref);
+			$this->db->order_by("StashEmailInvite_id", "DESC");
+			$this->db->limit(1, $off);
+			return $fetch = $this->db->get()->first_row('array');
+		}
+
+		public function getThisMessage($ref = 0){
+			$this->db->where("StashInviteMsg_id", $ref);
+			return $this->db->get("stash-invite-msg", 1)->first_row("array");
+		}
 	}
 
 ?>
