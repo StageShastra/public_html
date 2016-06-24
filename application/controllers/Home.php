@@ -184,8 +184,15 @@ class Home extends CI_Controller {
 		}
 		
 		$pageInfo['page'] = $type;
-
-		$this->load->view("signup", $pageInfo);
+		if($type =="director")
+		{
+			$this->load->view("signup_director", $pageInfo);	
+		}
+		if($type =="actor")
+		{
+			$this->load->view("signup_actor", $pageInfo);	
+		}
+		
 	}
 
 	public function forgotpassword($value=''){
@@ -218,6 +225,18 @@ class Home extends CI_Controller {
 		$_SESSION['Cstko_link'] = $link;
 		redirect( base_url() . "home/register/actor" );
 	}
+
+	public function pricing($link = ''){
+		$this->load->view("pricing");
+	}
+	public function connect($link = ''){
+		//$this->parseInvitaionLink($link);
+		$encryptedText = str_replace(" ", "+", urldecode($link));
+		$encryptedText = str_replace("_", "/", $encryptedText);
+		$this->load->library('encrypt');
+		$info = $this->encrypt->decode(trim($encryptedText));
+		$info = explode("_", $info);
+
 
 	public function connect($link = ''){
 		

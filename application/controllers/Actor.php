@@ -618,7 +618,7 @@
 					$this->response(false, Ac_Ajx_GenFailed);
 				}
 			}else{
-				$this->response(false, "Nothing to Updated");
+				$this->response(true, Ac_Ajx_GenSucc);
 			}
 		}
 		public function editWeight($data = []){
