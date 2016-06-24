@@ -7,9 +7,6 @@
         <script src="<?= JS ?>/lightbox.js"></script>
         <script src="<?= JS ?>/stupidtable.js"></script>
         <!-- Google Analytics: change UA-XXXXX-X to  be your site's ID. -->
-        <footer class="footer">
-          <foodiv class="container center">
-            <p class="dark-gray info-small center "><?= M_Copyright ?></p>
-        </footer>
+        
     </body>
 </html>

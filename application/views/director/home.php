@@ -5,6 +5,7 @@
         <style>
           body{
             padding-top: 90px;
+            padding-bottom: 0px;
           }
           .rotate-img {
             -webkit-animation: rotation 2s infinite linear;
@@ -102,6 +103,10 @@
     }
     .submit-btn {
     padding: 4px 8px;
+    }
+    .navbar-nav > li > a:hover {
+    color: #fff;
+    background: #F7A9A9;
     }
 
               </style>
@@ -618,5 +623,6 @@
       </script>
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php
+  include 'includes/footer.php';
   include 'includes/scripts.php';
 ?>
