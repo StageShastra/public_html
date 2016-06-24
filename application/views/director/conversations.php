@@ -208,14 +208,14 @@
             </nav>
             <div class="container-fluid margintop80 conversation_container">
               <ul class="nav nav-tabs nav-justified">
-                <li ><a data-toggle="tab" href="#email" class="contactListNav" data-for="cEmail">Email</a></li>
+                <li ><a data-toggle="tab" href="#email" class="contactListNav" id='clickFirst' data-for="cEmail">Email</a></li>
                 <li><a data-toggle="tab" href="#sms" class="contactListNav" data-for="cSMS">SMS</a></li>
                 <li class="active"><a data-toggle="tab" href="#email-invites" class="contactListNav" data-for="iEmail">Email Invites</a></li>
                 <li><a data-toggle="tab" href="#sms-invites" class="contactListNav" data-for="iSMS">SMS Invites</a></li>
               </ul>
 
               <div class="tab-content">
-                <div id="email" class="tab-pane fade in active">
+                <!-- <div id="email" class="tab-pane fade">
                   <table class="messages table table-striped">
                     <thead>
                       <tr>
@@ -225,6 +225,7 @@
                       </tr>
                     </thead>
                     <tbody>
+
                       <tr class="toggleview" data-unhide-id="#test1">
                         <td class="col-sm-3">
                           <div class="addresse_details">
@@ -235,6 +236,8 @@
                         <td class="col-sm-8 subject">Please come for audition on 27th of June</td>
                         <td class="col-sm-1 sent_on">22nd June</td>
                       </tr>
+
+
                       <tr>
                         <td colspan="12">
                           <div class="preview row" id="test1">
@@ -330,6 +333,8 @@
                           </div>
                         </td>
                       </tr>
+                      
+
                       <tr>
                         <td class="col-sm-3">
                           <div class="addresse_details">
@@ -340,16 +345,61 @@
                         <td class="col-sm-8 subject">Call for 2nd Audition for Dharma Production's Filmwale </td>
                         <td class="col-sm-1 sent_on">21st June</td>
                       </tr>
+
+                    </tbody>
+                  </table>
+                </div> -->
+                <div id="email" class="tab-pane fade">
+                  <table class="messages table table-striped">
+                    <thead>
+                      <tr>
+                        <th class="col-sm-3">Sent to</th>
+                        <th class="col-sm-7">Subject</th>
+                        <th class="col-sm-2">Time</th>
+                      </tr>
+                    </thead>
+                    <tbody>
                     </tbody>
                   </table>
                 </div>
                 <div id="sms" class="tab-pane fade">
-                  <h3>Menu 1</h3>
-                  <p>Some content in menu 1.</p>
+                  <table class="messages table table-striped">
+                    <thead>
+                      <tr>
+                        <th class="col-sm-3">Sent to</th>
+                        <th class="col-sm-7">Subject</th>
+                        <th class="col-sm-2">Time</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
                 </div>
-                <div id="menu2" class="tab-pane fade">
-                  <h3>Menu 2</h3>
-                  <p>Some content in menu 2.</p>
+                <div id="email-invites" class="tab-pane fade in active">
+                  <table class="messages table table-striped">
+                    <thead>
+                      <tr>
+                        <th class="col-sm-3">Sent to</th>
+                        <th class="col-sm-7">Subject</th>
+                        <th class="col-sm-2">Time</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+                <div id="sms-invites" class="tab-pane fade">
+                  <table class="messages table table-striped">
+                    <thead>
+                      <tr>
+                        <th class="col-sm-3">Sent to</th>
+                        <th class="col-sm-7">Subject</th>
+                        <th class="col-sm-2">Time</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -368,6 +418,9 @@
             <!-- Enter Email and Mobile Modal -->
             
         <!--================================== Navigation Ends Here =======================================-!-->
+<script type="text/javascript">
+  convo = true;
+</script>
 <?php
   include 'includes/scripts.php';
 ?>

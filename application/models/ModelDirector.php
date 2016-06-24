@@ -489,27 +489,6 @@
 			return $result;
 		}
 
-		public function getUserBascis($field = 'StashActor_email', $val, $select = "*"){
-			$this->db->select( $select );
-			$this->db->from("stash-actor");
-			$this->db->where($field, $val);
-			return $this->db->get()->first_row();
-		}
-
-		public function inviteEmailList($ref = 0){
-			$this->db->where("StashEmailInvite_director_id_ref", $ref);
-			$fetch = $this->db->get("stash-email-invites")->result("array");
-			$result = [];
-			foreach ($fetch as $key => $f) {
-				if( $f['StashEmailInvite_status'] == 0)
-					$f['user'] = $this->getUserBascis("StashActor_email", $f['StashEmailInvite_email'], "StashActor_actor_id_ref, StashActor_name, StashActor_email, StashActor_avatar");
-				else
-					$f['user'] = array();
-				$result[] = $f;
-			}
-			return $result;
-		}
-
 		public function getLastMessage($from = 'email', $ref = 0, $offset = 0){
 			$result = [];
 			if( $from == 'email' ){
@@ -553,6 +532,199 @@
 		public function getThisMessage($ref = 0){
 			$this->db->where("StashInviteMsg_id", $ref);
 			return $this->db->get("stash-invite-msg", 1)->first_row("array");
+		}
+
+		public function getUserBascis($field = 'StashActor_email', $val, $select = "*"){
+			$this->db->select( $select );
+			$this->db->from("stash-actor");
+			$this->db->where($field, $val);
+			return $this->db->get()->first_row('array');
+		}
+
+		public function inviteEmailList($ref = 0){
+			$this->db->where("StashEmailInvite_director_id_ref", $ref);
+			$fetch = $this->db->get("stash-email-invites")->result("array");
+			//$count = count($fetch);
+			$result = [];
+			$found = $msg = false;
+			$uniques = [];
+			foreach ($fetch as $key => $f) {
+				if( !in_array($f['StashEmailInvite_msg_id_ref'], $uniques) ){
+					$uniques[] = $f['StashEmailInvite_msg_id_ref'];
+					$found = $msg = false;
+				}
+				$id = array_search( $f['StashEmailInvite_msg_id_ref'], $uniques );
+				if( !isset($result['message'][$id]['others']) ){
+					$result[$id]['others'] = 1;
+					$result[$id]['date'] = $this->timeElapsedString($f['StashEmailInvite_time']);
+					$result[$id]['time'] = $f['StashEmailInvite_time'];
+					$result[$id]['id'] = $f['StashEmailInvite_id'];
+					$result[$id]['first'] = $f['StashEmailInvite_email'];
+				}else{
+					$result[$id]['others'] += 1;
+				}
+				if(!$found){
+					$user = $this->getUserBascis("StashActor_email", $f['StashEmailInvite_email'], "StashActor_actor_id_ref, StashActor_name, StashActor_email, StashActor_avatar");
+					if(count($user)){
+						$u = array('name' => $user['StashActor_name'], 'contact' => $user['StashActor_email'], 'id' => $user['StashActor_actor_id_ref'], 'avatar' => $user['StashActor_avatar']);
+						$result[$id]['firstUser'] = $u;
+						$found = true;
+					}
+				}
+
+				if(!$msg){
+					$m = $this->getThisMessage( $f['StashEmailInvite_msg_id_ref'] );
+					$result[$id]['subject'] = [$m['StashInviteMsg_id'], $m['StashInviteMsg_subject']];
+					$msg = true;
+				}
+			}
+			return $result;
+		}
+
+		public function inviteSMSList($ref = 0){
+			$this->db->where("StashSMSInvites_director_id_ref", $ref);
+			$fetch = $this->db->get("stash-sms-invites")->result("array");
+			$result = $uniques = [];
+			$found = $msg = false;
+			foreach ($fetch as $key => $f) {
+				if( !in_array($f['StashSMSInvites_msg_id'], $uniques) ){
+					$uniques[] = $f['StashSMSInvites_msg_id'];
+					$found = $msg = false;
+				}
+				$id = array_search( $f['StashSMSInvites_msg_id'], $uniques );
+				if( !isset($result[$id]['others']) ){
+					$result[$id]['others'] = 1;
+					$result[$id]['date'] = $this->timeElapsedString($f['StashSMSInvites_time']);
+					$result[$id]['time'] = $f['StashSMSInvites_time'];
+					$result[$id]['id'] = $f['StashSMSInvites_id'];
+					$result[$id]['first'] = $f['StashSMSInvites_mobile'];
+				}else{
+					$result[$id]['others'] += 1;
+				}
+				if(!$found){
+					$user = $this->getUserBascis("StashActor_mobile", $f['StashSMSInvites_mobile'], "StashActor_actor_id_ref, StashActor_name, StashActor_mobile, StashActor_avatar");
+					if(count($user)){
+						$u = array('name' => $user['StashActor_name'], 'contact' => $user['StashActor_mobile'], 'id' => $user['StashActor_actor_id_ref'], 'avatar' => $user['StashActor_avatar']);
+						$result[$id]['firstUser'] = $u;
+						$found = true;
+					}
+				}
+
+				if(!$msg){
+					$m = $this->getThisMessage( $f['StashSMSInvites_msg_id'] );
+					$result[$id]['subject'] = [$m['StashInviteMsg_id'], $m['StashInviteMsg_subject']];
+					$msg = true;
+				}
+			}
+			return $result;
+
+		}
+
+		public function contactEmailList($ref = 0){
+			$this->db->where("StashEmailMsg_director_id_ref", $ref);
+			$fetch = $this->db->get("stash-email-message")->result("array");
+			$result = $uniques = [];
+			$found = $msg = false;
+			foreach ($fetch as $key => $f) {
+				if( !in_array($f['StashEmailMsg_msg_id_ref'], $uniques) ){
+					$uniques[] = $f['StashEmailMsg_msg_id_ref'];
+					$found = $msg = false;
+				}
+				$id = array_search( $f['StashEmailMsg_msg_id_ref'], $uniques );
+				if( !isset($result[$id]['others']) ){
+					$result[$id]['others'] = 1;
+					$result[$id]['date'] = $this->timeElapsedString($f['StashEmailMsg_time']);
+					$result[$id]['time'] = $f['StashEmailMsg_time'];
+					$result[$id]['id'] = $f['StashEmailMsg_id'];
+					$result[$id]['first'] = "Actor";
+				}else{
+					$result[$id]['others'] += 1;
+				}
+				if(!$found){
+					$user = $this->getUserBascis("StashActor_actor_id_ref", $f['StashEmailMsg_actor_id_ref'], "StashActor_actor_id_ref, StashActor_name, StashActor_email, StashActor_avatar");
+					if(count($user)){
+						$u = array('name' => $user['StashActor_name'], 'contact' => $user['StashActor_email'], 'id' => $user['StashActor_actor_id_ref'], 'avatar' => $user['StashActor_avatar']);
+						$result[$id]['firstUser'] = $u;
+						$found = true;
+					}
+				}
+
+				if(!$msg){
+					$m = $this->getThisMessage( $f['StashEmailMsg_msg_id_ref'] );
+					$result[$id]['subject'] = [$m['StashInviteMsg_id'], $m['StashInviteMsg_subject']];
+					$msg = true;
+				}
+			}
+			return $result;
+		}
+
+		public function contactSMSList($ref = ''){
+			$this->db->where("StashSMSMsg_director_id_ref", $ref);
+			$fetch = $this->db->get("stash-sms-message")->result("array");
+			$result = $uniques = [];
+			$found = $msg = false;
+			foreach ($fetch as $key => $f) {
+				if( !in_array($f['StashSMSMsg_msg_id_ref'], $uniques) ){
+					$uniques[] = $f['StashSMSMsg_msg_id_ref'];
+					$found = $msg = false;
+				}
+				$id = array_search( $f['StashSMSMsg_msg_id_ref'], $uniques );
+				if( !isset($result[$id]['others']) ){
+					$result[$id]['others'] = 1;
+					$result[$id]['date'] = $this->timeElapsedString($f['StashSMSMsg_time']);
+					$result[$id]['time'] = $f['StashSMSMsg_time'];
+					$result[$id]['id'] = $f['StashSMSMsg_id'];
+					$result[$id]['first'] = "Actor";
+				}else{
+					$result[$id]['others'] += 1;
+				}
+				if(!$found){
+					$user = $this->getUserBascis("StashActor_actor_id_ref", $f['StashSMSMsg_actor_id_ref'], "StashActor_actor_id_ref, StashActor_name, StashActor_mobile, StashActor_avatar");
+					if(count($user)){
+						$u = array('name' => $user['StashActor_name'], 'contact' => $user['StashActor_mobile'], 'id' => $user['StashActor_actor_id_ref'], 'avatar' => $user['StashActor_avatar']);
+						$result[$id]['firstUser'] = $u;
+						$found = true;
+					}
+				}
+
+				if(!$msg){
+					$m = $this->getThisMessage( $f['StashSMSMsg_msg_id_ref'] );
+					$result[$id]['subject'] = [$m['StashInviteMsg_id'], $m['StashInviteMsg_subject']];
+					$msg = true;
+				}
+			}
+			return $result;
+		}
+
+		public function timeElapsedString($ptime){
+		    $etime = time() - $ptime;
+
+		    if ($etime < 1){
+		        return '0 seconds';
+		    }
+
+		    $a = array( 365 * 24 * 60 * 60  =>  'year',
+		                 30 * 24 * 60 * 60  =>  'month',
+		                      24 * 60 * 60  =>  'day',
+		                           60 * 60  =>  'hour',
+		                                60  =>  'minute',
+		                                 1  =>  'second'
+		                );
+		    $a_plural = array( 'year'   => 'years',
+		                       'month'  => 'months',
+		                       'day'    => 'days',
+		                       'hour'   => 'hours',
+		                       'minute' => 'minutes',
+		                       'second' => 'seconds'
+		                );
+
+		    foreach ($a as $secs => $str){
+		        $d = $etime / $secs;
+		        if ($d >= 1){
+		            $r = round($d);
+		            return $r . ' ' . ($r > 1 ? $a_plural[$str] : $str) . ' ago';
+		        }
+		    }
 		}
 	}
 

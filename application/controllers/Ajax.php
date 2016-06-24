@@ -50,11 +50,11 @@
 					case "SMSInvitation":
 						$this->SMSInvitation($data);
 						break;
-					case "ContactList":
-						$this->contactLits($data);
-						break;
 					case "LastMessages":
 						$this->lastMessages($data);
+						break;
+					case "ContactList":
+						$this->contactLits($data);
 						break;
 					
 					default:
@@ -64,6 +64,21 @@
 			}else{
 				$this->response(false, Aj_Req_NoData);
 			}
+		}
+
+		public function contactLits($data = []){
+			$this->load->model("ModelDirector");
+			$d = [];
+			if( $data['for'] == 'iEmail' ){
+				$res = $this->ModelDirector->inviteEmailList( $this->session->userdata("StaSh_User_id") );
+			}elseif( $data['for'] == 'iSMS' ){
+				$res = $this->ModelDirector->inviteSMSList( $this->session->userdata("StaSh_User_id") );
+			}elseif( $data['for'] == 'cEmail' ){
+				$res = $this->ModelDirector->contactEmailList( $this->session->userdata("StaSh_User_id") );
+			}elseif($data['for'] == 'cSMS'){
+				$res = $this->ModelDirector->contactSMSList( $this->session->userdata("StaSh_User_id") );
+			}
+			$this->response( true, "Messages", $res );
 		}
 
 		public function lastMessages($data = []){
@@ -80,24 +95,6 @@
 					$this->response(false, "No last message found.");
 				}
 			}
-		}
-		
-
-		public function contactLits($data = []){
-			$this->load->model("ModelDirector");
-			$d = [];
-			if( $data['for'] == 'iEmail' )
-				$d = $this->ModelDirector->inviteEmailList( $this->session->userdata("StaSh_User_id") );
-			elseif( $data['for'] == 'iSMS' )
-				$d = $this->ModelDirector->inviteEmailList( $this->session->userdata("StaSh_User_id") );
-			elseif( $data['for'] == 'cEmail' )
-				$d = $this->ModelDirector->inviteEmailList( $this->session->userdata("StaSh_User_id") );
-			elseif( $data['for'] == 'cSMS' )
-				$d = $this->ModelDirector->inviteEmailList( $this->session->userdata("StaSh_User_id") );
-			else
-				$this->response(false, "Invalid Selection.{$data['for']}");
-			
-			$this->response(true, "List", $d);
 		}
 		
 		public function SMSInvitation($data = []){
