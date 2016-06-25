@@ -382,7 +382,7 @@
 						'StashContactMessage_time' => time()
 					);
 			$this->db->insert("stash-contact-message", $data);
-
+		}
 		public function updateSMSLinkOpened($id = 0){
 			$this->db->where("StashSMSInvites_id", $id);
 			$this->db->update("stash-sms-invites", array('StashSMSInvites_opened' => time()));

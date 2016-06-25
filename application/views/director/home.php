@@ -5,6 +5,7 @@
         <style>
           body{
             padding-top: 90px;
+            padding-bottom: 0px;
           }
           .rotate-img {
             -webkit-animation: rotation 2s infinite linear;
@@ -62,6 +63,52 @@
       .form-group{
         margin-bottom: 0px;
       }
+      .info{
+        font-family: "Raleway","Open Sans";
+        font-weight: 400;
+        font-size: 15px;
+      }
+      .profile_image{
+        height: 75px;
+        width: 75px;
+        border-radius: 50%;
+        box-shadow: 2px 2px 10px gray;
+        border: 2px solid white;
+
+      }
+      thead{
+        font-family: "Open Sans";
+        font-size: 16px;
+        font-weight: 600;
+        background: white;
+        
+      }
+      th{
+        color: #FF9800;
+      }
+      table{
+        border: 1px solid #ddd;
+      }
+      .row_btn{
+        color:#FF9800;
+        margin-left: 5px;
+      }
+      .row_btn:hover{
+        color: #F44336;
+      }
+      .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+    
+        border-color: #ddd;
+        box-shadow:none; 
+    }
+    .submit-btn {
+    padding: 4px 8px;
+    }
+    .navbar-nav > li > a:hover {
+    color: #fff;
+    background: #F7A9A9;
+    }
+
               </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -148,8 +195,15 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="<?= base_url() ?>">
-                            <img src="<?= IMG ?>/logo.png" class="brands "/>
-              <span class="vertical-middle brandname title"><?= M_Title ?></span><p><span id="tag-line" class="firstcolor info-small"><?= M_TagLine?></span>
+                            <img src="<?= IMG ?>/logo.png" class="brands img-responsive "/>
+                            <div class="vertical-middle brandname title">
+                                <?= M_Title ?>
+                                <br>
+                                <span id="tag-line" class="firstcolor info-small hidden-xs">
+                                Making Casting easier!                      
+                                </span>
+                            </div>
+                            
                         </a>
                     </div> 
 
@@ -185,10 +239,28 @@
             </nav>
            <!-- contact modal toggle -->
             <div class="container-fluid padded">
-                <span class="submit-btn firstcolor notice-selected-actors">
+                <span class="firstcolor notice-selected-actors">
                   <p><span>2</span> Selected</p>
                 </span>
+
+
+                <!---floating buttons -->
+                <div>
+                  <button type="submit" class="btn submit-btn firstcolor bulk-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><span class="glyphicon glyphicon-pencil"></span></button>
+
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </div>
+
                 <button type="submit" class="btn submit-btn firstcolor contact-btn populateContactForm" data-toggle="modal" data-target="#<?= ($isAllowed) ? "contactmodal" : "notAllowedModal" ?>"><span class="glyphicon glyphicon-edit"></span></button>
+                <!--floating buttons end-->
+
+
                 <div class="alert alert-success" id="success_send" role="alert">Mail sent to all the actors.</div>
                 <div class="alert alert-danger"  id="failure_send" role="alert">Error sending mail! Please try again.</div>
                 <div class="container col-sm-12 center" id="browse-table">
@@ -551,5 +623,6 @@
       </script>
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php
+  include 'includes/footer.php';
   include 'includes/scripts.php';
 ?>

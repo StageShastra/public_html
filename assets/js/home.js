@@ -149,15 +149,15 @@ $(document).ready(function(){
 		actors = actorsInfo;
 		var ckh = (selectAll) ? "checked" : "";
 		var $table = $("#browse-table");
-		var content = '<table class="table table-curved display" id="actor_table">'
+		var content = '<table class="table table-striped display" id="actor_table">'
                		+ '<thead center>'
-               		+'<tr><th id="selectallcheckbox"><input type="checkbox" '+ckh+' name="selectallactor" id="selectallactor" class="css-checkbox" /><label for="selectallactor" class="css-label"></label></th><th>Profile</th>';
+               		+ '<tr><th id="selectallcheckbox"><input type="checkbox" '+ckh+' name="selectallactor" id="selectallactor" class="css-checkbox" /><label for="selectallactor" class="css-label"></label></th><th>Profile</th>';
         
         for(var i = 0; i < select.length; i++){
     		content += '<th data-sort="string">'+select[i]+' <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>';
     	}
 
-    	content += "</tr></thead>";
+    	content += "<th>Link</th></tr></thead>";
     	content += "<tbody>";
     	var link = '', tag = '';
 		
@@ -187,8 +187,8 @@ $(document).ready(function(){
 					+ 	'<input type="checkbox" name="checkactor" '+chk+' id="checkactor'+i+'" value='+i+' class="css-checkbox" /><label for="checkactor'+i+'" class="css-label"></label>'
               		+ '</td>' 
               		+ '<td style="vertical-align:middle-top;">'
-                	+ 	'<div class="img-div center">'
-					+		'<img src="'+base + 'assets/img/actors/' +actorsInfo[i].StashActor_avatar+'" class="showDetails" data-id="'+i+'" />'
+                	+ 	'<div class="center">'
+					+		'<img src="'+base + 'assets/img/actors/' +actorsInfo[i].StashActor_avatar+'" class="showDetails profile_image" data-id="'+i+'" />'
 					+	'</div>'
               		+ '</td>';
 
@@ -201,12 +201,9 @@ $(document).ready(function(){
 
             content += '<td style="vertical-align:middle;">'
                     +      '<font class="sortbuttons">'
-                    + 			'<a href="'+link+'" target="_blank"  class="btn submit-btn firstcolor toggle-btn" style="right:50px;" >'
-                    + 				'<span class="glyphicon glyphicon-share"></span>'
+                    + 			'<a href="'+link+'" target="_blank"> <span class="glyphicon glyphicon-share row_btn"></span>'
                     +			'</a>'
-                    +			'<button  class="btn submit-btn firstcolor toggle-btn removeActor" data-actor-id="'+i+'">'
-                    +				'<span class="glyphicon glyphicon-trash"></span>'
-                    +			'</button>'
+                    +				'<span class="glyphicon glyphicon-trash removeActor row_btn" data-actor-id="'+i+'"></span>'
                     + 		'</font>'
                     + '</td></tr>';
 
@@ -983,6 +980,38 @@ $(document).ready(function(){
 			$("#clickFirst").trigger("click");
 		}
 	}
+
+	$(document).on("click", ".bulkUserRemove", function(){
+		
+		conf = confirm( "Are you sure to remove selected Actor from your list ?" );
+		if(!conf)
+			return false;
+
+		toRemove = [];
+		for(i = 0; i < actorRef.length; i++){
+			id = actorRef[i];
+			toRemove.push(Number(actors[id].StashActor_actor_id_ref));
+		}
+
+		data = {request: "BulkRemove", data: JSON.stringify({list: toRemove, listid: actorRef})};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				if( response.status ){
+					removed = response.data.removed;
+					for( i = 0; i < removed.length; i++ ){
+						//console.log('#datarow'+removed[i]);
+						$('#datarow'+removed[i]).remove();
+					}
+				}else{
+					alert(response.message);
+				}
+			}
+		});
+
+	});
 
 });
 $(function () {

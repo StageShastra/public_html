@@ -33,7 +33,6 @@
 		public function getUserDetails($type = ''){
 			$this->db->where("StashUsers_type", $type);
 			$this->db->order_by("StashUsers_id", "DESC");
-			$this->db->limit(20, 0);
 			$query = $this->db->get("stash-users");
 			return $query->result('array');
 		}
