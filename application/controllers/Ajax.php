@@ -82,6 +82,10 @@
 				$res = $this->ModelDirector->fetchInviteEmailData( $this->session->userdata("StaSh_User_id"), $data['id'] );
 			}elseif( $data['for'] == 'iSMS' ){
 				$res = $this->ModelDirector->fetchInviteSMSData( $this->session->userdata("StaSh_User_id"), $data['id'] );
+			}elseif( $data['for'] == 'cEmail' ){
+				$res = $this->ModelDirector->fetchContactEmailData( $this->session->userdata("StaSh_User_id"), $data['id'] );	
+			}elseif( $data['for'] == 'cSMS' ){
+				$res = $this->ModelDirector->fetchContactSMSData( $this->session->userdata("StaSh_User_id"), $data['id'] );
 			}
 			$this->response(true, "Data", $res);
 		}
