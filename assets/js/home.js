@@ -2,12 +2,12 @@ $(document).ready(function(){
 	
 	//For Main Sevrer
 
-	var url = "/public_html/ajax/",
-		base = "/public_html/";
+	var url = "/Castiko/ajax/",
+		base = "/Castiko/";
 		
 	//For Localhost
-	/*var url = "/public_html/beta/ajax/",
-		base = "/public_html/beta/";
+	/*var url = "/Castiko/beta/ajax/",
+		base = "/Castiko/beta/";
 	*/
 	
 	var count = 0,
@@ -958,17 +958,17 @@ $(document).ready(function(){
 
 
 					tr = "";
-					tr += "<tr class='nextRowData' data-id='"+data[i].id+"' data-for='"+thisfor+"'>"
+					tr += "<tr class='nextRowData' data-hide='0' data-id='"+data[i].id+"' data-for='"+thisfor+"'>"
 					   + "	<td class='col-sm-3'>"
 					   + "		<div class='addresse_details'>"
 					   + 			txt2
 					   + "	</div></td>"
 					   + "	<td class='col-sm-8 subject'>"+data[i].subject[1]+"</td>"
 					   + "	<td class='col-sm-1 sent_on'> "+ data[i].date +" </td>"
-					   + "</tr>";
+					   + "</tr><tr class='convo-trs' id='convo-"+thisfor+"-"+data[i].id+"' style='display:none;'></tr>";
 
 					$(target + " table tbody").append(tr);
-					console.log(target + " table tbody");
+					//console.log(target + " table tbody");
 
 				}
 			}
@@ -980,6 +980,67 @@ $(document).ready(function(){
 			$("#clickFirst").trigger("click");
 		}
 	}
+
+	function populateForInviteConv( obj, that, thisId, thisfor ) {
+		contacts = obj.users;
+		usertr = "";
+		for( i = 0; i < contacts.length; i++ ){
+			a = ( typeof contacts[i].avatar == 'undefined' ) ? "default.png" : contacts[i].avatar;
+			usertr += "<tr>"
+				   + "<td class='col-sm-2 vertical_middle'><img src='"+base+"assets/img/actors/"+a+"' class='thumbnails_small'></td>"
+				   + "<td class='col-sm-4 row_text vertical_middle'>"+contacts[i].name+"<br><span class='contact_info'>"+contacts[i].contact+"</span></td>"
+				   + "<td class='col-sm-3 vertical_middle'><span class='label label-"+contacts[i].label+"'>"+contacts[i].status+"</span></td>"
+				   + "</tr>";
+		}
+
+		div1 = "<div class='col-sm-3 reciepients'><table class='messages table table-striped'><tbody> "+ usertr +" </tbody></table></div>";
+		msg = obj.msg[2];
+		iframeSrc = base + "director/emailPreview/?msg=" + encodeURI( msg );
+		div2 = "<div class='col-sm-6'><iframe src='"+iframeSrc+"' class='center' id='emailPreviewiFrame' width='600' height='500'></iframe></div>";
+		div3 = "<div class='col-sm-3'>"
+			 + "<div class='conversation_summary'><h3>Conversation Summary</h3><hr>"
+			 + "<span class='row_text'>Recipients: "+ obj.recipient +" </span>"
+			 + "<span class='row_text'>Responses</span><br>"
+			 + "<button class='btn btn-info'>Seen: <span class='badge'>"+obj.seen+"</span></button>"
+			 + "<button class='btn btn-info'>Joined: <span class='badge'>"+obj.used+"</span></button>"
+			 + "<button class='btn btn-info'>Pending: <span class='badge'>"+obj.pending+"</span></button>"
+			 + "<br></div></div>";
+
+		fianlTr = "<td colspan='12'><div class='row'>"+ div1 + div2 + div3 +"</div></td>";
+		$(".convo-trs").hide();
+		$("#convo-"+thisfor + "-" + thisId).html(fianlTr).show(500);
+	}
+
+	function populateForAuditionConv( obj, that ) {
+		
+	}
+
+	$(document).on("click", ".nextRowData", function(){
+		if( Number($(this).attr("data-hide")) ){
+			$(".convo-trs").hide();
+			$(this).attr("data-hide", 0);
+			return false;
+		}else{
+			$(this).attr("data-hide", 1);
+		}
+		that = this;
+		thisfor = $(this).attr("data-for");
+		thisId = $(this).attr("data-id");
+
+		data = {request: "ContactData", data: JSON.stringify({id: thisId, for: thisfor})};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				if( thisfor == 'iEmail' || thisfor == 'iSMS' )
+					populateForInviteConv( response.data, that, thisId, thisfor );
+				else
+					populateForAuditionConv( response.data, that );
+			}
+		})
+		return false;
+	});
 
 	$(document).on("click", ".bulkUserRemove", function(){
 		

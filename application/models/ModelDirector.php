@@ -696,6 +696,102 @@
 			return $result;
 		}
 
+		public function fetchInviteEmailData($ref = 0, $id = 0){
+			$this->db->where("StashEmailInvite_director_id_ref", $ref);
+			$this->db->where("StashEmailInvite_id", $id);
+			$fetch = $this->db->get("stash-email-invites", 1)->first_row('array');
+			return $this->fetchAndFilterIEmailData( $fetch );
+		}
+
+		public function fetchAndFilterIEmailData($data = []){
+			$this->db->where("StashEmailInvite_director_id_ref", $data['StashEmailInvite_director_id_ref']);
+			$this->db->where("StashEmailInvite_msg_id_ref", $data['StashEmailInvite_msg_id_ref']);
+			$this->db->where("StashEmailInvite_project_id_ref", $data['StashEmailInvite_project_id_ref']);
+			$fetch = $this->db->get("stash-email-invites")->result("array");
+			$recipient = count($fetch);
+			$result = [];
+			$o = $s = 0;
+			$msg = $this->getThisMessage( $data['StashEmailInvite_msg_id_ref'] );
+			$msg = [$msg['StashInviteMsg_id'], $msg['StashInviteMsg_subject'], $msg['StashInviteMsg_message'] ];
+			foreach ($fetch as $key => $f) {
+				if( $f['StashEmailInvite_opened'])
+					$o++;
+
+				if($f['StashEmailInvite_status']){
+					$d = $this->getUserBascis("StashActor_email", $f['StashEmailInvite_email'], "StashActor_actor_id_ref, StashActor_name, StashActor_email, StashActor_avatar");
+					if( count($d) )
+						$result['users'][] = [ 'name' => $d['StashActor_name'], 'contact' => $d['StashActor_email'], 'avatar' => $d['StashActor_avatar'], 'id' => $d['StashActor_actor_id_ref'], 'status' => 'joined', 'label' => 'success' ];
+					else
+						if($f['StashEmailInvite_opened'])
+							$result['user'][] = [ 'name' => $f['StashEmailInvite_email'], 'contact' => $f['StashEmailInvite_email'], 'status' => 'seen', 'label' => 'warning' ];
+						else
+							$result['user'][] = [ 'name' => $f['StashEmailInvite_email'], 'contact' => $f['StashEmailInvite_email'], 'status' => 'pending', 'label' => 'danger' ];
+					$s++;
+				}else{
+					$result['user'][] = [ 'name' => $f['StashEmailInvite_email'], 'contact' => $f['StashEmailInvite_email'], 'status' => 'pending', 'label' => 'danger' ];
+				}
+
+				if( $f['StashEmailInvite_opened'] && $f['StashEmailInvite_status'] )
+					$o--;
+			}
+			$result['recipient'] = $recipient;
+			$result['responded'] = $o + $s;
+			$result['seen'] = $o;
+			$result['used'] = $s;
+			$result['msg'] = $msg;
+			$result['pending'] = $recipient - $s;
+
+			return $result;
+		}
+
+		public function fetchInviteSMSData($ref = 0, $id = 0){
+			$this->db->where("StashSMSInvites_director_id_ref", $ref);
+			$this->db->where("StashSMSInvites_id", $id);
+			$fetch = $this->db->get("stash-sms-invites", 1)->first_row('array');
+			return $this->fetchAndFilterISMSData( $fetch );
+		}
+
+		public function fetchAndFilterISMSData($data = []){
+			$this->db->where("StashSMSInvites_director_id_ref", $data['StashSMSInvites_director_id_ref']);
+			$this->db->where("StashSMSInvites_msg_id", $data['StashSMSInvites_msg_id']);
+			$this->db->where("StashSMSInvites_project_id_ref", $data['StashSMSInvites_project_id_ref']);
+			$fetch = $this->db->get("stash-sms-invites")->result("array");
+			$recipient = count($fetch);
+			$result = [];
+			$o = $s = 0;
+			$msg = $this->getThisMessage( $data['StashSMSInvites_msg_id'] );
+			$msg = [$msg['StashInviteMsg_id'], $msg['StashInviteMsg_subject'], $msg['StashInviteMsg_message'] ];
+			foreach ($fetch as $key => $f) {
+				if( $f['StashSMSInvites_opened'])
+					$o++;
+
+				if($f['StashSMSInvites_status']){
+					$d = $this->getUserBascis("StashActor_mobile", $f['StashSMSInvites_mobile'], "StashActor_actor_id_ref, StashActor_name, StashActor_SMS, StashActor_avatar");
+					if( count($d) )
+						$result['users'][] = [ 'name' => $d['StashActor_name'], 'contact' => $d['StashActor_SMS'], 'avatar' => $d['StashActor_avatar'], 'id' => $d['StashActor_actor_id_ref'], 'status' => 'joined', 'label' => 'success' ];
+					else
+						if($f['StashSMSInvites_opened'])
+							$result['users'][] = [ 'name' => $f['StashSMSInvites_mobile'], 'contact' => $f['StashSMSInvites_mobile'], 'status' => 'seen', 'label' => 'warning' ];
+						else
+							$result['users'][] = [ 'name' => $f['StashSMSInvites_mobile'], 'contact' => $f['StashSMSInvites_mobile'], 'status' => 'pending', 'label' => 'danger' ];
+					$s++;
+				}else{
+					$result['users'][] = [ 'name' => $f['StashSMSInvites_mobile'], 'contact' => $f['StashSMSInvites_mobile'], 'status' => 'pending', 'label' => 'danger' ];
+				}
+
+				if( $f['StashSMSInvites_opened'] && $f['StashSMSInvites_status'] )
+					$o--;
+			}
+			$result['recipient'] = $recipient;
+			$result['responded'] = $o + $s;
+			$result['seen'] = $o;
+			$result['used'] = $s;
+			$result['msg'] = $msg;
+			$result['pending'] = $recipient - $s;
+
+			return $result;
+		}
+
 		public function timeElapsedString($ptime){
 		    $etime = time() - $ptime;
 

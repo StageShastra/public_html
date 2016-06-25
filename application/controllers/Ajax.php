@@ -62,6 +62,9 @@
 					case "BulkRemove":
 						$this->bulkRemove($data);
 						break;
+					case "ContactData":
+						$this->contactData($data);
+						break;
 					
 					default:
 						$this->response(false, "Invalid Request");
@@ -70,6 +73,17 @@
 			}else{
 				$this->response(false, Aj_Req_NoData);
 			}
+		}
+
+		public function contactData($data = []){
+			$this->load->model("ModelDirector");
+			$res = [];
+			if( $data['for'] == 'iEmail'){
+				$res = $this->ModelDirector->fetchInviteEmailData( $this->session->userdata("StaSh_User_id"), $data['id'] );
+			}elseif( $data['for'] == 'iSMS' ){
+				$res = $this->ModelDirector->fetchInviteSMSData( $this->session->userdata("StaSh_User_id"), $data['id'] );
+			}
+			$this->response(true, "Data", $res);
 		}
 
 
