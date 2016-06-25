@@ -766,9 +766,9 @@
 					$o++;
 
 				if($f['StashSMSInvites_status']){
-					$d = $this->getUserBascis("StashActor_mobile", $f['StashSMSInvites_mobile'], "StashActor_actor_id_ref, StashActor_name, StashActor_SMS, StashActor_avatar");
+					$d = $this->getUserBascis("StashActor_mobile", $f['StashSMSInvites_mobile'], "StashActor_actor_id_ref, StashActor_name, StashActor_mobile, StashActor_avatar");
 					if( count($d) )
-						$result['users'][] = [ 'name' => $d['StashActor_name'], 'contact' => $d['StashActor_SMS'], 'avatar' => $d['StashActor_avatar'], 'id' => $d['StashActor_actor_id_ref'], 'status' => 'joined', 'label' => 'success' ];
+						$result['users'][] = [ 'name' => $d['StashActor_name'], 'contact' => $d['StashActor_mobile'], 'avatar' => $d['StashActor_avatar'], 'id' => $d['StashActor_actor_id_ref'], 'status' => 'joined', 'label' => 'success' ];
 					else
 						if($f['StashSMSInvites_opened'])
 							$result['users'][] = [ 'name' => $f['StashSMSInvites_mobile'], 'contact' => $f['StashSMSInvites_mobile'], 'status' => 'seen', 'label' => 'warning' ];
