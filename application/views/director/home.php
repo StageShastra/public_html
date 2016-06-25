@@ -108,6 +108,13 @@
     color: #fff;
     background: #F7A9A9;
     }
+    .footer-items a {
+      color: rgba(255,255,255,0.7);
+    }
+    .footer-items a:hover {
+      color: rgba(255,255,255,1);
+      text-decoration: none;
+    }
 
               </style>
         <!--[if lt IE 8]>
@@ -214,7 +221,7 @@
                             <a href="#" class="not-active">Discover<span class="info-small"><i>(Coming Soon)</i></span></a>
                         </li>
                         <li >
-                            <a href="#" data-toggle="modal" data-target="#advancedSearch" ><span class="firstcolor"> Search<sup><span class="info-small">New!</span></sup></span>
+                            <a href="#" data-toggle="modal" data-target="#advancedSearch" ><span class="firstcolor"> Search</span>
                             </a>
                         </li>
                         <li >
