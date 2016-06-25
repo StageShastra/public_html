@@ -229,6 +229,9 @@ class Home extends CI_Controller {
 	public function pricing($link = ''){
 		$this->load->view("pricing");
 	}
+	public function checkout_actor($link = ''){
+		$this->load->view("checkout_actor");
+	}
 
 	public function connect($link = ''){
 		
