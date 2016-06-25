@@ -723,12 +723,12 @@
 						$result['users'][] = [ 'name' => $d['StashActor_name'], 'contact' => $d['StashActor_email'], 'avatar' => $d['StashActor_avatar'], 'id' => $d['StashActor_actor_id_ref'], 'status' => 'joined', 'label' => 'success' ];
 					else
 						if($f['StashEmailInvite_opened'])
-							$result['user'][] = [ 'name' => $f['StashEmailInvite_email'], 'contact' => $f['StashEmailInvite_email'], 'status' => 'seen', 'label' => 'warning' ];
+							$result['users'][] = [ 'name' => $f['StashEmailInvite_email'], 'contact' => $f['StashEmailInvite_email'], 'status' => 'seen', 'label' => 'warning' ];
 						else
-							$result['user'][] = [ 'name' => $f['StashEmailInvite_email'], 'contact' => $f['StashEmailInvite_email'], 'status' => 'pending', 'label' => 'danger' ];
+							$result['users'][] = [ 'name' => $f['StashEmailInvite_email'], 'contact' => $f['StashEmailInvite_email'], 'status' => 'pending', 'label' => 'danger' ];
 					$s++;
 				}else{
-					$result['user'][] = [ 'name' => $f['StashEmailInvite_email'], 'contact' => $f['StashEmailInvite_email'], 'status' => 'pending', 'label' => 'danger' ];
+					$result['users'][] = [ 'name' => $f['StashEmailInvite_email'], 'contact' => $f['StashEmailInvite_email'], 'status' => 'pending', 'label' => 'danger' ];
 				}
 
 				if( $f['StashEmailInvite_opened'] && $f['StashEmailInvite_status'] )
