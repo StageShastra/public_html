@@ -1011,8 +1011,35 @@ $(document).ready(function(){
 		$("#convo-"+thisfor + "-" + thisId).html(fianlTr).show(500);
 	}
 
-	function populateForAuditionConv( obj, that ) {
-		
+	function populateForAuditionConv( obj, that, thisId, thisfor ) {
+		contacts = obj.users;
+		usertr = "";
+		for( i = 0; i < contacts.length; i++ ){
+			a = ( typeof contacts[i].avatar == 'undefined' ) ? "default.png" : contacts[i].avatar;
+			usertr += "<tr>"
+				   + "<td class='col-sm-2 vertical_middle'><img src='"+base+"assets/img/actors/"+a+"' class='thumbnails_small'></td>"
+				   + "<td class='col-sm-4 row_text vertical_middle'>"+contacts[i].name+"<br><span class='contact_info'>"+contacts[i].contact+"</span></td>"
+				   + "<td class='col-sm-3 vertical_middle'><span class='label label-"+contacts[i].label+"'>"+contacts[i].status+"</span></td>"
+				   + "</tr>";
+		}
+
+		div1 = "<div class='col-sm-3 reciepients'><table class='messages table table-striped'><tbody> "+ usertr +" </tbody></table></div>";
+		msg = obj.msg[2];
+		iframeSrc = base + "director/emailPreview/?msg=" + encodeURI( msg );
+		div2 = "<div class='col-sm-6'><iframe src='"+iframeSrc+"' class='center' id='emailPreviewiFrame' width='600' height='500'></iframe></div>";
+		div3 = "<div class='col-sm-3'>"
+			 + "<div class='conversation_summary'><h3>Conversation Summary</h3><hr>"
+			 + "<span class='row_text'>Recipients: "+ obj.recipient +" </span>"
+			 + "<span class='row_text'>Responses</span><br>"
+			 + "<button class='btn btn-info'>Seen: <span class='badge'>"+obj.seen+"</span></button>"
+			 + "<button class='btn btn-info'>Yes: <span class='badge'>"+obj.yes+"</span></button>"
+			 + "<button class='btn btn-info'>No: <span class='badge'>"+obj.no+"</span></button>"
+			 + "<button class='btn btn-info'>Maybe: <span class='badge'>"+obj.maybe+"</span></button>"
+			 + "<br></div></div>";
+
+		fianlTr = "<td colspan='12'><div class='row'>"+ div1 + div2 + div3 +"</div></td>";
+		$(".convo-trs").hide();
+		$("#convo-"+thisfor + "-" + thisId).html(fianlTr).show(500);
 	}
 
 	$(document).on("click", ".nextRowData", function(){
@@ -1036,7 +1063,7 @@ $(document).ready(function(){
 				if( thisfor == 'iEmail' || thisfor == 'iSMS' )
 					populateForInviteConv( response.data, that, thisId, thisfor );
 				else
-					populateForAuditionConv( response.data, that );
+					populateForAuditionConv( response.data, that, thisId, thisfor );
 			}
 		})
 		return false;
