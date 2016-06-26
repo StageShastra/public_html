@@ -32,9 +32,6 @@
 
 </head>
 <style>
-body{
-    padding-top: 140px;
-}
 .pricing_banner{
     text-align: center;
 
@@ -143,6 +140,25 @@ a:hover, a:focus {
     color: #23527c;
     text-decoration: none;
 }
+.labels{
+    font-size: 15px;
+    color: #777;
+    text-align: left;
+    margin-bottom: 10px;
+}
+.checkout_box{
+    border-radius: 10px;
+    border: 1px solid #fff;
+    padding: 10px;
+    background: white;
+}
+.data{
+    color: black;
+    font-size: 15px;
+}
+.col-xs-12 {
+    margin-top: 30px;
+}
 </style>
 <body id="page-top" class="index">
 
@@ -171,101 +187,133 @@ a:hover, a:focus {
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right ul_list">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#forActors">For Actors</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#forDirectors">For Casting Directors</a>
+                    </li>
+                   <!-- <li class="page-scroll">
+                        <a href="#about">Video</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#contact">FAQ</a>
+                    </li>
+                    -->
+                    <li class="page-scroll">
+                        <a data-target="#loginModal" data-toggle="modal">Login</a>
+                    </li>
+                </ul>
+            </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container-fluid -->
     </nav>
-    <div class="container">
-        <div class="col-sm-6 col-lg-6 col-md-6 col-xs-12">
-            <div class="checkout_box">
+    <a class="anchor" id="forActors"></a>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="pricing_banner col-lg-8 col-xs-11 col-sm-11 center">
+                <span class="heading white">CHECKOUT</span><br>
                 <div class="row">
-                    <span class="label col-xs-6">Name : </span>
-                    <span class="col-xs-6 data">Prashant Kiran</span>
+                    <div class="col-sm-6 col-lg-6 col-md-6 col-xs-12">
+                        <div class="checkout_box">
+                            <div class="row">
+                                <span class="labels col-xs-6">Name : </span>
+                                <span class="col-xs-6 data">Prashant Kiran</span>
+                            </div>
+                            <div class="row">
+                                <span class="labels col-xs-6">Plan : </span>
+                                <span class="col-xs-6 data">
+                                    <select>
+                                        <option value="Actor-Basic" id="actor_basic"> Actor - Basic </option>
+                                        <option value="Actor-Pro" id="actor_pro"> Actor - Pro </option>
+                                    </select>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <span class="labels col-xs-6">Pricing : </span>
+                                <span class="col-xs-6 data"><i class="fa fa-inr"></i>200/p.m</span>
+                            </div>
+                            <div class="row">
+                                <span class="labels col-xs-6">Months : </span>
+                                <span class="col-xs-6 data">
+                                    <select>
+                                        <option value="3" id="3_months"> 3 Months</option>
+                                        <option value="6" id="6_months"> 6 Months</option>
+                                        <option value="12" id="12_months"> 12 Months</option>
+                                    </select>
+                                </span>
+                            </div>
+                            <hr>
+                            <br>
+                            <div class="row">
+                                <span class="label_big col-xs-6 black category">Amount : </span>
+                                <span class="col-xs-6 data_big green category"><i class="fa fa-inr"></i>600/p.m</span>
+                            </div>
+                            
+                            <button type="button" class="btn"><a href="https://www.instamojo.com/paycastiko/castiko-actor-membership-pro-plan-3-months/" rel="im-checkout" data-behaviour="remote" data-style="light" data-text="Checkout With Instamojo" data-token="43c9fd9353701a50b5cceafef6e13b6f"></a>
+<script src="https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"></script></button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
+                        <div class="content-box hidden"> 
+                            <span class="category black "> <b>BASIC</b></span>
+                            <br>
+                            <span class="button_text green">Free</span>
+                            <hr>
+                            <div class="left_aligned">
+                                <div class="expandButton">
+                                    <span class="plus toggleEdit" id="plus1" data-hide-id="#plus1" data-unhide-id="#basic1,#minus1" >+</span><span id="minus1" data-hide-id="#minus1,#basic1" data-unhide-id="#plus1" class="plus toggleEdit hidden">o</span>
+                                    <span class="subtext black"> Public profile with Photos and Videos. </span>
+                                    <div id="basic1" class="inner hidden">
+                                        <span class="glyphicon glyphicon-triangle-right green subtext"></span>The Castiko Profile is designed to showcase your talents. Add photos, videos, training and experience. Your unique link lets you share it with anyone - even outside Castiko.
+                                    </div>
+                                </div>
+                                <div class="expandButton">
+                                    <span class="plus toggleEdit" id="plus2" data-hide-id="#plus2" data-unhide-id="#basic2,#minus2" >+</span><span id="minus2" data-hide-id="#minus2,#basic2" data-unhide-id="#plus2" class="plus toggleEdit hidden">x</span>
+                                    <span class="subtext black"> Unlimited Casting Director Invitations. </span>
+                                    <div id="basic2" class="inner hidden">
+                                        <span class="glyphicon glyphicon-triangle-right green subtext"></span>Casting directors who already know you can add/invite you into their database.
+                                    </div>
+                                </div>
+                            </div>
+                            <button  class="btn"><a href="<?= base_url() . "home/register/actor?plan=basic" ?>" class="button_text black">GO BASIC</a></button>
+                        </div>
+                        <div class="content-box">
+                            <span class="category black"> <b>PRO</b></span>
+                            <br>
+                            <span class="button_text green"><i class="fa fa-inr"></i>200/month.</span>
+                            <hr>
+                            <div class="left_aligned">
+                                <div class="expandButton">
+                                    <span class="plus toggleEdit" id="plus3" data-hide-id="#plus3" data-unhide-id="#pro1,#minus3" >+</span><span id="minus3" data-hide-id="#minus3,#pro1" data-unhide-id="#plus3" class="plus toggleEdit hidden">x</span>
+                                    <span class="button_text black nohover"> <b>Searchable by all the Casting Directors.</b> </span>
+                                    <div id="pro1" class="inner">
+                                        <span class="glyphicon glyphicon-triangle-right green subtext"></span>Casting directors who don’t know you are often looking for new faces for projects. With Pro, we will make your profile searchable by all Casting Directors.
+                                    </div>
+                                </div>
+                                <div class="expandButton">
+                                    <span class="plus toggleEdit" id="plus4" data-hide-id="#plus4" data-unhide-id="#pro2,#minus4" >+</span><span id="minus4" data-hide-id="#minus4,#pro2" data-unhide-id="#plus4" class="plus toggleEdit hidden">x</span>
+                                    <span class="button_text black"> <b>Access to targeted audition notices.</b> </span>
+                                    <div id="pro2" class="inner">
+                                        <span class="glyphicon glyphicon-triangle-right green subtext"></span>Audition Notices are an easy way to get audition information. Pro lets you see them right on your home page.
+                                    </div>
+                                </div>
+                                <span class="glyphicon glyphicon-ok plus" style="font-size:10px;"></span>  <span class="button_text black"><b>Plus all the features in the basic </b></span>
+                            </div>
+                            
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <span class="label col-xs-6">Plan : </span>
-                    <span class="col-xs-6 data">
-                        <select>
-                            <option value="Actor-Basic" id="actor_basic"> Actor - Basic </option>
-                            <option value="Actor-Pro" id="actor_pro"> Actor - Pro </option>
-                        </select>
-                    </span>
-                </div>
-                <div class="row">
-                    <span class="label col-xs-6">Pricing : </span>
-                    <span class="col-xs-6 data"><i class="fa fa-inr"></i>200/p.m</span>
-                </div>
-                <div>
-                    <span class="label col-xs-6">Months : </span>
-                    <span class="col-xs-6 data">
-                        <select>
-                            <option value="3" id="3_months"> 3 Months</option>
-                            <option value="6" id="6_months"> 6 Months</option>
-                            <option value="12" id="12_months"> 12 Months</option>
-                        </select>
-                    </span>
-                </div>
-                <hr>
-                <div class="row">
-                    <span class="label_big col-xs-6">Amount : </span>
-                    <span class="col-xs-6 data_big"><i class="fa fa-inr"></i>600/p.m</span>
-                </div>
-                
             </div>
         </div>
-        <div class="col-sm-6 col-lg-6 col-md-6 col-xs-12">
-            <div class="content-box hidden">
-                <span class="category black"> <b>PRO</b></span>
-                <br>
-                <span class="button_text green"><i class="fa fa-inr"></i>200/month.</span>
-                <hr>
-                <div class="left_aligned">
-                    <div class="expandButton">
-                        <span class="plus toggleEdit" id="plus3" data-hide-id="#plus3" data-unhide-id="#pro1,#minus3" >+</span><span id="minus3" data-hide-id="#minus3,#pro1" data-unhide-id="#plus3" class="plus toggleEdit hidden">x</span>
-                        <span class="button_text black nohover"> <b>Searchable by all the Casting Directors.</b> </span>
-                        <div id="pro1" class="inner hidden">
-                            <span class="glyphicon glyphicon-triangle-right green subtext"></span>Casting directors who don’t know you are often looking for new faces for projects. With Pro, we will make your profile searchable by all Casting Directors.
-                        </div>
-                    </div>
-                    <div class="expandButton">
-                        <span class="plus toggleEdit" id="plus4" data-hide-id="#plus4" data-unhide-id="#pro2,#minus4" >+</span><span id="minus4" data-hide-id="#minus4,#pro2" data-unhide-id="#plus4" class="plus toggleEdit hidden">x</span>
-                        <span class="button_text black"> <b>Access to targeted audition notices.</b> </span>
-                        <div id="pro2" class="inner hidden">
-                            <span class="glyphicon glyphicon-triangle-right green subtext"></span>Audition Notices are an easy way to get audition information. Pro lets you see them right on your home page.
-                        </div>
-                    </div>
-                    <span class="glyphicon glyphicon-ok plus" style="font-size:10px;"></span>  <span class="button_text black"><b>Plus all the features in the basic </b></span>
-                </div>
-                <button type="button" class="btn"><a href="<?= base_url() . "home/register/actor?plan=pro" ?>" class="button_text black">GO PRO</a></button>
-            </div> <!-- Pro Ends -->
-            <!-- Basic starts -->
-            <div class="content-box">
-                <span class="category black"> <b>BASIC</b></span>
-                <br>
-                <span class="button_text green">Free</span>
-                <hr>
-                <div class="left_aligned">
-                    <div class="expandButton">
-                        <span class="plus toggleEdit" id="plus1" data-hide-id="#plus1" data-unhide-id="#basic1,#minus1" >+</span><span id="minus1" data-hide-id="#minus1,#basic1" data-unhide-id="#plus1" class="plus toggleEdit hidden">o</span>
-                        <span class="subtext black"> Public profile with Photos and Videos. </span>
-                        <div id="basic1" class="inner hidden">
-                            <span class="glyphicon glyphicon-triangle-right green subtext"></span>The Castiko Profile is designed to showcase your talents. Add photos, videos, training and experience. Your unique link lets you share it with anyone - even outside Castiko.
-                        </div>
-                    </div>
-                    <div class="expandButton">
-                        <span class="plus toggleEdit" id="plus2" data-hide-id="#plus2" data-unhide-id="#basic2,#minus2" >+</span><span id="minus2" data-hide-id="#minus2,#basic2" data-unhide-id="#plus2" class="plus toggleEdit hidden">x</span>
-                        <span class="subtext black"> Unlimited Casting Director Invitations. </span>
-                        <div id="basic2" class="inner hidden">
-                            <span class="glyphicon glyphicon-triangle-right green subtext"></span>Casting directors who already know you can add/invite you into their database.
-                        </div>
-                    </div>
-                </div>
-                <button  class="btn"><a href="<?= base_url() . "home/register/actor?plan=basic" ?>" class="button_text black">GO BASIC</a></button>
-            </div>
-
-        </div>
-    </div>
-    
+    </header>
 
    
     <!-- Footer -->
