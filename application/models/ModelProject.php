@@ -26,4 +26,26 @@
 			$this->db->update("stash-email-message", array( 'StashEmailMsg_opened' => time() ));
 		}
 
+		public function getProject($id = 0){
+			$this->db->where("StashProject_id", $id);
+			return $this->db->get("stash-project", 1)->first_row('array');
+		}
+
+		public function getThisMessage($ref = 0){
+			$this->db->where("StashInviteMsg_id", $ref);
+			return $this->db->get("stash-invite-msg", 1)->first_row("array");
+		}
+
+		public function respondToSMSMsg($id = 0, $res = 0){
+			$this->db->where("StashSMSMsg_id", $id);
+			$this->db->where("StashSMSMsg_actor_id_ref", $this->session->userdata("StaSh_User_id"));
+			return $this->db->update("stash-sms-message", array( 'StashSMSMsg_response' => $res ));
+		}
+
+		public function respondToEmailMsg($id = 0, $res = 0){
+			$this->db->where("StashEmailMsg_id", $id);
+			$this->db->where("StashEmailMsg_actor_id_ref", $this->session->userdata("StaSh_User_id"));
+			return $this->db->update("stash-email-message", array( 'StashEmailMsg_response' => $res ));
+		}
+
 	}
