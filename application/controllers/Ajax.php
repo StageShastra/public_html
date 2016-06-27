@@ -65,6 +65,9 @@
 					case "ContactData":
 						$this->contactData($data);
 						break;
+					case "BulkProjectTag":
+						$this->bulkProjectTag($data);
+						break;
 					
 					
 					default:
@@ -74,6 +77,25 @@
 			}else{
 				$this->response(false, Aj_Req_NoData);
 			}
+		}
+
+		public function bulkProjectTag($data = []){
+			$this->load->model("ModelDirector");
+			$list = $data['list'];
+			$listid = $data['listid'];
+			$pid = $data['project'];
+			$c = 0;$r = [];
+			foreach ($list as $key => $value) {
+				if( $this->ModelDirector->insertActorProject( $value, $pid ) ){
+					$c++;
+					$r[] = $listid[$key];
+				}
+			}
+
+			if($c)
+				$this->response(true, "selected actor added to project.");
+			else
+				$this->response(false, "something went wrong. try again later.");
 		}
 
 		public function contactData($data = []){

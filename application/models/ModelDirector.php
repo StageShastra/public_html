@@ -67,6 +67,18 @@
 			return trim($result['StashUsers_username']);
 		}
 
+		public function insertActorProject($ref = 0, $proj = 0){
+			$data = array(
+						'StashActorProject_id' => null,
+						'StashActorProject_actor_id_ref' => $ref,
+						'StashActorProject_project_id_ref' => $proj,
+						'StashActorProject_time' => time(),
+						'StashActorProject_status' => 1
+					);
+			//return $query = $this->db->get_compiled_insert("stash-actor-project", $data);
+			return $this->db->insert("stash-actor-project", $data);
+		}
+
 		public function getActorLanguage($ref = 0){
 			$this->db->select("*");
 			$this->db->from("stash-languages as lang");

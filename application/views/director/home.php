@@ -123,7 +123,7 @@
               <div class="col-sm-4">
                 <font class="info dark-gray"> <span id="totalSelected"></span> Selected</font>
                 <hr>
-                <div id="selected-actors"></div>
+                <div class="selectedActors"></div>
                 <div id="deleteAllSelected">
                   <button type="button" title="Remove All" class="btn submit-btn firstcolor " id="deleteAllSelectedBtn"><i class="glyphicon glyphicon-trash"></i></button>
           <button type="button" class="btn submit-btn firstcolor resetAllContact" data-form="" style="margin-left:10px;" ><span class="glyphicon glyphicon-repeat"></span></button>
@@ -184,6 +184,51 @@
               </div>  
             </div>  
           </div>
+
+          <!-- Modal Section : Bulk Actions -->
+          <div id="bulkActionModel" class="col-sm-8 fade contact-form" style="max-width: 550px;max-height:440px;display:none;">
+            <div class="row">
+              <div class="col-sm-4">
+                <font class="info dark-gray"> <span id="totalSelected"></span> Selected</font>
+                <hr>
+                <div class="selectedActors"></div>
+                <div id="deleteAllSelected">
+                  <button type="button" title="Remove All" class="btn submit-btn firstcolor " id="deleteAllSelectedBtn"><i class="glyphicon glyphicon-trash"></i></button>
+                  
+                  <button type="button" class="btn submit-btn firstcolor resetAllContact" data-form="" style="margin-left:10px;" ><span class="glyphicon glyphicon-repeat"></span></button>
+                </div>
+              </div>
+              <div class="col-sm-8 contact-right">
+                <font class="info dark-gray">Bulk Action</font>
+                <hr>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <div role="tabpanel" class="tab-pane active" id="contactViaEmail">
+
+                    <button type="submit" class="btn submit-btn firstcolor bulkUserRemove" id="btn-login" ><span class="fa fa-ban"></span> &nbsp; Delete Selected</button>
+
+                    <button type="button" class="btn submit-btn firstcolor toggleProjectBox" data-hide='1' style="margin-left:10px;" ><span class="fa fa-tags"></span> &nbsp; Tag to Project</button>
+                    <br><br>
+                    <div class="row project-box" style="display:none;">
+                      <p id="tagProjectErr" style="display:none;"></p>
+                      <span class="info-small gray">
+                        Select Project:   
+                      </span> 
+                      <input type="text" class="form-control contact_inputs" name="project_name" id="addPName" placeholder="Project Name" required />
+                      <button type="button" class="btn submit-btn firstcolor confirmTag" style="margin-left:10px;" ><span class="fa fa-tags"></span> &nbsp; Confirm Tag</button>
+                    </div>
+
+
+                  </div>
+                </div>
+
+                
+              </div>  
+            </div>  
+          </div>
+
+
+
         <!-- Ths section is pre selection !-->
         <div class="container" id="prelogin">
           <div class="col-sm-1">
@@ -217,7 +262,7 @@
 
                 <!---floating buttons -->
                 <div>
-                  <button type="submit" class="btn submit-btn firstcolor bulk-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><span class="glyphicon glyphicon-pencil"></span></button>
+                  <button type="submit" class="btn submit-btn firstcolor bulk-btn dropdown-toggle" data-toggle="modal" data-target='#bulkActionModel' ><span class="glyphicon glyphicon-pencil"></span></button>
 
                   <ul class="dropdown-menu">
                     <li><a href="#">Action</a></li>
