@@ -438,13 +438,13 @@
 		
 		public function checkRandLink($link = ''){
 			$this->db->where("StashSMSInvites_link", $link);
-			$query = $this->db->get("stash-email-invites");
+			$query = $this->db->get("stash-sms-invites");
 			return $query->num_rows();
 		}
 
 		public function checkEmailRandLink($link = ''){
 			$this->db->where("StashEmailInvite_link", $link);
-			$query = $this->db->get("stash-sms-invites");
+			$query = $this->db->get("stash-email-invites");
 			return $query->num_rows();
 		}
 
@@ -544,18 +544,19 @@
 		public function inviteEmailList($ref = 0){
 			$this->db->where("StashEmailInvite_director_id_ref", $ref);
 			$fetch = $this->db->get("stash-email-invites")->result("array");
-			//$count = count($fetch);
+			$count = count($fetch);
 			$result = [];
 			$found = $msg = false;
 			$uniques = [];
 			foreach ($fetch as $key => $f) {
+				//print_r($f);
 				if( !in_array($f['StashEmailInvite_msg_id_ref'], $uniques) ){
 					$uniques[] = $f['StashEmailInvite_msg_id_ref'];
 					$found = $msg = false;
 				}
 				$id = array_search( $f['StashEmailInvite_msg_id_ref'], $uniques );
-				if( !isset($result['message'][$id]['others']) ){
-					$result[$id]['others'] = 1;
+				if( !isset($result[$id]['others']) ){
+					$result[$id]['others'] = 0;
 					$result[$id]['date'] = $this->timeElapsedString($f['StashEmailInvite_time']);
 					$result[$id]['time'] = $f['StashEmailInvite_time'];
 					$result[$id]['id'] = $f['StashEmailInvite_id'];
@@ -593,7 +594,7 @@
 				}
 				$id = array_search( $f['StashSMSInvites_msg_id'], $uniques );
 				if( !isset($result[$id]['others']) ){
-					$result[$id]['others'] = 1;
+					$result[$id]['others'] = 0;
 					$result[$id]['date'] = $this->timeElapsedString($f['StashSMSInvites_time']);
 					$result[$id]['time'] = $f['StashSMSInvites_time'];
 					$result[$id]['id'] = $f['StashSMSInvites_id'];
@@ -632,7 +633,7 @@
 				}
 				$id = array_search( $f['StashEmailMsg_msg_id_ref'], $uniques );
 				if( !isset($result[$id]['others']) ){
-					$result[$id]['others'] = 1;
+					$result[$id]['others'] = 0;
 					$result[$id]['date'] = $this->timeElapsedString($f['StashEmailMsg_time']);
 					$result[$id]['time'] = $f['StashEmailMsg_time'];
 					$result[$id]['id'] = $f['StashEmailMsg_id'];
@@ -670,7 +671,7 @@
 				}
 				$id = array_search( $f['StashSMSMsg_msg_id_ref'], $uniques );
 				if( !isset($result[$id]['others']) ){
-					$result[$id]['others'] = 1;
+					$result[$id]['others'] = 0;
 					$result[$id]['date'] = $this->timeElapsedString($f['StashSMSMsg_time']);
 					$result[$id]['time'] = $f['StashSMSMsg_time'];
 					$result[$id]['id'] = $f['StashSMSMsg_id'];
