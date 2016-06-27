@@ -1,6 +1,7 @@
 <?php
   include 'includes/head.php';
  ?>
+
     <body>
         <style>
           body{
@@ -64,17 +65,19 @@
         margin-bottom: 0px;
       }
       .info{
-        font-family: "Raleway","Open Sans";
-        font-weight: 400;
+        font-family: "Roboto","Open Sans";
         font-size: 15px;
       }
       .profile_image{
         height: 75px;
         width: 75px;
         border-radius: 50%;
-        box-shadow: 2px 2px 10px gray;
         border: 2px solid white;
+        transition: all .2s ease-in-out;
 
+      }
+      .profile_image:hover{
+        transform: scale(1.1);
       }
       thead{
         font-family: "Open Sans";
@@ -218,7 +221,7 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  
                       <ul class="nav navbar-nav navbar-right ul_list">
                         <li >
-                            <a href="#" class="not-active">Discover<span class="info-small"><i>(Coming Soon)</i></span></a>
+                            <a href="conversations" >Conversations</a>
                         </li>
                         <li >
                             <a href="#" data-toggle="modal" data-target="#advancedSearch" ><span class="firstcolor"> Search</span>
@@ -417,7 +420,7 @@
             <h4 class="modal-title firstcolor info"> <?= CD_InviteSuc ?> </h4><span class="info-small gray"></span>
           </div>
           <div class="modal-body" style="background-color:#fff;">
-              <p id="inviteSuccessMsg info gray" style="font-family:'Raleway',sans-serif; font-size:15px;margin-top:15px;margin-bottom:18px;">
+              <p id="inviteSuccessMsg info gray" style="font-family:'Roboto',sans-serif; font-size:15px;margin-top:15px;margin-bottom:18px;">
                 <?= CD_InviteSucMsg ?>
               </p>
           </div>
@@ -574,10 +577,7 @@
                                   ( <span id="invite-charCounter">160</span> / 
                                   <span id="invite-msgCounter">0</span> )
                                 </span>
-
                                 <button type="button" class="btn submit-btn firstcolor pull-right addSuggestionText" data-name="sms" data-add="<?= CD_SuggTxt ?>" style="margin-top: 20px; margin-left:10px;" id="btn-search" > Suggested Text </button>
-
-                                <button type="button" class="btn submit-btn firstcolor pull-right addPrevMessage" data-name="sms" data-from="sms" data-offset="0" style="margin-top: 20px; margin-left:10px;" id="btn-search" > Previous Messages </button>
                                 <br>
                                 <p class="firstcolor pull-right" id="displaydate-sms"></p>
 

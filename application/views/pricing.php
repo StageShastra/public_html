@@ -136,10 +136,7 @@ a.anchor {
     padding-left: 0px;
     padding-right: 0px;
 }
-a:hover, a:focus {
-    color: #23527c;
-    text-decoration: none;
-}
+
 </style>
 <body id="page-top" class="index">
 

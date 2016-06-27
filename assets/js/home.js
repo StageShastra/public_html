@@ -157,7 +157,7 @@ $(document).ready(function(){
     		content += '<th data-sort="string">'+select[i]+' <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>';
     	}
 
-    	content += "<th>Link</th></tr></thead>";
+    	content += "<th>Action</th></tr></thead>";
     	content += "<tbody>";
     	var link = '', tag = '';
 		

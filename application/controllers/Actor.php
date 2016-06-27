@@ -38,6 +38,12 @@
 			
 			$this->load->view("actor/actor_profile", $pageInfo);
 		}
+		public function account($value=''){
+			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
+				redirect(base_url());
+			$pageInfo = [];
+			$this->load->view("actor/account", $pageInfo);
+		}
 		
 		protected function displayPageNotFound() {
 			$this->output->set_status_header('404');

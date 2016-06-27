@@ -73,6 +73,12 @@ function select_basic(){
 	$("#checkout_btn_pro_plus").addClass("hidden");
 	$("#net_amount").html(amount);
 
+	//checkoutbtn
+	$("#checkout_btn_basic").removeClass("hidden");
+	$("#checkout_btn_pro").addClass("hidden");
+	$("#checkout_btn_pro_plus").addClass("hidden");
+
+
 
 }
 
@@ -90,6 +96,12 @@ function select_pro(){
 	$("#checkout_btn_pro").removeClass("hidden");
 	$("#checkout_btn").addClass("hidden");
 	$("#net_amount").html(amount);
+
+	//checkoutbtn
+	$("#checkout_btn_basic").addClass("hidden");
+	$("#checkout_btn_pro_plus").addClass("hidden");
+	$("#checkout_btn_pro").removeClass("hidden");
+	
 }
 function select_pro_plus(){
 	var price = "4000/month";
@@ -105,4 +117,9 @@ function select_pro_plus(){
 	$("#checkout_btn_pro").removeClass("hidden");
 	$("#checkout_btn").addClass("hidden");
 	$("#net_amount").html(amount);
+
+	//checkoutbtn
+	$("#checkout_btn_basic").addClass("hidden");
+	$("#checkout_btn_pro").addClass("hidden");
+	$("#checkout_btn_pro_plus").removeClass("hidden");
 }
