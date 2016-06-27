@@ -1,6 +1,6 @@
 Options -MultiViews
 RewriteEngine On 
-RewriteBase /Castiko/invite/
+RewriteBase /public_html/invite/
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f

@@ -1,7 +1,14 @@
 <?php
   include "includes/head.php";
 ?>
+<link href="<?= CSS ?>/navbar.css" rel="stylesheet" type="text/css">
 <style>
+body{
+  padding-top: 120px;
+  background-color: rgb(240, 87, 89);
+  background-image: linear-gradient(-228deg, #F05759 0%, rgb(240, 87, 89) 31%, rgba(240,87,89,0.97) 78%, #F05759 95%);
+  padding-bottom: 0px;
+}
 .submit-btn {
     background-color:#FBB515; ;
     border-color: #E19B1B;
@@ -23,6 +30,10 @@
     color: black;
 }
 @media(max-width:767px) {
+  body{
+    background: white;
+
+  }
 .signup_box{
   background-image: linear-gradient(29deg, rgb(226, 162, 17) 3%, rgba(216, 115, 27, 0.86) 20%, rgba(195, 15, 76, 0.86) 100%, rgb(255, 0, 35) 10%);
   border-radius: 10px;
@@ -53,19 +64,63 @@
 }
     
 }
-
+.signup_content{
+  background: white;
+  border-radius: 15px;
+  margin-bottom: 20px; 
+}
+#form-div{
+  padding-bottom: 20px;
+}
+a:hover, a:focus {
+    color: #23527c;
+    text-decoration: none;
+}
+.title{
+  color: black;
+}
+.footer-items a {
+    color: rgba(255,255,255,0.7);
+}
+.footer-items a:hover {
+    color: rgba(255,255,255,1);
+}
 </style>
     <body>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div class="container">
+        <div class="container signup_content">
           <div class="container-fluid center col-lg-12 col-sm-10 col-xs-12"> <!--container fluid starts -->
-             <div class="center headname">
-              <a href="<?= base_url() ?>" class='a_logo'><img src="<?= IMG ?>/logo.png" class="logo img-fluid"/>
-			  <span class="title big"><?= M_Title ?></span></a>
-             <hr>
-             </div>
+             <nav class="navbar navbar-custom navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="<?= base_url() ?>">
+                            <img src="<?= IMG ?>/logo.png" class="brands img-responsive "/>
+                            <div class="vertical-middle brandname title">
+                                <?= M_Title ?>
+                                <br>
+                                <span id="tag-line" class="firstcolor info-small hidden-xs">
+                                Making Casting easier!                      
+                                </span>
+                            </div>
+                            
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
             <div class="row center signup_box">
               <div class="col-sm-12 light-padded">
                 <div class="col-lg-6 col-sm-6 col-xs-12" id="form-div">
@@ -128,5 +183,6 @@
           </div>
         </div>
 <?php
+  include "includes/footer.php";
   include "includes/scripts.php";
 ?>
