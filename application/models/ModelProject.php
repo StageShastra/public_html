@@ -13,9 +13,15 @@
 			$this->db->update("stash-sms-message", array( 'StashSMSMsg_opened' => time() ));
 		}
 
+		public function getUserId($email = ''){
+			$this->db->where("StashUsers_email", $email);
+			return $this->db->get("stash-users", 1)->first_row()->StashUsers_id;
+		}
+
 		public function getEmailLinkData($d = []){
+			$id = $this->getUserId($d[1]);
 			$this->db->where("StashEmailMsg_director_id_ref", $d[0]);
-			$this->db->where("StashEmailMsg_actor_id_ref", $d[1]);
+			$this->db->where("StashEmailMsg_actor_id_ref", $id);
 			$this->db->where("StashEmailMsg_msg_id_ref", $d[3]);
 			$this->db->where("StashEmailMsg_time", $d[2]);
 			return $this->db->get("stash-email-message", 1)->first_row("array");

@@ -917,7 +917,7 @@ button:hover
 	margin-left: 5px;
 }
 
-#selected-actors{
+.selectedActors{
 	overflow-y: scroll;
 	overflow-x: hidden;
 	min-height: 260px;

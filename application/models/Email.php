@@ -113,7 +113,7 @@
 			$msg = str_replace("__PUT_DIRECTOR_NAME_HERE__", $this->session->userdata("StaSh_User_name"), Em_AudiMail_message);
 			$msg .= Em_AudiMail_ifQues;
 
-			$message = $this->defaultTemplete("Dear Actor, <br>".$msg, $link, "Connect", "");
+			$message = $this->defaultTemplete("Dear Actor, <br>".$msg, $link, "Accept Invitation", "");
 			$message = preg_replace('~\\\r\\\n~',"<br>", $message);
 			$this->email->clear();
 			$this->email->set_newline("\n");

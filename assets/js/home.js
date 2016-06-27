@@ -333,7 +333,7 @@ $(document).ready(function(){
 			$checkactor.prop("checked", false);
 			$("p span", $noticeBox).html(0);
 			$("#totalSelected").html(0);
-			$("#selected-actors").html("");
+			$(".selectedActors").html("");
 
 			setTimeout(function(){
 				$noticeBox.hide();
@@ -358,7 +358,7 @@ $(document).ready(function(){
 				+  '	</div>'
 				+  '	<div class="media-right selected-act-remove" data-actor-id="'+id+'"><a href="#">x</a></div>'
 				+  '</div>';
-		$("#selected-actors").append(content);
+		$(".selectedActors").append(content);
 		checkContactModal();
 	}
 
@@ -382,9 +382,9 @@ $(document).ready(function(){
 			actorMobile.splice(actorMobile.indexOf(mobile), 1);
 			actorRef.splice(actorRef.indexOf(ref), 1);
 
-			$("#selected-actor-" + id).addClass("animated fadeOut");
+			$(".selectedActors #selected-actor-" + id).addClass("animated fadeOut");
 			setTimeout(function(){
-				$("#selected-actor-" + id).remove();
+				$(".selectedActors #selected-actor-" + id).remove();
 			}, 500);
 			//console.log("remove append triggered");
 		}
@@ -409,22 +409,26 @@ $(document).ready(function(){
 
 	});
 
+	function deleteAllSelected(argument) {
+		$(".selectedActors").html("");
+		actorEmails = [];
+		actorMobile = [];
+		actorRef = [];
+		$('input[name="checkactor"]').prop("checked", false);
+		$("#selectallactor").prop("checked", false);
+		selectAll = false;
+		var $noticeBox = $(".notice-selected-actors");
+		$("p span", $noticeBox).html(0);
+		$("#totalSelected").html(0);
+		setTimeout(function(){
+			$noticeBox.hide();
+		}, 1000);
+	}
+
 	$(document).on("click", "#deleteAllSelectedBtn", function(){
 		var conf = confirm("Are you sure to remove all selected actors ?");
 		if(conf){
-			$("#selected-actors").html("");
-			actorEmails = [];
-			actorMobile = [];
-			actorRef = [];
-			$('input[name="checkactor"]').prop("checked", false);
-			$("#selectallactor").prop("checked", false);
-			selectAll = false;
-			var $noticeBox = $(".notice-selected-actors");
-			$("p span", $noticeBox).html(0);
-			$("#totalSelected").html(0);
-			setTimeout(function(){
-				$noticeBox.hide();
-			}, 1000);
+			deleteAllSelected();
 		}
 		return false;
 	});
@@ -433,7 +437,7 @@ $(document).ready(function(){
 		var id = 0;
 		var content = "";
 		//console.log("populateReceipents", actorRef);
-		$("#selected-actors").html("");
+		$(".selectedActors").html("");
 		for(var i = 0; i < actorRef.length; i++){
 			id = actorRef[i];
 			//username = $.trim(actors[id].StashActor_email.split("@")[0]);
@@ -451,13 +455,20 @@ $(document).ready(function(){
 					+  '	<div class="media-right selected-act-remove" data-actor-id="'+id+'"><a href="#">x</a></div>'
 					+  '</div>';
 		}
-		$("#selected-actors").html(content);
+		$(".selectedActors").html(content);
 		checkContactModal();
 	}
 	//$('#contactmodal').modal("show");
 	$(document).on("click", ".populateContactForm", function(){
 		$(".notice-selected-actors").hide();
 		$('#contactmodal').removeClass("hidden");
+		//populateReceipents('email');
+		return false;
+	});
+
+	$(document).on("click", ".bulk-btn", function(){
+		$(".notice-selected-actors").hide();
+		$('#bulkActionModel').removeClass("hidden");
 		//populateReceipents('email');
 		return false;
 	});
@@ -538,9 +549,13 @@ $(document).ready(function(){
 
 		var subject = $("#subject").val();
 		var mail_message = $("#message").val();
-		//var subject = $("#subject").val();
-		//var sms_message = $("#textsms").val();
-		data = {request: "ContactActorByEmail", data: JSON.stringify({contact: contact, subject: subject, mail: mail_message})};
+		project_name = $("#cEmail_PName").val();
+		project_date = $("#cEmail_PDate").val();
+		isAud = 0;
+		if($("#emailCheck").is(":checked"))
+			$isAud = 1;
+
+		data = {request: "ContactActorByEmail", data: JSON.stringify({isAud: isAud, contact: contact, subject: subject, mail: mail_message, project_name: project_name, project_date: project_date})};
 
 		$.ajax({
 			url: url,
@@ -574,8 +589,14 @@ $(document).ready(function(){
 		contact['mobile'] = actorMobile;
 		contact['ref'] = tempRef;
 
+		project_name = $("#cSMS_PName").val();
+		project_date = $("#cSMS_PDate").val();
+		isAud = 0;
+		if($("#smsCheck").is(":checked"))
+			$isAud = 1;
+
 		var sms_message = $("#textsms").val();
-		data = {request: "ContactActorBySMS", data: JSON.stringify({contact: contact, sms: sms_message})};
+		data = {request: "ContactActorBySMS", data: JSON.stringify({contact: contact, sms: sms_message, project_name: project_name, project_date: project_date, isAud: isAud})};
 
 		$.ajax({
 			url: url,
@@ -851,6 +872,16 @@ $(document).ready(function(){
 			console.log(ui);
 			$("input[name='project_date']").val(ui.item.date);
 		}
+	});
+
+	$("#addPName").autocomplete({
+		source: base + "home/autoComplete/",
+		minLenght: 2,
+		select: function(ev, ui){
+			console.log(ui);
+			$("input#addPName").val(ui.item.name);
+			$("input#addPName").attr("data-id", Number(ui.item.id));
+		}
 	}); 
 	
 	$(document).on("click", ".addSuggestionText", function(){
@@ -1082,6 +1113,7 @@ $(document).ready(function(){
 		}
 
 		data = {request: "BulkRemove", data: JSON.stringify({list: toRemove, listid: actorRef})};
+
 		$.ajax({
 			url: url,
 			type: type,
@@ -1093,12 +1125,57 @@ $(document).ready(function(){
 						//console.log('#datarow'+removed[i]);
 						$('#datarow'+removed[i]).remove();
 					}
+					deleteAllSelected();
 				}else{
 					alert(response.message);
 				}
 			}
 		});
 
+	});
+
+	$(document).on("click", ".toggleProjectBox", function(){
+		if(Number($(this).attr("data-hide"))){
+			$(".project-box").show(500);
+			$(this).attr("data-hide", 0);
+		}
+		else{
+			$(".project-box").hide(500);
+			$(this).attr("data-hide", 1);
+		}
+		return false;
+	});
+
+	$(document).on("click", ".confirmTag", function(){
+		conf = confirm("Are you sure to tag them in selected project ?");
+		if(conf){
+			pid = Number($("#addPName").attr("data-id"));
+			if(pid == 0){
+				$("#addPName").after("<p class='help-text text-danger'> Please select a project first. </p>");
+				return false;
+			}
+			toAdd = [];
+			for(i = 0; i < actorRef.length; i++){
+				id = actorRef[i];
+				toAdd.push(Number(actors[id].StashActor_actor_id_ref));
+			}
+
+			data = {request: "BulkProjectTag", data: JSON.stringify({list: toAdd, listid: actorRef, project: pid})};
+
+			$.ajax({
+				url: url,
+				type: type,
+				data: data,
+				success: function(response){
+					$("#tagProjectErr").html(response.message).show(500).delay(3000).hide(500);
+					if(response.status){
+						$("#addPName").val("");
+					}
+				}
+			});
+
+		}
+		return false;
 	});
 
 });

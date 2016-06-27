@@ -33,8 +33,8 @@
 			echo $pass = hash_hmac('sha512', $pass, $this->config->item("encryption_key"));
 		}
 
-		public function timeToAgo($value=''){
-			echo $this->time_elapsed_string( 1466338173 );
+		public function timeToAgo($value=0){
+			echo $this->time_elapsed_string( $value );
 		}
 
 		public function time_elapsed_string($ptime){

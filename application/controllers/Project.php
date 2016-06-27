@@ -67,16 +67,27 @@
 
 			if(count($data)){
 				$linkData = $this->ModelProject->getEmailLinkData( $data );
+				
 				if(count($linkData)){
 					$this->ModelProject->updateEmailLinkOpened( $linkData['StashEmailMsg_id'] );
+					$pageInfo['project'] = $this->ModelProject->getProject( $linkData['StashEmailMsg_project_id_ref'] );
+					$pageInfo['message'] = $this->ModelProject->getThisMessage($linkData['StashEmailMsg_msg_id_ref']);
+					$pageInfo['for'] = "sms";
+					$pageInfo['forRef'] = $linkData['StashEmailMsg_id'];
+					$pageInfo['time'] = $linkData['StashEmailMsg_time'];
+					$pageInfo['response'] = $linkData['StashEmailMsg_response'];
+					return $pageInfo;
 				}
 			}
+			return [];
 		}
 
 		public function preview($link = '', $for = ''){
 			$pageInfo = [];
 			if( $for == 'sms' )
 				$pageInfo = $this->fromSMS( $link );
+			else
+				$pageInfo = $this->fromEmail( $link );
 			
 
 			if(count($pageInfo))

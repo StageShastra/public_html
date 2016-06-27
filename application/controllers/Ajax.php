@@ -65,6 +65,9 @@
 					case "ContactData":
 						$this->contactData($data);
 						break;
+					case "BulkProjectTag":
+						$this->bulkProjectTag($data);
+						break;
 					
 					
 					default:
@@ -74,6 +77,25 @@
 			}else{
 				$this->response(false, Aj_Req_NoData);
 			}
+		}
+
+		public function bulkProjectTag($data = []){
+			$this->load->model("ModelDirector");
+			$list = $data['list'];
+			$listid = $data['listid'];
+			$pid = $data['project'];
+			$c = 0;$r = [];
+			foreach ($list as $key => $value) {
+				if( $this->ModelDirector->insertActorProject( $value, $pid ) ){
+					$c++;
+					$r[] = $listid[$key];
+				}
+			}
+
+			if($c)
+				$this->response(true, "selected actor added to project.");
+			else
+				$this->response(false, "something went wrong. try again later.");
 		}
 
 		public function contactData($data = []){
@@ -220,8 +242,9 @@
 			}else{
 				$projectID = $this->ModelDirector->insertNewPorject($data['project_name'], $data['project_date']);
 			}
-			$data['msg'] = str_replace("\n", "<br>", $data['msg']);
 			$data['project_id'] = $projectID;
+			$data['msg'] = str_replace("\n", "<br>", $data['msg']);
+			
 
 			$msgId = $this->ModelDirector->insertSMSMsg($data['msg'], 'email', $data['subject']);
 
@@ -394,9 +417,19 @@
 		public function contactActorBySMS($data = []){
 			$this->load->model("ModelDirector");
 			$this->load->model("SMS");
+			$projectID = 0;
+			if(trim($data['project_name']) != ''){
+				$project = $this->ModelDirector->getProject($data['project_name'], $data['project_date']);
+				if(count($project)){
+					$projectID = $project['StashProject_id'];
+				}else{
+					$projectID = $this->ModelDirector->insertNewPorject($data['project_name'], $data['project_date']);
+				}
+			}
+			$data['project_id'] = $projectID;
 			$msgId = $this->ModelDirector->insertSMSMsg($data['sms'], 'sms');
-			$project = 0;
-			$isQues = 0;
+			$isQues = $data['isAud'];
+			$project = $projectID;
 			$str = base64_encode(md5(microtime() . $msgId . microtime()));
 			$rand = substr($str, 0, 6);
 			$start = 0;
@@ -425,13 +458,23 @@
 		public function contactActorByEmail($data = []){
 			$this->load->model("ModelDirector");
 			$this->load->model("Email");
+			$projectID = 0;
+			if(trim($data['project_name']) != ''){
+				$project = $this->ModelDirector->getProject($data['project_name'], $data['project_date']);
+				if(count($project)){
+					$projectID = $project['StashProject_id'];
+				}else{
+					$projectID = $this->ModelDirector->insertNewPorject($data['project_name'], $data['project_date']);
+				}
+			}
+			$data['project_id'] = $projectID;
 			$data['mail'] = str_replace("\n", "<br>", $data['mail']);
 			$msgId = $this->ModelDirector->insertSMSMsg($data['mail'], 'email', $data['subject']);
 			$emails = $data['contact']['email'];
 			$actors = $data['contact']['ref'];
 
-			$isQues = 1;//$data['isQues'];
-			$project = 0;
+			$isQues = $data['isAud'];
+			$project = $projectID;
 			$time = time();
 			$sent = $failed = 0;
 			$failedMails = [];

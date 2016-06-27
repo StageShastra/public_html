@@ -109,6 +109,10 @@
     background: #F7A9A9;
     }
 
+    .composeBox-input input {
+      font-size: 13px;
+    }
+
               </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -119,7 +123,7 @@
               <div class="col-sm-4">
                 <font class="info dark-gray"> <span id="totalSelected"></span> Selected</font>
                 <hr>
-                <div id="selected-actors"></div>
+                <div class="selectedActors"></div>
                 <div id="deleteAllSelected">
                   <button type="button" title="Remove All" class="btn submit-btn firstcolor " id="deleteAllSelectedBtn"><i class="glyphicon glyphicon-trash"></i></button>
           <button type="button" class="btn submit-btn firstcolor resetAllContact" data-form="" style="margin-left:10px;" ><span class="glyphicon glyphicon-repeat"></span></button>
@@ -137,20 +141,40 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                   <div role="tabpanel" class="tab-pane active" id="contactViaEmail">
-          <input type="text" class="contact-subject email-field" id="subject" placeholder="Subject"/>
-          <textarea class="contact-message email-field" id="message" placeholder="Type your message here."></textarea>
-            
-          <button type="submit" class="btn submit-btn firstcolor sendMail" id="btn-login" ><span class="glyphicon glyphicon-send"></span> &nbsp; Send Email</button>
-          <button type="button" class="btn submit-btn firstcolor previewEmailBtn" data-id="#message" style="margin-left:10px;" ><span class="glyphicon glyphicon-camera "></span> &nbsp; Preview</button>
+                    
+                    <div class="row composeBox-input">
+                      <div class="col-sm-6 form-group">
+                        <input type="text" class="form-control contact_inputs projectName" name="project_name" id='cEmail_PName' placeholder="Project Name" required />
+                      </div>
+                      <div class="col-sm-6 form-group"> 
+                        <input type="date" class="form-control contact_inputs" name="project_date" id='cEmail_PDate' value="<?= date("Y-m-d") ?>" required>
+                      </div>
+                    </div>
+
+                    <input type="text" class="contact-subject email-field" id="subject" placeholder="Subject"/>
+                    <textarea class="contact-message email-field" id="message" placeholder="Type your message here."></textarea>
+                    <input type="checkbox" id='emailCheck' name="emailCheck" class="css-checkbox" value="1"><label for='emailCheck' class="css-label">Is this an Audition Message ?</label>
+                    <button type="submit" class="btn submit-btn firstcolor sendMail" id="btn-login" ><span class="glyphicon glyphicon-send"></span> &nbsp; Send Email</button>
+                    <button type="button" class="btn submit-btn firstcolor previewEmailBtn" data-id="#message" style="margin-left:10px;" ><span class="glyphicon glyphicon-camera "></span> &nbsp; Preview</button>
                   </div>
                   <div role="tabpanel" class="tab-pane" id="contactViaSMS">
+
+                    <div class="row composeBox-input">
+                      <div class="col-sm-6 form-group">
+                        <input type="text" class="form-control contact_inputs projectName" name="project_name" id='cSMS_PName' placeholder="Project Name" required />
+                      </div>
+                      <div class="col-sm-6 form-group"> 
+                        <input type="date" class="form-control contact_inputs" name="project_date" id='cSMS_PDate' value="<?= date("Y-m-d") ?>" required>
+                      </div>
+                    </div>
+
                     <textarea class="contact-sms sms-field" id="textsms" maxlength=280 placeholder="Type your sms text here."></textarea>
 
                     <span class="info-small gray pull-right">
                       ( <span id="audi-charCounter">160</span> / 
                       <span id="audi-msgCounter">0</span> )
                     </span>
-
+                    <input type="checkbox" id='smsCheck' name="smsCheck" class="css-checkbox" value="1"><label for='smsCheck' class="css-label">Is this an Audition Message ?</label>
                     <button type="submit" class="btn submit-btn firstcolor sendSMS" id="btn-login" ><span class="glyphicon glyphicon-send"></span> &nbsp; Send SMS</button>
                     <button type="button" class="btn submit-btn firstcolor previewSMSBtn" data-id="#textsms" style="margin-left:10px;" ><span class="glyphicon glyphicon-camera "></span> &nbsp; Preview</button>
                   </div>
@@ -160,6 +184,51 @@
               </div>  
             </div>  
           </div>
+
+          <!-- Modal Section : Bulk Actions -->
+          <div id="bulkActionModel" class="col-sm-8 fade contact-form" style="max-width: 550px;max-height:440px;display:none;">
+            <div class="row">
+              <div class="col-sm-4">
+                <font class="info dark-gray"> <span id="totalSelected"></span> Selected</font>
+                <hr>
+                <div class="selectedActors"></div>
+                <div id="deleteAllSelected">
+                  <button type="button" title="Remove All" class="btn submit-btn firstcolor " id="deleteAllSelectedBtn"><i class="glyphicon glyphicon-trash"></i></button>
+                  
+                  <button type="button" class="btn submit-btn firstcolor resetAllContact" data-form="" style="margin-left:10px;" ><span class="glyphicon glyphicon-repeat"></span></button>
+                </div>
+              </div>
+              <div class="col-sm-8 contact-right">
+                <font class="info dark-gray">Bulk Action</font>
+                <hr>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <div role="tabpanel" class="tab-pane active" id="contactViaEmail">
+
+                    <button type="submit" class="btn submit-btn firstcolor bulkUserRemove" id="btn-login" ><span class="fa fa-ban"></span> &nbsp; Delete Selected</button>
+
+                    <button type="button" class="btn submit-btn firstcolor toggleProjectBox" data-hide='1' style="margin-left:10px;" ><span class="fa fa-tags"></span> &nbsp; Tag to Project</button>
+                    <br><br>
+                    <div class="row project-box" style="display:none;">
+                      <p id="tagProjectErr" style="display:none;"></p>
+                      <span class="info-small gray">
+                        Select Project:   
+                      </span> 
+                      <input type="text" class="form-control contact_inputs" name="project_name" id="addPName" placeholder="Project Name" required />
+                      <button type="button" class="btn submit-btn firstcolor confirmTag" style="margin-left:10px;" ><span class="fa fa-tags"></span> &nbsp; Confirm Tag</button>
+                    </div>
+
+
+                  </div>
+                </div>
+
+                
+              </div>  
+            </div>  
+          </div>
+
+
+
         <!-- Ths section is pre selection !-->
         <div class="container" id="prelogin">
           <div class="col-sm-1">
@@ -193,7 +262,7 @@
 
                 <!---floating buttons -->
                 <div>
-                  <button type="submit" class="btn submit-btn firstcolor bulk-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ><span class="glyphicon glyphicon-pencil"></span></button>
+                  <button type="submit" class="btn submit-btn firstcolor bulk-btn dropdown-toggle" data-toggle="modal" data-target='#bulkActionModel' ><span class="glyphicon glyphicon-pencil"></span></button>
 
                   <ul class="dropdown-menu">
                     <li><a href="#">Action</a></li>
