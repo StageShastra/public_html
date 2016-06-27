@@ -538,9 +538,13 @@ $(document).ready(function(){
 
 		var subject = $("#subject").val();
 		var mail_message = $("#message").val();
-		//var subject = $("#subject").val();
-		//var sms_message = $("#textsms").val();
-		data = {request: "ContactActorByEmail", data: JSON.stringify({contact: contact, subject: subject, mail: mail_message})};
+		project_name = $("#cEmail_PName").val();
+		project_date = $("#cEmail_PDate").val();
+		isAud = 0;
+		if($("#emailCheck").is("checked"))
+			$isAud = 1;
+
+		data = {request: "ContactActorByEmail", data: JSON.stringify({isAud: isAud, contact: contact, subject: subject, mail: mail_message, project_name: project_name, project_date: project_date})};
 
 		$.ajax({
 			url: url,
@@ -574,8 +578,14 @@ $(document).ready(function(){
 		contact['mobile'] = actorMobile;
 		contact['ref'] = tempRef;
 
+		project_name = $("#cSMS_PName").val();
+		project_date = $("#cSMS_PDate").val();
+		isAud = 0;
+		if($("#smsCheck").is("checked"))
+			$isAud = 1;
+
 		var sms_message = $("#textsms").val();
-		data = {request: "ContactActorBySMS", data: JSON.stringify({contact: contact, sms: sms_message})};
+		data = {request: "ContactActorBySMS", data: JSON.stringify({contact: contact, sms: sms_message, project_name: project_name, project_date: project_date, isAud: isAud})};
 
 		$.ajax({
 			url: url,

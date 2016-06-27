@@ -109,6 +109,10 @@
     background: #F7A9A9;
     }
 
+    .composeBox-input input {
+      font-size: 13px;
+    }
+
               </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -137,20 +141,40 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                   <div role="tabpanel" class="tab-pane active" id="contactViaEmail">
-          <input type="text" class="contact-subject email-field" id="subject" placeholder="Subject"/>
-          <textarea class="contact-message email-field" id="message" placeholder="Type your message here."></textarea>
-            
-          <button type="submit" class="btn submit-btn firstcolor sendMail" id="btn-login" ><span class="glyphicon glyphicon-send"></span> &nbsp; Send Email</button>
-          <button type="button" class="btn submit-btn firstcolor previewEmailBtn" data-id="#message" style="margin-left:10px;" ><span class="glyphicon glyphicon-camera "></span> &nbsp; Preview</button>
+                    
+                    <div class="row composeBox-input">
+                      <div class="col-sm-6 form-group">
+                        <input type="text" class="form-control contact_inputs projectName" name="project_name" id='cEmail_PName' placeholder="Project Name" required />
+                      </div>
+                      <div class="col-sm-6 form-group"> 
+                        <input type="date" class="form-control contact_inputs" name="project_date" id='cEmail_PDate' value="<?= date("Y-m-d") ?>" required>
+                      </div>
+                    </div>
+
+                    <input type="text" class="contact-subject email-field" id="subject" placeholder="Subject"/>
+                    <textarea class="contact-message email-field" id="message" placeholder="Type your message here."></textarea>
+                    <input type="checkbox" id='emailCheck' name="emailCheck" class="css-checkbox" value="1"><label for='emailCheck' class="css-label">Is this an Audition Message ?</label>
+                    <button type="submit" class="btn submit-btn firstcolor sendMail" id="btn-login" ><span class="glyphicon glyphicon-send"></span> &nbsp; Send Email</button>
+                    <button type="button" class="btn submit-btn firstcolor previewEmailBtn" data-id="#message" style="margin-left:10px;" ><span class="glyphicon glyphicon-camera "></span> &nbsp; Preview</button>
                   </div>
                   <div role="tabpanel" class="tab-pane" id="contactViaSMS">
+
+                    <div class="row composeBox-input">
+                      <div class="col-sm-6 form-group">
+                        <input type="text" class="form-control contact_inputs projectName" name="project_name" id='cSMS_PName' placeholder="Project Name" required />
+                      </div>
+                      <div class="col-sm-6 form-group"> 
+                        <input type="date" class="form-control contact_inputs" name="project_date" id='cSMS_PDate' value="<?= date("Y-m-d") ?>" required>
+                      </div>
+                    </div>
+
                     <textarea class="contact-sms sms-field" id="textsms" maxlength=280 placeholder="Type your sms text here."></textarea>
 
                     <span class="info-small gray pull-right">
                       ( <span id="audi-charCounter">160</span> / 
                       <span id="audi-msgCounter">0</span> )
                     </span>
-
+                    <input type="checkbox" id='smsCheck' name="smsCheck" class="css-checkbox" value="1"><label for='smsCheck' class="css-label">Is this an Audition Message ?</label>
                     <button type="submit" class="btn submit-btn firstcolor sendSMS" id="btn-login" ><span class="glyphicon glyphicon-send"></span> &nbsp; Send SMS</button>
                     <button type="button" class="btn submit-btn firstcolor previewSMSBtn" data-id="#textsms" style="margin-left:10px;" ><span class="glyphicon glyphicon-camera "></span> &nbsp; Preview</button>
                   </div>

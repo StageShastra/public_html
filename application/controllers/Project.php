@@ -69,6 +69,13 @@
 				$linkData = $this->ModelProject->getEmailLinkData( $data );
 				if(count($linkData)){
 					$this->ModelProject->updateEmailLinkOpened( $linkData['StashEmailMsg_id'] );
+					$pageInfo['project'] = $this->ModelProject->getProject( $linkData['StashSMSMsg_project_id_ref'] );
+					$pageInfo['message'] = $this->ModelProject->getThisMessage($linkData['StashSMSMsg_msg_id_ref']);
+					$pageInfo['for'] = "sms";
+					$pageInfo['forRef'] = $linkData['StashSMSMsg_id'];
+					$pageInfo['time'] = $linkData['StashSMSMsg_time'];
+					$pageInfo['response'] = $linkData['StashSMSMsg_response'];
+					return $pageInfo;
 				}
 			}
 		}

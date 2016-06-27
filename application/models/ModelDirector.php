@@ -851,7 +851,7 @@
 			}
 			$result['recipient'] = $recipient;
 			$result['responded'] = $s;
-			$result['seen'] = $o;
+			$result['seen'] = $s;
 			$result['yes'] = $y;
 			$result['no'] = $n;
 			$result['maybe'] = $mb;
@@ -919,7 +919,7 @@
 			}
 			$result['recipient'] = $recipient;
 			$result['responded'] = $s;
-			$result['seen'] = $o;
+			$result['seen'] = $s;
 			$result['yes'] = $y;
 			$result['no'] = $n;
 			$result['maybe'] = $mb;
