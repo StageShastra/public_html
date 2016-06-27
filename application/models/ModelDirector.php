@@ -444,7 +444,7 @@
 
 		public function checkEmailRandLink($link = ''){
 			$this->db->where("StashEmailInvite_link", $link);
-			$query = $this->db->get("stash-sms-invites");
+			$query = $this->db->get("stash-email-invites");
 			return $query->num_rows();
 		}
 
