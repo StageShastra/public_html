@@ -43,6 +43,10 @@ else{
         {
             echo "<script> var plan = 1; console.log(plan);</script>";
         }
+        else if($plan==2)
+        {
+            echo "<script> var plan = 2; console.log(plan);</script>";
+        }
         else
         {
             echo "<script> var plan = 0; console.log(plan);</script>";
@@ -249,14 +253,15 @@ a:hover, a:focus {
                         <div class="checkout_box">
                             <div class="row">
                                 <span class="labels col-xs-6">Name : </span>
-                                <span class="col-xs-6 data">Prashant Kiran</span>
+                                <span class="col-xs-6 data"><? echo "name" ?></span>
                             </div>
                             <div class="row">
                                 <span class="labels col-xs-6">Plan : </span>
                                 <span class="col-xs-6 data">
                                     <select id="planselector">
-                                        <option value="Actor-Basic" id="actor_basic" <? if($plan==0){echo 'selected="selected"';} ?> > Actor - Basic </option>
-                                        <option value="Actor-Pro" id="actor_pro" <? if($plan==1){echo 'selected="selected"';} ?>> Actor - Pro </option>
+                                        <option value="Basic" id="actor_basic" <? if($plan==0){echo 'selected="selected"';} ?> > Basic </option>
+                                        <option value="Pro" id="actor_pro" <? if($plan==1){echo 'selected="selected"';} ?>> Pro </option>
+                                        <option value="Pro-Plus" id="actor_pro" <? if($plan==2){echo 'selected="selected"';} ?>> Pro-Plus </option>
                                     </select>
                                 </span>
                             </div>
@@ -267,11 +272,7 @@ a:hover, a:focus {
                             <div class="row" id="months_row">
                                 <span class="labels col-xs-6">Months : </span>
                                 <span class="col-xs-6 data">
-                                    <select id="months">
-                                        <option value="3" id="3_months"> 3 Months</option>
-                                        <option value="6" id="6_months"> 6 Months</option>
-                                        <option value="12" id="12_months"> 12 Months</option>
-                                    </select>
+                                        <span id="months"></span>
                                 </span>
                             </div>
                             <hr>
@@ -284,67 +285,66 @@ a:hover, a:focus {
                             <button type="button" id="checkout_btn" class="btn">
                                 <a href="#">Register</a>
                             </button>
-                            <button type="button" id="checkout_btn_pro" class="btn">
-                                <a href="https://www.instamojo.com/paycastiko/castiko-actor-membership-pro-plan-3-months/" id="pay_link" rel="im-checkout" data-behaviour="remote" data-style="no-style" data-text="Checkout With Instamojo" data-token="43c9fd9353701a50b5cceafef6e13b6f"></a>
+                            <button type="button" id="checkout_btn_basic" class="btn">
+                                <a href="https://www.instamojo.com/paycastiko/castiko-director-membership-basic-plan-1-mon/" rel="im-checkout" data-behaviour="remote" data-style="no-style" data-text="Checkout With Instamojo" data-token="43c9fd9353701a50b5cceafef6e13b6f"></a>
                                 <script src="https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"></script>
                             </button>
-                            <button type="button" id="checkout_btn_pro_6" class="btn hidden">
+                            <button type="button" id="checkout_btn_pro" class="btn hidden">
                                 <a href="https://www.instamojo.com/paycastiko/castiko-actor-membership-pro-6-months/" id="pay_link" rel="im-checkout" data-behaviour="remote" data-style="no-style" data-text="Checkout With Instamojo" data-token="43c9fd9353701a50b5cceafef6e13b6f"></a>
                                
                             </button>
-                            <button type="button" id="checkout_btn_pro_12" class="btn hidden">
+                            <button type="button" id="checkout_btn_pro_plus" class="btn hidden">
                                 <a href="https://www.instamojo.com/paycastiko/castiko-actor-membership-pro-plan-12-months/" id="pay_link" rel="im-checkout" data-behaviour="remote" data-style="no-style" data-text="Checkout With Instamojo" data-token="43c9fd9353701a50b5cceafef6e13b6f"></a>
                                 
                             </button>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
-                        <div class="content-box hidden" id="basic_content"> 
-                            <span class="category black "> <b>BASIC</b></span>
+                         <div class="content-box" id="basic_content">
+                            <span class="category black"> <b>BASIC</b></span>
                             <br>
-                            <span class="button_text green">Free</span>
+                            <span class="button_text black"><b> One off. Just looking to manage a project or two. </b></span>
                             <hr>
-                            <div class="left_aligned">
-                                <div class="expandButton">
-                                    <span class="glyphicon glyphicon-ok plus" style="font-size:10px;"></span>
-                                    <span class="subtext black"> Public profile with Photos and Videos. </span>
-                                    <div id="basic1" class="inner">
-                                        <span class="glyphicon glyphicon-triangle-right green subtext"></span>The Castiko Profile is designed to showcase your talents. Add photos, videos, training and experience. Your unique link lets you share it with anyone - even outside Castiko.
-                                    </div>
-                                </div>
-                                <div class="expandButton">
-                                    <span class="glyphicon glyphicon-ok plus" style="font-size:10px;"></span>
-                                    <span class="subtext black"> Unlimited Casting Director Invitations. </span>
-                                    <div id="basic2" class="inner">
-                                        <span class="glyphicon glyphicon-triangle-right green subtext"></span>Casting directors who already know you can add/invite you into their database.
-                                    </div>
-                                </div>
-                            </div>
-                            
+                            <span class="subtext black">1 Month</span>
+                            <br>
+                            <span class="button_text black"><b><i class="fa fa-inr"></i>5000/month</b></span>
+                            <hr>
+                            <span class="subtext black" style="text-align:center;"><i class="fa fa-inr"></i>5000/- </span>
+                            <br>
+                            <span class="subtext green">+ 100 SMS free</span>
+                            <br>
                         </div>
-                        <div class="content-box" id="pro_content">
+                        <div class="content-box hidden" id="pro_content">
                             <span class="category black"> <b>PRO</b></span>
                             <br>
-                            <span class="button_text green"><i class="fa fa-inr"></i>200/month</span>
+                            <span class="button_text black"><b> Getting projects regularly,<br> buliding network. </b></span>
                             <hr>
-                            <div class="left_aligned">
-                                <div class="expandButton">
-                                    <span class="glyphicon glyphicon-ok plus" style="font-size:10px;"></span>
-                                    <span class="button_text black nohover"> <b>Searchable by all the Casting Directors.</b> </span>
-                                    <div id="pro1" class="inner">
-                                        <span class="glyphicon glyphicon-triangle-right green subtext"></span>Casting directors who don’t know you are often looking for new faces for projects. With Pro, we will make your profile searchable by all Casting Directors.
-                                    </div>
-                                </div>
-                                <div class="expandButton">
-                                <span class="glyphicon glyphicon-ok plus" style="font-size:10px;"></span>
-                                <span class="button_text black"> <b>Access to targeted audition notices.</b> </span>
-                                    <div id="pro2" class="inner">
-                                        <span class="glyphicon glyphicon-triangle-right green subtext"></span>Audition Notices are an easy way to get audition information. Pro lets you see them right on your home page.
-                                    </div>
-                                </div>
-                                <span class="glyphicon glyphicon-ok plus" style="font-size:10px;"></span>  <span class="button_text black"><b>Plus all the features in the basic </b></span>
-                            </div>
-                            
+                            <span class="subtext black">6 Months</span>
+                            <br>
+                            <span class="button_text black"><b><i class="fa fa-inr"></i>4500/month</b></span>
+                            <hr>
+                            <span class="subtext black" style="text-align:center;"><i class="fa fa-inr"></i>27000/- </span>
+                            <br>
+                            <span class="subtext green"><b> Save 10%!</span>
+                            <br>
+                            <span class="subtext green">+ 200 SMS free</span>
+                            <br>
+                        </div>
+                        <div class="content-box hidden" id="pro_plus_content">
+                            <span class="category black"> <b>PRO<sup class="plus">+</sup></b></span>
+                            <br>
+                            <span class="button_text black"><b> Full scale casting setup,<br> big network of actors </b></span>
+                            <hr>
+                            <span class="subtext black">12 Months</span>
+                            <br>
+                            <span class="button_text black"><b><i class="fa fa-inr"></i>4000/month</b></span>
+                            <hr>
+                            <span class="subtext black" style="text-align:center;"><i class="fa fa-inr"></i>48000/- </span>
+                            <br>
+                            <span class="subtext green"><b> Save 20%!</span>
+                            <br>
+                            <span class="subtext green">+ 500 SMS free</span>
+                            <br>
                         </div>
                     </div>
                 </div>
@@ -367,7 +367,7 @@ a:hover, a:focus {
     <script src="<?= JS ?>/vendor/cbpAnimatedHeader.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="<?= JS ?>/main.js"></script>
-    <script src="<?= JS ?>/actor_checkout.js"></script>
+    <script src="<?= JS ?>/director_checkout.js"></script>
 </body>
 
 </html>

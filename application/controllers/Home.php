@@ -232,7 +232,9 @@ class Home extends CI_Controller {
 	public function checkout_actor($link = ''){
 		$this->load->view("checkout_actor");
 	}
-
+	public function checkout_director($link = ''){
+		$this->load->view("checkout_director");
+	}
 	public function connect($link = ''){
 		
 		$parsedLink = $this->parseInvitaionLink( $link );
