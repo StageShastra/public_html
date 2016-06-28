@@ -3,6 +3,15 @@
 
 	class Director extends CI_Controller {
 
+		function __construct() {
+			parent::__construct();
+			$this->load->model("ModelDirector");
+			$plan=$this->ModelDirector->getDirectorPlan();
+			if(!count($plan)){
+				redirect(base_url()."payment");
+			}
+		}
+
 		public function index($value=''){
 			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'director')
 				redirect(base_url());

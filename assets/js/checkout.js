@@ -129,13 +129,13 @@ $(document).ready(function(){
 	$(document).on("click", "#checkout_btn_basic_actor", function(){
 		data = {request: "GoBasic", data: JSON.stringify({plan: 'Basic'})};
 		$.ajax({
-			url: "/Castiko/actor/ajax/",
+			url: "/public_html/ajax/",
 			type: "POST",
 			data: data,
 			success: function(response){
 				if(response.status){
 					setTimeout( function(){
-						window.location.href = "/Castiko/payment/success/basic";
+						window.location.href = "/public_html/payment/success/basic";
 					}, 5000 );
 				}
 			}

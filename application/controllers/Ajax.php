@@ -72,8 +72,9 @@
 					case "ChangePasswordIn":
 						$this->changePasswordIn($data);
 						break;
-					
-					
+					case "GoBasic":
+						$this->goBasicPlan($data);
+						break;
 					default:
 						$this->response(false, "Invalid Request");
 						break;
@@ -82,7 +83,14 @@
 				$this->response(false, Aj_Req_NoData);
 			}
 		}
-
+		public function goBasicPlan($data = []){
+			$this->load->model("Auth");
+			if( $this->Auth->insertActorPlan( $data['plan'] ) ){
+				$this->response(true, "You are activated with Basic Plan.");
+			}else{
+				$this->response(false, "Connection error occured. Try again.");
+			}
+		}
 		public function changePasswordIn($data = []){
 			$this->load->model("Auth");
 			$profile = $this->Auth->verifyCredentials( $data['current'] );			
