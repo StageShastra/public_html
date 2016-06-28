@@ -190,25 +190,26 @@
               <div class="col-lg-6 col-sm-6 col-xs-12 account_box">
                 <div class="heading"><i class="fa fa-dashboard"></i> Account Details</div>
                 <hr>
-                <div class="heading"><i class="fa fa-user"></i> Prashant Kiran</div>
-                <div class="sub_heading"><i class="fa fa-envelope"></i> <i>prashant@gmail.com</i></div>
+                <div class="heading"><i class="fa fa-user"></i> <?= $profile['StashUsers_name'] ?></div>
+                <div class="sub_heading"><i class="fa fa-envelope"></i> <i><?= $profile['StashUsers_email'] ?></i></div>
                 <hr>
                 <div class="row">
                   <div class="sub_heading col-sm-8"> <i class="fa fa-shopping-bag"></i>Subscription Plan </div>
-                  <span class="data col-sm-4"> Basic </span>
+                  <span class="data col-sm-4"> <?= ucfirst($plan['StashActorPlan_plan']) ?> </span>
                 </div>
                 <div class="row">
                   <div class="sub_heading col-sm-8"> <i class="fa fa-hourglass-start"></i>Subscription Started </div>
-                  <span class="data col-sm-4"> 22nd June, 2015 </span>
+                  <span class="data col-sm-4"> <?= date("d M, Y", $plan['StashActorPlan_start']) ?> </span>
                 </div>
                 <div class="row">
                   <div class="sub_heading col-sm-8"> <i class="fa fa-hourglass-end"></i>Subscription Ends </div>
-                  <span class="data col-sm-4"> 21st June, 2016 </span>
+                  <span class="data col-sm-4"> <?= date("d M, Y", $plan['StashActorPlan_end']) ?> </span>
                 </div>
               </div>
              
               <div class="col-lg-6 col-sm-6 col-xs-12 account_box">
                 <div class="heading"><i class="fa fa-pencil"></i> Change Password</div>
+                <p class="text-warning" id="changepassword_err" style="display:none;"></p>
                 <hr>
                 <div class="row">
                   <div class="sub_heading col-sm-5"> <i class="fa fa-cog"></i>Current Password </div>
@@ -225,7 +226,7 @@
                   <div class="sub_heading col-sm-5"> <i class="fa fa-check-square-o"></i>Confirm Password </div>
                   <span class="data col-sm-7"> <input type="password" name="confirm_passowrd" id="confirm_password"></input></span>
                 </div>
-                <center><button type="button" class="btn submit-btn">Change Password</button></center>
+                <center><button type="button" class="btn submit-btn changePassword">Change Password</button></center>
               </div>
             </div>
         <!--================================== Navigation Ends Here =======================================-!-->

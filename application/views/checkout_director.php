@@ -1,11 +1,3 @@
-<?php
-if(isset($_REQUEST['plan'])){
-    $plan = $_REQUEST['plan'];
-}
-else{
-    $plan=0;
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,20 +30,10 @@ else{
     heap.load("408837571");
     
   </script>
-<? 
-        if($plan==1)
-        {
-            echo "<script> var plan = 1; console.log(plan);</script>";
-        }
-        else if($plan==2)
-        {
-            echo "<script> var plan = 2; console.log(plan);</script>";
-        }
-        else
-        {
-            echo "<script> var plan = 0; console.log(plan);</script>";
-        }
-?>
+  <script type="text/javascript">
+      var plan = <?= $plan ?>;
+      var payee = '<?= $this->session->userdata("StaSh_User_type") ?>';
+  </script>
 </head>
 <style>
 .pricing_banner{
@@ -233,9 +215,16 @@ a:hover, a:focus {
                         <a href="#contact">FAQ</a>
                     </li>
                     -->
-                    <li class="page-scroll">
-                        <a data-target="#loginModal" data-toggle="modal">Login</a>
-                    </li>
+                    <!-- <li class="page-scroll">
+                        <?php
+                            if($this->session->userdata("StaSh_User_Logged_In")){
+                                $a = $this->session->userdata("StaSh_User_type");
+                                echo '<a href="'.base_url(). $a.'/">Dashboard</a>';
+                            }else{
+                                echo '<a data-target="#loginModal" data-toggle="modal">Login</a>';
+                            }
+                        ?>
+                    </li> -->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -281,19 +270,22 @@ a:hover, a:focus {
                                 <span class="label_big col-xs-6 black category">Amount : </span>
                                 <span class="col-xs-6 data_big green category"><i class="fa fa-inr"></i><span id="net_amount"></span>.00/-</span>
                             </div>
-                            
+                            <?php
+                                if( !$this->session->userdata("StaSh_User_Logged_In") ){
+                            ?>
                             <button type="button" id="checkout_btn" class="btn">
                                 <a href="#">Register</a>
                             </button>
-                            <button type="button" id="checkout_btn_basic" class="btn">
+                            <?php } ?>
+                            <button type="button" id="checkout_btn_basic" class="btn checkout_btn">
                                 <a href="https://www.instamojo.com/paycastiko/castiko-director-membership-basic-plan-1-mon/" rel="im-checkout" data-behaviour="remote" data-style="no-style" data-text="Checkout With Instamojo" data-token="43c9fd9353701a50b5cceafef6e13b6f"></a>
                                 <script src="https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"></script>
                             </button>
-                            <button type="button" id="checkout_btn_pro" class="btn hidden">
+                            <button type="button" id="checkout_btn_pro" class="btn hidden checkout_btn">
                                 <a href="https://www.instamojo.com/paycastiko/castiko-actor-membership-pro-6-months/" id="pay_link" rel="im-checkout" data-behaviour="remote" data-style="no-style" data-text="Checkout With Instamojo" data-token="43c9fd9353701a50b5cceafef6e13b6f"></a>
                                
                             </button>
-                            <button type="button" id="checkout_btn_pro_plus" class="btn hidden">
+                            <button type="button" id="checkout_btn_pro_plus" class="btn hidden checkout_btn">
                                 <a href="https://www.instamojo.com/paycastiko/castiko-actor-membership-pro-plan-12-months/" id="pay_link" rel="im-checkout" data-behaviour="remote" data-style="no-style" data-text="Checkout With Instamojo" data-token="43c9fd9353701a50b5cceafef6e13b6f"></a>
                                 
                             </button>
@@ -367,7 +359,7 @@ a:hover, a:focus {
     <script src="<?= JS ?>/vendor/cbpAnimatedHeader.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="<?= JS ?>/main.js"></script>
-    <script src="<?= JS ?>/director_checkout.js"></script>
+    <script src="<?= JS ?>/checkout.js"></script>
 </body>
 
 </html>

@@ -542,6 +542,31 @@ $(document).ready(function(){
 
 	});
 
+	$(document).on("click", ".changePassword", function(){
+		cur_p = $("input[name='current_passowrd']").val();
+		new_p = $("input[name='new_passowrd']").val();
+		con_p = $("input[name='confirm_passowrd']").val();
+		if(con_p != new_p){
+			$("#changepassword_err").html("New password and Confirm password did not match.").show(500).delay(3000).hide(500);
+			return false;
+		}
+		data = {request: "ChangePasswordIn", data: JSON.stringify({ current: cur_p, password: new_p, confirm: con_p })};
+		$.ajax({
+			url: base + "ajax/",
+			type: type,
+			data: data, 
+			success: function(response){
+				$("#changepassword_err").html(response.message).show(500).delay(3000).hide(500);
+				if(response.status){
+					setTimeout(function(){
+						window.location.href = base;
+					}, 5000);
+				}
+			}
+		});
+		return false;
+	});
+
 });
 
 String.prototype.toProperCase = function () {
@@ -621,6 +646,8 @@ function populate_photos()
 	$(document).on("click", ".actor_link", function(){
 		SelectText("actor_link");
 	});
+
+
 
 }
 

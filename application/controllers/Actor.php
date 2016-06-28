@@ -1,6 +1,14 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
 	class Actor extends CI_Controller {
+		function __construct() {
+			parent::__construct();
+			$this->load->model("ModelActor");
+			$plan=$this->ModelActor->getActorPlan();
+			if(!count($plan)){
+				redirect(base_url()."payment");
+			}
+		}
 		public function index($value=''){
 			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
 				redirect(base_url());
@@ -42,6 +50,9 @@
 			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
 				redirect(base_url());
 			$pageInfo = [];
+			$this->load->model("ModelActor");
+			$pageInfo['plan'] = $this->ModelActor->getActorPlan();
+			$pageInfo['profile'] = $this->ModelActor->actorProfile();
 			$this->load->view("actor/account", $pageInfo);
 		}
 		
@@ -187,6 +198,9 @@
 				}
 			}
 		}
+
+		
+
 		public function imageToEncode($data = []){
 			$img = $data['img'];
 			$ext = pathinfo($img, PATHINFO_EXTENSION);

@@ -88,6 +88,16 @@
 			$query = $this->db->get("stash-users");
 			return $query->first_row('array');
 		}
+
+		public function verifyCredentials($pass = ''){
+			$pass = hash_hmac('sha512', $pass, $this->config->item("encryption_key"));
+			$this->db->where("StashUsers_id", $this->session->userdata("StaSh_User_id"));
+			$this->db->where("StashUsers_password", $pass);
+			$this->db->where("StashUsers_type", $this->session->userdata("StaSh_User_type"));
+			$query = $this->db->get("stash-users");
+			return $query->first_row('array');
+		}
+
 		public function startLoginSession($profile = []){
 			$session_data = array(
 								'StaSh_User_Logged_In' => true,
@@ -429,6 +439,34 @@
 			$this->db->where("StashPromo_status", 1);
 			return $this->db->get("stash-promo", 1)->num_rows();
 
+		}
+
+		public function insertActorPlan($plan = ''){
+			$d = array(
+						'StashActorPlan_id' => null,
+						'StashActorPlan_actor_id_ref' => $this->session->userdata("StaSh_User_id"),
+						'StashActorPlan_plan' => $plan,
+						'StashActorPlan_start' => time(),
+						'StashActorPlan_end' => strtotime("+1 year"),
+						'StashActorPlan_time' => time(),
+						'StashActorPlan_status' => 1,
+						'StashActorPlan_ip' => $this->input->ip_address()
+					);
+			return $this->db->insert("stash-actor-plan", $d);
+		}
+
+		public function getDirectPayments(){
+			$this->db->where("StashDirectorPlan_director_id_ref", $this->session->userdata("StaSh_User_id"));
+			$this->db->where("StashDirectorPlan_status", 1);
+			$this->db->ordeR_by("StashDirectorPlan_id", "DESC");
+			return $this->db->get("stash-director-plans", 1)->num_rows();
+		}
+
+		public function getActorPayments(){
+			$this->db->where("StashActorPlan_actor_id_ref", $this->session->userdata("StaSh_User_id"));
+			$this->db->where("StashActorPlan_status", 1);
+			$this->db->ordeR_by("StashActorPlan_id", "DESC");
+			return $this->db->get("stash-actor-plan", 1)->num_rows();
 		}
 	}
 ?>

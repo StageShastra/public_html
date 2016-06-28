@@ -2,8 +2,8 @@ $(document).ready(function(){
 	
 	//For Main Sevrer
 
-	var url = "/public_html/ajax/",
-		base = "/public_html/";
+	var url = "/Castiko/ajax/",
+		base = "/Castiko/";
 		
 	//For Localhost
 	/*var url = "/Castiko/beta/ajax/",
@@ -1175,6 +1175,31 @@ $(document).ready(function(){
 			});
 
 		}
+		return false;
+	});
+
+	$(document).on("click", ".changePassword", function(){
+		cur_p = $("input[name='current_passowrd']").val();
+		new_p = $("input[name='new_passowrd']").val();
+		con_p = $("input[name='confirm_passowrd']").val();
+		if(con_p != new_p){
+			$("#changepassword_err").html("New password and Confirm password did not match.").show(500).delay(3000).hide(500);
+			return false;
+		}
+		data = {request: "ChangePasswordIn", data: JSON.stringify({ current: cur_p, password: new_p, confirm: con_p })};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data, 
+			success: function(response){
+				$("#changepassword_err").html(response.message).show(500).delay(3000).hide(500);
+				if(response.status){
+					setTimeout(function(){
+						window.location.href = base;
+					}, 5000);
+				}
+			}
+		});
 		return false;
 	});
 

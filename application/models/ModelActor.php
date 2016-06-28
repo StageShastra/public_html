@@ -355,6 +355,19 @@
 			return $result;
 		}
 
+		public function getActorPlan($value=''){
+			$this->db->where("StashActorPlan_actor_id_ref", $this->session->userdata("StaSh_User_id"));
+			$this->db->where("StashActorPlan_status", 1);
+			$this->db->ordeR_by("StashActorPlan_id", "DESC");
+			return $this->db->get("stash-actor-plan", 1)->first_row('array');
+		}
+
+		public function actorProfile($value=''){
+			$this->db->where("StashUsers_id", $this->session->userdata("StaSh_User_id"));
+			$query = $this->db->get("stash-users");
+			return $query->first_row('array');
+		}
+
 	}
 
 ?>

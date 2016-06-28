@@ -971,6 +971,40 @@
 		        }
 		    }
 		}
+
+		public function getDirectorPlan($value=''){
+			$this->db->where("StashDirectorPlan_director_id_ref", $this->session->userdata("StaSh_User_id"));
+			$this->db->where("StashDirectorPlan_status", 1);
+			$this->db->ordeR_by("StashDirectorPlan_id", "DESC");
+			return $this->db->get("stash-director-plans", 1)->first_row('array');
+		}
+
+		public function directorProfile($value=''){
+			$this->db->where("StashUsers_id", $this->session->userdata("StaSh_User_id"));
+			$query = $this->db->get("stash-users");
+			return $query->first_row('array');
+		}
+
+		public function countUsedSMS($ref = 0){
+			$inv = $this->countInviteSMS($ref);
+			$aud = $this->countAudtionSMS($ref);
+			$total = $inv + $aud;
+		}
+
+		public function countInviteSMS($ref = 0){
+			$this->db->where("StashSMSInvites_director_id_ref", $ref);
+			return $this->db->get("stash-sms-invites")->num_rows();
+		}
+
+		public function countAudtionSMS($ref = 0){
+			$this->db->where("StashSMSMsg_director_id_ref", $ref);
+			return $this->db->get("stash-sms-message")->num_rows();
+		}
+
+		public function updateSMSCreditUsed($id = 0, $sms = 0){
+			$this->db->where("StashDirectorPlan_id", $id);
+			$this->db->update("stash-director-plans", array('StashDirectorPlan_used_sms' => $sms));
+		}
 	}
 
 ?>

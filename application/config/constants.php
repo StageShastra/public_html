@@ -207,6 +207,14 @@ define('Em_Welcome_msg_actor', 'Welcome to Castiko. We have lots of exciting fea
 define('Em_Reminder_subject', 'Reminder | Castiko');
 define('Em_Reminder_msg', "Dear User <br> You account seems inactive from a long time. You might be missing lot of audition invitation and excited feature of Castiko. <a href='http://castiko.com/'>Login</a> to your account and checkout what's new.");
 
+//for new Audition Mail
+
+define('Em_AudiMail_subject', 'Audition Mail');
+define('Em_AudiMail_message', 'You got a Message from __PUT_DIRECTOR_NAME_HERE__. Open this link to see message.');
+define('Em_AudiMail_ifQues', '');
+
+
+
 
 
 
