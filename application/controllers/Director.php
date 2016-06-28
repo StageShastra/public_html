@@ -18,10 +18,6 @@
 			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'director')
 				redirect(base_url());
 			$pageInfo = [];
-			$this->load->model("ModelDirector");
-			$pageInfo['isAllowed'] = $this->ModelDirector->getAdminConfirmation();
-			$pageInfo['count_emails'] = $this->ModelDirector->getInvitationEmailCount($this->session->userdata("StaSh_User_id"));
-			$pageInfo['count_sms'] = $this->ModelDirector->getInvitationSMSCount($this->session->userdata("StaSh_User_id"));
 			$this->load->view("director/conversations", $pageInfo);
 		}
 		public function account($value=''){
@@ -30,8 +26,8 @@
 			$pageInfo = [];
 			$this->load->model("ModelDirector");
 			$pageInfo['isAllowed'] = $this->ModelDirector->getAdminConfirmation();
-			$pageInfo['count_emails'] = $this->ModelDirector->getInvitationEmailCount($this->session->userdata("StaSh_User_id"));
-			$pageInfo['count_sms'] = $this->ModelDirector->getInvitationSMSCount($this->session->userdata("StaSh_User_id"));
+			$pageInfo['plan'] = $this->ModelDirector->getDirectorPlan();
+			$pageInfo['profile'] = $this->ModelDirector->directorProfile();
 			$this->load->view("director/account", $pageInfo);
 		}
 

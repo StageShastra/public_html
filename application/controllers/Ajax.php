@@ -68,6 +68,10 @@
 					case "BulkProjectTag":
 						$this->bulkProjectTag($data);
 						break;
+
+					case "ChangePasswordIn":
+						$this->changePasswordIn($data);
+						break;
 					
 					
 					default:
@@ -77,6 +81,33 @@
 			}else{
 				$this->response(false, Aj_Req_NoData);
 			}
+		}
+
+		public function changePasswordIn($data = []){
+			$this->load->model("Auth");
+			$profile = $this->Auth->verifyCredentials( $data['current'] );			
+			if(count($profile)){
+				if($data['password'] == $data['confirm']){
+					if($this->Auth->updatePassword($profile['StashUsers_id'], $data['password'])){
+						$this->destroyUserSession();
+						$this->response(true, "Password Changed successfully. You will be logged out in few seconds for security reasons.");
+					}else{
+						$this->response(false, Aj_ChangePass_Fail);
+					}
+				}else{
+					$this->response(false, "New password and confirm password did not match.");
+				}
+			}else{
+				$this->response(false, "Invalid password.");
+			}
+		}
+
+		public function destroyUserSession($value=''){
+			$this->session->set_userdata(array());
+			$this->session->sess_destroy();
+			$this->load->helper('cookie');
+			delete_cookie('categories');
+			delete_cookie('isCat');
 		}
 
 		public function bulkProjectTag($data = []){
@@ -171,6 +202,21 @@
 		public function SMSInvitation($data = []){
 			$this->load->model("ModelDirector");
 			$this->load->model("SMS");
+
+			$filterNumbers = $this->filterMobile( $data['mobiles'] );
+
+			$totNum = count($filterNumbers);
+			$msgLen = strlen($data['sms']);
+			$totSMS = ($msgLen / 160) * $totNum;
+			
+			$plan = $this->ModelDirector->getDirectorPlan();
+			$leftSMS = $plan['StashDirectorPlan_free_sms'] - $plan['StashDirectorPlan_used_sms'];
+			$usedSMS = $plan['StashDirectorPlan_used_sms'];
+			$planId = $plan['StashDirectorPlan_id'];
+			if($leftSMS < $totSMS){
+				$this->response(false, "You don't have enough SMS Credits. Plan recharge for SMS Credits.");
+			}
+
 			$project = $this->ModelDirector->getProject($data['project_name'], $data['project_date']);
 			if(count($project)){
 				$projectID = $project['StashProject_id'];
@@ -180,7 +226,7 @@
 			$data['project_id'] = $projectID;
 			// Generating Link.
 
-			$filterNumbers = $this->filterMobile( $data['mobiles'] );
+			
 			$mobiles = $filterNumbers['numbers'];
 			$invalid = $filterNumbers['invalid'];
 			$mobileIndirectorDB = $this->ModelDirector->getMobileFromDirectorDB();
@@ -203,6 +249,9 @@
 
 			$r = array( 'sent' => count($mobileNotInDB), 'invalid' => count($invalid), 'invalidNums' => $invalid, 'duplicate' => count($duplicate), "duplicateNums" => $duplicate );
 			$this->ModelDirector->updateCountAudSMS(count($mobileNotInDB), "invite", "sms");
+
+			$totSMSUsed = $usedSMS + count($mobileNotInDB);
+			$this->ModelDirector->updateSMSCreditUsed( $planId, $totSMSUsed );
 			
 			$this->response(true, "Invitation SMS Sent", $r);
 		}
@@ -417,6 +466,21 @@
 		public function contactActorBySMS($data = []){
 			$this->load->model("ModelDirector");
 			$this->load->model("SMS");
+
+			$totNum = count($data['contact']['mobile']);
+			$msgLen = strlen($data['sms']);
+			$totSMS = ($msgLen / 160) * $totNum;
+			
+			$plan = $this->ModelDirector->getDirectorPlan();
+			$usedSMS = $plan['StashDirectorPlan_used_sms'];
+			$planId = $plan['StashDirectorPlan_id'];
+			$leftSMS = $plan['StashDirectorPlan_free_sms'] - $plan['StashDirectorPlan_used_sms'];
+			if($leftSMS < $totSMS){
+				$this->response(false, "You don't have enough SMS Credits. Plan recharge for SMS Credits.");
+			}
+
+
+
 			$projectID = 0;
 			if(trim($data['project_name']) != ''){
 				$project = $this->ModelDirector->getProject($data['project_name'], $data['project_date']);
@@ -452,6 +516,9 @@
 			foreach ($data['contact']['ref'] as $key => $ref) {
 				$this->ModelDirector->insertSendSMS( $ref, $msgId, $project, $isQues, $time, $rand );
 			}
+
+			$totSMSUsed = $usedSMS + $sent;
+			$this->ModelDirector->updateSMSCreditUsed( $planId, $totSMSUsed );
 
 			$this->response(true, "{$sent} SMS Sent.");
 		}
@@ -568,28 +635,17 @@
 				if(count($profile)){
 					$this->Auth->startLoginSession($profile);
 					$this->Auth->updateUserLogin($profile['StashUsers_id']);
+
 					if($data['type'] == 'director'){
 						$this->Auth->setDefaultCookies();
+						$paymentData = $this->Auth->getDirectPayments();
 					}else{
-						if($this->input->cookie("newInvite")){
-							//$info = $this->session->userdata("Stash_New_User");
-	    					if($this->Auth->checkActorProject($profile['StashUsers_id'], $this->input->cookie("project_ref")))
-								$this->Auth->insertActorInProject($profile['StashUsers_id']);
-	    					
-							if($this->Auth->checkActorInDirector($profile['StashUsers_id'], $this->input->cookie("director_ref")))
-								$this->Auth->insertActorInDirectorList($profile['StashUsers_id']);
-							$this->session->set_userdata(array("Stash_New_User" => array()));
-							
-							unset($_COOKIE['newInvite']);
-							unset($_COOKIE['project_ref']);
-							unset($_COOKIE['director_ref']);
-							
-							setcookie('newInvite', null, -1, '/');
-							setcookie('project_ref', null, -1, '/');
-							setcookie('director_ref', null, -1, '/');
-	    				}
+						$paymentData = $this->Auth->getActorPayments();
 					}
-					$this->response(true, Aj_Login_Succ . " {$data['email']}");
+
+					$redirect = (bool) $paymentData;
+
+					$this->response(true, Aj_Login_Succ . " {$data['email']}", ['redirect' => $redirect]);
 				}else{
 					$this->response(false, Aj_Login_Failed);
 				}

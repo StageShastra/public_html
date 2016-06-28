@@ -144,6 +144,7 @@
       margin-bottom: 20px;
       padding: 10px;
       border: 1px solid #ddd;
+      min-height: 300px;
     }
               </style>
         <!--[if lt IE 8]>
@@ -214,20 +215,21 @@
               <div class="col-lg-4 col-sm-4 col-xs-12 account_box">
                 <div class="heading"><i class="fa fa-dashboard"></i> Account Details</div>
                 <hr>
-                <div class="heading"><i class="fa fa-user"></i> CastingBay</div>
-                <div class="sub_heading"><i class="fa fa-envelope"></i> <i>thecastingbay@gmail.com</i></div>
+                <div class="heading"><i class="fa fa-user"></i> <?= $profile['StashUsers_name'] ?></div>
+                <div class="sub_heading"><i class="fa fa-envelope"></i> <i><?= $profile['StashUsers_email'] ?></i></div>
+                <div class="sub_heading"><i class="fa fa-mobile"></i> <i><?= $profile['StashUsers_mobile'] ?></i></div>
                 <hr>
                 <div class="row">
                   <div class="sub_heading col-sm-8"> <i class="fa fa-shopping-bag"></i>Subscription Plan </div>
-                  <span class="data col-sm-4"> Basic </span>
+                  <span class="data col-sm-4"> <?= ucfirst($plan['StashDirectorPlan_plan']) ?> </span>
                 </div>
                 <div class="row">
                   <div class="sub_heading col-sm-8"> <i class="fa fa-hourglass-start"></i>Subscription Started </div>
-                  <span class="data col-sm-4"> 22nd June, 2015 </span>
+                  <span class="data col-sm-4"> <?= date("d M, Y", $plan['StashDirectorPlan_start']) ?> </span>
                 </div>
                 <div class="row">
                   <div class="sub_heading col-sm-8"> <i class="fa fa-hourglass-end"></i>Subscription Ends </div>
-                  <span class="data col-sm-4"> 21st June, 2016 </span>
+                  <span class="data col-sm-4"> <?= date("d M, Y", $plan['StashDirectorPlan_end']) ?> </span>
                 </div>
               </div>
               <div class="col-lg-4 col-sm-4 col-xs-12 account_box">
@@ -235,15 +237,15 @@
                 <hr>
                 <div class="row">
                   <div class="sub_heading col-sm-8"> <i class="fa fa-money"></i>SMS Credits  </div>
-                  <span class="data col-sm-4"> 500</span>
+                  <span class="data col-sm-4"> <?= $plan['StashDirectorPlan_free_sms'] ?></span>
                 </div>
                 <div class="row">
                   <div class="sub_heading col-sm-8"> <i class="fa fa-commenting"></i>SMS Credits Used </div>
-                  <span class="data col-sm-4"> 210</span>
+                  <span class="data col-sm-4"> <?= $plan['StashDirectorPlan_used_sms'] ?></span>
                 </div>
                 <div class="row">
                   <div class="sub_heading col-sm-8"> <i class="fa fa-envelope-o"></i>SMS Credits Available </div>
-                  <span class="data col-sm-4"> 390 </span>
+                  <span class="data col-sm-4"> <?= $plan['StashDirectorPlan_free_sms'] - $plan['StashDirectorPlan_used_sms'] ?> </span>
                 </div>
                 <hr>
                 <div class="heading hidden"><i class="fa fa-plus"></i>Top-Up SMS Credits</div>
@@ -262,6 +264,7 @@
               </div>
               <div class="col-lg-4 col-sm-4 col-xs-12 account_box">
                 <div class="heading"><i class="fa fa-pencil"></i> Change Password</div>
+                <p class="text-warning" id="changepassword_err" style="display:none;"></p>
                 <hr>
                 <div class="row">
                   <div class="sub_heading col-sm-5"> <i class="fa fa-cog"></i>Current Password </div>
@@ -278,7 +281,7 @@
                   <div class="sub_heading col-sm-5"> <i class="fa fa-check-square-o"></i>Confirm Password </div>
                   <span class="data col-sm-7"> <input type="password" name="confirm_passowrd" id="confirm_password"></input></span>
                 </div>
-                <center><button type="button" class="btn submit-btn">Change Password</button></center>
+                <center><button type="button" class="btn submit-btn changePassword">Change Password</button></center>
               </div>
             </div>
       <script>

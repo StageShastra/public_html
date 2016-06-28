@@ -94,7 +94,14 @@
                         <a href="#contact">Contact</a>
                     </li>
                     <li class="page-scroll">
-                        <a data-target="#loginModal" data-toggle="modal">Login</a>
+                        <?php
+                            if($this->session->userdata("StaSh_User_Logged_In")){
+                                $a = $this->session->userdata("StaSh_User_type");
+                                echo '<a href="'.base_url(). $a.'/">Dashboard</a>';
+                            }else{
+                                echo '<a data-target="#loginModal" data-toggle="modal">Login</a>';
+                            }
+                        ?>
                     </li>
                 </ul>
             </div>
@@ -150,7 +157,7 @@
                         <span class="info-item-desc " >Casting Directors are updated instantly when you add new work.</span>
                     </div>
                     <div>
-                        <a href="<?= base_url() . "home/login" ?>" class="btn btn-custom-outlined"  onmouseover='show_time_taken("a")' onmouseout='hide_time_taken("a")' target="_blank">Sign up now</a>
+                        <a href="<?=base_url() ?>home/pricing#forActors" class="btn btn-custom-outlined"  onmouseover='show_time_taken("a")' onmouseout='hide_time_taken("a")' target="_blank">Sign up now</a>
                         <a href="<?=base_url() ?>home/pricing#forActors" class="btn btn-custom-outlined" target="_blank">See Pricing</a>
                     </div>
                     <div id="time_taken_a" class="time_taken hidden">Just takes 2 mins</div>
@@ -190,7 +197,7 @@
                         <span class="info-item-desc">Track responses, attendance and shortlists with ease.</span>
                     </div>
                     <div>
-                        <span  onmouseover='show_time_taken("cd")' onmouseout='hide_time_taken("cd")'><a href="<?= base_url() . "home/login" ?>" class="btn btn-custom-outlined" >Sign up now</a></span>
+                        <span  onmouseover='show_time_taken("cd")' onmouseout='hide_time_taken("cd")'><a href="<?=base_url() ?>home/pricing#forDirectors" class="btn btn-custom-outlined" >Sign up now</a></span>
                         <a href="<?=base_url() ?>home/pricing#forDirectors" class="btn btn-custom-outlined" target="_blank">See Pricing</a>
                         <div id="time_taken_cd" class="time_taken hidden">Just takes 2 mins</div>
                     </div>

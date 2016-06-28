@@ -42,6 +42,9 @@
 			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
 				redirect(base_url());
 			$pageInfo = [];
+			$this->load->model("ModelActor");
+			$pageInfo['plan'] = $this->ModelActor->getActorPlan();
+			$pageInfo['profile'] = $this->ModelActor->actorProfile();
 			$this->load->view("actor/account", $pageInfo);
 		}
 		
@@ -181,12 +184,26 @@
 					case "ImageToEncode":
 						$this->imageToEncode($data);
 						break;
+					case "GoBasic":
+						$this->goBasicPlan($data);
+						break;
+
 					default:
 						$this->response(false, "Invalid Request");
 						break;
 				}
 			}
 		}
+
+		public function goBasicPlan($data = []){
+			$this->load->model("Auth");
+			if( $this->Auth->insertActorPlan( $data['plan'] ) ){
+				$this->response(true, "You are activated with Basic Plan.");
+			}else{
+				$this->response(false, "Connection error occured. Try again.");
+			}
+		}
+
 		public function imageToEncode($data = []){
 			$img = $data['img'];
 			$ext = pathinfo($img, PATHINFO_EXTENSION);

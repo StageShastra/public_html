@@ -4,11 +4,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Home extends CI_Controller {
 
 	public function index($value=''){
-		$this->login();
+		$this->landingpage();
 	}
 
 	public function landingpage($value=''){
-		$this->load->view("landingpage");
+		$this->load->view("index");
 	}
 
 	public function login($value=''){
@@ -113,6 +113,9 @@ class Home extends CI_Controller {
 	    		
 	    		if($response > 0){
 	    			if($type == 'actor'){
+
+	    				$plan = (isset($_REQUEST['plan']) && $_REQUEST['plan'] == 'basic') ? 0 : 1;
+
 	    				$this->Auth->setupActorProfile($response);
 
 	    				if( $this->input->post("director") != 0 && 
@@ -166,6 +169,14 @@ class Home extends CI_Controller {
 
 	    				}
 	    			}else{
+	    				if(isset($_REQUEST['plan'])){
+	    					if($_REQUEST['plan'] == 'basic')
+	    						$plan = 0;
+	    					elseif($_REQUEST['plan'] == 'pro')
+	    						$plan = 1;
+	    					else
+	    						$plan = 2;
+	    				}
 	    				$this->Auth->setupDirectorProfile($response);
 						$this->Auth->setupDirectorConfirmation($response);
 	    			}
@@ -174,7 +185,12 @@ class Home extends CI_Controller {
 	    			$this->load->model("Email");
 	    			$this->Email->sendActivationMail($this->input->post('name'), $this->input->post('email'), $response);
 
-	    			( $type == 'actor' ) ? redirect( base_url() . "actor/" ) : redirect( base_url() . "director/" );
+	    			//startLoginSession
+
+	    			$profile = $this->Auth->getUserData("StashUsers_id", $response);
+	    			$this->Auth->startLoginSession($profile);
+	    			redirect(base_url() . "payment/?plan={$plan}");
+	    			//( $type == 'actor' ) ? redirect( base_url() . "actor/" ) : redirect( base_url() . "director/" );
 	    			/*$pageInfo['error'] = true;
 	    			$pageInfo['error_msg'] = Ho_Reg_SuccMsg;*/
 	    		}else{

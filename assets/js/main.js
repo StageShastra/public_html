@@ -5,8 +5,8 @@ if(window.location.hash== "#login")
 }
 $(document).ready(function(){
 	//For Main Sevrer
-	var url = "/public_html/ajax/",
-		base = "/public_html/";
+	var url = "/Castiko/ajax/",
+		base = "/Castiko/";
 		
 	//For Localhost
 	/*var url = "/public_html/beta/ajax/",
@@ -25,6 +25,10 @@ $(document).ready(function(){
 		return false;
 	});
 
+    function firstToUpperCase( str ) {
+        return str.substr(0, 1).toUpperCase() + str.substr(1);
+    }
+
 	$(document).on('submit', 'form.login-forms', function(){
 
 		var that = this;
@@ -34,8 +38,7 @@ $(document).ready(function(){
 		});
 		var user = formdata['type'];
 		data = {request: "UserLogin", data: JSON.stringify(formdata)};
-        console.log(that);
-        console.log(user);
+        
 		$.ajax({
 			url: url,
 			type: type,
@@ -44,10 +47,13 @@ $(document).ready(function(){
 				if(response.status){
 					$("#login-error-" + user).removeClass("text-danger").addClass("text-success");
 					//$("input", $(that)).val("");
-
-					window.location.href = base + user;
+                    if(response.data.redirect){
+                        window.location.href = base + user;
+                    }else{
+                        window.location.href = base + "payment";
+                    }
 				}else{
-                    console.log(data);
+                    //console.log(data);
                     $("#login-error-" + user).html(response.message).show(500).delay(5000).hide(500);
                 }
 				

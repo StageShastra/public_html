@@ -11,7 +11,7 @@
           <div class="container-fluid col-sm-10 center"> <!--container fluid starts -->
             <div class="center headname">
               <a href="<?= base_url() ?>" class='a_logo'><img src="<?= IMG ?>/logo.png" class="logo img-fluid"/>
-			  <span class="title big"><?= M_Title ?></span></a>
+			         <span class="title big"><?= M_Title ?></span></a>
             </div>
             <hr class="thick">
             </hr>
@@ -36,7 +36,7 @@
 			?>
 			<script>
 				setTimeout(function(){
-					window.location.href = "<?= base_url() ?>";
+					window.location.href = "<?= base_url() . $page ?>";
 				}, 10000);
 			</script>
 			<?php
