@@ -17,8 +17,8 @@
         <link rel="stylesheet" href="<?= CSS ?>/jquery-ui.css">
         <link rel="stylesheet" href="<?= CSS ?>/main.css">
         <link rel="stylesheet" href="<?= CSS ?>/lightbox.css">
-        <link rel="stylesheet" href="<?= CSS ?>/datatable.css">
         <link rel="stylesheet" href="<?= CSS ?>/cropper.css">
+        <link rel="stylesheet" href="<?= CSS ?>/introjs.css">
         <link href="<?= CSS ?>/dropzone.css" type="text/css" rel="stylesheet" />
         <link href="<?= CSS ?>/animate.css" type="text/css" rel="stylesheet" />
 		<link href="<?= CSS ?>/font-awesome.css" type="text/css" rel="stylesheet" />

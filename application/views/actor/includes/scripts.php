@@ -9,7 +9,7 @@
 		<script src="<?= JS ?>/cropper.js"></script>
         <script src="<?= JS ?>/act.js"></script>
         <script src="<?= JS ?>/lightbox.js"></script>
-        <script src="<?= JS ?>/stupidtable.js"></script>
+        <script src="<?= JS ?>/intro.js"></script>
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials.min.js"></script>
 		
 		<script>

@@ -589,6 +589,10 @@ textarea{
     margin-left: 2px;
     margin-right: 2px;
 }
+.introjs-helperNumberLayer{
+    padding: 0px;
+    line-height: normal;
+}
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -688,6 +692,7 @@ textarea{
                             </font>
                         </div>
                         </div>
+                        <a class="btn btn-large btn-success" href="javascript:void(0);" onclick="startIntro();">Show me how</a>
                         <div class = "row" id="actor_basics">
                             <div class=" col-sm-3 col-lg-4 col-md-4  a_pic" id="actor_pro_pic">
                                <span class="glyphicon glyphicon-remove  toggleEdit overlay_edit removeDP" style="left:8px; right:0px; width:18px;" aria-hidden="true"></span> <span class="glyphicon glyphicon-camera  toggleEdit overlay_edit" data-toggle="modal" data-target="#set_profile_photo" aria-hidden="true"></span>
@@ -698,7 +703,7 @@ textarea{
                             </div>
                             <div class="basics col-sm-12 col-lg-7 col-md-7" style="padding-left:0px;padding-right:0px;">
                                 <div class="category_heading ">BASICS
-                                    <span class="glyphicon glyphicon-pencil edit-button  toggleEdit" data-unhide-id="#actor_basics_edit" data-hide-id="#actor_basics" aria-hidden="true" ></span>
+                                    <span class="glyphicon glyphicon-pencil edit-button" id="step1"  toggleEdit" data-unhide-id="#actor_basics_edit" data-hide-id="#actor_basics" aria-hidden="true" data-step="1" data-intro="Click on this button to edit your basic details. " ></span>
                                 </div>
                                 <div class="elements">
                                     <span class="elements_label">Sex: </span><span id="actor_sex"><?= ($actorProfile['StashActor_gender']) ? "Male" : "Female" ?></span>
@@ -754,7 +759,7 @@ textarea{
                             <br>
                             <div class="category_heading">DETAILS
                                 <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#actor_details_edit" 
-                                            data-hide-id="#actor_details" aria-hidden="true"></span>
+                                            data-hide-id="#actor_details" aria-hidden="true" data-step="2" data-intro="Click here to enter your contact details. It is important that you verify your phone number."></span>
                             </div>
                             <div id="actor_details">
                                 <span class="elements_label">Date of Birth:</span><span class="elements" id="actor_dob"><?php
@@ -817,7 +822,7 @@ textarea{
                         <div class="row">
                             <br>
                              <div class="category_heading">LANGUAGES
-                                <span class="glyphicon glyphicon-pencil  edit-button pull-right toggleEdit" data-unhide-id="#language_edit" data-hide-id="#actor_language" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-pencil  edit-button pull-right toggleEdit" data-unhide-id="#language_edit" data-hide-id="#actor_language" aria-hidden="true" data-step="3" data-intro="Add languages you speak comfortably. You can add multiple languages tags using ,"></span>
                             </div>
                              <span id="actor_language" class="info dark-gray ">
                                 <?php
