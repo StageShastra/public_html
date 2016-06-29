@@ -398,6 +398,9 @@
             .blurb{
                 font-size: 15px;
             }
+            .ul_list{
+                margin-right: 120px;
+            }
         }
         /* lg */
         @media screen and (min-width: 1200px) {
@@ -425,6 +428,9 @@
             }
             .blurb{
                 font-size: 15px;
+            }
+            .ul_list{
+                margin-right: 120px;
             }
         }
         .videoWrapper {
@@ -636,7 +642,7 @@ textarea{
     color: inherit;
 }
 .navbar-nav > li > a{
-    font-size: 14px !important;
+    font-size: 16px !important;
 }
 .navbar-nav > li > a:hover {
     color: #fff !important;
