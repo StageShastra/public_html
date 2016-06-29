@@ -133,7 +133,7 @@
 				$post['mac'] = 1;
 			else
 				$post['mac'] = 0;
-			$this->insertPaymentData( $post );
+			$this->ModelPayment->insertPaymentData( $post );
 		}
 
 		public function curlPaymentDetails($id = '', $req = ''){
