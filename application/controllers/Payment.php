@@ -96,8 +96,9 @@
 			}
 			$page = $this->session->userdata("StaSh_User_type");
 			$pageInfo['title'] = "Thank you.";
+			echo $plan;
 			if( $plan == '' ){
-				$pageInfo['body'] = "Your Payment Success.<br><p>Payment Id: {$pay_id}</p><p>Payment Request Id: {$req_id}</p>";
+				$pageInfo['body'] = "Your Payment was successful.<br><p>Payment Id: {$pay_id}</p>";
 				
 			}else{
 				if($plan == 'basic'){
