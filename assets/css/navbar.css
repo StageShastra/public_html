@@ -109,6 +109,11 @@
                 margin-top: 18px;
                 font-size: 16px;
             }
+            footer{
+                position: absolute;
+                width: 100%;
+                bottom: 0px;
+            }
         }
         /* lg */
         @media screen and (min-width: 1200px) {
@@ -125,6 +130,12 @@
                 margin-top: 18px;
                 font-size: 16px;
             }
+            footer{
+                position: absolute;
+                width: 100%;
+                bottom: 0px;
+            }
+
         }
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
     color: #555;
