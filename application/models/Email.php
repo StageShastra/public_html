@@ -237,7 +237,7 @@
 			if($type == 'director'){
 				$msg = "Hello {$name}, <br>" . Em_Welcome_msg_director;
 			}else{
-				$msg = completion_template();
+				$msg = $this->completion_template();
 			}
 			
 			$message = $this->defaultTemplete($msg);
