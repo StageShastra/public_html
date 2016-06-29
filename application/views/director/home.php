@@ -301,8 +301,7 @@
            </div>
 
 
-          <div id="detailsActor" class="modal fade col-sm-10 center" role="dialog">
-        </div>
+          
       </div>
       <!-- Preview Email End -->
 
@@ -552,7 +551,7 @@
               </div>
             </div>
 
-            <div id="detailsActor" class="modal fade col-sm-10 center" role="dialog">
+            <div id="detailsActor" class="modal col-sm-10 center" role="dialog">
             <div class="modal-dialog" style="width:100%;">
 
               <!-- Modal content-->
@@ -569,11 +568,9 @@
               </div>
 
             </div>
-
-            <?php include 'includes/modals.php'; ?>
           </div>
       <script>
-      var isAllowed = <?= ($isAllowed) ? 1 : 0; ?>;
+      var isAllowed = <?= ($isAllowed) ? true : false; ?>;
       </script>
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php

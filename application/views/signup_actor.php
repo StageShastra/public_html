@@ -134,11 +134,7 @@ a:hover, a:focus {
 .footer-items a:hover {
     color: rgba(255,255,255,1);
 }
-footer{
-                position: absolute;
-                width: 100%;
-                bottom: 0px;
-            }
+
 </style>
     <body>
         <!--[if lt IE 8]>
@@ -235,6 +231,7 @@ footer{
             </div>
           </div>
           </div>
+          <br><br><br><br><br>
         </div>
 <?php
   include "includes/footer.php";
