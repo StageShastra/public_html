@@ -353,6 +353,11 @@
 			}
 			return array();
 		}
+
+		public function getContactMessages($value=''){
+			$this->db->order_by("StashContactMessage_id", "DESC");
+			return $this->db->get("stash-contact-message")->result("array");
+		}
 	}
 
 ?>

@@ -195,8 +195,6 @@ a.anchor {
                             if($this->session->userdata("StaSh_User_Logged_In")){
                                 $a = $this->session->userdata("StaSh_User_type");
                                 echo '<a href="'.base_url(). $a.'/">Dashboard</a>';
-                            }else{
-                                echo '<a data-target="#loginModal" data-toggle="modal">Login</a>';
                             }
                         ?>
                     </li>
