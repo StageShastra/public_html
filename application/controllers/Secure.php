@@ -26,6 +26,7 @@
 
 
 						// Sending Welcome Message.
+						$this->load->model("Email");
 						$this->Email->sendWelcomeMail($userData['StashUsers_email'], $userData['StashUsers_name'], $userData['StashUsers_type']);
 					}else{
 						$pageInfo['title'] = "Already Confirmed";
