@@ -6,10 +6,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Castiko | Makes Casting easier.</title>
+    <meta name="description" content="Castiko is a platform to connect Actors and Casting Directors. Actors – create your own acting profiles with photos & videos. Get auditions. Casting directors – manage all your data, run auditions and find new actors">
+    <meta name="keywords" content="Acting, Audition, Actor, Casting, Film, Casting Directors in Mumbai, Search Actors">
+    <meta name="filename" content="Castiko-Acting-Audition-Casting-Tool-Home">
+    <meta property="og:title" content="Castiko Home - Acting auditions and casting for film production"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://www.castiko.com/"/>
+    <meta property="og:image" content="http://www.castiko.com/assets/img/logo.png"/>
+    <meta property="og:description" content="Castiko is a platform to connect Actors and Casting Directors. Actors – create your own acting profiles with photos & videos. Get auditions. Casting directors – manage all your data, run auditions and find new actors"/>
+    <title>Castiko Home | Acting auditions and casting for film production</title>
 
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
     <link href="<?= CSS ?>/bootstrap.min.css" rel="stylesheet">
@@ -316,7 +321,7 @@
             <div class="tab-content">
               <div id="actor" class="tab-pane fade in active">
                 <p class="login_form">
-                  <font class="info dark-gray center"> Log In | </font><a href="<?= base_url() ?>home/register/director"><font class="info firstcolor center"> Sign Up! </a></font>
+                  <font class="info dark-gray center"> Log In | </font><a href="<?=base_url() ?>home/pricing#forDirectors"><font class="info firstcolor center"> Sign Up! </a></font>
                       <form role="form" id="login-form" class="login-forms" method="post" >
                         <b><p class="text-danger" id="login-error-director"></p></b>
                       <div class="form-group col-lg-8 col-md-6 col-xs-12 center">
@@ -340,7 +345,7 @@
               </div>
               <div id="cd" class="tab-pane fade">
                 <p class="login_form">
-                <font class="info dark-gray  center"> Log In | <a href="<?= base_url() ?>home/register/actor"><font class="info firstcolor center"> Sign Up! </a></font></font>
+                <font class="info dark-gray  center"> Log In | <a href="<?=base_url() ?>home/pricing#forActors"><font class="info firstcolor center"> Sign Up! </a></font></font>
                     <form role="form" id="actor_login-form" class="login-forms" method="post" >
                     <b><p class="text-danger" id="login-error-actor"></p></b>
                     <div class="form-group col-lg-8 col-md-6 col-xs-12 center">

@@ -6,10 +6,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Unlock the power of Castiko. See what Castiko Pro can do for you. Propel your acting/casting career forward. Get started with a free account. Click here to see Castiko pricing">
+    <meta name="keywords" content="Castiko Pricing, Castiko Pro Pricing, Castiko Baisc, Actor, Casting, Director, Film">
+    <meta name="filename" content="Castiko-Actor-Casting-Director-Pricing">
+    <meta property="og:title" content="Basic & Pro Plans for Actors & Casting Directors - Castiko Pricing"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://www.castiko.com/"/>
+    <meta property="og:image" content="http://www.castiko.com/assets/img/logo.png"/>
+    <meta property="og:description" content="Castiko is a platform to connect Actors and Casting Directors. Actors – create your own acting profiles with photos & videos. Get auditions. Casting directors – manage all your data, run auditions and find new actors"/>
 
-    <title>Castiko | Makes Casting easier.</title>
+    <title>Castiko Pricing | Basic & Pro Plans for Actors & Casting Directors </title>
 
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
     <link href="<?= CSS ?>/bootstrap.min.css" rel="stylesheet">

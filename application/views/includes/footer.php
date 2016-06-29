@@ -25,7 +25,7 @@
                     </div>
                     <div class="footer-col col-md-3 col-sm-3 col-xs-12">
                         <span style="font-size:16px;">About Castiko</span>
-                        <h5 style="font-family:Raleway;font-size:13px;">Casting Directors use Castiko to manage their data and stay in touch with the actors.</h5>
+                        <h5 style="font-family:Raleway;font-size:13px;text-align:left;">Castiko is a platform to connect Actors and Casting Directors.<br><br>Actors – create your own acting profiles with photos & videos. Get auditions. <br><br>Casting directors – manage all your data, run auditions and find new actors</h5>
                     </div>
                 </div>
             </div>

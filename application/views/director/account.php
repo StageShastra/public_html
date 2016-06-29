@@ -126,11 +126,11 @@
       margin-top: 20px;
     }
     .sub_heading{
-      font-size: 14px;
-      font-family: Roboto;
+      
     }
     .data{
-
+      font-size: 14px;
+      font-family: Roboto;
     }
     .account_box .fa{
       color: #FFC107;

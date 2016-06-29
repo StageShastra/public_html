@@ -126,11 +126,11 @@
       margin-top: 20px;
     }
     .sub_heading{
-      font-size: 14px;
-      font-family: "Open Sans";
+      
     }
     .data{
-
+      font-size: 14px;
+      font-family: "Open Sans";
     }
     .account_box .fa{
       color: #FFC107;

@@ -202,12 +202,7 @@ a:hover, a:focus {
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
-                    <li class="page-scroll">
-                        <a href="#forActors">For Actors</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#forDirectors">For Casting Directors</a>
-                    </li>
+                    <li><a href="<?= base_url() ?>home/logout/">Sign-Out</a></li>
                    <!-- <li class="page-scroll">
                         <a href="#about">Video</a>
                     </li>
@@ -242,7 +237,7 @@ a:hover, a:focus {
                         <div class="checkout_box">
                             <div class="row">
                                 <span class="labels col-xs-6">Name : </span>
-                                <span class="col-xs-6 data"><? echo "name" ?></span>
+                                <span class="col-xs-6 data"><? echo $this->session->userdata("StaSh_User_name"); ?></span>
                             </div>
                             <div class="row">
                                 <span class="labels col-xs-6">Plan : </span>

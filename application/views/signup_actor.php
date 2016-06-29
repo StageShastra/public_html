@@ -1,6 +1,53 @@
 <?php
-  include "includes/head.php";
+  if(isset($_REQUEST['plan'])){
+    $plan=$_REQUEST['plan'];
+  }
+  else
+  {
+    $plan=null;
+  }
 ?>
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Castiko | Register as an Actor.</title>
+        <meta name="description" content="Propel your acting career forward - sign up to create a Castiko profile with photos & videos. Castiko helps casting directors and actors to work together">
+        <meta name="keywords" content="Castiko, Acting, Audition, Actor, Casting, Sign Up">
+        <meta name="filename" content="Castiko-Actor-Casting-Director-Pricing">
+        <meta property="og:title" content="Castiko | Register as an Actor."/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="http://www.castiko.com/"/>
+        <meta property="og:image" content="http://www.castiko.com/assets/img/logo.png"/>
+        <meta property="og:description" content="Propel your acting career forward - sign up to create a Castiko profile with photos & videos. Castiko helps casting directors and actors to work together"/>
+
+        <link rel="shortcut icon" href="<?= IMG ?>/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="<?= CSS ?>/bootstrap.min.css">
+        <link rel="stylesheet" href="<?= CSS ?>/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="<?= CSS ?>/main.css">
+        <link rel="stylesheet" href="<?= CSS ?>/font-awesome.css">
+        <link href='https://fonts.googleapis.com/css?family=Raleway:700,800,400,200,300,100' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+        <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
+    
+      <script type="text/javascript">
+    window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+    heap.load("408837571");
+  </script>
+
+    <script>
+      var registerSuccess = false;
+    </script>
+
+      
+    </head>
+
 <link href="<?= CSS ?>/navbar.css" rel="stylesheet" type="text/css">
 <style>
 body{
@@ -125,7 +172,7 @@ a:hover, a:focus {
               <div class="col-sm-12 light-padded">
                 <div class="col-lg-6 col-sm-6 col-xs-12" id="form-div">
                 <?php if(!$error){ ?>
-                  <font class="info-small text-primary signup_heading"> Actor Sign Up  - <? echo ucwords($_REQUEST['plan']); ?></font>
+                  <font class="info-small text-primary signup_heading"> Actor Sign Up   <? echo ucwords("- ".$plan); ?></font>
                   
                       <form role="form" action="<?= $_SERVER['REQUEST_URI'] ?>" method="POST">
                       <div class="form-group">

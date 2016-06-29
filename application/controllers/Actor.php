@@ -3,10 +3,12 @@
 	class Actor extends CI_Controller {
 		function __construct() {
 			parent::__construct();
-			$this->load->model("ModelActor");
-			$plan=$this->ModelActor->getActorPlan();
-			if(!count($plan)){
-				redirect(base_url()."payment");
+			if($this->session->userdata("StaSh_User_type") == 'actor'){
+				$this->load->model("ModelActor");
+				$plan=$this->ModelActor->getActorPlan();
+				if(!count($plan)){
+					redirect(base_url()."payment");
+				}
 			}
 		}
 		public function index($value=''){
