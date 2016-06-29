@@ -233,16 +233,16 @@ a.anchor {
                             <hr>
                             <div class="left_aligned">
                                 <div class="expandButton">
-                                    <span id="minus1" data-hide-id="#minus1,#basic1" data-unhide-id="#plus1" class="plus toggleEdit hidden">o<span class="subtext black"> Public profile with Photos and Videos. </span></span><span class="plus toggleEdit" id="plus1" data-hide-id="#plus1" data-unhide-id="#basic1,#minus1" >+
-                                    <span class="subtext black"> Public profile with Photos and Videos. </span></span>
+                                    <span id="minus1" data-hide-id="#minus1,#basic1" data-unhide-id="#plus1" class="plus toggleEdit hidden">o<span class="subtext black nohover"> Public profile with Photos and Videos. </span></span><span class="plus toggleEdit" id="plus1" data-hide-id="#plus1" data-unhide-id="#basic1,#minus1" >+
+                                    <span class="subtext black nohover"> Public profile with Photos and Videos. </span></span>
                                     <div id="basic1" class="inner hidden">
                                         <span class="glyphicon glyphicon-triangle-right green subtext"></span>The Castiko Profile is designed to showcase your talents. Add photos, videos, training and experience. Your unique link lets you share it with anyone - even outside Castiko.
                                     </div>
                                 </div>
                                 <div class="expandButton">
-                                    <span id="minus2" data-hide-id="#minus2,#basic2" data-unhide-id="#plus2" class="plus toggleEdit hidden">o<span class="subtext black"> Unlimited Casting Director Invitations. </span></span>
+                                    <span id="minus2" data-hide-id="#minus2,#basic2" data-unhide-id="#plus2" class="plus toggleEdit hidden">o<span class="subtext black nohover"> Unlimited Casting Director Invitations. </span></span>
                                     <span class="plus toggleEdit" id="plus2" data-hide-id="#plus2" data-unhide-id="#basic2,#minus2" >+
-                                    <span class="subtext black"> Unlimited Casting Director Invitations. </span></span>
+                                    <span class="subtext black nohover"> Unlimited Casting Director Invitations. </span></span>
                                     <div id="basic2" class="inner hidden">
                                         <span class="glyphicon glyphicon-triangle-right green subtext"></span>Casting directors who already know you can add/invite you into their database.
                                     </div>
@@ -267,9 +267,9 @@ a.anchor {
                                     </div>
                                 </div>
                                 <div class="expandButton">
-                                    <span id="minus4" data-hide-id="#minus4,#pro2" data-unhide-id="#plus4" class="plus toggleEdit hidden">o<span class="button_text black"> <b>Access to targeted audition notices.</b> </span></span>
+                                    <span id="minus4" data-hide-id="#minus4,#pro2" data-unhide-id="#plus4" class="plus toggleEdit hidden">o<span class="button_text black nohover"> <b>Access to targeted audition notices.</b> </span></span>
                                     <span class="plus toggleEdit" id="plus4" data-hide-id="#plus4" data-unhide-id="#pro2,#minus4" >+
-                                    <span class="button_text black"> <b>Access to targeted audition notices.</b> </span></span>
+                                    <span class="button_text black nohover"> <b>Access to targeted audition notices.</b> </span></span>
                                     <div id="pro2" class="inner hidden">
                                         <span class="glyphicon glyphicon-triangle-right green subtext"></span>Audition Notices are an easy way to get audition information. Pro lets you see them right on your home page.
                                     </div>
