@@ -284,6 +284,7 @@
                 <center><button type="button" class="btn submit-btn changePassword">Change Password</button></center>
               </div>
             </div>
+            
       <script>
       var isAllowed = <?= ($isAllowed) ? 1 : 0; ?>;
       </script>

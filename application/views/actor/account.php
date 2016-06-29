@@ -145,6 +145,13 @@
       padding: 10px;
       border: 1px solid #ddd;
     }
+    .navbar-nav > li > a{
+        font-size: 14px !important;
+    }
+    .navbar-nav > li > a:hover {
+        color: #fff !important;
+        background: #F7A9A9 !important;
+    }
               </style>
         <!--[if lt IE 8]> -->
          <div class="container-fluid" id="home">
@@ -175,10 +182,24 @@
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  
-                      <ul class="nav navbar-nav navbar-right" style="text-align:right;">
-                       
+                      <ul class="nav navbar-nav navbar-right ul_list">
+                        <li >
+                            <a href="<?= base_url()?>actor/"  > Dashboard
+                            </a>
+                        </li>
+                        <li >
+                            <a href="<?= base_url()?>actor/account"  > Account
+                            </a>
+                        </li>
+                        <?php if(strtolower($plan['StashActorPlan_plan'])=="basic") { ?>
                         <li>
-                            <a href="<?= base_url() ?>home/logout/"><button type="button" class="btn submit-btn firstcolor" id="btn-logout"  ><span class="glyphicon glyphicon-log-out"></span> &nbsp; Sign Out</button></a>
+                            <a href="<?= base_url() ?>/payment?plan=1"> Go Pro!
+                            </a>
+                        </li>
+                         <?php } ?>
+                        <li >
+                            <a href="<?= base_url() ?>home/logout/"> Sign Out
+                            </a>
                         </li>
                       </ul>
                     </div><!-- /.navbar-collapse -->
@@ -190,8 +211,8 @@
               <div class="col-lg-6 col-sm-6 col-xs-12 account_box">
                 <div class="heading"><i class="fa fa-dashboard"></i> Account Details</div>
                 <hr>
-                <div class="heading"><i class="fa fa-user"></i> <?= $profile['StashUsers_name'] ?></div>
-                <div class="sub_heading"><i class="fa fa-envelope"></i> <i><?= $profile['StashUsers_email'] ?></i></div>
+                <div class="heading"><i class="fa fa-user"></i> <?= $actor['StashUsers_name'] ?></div>
+                <div class="sub_heading"><i class="fa fa-envelope"></i> <i><?= $actor['StashUsers_email'] ?></i></div>
                 <hr>
                 <div class="row">
                   <div class="sub_heading col-sm-8"> <i class="fa fa-shopping-bag"></i>Subscription Plan </div>

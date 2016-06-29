@@ -24,9 +24,11 @@
 		}
 
 		public function conversations($value=''){
+
 			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'director')
 				redirect(base_url());
 			$pageInfo = [];
+			$pageInfo['isAllowed'] = $this->ModelDirector->getAdminConfirmation();
 			$this->load->view("director/conversations", $pageInfo);
 		}
 		public function account($value=''){

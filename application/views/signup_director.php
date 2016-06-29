@@ -25,7 +25,8 @@
         <meta property="og:url" content="http://www.castiko.com/"/>
         <meta property="og:image" content="http://www.castiko.com/assets/img/logo.png"/>
         <meta property="og:description" content="Propel your casting business forward - sign up to create a Castiko account to manage your data, run auditions and find new actors"/>
-
+        <link rel="shortcut icon" href="<?= IMG ?>/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="<?= IMG ?>/favicon.ico" type="image/x-icon">
         <link rel="shortcut icon" href="<?= IMG ?>/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="<?= CSS ?>/bootstrap.min.css">
         <link rel="stylesheet" href="<?= CSS ?>/bootstrap-theme.min.css">

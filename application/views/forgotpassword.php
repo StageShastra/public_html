@@ -8,7 +8,7 @@
         <div class="container">
           <div class="col-sm-1">
           </div>
-          <div class="container-fluid col-sm-10"> <!--container fluid starts -->
+          <div class="container-fluid col-sm-10 center"> <!--container fluid starts -->
             <div class="center headname">
               <a href="<?= base_url() ?>" class='a_logo'><img src="<?= IMG ?>/logo.png" class="logo img-fluid"/>
 			  <span class="title big"><?= M_Title ?></span></a>
@@ -37,6 +37,7 @@
                 <div class="mycontent-right center light-padded">
                     <font class="info firstcolor center"> Forgot Password </font>
                     <form role="form" class="vertical-padded "id="change-password" method="post" >
+                    <p class="text-succes" id='sent_code'>  </p>
                     <p class="text-warning" id="error-change-password"></p>
                     <div class="form-group">
                       <input type="email" class="form-control login" id="username" name="email" placeholder="Email" required />

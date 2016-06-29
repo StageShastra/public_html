@@ -17,7 +17,8 @@
     <link href="<?= CSS ?>/navbar.css" rel="stylesheet">
     <link href="<?= CSS ?>/font-awesome.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
-
+    <link rel="shortcut icon" href="<?= IMG ?>/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="<?= IMG ?>/favicon.ico" type="image/x-icon">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

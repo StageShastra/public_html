@@ -22,6 +22,7 @@
 			$pageInfo['experience'] = $this->ModelActor->getActorExperienceById($this->session->userdata("StaSh_User_id"));
 			$pageInfo['training'] = $this->ModelActor->getActorTrainingById($this->session->userdata("StaSh_User_id"));
 			$pageInfo['directors'] = $this->ModelActor->getDirectors($this->session->userdata("StaSh_User_id"));
+			$pageInfo['plan'] = $this->ModelActor->getActorPlan();
 			$this->load->view("actor/home", $pageInfo);
 		}
 		
@@ -52,9 +53,12 @@
 			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
 				redirect(base_url());
 			$pageInfo = [];
+			$this->load->model("Auth");
 			$this->load->model("ModelActor");
+			$pageInfo['actor'] = $this->Auth->getUserData('StashUsers_id', $this->session->userdata("StaSh_User_id"));
+			$pageInfo['profile'] = $this->ModelActor->getActorProfileById($this->session->userdata("StaSh_User_id"));
 			$pageInfo['plan'] = $this->ModelActor->getActorPlan();
-			$pageInfo['profile'] = $this->ModelActor->actorProfile();
+			//$pageInfo['profile'] = $this->ModelActor->actorProfile();
 			$this->load->view("actor/account", $pageInfo);
 		}
 		

@@ -14,7 +14,6 @@
   ?>
     <body>
           <style>
-
           body{
             padding-top: 90px;
           }
@@ -28,12 +27,10 @@
           .bootstrap-tagsinput {
             background-color: #f2f2f2;
         }
-
         .blurb{
             font-family: AvenirNext-Regular;
-            color: #4A4A4A;
+            color:#4A4A4A;
         }
-
         .a_name{
             font-family: 'AvenirNext-Bold', sans-serif, AvenirNext-Regular;
             font-size: 20px;
@@ -126,17 +123,25 @@
             text-overflow: ellipsis;
             -o-text-overflow: ellipsis;
         }
+        .skills_tag:
+        {
+
+        }
         .ellipsis{
              -webkit-transition: width 1s ease-in-out;
             -moz-transition: width 1s ease-in-out;
             -o-transition: width 1s ease-in-out;
             transition: width 1s ease-in-out;
         }
-
-        .ellipsis:focus, .ellipsis:hover, .ellipsis:active{
+        .ellipsis:focus{
             width: auto;
         }
-
+        .ellipsis:active{
+            width: auto;
+        }
+        .ellipsis:visited{
+            width: auto;
+        }
         .taga-text {
             padding-left: 3px !important;
             padding-right: 3px !important;
@@ -170,7 +175,7 @@
         }
         .training_title{
             font-family: AvenirNext-Bold;
-            font-size: 18px;
+            font-size: 15px;
             color: #9B9B9B;
             letter-spacing: 0px;
             text-shadow: 0px 1px 0px #FFFFFF;
@@ -178,7 +183,7 @@
         .training_details{
             background: #EBEBEB;
             border-radius: 9px;
-            font-size: 16px;
+            font-size: 15px;
             color: black;
             padding-left: 15px;
             padding: 15px;
@@ -245,6 +250,7 @@
             overflow: hidden;
             position: relative;
             border-radius: 10px;
+            float: left
         }
         .crop {
             position:absolute;
@@ -306,12 +312,10 @@
             background:#FFB600;
             color: white; 
         }
-
         .navbar-fixed-top{
                 margin-left: 0%;
                 margin-right: 0%;
             }
-
            
         /* xs */
         @media screen and (max-width: 767px) {
@@ -320,32 +324,6 @@
             }
             .container-fluid{
                 padding:0px;
-            }
-            .navbar-fixed-top{
-                margin-left: 0%;
-                margin-right: 0%;
-            }
-            .navbar-header{
-                height: 75px;
-            }
-
-            .headname{
-                position: relative;
-                top:15px;
-                font-size: 20px;
-            }
-            .brands{
-                width: 55px;
-                height: auto;
-            }
-            .navbar-toggle{
-                margin-right: 20px;
-                position: relative;
-                top:20px;
-                margin-top: 0px;
-            }
-             .tagline{
-                font-size: 9px;
             }
             .light-padded
             {
@@ -360,7 +338,7 @@
             margin-right: -15px;
             }
             .DocumentItem{
-                width:60px;
+                width:auto;
                 height: 60px;
             }
             .nav_icons{
@@ -386,31 +364,12 @@
             .container-fluid{
                 padding:0px;
             }
-            .navbar-fixed-top{
-                margin-left: 0%;
-                margin-right: 0%;
-            }
-            .headname{
-                position: relative;
-                top:15px;
-                font-size: 22px;
-            }
-            .brands{
-                width: 60px;
-                height: auto;
-            }
-            .tagline{
-                font-size: 9px;
-            }
-            .navbar-toggle{
-                margin-right: 20px;
-            }
             .no_padding_small{
             padding-left: 0px;
             padding-right: 0px;
         }
         .DocumentItem{
-                width:75px;
+                width:auto;
                 height: 75px;
             }
             .blurb{
@@ -421,19 +380,6 @@
         @media screen and (min-width: 992px) {
             body {
                 font-size: 1.1em;
-            }
-            .navbar-fixed-top{
-                margin-left: 0%;
-                margin-right: 0%;
-            }
-            .headname{
-                position: relative;
-                top:18px;
-                font-size: 22px;
-            }
-            .brands{
-                width: 65px;
-                height: auto;
             }
             .info-small{
                 font-size: 12px;
@@ -446,7 +392,7 @@
                 margin-top: 20px;
             }
             .DocumentItem{
-                width:120px;
+                width:auto;
                 height: 120px;
             }
             .blurb{
@@ -466,59 +412,6 @@
             padding-left:15px;
             padding-right: 15px;
             }
-            .navbar-fixed-top{
-                margin-left: 0%;
-                margin-right: 0%;
-            }
-            .headname{
-                position: relative;
-                top:20px;
-                font-size: 24px;
-            }
-            .brands{
-                width: 85px;
-                height: auto;
-            }
-
-            .light-padded
-            {
-                padding-left: 10px;
-            }
-
-            #browse-table{
-                margin-top: 20px;
-            }
-            .DocumentItem{
-                width:120px;
-                height: 120px;
-            }
-        }
-        /* lg */
-        @media screen and (min-width: 1200px) {
-            body {
-                font-size: 1.2em;
-            }
-            .padded{
-                padding-left: 15px;
-                padding-right: 15px;
-            }
-            #home{
-            padding-left:15px;
-            padding-right: 15px;
-            }
-            .navbar-fixed-top{
-                margin-left: 3%;
-                margin-right: 3%;
-            }
-            .headname{
-                position: relative;
-                top:20px;
-                font-size: 24px;
-            }
-            .brands{
-                width: 85px;
-                height: auto;
-            }
             .light-padded
             {
                 padding-left: 10px;
@@ -527,10 +420,12 @@
                 margin-top: 25px;
             }
             .DocumentItem{
-                width:150px;
+                width:auto;
                 height: 150px;
             }
-
+            .blurb{
+                font-size: 15px;
+            }
         }
         .videoWrapper {
         position: relative;
@@ -544,6 +439,7 @@
     left: 0;
     width: 100%;
     height: 100%;
+    box-shadow: 2px 2px 10px gray;
 }
  .rotate-img {
             -webkit-animation: rotation 2s infinite linear;
@@ -694,6 +590,10 @@ textarea{
     margin-left: 2px;
     margin-right: 2px;
 }
+.introjs-helperNumberLayer{
+    padding: 0px;
+    line-height: normal;
+}
    
         </style>
         <!--[if lt IE 8]>
@@ -720,7 +620,15 @@ textarea{
                         </button>
 
                         <a class="navbar-brand" href="<?= base_url() ?>">
-                            <img src="<?= IMG ?>/logo.png" class="brands"/><span class="headname"><span >C A S T I K O</span><br><span class="firstcolor info-small tagline"><?= M_TagLine?></span></b></span>
+                            <img src="<?= IMG ?>/logo.png" class="brands "/>
+                            <div class="vertical-middle brandname title">
+                                <?= M_Title ?>
+                                <br>
+                                <span id="tag-line" class="firstcolor info-small">
+                                Making Casting easier!                      
+                                </span>
+                            </div>
+                            
                         </a>
                     </div> 
 
@@ -897,7 +805,7 @@ textarea{
                                             if($youtube_flag==1) 
                                             {    
                                                 
-                                                echo '<div class="col-sm-7" style="padding-left:0px;padding-right:0px"><div class="videoWrapper"><iframe width="482" height="300" src="'.$youtube.'" frameborder="0" allowfullscreen></iframe></div></div>';
+                                                echo '<div class="col-sm-7" style="padding-left:0px;padding-right:0px;max-width:400px;margin-left:15px;"><div class="videoWrapper"><iframe width="482" height="300" src="'.$youtube.'" frameborder="0" allowfullscreen></iframe></div></div>';
                                                 echo '<div class="col-sm-5"">
 
                                                         <span class="info black" id="actor_ex_title_'.$key.'"><b>'.ucfirst($experience['StashActorExperience_title']).'</b></span>
@@ -967,13 +875,11 @@ textarea{
 
                                                 echo "<li class='DocumentItem' id='DocumentItem_{$key}'>"
                                                     . "<a href='".IMG."/actors/".$image."' data-lightbox='".$actorProfile['StashActor_name']."'>"
-                                                    .   "<img src='".IMG."/actors/".$image."' height='100%' width='auto' class=' img-rounded'>"
+                                                    .   "<img src='".IMG."/actors/".$image."' height='100%' width='auto' class=' img-rounded' title ='".$actorProfile['StashActor_name']." headshots and profile images' description='".$actorProfile['StashActor_name']." profile pictures and headshots from portfolio'>"
                                                     . "</a>"
                                                     . "</li>";
                                                     $counter++;
-                                                        if($counter%5==0){
-                                                            echo '<br>';
-                                                        }
+                                                        
                                             }
                                         ?>     
 

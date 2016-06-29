@@ -93,7 +93,10 @@ $(document).ready(function(){
     		success: function(response){
     			//console.log(response);
     			if(response.status){
-    				$("#error-forgot-password").removeClass("text-warning").addClass("text-success");
+    				$("#sent_code").removeClass("text-warning").addClass("text-success");
+                    $("#getcodediv").hide();  
+                    $("#gotcodediv").show();
+                    $("#sent_code").html(response.message).show(500);
     			}
     			$("#error-forgot-password").html(response.message).show(500);
     		}
@@ -181,7 +184,7 @@ $(document).on("click", ".toggleEdit", function(){
     });
 
 
-$(document).on("click", "#submit_contact_message", function(){
+$(document).on("submit", "form#contactForm", function(){
     var data={};
     var name = $("#name_sender").val();
     var email = $("#email_sender").val();

@@ -20,20 +20,34 @@
                             
                         </a>
                     </div> 
-
+                    <style>
+                    .ul_list a{
+                        color:#A4A6A9;
+                    }
+                    .ul_list a:hover {
+                        background-color: #ffd6d9 !important;
+                        background-image: none;
+                        color : #fff !important;
+                    }
+                    </style>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  
                       <ul class="nav navbar-nav navbar-right ul_list">
                         <li >
-                            <a href="#" class="not-active">Discover<span class="info-small"><i>(Coming Soon)</i></span></a>
+                            <a href="<?= base_url()?>director/"  > Dashboard
+                            </a>
                         </li>
                         <li >
-                            <a href="#" data-toggle="modal" data-target="#advancedSearch" ><span class="firstcolor"> Search<sup><span class="info-small">New!</span></sup></span>
+                            <a href="<?= base_url()?>director/account"  > Account
+                            </a>
+                        </li>
+                        <li >
+                            <a href="#" data-toggle="modal" data-target="#advancedSearch" > Search
                             </a>
                         </li>
                         <li >
                             <a href="#" data-toggle="modal" data-target="#<?= ($isAllowed) ? "inviteActors" : "notAllowedModal" ?>">
-                              <span class="firstcolor" > Invite </span>
+                               Invite 
                             </a>
                         </li>
                         <li class="dropdown">

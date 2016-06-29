@@ -15,7 +15,8 @@
     <meta property="og:image" content="http://www.castiko.com/assets/img/logo.png"/>
     <meta property="og:description" content="Castiko is a platform to connect Actors and Casting Directors. Actors – create your own acting profiles with photos & videos. Get auditions. Casting directors – manage all your data, run auditions and find new actors"/>
     <title>Castiko Home | Acting auditions and casting for film production</title>
-
+    <link rel="shortcut icon" href="<?= IMG ?>/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="<?= IMG ?>/favicon.ico" type="image/x-icon">
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
     <link href="<?= CSS ?>/bootstrap.min.css" rel="stylesheet">
     <link href="<?= CSS ?>/landingpage.css" rel="stylesheet">
@@ -254,7 +255,7 @@
                 <div class="col-lg-8 center">
                     <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                     <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-                    <form name="sentMessage" id="contactForm" novalidate>
+                    <form name="sentMessage" id="contactForm" validate>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Name</label>

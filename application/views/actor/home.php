@@ -59,7 +59,7 @@
             text-align: left;
         }
         .category_heading{
-            font-family: Raleway;
+            font-family: "Open Sans","Raleway","Helvetica";
             font-weight: 400;
             font-size: 15px;
             color: #FFB600;
@@ -439,6 +439,7 @@
     left: 0;
     width: 100%;
     height: 100%;
+    box-shadow: 2px 2px 10px gray;
 }
  .rotate-img {
             -webkit-animation: rotation 2s infinite linear;
@@ -456,7 +457,7 @@
         }
         .collapse
         {
-            height: 75px !important;
+            height: auto;
         }
         .custom-navbar{
             padding-bottom: 0px;
@@ -593,6 +594,54 @@ textarea{
     padding: 0px;
     line-height: normal;
 }
+.submit-btn{
+    background: #FFC107;
+    color: #fff;
+    border-radius:4px;
+    padding: 5px; 
+    border: none;
+    font-size: 14px;
+
+}
+.submit-btn:hover{
+    background: #fff;
+    color: #FFC107;
+    border: 1px solid #FFC107;
+}
+.edit_inputs_basics{
+    background: white;
+    border-radius: 0px;
+    border: 1px solid #ddd;
+}
+.alertbox{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    float: none;
+    z-index: 99999999;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    margin-top: 20px;
+    background: #607D8B !important;
+    color: white;
+    max-width: 400px;
+    border: 3px solid;
+    box-shadow: 2px 2px 10px gray;
+}
+.alert-dismissable .close, .alert-dismissible .close {
+    position: relative;
+    top: -2px;
+    right: -5px;
+    color: inherit;
+}
+.navbar-nav > li > a{
+    font-size: 14px !important;
+}
+.navbar-nav > li > a:hover {
+    color: #fff !important;
+    background: #F7A9A9 !important;
+}
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -630,10 +679,24 @@ textarea{
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  
-                      <ul class="nav navbar-nav navbar-right" style="text-align:right;">
-                       
+                      <ul class="nav navbar-nav navbar-right ul_list">
+                        <li >
+                            <a href="<?= base_url()?>actor/"  > Dashboard
+                            </a>
+                        </li>
+                        <li >
+                            <a href="<?= base_url()?>actor/account"  > Account
+                            </a>
+                        </li>
+                        <?php if(strtolower($plan['StashActorPlan_plan'])=="basic") { ?>
                         <li>
-                            <a href="<?= base_url() ?>home/logout/"><button type="button" class="btn submit-btn firstcolor" id="btn-logout"  ><span class="glyphicon glyphicon-log-out"></span> &nbsp; Sign Out</button></a>
+                            <a href="<?= base_url() ?>/payment?plan=1"> Go Pro!
+                            </a>
+                        </li>
+                         <?php } ?>
+                        <li >
+                            <a href="<?= base_url() ?>home/logout/"> Sign Out
+                            </a>
                         </li>
                       </ul>
                     </div><!-- /.navbar-collapse -->
@@ -647,7 +710,7 @@ textarea{
                 <?php
                     if($user["StashUsers_status"] == 0){
                 ?>
-                <div class="alert alertbox alert-warning alert-dismissible" id="warningmsg" role="alert">
+                <div class="alert alertbox alert-warning alert-dismissible center" id="warningmsg" role="alert">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <strong>Warning!</strong> <?= AC_ActivationWarning ?>
                 </div>
@@ -668,8 +731,8 @@ textarea{
                         
                         <br>
                         <span class="actor_link" id="actor_username">
-                            <span id="profile_link" ><a href="<?= base_url() . $user['StashUsers_username'] ?>" id="actor_username_txt" target="_blank"><?= base_url() . $user['StashUsers_username'] ?></a></span>
-                            <i>&emsp;</i>
+                            <span id="profile_link" ><a href="<?= base_url() . $user['StashUsers_username'] ?>" id="actor_username_txt" target="_blank"><?= base_url() . $user['StashUsers_username'] ?></a><i class="glyphicon  glyphicon-info-sign" style="color:#ffb600; font-size:15px;" data-toggle="tooltip" data-placement="right" title="To increase visibilty in search results, it is recommended that, you add your Castiko's profile link to your Facebook, Instagram and other Social network profiles."></i></span>
+                            
                         </span>
                         
                         <div id="socialShare" ></div>
@@ -692,7 +755,6 @@ textarea{
                             </font>
                         </div>
                         </div>
-                        <a class="btn btn-large btn-success" href="javascript:void(0);" onclick="startIntro();">Show me how</a>
                         <div class = "row" id="actor_basics">
                             <div class=" col-sm-3 col-lg-4 col-md-4  a_pic" id="actor_pro_pic">
                                <span class="glyphicon glyphicon-remove  toggleEdit overlay_edit removeDP" style="left:8px; right:0px; width:18px;" aria-hidden="true"></span> <span class="glyphicon glyphicon-camera  toggleEdit overlay_edit" data-toggle="modal" data-target="#set_profile_photo" aria-hidden="true"></span>
@@ -703,7 +765,7 @@ textarea{
                             </div>
                             <div class="basics col-sm-12 col-lg-7 col-md-7" style="padding-left:0px;padding-right:0px;">
                                 <div class="category_heading ">BASICS
-                                    <span class="glyphicon glyphicon-pencil edit-button" id="step1"  toggleEdit" data-unhide-id="#actor_basics_edit" data-hide-id="#actor_basics" aria-hidden="true" data-step="1" data-intro="Click on this button to edit your basic details. " ></span>
+                                    <span class="glyphicon glyphicon-pencil edit-button toggleEdit" id="step1"   data-unhide-id="#actor_basics_edit" data-hide-id="#actor_basics" aria-hidden="true" data-step="1" data-intro="Click on this button to edit your basic details. " ></span>
                                 </div>
                                 <div class="elements">
                                     <span class="elements_label">Sex: </span><span id="actor_sex"><?= ($actorProfile['StashActor_gender']) ? "Male" : "Female" ?></span>
@@ -746,12 +808,12 @@ textarea{
                                     </div>
                                 
                                 <font class="sortbuttons">
-                                        <button type="button" class="btn submit-btn firstcolor tick updateDataField"
+                                        <button type="button" class="btn submit-btn firstcolor tick updateDataField center"
                                                 data-input-names="sex,min_age,max_age,weight,height"
                                                 data-request="EditBasics"
                                                 data-hide-id="#actor_basics_edit" 
                                                 data-unhide-id="#actor_basics" style="margin-left: -15px;">
-                                            <span class="glyphicon glyphicon-ok"></span>
+                                            <span > Save</span>
                                         </button>
                                 </font>
                             </div>
@@ -800,7 +862,7 @@ textarea{
                                                 data-request="EditContacts"
                                                 data-hide-id="#actor_details_edit" 
                                                 data-unhide-id="#actor_details">
-                                            <span class="glyphicon glyphicon-ok"></span>
+                                            Save
                                         </button>
                                 </font>
                            
@@ -846,7 +908,7 @@ textarea{
                                             data-request="EditLanguage"
                                             data-hide-id="#language_edit" 
                                             data-unhide-id="#actor_language">
-                                        <span class="glyphicon glyphicon-ok"></span>
+                                        Save
                                     </button>
                                 </font>
                             </span>
@@ -879,7 +941,7 @@ textarea{
                                             data-request="EditSkills"
                                             data-hide-id="#skills_edit" 
                                             data-unhide-id="#actor_skills">
-                                        <span class="glyphicon glyphicon-ok"></span>
+                                        Save
                                     </button>
                                 </font>
                             </span>
@@ -959,7 +1021,7 @@ textarea{
                                             if($youtube_flag==1) 
                                             {    
                                                 
-                                                echo '<div class="col-sm-7" style="padding-left:0px;padding-right:0px"><div class="videoWrapper"><iframe width="482" height="300" src="'.$youtube.'" frameborder="0" allowfullscreen></iframe></div></div>';
+                                                echo '<div class="col-sm-7" style="padding-left:0px;padding-right:0px; max-width:400px;"><div class="videoWrapper"><iframe width="482" height="300" src="'.$youtube.'" frameborder="0" allowfullscreen></iframe></div></div>';
                                                 echo '<div class="col-sm-5"">
                                                         <span class="info black" id="actor_ex_title_'.$key.'"><b>'.ucfirst($experience['StashActorExperience_title']).'</b></span>
                                                         <span class="glyphicon glyphicon-pencil edit-button  firstcolor toggleEdit" data-unhide-id="#experience-'.$key.'_edit" data-hide-id="#experience-'.$key.'" aria-hidden="true"></span>
@@ -1025,7 +1087,7 @@ textarea{
                                                     data-request="EditExperience"
                                                     data-hide-id="#experience-<?= $key ?>_edit,#edit_exp_btn " 
                                                     data-unhide-id="#experience-<?= $key ?>,#edit_exp_btn_load ">
-                                                <span class="glyphicon glyphicon-ok"></span>
+                                                Save
                                             </button>
                                             <button type="button" class="btn submit-btn firstcolor center tick hidden" id="edit_exp_btn_load"
                                                     data-input-names="ex_title_<?= $key ?>, ex_role_<?= $key ?>,ex_link_<?= $key ?>,ex_blurb_<?= $key ?>"
@@ -1140,7 +1202,7 @@ textarea{
                                                     data-request="EditTraining"
                                                     data-hide-id="#training-<?= $key ?>_edit" 
                                                     data-unhide-id="#training-<?= $key ?>">
-                                                <span class="glyphicon glyphicon-ok"></span>
+                                                Save
                                             </button>
                                         </font>
                                         <hr>

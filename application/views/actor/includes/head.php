@@ -6,8 +6,16 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-         <title>Castiko | Makes Casting easier.</title>
-        <meta name="description" content="">
+         <title><?=$actor["StashUsers_name"]?> | Castiko </title>
+         <meta name="description" content="Castiko is a platform to connect Actors and Casting Directors. Actors – create your own acting profiles with photos & videos. Get auditions. Casting directors – manage all your data, run auditions and find new actors">
+        <meta name="keywords" content="<?=$actor["StashUsers_name"]?>,Actor, Audition, Acting, Photos, Videos">
+        <meta name="filename" content="http://castiko.com/<?=$actor["StashUsers_username"]?>">
+        <meta property="og:title" content="<?=$actor["StashUsers_name"]?> | Castiko "/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="http://castiko.com/<?=$actor["StashUsers_username"]?>"/>
+        <meta property="og:image" content="http://castiko.com/assets/img/actors/<?=$profile["StashActor_avatar"]?>"/>
+        <meta property="og:description" content="View <?=$actor["StashUsers_name"]?>’s professional portfolio on Castiko. Castiko is a tool for casting directors and actors to work together better"/>
+        <meta name="description" content="View <?=$actor["StashUsers_name"]?>’s professional portfolio on Castiko. Castiko is a tool for casting directors and actors to work together better">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <link rel="shortcut icon" href="<?= IMG ?>/favicon.ico" type="image/x-icon">

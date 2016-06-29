@@ -136,7 +136,7 @@ $(document).ready(function(){
 				if(response.status){
 					setTimeout( function(){
 						window.location.href = "/public_html/payment/success/basic";
-					}, 5000 );
+					}, 500 );
 				}
 			}
 		});

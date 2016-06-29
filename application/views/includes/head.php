@@ -11,6 +11,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="<?= IMG ?>/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="<?= IMG ?>/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="<?= CSS ?>/bootstrap.min.css">
         <link rel="stylesheet" href="<?= CSS ?>/bootstrap-theme.min.css">
         <link rel="stylesheet" href="<?= CSS ?>/main.css">

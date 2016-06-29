@@ -14,7 +14,8 @@
     <meta property="og:url" content="http://www.castiko.com/"/>
     <meta property="og:image" content="http://www.castiko.com/assets/img/logo.png"/>
     <meta property="og:description" content="Castiko is a platform to connect Actors and Casting Directors. Actors – create your own acting profiles with photos & videos. Get auditions. Casting directors – manage all your data, run auditions and find new actors"/>
-
+    <link rel="shortcut icon" href="<?= IMG ?>/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="<?= IMG ?>/favicon.ico" type="image/x-icon">
     <title>Castiko Pricing | Basic & Pro Plans for Actors & Casting Directors </title>
 
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
