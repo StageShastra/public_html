@@ -389,7 +389,10 @@
 						'StashContactMessage_email' => $d["email"],
 						'StashContactMessage_message' => $d["message"],
 						'StashContactMessage_ip' => $this->input->ip_address(),
-						'StashContactMessage_time' => time()
+						'StashContactMessage_time' => time(),
+						'StashContactMessage_status' => 0,
+						'StashContactMessage_responded_by' => 0,
+						'StashContactMessage_responded_on' => 0
 					);
 			$this->db->insert("stash-contact-message", $data);
 		}

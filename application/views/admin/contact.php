@@ -6,13 +6,13 @@
 ?>
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>All Actors</h2>
+            <h2>All Contact Message</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="<?= base_url() ?>admin/home/">Home</a>
                 </li>
                 <li class="active">
-                    <strong>Actors</strong>
+                    <strong>Messages</strong>
                 </li>
             </ol>
         </div>
@@ -25,7 +25,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5> Actors List </h5>
+                    <h5> Message List </h5>
                     
                 </div>
                 <div class="ibox-content">
@@ -48,40 +48,38 @@
                             <thead>
                                 <tr>
                                     <th data-toggle="true">#</th>
-                                    <th>Id</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Mobile</th>
-                                    <th>Registered</th>
-                                    <th>IP</th>
-                                    <th>Account</th>
-                                    <th>Mobile</th>
+                                    <th>Message</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
         						<?php
         							
-        							foreach($actors as $key => $actor){
+        							foreach($messages as $key => $message){
         						?>
         						<tr>
-                                    <td><?= ++$key ?></td>
-        							<!-- <td class="client-avatar"> <a href="#"> <img src="#" height="64" width="64" > </a> </td> -->
-        							<td> <a href="<?= base_url() ?>admin/actor/<?= $actor['StashUsers_id']?>"><?= sprintf("%05d", $actor['StashUsers_id'])  ?></a></td>
-                                    <td><?= $actor['StashUsers_name']?></td>
-                                    <td><?= $actor['StashUsers_email']?></td>
-                                    <td><?= $actor['StashUsers_mobile']?></td>
-        							<td><?= $this->ModelAdmin->timeElapsedString($actor['StashUsers_time'])?></td>
-                                    <td><?= $actor['StashUsers_ip']?></td>
-                                    <td><label class='label label-<?= ($actor['StashUsers_status']) ? "primary" : "warning" ?>'><?= ($actor['StashUsers_status']) ? "active" : "pending" ?></label></td>
-                                    <td><label class='label label-<?= ($actor['StashUsers_mobile_status']) ? "primary" : "warning" ?>'><?= ($actor['StashUsers_mobile_status']) ? "verified" : "pending" ?></label></td>
-                                    <td></td>
+                                    <td><a href="<?= base_url() ?>admin/message/<?= $message['StashContactMessage_id']?>"><?= ++$key ?></a></td>
+                                    <td><?= $message['StashContactMessage_name']?></td>
+                                    <td><?= $message['StashContactMessage_email']?></td>
+                                    <td><?= $message['StashContactMessage_phone']?></td>
+                                    <td><?= $message['StashContactMessage_message']?></td>
+        							<td><?= $this->ModelAdmin->timeElapsedString($message['StashContactMessage_time'])?></td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href='<?= base_url() ?>admin/sendMail/<?= urlencode($message['StashContactMessage_email']) ?>' class="btn-success btn btn-xs"><i class='fa fa-reply'></i> Reply</a>
+                                        </div>
+                                    </td>
         						</tr>
 
         						<?php } ?>
         					</tbody>
                             <tfoot class="hide-if-no-paging">
                                 <tr>
-                                    <td colspan="5">
+                                    <td colspan="7">
                                         <ul class="pagination pagination-centered"></ul>
                                     </td>
                                 </tr>

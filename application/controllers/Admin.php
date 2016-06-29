@@ -394,6 +394,21 @@
 			}
 		}
 
+		public function contactMessage($value=''){
+			$pageInfo['nav_h'] = "contact";
+			$pageInfo['nav_sh'] = "contactMessage";
+
+			$pageInfo['messages'] = $this->ModelAdmin->getContactMessages();
+
+			$this->load->view("admin/contact", $pageInfo);
+		}
+
+		public function embededMail($value=''){
+			$pageInfo['nav_h'] = "contact";
+			$pageInfo['nav_sh'] = "embededMail";
+			$this->load->view("admin/embededMail", $pageInfo);
+		}
+
 
 
 
