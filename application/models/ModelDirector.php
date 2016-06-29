@@ -560,6 +560,7 @@
 			$result = [];
 			$found = $msg = false;
 			$uniques = [];
+
 			foreach ($fetch as $key => $f) {
 				//print_r($f);
 				if( !in_array($f['StashEmailInvite_msg_id_ref'], $uniques) ){
@@ -586,8 +587,9 @@
 				}
 
 				if(!$msg){
+					$project = $this->getProjectById( $f['StashEmailInvite_project_id_ref'] );
 					$m = $this->getThisMessage( $f['StashEmailInvite_msg_id_ref'] );
-					$result[$id]['subject'] = [$m['StashInviteMsg_id'], $m['StashInviteMsg_subject']];
+					$result[$id]['subject'] = [$m['StashInviteMsg_id'], $project['StashProject_name'] . " : " .$m['StashInviteMsg_subject']];
 					$msg = true;
 				}
 			}
@@ -624,8 +626,9 @@
 				}
 
 				if(!$msg){
+					$project = $this->getProjectById( $f['StashSMSInvites_project_id_ref'] );
 					$m = $this->getThisMessage( $f['StashSMSInvites_msg_id'] );
-					$result[$id]['subject'] = [$m['StashInviteMsg_id'], $m['StashInviteMsg_subject']];
+					$result[$id]['subject'] = [$m['StashInviteMsg_id'], $project['StashProject_name'] . " : ". $m['StashInviteMsg_subject']];
 					$msg = true;
 				}
 			}
@@ -716,6 +719,11 @@
 			return $this->fetchAndFilterIEmailData( $fetch );
 		}
 
+		public function getProjectById($id = 0){
+			$this->db->where("StashProject_id", $id);
+			return $this->db->get("stash-project", 1)->first_row('array');
+		}
+
 		public function fetchAndFilterIEmailData($data = []){
 			$this->db->where("StashEmailInvite_director_id_ref", $data['StashEmailInvite_director_id_ref']);
 			$this->db->where("StashEmailInvite_msg_id_ref", $data['StashEmailInvite_msg_id_ref']);
@@ -724,8 +732,12 @@
 			$recipient = count($fetch);
 			$result = [];
 			$o = $s = 0;
+
 			$msg = $this->getThisMessage( $data['StashEmailInvite_msg_id_ref'] );
-			$msg = [$msg['StashInviteMsg_id'], $msg['StashInviteMsg_subject'], $msg['StashInviteMsg_message'] ];
+			$project = $this->getProjectById($data['StashEmailInvite_project_id_ref']);
+			$result['project'] = $project;
+
+			$msg = [$msg['StashInviteMsg_id'], $project['StashProject_name'] . " : " . $msg['StashInviteMsg_subject'], $msg['StashInviteMsg_message'] ];
 			foreach ($fetch as $key => $f) {
 				if( $f['StashEmailInvite_opened'])
 					$o++;
@@ -772,8 +784,9 @@
 			$recipient = count($fetch);
 			$result = [];
 			$o = $s = 0;
+			$project = $this->getProjectById($data['StashSMSInvites_project_id_ref']);
 			$msg = $this->getThisMessage( $data['StashSMSInvites_msg_id'] );
-			$msg = [$msg['StashInviteMsg_id'], $msg['StashInviteMsg_subject'], $msg['StashInviteMsg_message'] ];
+			$msg = [$msg['StashInviteMsg_id'], $project['StashProject_name'].' : '.$msg['StashInviteMsg_subject'], $msg['StashInviteMsg_message'] ];
 			foreach ($fetch as $key => $f) {
 				if( $f['StashSMSInvites_opened'])
 					$o++;

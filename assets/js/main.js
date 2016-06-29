@@ -5,8 +5,8 @@ if(window.location.hash== "#login")
 }
 $(document).ready(function(){
 	//For Main Sevrer
-	var url = "/public_html/ajax/",
-		base = "/public_html/";
+	var url = "/ajax/",
+		base = "/";
 		
 	//For Localhost
 	/*var url = "/public_html/beta/ajax/",

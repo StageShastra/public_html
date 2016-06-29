@@ -150,7 +150,26 @@
         color: #4a444a;
 
       }
-     </style>
+      .ul_list a{
+          color:#A4A6A9 !important;
+          font-size: 14px !important;
+      }
+      .ul_list a:hover {
+          background-color: #ffd6d9 !important;
+          background-image: none;
+          color : #fff !important;
+      }
+      .btn{
+        font-size: 12px;
+        margin-right: 5px;
+      }
+      .btn-info:hover{
+        background: #0288D1;
+      }
+      .badge{
+        font-size: 9px;
+      }
+      </style>
      
         
 

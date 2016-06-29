@@ -1,6 +1,6 @@
 Options -MultiViews
 RewriteEngine On 
-RewriteBase /public_html/info/
+RewriteBase /info/
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f

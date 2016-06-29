@@ -83,7 +83,10 @@
 						$end = strtotime("+3 months");
 					}elseif($amount == 1200){
 						$end = strtotime("+6 months");
-					}else{
+					}elseif($amount==10){
+						$end = strtotime("+3 months");
+					}
+					else{
 						$end = strtotime("+1 year");
 					}
 

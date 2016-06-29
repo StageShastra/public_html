@@ -1,5 +1,5 @@
 <?php
-	$base = "http://localhost/Castiko/";//"http://castiko.com/";
+	$base = "http://castiko.com/";
 	
 	if(isset($_GET['url']) && $_GET['url'] != ''){
 		

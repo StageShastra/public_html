@@ -2,8 +2,8 @@ $(document).ready(function(){
 	
 	//For Main Sevrer
 
-	var url = "/public_html/ajax/",
-		base = "/public_html/";
+	var url = "/ajax/",
+		base = "/";
 		
 	//For Localhost
 	/*var url = "/Castiko/beta/ajax/",
@@ -981,7 +981,7 @@ $(document).ready(function(){
 					txt2 += "			<span class='row_text'> "+ data[i].first + txt1 +"</span>";
 
 					if(typeof data[i].firstUser != "undefined"){
-						if(data[i].firstUser.avatar){
+						if(data[i].firstUser.avatar != 'default.png'){
 							txt2 = "<img src='"+base+"assets/img/actors/"+ data[i].firstUser.avatar +"' class='thumbnails'>";
 							txt2 += "			<span class='row_text'> "+ data[i].firstUser.name + txt1 +"</span>";
 						}
@@ -1017,8 +1017,17 @@ $(document).ready(function(){
 		usertr = "";
 		for( i = 0; i < contacts.length; i++ ){
 			a = ( typeof contacts[i].avatar == 'undefined' ) ? "default.png" : contacts[i].avatar;
+			if(typeof contacts[i].avatar == 'undefined'){
+				img = "<button class='sentto'> "+ contacts[i].name.charAt(0).toUpperCase() +" </button>";
+			}else{
+				if(contacts[i].avatar == 'default.png'){
+					img = "<button class='sentto'> "+ contacts[i].name.charAt(0).toUpperCase() +" </button>";
+				}else{
+					img = "<img src='"+base+"assets/img/actors/"+contacts[i].avatar+"' class='thumbnails_small'>";
+				}
+			}
 			usertr += "<tr>"
-				   + "<td class='col-sm-2 vertical_middle'><img src='"+base+"assets/img/actors/"+a+"' class='thumbnails_small'></td>"
+				   + "<td class='col-sm-2 vertical_middle'>"+ img +"</td>"
 				   + "<td class='col-sm-4 row_text vertical_middle'>"+contacts[i].name+"<br><span class='contact_info'>"+contacts[i].contact+"</span></td>"
 				   + "<td class='col-sm-3 vertical_middle'><span class='label label-"+contacts[i].label+"'>"+contacts[i].status+"</span></td>"
 				   + "</tr>";
@@ -1030,11 +1039,11 @@ $(document).ready(function(){
 		div2 = "<div class='col-sm-6'><iframe src='"+iframeSrc+"' class='center' id='emailPreviewiFrame' width='600' height='500'></iframe></div>";
 		div3 = "<div class='col-sm-3'>"
 			 + "<div class='conversation_summary'><h3>Conversation Summary</h3><hr>"
-			 + "<span class='row_text'>Recipients: "+ obj.recipient +" </span>"
+			 + "<span class='row_text'>Recipients: "+ obj.recipient +" </span><br>"
 			 + "<span class='row_text'>Responses</span><br>"
 			 + "<button class='btn btn-info'>Seen: <span class='badge'>"+obj.seen+"</span></button>"
-			 + "<button class='btn btn-info'>Joined: <span class='badge'>"+obj.used+"</span></button>"
-			 + "<button class='btn btn-info'>Pending: <span class='badge'>"+obj.pending+"</span></button>"
+			 + "<button class='btn btn-success'>Joined: <span class='badge'>"+obj.used+"</span></button>"
+			 + "<button class='btn btn-danger'>Pending: <span class='badge'>"+obj.pending+"</span></button>"
 			 + "<br></div></div>";
 
 		fianlTr = "<td colspan='12'><div class='row'>"+ div1 + div2 + div3 +"</div></td>";
@@ -1047,8 +1056,17 @@ $(document).ready(function(){
 		usertr = "";
 		for( i = 0; i < contacts.length; i++ ){
 			a = ( typeof contacts[i].avatar == 'undefined' ) ? "default.png" : contacts[i].avatar;
+			if(typeof contacts[i].avatar == 'undefined'){
+				img = "<button class='sentto'> "+ contacts[i].name.charAt(0).toUpperCase() +" </button>";
+			}else{
+				if(contacts[i].avatar == 'default.png'){
+					img = "<button class='sentto'> "+ contacts[i].name.charAt(0).toUpperCase() +" </button>";
+				}else{
+					img = "<img src='"+base+"assets/img/actors/"+contacts[i].avatar+"' class='thumbnails_small'>";
+				}
+			}
 			usertr += "<tr>"
-				   + "<td class='col-sm-2 vertical_middle'><img src='"+base+"assets/img/actors/"+a+"' class='thumbnails_small'></td>"
+				   + "<td class='col-sm-2 vertical_middle'>"+img+"</td>"
 				   + "<td class='col-sm-4 row_text vertical_middle'>"+contacts[i].name+"<br><span class='contact_info'>"+contacts[i].contact+"</span></td>"
 				   + "<td class='col-sm-3 vertical_middle'><span class='label label-"+contacts[i].label+"'>"+contacts[i].status+"</span></td>"
 				   + "</tr>";
@@ -1060,12 +1078,12 @@ $(document).ready(function(){
 		div2 = "<div class='col-sm-6'><iframe src='"+iframeSrc+"' class='center' id='emailPreviewiFrame' width='600' height='500'></iframe></div>";
 		div3 = "<div class='col-sm-3'>"
 			 + "<div class='conversation_summary'><h3>Conversation Summary</h3><hr>"
-			 + "<span class='row_text'>Recipients: "+ obj.recipient +" </span>"
+			 + "<span class='row_text'>Recipients: "+ obj.recipient +" </span><br>"
 			 + "<span class='row_text'>Responses</span><br>"
 			 + "<button class='btn btn-info'>Seen: <span class='badge'>"+obj.seen+"</span></button>"
-			 + "<button class='btn btn-info'>Yes: <span class='badge'>"+obj.yes+"</span></button>"
-			 + "<button class='btn btn-info'>No: <span class='badge'>"+obj.no+"</span></button>"
-			 + "<button class='btn btn-info'>Maybe: <span class='badge'>"+obj.maybe+"</span></button>"
+			 + "<button class='btn btn-success'>Yes: <span class='badge'>"+obj.yes+"</span></button>"
+			 + "<button class='btn btn-danger'>No: <span class='badge'>"+obj.no+"</span></button>"
+			 + "<button class='btn btn-warning'>Maybe: <span class='badge'>"+obj.maybe+"</span></button>"
 			 + "<br></div></div>";
 
 		fianlTr = "<td colspan='12'><div class='row'>"+ div1 + div2 + div3 +"</div></td>";

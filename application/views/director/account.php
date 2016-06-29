@@ -146,6 +146,17 @@
       border: 1px solid #ddd;
       min-height: 300px;
     }
+
+    .ul_list a{
+        color:#A4A6A9 !important;
+        font-size: 14px !important;
+    }
+    .ul_list a:hover {
+        background-color: #ffd6d9 !important;
+        background-image: none;
+        color : #fff !important;
+    }
+
               </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -182,22 +193,19 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  
                       <ul class="nav navbar-nav navbar-right ul_list">
-                        <li >
-                            <a href="conversations" >Conversations</a>
-                        </li>
-                        <li >
-                            <a href="#" data-toggle="modal" data-target="#advancedSearch" ><span class="firstcolor"> Search</span>
+                       <li >
+                            <a href="<?= base_url()?>director/"  > Dashboard
                             </a>
                         </li>
                         <li >
-                            <a href="#" data-toggle="modal" data-target="#<?= ($isAllowed) ? "inviteActors" : "notAllowedModal" ?>">
-                              <span class="firstcolor" > Invite </span>
+                            <a href="<?= base_url()?>director/account"  > Account
                             </a>
                         </li>
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-chevron-down firstcolor" aria-hidden="true"></span></a>
                           <ul class="dropdown-menu">
                            <li><a href="#" class="changeCategory">Change Category</a></li>
+                           <li><a href="<?= base_url() . "director/conversations" ?>" >Conversations</a></li>
                             <!--<li><a href="add_actor.php">Add</a></li>
                             <li><a class="not-active" href="#">Import</a></li>
                             <li><a class="not-active" href="#">Export</a></li>
@@ -284,7 +292,7 @@
                 <center><button type="button" class="btn submit-btn changePassword">Change Password</button></center>
               </div>
             </div>
-            
+
       <script>
       var isAllowed = <?= ($isAllowed) ? 1 : 0; ?>;
       </script>

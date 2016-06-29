@@ -22,7 +22,8 @@
                     </div> 
                     <style>
                     .ul_list a{
-                        color:#A4A6A9;
+                        color:#A4A6A9 !important;
+                        font-size: 14px !important;
                     }
                     .ul_list a:hover {
                         background-color: #ffd6d9 !important;
