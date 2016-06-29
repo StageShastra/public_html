@@ -40,6 +40,8 @@
         <script src="<?= JS ?>/dropzone.js"></script>
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
         <link href='https://fonts.googleapis.com/css?family=Raleway:400,200,300,100' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="<?= CSS ?>/tagsinput.css" />
 
 		  <script type="text/javascript">

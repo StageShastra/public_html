@@ -17,6 +17,8 @@
     <link href="<?= CSS ?>/navbar.css" rel="stylesheet">
     <link href="<?= CSS ?>/font-awesome.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:800,200,100,300' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="<?= IMG ?>/favicon.ico" type="image/x-icon">
         <link rel="icon" href="<?= IMG ?>/favicon.ico" type="image/x-icon">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="<?= CSS ?>/font-awesome.css">
         <link href='https://fonts.googleapis.com/css?family=Raleway:700,800,400,200,300,100' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.js"></script>
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
 		
