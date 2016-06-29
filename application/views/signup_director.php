@@ -206,7 +206,7 @@ a:hover, a:focus {
 
 					<?php echo ($error) ? "" : "<p class='text-danger'><b>{$error_msg}</b></p>" ?>
                 
-					<script> registerSuccess = <?= ($error) ? true : false; ?> </script>
+					<script> registerSuccess = <?= ($error) ? 1: 0; ?>; </script>
 				</div>
 				
 				

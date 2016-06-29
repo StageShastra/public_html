@@ -207,7 +207,7 @@ a:hover, a:focus {
 
 					<?php echo ($error) ? "" : "<p class='text-danger'><b>{$error_msg}</b></p>" ?>
                 
-					<script> registerSuccess = <?= ($error) ? true : false; ?> </script>
+					<script> var registerSuccess = <?= ($error) ? 1 : 0; ?>; </script>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6 hidden-xs" style="margin-top:45px;">
                   <img src="<?= IMG ?>/macbook_actor_register.png" class="animation-element slide-left img-responsive laptoponly" >

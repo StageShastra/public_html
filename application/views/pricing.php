@@ -101,6 +101,7 @@ hr{
     position: relative;
     bottom: -30px;
     height: 40px;
+    padding: 5px;
     background: white;
 
 }
@@ -242,7 +243,7 @@ a.anchor {
                                     </div>
                                 </div>
                             </div>
-                            <button  class="btn"><a href="<?= base_url() . "home/register/actor?plan=basic" ?>" class="button_text black">GO BASIC</a></button>
+                            <a href="<?= base_url() . "home/register/actor?plan=basic" ?>" class="button_text black btn">GO BASIC</a>
                         </div>
                     </div>
                     <div class="col-lg-6 col-xs-12 col-md-6 col-sm-12 topmargin35">
@@ -268,7 +269,7 @@ a.anchor {
                                 </div>
                                 <span class="glyphicon glyphicon-ok plus" style="font-size:10px;"></span>  <span class="button_text black"><b>Plus all the features in the basic </b></span>
                             </div>
-                            <button type="button" class="btn"><a href="<?= base_url() . "home/register/actor?plan=pro" ?>" class="button_text black">GO PRO</a></button>
+                            <a href="<?= base_url() . "home/register/actor?plan=pro" ?>" class="button_text black btn">GO PRO</a>
                         </div>
                     </div>
                 </div>
@@ -302,7 +303,7 @@ a.anchor {
                             <br>
                             <span class="subtext green">+ 100 SMS free</span>
                             <br>
-                            <button type="button" class="btn"><a href="<?= base_url() . "home/register/director?plan=basic" ?>" class="button_text black">GO BASIC</a></button>
+                            <a href="<?= base_url() . "home/register/director?plan=basic" ?>" class="button_text black btn">GO BASIC</a>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 topmargin35">
@@ -321,7 +322,7 @@ a.anchor {
                             <br>
                             <span class="subtext green">+ 200 SMS free</span>
                             <br>
-                            <button type="button" class="btn"><a href="<?= base_url() . "home/register/director?plan=pro" ?>" class="button_text black">GO PRO</a></button>
+                            <a href="<?= base_url() . "home/register/director?plan=pro" ?>" class="button_text black btn">GO PRO</a>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 topmargin35">
@@ -340,7 +341,7 @@ a.anchor {
                             <br>
                             <span class="subtext green">+ 500 SMS free</span>
                             <br>
-                            <button type="button" class="btn"><a href="<?= base_url() . "home/register/director?plan=pro-plus" ?>"class="button_text black">GO PRO-PLUS</a></button>
+                            <a href="<?= base_url() . "home/register/director?plan=pro-plus" ?>"class="button_text black btn">GO PRO-PLUS</a></button>
                         </div>
                     </div>
                 </div>
