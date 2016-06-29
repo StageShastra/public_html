@@ -135,7 +135,10 @@ a.anchor {
     visibility: hidden;
 }
 .nohover{
-    cursor: none;
+    cursor: pointer;
+}
+.nohover:hover{
+    cursor: pointer;
 }
 .nolrpadding{
     padding-left: 0px;
