@@ -60,6 +60,7 @@
 					$plan = "Basic";
 					$end = strtotime("+1 day");
 					$sms = 0;
+					$chk = 1;
 					if($amount == 5000){
 						$plan = "Basic";
 						$end = strtotime("+30 days");
@@ -79,6 +80,7 @@
 					$this->ModelPayment->insertDirectorPlan( $plan, $user, $end, $sms );
 				}else{
 					$plan = 'Pro';
+					$chk = 0;
 					if($amount == 600){
 						$end = strtotime("+3 months");
 					}elseif($amount == 1200){
@@ -96,17 +98,14 @@
 			}
 			$page = $this->session->userdata("StaSh_User_type");
 			$pageInfo['title'] = "Thank you.";
-			echo $plan;
-			if( $plan == '' ){
-				$pageInfo['body'] = "Your Payment was successful.<br><p>Payment Id: {$pay_id}</p>";
-				
+			
+			if( $chk == 0 && $plan == 'basic' ){
+				$pageInfo['body'] = "You are active now in Free Basic for 1 Years.";
 			}else{
-				if($plan == 'basic'){
-					$pageInfo['body'] = "You are active now in Free Basic for 1 Years.";
-				}else{
-					$this->displayPageNotFound();
-				}
+				$pageInfo['body'] = "Your Payment was successful. You are active now in {$plan} <br><p>Payment Id: {$pay_id}</p>";
 			}
+
+			
 			$pageInfo['body'] .= "<p><b>You will be redirected in 10 secs. If its taking too long <a href='".base_url()."{$page}'>redirect here.</a></b></p>";
 			
 			$pageInfo['redirect'] = true;
