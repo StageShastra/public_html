@@ -31,6 +31,7 @@
         <link rel="stylesheet" href="<?= CSS ?>/bootstrap.min.css">
         <link rel="stylesheet" href="<?= CSS ?>/bootstrap-theme.min.css">
         <link rel="stylesheet" href="<?= CSS ?>/main.css">
+        <link rel="stylesheet" href="<?= CSS ?>/navbar.css">
         <link rel="stylesheet" href="<?= CSS ?>/font-awesome.css">
         <link href='https://fonts.googleapis.com/css?family=Raleway:700,800,400,200,300,100' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
