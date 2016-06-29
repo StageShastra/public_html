@@ -41,7 +41,7 @@
 
 			if(isset($_REQUEST['payment_id'])){
 				$pay_id = trim($_REQUEST['payment_id']);
-				$req_id = null;
+				$req_id = "";
 				$this->ModelPayment->insertPaymentSuccess($pay_id, $req_id);
 				$user = (int)$this->input->cookie("Cstko_user_id");
 				$payment = $this->curlPaymentDetails( $pay_id, $req_id );
