@@ -153,7 +153,7 @@
 				while($this->ModelDirector->checkEmailRandLink($rand))
 					$rand = substr(base64_encode(md5(microtime() . $fe . microtime())), 0, 8);
 
-				$failed = $this->Email->sendInvitationToInDB( $msg['StashInviteMsg_message'], $fe, $project, $rand, $msg['StashInviteMsg_subject'], 'View Message' );
+				$failed = $this->Email->sendInvitationToInDB( $msg['StashInviteMsg_message'], $fe, $project, $rand, $msg['StashInviteMsg_subject'], 'Confirm' );
 				if( $failed !== true ){
 					// Sending Mail Failed. do something here.
 					$failedEmailConnect[] = $failed;
