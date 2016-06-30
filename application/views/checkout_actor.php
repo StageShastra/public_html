@@ -95,8 +95,18 @@ hr{
     margin-bottom: 0px;
 }
 .btn{
+    border-radius: 20px;
+    border: 4px solid #FBB61A;
     position: relative;
     bottom: -30px;
+    height: 40px;
+    padding: 6px;
+    background: white;
+}
+.btn:hover{
+    border: solid 2px #fbb515;
+    color: #000;
+    background: #fbb515;
 }
 .inner{
     background: #f2f2f2;
