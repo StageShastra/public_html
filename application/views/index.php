@@ -317,8 +317,8 @@
           </div>
           <div class="modal-body">
             <ul class="nav nav-tabs">
-              <li class="tabs-left active"><a data-toggle="tab" href="#actor">Directors</a></li>
-              <li class="tabs-right"><a data-toggle="tab" href="#cd">Actors</a></li>
+              <li class="tabs-left active"><a role="tab" data-toggle="tab" href="#actor">Directors</a></li>
+              <li class="tabs-right"><a role="tab" data-toggle="tab" href="#cd">Actors</a></li>
             </ul>
 
             <div class="tab-content">

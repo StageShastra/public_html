@@ -31,6 +31,7 @@
         <link rel="stylesheet" href="<?= CSS ?>/bootstrap.min.css">
         <link rel="stylesheet" href="<?= CSS ?>/bootstrap-theme.min.css">
         <link rel="stylesheet" href="<?= CSS ?>/main.css">
+        <link rel="stylesheet" href="<?= CSS ?>/navbar.css">
         <link rel="stylesheet" href="<?= CSS ?>/font-awesome.css">
         <link href='https://fonts.googleapis.com/css?family=Raleway:700,800,400,200,300,100' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
@@ -132,6 +133,7 @@ a:hover, a:focus {
 .footer-items a:hover {
     color: rgba(255,255,255,1);
 }
+
 </style>
     <body>
         <!--[if lt IE 8]>
@@ -206,7 +208,7 @@ a:hover, a:focus {
 
 					<?php echo ($error) ? "" : "<p class='text-danger'><b>{$error_msg}</b></p>" ?>
                 
-					<script> registerSuccess = <?= ($error) ? true : false; ?> </script>
+					<script> registerSuccess = <?= ($error) ? 1: 0; ?>; </script>
 				</div>
 				
 				
@@ -230,6 +232,7 @@ a:hover, a:focus {
             </div>
           </div>
           </div>
+          <br><br><br><br><br>
         </div>
 <?php
   include "includes/footer.php";

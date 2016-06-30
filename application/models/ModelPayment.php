@@ -21,12 +21,8 @@
 						'StashPayment_amount' => $posted['amount'],
 						'StashPayment_currency' => $posted['currency'],
 						'StashPayment_fees' => $posted['fees'],
-						'StashPayment_longurl' => $posted['longurl'],
-						'StashPayment_shorturl' => $posted['shorturl'],
 						'StashPayment_mac' => $posted['mac'],
 						'StashPayment_payment_id' => $posted['payment_id'],
-						'StashPayment_payment_request_id' => $posted['payment_request_id'],
-						'StashPayment_purpose' => $posted['purpose'],
 						'StashPayment_status' => $posted['status'],
 						'StashPayment_time' => time(),
 						'StashPayment_ip' => $this->input->ip_address()
