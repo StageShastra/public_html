@@ -48,7 +48,10 @@ $(document).ready(function(){
 					$("#login-error-" + user).removeClass("text-danger").addClass("text-success");
 					//$("input", $(that)).val("");
                     if(response.data.redirect){
-                        window.location.href = base + user;
+                        if( typeof redirect_url != 'undefined' && redirect_url != '' && user == 'actor' )
+                            window.location.href = redirect_url;
+                        else
+                            window.location.href = base + user;
                     }else{
                         window.location.href = base + "payment";
                     }

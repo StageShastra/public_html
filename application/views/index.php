@@ -381,6 +381,10 @@
       </div>
     </div>
     <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+
+    <script type="text/javascript">
+        var redirect_url = '<?= isset($_GET['redirect']) ? trim($_GET['redirect']) : '' ?>';
+    </script>
    
 
     <script src="<?= JS ?>/vendor/jquery-1.11.2.min.js"></script>

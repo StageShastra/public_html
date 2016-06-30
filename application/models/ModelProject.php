@@ -15,7 +15,14 @@
 
 		public function getUserId($email = ''){
 			$this->db->where("StashUsers_email", $email);
-			return $this->db->get("stash-users", 1)->first_row()->StashUsers_id;
+			$fetch = $this->db->get("stash-users", 1)->first_row('array');
+			return $fetch['StashUsers_id'];
+		}
+
+		public function getUserName($id = 0){
+			$this->db->where("StashUsers_id", $id);
+			$fetch = $this->db->get("stash-users", 1)->first_row('array');
+			return $fetch['StashUsers_name'];
 		}
 
 		public function getEmailLinkData($d = []){

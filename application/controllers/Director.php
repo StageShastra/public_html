@@ -5,10 +5,12 @@
 
 		function __construct() {
 			parent::__construct();
+			if($this->session->userdata("StaSh_User_type") == 'director'){
 			$this->load->model("ModelDirector");
-			$plan=$this->ModelDirector->getDirectorPlan();
-			if(!count($plan)){
-				redirect(base_url()."payment");
+				$plan=$this->ModelDirector->getDirectorPlan();
+				if(!count($plan)){
+					redirect(base_url()."payment");
+				}
 			}
 		}
 

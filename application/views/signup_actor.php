@@ -201,7 +201,7 @@ a:hover, a:focus {
                               <input type="radio" name="type" value="actor"> Actor
                       </div> -->
                       <button type="submit" class="btn submit-btn firstcolor" name="submit" id="sign-upbtn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Sign Up</button>
-                      <center><a href="<?= base_url() ?>" class="already"><small><?= M_AlreadyRegistered ?></small></a></center>
+                      <center><a href="<?= base_url() . "?redirect=%2Fpayment%3Fplan%3D1" ?>" class="already"><small><?= M_AlreadyRegistered ?></small></a></center>
                     </form>
                 <?php } ?>
 					

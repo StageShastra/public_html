@@ -28,7 +28,7 @@
 
 		public function notification($link = ''){
 			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
-				redirect(base_url());
+				redirect(base_url() . "?redirect=" . urlencode($_SERVER['REQUEST_URI']) );
 			$link = trim($link);
 			if( strlen($link) == 6 ){
 				$this->preview( $link, 'sms' );
@@ -48,6 +48,7 @@
 				$pageInfo['forRef'] = $linkData['StashSMSMsg_id'];
 				$pageInfo['time'] = $linkData['StashSMSMsg_time'];
 				$pageInfo['response'] = $linkData['StashSMSMsg_response'];
+				$pageInfo['director'] = $this->ModelProject->getUserName($linkData['StashSMSMsg_director_id_ref']);
 				return $pageInfo;
 			}
 
@@ -66,16 +67,16 @@
 			*/
 
 			if(count($data)){
-				$linkData = $this->ModelProject->getEmailLinkData( $data );
-				
+				$linkData = $this->ModelProject->getEmailLinkData( $data );				
 				if(count($linkData)){
 					$this->ModelProject->updateEmailLinkOpened( $linkData['StashEmailMsg_id'] );
 					$pageInfo['project'] = $this->ModelProject->getProject( $linkData['StashEmailMsg_project_id_ref'] );
 					$pageInfo['message'] = $this->ModelProject->getThisMessage($linkData['StashEmailMsg_msg_id_ref']);
-					$pageInfo['for'] = "sms";
+					$pageInfo['for'] = "email";
 					$pageInfo['forRef'] = $linkData['StashEmailMsg_id'];
 					$pageInfo['time'] = $linkData['StashEmailMsg_time'];
 					$pageInfo['response'] = $linkData['StashEmailMsg_response'];
+					$pageInfo['director'] = $this->ModelProject->getUserName($linkData['StashEmailMsg_director_id_ref']);
 					return $pageInfo;
 				}
 			}
