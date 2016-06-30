@@ -169,6 +169,10 @@
       .badge{
         font-size: 9px;
       }
+      .btn .badge {
+        position: relative;
+        top: 0px;
+      }
       </style>
      
         
