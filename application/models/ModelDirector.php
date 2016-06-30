@@ -555,6 +555,7 @@
 
 		public function inviteEmailList($ref = 0){
 			$this->db->where("StashEmailInvite_director_id_ref", $ref);
+			$this->db->order_by("StashEmailInvite_id","desc");
 			$fetch = $this->db->get("stash-email-invites")->result("array");
 			$count = count($fetch);
 			$result = [];
@@ -598,6 +599,7 @@
 
 		public function inviteSMSList($ref = 0){
 			$this->db->where("StashSMSInvites_director_id_ref", $ref);
+			$this->db->order_by("StashSMSInvites_id","desc");
 			$fetch = $this->db->get("stash-sms-invites")->result("array");
 			$result = $uniques = [];
 			$found = $msg = false;
@@ -638,6 +640,7 @@
 
 		public function contactEmailList($ref = 0){
 			$this->db->where("StashEmailMsg_director_id_ref", $ref);
+			$this->db->order_by("StashEmailMsg_id","desc");
 			$fetch = $this->db->get("stash-email-message")->result("array");
 			$result = $uniques = [];
 			$found = $msg = false;
@@ -676,6 +679,7 @@
 
 		public function contactSMSList($ref = ''){
 			$this->db->where("StashSMSMsg_director_id_ref", $ref);
+			$this->db->order_by("StashSMSMsg_id","desc");
 			$fetch = $this->db->get("stash-sms-message")->result("array");
 			$result = $uniques = [];
 			$found = $msg = false;
