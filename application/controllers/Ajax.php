@@ -214,7 +214,7 @@
 			$filterNumbers = $this->filterMobile( $data['mobiles'] );
 
 			$totNum = count($filterNumbers);
-			$msgLen = strlen($data['sms']);
+			$msgLen = strlen($data['msg']);
 			$totSMS = ($msgLen / 160) * $totNum;
 			
 			$plan = $this->ModelDirector->getDirectorPlan();
