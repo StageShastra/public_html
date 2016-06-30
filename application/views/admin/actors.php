@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="footable table table-stripped toggle-arrow-tiny" id="tableData" data-page-size='20' data-page-navigation=".pagination">
+                        <table class="footable table table-striped toggle-arrow-tiny" id="tableData" data-page-size='20' data-page-navigation=".pagination">
 
                             <thead>
                                 <tr>

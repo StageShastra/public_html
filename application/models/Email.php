@@ -113,7 +113,7 @@
 			$msg = str_replace("__PUT_DIRECTOR_NAME_HERE__", $this->session->userdata("StaSh_User_name"), Em_AudiMail_message);
 			$msg .= Em_AudiMail_ifQues;
 
-			$message = $this->defaultTemplete("Dear Actor, <br>".$msg, $link, "Accept Invitation", "");
+			$message = $this->defaultTemplete("Dear Actor, <br>".$msg, $link, "View Message", "");
 			$message = preg_replace('~\\\r\\\n~',"<br>", $message);
 			$this->email->clear();
 			$this->email->set_newline("\n");
@@ -128,7 +128,7 @@
 			return true;
 		}
 
-		public function sendInvitationToInDB($msg = '', $to = '', $project = 0, $sub = "Connect to Casting Director", $rand = ''){
+		public function sendInvitationToInDB($msg = '', $to = '', $project = 0, $rand = '', $sub = "Connect to Casting Director"){
 			$this->load->library('email', $this->config());
 			$failedEmails = [];
 			$plainText = json_encode(array($this->session->userdata("StaSh_User_id"), $project, time(), $to, $rand));
@@ -149,7 +149,7 @@
 			}
 			return true;
 		}
-		public function sendInvitationToNotInDB($msg = '', $to = '', $project = 0, $sub = "Invitation ", $rand = ''){
+		public function sendInvitationToNotInDB($msg = '', $to = '', $project = 0, $rand = '', $sub = "Invitation "){
 			$this->load->library('email', $this->config());
 			$failedEmails = [];
 			$plainText = json_encode(array($this->session->userdata("StaSh_User_id"), $project, time(), $to, $rand));
