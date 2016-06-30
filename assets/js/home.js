@@ -2,8 +2,8 @@ $(document).ready(function(){
 	
 	//For Main Sevrer
 
-	var url = "/Castiko/ajax/",
-		base = "/Castiko/";
+	var url = "/ajax/",
+		base = "/";
 		
 	//For Localhost
 	/*var url = "/Castiko/beta/ajax/",
