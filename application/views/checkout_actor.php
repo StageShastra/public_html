@@ -264,10 +264,17 @@ a:hover, a:focus {
                             <button type="button" id="checkout_btn_basic_actor" class="btn checkout_btn hidden ">
                                 <a href="#">Go Basic</a>
                             </button>
-                                    <a href="https://www.instamojo.com/paycastiko/castiko-actor-membership-pro-plan-3-months/" id="checkout_btn_pro_3" class="btn hidden" rel="im-checkout" data-behaviour="remote" data-style="flat" data-text="Checkout With Instamojo" data-token="43c9fd9353701a50b5cceafef6e13b6f"></a>
+                                <div id="checkout_btn_pro_3" class="btn hidden">
+                                    <a href="https://www.instamojo.com/paycastiko/castiko-actor-membership-pro-plan-3-months/"  rel="im-checkout" data-behaviour="remote" data-style="flat" data-text="Checkout With Instamojo" data-token="43c9fd9353701a50b5cceafef6e13b6f"></a>
+                                </div> 
+                                    
                                     <script src="https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"></script>
-                                    <a href="https://www.instamojo.com/paycastiko/castiko-actor-membership-pro-6-months/" id="checkout_btn_pro_6" class="btn hidden " rel="im-checkout" data-behaviour="remote" data-style="flat-dark" data-text="Checkout With Instamojo" data-token="43c9fd9353701a50b5cceafef6e13b6f"></a>
-                                    <a href="https://www.instamojo.com/paycastiko/castiko-actor-membership-pro-plan-12-months/" id="checkout_btn_pro_12" class="btn hidden checkout_btn" rel="im-checkout" data-behaviour="remote" data-style="flat-dark" data-text="Checkout With Instamojo" data-token="43c9fd9353701a50b5cceafef6e13b6f"></a>
+                                <div id="checkout_btn_pro_6" class="btn hidden">
+                                    <a href="https://www.instamojo.com/paycastiko/castiko-actor-membership-pro-6-months/"  rel="im-checkout" data-behaviour="remote" data-style="flat-dark" data-text="Checkout With Instamojo" data-token="43c9fd9353701a50b5cceafef6e13b6f"></a>
+                                </div>
+                                <div id="checkout_btn_pro_12" class="btn hidden">
+                                    <a href="https://www.instamojo.com/paycastiko/castiko-actor-membership-pro-plan-12-months/"  rel="im-checkout" data-behaviour="remote" data-style="flat-dark" data-text="Checkout With Instamojo" data-token="43c9fd9353701a50b5cceafef6e13b6f"></a>
+                                </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
