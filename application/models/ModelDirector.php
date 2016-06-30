@@ -756,8 +756,6 @@
 					$result['users'][] = [ 'name' => $f['StashEmailInvite_email'], 'contact' => $f['StashEmailInvite_email'], 'status' => 'pending', 'label' => 'danger' ];
 				}
 
-				if( $f['StashEmailInvite_opened'] && $f['StashEmailInvite_status'] )
-					$o--;
 			}
 			$result['recipient'] = $recipient;
 			$result['responded'] = $o + $s;
