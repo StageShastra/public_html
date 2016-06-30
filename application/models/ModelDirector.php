@@ -803,8 +803,7 @@
 					$result['users'][] = [ 'name' => $f['StashSMSInvites_mobile'], 'contact' => $f['StashSMSInvites_mobile'], 'status' => 'pending', 'label' => 'danger' ];
 				}
 
-				if( $f['StashSMSInvites_opened'] && $f['StashSMSInvites_status'] )
-					$o--;
+				
 			}
 			$result['recipient'] = $recipient;
 			$result['responded'] = $o + $s;
@@ -869,8 +868,7 @@
 										'label' => $lb 
 									];
 
-				if( $f['StashEmailMsg_opened'] && $f['StashEmailMsg_response'] )
-					$o--;
+				
 			}
 			$result['recipient'] = $recipient;
 			$result['responded'] = $s;
@@ -937,8 +935,7 @@
 										'label' => $lb 
 									];
 
-				if( $f['StashSMSMsg_opened'] && $f['StashSMSMsg_response'] )
-					$o--;
+				
 			}
 			$result['recipient'] = $recipient;
 			$result['responded'] = $s;
