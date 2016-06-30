@@ -173,6 +173,16 @@
         position: relative;
         top: 0px;
       }
+      tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+    color: #555;
+    cursor: default;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    outline: none;
+    border-color: #607D8B;
+    box-shadow:0px 0px 10px #607D8B;
+}
       </style>
      
         
