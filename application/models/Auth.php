@@ -214,7 +214,7 @@
 			$this->db->where("StashDirectorActorLink_actor_id_ref", $ref);
 			$this->db->where("StashDirectorActorLink_director_id_ref", $director);
 			$query = $this->db->get("stash-director-actor-link");
-			$result = $query->num_rows();
+			return $query->num_rows();
 		}
 		
 		public function confirmEMail($email = ''){
