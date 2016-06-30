@@ -147,7 +147,7 @@
 			$this->load->model("ModelDirector");
 			$this->load->model("Email");
 			$msg = $this->ModelDirector->getThisMessage($msgId);
-
+			$failedEmailConnect=[];
 			foreach ($emails as $key => $fe) {
 				$rand = substr(base64_encode(md5(microtime() . $fe . microtime())), 0, 8);
 				while($this->ModelDirector->checkEmailRandLink($rand))
