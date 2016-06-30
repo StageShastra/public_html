@@ -38,6 +38,7 @@
 
 		public function success( $plan = '' ){
 			$pay_id = $req_id = '';
+			$chk = 0;
 
 			if(isset($_REQUEST['payment_id'])){
 				$pay_id = trim($_REQUEST['payment_id']);

@@ -2,8 +2,8 @@ $(document).ready(function(){
 	
 	//For Main Sevrer
 
-	var url = "/ajax/",
-		base = "/";
+	var url = "/Castiko/ajax/",
+		base = "/Castiko/";
 		
 	//For Localhost
 	/*var url = "/Castiko/beta/ajax/",
@@ -779,6 +779,16 @@ $(document).ready(function(){
 		smsCharCounter("#textsms", "#audi-charCounter", "#audi-msgCounter");
 	});
 
+
+	/*
+		For duplicate contacts
+	*/
+
+	var duplicateContacts = [];
+	var duplicateType = '';
+	var dupProject = 0;
+	var dupMsgId = 0;
+
 	$(document).on("submit", "form#emailInvitationForm", function(){
 		var conf = confirm("Are you sure you want to send this message ?");
 		if(!conf)
@@ -797,7 +807,6 @@ $(document).ready(function(){
 			project_date: project_date,
 			subject: subject
 		})};
-		console.log(data);
 		$.ajax({
 			url: url,
 			type: type,
@@ -808,9 +817,23 @@ $(document).ready(function(){
 					$("input, textarea", $(that)).val('');
 				}
 				//$("#invite-error").html(response.message).show().delay(5000); */
-				$("#inviteSuccessMsg").html(response.message);
+				if(response.data.duplicate != 0){
+					duplicates = response.data.duplicateEmail;
+					dupMsgId = response.data.msg;
+					duplicateType = 'email';
+					dupList = '';
+					dupProject = response.data.project_id;
+					for(var i = 0; i < duplicates.length; i++){
+						dupList += "<span class='label label-info'>"+duplicates[i]+"</span>";
+						duplicateContacts.push(duplicates[i]);
+					}
+					$("#contactsDuplicate").html(dupList);
+					$("#successInvitation").modal("show");
+				}else{
+					$("#inviteSuccessMsg").html(response.message);
+					$("#inviteSuccess").modal("show");
+				}
 				$("#inviteActors").hide();
-				$("#inviteSuccess").modal("show");
 			}
 		});
 		return false;
@@ -843,9 +866,23 @@ $(document).ready(function(){
 					$("input, textarea", $(that)).val('');
 				}
 				$("#invite-error").html(response.message).show().delay(5000); */
-				$("#inviteSuccessMsg").html(response.message);
+				if(response.data.duplicate != 0){
+					duplicates = response.data.duplicateNums;
+					dupMsgId = response.data.msg;
+					dupProject = response.data.project_id;
+					dupList = '';
+					duplicateType = 'sms';
+					for(var i = 0; i < duplicates.length; i++){
+						dupList += "<span class='label label-info'>"+duplicates[i]+"</span>";
+						duplicateContacts.push(duplicates[i]);
+					}
+					$("#contactsDuplicate").html(dupList);
+					$("#successInvitation").modal("show");
+				}else{
+					$("#inviteSuccessMsg").html(response.message);
+					$("#inviteSuccess").modal("show");
+				}
 				$("#inviteActors").hide();
-				$("#inviteSuccess").modal("show");
 			}
 		});
 		return false;
@@ -887,7 +924,6 @@ $(document).ready(function(){
 	$(document).on("click", ".addSuggestionText", function(){
 		var name = $(this).attr("data-name");
 		var txt = $("textarea[name='"+name+"']").val();
-		console.log(txt);
 		var add = $(this).attr("data-add");
 		txt += " " + add;
 		$("textarea[name='"+name+"']").val(txt);
@@ -1216,6 +1252,36 @@ $(document).ready(function(){
 						window.location.href = base;
 					}, 5000);
 				}
+			}
+		});
+		return false;
+	});
+
+	$(document).on("click", ".duplicateTags", function(){
+		data = {request: "BulkDupTag", data: JSON.stringify({contacts: duplicateContacts, type: duplicateType, project: dupProject})};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				$("#dupTagSucessMsg").html(response.message);
+				$("#successInvitation").modal("hide");
+				$("#dupTagSucess").modal("show");
+			}
+		});
+		return false;
+	});
+
+	$(document).on("click", ".duplicateReInvite", function(){
+		data = {request: "BulkDupReInvite", data: JSON.stringify({contacts: duplicateContacts, type: duplicateType, project: dupProject, msgID: dupMsgId})};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				$("#dupTagSucessMsg").html(response.message);
+				$("#successInvitation").modal("hide");
+				$("#dupTagSucess").modal("show");
 			}
 		});
 		return false;

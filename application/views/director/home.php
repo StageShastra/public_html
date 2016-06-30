@@ -328,6 +328,56 @@
       </div>
       <!-- Preview SMS End -->
 
+      <!-- Invitation Success start-->
+      <div id="successInvitation" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title firstcolor info"> Invitation Success  </h4>
+            <span class="info-small gray"></span>
+          </div>
+          <div class="modal-body" style="background-color:#f2f2f2;">
+            <div class="container" style="max-width:100%; ">
+              <h5 style="font-family: 'Open sans';">
+                We found that following contacts are already in your database. Do you want to tag them in the project or Re-Invite?   
+              </h5>
+              <div class="panel panel-default">
+                <div class="panel-body" id='contactsDuplicate'>
+                </div>
+              </div>
+              <button type="button" class="btn submit-btn firstcolor pull-right duplicateTags" style="margin-top: 20px; margin-left:10px;" id="btn-search" > <i class="fa fa-plus"></i> Tag </button>
+              <button type="button" class="btn submit-btn firstcolor pull-right duplicateReInvite" style="margin-top: 20px; margin-left:10px;" id="btn-search" > <i class="fa fa-refresh"></i> Re-invite </button>
+            </div>
+          </div>
+          
+          </div>
+
+        </div>
+      </div>
+
+      <div id="dupTagSucess" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title firstcolor info"> Status </h4><span class="info-small gray"></span>
+          </div>
+          <div class="modal-body" style="background-color:#fff;">
+              <p id="dupTagSucessMsg" class="info gray" style="font-family:'Roboto',sans-serif; font-size:15px;margin-top:15px;margin-bottom:18px;">
+              </p>
+          </div>
+          
+          </div>
+
+        </div>
+      </div>
+      <!-- Invitation Success End -->
+
 
       <div id="notAllowedModal" class="modal fade" role="dialog">
         <div class="modal-dialog">

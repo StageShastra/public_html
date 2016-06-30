@@ -1018,6 +1018,30 @@
 			$this->db->where("StashDirectorPlan_id", $id);
 			$this->db->update("stash-director-plans", array('StashDirectorPlan_used_sms' => $sms));
 		}
+
+		public function getUserIdListBy($field = 'StashUsers_email', $data = []){
+			$this->db->where_in($field, $data);
+			$fetched = $this->db->get("stash-users")->result("array");
+			$result = [];
+			foreach ($fetched as $key => $f) {
+				$result[] = $f['StashUsers_id'];
+			}
+			return $result;
+		}
+
+		public function addInProject($project = 0, $actors = []){
+			foreach ($actors as $key => $actor) {
+				if(!$this->checkActorProject( $actor, $project ))
+					$this->insertActorProject($actor, $project);
+			}
+			return true;
+		}
+
+		public function checkActorProject($ref = 0, $project = 0){
+			$this->db->where("StashActorProject_actor_id_ref", $ref);
+			$this->db->where("StashActorProject_project_id_ref", $project);
+			return $this->db->get("stash-actor-project")->num_rows();
+		}
 	}
 
 ?>

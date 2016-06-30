@@ -128,14 +128,14 @@
 			return true;
 		}
 
-		public function sendInvitationToInDB($msg = '', $to = '', $project = 0, $rand = '', $sub = "Connect to Casting Director"){
+		public function sendInvitationToInDB($msg = '', $to = '', $project = 0, $rand = '', $sub = "Connect to Casting Director", $a = 'Connect'){
 			$this->load->library('email', $this->config());
 			$failedEmails = [];
 			$plainText = json_encode(array($this->session->userdata("StaSh_User_id"), $project, time(), $to, $rand));
 			$encryptedText = $this->getEncryptedText($plainText);
 			$encryptedText = str_replace("/", "_", $encryptedText);
 			$link = base_url() . "home/connect/" . urlencode($encryptedText);
-			$message = $this->defaultTemplete("Dear Actor, <br>".$msg, $link, "Connect", "");
+			$message = $this->defaultTemplete("Dear Actor, <br>".$msg, $link, $a, "");
 			$message = preg_replace('~\\\r\\\n~',"<br>", $message);
 			$this->email->clear();
 			$this->email->set_newline("\n");

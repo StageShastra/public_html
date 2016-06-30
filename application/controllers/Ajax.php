@@ -75,6 +75,12 @@
 					case "GoBasic":
 						$this->goBasicPlan($data);
 						break;
+					case "BulkDupTag":
+						$this->bulkDupTag($data);
+						break;
+					case "BulkDupReInvite":
+						$this->bulkDupReInvite($data);
+						break;
 					default:
 						$this->response(false, "Invalid Request");
 						break;
@@ -83,6 +89,101 @@
 				$this->response(false, Aj_Req_NoData);
 			}
 		}
+
+		public function bulkDupReInvite($data = []){
+			$this->load->model("ModelDirector");
+			$failed = [];
+			if( $data['type'] == 'email' ){
+				$userIdList = $this->ModelDirector->getUserIdListBy('StashUsers_email', $data['contacts']);
+				$failed = $this->reSendEmails( $data['contacts'], $data['msgID'], $data['project'] );
+				$e = " Email ";
+			}else{
+				$userIdList = $this->ModelDirector->getUserIdListBy('StashUsers_mobile', $data['contacts']);
+				$this->reSendSMS( $data['contacts'], $data['msgID'], $data['project'] );
+				$e = " SMS ";
+			}
+			$this->ModelDirector->addInProject($data['project'], $userIdList);
+			$this->response(true, "{$e} re-sent successfully.", ['failed' => $failed]);
+			
+		}
+
+		public function reSendSMS($numbers = [], $msgId = 0, $project = 0){
+			$this->load->model("ModelDirector");
+			$this->load->model("SMS");
+			$msg = $this->ModelDirector->getThisMessage($msgId);
+
+			$totNum = count($numbers);
+			$msgLen = strlen($msg['StashInviteMsg_message']);
+			$totSMS = ($msgLen / 160) * $totNum;
+			
+			$plan = $this->ModelDirector->getDirectorPlan();
+			$leftSMS = $plan['StashDirectorPlan_free_sms'] - $plan['StashDirectorPlan_used_sms'];
+			$usedSMS = $plan['StashDirectorPlan_used_sms'];
+			$planId = $plan['StashDirectorPlan_id'];
+			if($leftSMS < $totSMS){
+				$this->response(false, "You don't have enough SMS Credits. Plan recharge for SMS Credits.");
+			}
+
+			foreach ($numbers as $key => $number) {
+
+				$rand = substr(base64_encode(md5(microtime() . $number . microtime())), 0, 6);
+				while($this->ModelDirector->checkRandLink($rand))
+					$rand = substr(base64_encode(md5(microtime() . $number . microtime())), 0, 6);
+				
+				$link = "http://castiko.com/invite/{$rand}";
+				$this->SMS->sendInvitaionSMS( $msg['StashInviteMsg_message'], $number, $link );
+				$this->ModelDirector->insertInvitationSMS($msgId, $rand, $project, $number);
+
+			}
+
+			$this->ModelDirector->updateCountAudSMS(count($numbers), "invite", "sms");
+
+			$totSMSUsed = $usedSMS + count($numbers);
+			$this->ModelDirector->updateSMSCreditUsed( $planId, $totSMSUsed );
+			
+		}
+
+		public function reSendEmails($emails = [], $msgId = 0, $project = 0){
+			$this->load->model("ModelDirector");
+			$this->load->model("Email");
+			$msg = $this->ModelDirector->getThisMessage($msgId);
+
+			foreach ($emails as $key => $fe) {
+				$rand = substr(base64_encode(md5(microtime() . $fe . microtime())), 0, 8);
+				while($this->ModelDirector->checkEmailRandLink($rand))
+					$rand = substr(base64_encode(md5(microtime() . $fe . microtime())), 0, 8);
+
+				$failed = $this->Email->sendInvitationToInDB( $msg['StashInviteMsg_message'], $fe, $project, $rand, $msg['StashInviteMsg_subject'], 'View Message' );
+				if( $failed !== true ){
+					// Sending Mail Failed. do something here.
+					$failedEmailConnect[] = $failed;
+				}else{
+					$this->ModelDirector->insertInvitationMail( $fe, $msgId, $project, 'connect', $rand );
+				}
+			}
+
+			$this->ModelDirector->insertFailedInvitations( $failedEmailConnect, $msgId, $project, 'invite' );
+			return $failedEmailConnect;
+		}
+
+		public function bulkDupTag($data =[]){
+			$this->load->model("ModelDirector");
+			if( $data['type'] == 'email' )
+				$userIdList = $this->ModelDirector->getUserIdListBy('StashUsers_email', $data['contacts']);
+			else
+				$userIdList = $this->ModelDirector->getUserIdListBy('StashUsers_mobile', $data['contacts']);
+
+			if(count($userIdList)){
+				if($this->ModelDirector->addInProject($data['project'], $userIdList)){
+					$this->response(true, "Added to the Project.");
+				}else{
+					$this->response(false, "Failed to add in project.");
+				}
+			}else{
+				$this->response(false, "Not in List");
+			}
+		}
+
 		public function goBasicPlan($data = []){
 			$this->load->model("Auth");
 			if( $this->Auth->insertActorPlan( $data['plan'] ) ){
@@ -214,7 +315,7 @@
 			$filterNumbers = $this->filterMobile( $data['mobiles'] );
 
 			$totNum = count($filterNumbers);
-			$msgLen = strlen($data['sms']);
+			$msgLen = strlen($data['msg']);
 			$totSMS = ($msgLen / 160) * $totNum;
 			
 			$plan = $this->ModelDirector->getDirectorPlan();
@@ -254,8 +355,8 @@
 				$this->ModelDirector->insertInvitationSMS($msgId, $rand, $projectID, $notInDB);
 
 			}
-
-			$r = array( 'sent' => count($mobileNotInDB), 'invalid' => count($invalid), 'invalidNums' => $invalid, 'duplicate' => count($duplicate), "duplicateNums" => $duplicate );
+			$duplicate = $this->remapArray($duplicate);
+			$r = array( 'sent' => count($mobileNotInDB), 'invalid' => count($invalid), 'invalidNums' => $invalid, 'duplicate' => count($duplicate), "duplicateNums" => $duplicate, 'project_id' => $projectID, 'msg' => $msgId );
 			$this->ModelDirector->updateCountAudSMS(count($mobileNotInDB), "invite", "sms");
 
 			$totSMSUsed = $usedSMS + count($mobileNotInDB);
@@ -355,8 +456,18 @@
 			$this->ModelDirector->insertFailedInvitations( $failedEmailConnect, $msgId, $projectID, 'connect' );
 
 			$this->ModelDirector->updateCountAudSMS($sent, "invite", "email");
-			$r = array( 'sent' => $sent, 'invalid' => count($invalid), 'failed' => $fail, 'invalidEmails' => $invalid, 'duplicate' => count($emailInCDdb), "duplicateEmail" => $emailInCDdb );
+
+			$emailInCDdb = $this->remapArray($emailInCDdb);
+			$r = array( 'sent' => $sent, 'invalid' => count($invalid), 'failed' => $fail, 'invalidEmails' => $invalid, 'duplicate' => count($emailInCDdb), "duplicateEmail" => $emailInCDdb, 'project_id' => $projectID, 'msg' => $msgId );
 			$this->response(true, "{$sent} Invitation Emails sent", $r);
+		}
+
+		public function remapArray($arr = []){
+			$a = [];
+			foreach ($arr as $key => $value) {
+				$a[] = trim($value);
+			}
+			return $a;
 		}
 
 		public function filterEmail($emails = ''){
