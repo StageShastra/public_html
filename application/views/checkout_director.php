@@ -284,7 +284,7 @@ a:hover, a:focus {
                                 <a href="https://www.instamojo.com/paycastiko/castiko-director-membership-pro-plan-6-month/" rel="im-checkout" data-behaviour="remote" data-style="no-style" data-text="Checkout With Instamojo" data-token="43c9fd9353701a50b5cceafef6e13b6f"></a>
                             </button>
                             <button type="button" id="checkout_btn_pro_plus" class="btn hidden checkout_btn">
-                                <a href="https://www.instamojo.com/paycastiko/castiko-director-membership-pro-plus-plan-12/" rel="im-checkout" data-behaviour="remote" data-style="light" data-text="Checkout With Instamojo" data-token="43c9fd9353701a50b5cceafef6e13b6f"></a>
+                                <a href="https://www.instamojo.com/paycastiko/castiko-director-membership-pro-plus-plan-12/" rel="im-checkout" data-behaviour="remote" data-style="no-style" data-text="Checkout With Instamojo" data-token="43c9fd9353701a50b5cceafef6e13b6f"></a>
                             </button>
                         </div>
                     </div>
