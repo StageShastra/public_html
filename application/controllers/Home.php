@@ -235,7 +235,7 @@ class Home extends CI_Controller {
 		$dataInUrl = json_decode($parsedLink);
 		$this->load->model("Auth");
 		$linkDetails = $this->Auth->getEmailLinkDetails($dataInUrl[4]);
-		$this->Auth->updateSMSLinkOpened( $linkDetails['StashEmailInvite_id'] );
+		$this->Auth->updateEmailLinkOpened( $linkDetails['StashEmailInvite_id'] );
 		$link = trim($linkDetails['StashEmailInvite_link']);
 		setcookie("Cstko_link", $link, time() + 3600, "/");
 		$_SESSION['Cstko_link'] = $link;
@@ -257,7 +257,7 @@ class Home extends CI_Controller {
 		$dataInUrl = json_decode($parsedLink);
 		$this->load->model("Auth");
 		$linkDetails = $this->Auth->getEmailLinkDetails($dataInUrl[4]);
-		$this->Auth->updateSMSLinkOpened( $linkDetails['StashEmailInvite_id'] );	
+		$this->Auth->updateEmailLinkOpened( $linkDetails['StashEmailInvite_id'] );	
 		/*
 		data in url::
 			index | value
