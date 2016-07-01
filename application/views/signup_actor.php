@@ -166,7 +166,7 @@ a:hover, a:focus {
               <div class="col-sm-12 light-padded">
                 <div class="col-lg-6 col-sm-6 col-xs-12" id="form-div">
                 <?php if(!$error){ ?>
-                  <font class="info-small text-primary signup_heading"> Actor Sign Up   <? if(isset[$_REQUEST['plan']]) {echo ucwords("- ".$_REQUEST['plan']);} ?></font>
+                  <font class="info-small text-primary signup_heading"> Actor Sign Up   <? if(isset($_REQUEST['plan'])) {echo ucwords("- ".$_REQUEST['plan']);} ?></font>
                   
                       <form role="form" action="<?= $_SERVER['REQUEST_URI'] ?>" method="POST">
                       <div class="form-group">
