@@ -386,7 +386,7 @@
 				}
 			}
 
-			return array( [0, $sent], [1, $seen], [2, $useen], [3, $reg], [4, $paid], [5, $basic], [6, $pend], [7, $confirm] );
+			return array( [0, $sent], [1, $seen], [2, $useen], [3, $pend], [4, $reg], [5, $paid], [6, $basic], [7, $confirm] );
 		}
 
 		public function smsInvitationData($value=''){
@@ -416,7 +416,7 @@
 				}
 			}
 
-			return array( [0, $sent], [1, $seen], [2, $useen], [3, $reg], [4, $paid], [5, $basic], [6, $pend], [7, $confirm] );
+			return array( [0, $sent], [1, $seen], [2, $useen], [3, $pend], [4, $reg], [5, $paid], [6, $basic], [7, $confirm] );
 		}
 
 		public function thisUserData($field = '', $value = ''){

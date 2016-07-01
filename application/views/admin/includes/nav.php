@@ -36,6 +36,8 @@
                                 $fa = "briefcase";
                             elseif( $identifier == 'promo' )
                                 $fa = "tags";
+                            elseif( $identifier == 'contact' )
+                                $fa = "envelope";
                             else
                                 $fa = "user-secret";
                             return $fa;

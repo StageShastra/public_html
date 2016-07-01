@@ -230,8 +230,8 @@
 
 		public function sendMail($email = 'connect@castiko.com'){
 			$pageInfo = array("error" => false, 'error_msg' => null, 'success' => "text-danger");
-			$pageInfo['nav_h'] = "dashboard";
-			$pageInfo['nav_sh'] = "dashboard";
+			$pageInfo['nav_h'] = "contact";
+			$pageInfo['nav_sh'] = "sendMail";
 			$pageInfo['email'] = urldecode($email);
 			if( count($this->input->post()) ){
 				$pageInfo['error'] = true;
@@ -484,7 +484,12 @@
 		public function emailGraphData($data = []){
 			$d = $this->ModelAdmin->emailInvitationData();
 			$s = $this->ModelAdmin->smsInvitationData();
-			$this->response(true, "Data", array('email' => $d, 'sms' => $s));
+			$m = [];
+			for($i = 0; $i < count($d); $i++){
+				$m[$i] = [$i, $d[$i][1] + $s[$i][1]];
+			}
+
+			$this->response(true, "Data", array('email' => $d, 'sms' => $s, 'main' => $m));
 		}
 
 		public function checkPromo($data = []){

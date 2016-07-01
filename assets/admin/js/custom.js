@@ -330,7 +330,7 @@ $(document).ready(function(){
 	            }
 	        },
 	        xaxis: {
-	            ticks: [[0,'Sent'],[1,'Seen'],[2,'Unseen'],[3,'Joined'],[4,'Paid'],[5,'Basic'],[6,'Pending'],[7,'Confirmed']]
+	            ticks: [[0,'Sent'],[1,'Seen'],[2,'Unseen'],[3,'Pending'],[4,'Joined'],[5,'Paid'],[6,'Basic'],[7,'Confirmed']]
 	        },
 	        colors: ["#1ab394"],
 	        grid: {
@@ -362,6 +362,7 @@ $(document).ready(function(){
 			type: type,
 			data: data,
 			success: function(response){
+				flowLineChart(response.data.main, '#flot-line-chart-main');
 				flowLineChart(response.data.email, '#flot-line-chart');
 				flowLineChart(response.data.sms, '#flot-line-chart-2');
 			}
