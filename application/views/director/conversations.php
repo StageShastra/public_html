@@ -206,7 +206,7 @@
 
               <div class="tab-content">
                 <div id="email" class="tab-pane fade in active">
-                  <table class="messages table table-striped">
+                  <table id="email_table" class="messages table table-striped">
                     <thead>
                       <tr>
                         <th class="col-sm-3">Sent to</th>
