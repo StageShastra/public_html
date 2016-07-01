@@ -325,7 +325,7 @@
               <div id="actor" class="tab-pane fade in active">
                 <p class="login_form">
                   <font class="info dark-gray center"> Log In | </font><a href="<?=base_url() ?>home/pricing#forDirectors"><font class="info firstcolor center"> Sign Up! </a></font>
-                      <form role="form" id="login-form" class="login-forms" method="post" >
+                      <form role="form" id="login-form" class="login-forms" method="post">
                         <b><p class="text-danger" id="login-error-director"></p></b>
                       <div class="form-group col-lg-8 col-md-6 col-xs-12 center">
                         <input type="email" class="form-control login " id="username" name="email" placeholder= "Email" required oninvalid="this.setCustomValidity('You appear to have entered an invalid email. Please try again.')" />
@@ -396,6 +396,7 @@
     <script src="<?= JS ?>/vendor/cbpAnimatedHeader.js"></script>
 
     <!-- Custom Theme JavaScript -->
+    <script src="<?= JS ?>/constants.js"></script>
     <script src="<?= JS ?>/landingpage.js"></script>
     <script src="<?= JS ?>/main.js"></script>
 </body>

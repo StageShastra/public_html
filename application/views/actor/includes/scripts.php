@@ -6,6 +6,7 @@
         <script src='<?= JS ?>/tagsinput.js'></script>
 		<script src="<?= JS ?>/vendor/js.cookies.js"></script>
 		<script src="<?= JS ?>/vendor/jquery-ui.js"></script>
+		<script src="<?= JS ?>/constants.js"></script>
 		<script src="<?= JS ?>/cropper.js"></script>
         <script src="<?= JS ?>/act.js"></script>
         <script src="<?= JS ?>/lightbox.js"></script>

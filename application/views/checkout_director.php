@@ -355,6 +355,7 @@ a:hover, a:focus {
     <script src="<?= JS ?>/vendor/classie.js"></script>
     <script src="<?= JS ?>/vendor/cbpAnimatedHeader.js"></script>
     <!-- Custom Theme JavaScript -->
+    <script src="<?= JS ?>/constants.js"></script>
     <script src="<?= JS ?>/main.js"></script>
     <script src="<?= JS ?>/checkout.js"></script>
 </body>

@@ -1,6 +1,7 @@
         <script src="<?= JS ?>/vendor/jquery-1.11.2.min.js"></script>
 		<script src="<?= JS ?>/vendor/bootstrap.min.js"></script>
 		<script src="<?= JS ?>/vendor/jquery-ui.js"></script>
+        <script src="<?= JS ?>/constants.js"></script>
         <script src="<?= JS ?>/vendor/js.cookies.js"></script>
         <script src='<?= JS ?>/tagsinput.js'></script>
         <script src="<?= JS ?>/home.js"></script>

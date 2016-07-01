@@ -1,19 +1,7 @@
 $(document).ready(function(){
 	
-	//For Main Sevrer
-
-	var url = "/public_html/ajax/",
-		base = "/public_html/";
-		
-	//For Localhost
-	/*var url = "/Castiko/beta/ajax/",
-		base = "/Castiko/beta/";
-	*/
-	
 	var count = 0,
 		select = [],
-		type = "POST",
-		data = {},
 		actors = [],
 		actorEmails = [],
 		actorMobile = [],
@@ -653,6 +641,9 @@ $(document).ready(function(){
 		return false;
 	});
 
+	var searchData = {};
+
+
 	$(document).on("submit", "form#advanceSearch", function(){
 		var that = this;
 		$('#advancedSearch').modal('hide');
@@ -662,13 +653,17 @@ $(document).ready(function(){
 			if(typeof $(this).attr("name") != 'undefined' )
 				formdata[$(this).attr("name")] = $(this).val();
 		});
+		formdata['dponly'] = 0;
+		if($("input[name='dponly']", $(this)).is(":checked"))
+			formdata['dponly'] = 1;
+		searchData = formdata;
 		data = {request: "AdvanceSearch", data: JSON.stringify(formdata)};
 		$.ajax({
 			url: url,
 			type: type,
 			data: data,
 			success: function(response){
-				console.log(response);
+				//console.log(response);
 				if(response.status){
 					populateActorList(response.data, 1);
 				}else{
@@ -676,14 +671,99 @@ $(document).ready(function(){
 					noActorFound();
 				}
 			}
-		})
+		});
+		$(".filterblocks").html('');
+		for (var key in searchData){
+			if(typeof searchData[key] !== 'function' && searchData[key] !== ''){
+				if(key == 'dponly' && searchData[key] == 0){
+					continue;
+				}
+				if(key == 'agemin'){
+					name = "Min Age: ";
+				}
+
+				if(key == 'agemax'){
+					name = "Max Age: ";
+				}
+
+				if(key == 'heightmin'){
+					name = "Min Height: ";
+				}
+
+				if(key == 'sex'){
+					name = "Sex: ";
+				}
+
+				if(key == 'heightmax'){
+					name = "Max Height: ";
+				}
+
+				btn = '<button type="button" class="btn taga taga-selected toggleSearchfilter" data-key="'+key+'" style="width:auto; min-width:1px;background-color: #FF9800; color:white;" aria-label="Left Align" id="Name" data-cate="Name">'
+                    + '<font class="">'+ name + searchData[key] +'</font>'
+                    + '<span class="glyphicon glyphicon-remove pull-right no-top removeSearchFilter" aria-hidden="true"></span>'
+                    + '</button>';
+
+				if(key == 'dponly' && searchData[key] == 1){
+					name = "Image: ";
+					btn = '<button type="button" class="btn taga taga-selected toggleSearchfilter" data-key="'+key+'" style="width:auto; min-width:1px;background-color: #FF9800; color:white;" aria-label="Left Align" id="Name" data-cate="Name">'
+	                    + '<font class="">'+ name +'<i class="fa fa-check-circle-o"></i> </font>'
+	                    + '<span class="glyphicon glyphicon-remove pull-right no-top removeSearchFilter" aria-hidden="true"></span>'
+	                    + '</button>';
+				}
+
+				if(key == 'skills' || key == 'projects' || key == 'actor_names'){
+					peices = searchData[key].split(",");
+					btn = '';
+					for(k in peices){
+						btn += '<button type="button" class="btn taga taga-selected toggleSearchfilter" data-key="'+key + '-' + peices[k] +'" style="width:auto; min-width:1px;background-color: #FF9800; color:white;" aria-label="Left Align" id="Name" data-cate="Name">'
+		                    + '<font class="">'+ peices[k] +'</font>'
+		                    + '<span class="glyphicon glyphicon-remove pull-right no-top removeSearchFilter" aria-hidden="true"></span>'
+		                    + '</button>';
+					}
+				}
+				$(".filterblocks").append(btn);	
+			}
+		}
 		return false;
+	});
+
+	$(document).on("click", ".removeSearchFilter", function(){
+		$btn = $(this).parent();
+		thisKey = $btn.attr("data-key");
+		$btn.remove();
+
+		peices = thisKey.split('-');
+
+		if(thisKey == 'dponly'){
+			searchData[dponly] = 0;
+		}else if(peices.length == 2){
+			d = searchData[peices[0]];
+			console.log(d, peices[1]);
+			searchData[peices[0]] = d.replace(peices[1], "");
+		}else{
+			searchData[thisKey] = "";
+		}
+
+		data = {request: "AdvanceSearch", data: JSON.stringify(searchData)};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				//console.log(response);
+				if(response.status){
+					populateActorList(response.data, 1);
+				}else{
+					$("#main-container").html("");
+					noActorFound();
+				}
+			}
+		});
 	});
 	
 	$(document).on("click", "img.showDetails", function(){
 		var id = $(this).attr("data-id");
 		var str = '';
-		//console.log(actors[id]);
 		var t = actors[id].StashActor_dob;
 		var d = new Date(t * 1000);
 		content = '<div class="center">'

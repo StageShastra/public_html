@@ -245,6 +245,10 @@
 				$data['StashActor_height <= '] = $filter['maxHeight'];
 			}
 
+			if($filter['dp']){
+				$data['StashActor_avatar <> '] = 'default.png';
+			}
+
 			$this->db->where($data);
 			$this->db->like("StashActor_gender", $filter['sex'], 'both');
 			$this->db->where_in('StashActor_actor_id_ref', $filter['in']);

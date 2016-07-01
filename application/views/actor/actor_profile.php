@@ -688,6 +688,7 @@ textarea{
                                 }
                             ?></span><br>
 
+                                <?php if( $this->session->userdata("StaSh_User_type") == 'director'){ ?>
                                 <span class="elements_label">Email: </span><span class="elements"> <?= $actorProfile['StashActor_email'] ?></span><br>
                                 <span class="elements_label">Phone:</span>
                                 
@@ -699,6 +700,7 @@ textarea{
 
                                 <br>
                                 <span class="elements_label">WhatsApp: </span><span class="elements" id="actor_whatsapp"><?= $actorProfile['StashActor_whatsapp'] ?></span><br>
+                                <?php } ?>
 
                             </div>
                         </div>

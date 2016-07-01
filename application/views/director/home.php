@@ -123,6 +123,10 @@
       font-size: 13px;
     }
 
+    .toggleSearchfilter {
+      margin: 0 5px;
+    }
+
               </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -231,7 +235,11 @@
                       </div>
                       <div class="row">
                           <div class="col-sm-6 form-group no-paddinglr">
-                            <button type="submit" class="btn submit-btn firstcolor" style="margin-top: 20px; margin-left:10px;" id="btn-search" ><span class="glyphicon glyphicon-filter"></span> &nbsp; Search</button>
+                          <!-- Insert a checkbox here and with name='dponly' -->
+                          <br>
+                          <input type="checkbox" id='dponly' name="dponly" class="css-checkbox" value="1"><label for='dponly' class="css-label info-small gray"> <small>Include profiles only with display pictures.</small>  </label>
+                          <hr>
+                          <button type="submit" class="btn submit-btn firstcolor" style="margin-top: 20px; margin-left:10px;" id="btn-search" ><span class="glyphicon glyphicon-filter"></span> &nbsp; Search</button>
                             <button type="button" class="btn submit-btn firstcolor resetAll" data-form="advanceSearch" style="margin-top: 20px; margin-left:10px;" id="btn-search" ><span class="glyphicon glyphicon-repeat"></span> &nbsp; Clear Form</button>
                           </div>
                           <div class="col-sm-6 form-group no-paddinglr">
@@ -343,7 +351,16 @@
 
                 <div class="alert alert-success" id="success_send" role="alert">Mail sent to all the actors.</div>
                 <div class="alert alert-danger"  id="failure_send" role="alert">Error sending mail! Please try again.</div>
-                <button type="button" class="btn taga addToCategories taga-selected " style="width:auto; min-width:1px;     background-color: #FF9800; color:white;" aria-label="Left Align" id="Name" data-cate="Name"><font class="">Name</font><span class="glyphicon glyphicon-remove pull-right no-top removeCate" aria-hidden="true" id="Name-remove" data-cate="Name"></span></button>
+
+
+                <div class="filterblocks">
+                  <!-- <button type="button" class="btn taga taga-selected" style="width:auto; min-width:1px;background-color: #FF9800; color:white;" aria-label="Left Align" id="Name" data-cate="Name">
+                    <font class="">Name</font>
+                    <span class="glyphicon glyphicon-remove pull-right no-top removeCate" aria-hidden="true" id="Name-remove" data-cate="Name"></span>
+                  </button> -->
+                </div>
+
+
                 <div class="container col-sm-12 center" id="browse-table">
                       
                 </div>

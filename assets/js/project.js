@@ -1,11 +1,5 @@
 $(document).ready(function(){
 
-	var url = "/public_html/project/ajax/",
-		base = "/public_html/",
-		type = "POST",
-		data = {};
-
-
 	$(document).on("click", ".responseToAudtion", function(){
 		$that = $(this);
 		cate = $("#projectInfoId").attr("data-for");

@@ -4,18 +4,7 @@ if(window.location.hash== "#login")
     console.log(window.location);
 }
 $(document).ready(function(){
-	//For Main Sevrer
-	var url = "/public_html/ajax/",
-		base = "/public_html/";
-		
-	//For Localhost
-	/*var url = "/public_html/beta/ajax/",
-		base = "/public_html/beta/";
-	*/
-
-	var type = "POST",
-		data = {},
-		formdata = {};
+    var formdata = {};
 
 	$(document).on("click", "button.select-btn", function(){
 		var show_div = $(this).attr("data-show"),

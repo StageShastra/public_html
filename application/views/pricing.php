@@ -371,6 +371,7 @@ a.anchor {
     <script src="<?= JS ?>/vendor/cbpAnimatedHeader.js"></script>
 
     <!-- Custom Theme JavaScript -->
+    <script src="<?= JS ?>/constants.js"></script>
     <script src="<?= JS ?>/main.js"></script>
     <script src="<?= JS ?>/landingpage.js"></script>
 </body>

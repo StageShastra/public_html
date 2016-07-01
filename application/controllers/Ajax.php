@@ -525,6 +525,8 @@
 			$this->load->model("ModelDirector");
 			// Santizing data
 			$minAge = $maxAge = $minHeight = $maxHeight = $sex = $skills = $projects = '';
+			$actorsInDirectorList = $this->ModelDirector->getActorsIdWithDirectors($this->session->userdata("StaSh_User_id"));
+			
 			if($data['agemin'] != ''){
 				$minAge = strtotime("-{$data['agemin']} years");
 			}
@@ -560,7 +562,7 @@
 				$actor_names = trim($data['actor_names']);
 			}
 			
-			$actorsInDirectorList = $this->ModelDirector->getActorsIdWithDirectors($this->session->userdata("StaSh_User_id"));
+			
 			$diff = array_merge($filteredBySKills, $filteredByProjects);
 			//print_r($filteredByProjects);
 			if(count($diff) == 0)
@@ -572,7 +574,8 @@
 							'maxAge' => $maxAge,
 							'sex' => $sex,
 							'in' => $diff,
-							'names' => $data['actor_names']
+							'names' => $data['actor_names'],
+							'dp' => $data['dponly']
 						);
 			//print_r($searchData);
 			$finalFilteredActors = $this->ModelDirector->finalFilter($searchData);
