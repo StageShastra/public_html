@@ -28,7 +28,6 @@
 
     <!-- Peity -->
     <script src="<?= ADMIN ?>/js/plugins/peity/jquery.peity.min.js"></script>
-    <script src="<?= ADMIN ?>/js/demo/peity-demo.js"></script>
 	
 	<script src="<?= ADMIN ?>/js/plugins/sweetalert/sweetalert.min.js"></script>
 

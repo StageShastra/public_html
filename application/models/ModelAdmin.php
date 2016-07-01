@@ -358,6 +358,79 @@
 			$this->db->order_by("StashContactMessage_id", "DESC");
 			return $this->db->get("stash-contact-message")->result("array");
 		}
+
+		public function emailInvitationData($value=''){
+			$fetch = $this->db->get("stash-email-invites")->result('array');
+
+			$sent = $seen = $reg = $paid = $pend = $confirm = $useen = $basic = 0;
+			foreach ($fetch as $key => $f) {
+				$sent++;
+				if($f['StashEmailInvite_opened']){
+					$seen++;
+					$user = $this->thisUserData('StashUsers_email', $f['StashEmailInvite_email']);
+					if(count($user)){
+						$reg++;
+						if($user['StashUsers_status'])
+							$confirm++;
+
+						$plan = $this->getActorPlan($user['StashUsers_id']);
+						if(count($plan))
+							$paid++;
+						else
+							$basic++;
+					}else{
+						$pend++;
+					}
+				}else{
+					$useen++;
+				}
+			}
+
+			return array( [0, $sent], [1, $seen], [2, $useen], [3, $reg], [4, $paid], [5, $basic], [6, $pend], [7, $confirm] );
+		}
+
+		public function smsInvitationData($value=''){
+			$fetch = $this->db->get("stash-sms-invites")->result('array');
+
+			$sent = $seen = $reg = $paid = $pend = $confirm = $useen = $basic = 0;
+			foreach ($fetch as $key => $f) {
+				$sent++;
+				if($f['StashSMSInvites_opened']){
+					$seen++;
+					$user = $this->thisUserData('StashUsers_mobile', $f['StashSMSInvites_mobile']);
+					if(count($user)){
+						$reg++;
+						if($user['StashUsers_status'])
+							$confirm++;
+
+						$plan = $this->getActorPlan($user['StashUsers_id']);
+						if(count($plan))
+							$paid++;
+						else
+							$basic++;
+					}else{
+						$pend++;
+					}
+				}else{
+					$useen++;
+				}
+			}
+
+			return array( [0, $sent], [1, $seen], [2, $useen], [3, $reg], [4, $paid], [5, $basic], [6, $pend], [7, $confirm] );
+		}
+
+		public function thisUserData($field = '', $value = ''){
+			$this->db->where($field, $value);
+			return $this->db->get("stash-users", 1)->first_row('array');
+		}
+
+		public function getActorPlan($ref = 0){
+			$this->db->where("StashActorPlan_actor_id_ref", $ref);
+			$this->db->where("StashActorPlan_status", 1);
+			$this->db->where("StashActorPlan_end <= ", time());
+			$this->db->ordeR_by("StashActorPlan_id", "DESC");
+			return $this->db->get("stash-actor-plan", 1)->first_row('array');
+		}
 	}
 
 ?>

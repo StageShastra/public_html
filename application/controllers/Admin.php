@@ -465,6 +465,10 @@
 					case 'CheckPromo':
 						$this->checkPromo($data);
 						break;
+
+					case "EmailGraphData":
+						$this->emailGraphData($data);
+						break;
 					
 					default:
 						$this->response(false, "Invalid Request.");
@@ -475,6 +479,12 @@
 				$this->response(false, "Form is empty.");
 			}
 
+		}
+
+		public function emailGraphData($data = []){
+			$d = $this->ModelAdmin->emailInvitationData();
+			$s = $this->ModelAdmin->smsInvitationData();
+			$this->response(true, "Data", array('email' => $d, 'sms' => $s));
 		}
 
 		public function checkPromo($data = []){

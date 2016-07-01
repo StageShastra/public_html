@@ -310,6 +310,63 @@ $(document).ready(function(){
 		return false;
 	});
 
+
+	// Flow Chart Line...
+
+	function flowLineChart( graphData, divId) {
+		var barOptions = {
+	        series: {
+	            lines: {
+	                show: true,
+	                lineWidth: 2,
+	                fill: true,
+	                fillColor: {
+	                    colors: [{
+	                        opacity: 0.0
+	                    }, {
+	                        opacity: 0.0
+	                    }]
+	                }
+	            }
+	        },
+	        xaxis: {
+	            ticks: [[0,'Sent'],[1,'Seen'],[2,'Unseen'],[3,'Joined'],[4,'Paid'],[5,'Basic'],[6,'Pending'],[7,'Confirmed']]
+	        },
+	        colors: ["#1ab394"],
+	        grid: {
+	            color: "#999999",
+	            hoverable: true,
+	            clickable: true,
+	            tickColor: "#D4D4D4",
+	            borderWidth:0
+	        },
+	        legend: {
+	            show: false
+	        },
+	        tooltip: true,
+	        tooltipOpts: {
+	            content: "%y"
+	        }
+	    };
+	    var barData = {
+	        label: "bar",
+	        data: graphData
+	    };
+	    $.plot($(divId), [barData], barOptions);
+	}
+
+	if( typeof graph !== 'undefined' ){
+		data = {request: "EmailGraphData", data: '{}'};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				flowLineChart(response.data.email, '#flot-line-chart');
+				flowLineChart(response.data.sms, '#flot-line-chart-2');
+			}
+		});
+	}
 	
 
 });
