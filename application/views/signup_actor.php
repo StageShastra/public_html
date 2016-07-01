@@ -8,6 +8,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Castiko | Register as an Actor.</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Propel your acting career forward - sign up to create a Castiko profile with photos & videos. Castiko helps casting directors and actors to work together">
         <meta name="keywords" content="Castiko, Acting, Audition, Actor, Casting, Sign Up">
         <meta name="filename" content="Castiko-Actor-Casting-Director-Pricing">
