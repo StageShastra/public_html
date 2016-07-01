@@ -714,6 +714,7 @@ textarea{
            <!-- contact modal toggle -->
              <div class="container-fluid">
                 <?php
+                    echo '<script>var first_time='.$user["StashUsers_status"].';</script>';
                     if($user["StashUsers_status"] == 0){
                 ?>
                 <div class="alert alertbox alert-warning alert-dismissible center" id="warningmsg" role="alert">
@@ -771,7 +772,7 @@ textarea{
                             </div>
                             <div class="basics col-sm-12 col-lg-7 col-md-7" style="padding-left:0px;padding-right:0px;">
                                 <div class="category_heading ">BASICS
-                                    <span class="glyphicon glyphicon-pencil edit-button toggleEdit" id="step1"   data-unhide-id="#actor_basics_edit" data-hide-id="#actor_basics" aria-hidden="true" data-step="1" data-intro="Click on this button to edit your basic details. " ></span>
+                                    <span class="glyphicon glyphicon-pencil edit-button toggleEdit" id="step1"   data-unhide-id="#actor_basics_edit" data-hide-id="#actor_basics" aria-hidden="true"  ></span>
                                 </div>
                                 <div class="elements">
                                     <span class="elements_label">Sex: </span><span id="actor_sex"><?= ($actorProfile['StashActor_gender']) ? "Male" : "Female" ?></span>
@@ -958,7 +959,7 @@ textarea{
                     <div class="col-sm-8 left" id="second_column_actor">
                          <div class="col-sm-12 no_padding_small" >
                             <br>
-                            <div class="category_heading">EXPERIENCE <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= AC_ExpHelpTxt ?>"></i>
+                            <div class="category_heading" id="step2">EXPERIENCE <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="<?= AC_ExpHelpTxt ?>"></i>
                                 <span id="openexperienceicon" class="glyphicon glyphicon-plus edit-button pull-right firstcolor toggleEdit" data-unhide-id="#experience_add, #closeexperienceicon" data-hide-id="#openexperienceicon" aria-hidden="true"></span>
                                 <span id="closeexperienceicon" class="glyphicon glyphicon-minus pull-right hidden toggleEdit" data-hide-id="#experience_add, #closeexperienceicon" data-unhide-id="#openexperienceicon" aria-hidden="true"></span>
                             </div>
@@ -1111,7 +1112,7 @@ textarea{
                                 </div>
                                 <hr>
                             </div>
-                            <div class="category_heading">GALLERY
+                            <div class="category_heading" id="step3">GALLERY
                                  <span class="glyphicon glyphicon-plus edit-button pull-right" data-toggle="modal" data-target="#photosupload" aria-hidden="true"></span>
                                 <div id="photos_videos">
                                 <div class="row" style="padding-right:15px;">

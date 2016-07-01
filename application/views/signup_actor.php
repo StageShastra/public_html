@@ -8,6 +8,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Castiko | Register as an Actor.</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Propel your acting career forward - sign up to create a Castiko profile with photos & videos. Castiko helps casting directors and actors to work together">
         <meta name="keywords" content="Castiko, Acting, Audition, Actor, Casting, Sign Up">
         <meta name="filename" content="Castiko-Actor-Casting-Director-Pricing">
@@ -137,12 +138,7 @@ a:hover, a:focus {
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+                
                 <a class="navbar-brand" href="<?= base_url() ?>">
                             <img src="<?= IMG ?>/logo.png" class="brands img-responsive "/>
                             <div class="vertical-middle brandname title">
@@ -166,7 +162,7 @@ a:hover, a:focus {
               <div class="col-sm-12 light-padded">
                 <div class="col-lg-6 col-sm-6 col-xs-12" id="form-div">
                 <?php if(!$error){ ?>
-                  <font class="info-small text-primary signup_heading"> Actor Sign Up   <? echo ucwords("- ".$plan); ?></font>
+                  <font class="info-small text-primary signup_heading"> Actor Sign Up   <? if(isset($_REQUEST['plan'])) {echo ucwords("- ".$_REQUEST['plan']);} ?></font>
                   
                       <form role="form" action="<?= $_SERVER['REQUEST_URI'] ?>" method="POST">
                       <div class="form-group">

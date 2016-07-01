@@ -687,21 +687,6 @@ textarea{
                                     echo date("m/d/Y", $actorProfile['StashActor_dob']);
                                 }
                             ?></span><br>
-
-                                <?php if( $this->session->userdata("StaSh_User_type") == 'director'){ ?>
-                                <span class="elements_label">Email: </span><span class="elements"> <?= $actorProfile['StashActor_email'] ?></span><br>
-                                <span class="elements_label">Phone:</span>
-                                
-                                <span class="text-danger elements" id="actor_phone"> <?= $actorProfile['StashActor_mobile'] ?> 
-                                <?php if($user["StashUsers_mobile_status"] == 0){ ?>
-                                <a href="<?= base_url() ?>actor/mobileverify" data-toggle="tooltip" data-placement="right" title="<?= AC_MobileVerifyTxt ?>" class="text-danger otpLink"><i class="fa fa-exclamation"></i></a>
-                                <?php } ?>
-                                </span>
-
-                                <br>
-                                <span class="elements_label">WhatsApp: </span><span class="elements" id="actor_whatsapp"><?= $actorProfile['StashActor_whatsapp'] ?></span><br>
-                                <?php } ?>
-
                             </div>
                         </div>
                         <div class="row">

@@ -1,7 +1,11 @@
 $(document).ready(function(){
 
+	var firsttime=0;
+	if(first_time==0)
+	{
+		startIntro();
+	}
 	url = base + "actor/ajax";
-
 	//$("#warningmsg").hide();
 	$("#resendConfirmationModal").modal("hide");
 	
@@ -414,6 +418,12 @@ $(document).ready(function(){
 			}
 
 			plc = $(this).attr("placeholder").replace(":", "");
+			if(plc.search("Language")!=-1){
+				plc="language";
+			}
+			else {
+				plc="skills";
+			}
 			ac = plc.toLowerCase();
 		})
 		.autocomplete({
@@ -720,30 +730,30 @@ function feet_to_cm()
           intro.setOptions({
             steps: [
               { 
-                intro: "Hello world!"
+                intro: "Welcome to Castiko.<br>You are just 5 minutes away from showing your professional profile to the world!"
               },
               {
                 element: document.querySelector('#step1'),
-                intro: "This is a tooltip."
+                intro: "Click on any of these pencils to edit a section of your profile."
               },
               {
                 element: document.querySelectorAll('#step2')[0],
-                intro: "Ok, wasn't that fun?",
-                position: 'right'
-              },
-              {
-                element: '#step3',
-                intro: 'More features, more fun.',
-                position: 'left'
-              },
-              {
-                element: '#step4',
-                intro: "Another step.",
+                intro: "You can add videos to your profile.",
                 position: 'bottom'
               },
               {
-                element: '#step5',
-                intro: 'Get it, use it.'
+                element: '#step3',
+                intro: 'Fill your gallery with some compellings shots of you.',
+                position: 'left'
+              },
+              {
+                element: '#actor_pro_pic',
+                intro: "Remember to choose your profile pic from already uploaded gallery and crop it perfectly",
+                position: 'bottom'
+              },
+              {
+                element: '#profile_link',
+                intro: 'Use this customisable profile link of yours to share your profile with the whole world! <br> Click <a href="http://castiko.com/johndoe">here</a> too see a sample profie<br>Otherwise you are all set!'
               }
             ]
           });

@@ -761,7 +761,11 @@
 							$result['users'][] = [ 'name' => $f['StashEmailInvite_email'], 'contact' => $f['StashEmailInvite_email'], 'status' => 'pending', 'label' => 'danger' ];
 					$s++;
 				}else{
-					$result['users'][] = [ 'name' => $f['StashEmailInvite_email'], 'contact' => $f['StashEmailInvite_email'], 'status' => 'pending', 'label' => 'danger' ];
+					if($f['StashEmailInvite_opened'])
+						$result['users'][] = [ 'name' => $f['StashEmailInvite_email'], 'contact' => $f['StashEmailInvite_email'], 'status' => 'seen', 'label' => 'warning' ];
+					else
+						$result['users'][] = [ 'name' => $f['StashEmailInvite_email'], 'contact' => $f['StashEmailInvite_email'], 'status' => 'pending', 'label' => 'danger' ];
+					//$result['users'][] = [ 'name' => $f['StashEmailInvite_email'], 'contact' => $f['StashEmailInvite_email'], 'status' => 'pending', 'label' => 'danger' ];
 				}
 
 			}
@@ -770,7 +774,7 @@
 			$result['seen'] = $o;
 			$result['used'] = $s;
 			$result['msg'] = $msg;
-			$result['pending'] = $recipient - $s;
+			$result['pending'] = $recipient - $result['responded'];
 
 			return $result;
 		}
@@ -808,7 +812,11 @@
 							$result['users'][] = [ 'name' => $f['StashSMSInvites_mobile'], 'contact' => $f['StashSMSInvites_mobile'], 'status' => 'pending', 'label' => 'danger' ];
 					$s++;
 				}else{
-					$result['users'][] = [ 'name' => $f['StashSMSInvites_mobile'], 'contact' => $f['StashSMSInvites_mobile'], 'status' => 'pending', 'label' => 'danger' ];
+					if($f['StashSMSInvites_opened'])
+						$result['users'][] = [ 'name' => $f['StashSMSInvites_mobile'], 'contact' => $f['StashSMSInvites_mobile'], 'status' => 'seen', 'label' => 'warning' ];
+					else
+						$result['users'][] = [ 'name' => $f['StashSMSInvites_mobile'], 'contact' => $f['StashSMSInvites_mobile'], 'status' => 'pending', 'label' => 'danger' ];
+							//$result['users'][] = [ 'name' => $f['StashSMSInvites_mobile'], 'contact' => $f['StashSMSInvites_mobile'], 'status' => 'pending', 'label' => 'danger' ];
 				}
 
 				
@@ -818,7 +826,7 @@
 			$result['seen'] = $o;
 			$result['used'] = $s;
 			$result['msg'] = $msg;
-			$result['pending'] = $recipient - $s;
+			$result['pending'] = $recipient - $result['responded'];
 
 			return $result;
 		}

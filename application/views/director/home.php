@@ -91,6 +91,7 @@
       }
       table{
         border: 1px solid #ddd;
+        margin-top: 10px;
       }
       .row_btn{
         color:#FF9800;
@@ -125,6 +126,21 @@
 
     .toggleSearchfilter {
       margin: 0 5px;
+      width:auto; 
+      min-width:1px;
+      background-color: #F44336;
+      color:white;
+      margin-left: 15px;
+    }
+    .toggleSearchfilter:hover{
+      color:white;
+    }
+    .removeSearchFilter{
+      color: white;
+      transition: all .2s ease-in-out;
+    }
+    .removeSearchFilter:hover{
+      transform:scale(1.3);
     }
 
               </style>
