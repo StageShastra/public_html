@@ -622,7 +622,7 @@ $(document).ready(function(){
 					+ '<font class="info gray">'
 					+ 'Oops! It looks like no actor match your criteria. <br>Why don\'t you try changing some of the filters?'
   					+ '<br><button type="button" class="btn submit-btn firstcolor" data-toggle="modal" data-target="#advancedSearch" id="btn-login" >'
-  					+ '<span class="glyphicon glyphicon-filter"></span> &nbsp; Change Filters</button></div>';
+  					+ '<span class="glyphicon glyphicon-filter"></span> &nbsp; Change Filters</button></div><br><br><br><br><br>';
   		$table.html(content);
 	}
 
@@ -698,7 +698,7 @@ $(document).ready(function(){
 					name = "Max Height: ";
 				}
 
-				btn = '<button type="button" class="btn taga taga-selected toggleSearchfilter" data-key="'+key+'" style="width:auto; min-width:1px;background-color: #FF9800; color:white;" aria-label="Left Align" id="Name" data-cate="Name">'
+				btn = '<button type="button" class="btn taga taga-selected toggleSearchfilter" data-key="'+key+'"  aria-label="Left Align" id="Name" data-cate="Name">'
                     + '<font class="">'+ name + searchData[key] +'</font>'
                     + '<span class="glyphicon glyphicon-remove pull-right no-top removeSearchFilter" aria-hidden="true"></span>'
                     + '</button>';
@@ -1157,9 +1157,9 @@ $(document).ready(function(){
 			 + "<div class='conversation_summary'><h3>Conversation Summary</h3><hr>"
 			 + "<span class='row_text'>Recipients: "+ obj.recipient +" </span><br>"
 			 + "<span class='row_text'>Responses</span><br>"
+			 + "<button class='btn btn-danger'>Pending: <span class='badge'>"+obj.pending+"</span></button>"
 			 + "<button class='btn btn-info'>Seen: <span class='badge'>"+obj.seen+"</span></button>"
 			 + "<button class='btn btn-success'>Joined: <span class='badge'>"+obj.used+"</span></button>"
-			 + "<button class='btn btn-danger'>Pending: <span class='badge'>"+obj.pending+"</span></button>"
 			 + "<br></div></div>";
 
 		fianlTr = "<td colspan='12'><div class='row'>"+ div1 + div2 + div3 +"</div></td>";

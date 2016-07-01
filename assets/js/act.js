@@ -1,15 +1,11 @@
 $(document).ready(function(){
+
 	var firsttime=0;
 	if(first_time==0)
 	{
 		startIntro();
 	}
-	var url = "/public_html/actor/ajax",
-		base = "/public_html/",
-		type = "POST",
-		data = {};
-
-
+	url = base + "actor/ajax";
 	//$("#warningmsg").hide();
 	$("#resendConfirmationModal").modal("hide");
 	
