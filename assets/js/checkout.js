@@ -129,14 +129,14 @@ $(document).ready(function(){
 	$(document).on("click", "#checkout_btn_basic_actor", function(){
 		data = {request: "GoBasic", data: JSON.stringify({plan: 'Basic'})};
 		$.ajax({
-			url: "/public_html/ajax/",
-			type: "POST",
+			url: url,
+			type: type,
 			data: data,
 			success: function(response){
 				if(response.status){
 					setTimeout( function(){
 
-						window.location.href = "/public_html/payment/success/basic";
+						window.location.href = base + "payment/success/basic";
 					}, 500 );
 				}
 			}

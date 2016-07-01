@@ -9,6 +9,7 @@ $(document).ready(function(){
 		type = "POST",
 		data = {};
 
+
 	//$("#warningmsg").hide();
 	$("#resendConfirmationModal").modal("hide");
 	
