@@ -1125,6 +1125,7 @@ $(document).ready(function(){
 		fianlTr = "<td colspan='12'><div class='row'>"+ div1 + div2 + div3 +"</div></td>";
 		$(".convo-trs").hide();
 		$("#convo-"+thisfor + "-" + thisId).html(fianlTr).show(500);
+		 $('#email_table').DataTable();
 	}
 
 	$(document).on("click", ".nextRowData", function(){
@@ -1271,7 +1272,6 @@ $(document).ready(function(){
 		});
 		return false;
 	});
-
 	$(document).on("click", ".duplicateReInvite", function(){
 		data = {request: "BulkDupReInvite", data: JSON.stringify({contacts: duplicateContacts, type: duplicateType, project: dupProject, msgID: dupMsgId})};
 		$.ajax({
