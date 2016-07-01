@@ -194,6 +194,58 @@
               </div>  
             </div>  
           </div>
+          <!-- Advanced Search Modal -->
+          <!-- Advanced Search Modal -->
+          <div id="advancedSearch" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title firstcolor info"><?= CD_AdvSearch ?></h4><span class="info-small gray"><?= CD_AdvSearchSmall ?></span>
+                </div>
+                <div class="modal-body" style="background-color:#f2f2f2;">
+                  <div class="container" style="max-width:100%; ">
+                    <form action="#" method="post" id="advanceSearch">
+                      <div class="row">
+                        <div class="col-sm-6 form-group no-paddinglr">
+                          <span class="info-small gray">Age Range (Min)</span> <input type="text" class="form-control add" id="aagemin" name="agemin"  placeholder= "from age:"  />
+                          <span class="info-small gray">Sex(M/F) </span> <input type="text" class="form-control add" id="asex" name="sex" placeholder= "M/F:"  />
+
+                        </div>
+                        <div class="col-sm-6 form-group no-paddinglr">
+                          <span class="info-small gray">Age Range (Max) </span> <input type="text" class="form-control add" id="aagemax"  name="agemax" placeholder= "upto age :"  />
+                          <span class="info-small gray">Skills(tag)</span>  <input type="text" data-role="tagsinput" class="form-control add" id="askills" name="skills" placeholder= "Skills :"  />
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6 form-group no-paddinglr">
+                          <span class="info-small gray">Min. Height (in cm) </span> <input type="text" class="form-control add" id="aheightmin" name="heightmin" placeholder= "from height (in cms) :"  />
+                          <span class="info-small gray">Projects(tag) <input type="text" data-role="tagsinput" class="form-control add" id="aprojects" name="projects" placeholder= "Projects"  />
+                        </div>
+                        <div class="col-sm-6 form-group no-paddinglr">
+                          <span class="info-small gray">Max. Height (in cm) </span> <input type="text" class="form-control add" id="aheightmax"  name="heightmax" placeholder= "upto height (in cms) :"  />
+                          <span class="info-small gray">Actor Names(tag) <input type="text" data-role="tagsinput" class="form-control add" id="actr_name" name="actor_names" placeholder= "Actor Names"  />
+                        </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6 form-group no-paddinglr">
+                            <button type="submit" class="btn submit-btn firstcolor" style="margin-top: 20px; margin-left:10px;" id="btn-search" ><span class="glyphicon glyphicon-filter"></span> &nbsp; Search</button>
+                            <button type="button" class="btn submit-btn firstcolor resetAll" data-form="advanceSearch" style="margin-top: 20px; margin-left:10px;" id="btn-search" ><span class="glyphicon glyphicon-repeat"></span> &nbsp; Clear Form</button>
+                          </div>
+                          <div class="col-sm-6 form-group no-paddinglr">
+
+                          </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
 
           <!-- Modal Section : Bulk Actions -->
           <div id="bulkActionModel" class="col-sm-8 fade contact-form" style="max-width: 550px;max-height:440px;display:none;">
@@ -291,6 +343,7 @@
 
                 <div class="alert alert-success" id="success_send" role="alert">Mail sent to all the actors.</div>
                 <div class="alert alert-danger"  id="failure_send" role="alert">Error sending mail! Please try again.</div>
+                <button type="button" class="btn taga addToCategories taga-selected " style="width:auto; min-width:1px;     background-color: #FF9800; color:white;" aria-label="Left Align" id="Name" data-cate="Name"><font class="">Name</font><span class="glyphicon glyphicon-remove pull-right no-top removeCate" aria-hidden="true" id="Name-remove" data-cate="Name"></span></button>
                 <div class="container col-sm-12 center" id="browse-table">
                       
                 </div>
