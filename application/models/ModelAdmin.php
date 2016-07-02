@@ -362,7 +362,7 @@
 		public function emailInvitationData($value=''){
 			$fetch = $this->db->get("stash-email-invites")->result('array');
 
-			$sent = $seen = $reg = $paid = $pend = $confirm = $useen = $basic = $price = $check = 0;
+			$sent = $seen = $reg = $paid = $pend = $confirm = $useen = $basic = $price = $check =  $complete = 0;
 			foreach ($fetch as $key => $f) {
 				$sent++;
 				if($f['StashEmailInvite_opened']){
@@ -392,13 +392,13 @@
 				}
 			}
 
-			return array( [0, $sent], [1, $seen], [2, $useen], [3, $pend], [4, $reg], [5, $paid], [6, $basic], [7, $confirm], [8, $price], [9, $check] );
+			return array( [0, $sent], [1, $seen], [2, $price], [3, $reg], [4, $check], [5, $paid], [6, $confirm], [7, $complete] );
 		}
 
 		public function smsInvitationData($value=''){
 			$fetch = $this->db->get("stash-sms-invites")->result('array');
 
-			$sent = $seen = $reg = $paid = $pend = $confirm = $useen = $basic = $price = $check = 0;
+			$sent = $seen = $reg = $paid = $pend = $confirm = $useen = $basic = $price = $check = $complete = 0 ;
 			foreach ($fetch as $key => $f) {
 				$sent++;
 				if($f['StashSMSInvites_opened']){
@@ -428,7 +428,7 @@
 				}
 			}
 
-			return array( [0, $sent], [1, $seen], [2, $useen], [3, $pend], [4, $reg], [5, $paid], [6, $basic], [7, $confirm], [8, $price], [9, $check] );
+			return array( [0, $sent], [1, $seen], [2, $price], [3, $reg], [4, $check], [5, $paid], [6, $confirm], [7, $complete] );
 		}
 
 		public function thisUserData($field = '', $value = ''){
