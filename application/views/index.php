@@ -165,7 +165,7 @@
                         <span class="info-item-desc " >Casting Directors are updated instantly when you add new work.</span>
                     </div>
                     <div>
-                        <a href="<?=base_url() ?>home/pricing#forActors" class="btn btn-custom-outlined"  onmouseover='show_time_taken("a")' onmouseout='hide_time_taken("a")' target="_blank">Sign up now</a>
+                        <a href="<?=base_url() ?>home/choose_plan#forActors" class="btn btn-custom-outlined"  onmouseover='show_time_taken("a")' onmouseout='hide_time_taken("a")' target="_blank">Sign up now</a>
                         <a href="<?=base_url() ?>home/pricing#forActors" class="btn btn-custom-outlined" target="_blank">See Pricing</a>
                     </div>
                     <div id="time_taken_a" class="time_taken hidden">Just takes 2 mins</div>
@@ -205,7 +205,7 @@
                         <span class="info-item-desc">Track responses, attendance and shortlists with ease.</span>
                     </div>
                     <div>
-                        <span  onmouseover='show_time_taken("cd")' onmouseout='hide_time_taken("cd")'><a href="<?=base_url() ?>home/pricing#forDirectors" class="btn btn-custom-outlined" >Sign up now</a></span>
+                        <span  onmouseover='show_time_taken("cd")' onmouseout='hide_time_taken("cd")'><a href="<?=base_url() ?>home/choose_plan#forDirectors" class="btn btn-custom-outlined" >Sign up now</a></span>
                         <a href="<?=base_url() ?>home/pricing#forDirectors" class="btn btn-custom-outlined" target="_blank">See Pricing</a>
                         <div id="time_taken_cd" class="time_taken hidden">Just takes 2 mins</div>
                     </div>
@@ -244,7 +244,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Say, Ola!</h2>
+                    <h2>Say Hola!</h2>
                     <div style="text-align:center;">
                                 Its good to see you here!<br>
                             Want to say Hi ? Have some feedback?<br>
