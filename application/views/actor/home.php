@@ -354,10 +354,19 @@
             .blurb{
                 font-size: 14px;
             }
+            .notification{
+                display: block !important;
+            }
             
         }
         /* sm */
         @media screen and (min-width: 768px) {
+            .navbar-right .dropdown-menu {
+                right: 0px;
+                float: none;
+                left: 0px;
+                width: 400px;
+            }
             body {
                 font-size: 1em;
             }
@@ -378,6 +387,12 @@
         }
         /* md */
         @media screen and (min-width: 992px) {
+            .navbar-right .dropdown-menu {
+                right: 0px;
+                float: none;
+                left: 0px;
+                width: 400px;
+            }
             body {
                 font-size: 1.1em;
             }
@@ -404,6 +419,12 @@
         }
         /* lg */
         @media screen and (min-width: 1200px) {
+            .navbar-right .dropdown-menu {
+                right: 0px;
+                float: none;
+                left: 0px;
+                width: 400px;
+            }
             body {
                 font-size: 1.2em;
             }
@@ -642,12 +663,35 @@ textarea{
     color: inherit;
 }
 .navbar-nav > li > a{
-    font-size: 16px !important;
+    font-size: 12px !important;
 }
 .navbar-nav > li > a:hover {
     color: #fff !important;
     background: #F7A9A9 !important;
 }
+.notification{
+    padding: 10px;
+    padding: 10px;
+    position: relative;
+    top: 8px;
+    font-size: 12px;
+
+}
+.notificaton_btn{
+    position: relative;
+    top: 24px;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+}
+.notification:hover{
+    background: white !important;
+    color:red !important;
+}
+#notification_bar{
+    height: auto!important;
+}
+
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -664,7 +708,9 @@ textarea{
                 <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <button type="button" class="notificaton_btn hidden-lg hidden-sm hidden-md" data-toggle="collapse" data-target="#notification_bar" aria-haspopup="true" aria-expanded="false"><span class="fa fa-bell-o firstcolor" aria-hidden="true"></span></a>
+                
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> 
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -686,6 +732,18 @@ textarea{
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  
                       <ul class="nav navbar-nav navbar-right ul_list">
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle hidden-xs " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-bell-o firstcolor" aria-hidden="true"></span></a>
+                          <ul class="dropdown-menu hidden-xs">
+                           <li><a href="#" class="changeCategory">Change Category</a></li>
+                           <li><a href="<?= base_url() . "director/conversations" ?>" >Conversations</a></li>
+                            <!--<li><a href="add_actor.php">Add</a></li>
+                            <li><a class="not-active" href="#">Import</a></li>
+                            <li><a class="not-active" href="#">Export</a></li>
+                            <li role="separator" class="divider"></li>-->
+                            <li><a href="<?= base_url() ?>home/logout/">Sign-Out</a></li>
+                          </ul>
+                        </li>   
                         <li >
                             <a href="<?= base_url()?>actor/"  > Dashboard
                             </a>
@@ -706,6 +764,24 @@ textarea{
                         </li>
                       </ul>
                     </div><!-- /.navbar-collapse -->
+                    
+                </div>
+
+
+                <!-- ========================================================= -->
+                <!-- Notification Bar -->
+                <div class="collapse navbar-collapse hidden-lg hidden-sm hidden-md" style="height:auto!important;" id="notification_bar">  
+                    <ul class="nav navbar-nav navbar-right ul_list">
+                        <li>
+                            <a href="<?= base_url() ?>/payment?plan=1"> Go Pro!
+                            </a>
+                        </li>
+                    </ul>      
+                </div><!-- /notification_bar-->
+                <!-- ====================================================== -->
+
+
+
                 </div>
             </nav>
 
