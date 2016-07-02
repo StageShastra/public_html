@@ -380,9 +380,10 @@
 
 						$plan = $this->getActorPlan($user['StashUsers_id']);
 						if(count($plan))
-							$paid++;
-						else
-							$basic++;
+							if(strpos($plan['StashActorPlan_plan'], 'pro'))
+								$paid++;
+							else
+								$basic++;
 					}else{
 						$pend++;
 					}
@@ -415,9 +416,10 @@
 
 						$plan = $this->getActorPlan($user['StashUsers_id']);
 						if(count($plan))
-							$paid++;
-						else
-							$basic++;
+							if(strpos($plan['StashActorPlan_plan'], 'pro'))
+								$paid++;
+							else
+								$basic++;
 					}else{
 						$pend++;
 					}

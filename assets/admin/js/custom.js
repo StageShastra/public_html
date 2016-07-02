@@ -355,6 +355,42 @@ $(document).ready(function(){
 	    $.plot($(divId), [barData], barOptions);
 	}
 
+	function pieChart(pro, basic, reg) {
+		var data = [{
+	        label: "Paid Pro",
+	        data: pro,
+	        color: "#d3d3d3",
+	    }, {
+	        label: "Basic",
+	        data: basic,
+	        color: "#bababa",
+	    }, {
+	        label: "Other",
+	        data: reg,
+	        color: "#79d2c0",
+	    }];
+
+	    var plotObj = $.plot($("#flot-pie-chart"), data, {
+	        series: {
+	            pie: {
+	                show: true
+	            }
+	        },
+	        grid: {
+	            hoverable: true
+	        },
+	        tooltip: true,
+	        tooltipOpts: {
+	            content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
+	            shifts: {
+	                x: 20,
+	                y: 0
+	            },
+	            defaultTheme: false
+	        }
+	    });
+	}
+
 	if( typeof graph !== 'undefined' ){
 		data = {request: "EmailGraphData", data: '{}'};
 		$.ajax({
@@ -365,6 +401,8 @@ $(document).ready(function(){
 				flowLineChart(response.data.main, '#flot-line-chart-main');
 				flowLineChart(response.data.email, '#flot-line-chart');
 				flowLineChart(response.data.sms, '#flot-line-chart-2');
+				//console.log(response.data.main[5][1], response.data.main[6][1], response.data.main[4][1]);
+				pieChart(response.data.main[5][1], response.data.main[6][1], response.data.main[4][1]);
 			}
 		});
 	}
