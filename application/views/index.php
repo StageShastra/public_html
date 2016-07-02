@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Castiko is a platform to connect Actors and Casting Directors. Actors – create your own acting profiles with photos & videos. Get auditions. Casting directors – manage all your data, run auditions and find new actors">
-    <meta name="keywords" content="Acting, Audition, Actor, Casting, Film, Casting Directors in Mumbai, Search Actors">
+    <meta name="keywords" content="Acting, Audition, Actor, Casting, Film, Castiko's Official Website, Casting Directors in Mumbai, Search Actors">
     <meta name="filename" content="Castiko-Acting-Audition-Casting-Tool-Home">
     <meta property="og:title" content="Castiko Home - Acting auditions and casting for film production"/>
     <meta property="og:type" content="website"/>
@@ -67,7 +67,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="<?= base_url() ?>">
-                            <img src="<?= IMG ?>/logo.png" class="brands img-responsive "/>
+                            <img src="<?= IMG ?>/logo.png" alt="Castiko's Official Logo" class="brands img-responsive "/>
                             <div class="vertical-middle brandname title ">
                                 <?= M_Title ?>
                                 <br>
@@ -124,8 +124,8 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="intro-text">
-                        <span class="name">Making casting easier.</span>
-                        <span class="skills">Castiko makes it easier for actors and<br> casting directors to work together.</span>
+                        <h3 class="name">Making casting easier.</h3>
+                        <h1 class="skills">Castiko makes it easier for actors and<br> casting directors to work together.</h1>
                         <div><a href="#forActor" class="btn btn-custom">I'm an Actor</a>
                         <a href="#forDirector" class="btn btn-custom">I'm a Casting Director</a></div>
                     </div>
@@ -171,8 +171,8 @@
                     <div id="time_taken_a" class="time_taken hidden">Just takes 2 mins</div>
                 </div>
                 <div class="col-md-6 col-xs-6 col-sm-6 deviceholder" >
-                    <img src="<?= IMG ?>/macbook.png" class="animation-element slide-left img-responsive laptoponly" >
-                    <img src="<?= IMG ?>/iphone.png" class="animation-element slide-left  img-responsive mobileonly" >
+                    <img src="<?= IMG ?>/macbook.png" alt="Castiko's Sample Actor Profile on Macbook" class="animation-element slide-left img-responsive laptoponly" >
+                    <img src="<?= IMG ?>/iphone.png" alt="Castiko's Sample Actor Profile on Iphone" class="animation-element slide-left  img-responsive mobileonly" >
                 </div>
             </div>
         </div>
@@ -187,8 +187,8 @@
                 <h3>For Casting Directors</h3>
               </center>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <img src="<?= IMG ?>/macbook_cd.png" class="animation-element slide-left  img-responsive laptoponly" >
-                    <img src="<?= IMG ?>/ipadcd.png" class="animation-element slide-left  img-responsive mobileonly" >
+                    <img src="<?= IMG ?>/macbook_cd.png" alt="Castiko's Sample Casting Director Dashboard on Macbook" class="animation-element slide-left  img-responsive laptoponly" >
+                    <img src="<?= IMG ?>/ipadcd.png" alt=" Castiko's Sample Casting Director Dashboard on Ipad" class="animation-element slide-left  img-responsive mobileonly" >
 
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-12">
