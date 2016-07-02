@@ -330,7 +330,7 @@ $(document).ready(function(){
 	            }
 	        },
 	        xaxis: {
-	            ticks: [[0,'Sent'],[1,'Seen'],[2,'Unseen'],[3,'Pending'],[4,'Joined'],[5,'Paid'],[6,'Basic'],[7,'Confirmed'],[8,'Pricing'],[9,'Checkout']]
+	            ticks: [[0,'Sent'],[1,'Seen'],[2,'Chose Plan'],[3,'Signed Up'],[4,'Clicked Checkout'],[5,'Paid'],[6,'Confirmed'],[7,'Completed']]
 	        },
 	        colors: ["#1ab394"],
 	        grid: {
