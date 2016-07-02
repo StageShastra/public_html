@@ -81,6 +81,9 @@
 					case "BulkDupReInvite":
 						$this->bulkDupReInvite($data);
 						break;
+					case "CheckoutClicked":
+						$this->checkoutClicked($data);
+						break;
 					default:
 						$this->response(false, "Invalid Request");
 						break;
@@ -88,6 +91,12 @@
 			}else{
 				$this->response(false, Aj_Req_NoData);
 			}
+		}
+
+		public function checkoutClicked($data = []){
+			$this->load->model("ModelProject");
+			$this->updateCheckoutClicked();
+			$this->response(true);
 		}
 
 		public function bulkDupReInvite($data = []){

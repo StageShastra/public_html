@@ -362,7 +362,7 @@
 		public function emailInvitationData($value=''){
 			$fetch = $this->db->get("stash-email-invites")->result('array');
 
-			$sent = $seen = $reg = $paid = $pend = $confirm = $useen = $basic = 0;
+			$sent = $seen = $reg = $paid = $pend = $confirm = $useen = $basic = $price = $check = 0;
 			foreach ($fetch as $key => $f) {
 				$sent++;
 				if($f['StashEmailInvite_opened']){
@@ -373,6 +373,11 @@
 						if($user['StashUsers_status'])
 							$confirm++;
 
+						if($f['StashEmailInvite_status'] == 2)
+							$price++;
+						elseif($f['StashEmailInvite_status'] == 3)
+							$check++;
+
 						$plan = $this->getActorPlan($user['StashUsers_id']);
 						if(count($plan))
 							$paid++;
@@ -386,13 +391,13 @@
 				}
 			}
 
-			return array( [0, $sent], [1, $seen], [2, $useen], [3, $pend], [4, $reg], [5, $paid], [6, $basic], [7, $confirm] );
+			return array( [0, $sent], [1, $seen], [2, $useen], [3, $pend], [4, $reg], [5, $paid], [6, $basic], [7, $confirm], [8, $price], [9, $check] );
 		}
 
 		public function smsInvitationData($value=''){
 			$fetch = $this->db->get("stash-sms-invites")->result('array');
 
-			$sent = $seen = $reg = $paid = $pend = $confirm = $useen = $basic = 0;
+			$sent = $seen = $reg = $paid = $pend = $confirm = $useen = $basic = $price = $check = 0;
 			foreach ($fetch as $key => $f) {
 				$sent++;
 				if($f['StashSMSInvites_opened']){
@@ -403,6 +408,11 @@
 						if($user['StashUsers_status'])
 							$confirm++;
 
+						if($f['StashSMSInvites_status'] == 2)
+							$price++;
+						elseif($f['StashSMSInvites_status'] == 3)
+							$check++;
+
 						$plan = $this->getActorPlan($user['StashUsers_id']);
 						if(count($plan))
 							$paid++;
@@ -416,7 +426,7 @@
 				}
 			}
 
-			return array( [0, $sent], [1, $seen], [2, $useen], [3, $pend], [4, $reg], [5, $paid], [6, $basic], [7, $confirm] );
+			return array( [0, $sent], [1, $seen], [2, $useen], [3, $pend], [4, $reg], [5, $paid], [6, $basic], [7, $confirm], [8, $price], [9, $check] );
 		}
 
 		public function thisUserData($field = '', $value = ''){

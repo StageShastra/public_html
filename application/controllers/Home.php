@@ -73,6 +73,13 @@ class Home extends CI_Controller {
 			}
 		}
 
+		setcookie("Cstko_refer", $refer, time() + 3600, "/");
+
+		if( $refer == 'sms' )
+			$this->Auth->updateSMSLinkUsed( $this->input->post("link_id"), 2 );
+		elseif($refer == 'email')
+			$this->Auth->updateEmailLinkUsed( $this->input->post("link_id"), 2 );
+
 		/*print_r($this->input->post());
 		exit();*/
 

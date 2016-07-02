@@ -401,9 +401,10 @@
 			$this->db->update("stash-sms-invites", array('StashSMSInvites_opened' => time()));
 		}
 
-		public function updateSMSLinkUsed($id = 0){
+		public function updateSMSLinkUsed($id = 0, $st = 0){
+			$s = ($st) ? $st : 1;
 			$this->db->where("StashSMSInvites_id", $id);
-			$this->db->update("stash-sms-invites", array('StashSMSInvites_status' => 1));
+			$this->db->update("stash-sms-invites", array('StashSMSInvites_status' => $s));
 		}
 
 		public function updateEmailLinkOpened($id = ''){
@@ -411,9 +412,10 @@
 			$this->db->update("stash-email-invites", array('StashEmailInvite_opened' => time()));
 		}
 
-		public function updateEmailLinkUsed($id = ''){
+		public function updateEmailLinkUsed($id = 0, $st = 0){
+			$s = ($st) ? $st : 1;
 			$this->db->where("StashEmailInvite_id", $id);
-			$this->db->update("stash-email-invites", array('StashEmailInvite_status' => 1));
+			$this->db->update("stash-email-invites", array('StashEmailInvite_status' => $s));
 		}
 
 		public function promoLinkOpened($ref = 0){

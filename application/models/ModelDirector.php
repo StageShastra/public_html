@@ -750,7 +750,7 @@
 				if( $f['StashEmailInvite_opened'])
 					$o++;
 
-				if($f['StashEmailInvite_status']){
+				if($f['StashEmailInvite_status'] == 1 || $f['StashEmailInvite_status'] == 3){
 					$d = $this->getUserBascis("StashActor_email", $f['StashEmailInvite_email'], "StashActor_actor_id_ref, StashActor_name, StashActor_email, StashActor_avatar");
 					if( count($d) )
 						$result['users'][] = [ 'name' => $d['StashActor_name'], 'contact' => $d['StashActor_email'], 'avatar' => $d['StashActor_avatar'], 'id' => $d['StashActor_actor_id_ref'], 'status' => 'joined', 'label' => 'success' ];
@@ -801,7 +801,7 @@
 				if( $f['StashSMSInvites_opened'])
 					$o++;
 
-				if($f['StashSMSInvites_status']){
+				if($f['StashSMSInvites_status'] == 1 || $f['StashSMSInvites_status'] == 3){
 					$d = $this->getUserBascis("StashActor_mobile", $f['StashSMSInvites_mobile'], "StashActor_actor_id_ref, StashActor_name, StashActor_mobile, StashActor_avatar");
 					if( count($d) )
 						$result['users'][] = [ 'name' => $d['StashActor_name'], 'contact' => $d['StashActor_mobile'], 'avatar' => $d['StashActor_avatar'], 'id' => $d['StashActor_actor_id_ref'], 'status' => 'joined', 'label' => 'success' ];

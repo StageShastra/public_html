@@ -144,4 +144,16 @@ $(document).ready(function(){
 		return false;
 	});
 
+	$(document).on('click', ".checkout_btn", function(){
+		data = {request: "CheckoutClicked", data: "{}"};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				
+			}
+		});
+	});
+
 });
