@@ -401,8 +401,8 @@ $(document).ready(function(){
 				flowLineChart(response.data.main, '#flot-line-chart-main');
 				flowLineChart(response.data.email, '#flot-line-chart');
 				flowLineChart(response.data.sms, '#flot-line-chart-2');
-				//console.log(response.data.main[5][1], response.data.main[6][1], response.data.main[4][1]);
-				pieChart(response.data.main[5][1], response.data.main[6][1], response.data.main[4][1]);
+				//console.log(response.data.main[5][1], response.data.main[8][1], response.data.main[3][1]);
+				pieChart(response.data.main[5][1], response.data.main[8][1], response.data.main[3][1]);
 			}
 		});
 	}
