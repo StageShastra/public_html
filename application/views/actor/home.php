@@ -423,7 +423,8 @@
                 right: 0px;
                 float: none;
                 left: 0px;
-                width: 400px;
+                width: 360px!important;
+                max-width: 400px!important;
             }
             body {
                 font-size: 1.2em;
@@ -691,7 +692,18 @@ textarea{
 #notification_bar{
     height: auto!important;
 }
-
+.notification_message{
+    color:#4a4a4a;
+    font-size: 13px;
+}
+.fa{
+    width: 14px;
+    margin-right: 5px;
+    color: #9b9b9b;
+}
+.time_notification{
+    font-size: 9px;
+}
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -735,13 +747,36 @@ textarea{
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle hidden-xs " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-bell-o firstcolor" aria-hidden="true"></span></a>
                           <ul class="dropdown-menu hidden-xs">
-                           <li><a href="#" class="changeCategory">Change Category</a></li>
-                           <li><a href="<?= base_url() . "director/conversations" ?>" >Conversations</a></li>
-                            <!--<li><a href="add_actor.php">Add</a></li>
-                            <li><a class="not-active" href="#">Import</a></li>
-                            <li><a class="not-active" href="#">Export</a></li>
-                            <li role="separator" class="divider"></li>-->
-                            <li><a href="<?= base_url() ?>home/logout/">Sign-Out</a></li>
+                            <li>
+                                <a href="<?= base_url() ?>/payment?plan=1">
+                                    <span class="notification_message"><i class="fa fa-envelope"></i>Casting Bay has sent you an audition message</span><br><span class ="time_notification gray"><i>29mins ago</i><span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= base_url() ?>/payment?plan=1">
+                                    <span class="notification_message"><i class="fa fa-eye"></i>Casting Bay viewed your profile.</span><br><span class ="time_notification gray"><i>36mins ago</i><span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= base_url() ?>/payment?plan=1">
+                                    <span class="notification_message"><i class="fa fa-user-plus"></i>Shikha wants to connect with you. Click to accept.</span><br><span class ="time_notification gray"><i>2 hours ago</i><span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= base_url() ?>/payment?plan=1">
+                                    <span class="notification_message"><i class="fa fa-bolt"></i>Casting Bay took a quick view of your profile.</span> <br><span class ="time_notification gray"><i>1 day ago</i><span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= base_url() ?>/payment?plan=1">
+                                    <span class="notification_message"><i class="fa fa-comment-o"></i>Pritesh has sent you a private message.</span><br><span class ="time_notification gray"><i>2 days ago</i><span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?= base_url() ?>/payment?plan=1">
+                                    <span class="notification_message"><i class="fa fa-user-secret"></i>Someone viewed your profile</span><br><span class ="time_notification gray"><i>1 week ago</i><span>
+                                </a>
+                            </li>
                           </ul>
                         </li>   
                         <li >
@@ -773,7 +808,28 @@ textarea{
                 <div class="collapse navbar-collapse hidden-lg hidden-sm hidden-md" style="height:auto!important;" id="notification_bar">  
                     <ul class="nav navbar-nav navbar-right ul_list">
                         <li>
-                            <a href="<?= base_url() ?>/payment?plan=1"> Go Pro!
+                            <a href="<?= base_url() ?>/payment?plan=1">
+                                <i class="fa fa-envelope"></i><span>Casting Bay has sent you an audition message</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url() ?>/payment?plan=1">
+                                <i class="fa fa-user-plus"></i><span>Shikha wants to connect with you.</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url() ?>/payment?plan=1">
+                                <i class="fa fa-bolt"></i><span>Casting Bay took a quick view of your profile.</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url() ?>/payment?plan=1">
+                                <i class="fa fa-comment-o"></i><span>Pritesh has sent you a private message.</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url() ?>/payment?plan=1">
+                                <i class="fa fa-user-secret"></i><span>Someone viewed your profile</span>
                             </a>
                         </li>
                     </ul>      
