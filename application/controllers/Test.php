@@ -75,6 +75,30 @@
 			$encryptedText = str_replace("/", "_", $encryptedText);
 			echo urldecode($encryptedText);
 		}
+
+		public function transferData($value=''){
+			$this->load->model("TestModel");
+			$id = 18;$num = 0;
+			if($this->input->cookie("Cstko_datatransfer") == 1)
+				exit("<h4>Data already transfered....</h4>");
+			setcookie("Cstko_datatransfer", 1, time() + 3600, "/");
+			$invitation = $this->TestModel->allInvitations($id);
+			foreach ($invitation as $key => $invite) {
+				$_token = $this->TestModel->getThisToken($invite['StashSMSInvite_director_id_ref'], $invite['StashSMSInvite_project_id_ref']);
+				$_token = $_token['StashSMSInviteLink_link'];
+				$msgId = $this->TestModel->insertSMSMsg($invite['StashSMSInvite_message']);
+				$time = $invite['StashSMSInvite_time'];
+				$numbers = explode(",", $invite['StashSMSInvite_mobiles']);
+				foreach ($numbers as $k => $number) {
+					if(trim($number) == '')
+						continue;
+					$this->TestModel->insertInvitationSMS($msgId, $_token, $invite['StashSMSInvite_project_id_ref'], trim($number), $invite['StashSMSInvite_director_id_ref']);
+					$num++;
+				}
+			}
+
+			echo "Data Transfered... {$num} ";
+		}
 		
 	}
 
