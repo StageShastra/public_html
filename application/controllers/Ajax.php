@@ -433,7 +433,7 @@
 				while($this->ModelDirector->checkEmailRandLink($rand))
 					$rand = substr(base64_encode(md5(microtime() . $fe . microtime())), 0, 8);
 
-				$failed = $this->Email->sendInvitationToNotInDB( $data['msg'], $fe, $projectID, $rand );
+				$failed = $this->Email->sendInvitationToNotInDB( $data['msg'], $fe, $projectID, $rand , $data['subject']);
 				if( $failed !== true ){
 					// Sending Mail Failed. do something here.
 					$failedEmailFresh[] = $failed;
@@ -450,7 +450,7 @@
 				while($this->ModelDirector->checkEmailRandLink($rand))
 					$rand = substr(base64_encode(md5(microtime() . $fe . microtime())), 0, 8);
 
-				$failed = $this->Email->sendInvitationToInDB( $data['msg'], $fe, $projectID, $rand );
+				$failed = $this->Email->sendInvitationToInDB( $data['msg'], $fe, $projectID, $rand ,  $data['subject']);
 				if( $failed !== true ){
 					// Sending Mail Failed. do something here.
 					$failedEmailConnect[] = $failed;
