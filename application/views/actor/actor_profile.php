@@ -655,6 +655,7 @@ textarea{
     font-size: 14px;
     color:#9b9b9b;
 }
+</style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
