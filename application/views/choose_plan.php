@@ -185,7 +185,7 @@ a.anchor {
                                 <?= M_Title ?>
                                 <br>
                                 <span id="tag-line" class="firstcolor info-small hidden-xs">
-                                Making Casting easier!                      
+                                Making casting easier!                      
                                 </span>
                             </div>
                             
@@ -244,6 +244,7 @@ a.anchor {
                         <div class="content-box">
                             <span class="category black"> BASIC</span>
                             <br>
+                            <br>
                             <span class="button_text green margintopbottom5">Free</span>
                             <hr>
                             <br>
@@ -268,6 +269,7 @@ a.anchor {
                     <div class="col-lg-6 col-xs-12 col-md-6 col-sm-12 topmargin35">
                         <div class="content-box">
                             <span class="category black">PROFESSIONAL</span>
+                            <br>
                             <br>
                             <span class="button_text green margintopbottom5">Rs. 200 / month.</span>
                             <hr>
@@ -310,7 +312,7 @@ a.anchor {
                 <div  class="row center" style="text-align:center;">
                     <div class="col-lg- col-md-4 col-xs-12 col-sm-12 topmargin35 ">
                         <div class="content-box ">
-                            <span class="category black"> <b>BASIC</b></span>
+                            <span class="category black">BASIC</span>
                             <br>
                             <span class="subtext gray"> One-off. Just looking to manage a project or two.</span>
                             <hr class="margintopbottom5">
@@ -337,7 +339,7 @@ a.anchor {
                             <hr class="margintopbottom5">
                             <span class="subtext black" style="text-align:center;">Rs. 27000/- </span>
                             <br>
-                            <span class="subtext green"><b> Save 10%!</span>
+                            <span class="subtext green">Save 10%!</span>
                             <br>
                             <span class="subtext green">+ 200 SMS free</span>
                             <br>
@@ -356,7 +358,7 @@ a.anchor {
                             <hr class="margintopbottom5">
                             <span class="subtext black" style="text-align:center;">Rs. 48000/- </span>
                             <br>
-                            <span class="subtext green"><b> Save 20%!</span>
+                            <span class="subtext green">Save 20%!</span>
                             <br>
                             <span class="subtext green">+ 500 SMS free</span>
                             <br>
