@@ -392,7 +392,7 @@ $(document).ready(function(){
 	}
 
 	if( typeof graph !== 'undefined' ){
-		data = {request: "EmailGraphData", data: '{}'};
+		data = {request: "EmailGraphData", data: JSON.stringify({id:0, by:false})};
 		$.ajax({
 			url: url,
 			type: type,
@@ -401,11 +401,39 @@ $(document).ready(function(){
 				flowLineChart(response.data.main, '#flot-line-chart-main');
 				flowLineChart(response.data.email, '#flot-line-chart');
 				flowLineChart(response.data.sms, '#flot-line-chart-2');
-				//console.log(response.data.main[5][1], response.data.main[8][1], response.data.main[3][1]);
 				pieChart(response.data.main[5][1], response.data.main[8][1], response.data.main[3][1]);
 			}
 		});
 	}
+
+	function updateFlowLineGraph(by, id) {
+		data = {request: "EmailGraphData", data: JSON.stringify({id:id, by:by})};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				if(by == 'email')
+					flowLineChart(response.data.email, '#flot-line-chart');
+				else
+					flowLineChart(response.data.sms, '#flot-line-chart-2');
+			}
+		});
+	}
+
+
+	$(document).on("focus", ".datetimefilter", function(){
+		app = $(this).attr("data-url");
+		link = base_url + "admin/filterInvites/" + app;
+		$(".datetimefilter").autocomplete({
+			source: link,
+			minLenght: 10,
+			select: function(ev, ui){
+				id = ui.item.id;
+				updateFlowLineGraph(app, id);
+			}
+		})
+	});
 	
 
 });

@@ -359,7 +359,13 @@
 			return $this->db->get("stash-contact-message")->result("array");
 		}
 
-		public function emailInvitationData($value=''){
+		public function emailInvitationData($id = ''){
+			if($id != ''){
+				$tags = explode("-", $id);
+				$this->db->where("StashEmailInvite_director_id_ref", $tags[0]);
+				$this->db->where("StashEmailInvite_project_id_ref", $tags[1]);
+				$this->db->where("StashEmailInvite_msg_id_ref", $tags[2]);
+			}
 			$fetch = $this->db->get("stash-email-invites")->result('array');
 
 			$sent = $seen = $reg = $paid = $pend = $confirm = $useen = $basic = $price = $check =  $complete = 0;
@@ -396,7 +402,13 @@
 			return array( [0, $sent], [1, $seen], [2, $price], [3, $reg], [4, $check], [5, $paid], [6, $confirm], [7, $complete], [8, $basic] );
 		}
 
-		public function smsInvitationData($value=''){
+		public function smsInvitationData($id = ''){
+			if($id != ''){
+				$tags = explode("-", $id);
+				$this->db->where("StashSMSInvites_director_id_ref", $tags[0]);
+				$this->db->where("StashSMSInvites_project_id_ref", $tags[1]);
+				$this->db->where("StashSMSInvites_msg_id", $tags[2]);
+			}
 			$fetch = $this->db->get("stash-sms-invites")->result('array');
 
 			$sent = $seen = $reg = $paid = $pend = $confirm = $useen = $basic = $price = $check = $complete = 0 ;
@@ -443,6 +455,43 @@
 			$this->db->where("StashActorPlan_end <= ", time());
 			$this->db->ordeR_by("StashActorPlan_id", "DESC");
 			return $this->db->get("stash-actor-plan", 1)->first_row('array');
+		}
+
+		public function getInvitationBtnDate($start = 0, $end = 0, $by = 'email'){
+			if($by == 'email'){
+				$base = "StashEmailInvite_";
+				$m = $base . "msg_id_ref";
+				$this->db->where("StashEmailInvite_time >= ", $start);
+				$this->db->where("StashEmailInvite_time < ", $end);
+				$fetch = $this->db->get("stash-email-invites")->result("array");
+			}else{
+				$base = "StashSMSInvites_";
+				$m = $base . "msg_id";
+				$this->db->where("StashSMSInvites_time >= ", $start);
+				$this->db->where("StashSMSInvites_time < ", $end);
+				$fetch = $this->db->get("stash-sms-invites")->result("array");
+			}
+
+			$result = [];
+			$inArray = [];
+			foreach ($fetch as $key => $f) {
+				$tag = $f[$base . "director_id_ref"] . "-" . $f[$base . "project_id_ref"] . "-" . $f[$m];
+				if(in_array($tag, $inArray))
+					continue;
+				$inArray[] = $tag;
+				$r = [];
+				$director = $this->getDirectorName($f[$base . "director_id_ref"]);
+				$r['label'] = $director['StashDirector_name'] . " - " . date("h:i:s", $f[$base . "time"]);
+				$r['value'] = $director['StashDirector_name'] . " - " . date("h:i:s", $f[$base . "time"]);
+				$r['id'] = $tag;
+				$result[] = $r;
+			}
+			return $result;
+		}
+
+		public function getDirectorName($id = 0){
+			$this->db->where("StashDirector_director_id_ref", $id);
+			return $this->db->get("stash-director", 1)->first_row("array");
 		}
 	}
 
