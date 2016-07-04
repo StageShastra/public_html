@@ -232,7 +232,7 @@
 			$this->email->from("no-reply@castiko.com", 'Castiko');
 			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
 			$this->email->to($email);
-			$this->email->subject(Em_Welcome_subject);
+			$this->email->subject("Important! Please complete your profile to get auditions!");
 
 			if($type == 'director'){
 				$msg = "Hello {$name}, <br>" . Em_Welcome_msg_director;
