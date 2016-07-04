@@ -40,6 +40,9 @@
 
 </head>
 <style>
+body{
+    font-family: "Century Gothic";
+}
 .pricing_banner{
     text-align: center;
 
@@ -232,27 +235,27 @@ a.anchor {
                     <div class="sub_heading col-lg-12 col-md-12 col-sm-12 col-xs-12 heading gray center">
                             Actors
                             <div class="button_text gray">
-                                Castiko is the easiet way for actors to showcase their work to Casting Directors
+                                Castiko is the easiest way for actors to showcase their work to casting directors.
                             </div>
                     </div>
                 </div>
                 <div class="row center" style="text-align:center;">
                     <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 topmargin35">
                         <div class="content-box">
-                            <span class="category black"> <b>BASIC</b></span>
+                            <span class="category black"> BASIC</span>
                             <br>
-                            <span class="button_text green">Free</span>
+                            <span class="button_text green margintopbottom5">Free</span>
                             <hr>
                             <br>
                             <div class="left_aligned">
                                 <div class="expandButton">
-                                    <span id="minus1" class="plus toggleEdit ">o<span class="features"> Public profile with Photos and Videos. </span></span>
+                                    <span id="minus1" class="plus toggleEdit ">o<span class="features"> Public profile with photos and videos. </span></span>
                                     <div id="basic1" class="inner">
-                                        <span class="glyphicon glyphicon-triangle-right green subtext"></span>The Castiko Profile is designed to showcase your talents. Add photos, videos, training and experience. Your unique link lets you share it with anyone - even outside Castiko.
+                                        <span class="glyphicon glyphicon-triangle-right green subtext"></span>The Castiko profile is designed to showcase your talents. Add photos, videos, training and experience. Your unique link lets you share it with anyone - even outside Castiko.
                                     </div>
                                 </div>
                                 <div class="expandButton">
-                                    <span id="minus2" class="plus toggleEdit ">o<span class="features"> Unlimited Casting Director Invitations. </span></span>
+                                    <span id="minus2" class="plus toggleEdit ">o<span class="features"> Unlimited casting director invitations. </span></span>
                                     <div id="basic2" class="inner">
                                         <span class="glyphicon glyphicon-triangle-right green subtext"></span>Casting directors who already know you can add/invite you into their database.
                                     </div>
@@ -264,14 +267,14 @@ a.anchor {
                     </div>
                     <div class="col-lg-6 col-xs-12 col-md-6 col-sm-12 topmargin35">
                         <div class="content-box">
-                            <span class="category black"> <b>PRO</b></span>
+                            <span class="category black">PROFESSIONAL</span>
                             <br>
-                            <span class="button_text green"><i class="fa fa-inr"></i>200/month.</span>
+                            <span class="button_text green margintopbottom5">Rs. 200 / month.</span>
                             <hr>
                             <br>
                             <div class="left_aligned">
                                 <div class="expandButton">
-                                    <span id="minus3"  class="plus">o<span class="features"> Searchable by all the Casting Directors.</span>
+                                    <span id="minus3"  class="plus">o<span class="features"> Searchable by all casting directors.</span>
                                     </span>
                                     <div id="pro1" class="inner">
                                         <span class="glyphicon glyphicon-triangle-right green subtext"></span>Casting directors who don’t know you are often looking for new faces for projects. With Pro, we will make your profile searchable by all Casting Directors.
@@ -280,7 +283,7 @@ a.anchor {
                                 <div class="expandButton">
                                     <span id="minus4" data-hide-id="#minus4,#pro2" data-unhide-id="#plus4" class="plus">o<span class="features"> Access to targeted audition notices.</span></span>
                                     <div id="pro2" class="inner">
-                                        <span class="glyphicon glyphicon-triangle-right green subtext"></span>Audition Notices are an easy way to get audition information. Pro lets you see them right on your home page.
+                                        <span class="glyphicon glyphicon-triangle-right green subtext"></span>Audition notices are an easy way to get audition information. Pro lets you see them right on your home page.
                                     </div>
                                 </div>
                                 <span class="glyphicon glyphicon-ok plus" style="font-size:10px;"></span>  <span class="features"> Plus all the features in the basic </span>
@@ -309,11 +312,11 @@ a.anchor {
                         <div class="content-box ">
                             <span class="category black"> <b>BASIC</b></span>
                             <br>
-                            <span class="subtext gray"> One off. Just looking to manage a project or two.</span>
+                            <span class="subtext gray"> One-off. Just looking to manage a project or two.</span>
                             <hr class="margintopbottom5">
                             <span class="subtext black">1 Month</span>
                             <br>
-                            <span class="category black"><i class="fa fa-inr"></i>5000 / month</span>
+                            <span class="category black">Rs. 5000 / month</span>
                             <hr class="margintopbottom5">
                             <span class="subtext black" style="text-align:center;"><i class="fa fa-inr"></i>5000/- </span>
                             <br>
@@ -326,13 +329,13 @@ a.anchor {
                         <div class="content-box ">
                             <span class="category black"> PROFESSIONAL</span>
                             <br>
-                            <span class="subtext gray">Getting projects regularly,<br> buliding network.</span>
+                            <span class="subtext gray">Getting projects regularly,<br> building up a network.</span>
                             <hr class="margintopbottom5">
                             <span class="subtext black">6 Months</span>
                             <br>
-                            <span class="category black"><i class="fa fa-inr"></i>4500 / month</span>
+                            <span class="category black">Rs. 4500 / month</span>
                             <hr class="margintopbottom5">
-                            <span class="subtext black" style="text-align:center;"><i class="fa fa-inr"></i>27000/- </span>
+                            <span class="subtext black" style="text-align:center;">Rs. 27000/- </span>
                             <br>
                             <span class="subtext green"><b> Save 10%!</span>
                             <br>
@@ -345,13 +348,13 @@ a.anchor {
                         <div class="content-box ">
                             <span class="category black">PRO-PLUS</span>
                             <br>
-                            <span class="subtext gray">Full scale casting setup,<br> big network of actors</span>
+                            <span class="subtext gray">Full-scale casting setup,<br> big network of actors.</span>
                             <hr class="margintopbottom5">
                             <span class="subtext black">12 Months</span>
                             <br>
-                            <span class="category black"><i class="fa fa-inr"></i>4000 / month</span>
+                            <span class="category black">Rs. 4000 / month</span>
                             <hr class="margintopbottom5">
-                            <span class="subtext black" style="text-align:center;"><i class="fa fa-inr"></i>48000/- </span>
+                            <span class="subtext black" style="text-align:center;">Rs. 48000/- </span>
                             <br>
                             <span class="subtext green"><b> Save 20%!</span>
                             <br>
