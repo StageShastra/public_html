@@ -121,7 +121,7 @@ class Home extends CI_Controller {
 	    		if($response > 0){
 	    			if($type == 'actor'){
 
-	    				$plan = (isset($_REQUEST['plan']) && $_REQUEST['plan'] == 'basic') ? 0 : 1;
+	    				$plan = (isset($_REQUEST['plan']) && $_REQUEST['plan'] == 'pro') ? 1 : 0;
 
 	    				$this->Auth->setupActorProfile($response);
 
