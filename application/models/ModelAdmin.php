@@ -391,7 +391,7 @@
 					$useen++;
 				}
 			}
-			$price + = $reg;
+			$price = $price + $reg;
 
 			return array( [0, $sent], [1, $seen], [2, $price], [3, $reg], [4, $check], [5, $paid], [6, $confirm], [7, $complete], [8, $basic] );
 		}
@@ -428,7 +428,7 @@
 					$useen++;
 				}
 			}
-			$price + = $reg;
+			$price = $price + $reg;
 			return array( [0, $sent], [1, $seen], [2, $price], [3, $reg], [4, $check], [5, $paid], [6, $confirm], [7, $complete], [8, $basic] );
 		}
 
