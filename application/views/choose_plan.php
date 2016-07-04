@@ -71,12 +71,20 @@
 {
     color: #598725;
 }
+.features{
+    font-size: 15px;
+    color: #4A4A4A;
+}
 .sub_heading{
     background: rgba(255,255,255,0.6);
     border-radius: 15px;
     padding:10px;
     margin-top: 10px;
     margin-bottom: 20px;
+}
+.lrmargin15{
+    margin-left: 15px;
+    margin-right: 15px;
 }
 .content-box{
     padding: 10px 15px 10px 15px;
@@ -97,13 +105,19 @@ hr{
 }
 .btn{
     border-radius: 20px;
-    border: 4px solid #FBB61A;
+    border: 2px solid #FBB61A;
     position: relative;
     bottom: -30px;
     height: 40px;
-    padding: 5px;
+    padding: 9px 15px; 
     background: white;
 
+}
+.margintopbottom5{
+    margin: 8px 0px;
+}
+.minheight275{
+    min-height: 275px;
 }
 .btn:hover{
     border: solid 2px #fbb515;
@@ -124,9 +138,7 @@ hr{
     margin: 0px;
     padding: 0px;
 }
-.expandButton:hover{
-    text-shadow: 0px 1px rgb(202, 202, 202);
-}
+
 
 a.anchor {
     display: block;
@@ -216,7 +228,7 @@ a.anchor {
         <div class="container">
             <div class="pricing_banner col-lg-8 col-xs-11 col-sm-11 center">
                 <span class="heading white">Choose Plan</span><br>
-                <div class="row">
+                <div class="row lrmargin15">
                     <div class="sub_heading col-lg-12 col-md-12 col-sm-12 col-xs-12 heading gray center">
                             Actors
                             <div class="button_text gray">
@@ -231,23 +243,22 @@ a.anchor {
                             <br>
                             <span class="button_text green">Free</span>
                             <hr>
+                            <br>
                             <div class="left_aligned">
                                 <div class="expandButton">
-                                    <span id="minus1" data-hide-id="#minus1,#basic1" data-unhide-id="#plus1" class="plus toggleEdit hidden">o<span class="subtext black nohover"> Public profile with Photos and Videos. </span></span><span class="plus toggleEdit" id="plus1" data-hide-id="#plus1" data-unhide-id="#basic1,#minus1" >+
-                                    <span class="subtext black nohover"> Public profile with Photos and Videos. </span></span>
-                                    <div id="basic1" class="inner hidden">
+                                    <span id="minus1" class="plus toggleEdit ">o<span class="features"> Public profile with Photos and Videos. </span></span>
+                                    <div id="basic1" class="inner">
                                         <span class="glyphicon glyphicon-triangle-right green subtext"></span>The Castiko Profile is designed to showcase your talents. Add photos, videos, training and experience. Your unique link lets you share it with anyone - even outside Castiko.
                                     </div>
                                 </div>
                                 <div class="expandButton">
-                                    <span id="minus2" data-hide-id="#minus2,#basic2" data-unhide-id="#plus2" class="plus toggleEdit hidden">o<span class="subtext black nohover"> Unlimited Casting Director Invitations. </span></span>
-                                    <span class="plus toggleEdit" id="plus2" data-hide-id="#plus2" data-unhide-id="#basic2,#minus2" >+
-                                    <span class="subtext black nohover"> Unlimited Casting Director Invitations. </span></span>
-                                    <div id="basic2" class="inner hidden">
+                                    <span id="minus2" class="plus toggleEdit ">o<span class="features"> Unlimited Casting Director Invitations. </span></span>
+                                    <div id="basic2" class="inner">
                                         <span class="glyphicon glyphicon-triangle-right green subtext"></span>Casting directors who already know you can add/invite you into their database.
                                     </div>
                                 </div>
                             </div>
+                            <br>
                             <a href="<?= base_url() . "home/register/actor?plan=basic" ?>" class="button_text black btn">GO BASIC</a>
                         </div>
                     </div>
@@ -257,30 +268,28 @@ a.anchor {
                             <br>
                             <span class="button_text green"><i class="fa fa-inr"></i>200/month.</span>
                             <hr>
+                            <br>
                             <div class="left_aligned">
                                 <div class="expandButton">
-                                    <span id="minus3" data-hide-id="#minus3,#pro1" data-unhide-id="#plus3" class="plus toggleEdit hidden">o<span class="button_text black nohover"> <b>Searchable by all the Casting Directors.</b> </span>
-                                    </span><span class="plus toggleEdit" id="plus3" data-hide-id="#plus3" data-unhide-id="#pro1,#minus3" >+
-                                    <span class="button_text black nohover"> <b>Searchable by all the Casting Directors.</b> </span></span>
-                                    <div id="pro1" class="inner hidden">
+                                    <span id="minus3"  class="plus">o<span class="features"> Searchable by all the Casting Directors.</span>
+                                    </span>
+                                    <div id="pro1" class="inner">
                                         <span class="glyphicon glyphicon-triangle-right green subtext"></span>Casting directors who don’t know you are often looking for new faces for projects. With Pro, we will make your profile searchable by all Casting Directors.
                                     </div>
                                 </div>
                                 <div class="expandButton">
-                                    <span id="minus4" data-hide-id="#minus4,#pro2" data-unhide-id="#plus4" class="plus toggleEdit hidden">o<span class="button_text black nohover"> <b>Access to targeted audition notices.</b> </span></span>
-                                    <span class="plus toggleEdit" id="plus4" data-hide-id="#plus4" data-unhide-id="#pro2,#minus4" >+
-                                    <span class="button_text black nohover"> <b>Access to targeted audition notices.</b> </span></span>
-                                    <div id="pro2" class="inner hidden">
+                                    <span id="minus4" data-hide-id="#minus4,#pro2" data-unhide-id="#plus4" class="plus">o<span class="features"> Access to targeted audition notices.</span></span>
+                                    <div id="pro2" class="inner">
                                         <span class="glyphicon glyphicon-triangle-right green subtext"></span>Audition Notices are an easy way to get audition information. Pro lets you see them right on your home page.
                                     </div>
                                 </div>
-                                <span class="glyphicon glyphicon-ok plus" style="font-size:10px;"></span>  <span class="button_text black"><b>Plus all the features in the basic </b></span>
+                                <span class="glyphicon glyphicon-ok plus" style="font-size:10px;"></span>  <span class="features"> Plus all the features in the basic </span>
                             </div>
                             <a href="<?= base_url() . "home/register/actor?plan=pro" ?>" class="button_text black btn">GO PRO</a>
                         </div>
                     </div>
                 </div>
-                <div class="row" style="margin-top:180px;">
+                <div class="row lrmargin15" style="margin-top:180px;">
                     <a class="anchor" id="forDirectors"></a>
                     <div class="sub_heading col-lg-12 col-md-12 col-sm-12 col-xs-12 heading gray center">
                             Casting Directors
@@ -297,15 +306,15 @@ a.anchor {
                 </div>
                 <div  class="row center" style="text-align:center;">
                     <div class="col-lg- col-md-4 col-xs-12 col-sm-12 topmargin35 ">
-                        <div class="content-box">
+                        <div class="content-box ">
                             <span class="category black"> <b>BASIC</b></span>
                             <br>
                             <span class="button_text black"><b> One off. Just looking to manage a project or two. </b></span>
-                            <hr>
+                            <hr class="margintopbottom5">
                             <span class="subtext black">1 Month</span>
                             <br>
-                            <span class="button_text black"><b><i class="fa fa-inr"></i>5000/month</b></span>
-                            <hr>
+                            <span class="category black"><i class="fa fa-inr"></i>5000 / month</span>
+                            <hr class="margintopbottom5">
                             <span class="subtext black" style="text-align:center;"><i class="fa fa-inr"></i>5000/- </span>
                             <br>
                             <span class="subtext green">+ 100 SMS free</span>
@@ -314,15 +323,15 @@ a.anchor {
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 topmargin35">
-                        <div class="content-box">
-                            <span class="category black"> <b>PRO</b></span>
+                        <div class="content-box ">
+                            <span class="category black"> PROFESSIONAL</span>
                             <br>
                             <span class="button_text black"><b> Getting projects regularly,<br> buliding network. </b></span>
-                            <hr>
+                            <hr class="margintopbottom5">
                             <span class="subtext black">6 Months</span>
                             <br>
-                            <span class="button_text black"><b><i class="fa fa-inr"></i>4500/month</b></span>
-                            <hr>
+                            <span class="category black"><i class="fa fa-inr"></i>4500 / month</span>
+                            <hr class="margintopbottom5">
                             <span class="subtext black" style="text-align:center;"><i class="fa fa-inr"></i>27000/- </span>
                             <br>
                             <span class="subtext green"><b> Save 10%!</span>
@@ -333,15 +342,15 @@ a.anchor {
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12 topmargin35">
-                        <div class="content-box">
-                            <span class="category black"> <b>PRO<sup class="plus">+</sup></b></span>
+                        <div class="content-box ">
+                            <span class="category black">PRO-PLUS</span>
                             <br>
                             <span class="button_text black"><b> Full scale casting setup,<br> big network of actors </b></span>
-                            <hr>
+                            <hr class="margintopbottom5">
                             <span class="subtext black">12 Months</span>
                             <br>
-                            <span class="button_text black"><b><i class="fa fa-inr"></i>4000/month</b></span>
-                            <hr>
+                            <span class="button_text black"><i class="fa fa-inr"></i>4000 / month</span>
+                            <hr class="margintopbottom5">
                             <span class="subtext black" style="text-align:center;"><i class="fa fa-inr"></i>48000/- </span>
                             <br>
                             <span class="subtext green"><b> Save 20%!</span>

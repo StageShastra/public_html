@@ -246,7 +246,7 @@ class Home extends CI_Controller {
 		$link = trim($linkDetails['StashEmailInvite_link']);
 		setcookie("Cstko_link", $link, time() + 3600, "/");
 		$_SESSION['Cstko_link'] = $link;
-		redirect( base_url() . "home/choose_plan#ForActors" );
+		redirect( base_url() . "home/register/actor" );
 	}
 
 	public function pricing($link = ''){
@@ -320,7 +320,7 @@ class Home extends CI_Controller {
 				// Not Registered yet.
 				setcookie("Cstko_link", $link, time() + 3600, "/");
 				$_SESSION['Cstko_link'] = $link;
-				redirect( base_url() . "home/choose_plan#ForActors" );
+				redirect( base_url() . "home/register/actor" );
 			}
 		}else{
 			redirect(base_url());
@@ -339,7 +339,7 @@ class Home extends CI_Controller {
 			$l = $linkDetails['StashPromo_id'];
 			setcookie("Cstko_link", $l, time() + 3600, "/");
 			$_SESSION['Cstko_link'] = $l;
-			redirect( base_url() . "home/choose_plan#ForActors" );
+			redirect( base_url() . "home/register/actor" );
 
 		}else{
 			redirect( base_url() );

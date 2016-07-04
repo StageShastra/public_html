@@ -72,7 +72,7 @@
                                 <?= M_Title ?>
                                 <br>
                                 <span id="tag-line" class="firstcolor info-small hidden-xs">
-                                Making Casting easier!                      
+                                Making casting easier.                     
                                 </span>
                             </div>
                             
@@ -125,7 +125,7 @@
                 <div class="col-md-8">
                     <div class="intro-text">
                         <h3 class="name">Making casting easier.</h3>
-                        <h1 class="skills">Castiko makes it easier for actors and<br> casting directors to work together.</h1>
+                        <h1 class="skills">Castiko makes it easier for actors and casting directors <br>  to work together.</h1>
                         <div><a href="#forActor" class="btn btn-custom">I'm an Actor</a>
                         <a href="#forDirector" class="btn btn-custom">I'm a Casting Director</a></div>
                     </div>
@@ -244,11 +244,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Say Hola!</h2>
+                    <h2>Say hello!</h2>
                     <div style="text-align:center;">
-                                Its good to see you here!<br>
-                            Want to say Hi ? Have some feedback?<br>
-                        Leave a message and We promise to get back to you!
+                        It is good to see you here.<br> 
+                        Leave us a message and we will get back to you shortly.
                     </div>
                     <hr class="star-primary">
                 </div>
@@ -348,7 +347,7 @@
               </div>
               <div id="cd" class="tab-pane fade">
                 <p class="login_form">
-                <font class="info dark-gray  center"> Log In | <a href="<?=base_url() ?>home/pricing#forActors"><font class="info firstcolor center"> Sign Up! </a></font></font>
+                <font class="info dark-gray  center"> Log In | <a href="<?=base_url() ?>home/register/actor"><font class="info firstcolor center"> Sign Up! </a></font></font>
                     <form role="form" id="actor_login-form" class="login-forms" method="post" >
                     <b><p class="text-danger" id="login-error-actor"></p></b>
                     <div class="form-group col-lg-8 col-md-6 col-xs-12 center">
