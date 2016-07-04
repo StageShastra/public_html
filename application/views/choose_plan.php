@@ -304,7 +304,7 @@ a.anchor {
                     </div>
                     <div class="sub_heading col-lg-12 col-md-12 col-sm-12 col-xs-12 heading gray center">
                             <div class="button_text gray">
-                                You can use all the Castiko's feature with any of the following plans.<br> For more information about the feature
+                                You can use all the Castiko's feature with any of the following plans.<br> For more information about the feature <a href="<?= base_url()?>" target="_blank"> click here </a>
                             </div>
                     </div>
                     
