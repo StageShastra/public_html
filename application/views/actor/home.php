@@ -648,6 +648,9 @@ textarea{
     color: #fff !important;
     background: #F7A9A9 !important;
 }
+.shareButton{
+    font-size: 20px;
+}
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -738,7 +741,7 @@ textarea{
                         
                         <br>
                         <span class="actor_link" id="actor_username">
-                            <span id="profile_link" ><a href="<?= base_url() . $user['StashUsers_username'] ?>" id="actor_username_txt" target="_blank"><?= base_url() . $user['StashUsers_username'] ?></a><i class="glyphicon  glyphicon-info-sign" style="color:#ffb600; font-size:15px;" data-toggle="tooltip" data-placement="right" title="To increase visibilty in search results, it is recommended that, you add your Castiko's profile link to your Facebook, Instagram and other Social network profiles."></i></span>
+                            <span id="profile_link" ><a href="<?= base_url() . $user['StashUsers_username'] ?>" id="actor_username_txt" target="_blank"><?= base_url() . $user['StashUsers_username'] ?></a><i class="glyphicon  glyphicon-info-sign" style="color:#ffb600; font-size:15px;" data-toggle="tooltip" data-placement="right" title="You can also add your Castiko link to your other Social Media profiles."></i></span>
                             
                         </span>
                         
@@ -777,8 +780,8 @@ textarea{
                                 <div class="elements">
                                     <span class="elements_label">Sex: </span><span id="actor_sex"><?= ($actorProfile['StashActor_gender']) ? "Male" : "Female" ?></span>
                                     <br>
-                                    <span class="elements_label">Age Range:</span><span id="actor_min_age" ><?= $actorProfile['StashActor_min_role_age'] ?></span>-<span id="actor_max_age"><?= $actorProfile['StashActor_max_role_age'] ?> years</span><br>
-                                   <span class="elements_label ">Weight:</span><span id="actor_weight" ><?= $actorProfile['StashActor_weight'] ?></span> kgs<br>
+                                    <span class="elements_label">Age Range: </span><span id="actor_min_age" ><?= $actorProfile['StashActor_min_role_age'] ?></span>-<span id="actor_max_age"><?= $actorProfile['StashActor_max_role_age'] ?> years</span><br>
+                                   <span class="elements_label ">Weight: </span><span id="actor_weight" ><?= $actorProfile['StashActor_weight'] ?></span> kgs<br>
                                     <span class="elements_label ">Height: </span><span id="actor_height" ><?= $actorProfile['StashActor_height'] ?></span> cms<br>
                                 </div>
                             </div>
@@ -831,7 +834,7 @@ textarea{
                                             data-hide-id="#actor_details" aria-hidden="true" data-step="2" data-intro="Click here to enter your contact details. It is important that you verify your phone number."></span>
                             </div>
                             <div id="actor_details">
-                                <span class="elements_label">Date of Birth:</span><span class="elements" id="actor_dob"><?php
+                                <span class="elements_label">Date of Birth: </span><span class="elements" id="actor_dob"><?php
                                 if($actorProfile['StashActor_dob'] == 0){
                                     echo '';
                                     $actorProfile['StashActor_dob'] = strtotime("-18 years");
@@ -840,7 +843,7 @@ textarea{
                                 }
                             ?></span><br>
                                 <span class="elements_label">Email: </span><span class="elements"> <?= $actorProfile['StashActor_email'] ?></span><br>
-                                <span class="elements_label">Phone:</span>
+                                <span class="elements_label">Phone: </span>
                                 
                                 <span class="text-danger elements" id="actor_phone"> <?= $actorProfile['StashActor_mobile'] ?> 
                                 <?php if($user["StashUsers_mobile_status"] == 0){ ?>
@@ -857,10 +860,10 @@ textarea{
                                     <span class="elements_label col-sm-5 col-xs-4">Date of Birth: </span>
                                     <input type="date" name="dob" class="editwhite edit_inputs_basics col-sm-8"  value="<?= date("Y-m-d", $actorProfile['StashActor_dob']) ?>" id="dob"/>
                                 <br>
-                                <span class="elements_label col-sm-5 col-xs-4">Phone:</span><input type="text" class="editwhite edit_inputs_basics col-sm-8" name="phone" value="<?= $actorProfile['StashActor_mobile'] ?>" maxlength='10' id="phone"/>
+                                <span class="elements_label col-sm-5 col-xs-4">Phone: </span><input type="text" class="editwhite edit_inputs_basics col-sm-8" name="phone" value="<?= $actorProfile['StashActor_mobile'] ?>" maxlength='10' id="phone"/>
                                 </span>
                                 <br>
-                                <span class="elements_label col-sm-5 col-xs-4">WhatsApp:</span><input type="text" class="editwhite edit_inputs_basics col-sm-7 col-xs-8" name="whatsapp" value="<?= $actorProfile['StashActor_whatsapp'] ?>" id="whatsapp"/>
+                                <span class="elements_label col-sm-5 col-xs-4">WhatsApp: </span><input type="text" class="editwhite edit_inputs_basics col-sm-7 col-xs-8" name="whatsapp" value="<?= $actorProfile['StashActor_whatsapp'] ?>" id="whatsapp"/>
                                 </span>
                                 </div>
                                 <font class="sortbuttons">
@@ -1068,7 +1071,7 @@ textarea{
                                             if($onlyone!=1)
                                             {   $index=$key+1;
                                                 echo '<div class="nav_icons">
-                                                <span class="leftnav center edit-button toggleEdit glyphicon glyphicon-chevron-left gray" data-hide-id="#experience-'.$key.'" data-unhide-id=#experience-'.$previous.'>
+                                                <span class="leftnav center edit-button toggleEdit glyphicon edit-button glyphicon-chevron-left gray" data-hide-id="#experience-'.$key.'" data-unhide-id=#experience-'.$previous.'>
                                                 </span><span class="info-small firstcolor center">'.$index.' of '.$count_experience.' experiences</span>
                                                 <span class="righttnav edit-button toggleEdit center glyphicon glyphicon-chevron-right gray" data-hide-id="#experience-'.$key.'" data-unhide-id=#experience-'.$next.' >
                                                 </span></div>';

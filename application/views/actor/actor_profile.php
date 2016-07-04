@@ -606,7 +606,7 @@ textarea{
         <!-- Ths section is post selection !-->
         <div class="container-fluid" id="home">
            
-           
+           <script>var first_time=1</script>
             <nav class="navbar navbar-default navbar-fixed-top custom-navbar">
                 <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -666,8 +666,8 @@ textarea{
                                 <div class="elements">
                                     <span class="elements_label">Sex: </span><span id="actor_sex"><?= ($actorProfile['StashActor_gender']) ? "Male" : "Female" ?></span>
                                     <br>
-                                    <span class="elements_label">Age Range:</span><span id="actor_min_age" ><?= $actorProfile['StashActor_min_role_age'] ?></span>-<span id="actor_max_age"><?= $actorProfile['StashActor_max_role_age'] ?></span><span style="font-size:9px;"> years</span><br>
-                                   <span class="elements_label ">Weight:</span><span id="actor_weight" ><?= $actorProfile['StashActor_weight'] ?></span> kgs<br>
+                                    <span class="elements_label">Age Range: </span><span id="actor_min_age" ><?= $actorProfile['StashActor_min_role_age'] ?></span>-<span id="actor_max_age"><?= $actorProfile['StashActor_max_role_age'] ?></span><span style="font-size:9px;"> years</span><br>
+                                   <span class="elements_label ">Weight: </span><span id="actor_weight" ><?= $actorProfile['StashActor_weight'] ?></span> kgs<br>
                                     <span class="elements_label ">Height: </span><span id="actor_height" ><?= $actorProfile['StashActor_height'] ?></span> cms<br>
                                 </div>
                             </div>
@@ -679,7 +679,7 @@ textarea{
                             <div class="category_heading">DETAILS
                             </div>
                             <div id="actor_details">
-                                <span class="elements_label">Date of Birth:</span><span class="elements" id="actor_dob"><?php
+                                <span class="elements_label">Date of Birth: </span><span class="elements" id="actor_dob"><?php
                                 if($actorProfile['StashActor_dob'] == 0){
                                     echo '';
                                     $actorProfile['StashActor_dob'] = strtotime("-18 years");
@@ -792,7 +792,7 @@ textarea{
                                             if($youtube_flag==1) 
                                             {    
                                                 
-                                                echo '<div class="col-sm-7" style="padding-left:0px;padding-right:0px;max-width:400px;margin-left:15px;"><div class="videoWrapper"><iframe width="482" height="300" src="'.$youtube.'" frameborder="0" allowfullscreen></iframe></div></div>';
+                                                echo '<div class="col-sm-7" style="padding-left:0px;padding-right:0px;max-width:400px;"><div class="videoWrapper"><iframe width="482" height="300" src="'.$youtube.'" frameborder="0" allowfullscreen></iframe></div></div>';
                                                 echo '<div class="col-sm-5"">
 
                                                         <span class="info black" id="actor_ex_title_'.$key.'"><b>'.ucfirst($experience['StashActorExperience_title']).'</b></span>
@@ -829,11 +829,13 @@ textarea{
                                             }
                                             if($onlyone!=1)
                                             {
+                                                $index=$key+1;
                                                 echo '<div class="nav_icons">
-                                                <span class="leftnav center toggleEdit glyphicon glyphicon-chevron-left gray" data-hide-id="#experience-'.$key.'" data-unhide-id=#experience-'.$previous.'>
-                                                </span>
-                                                <span class="righttnav toggleEdit center glyphicon glyphicon-chevron-right gray" data-hide-id="#experience-'.$key.'" data-unhide-id=#experience-'.$next.' >
+                                                <span class="leftnav center edit-button toggleEdit glyphicon edit-button glyphicon-chevron-left gray" data-hide-id="#experience-'.$key.'" data-unhide-id=#experience-'.$previous.'>
+                                                </span><span class="info-small firstcolor center">'.$index.' of '.$count_experience.' experiences</span>
+                                                <span class="righttnav edit-button toggleEdit center glyphicon glyphicon-chevron-right gray" data-hide-id="#experience-'.$key.'" data-unhide-id=#experience-'.$next.' >
                                                 </span></div>';
+                                            
                                             }
                                             
                                         ?>
