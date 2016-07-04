@@ -503,7 +503,9 @@
 			}
 			$m = [];
 			for($i = 0; $i < count($d); $i++){
-				$m[$i] = [$i, $d[$i][1] + $s[$i][1]];
+				$var =  (isset($d[$i][1]))?$d[$i][1] : 0;
+				$var2 = (isset($s[$i][1]))?$s[$i][1] : 0;
+				$m[$i] = [$i, $var + $var2];
 			}
 
 			$this->response(true, "Data", array('email' => $d, 'sms' => $s, 'main' => $m));
