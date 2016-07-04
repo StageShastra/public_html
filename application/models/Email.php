@@ -135,7 +135,7 @@
 			$encryptedText = $this->getEncryptedText($plainText);
 			$encryptedText = str_replace("/", "_", $encryptedText);
 			$link = base_url() . "home/connect/" . urlencode($encryptedText);
-			$message = $this->defaultTemplete("Dear Actor, <br>".$msg, $link, $a, "");
+			$message = $this->defaultTemplete("Hi, <br>".$msg, $link, $a, "");
 			$message = preg_replace('~\\\r\\\n~',"<br>", $message);
 			$this->email->clear();
 			$this->email->set_newline("\n");
@@ -156,7 +156,7 @@
 			$encryptedText = $this->getEncryptedText($plainText);
 			$encryptedText = str_replace("/", "_", $encryptedText);
 			$link = base_url() . "home/join/" . urlencode($encryptedText);
-			$message = $this->defaultTemplete("Dear Actor, <br>".$msg, $link, "Accept Invitation", "");
+			$message = $this->defaultTemplete("Hi, <br>".$msg, $link, "Accept Invitation", "");
 			$message = preg_replace('~\\\r\\\n~',"<br>", $message);
 			$this->email->clear();
 			$this->email->set_newline("\n");
