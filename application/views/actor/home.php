@@ -651,6 +651,10 @@ textarea{
 .shareButton{
     font-size: 20px;
 }
+.counter_exp{
+    font-size: 14px;
+    color:#9b9b9b;
+}
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -1072,7 +1076,7 @@ textarea{
                                             {   $index=$key+1;
                                                 echo '<div class="nav_icons">
                                                 <span class="leftnav center edit-button toggleEdit glyphicon edit-button glyphicon-chevron-left gray" data-hide-id="#experience-'.$key.'" data-unhide-id=#experience-'.$previous.'>
-                                                </span><span class="info-small firstcolor center">'.$index.' of '.$count_experience.' experiences</span>
+                                                </span><span class="count_exp center">'.$index.' of '.$count_experience.'</span>
                                                 <span class="righttnav edit-button toggleEdit center glyphicon glyphicon-chevron-right gray" data-hide-id="#experience-'.$key.'" data-unhide-id=#experience-'.$next.' >
                                                 </span></div>';
                                             }
