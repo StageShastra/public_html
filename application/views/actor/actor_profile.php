@@ -13,7 +13,7 @@
     }
   ?>
     <body>
-          <style>
+     <style>
           body{
             padding-top: 90px;
           }
@@ -59,7 +59,7 @@
             text-align: left;
         }
         .category_heading{
-            font-family: Raleway;
+            font-family: "Open Sans","Raleway","Helvetica";
             font-weight: 400;
             font-size: 15px;
             color: #FFB600;
@@ -398,6 +398,9 @@
             .blurb{
                 font-size: 15px;
             }
+            .ul_list{
+                margin-right: 120px;
+            }
         }
         /* lg */
         @media screen and (min-width: 1200px) {
@@ -425,6 +428,9 @@
             }
             .blurb{
                 font-size: 15px;
+            }
+            .ul_list{
+                margin-right: 120px;
             }
         }
         .videoWrapper {
@@ -457,7 +463,7 @@
         }
         .collapse
         {
-            height: 75px !important;
+            height: auto;
         }
         .custom-navbar{
             padding-bottom: 0px;
@@ -594,6 +600,54 @@ textarea{
     padding: 0px;
     line-height: normal;
 }
+.submit-btn{
+    background: #FFC107;
+    color: #fff;
+    border-radius:4px;
+    padding: 5px; 
+    border: none;
+    font-size: 14px;
+
+}
+.submit-btn:hover{
+    background: #fff;
+    color: #FFC107;
+    border: 1px solid #FFC107;
+}
+.edit_inputs_basics{
+    background: white;
+    border-radius: 0px;
+    border: 1px solid #ddd;
+}
+.alertbox{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    float: none;
+    z-index: 99999999;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    margin-top: 20px;
+    background: #607D8B !important;
+    color: white;
+    max-width: 400px;
+    border: 3px solid;
+    box-shadow: 2px 2px 10px gray;
+}
+.alert-dismissable .close, .alert-dismissible .close {
+    position: relative;
+    top: -2px;
+    right: -5px;
+    color: inherit;
+}
+.navbar-nav > li > a{
+    font-size: 16px !important;
+}
+.navbar-nav > li > a:hover {
+    color: #fff !important;
+    background: #F7A9A9 !important;
+}
 .shareButton{
     font-size: 20px;
 }
@@ -601,8 +655,6 @@ textarea{
     font-size: 14px;
     color:#9b9b9b;
 }
-   
-        </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -673,7 +725,7 @@ textarea{
                                 <div class="elements">
                                     <span class="elements_label">Sex: </span><span id="actor_sex"><?= ($actorProfile['StashActor_gender']) ? "Male" : "Female" ?></span>
                                     <br>
-                                    <span class="elements_label">Age Range: </span><span id="actor_min_age" ><?= $actorProfile['StashActor_min_role_age'] ?></span>-<span id="actor_max_age"><?= $actorProfile['StashActor_max_role_age'] ?></span><span style="font-size:9px;"> years</span><br>
+                                    <span class="elements_label">Age Range: </span><span id="actor_min_age" ><?= $actorProfile['StashActor_min_role_age'] ?></span>-<span id="actor_max_age"><?= $actorProfile['StashActor_max_role_age'] ?></span><span> yrs</span><br>
                                    <span class="elements_label ">Weight: </span><span id="actor_weight" ><?= $actorProfile['StashActor_weight'] ?></span> kgs<br>
                                     <span class="elements_label ">Height: </span><span id="actor_height" ><?= $actorProfile['StashActor_height'] ?></span> cms<br>
                                 </div>
