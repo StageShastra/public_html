@@ -309,7 +309,7 @@ a.anchor {
                         <div class="content-box ">
                             <span class="category black"> <b>BASIC</b></span>
                             <br>
-                            <span class="button_text black"><b> One off. Just looking to manage a project or two. </b></span>
+                            <span class="subtext gray"> One off. Just looking to manage a project or two.</span>
                             <hr class="margintopbottom5">
                             <span class="subtext black">1 Month</span>
                             <br>
@@ -326,7 +326,7 @@ a.anchor {
                         <div class="content-box ">
                             <span class="category black"> PROFESSIONAL</span>
                             <br>
-                            <span class="button_text black"><b> Getting projects regularly,<br> buliding network. </b></span>
+                            <span class="subtext gray">Getting projects regularly,<br> buliding network.</span>
                             <hr class="margintopbottom5">
                             <span class="subtext black">6 Months</span>
                             <br>
@@ -345,11 +345,11 @@ a.anchor {
                         <div class="content-box ">
                             <span class="category black">PRO-PLUS</span>
                             <br>
-                            <span class="button_text black"><b> Full scale casting setup,<br> big network of actors </b></span>
+                            <span class="subtext gray">Full scale casting setup,<br> big network of actors</span>
                             <hr class="margintopbottom5">
                             <span class="subtext black">12 Months</span>
                             <br>
-                            <span class="button_text black"><i class="fa fa-inr"></i>4000 / month</span>
+                            <span class="category black"><i class="fa fa-inr"></i>4000 / month</span>
                             <hr class="margintopbottom5">
                             <span class="subtext black" style="text-align:center;"><i class="fa fa-inr"></i>48000/- </span>
                             <br>
