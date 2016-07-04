@@ -5,6 +5,7 @@
 			parent::__construct();
 			if($this->session->userdata("StaSh_User_type") == 'actor'){
 				$this->load->model("ModelActor");
+				$this->load->model("Notifications");
 				$plan=$this->ModelActor->getActorPlan();
 				if(!count($plan)){
 					redirect(base_url()."payment");
@@ -23,6 +24,8 @@
 			$pageInfo['training'] = $this->ModelActor->getActorTrainingById($this->session->userdata("StaSh_User_id"));
 			$pageInfo['directors'] = $this->ModelActor->getDirectors($this->session->userdata("StaSh_User_id"));
 			$pageInfo['plan'] = $this->ModelActor->getActorPlan();
+			$pageInfo['newNotice'] = $this->Notifications->newNotice();
+			$pageInfo['notices'] = $this->Notifications->getNotice();
 			$this->load->view("actor/home", $pageInfo);
 		}
 		
@@ -32,7 +35,22 @@
 			$pageInfo = [];
 			$this->load->model("ModelActor");
 			$this->load->model("Auth");
+			$this->load->model("Notifications");
+
 			$userdata = $this->Auth->getUserData('StashUsers_username', $username);
+
+			if($this->session->userdata("StaSh_User_type") != 'actor'){
+				if($this->session->userdata("StaSh_User_Logged_In")){
+					$m = $this->session->userdata("StaSh_User_name") . " viewed your profile.";
+					$d = ['director' => $this->session->userdata("StaSh_User_id")];
+					$v = 'view';
+				}else{
+					$m = "Someone viewed your profile.";
+					$d = [];
+					$v = 'viewx';
+				}
+				$this->Notifications->insertNotification($userdata['StashUsers_id'], $m, 'view', $d);
+			}
 			
 			if(count($userdata) == 0){
 				$this->displayPageNotFound();
@@ -198,6 +216,12 @@
 					case "ImageToEncode":
 						$this->imageToEncode($data);
 						break;
+					case "SeenNotice":
+						$this->seenNotice($data);
+						break;
+					case 'CheckNotification':
+						$this->checkNotification($data);
+						break;
 					default:
 						$this->response(false, "Invalid Request");
 						break;
@@ -205,6 +229,45 @@
 			}
 		}
 
+		public function checkNotification($data = []){
+			$this->load->model("Notifications");
+			$new = $this->Notifications->newNotice();
+			$notices = $this->Notifications->getNotice();
+			$d = $this->parseNotice($notices);
+			$d['new'] = $new;
+			if($new)
+				$this->response(true, "Notifications", $d);
+			$this->response(false, "No New Notifications");
+		}
+
+		public function parseNotice($notices = []){
+			$this->load->model("Notifications");
+			$html = "";
+			$html2 = "";
+			foreach ($notices as $key => $notice) {
+				$fa = $this->Notifications->type2fa($notice['StashNotification_type']);
+	            $delay = $this->Notifications->timeElapsedString($notice['StashNotification_time']);
+
+	            if($notice['StashNotification_type'] == 'audition'){
+	                $link = base_url() . "project/notification/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
+	            }elseif($notice['StashNotification_type'] == 'connect'){
+	                $link = base_url() . "home/connect/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
+	            }else{
+	                $link = '#';
+	            }
+	            $html .= "<li><a href='{$link}'><span class='notification_message'><i class='fa {$fa}'></i>{$notice['StashNotification_message']}</span><br><span class='time_notification gray'><i>{$delay}</i></span></a></li>";
+
+	            $html2 .= "<li><a href='{$link}'><i class='fa {$fa}'></i>{$notice['StashNotification_message']}</a></li>";
+			}
+
+			return ['main' => $html, 'submain' => $html2];
+		}
+
+		public function seenNotice($data = []){
+			$this->load->model("Notifications");
+			$this->Notifications->updateNotificationSeen();
+			$this->response(true, "Notification Seen...");
+		}
 		
 
 		public function imageToEncode($data = []){

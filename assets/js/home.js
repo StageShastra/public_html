@@ -826,6 +826,16 @@ $(document).ready(function(){
                        +'</div> ';
         $("#actor_detail").html(content);
         $('#detailsActor').modal('show');
+
+        data = {request: "QuickViewNotice", data: JSON.stringify({actor: actors[id].StashActor_actor_id_ref})};
+        $.ajax({
+        	url: url,
+        	type: type,
+        	data: data,
+        	success: function(response){
+        		//
+        	}
+        });
 	});
 
 	function smsCharCounter(textbox, countID, msgID) {

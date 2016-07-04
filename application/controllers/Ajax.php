@@ -81,6 +81,12 @@
 					case "BulkDupReInvite":
 						$this->bulkDupReInvite($data);
 						break;
+					case "CheckoutClicked":
+						$this->checkoutClicked($data);
+						break;
+					case "QuickViewNotice":
+						$this->quickViewNotice($data);
+						break;
 					default:
 						$this->response(false, "Invalid Request");
 						break;
@@ -88,6 +94,19 @@
 			}else{
 				$this->response(false, Aj_Req_NoData);
 			}
+		}
+
+		public function quickViewNotice($data = []){
+			$this->load->model("Notifications");
+			$m = $this->session->userdata("StaSh_User_name") . " took a quick view of your profile";
+			$this->Notifications->insertNotification( $data['actor'], $m, 'quick', ['director' => $this->session->userdata("StaSh_User_id")] );
+			$this->response(true, "Quick View");
+		}
+
+		public function checkoutClicked($data = []){
+			$this->load->model("ModelProject");
+			$this->updateCheckoutClicked();
+			$this->response(true);
 		}
 
 		public function bulkDupReInvite($data = []){
@@ -394,6 +413,7 @@
 		public function eMailInvitation($data = []){
 			$this->load->model("ModelDirector");
 			$this->load->model("Email");
+			$this->load->model("Notifications");
 			$project = $this->ModelDirector->getProject($data['project_name'], $data['project_date']);
 			if(count($project)){
 				$projectID = $project['StashProject_id'];
@@ -424,7 +444,7 @@
 				while($this->ModelDirector->checkEmailRandLink($rand))
 					$rand = substr(base64_encode(md5(microtime() . $fe . microtime())), 0, 8);
 
-				$failed = $this->Email->sendInvitationToNotInDB( $data['msg'], $fe, $projectID, $rand );
+				$failed = $this->Email->sendInvitationToNotInDB( $data['msg'], $fe, $projectID, $rand , $data['subject']);
 				if( $failed !== true ){
 					// Sending Mail Failed. do something here.
 					$failedEmailFresh[] = $failed;
@@ -441,13 +461,17 @@
 				while($this->ModelDirector->checkEmailRandLink($rand))
 					$rand = substr(base64_encode(md5(microtime() . $fe . microtime())), 0, 8);
 
-				$failed = $this->Email->sendInvitationToInDB( $data['msg'], $fe, $projectID, $rand );
+				$failed = $this->Email->sendInvitationToInDB( $data['msg'], $fe, $projectID, $rand ,  $data['subject']);
 				if( $failed !== true ){
 					// Sending Mail Failed. do something here.
 					$failedEmailConnect[] = $failed;
 					$fail++;
 				}else{
 					$this->ModelDirector->insertInvitationMail( $fe, $msgId, $projectID, 'connect', $rand );
+					$actId = $this->ModelDirector->getActorIdByEmail($fe);
+					$m = $this->session->userdata("StaSh_User_name") . ' wants to connect with you. Click t accept.';
+					$notiD = array($this->session->userdata("StaSh_User_id"), $projectID, time(), $fe, $rand);
+					$this->Notifications->insertNotification( $actId, $m, "connect", $notiD );
 					$sent++;
 				}
 			}
@@ -647,6 +671,7 @@
 		public function contactActorByEmail($data = []){
 			$this->load->model("ModelDirector");
 			$this->load->model("Email");
+			$this->load->model("Notifications");
 			$projectID = 0;
 			if(trim($data['project_name']) != ''){
 				$project = $this->ModelDirector->getProject($data['project_name'], $data['project_date']);
@@ -671,6 +696,10 @@
 			foreach ($emails as $key => $email) {
 				if( $this->Email->sendAuditionMailUpdated( $email, $time, $msgId ) ){
 					$this->ModelDirector->insertSendMail( $actors[$key], $project, $msgId, $time );
+
+					$notiD = array($this->session->userdata("StaSh_User_id"), $email, $time, $msgId);
+
+					$this->Notifications->insertNotification($actors[$key], $this->session->userdata("StaSh_User_name") . " has sent you an audition message.", 'audition', $notiD);
 					$sent++;
 				}else{
 					$failedMails[] = $email;
@@ -684,6 +713,12 @@
 			$arr = array( 'sent' => $sent, 'fail' => $failed );
 			$this->response(true, "{$sent} Emails successfully sent.", $arr);
 		}
+
+		public function getEncryptedText($text = ''){
+			$this->load->library('encrypt');
+			return $this->encrypt->encode($text);
+		}
+
 		public function removeActor($data = []){
 			$this->load->model("ModelDirector");
 			if($this->ModelDirector->deleteActorFromDirector($data['actor_ref'])){

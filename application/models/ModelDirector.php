@@ -67,6 +67,13 @@
 			return trim($result['StashUsers_username']);
 		}
 
+		public function getActorIdByEmail($email = ''){
+			$this->db->where("StashUsers_email", $email);
+			$query = $this->db->get("stash-users");
+			$result = $query->first_row("array");
+			return trim($result['StashUsers_id']);
+		}
+
 		public function insertActorProject($ref = 0, $proj = 0){
 			$data = array(
 						'StashActorProject_id' => null,

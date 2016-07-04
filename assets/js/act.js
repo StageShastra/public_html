@@ -574,6 +574,42 @@ $(document).ready(function(){
 		return false;
 	});
 
+	$(document).on("click", ".seenNotice", function(){
+		data = {request: "SeenNotice", data: "{}"};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				$(".seenNotice").find("i.noticeCount").remove();
+			}
+		});
+		return false;
+	});
+
+	function checkNotification() {
+		data = {request: "CheckNotification", data: "{}"};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				if(response.status){
+					data = response.data;
+					$(".seenNoticeSpan").after("<i class='label label-danger noticeCount'>"+ data.new +"</i>");
+					$(".mainNoticeCont").prepend(data.main);
+					$(".subNoticeCont").prepend(data.submain);
+				}
+			}
+		});
+	}
+
+	var interval = 5 * 60 * 1000; // 5 Mins;
+
+	setInterval(function(){
+		checkNotification();
+	}, 30000);
+
 });
 
 String.prototype.toProperCase = function () {

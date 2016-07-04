@@ -745,38 +745,45 @@ textarea{
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  
                       <ul class="nav navbar-nav navbar-right ul_list">
                         <li class="dropdown">
-                          <a href="#" class="dropdown-toggle hidden-xs " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-bell-o firstcolor" aria-hidden="true"></span></a>
-                          <ul class="dropdown-menu hidden-xs">
-                            <li>
-                                <a href="<?= base_url() ?>/payment?plan=1">
-                                    <span class="notification_message"><i class="fa fa-envelope"></i>Casting Bay has sent you an audition message</span><br><span class ="time_notification gray"><i>29mins ago</i><span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?= base_url() ?>/payment?plan=1">
-                                    <span class="notification_message"><i class="fa fa-eye"></i>Casting Bay viewed your profile.</span><br><span class ="time_notification gray"><i>36mins ago</i><span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?= base_url() ?>/payment?plan=1">
-                                    <span class="notification_message"><i class="fa fa-user-plus"></i>Shikha wants to connect with you. Click to accept.</span><br><span class ="time_notification gray"><i>2 hours ago</i><span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?= base_url() ?>/payment?plan=1">
-                                    <span class="notification_message"><i class="fa fa-bolt"></i>Casting Bay took a quick view of your profile.</span> <br><span class ="time_notification gray"><i>1 day ago</i><span>
-                                </a>
-                            </li>
-                            <li>
+                          <a href="#" class="dropdown-toggle hidden-xs seenNotice" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-bell-o firstcolor seenNoticeSpan" aria-hidden="true"></span>
+                          <?php
+                            if($newNotice){
+                                echo "<i class='label label-danger noticeCount'>{$newNotice}</i>";
+                            }
+                          ?>
+                          </a>
+                          <ul class="dropdown-menu hidden-xs mainNoticeCont">
+                          <?php
+
+                                foreach ($notices as $key => $notice) {
+                                    $fa = $this->Notifications->type2fa($notice['StashNotification_type']);
+                                    $delay = $this->Notifications->timeElapsedString($notice['StashNotification_time']);
+
+                                    if($notice['StashNotification_type'] == 'audition'){
+                                        $link = base_url() . "project/notification/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
+                                    }elseif($notice['StashNotification_type'] == 'connect'){
+                                        $link = base_url() . "home/connect/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
+                                    }else{
+                                        $link = '#';
+                                    }
+                            ?>
+                            
+                                    <li>
+                                        <a href='#'>
+                                            <span class='notification_message'><i class='fa <?= $fa ?>'></i><?= $notice['StashNotification_message'] ?></span><br>
+                                            <span class ="time_notification gray"><i><?= $delay ?></i><span>
+                                        </a>
+                                    </li>
+
+                            <?php
+                                }
+
+                          ?>
+                            <!-- <li>
                                 <a href="<?= base_url() ?>/payment?plan=1">
                                     <span class="notification_message"><i class="fa fa-comment-o"></i>Pritesh has sent you a private message.</span><br><span class ="time_notification gray"><i>2 days ago</i><span>
                                 </a>
-                            </li>
-                            <li>
-                                <a href="<?= base_url() ?>/payment?plan=1">
-                                    <span class="notification_message"><i class="fa fa-user-secret"></i>Someone viewed your profile</span><br><span class ="time_notification gray"><i>1 week ago</i><span>
-                                </a>
-                            </li>
+                            </li> -->
                           </ul>
                         </li>   
                         <li >
@@ -806,32 +813,27 @@ textarea{
                 <!-- ========================================================= -->
                 <!-- Notification Bar -->
                 <div class="collapse navbar-collapse hidden-lg hidden-sm hidden-md" style="height:auto!important;" id="notification_bar">  
-                    <ul class="nav navbar-nav navbar-right ul_list">
+                    <ul class="nav navbar-nav navbar-right ul_list subNoticeCont">
+                        <?php
+
+                            foreach ($notices as $key => $notice) {
+                                $fa = $this->Notifications->type2fa($notice['StashNotification_type']);
+                                $delay = $this->Notifications->timeElapsedString($notice['StashNotification_time']);
+
+                                if($notice['StashNotification_type'] == 'audition'){
+                                    $link = base_url() . "project/notification/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
+                                }elseif($notice['StashNotification_type'] == 'connect'){
+                                    $link = base_url() . "home/connect/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
+                                }else{
+                                    $link = '#';
+                                }
+                        ?>
                         <li>
-                            <a href="<?= base_url() ?>/payment?plan=1">
-                                <i class="fa fa-envelope"></i><span>Casting Bay has sent you an audition message</span>
+                            <a href="<?= $link ?>">
+                                <i class="fa <?= $fa ?>"></i><span><?= $notice['StashNotification_message'] ?></span>
                             </a>
                         </li>
-                        <li>
-                            <a href="<?= base_url() ?>/payment?plan=1">
-                                <i class="fa fa-user-plus"></i><span>Shikha wants to connect with you.</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= base_url() ?>/payment?plan=1">
-                                <i class="fa fa-bolt"></i><span>Casting Bay took a quick view of your profile.</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= base_url() ?>/payment?plan=1">
-                                <i class="fa fa-comment-o"></i><span>Pritesh has sent you a private message.</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= base_url() ?>/payment?plan=1">
-                                <i class="fa fa-user-secret"></i><span>Someone viewed your profile</span>
-                            </a>
-                        </li>
+                        <?php } ?>
                     </ul>      
                 </div><!-- /notification_bar-->
                 <!-- ====================================================== -->
