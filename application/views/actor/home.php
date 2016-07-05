@@ -711,6 +711,13 @@ textarea{
     font-size: 14px;
     color:#9b9b9b;
 }
+.mainNoticeCont{
+    overflow-y:hidden;
+    height: 450px;
+}
+.mainNoticeCont:hover{
+    overflow-y:scroll;
+}
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -1002,7 +1009,7 @@ textarea{
                                 <span class="elements_label col-sm-5 col-xs-4">Phone: </span><input type="text" class="editwhite edit_inputs_basics col-sm-8" name="phone" value="<?= $actorProfile['StashActor_mobile'] ?>" maxlength='10' id="phone"/>
                                 </span>
                                 <br>
-                                <span class="elements_label col-sm-5 col-xs-4">WhatsApp: </span><input type="text" class="editwhite edit_inputs_basics col-sm-7 col-xs-8" name="whatsapp" value="<?= $actorProfile['StashActor_whatsapp'] ?>" id="whatsapp"/>
+                                <span class="elements_label col-sm-5 col-xs-4">WhatsApp: </span><input type="text" class="editwhite edit_inputs_basics col-sm-7 col-xs-8" name="whatsapp" value="<?= $actorProfile['StashActor_mobile'] ?>" id="whatsapp"/>
                                 </span>
                                 </div>
                                 <font class="sortbuttons">
