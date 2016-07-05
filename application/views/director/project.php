@@ -79,30 +79,33 @@
                     <p class="message-box"><?= $message['StashInviteMsg_message'] ?></p>
                   </div>
                   <div class="col-sm-4">
+                    
+                    <?php
+                      if(count($project)){
+                          if( $response == 0 ){
+                            echo "<p id='res-message'>Are you coming to the audition ?</p>";
+                          }else{
+                            if($response == 1){
+                              $l = 'success';
+                              $a = 'Yes';
+                            }elseif($response == 2){
+                              $l = "danger";
+                              $a = "No";
+                            }else{
+                              $l = "warning";
+                              $a = "May be";
+                            }
+                            echo "<p id='res-message'> You selected <span class='label label-{$l}'>{$a}</span>. You can change your choice anytime. </p>";
+                          }
+                    ?>
                     <h3>Response</h3>
                     <hr>
-                    <?php
-                      if( $response == 0 ){
-                        echo "<p id='res-message'>Are you coming to the audition ?</p>";
-                      }else{
-                        if($response == 1){
-                          $l = 'success';
-                          $a = 'Yes';
-                        }elseif($response == 2){
-                          $l = "danger";
-                          $a = "No";
-                        }else{
-                          $l = "warning";
-                          $a = "May be";
-                        }
-                        echo "<p id='res-message'> You selected <span class='label label-{$l}'>{$a}</span>. You can change your choice anytime. </p>";
-                      }
-                    ?>
                     <br>
                     <i id="projectInfoId" data-id='<?= $forRef ?>' data-for='<?= $for ?>'></i>
                     <button type="button" class="btn btn-success responseToAudtion <?= ($response == 1) ? 'disabled' : '' ?>" data-response='1'>Yes</button>
                     <button type="button" class="btn btn-danger responseToAudtion <?= ($response == 2) ? 'disabled' : '' ?>" data-response='2'>No</button>
                     <button type="button" class="btn btn-warning responseToAudtion <?= ($response == 3) ? 'disabled' : '' ?>" data-response='3'>May be</button>
+                    <?php } ?>
                   </div>
               </div>
 
