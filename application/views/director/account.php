@@ -105,11 +105,12 @@
         box-shadow:none; 
     }
     .submit-btn {
-    padding: 4px 8px;
+      padding: 4px 8px;
     }
-    .navbar-nav > li > a:hover {
-    color: #fff;
-    background: #F7A9A9;
+    .navbar-nav > li > a:hover{
+      color: #fff;
+      background:#F7A9A9;
+      border-radius:30px; 
     }
     .footer-items a {
       color: rgba(255,255,255,0.7);

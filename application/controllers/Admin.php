@@ -409,6 +409,16 @@
 			$this->load->view("admin/embededMail", $pageInfo);
 		}
 
+		public function filterInvites($by = 'email'){
+			$term = trim($_REQUEST['term']);
+			$start = strtotime($term);
+			$end = $start + 86400;
+			$invitations = $this->ModelAdmin->getInvitationBtnDate($start, $end, $by);
+			header("Content-Type: application/json");
+			echo json_encode($invitations);
+			exit();
+		}
+
 
 
 
@@ -482,11 +492,20 @@
 		}
 
 		public function emailGraphData($data = []){
-			$d = $this->ModelAdmin->emailInvitationData();
-			$s = $this->ModelAdmin->smsInvitationData();
+			$d = $s = [];
+			if($data['by'] === false){
+				$d = $this->ModelAdmin->emailInvitationData();
+				$s = $this->ModelAdmin->smsInvitationData();
+			}elseif($data['by'] == 'sms'){
+				$s = $this->ModelAdmin->smsInvitationData($data['id']);
+			}else{
+				$d = $this->ModelAdmin->emailInvitationData($data['id']);
+			}
 			$m = [];
 			for($i = 0; $i < count($d); $i++){
-				$m[$i] = [$i, $d[$i][1] + $s[$i][1]];
+				$var =  (isset($d[$i][1]))?$d[$i][1] : 0;
+				$var2 = (isset($s[$i][1]))?$s[$i][1] : 0;
+				$m[$i] = [$i, $var + $var2];
 			}
 
 			$this->response(true, "Data", array('email' => $d, 'sms' => $s, 'main' => $m));

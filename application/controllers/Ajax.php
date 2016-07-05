@@ -96,6 +96,7 @@
 			}
 		}
 
+
 		public function quickViewNotice($data = []){
 			$this->load->model("Notifications");
 			$m = $this->session->userdata("StaSh_User_name") . " took a quick view of your profile";

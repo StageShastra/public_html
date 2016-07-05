@@ -13,6 +13,14 @@
 		</ol>
 	</div>
 </div>
+<style type="text/css">
+	.datetimefilter{
+		padding: 3px;
+		margin: 0 5px;
+		border-radius: 3px;
+		border: 1px solid #999;
+	}
+</style>
 <div class="wrapper wrapper-content">
 	<div class="row">
 		<!-- <div class="col-lg-3">
@@ -67,10 +75,11 @@
 				</div>
 			</div>
 		</div> -->
-		<div class="col-lg-12">
+		<div class="col-lg-8">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Invitation Status <small>Email + SMS invitation</small></h5>
+                    
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -86,6 +95,29 @@
                 <div class="ibox-content">
                     <div class="flot-chart">
                         <div class="flot-chart-content" id="flot-line-chart-main"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Registration Status <small>Email + SMS invitation</small></h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="flot-chart">
+                        <div class="flot-chart-content" id="flot-pie-chart"></div>
                     </div>
                 </div>
             </div>
@@ -150,6 +182,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Invitation Status <small>Email Invitation</small></h5>
+                    <input type="text" name="datetimefilter" class="datetimefilter" data-url="email" placeholder="mm/dd/yyyy">
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -179,6 +212,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Invitation Status <small>SMS Invitation</small></h5>
+                    <input type="text" name="datetimefilter" class="datetimefilter" data-url="sms" placeholder="mm/dd/yyyy">
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>

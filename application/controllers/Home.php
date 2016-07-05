@@ -73,6 +73,13 @@ class Home extends CI_Controller {
 			}
 		}
 
+		setcookie("Cstko_refer", $refer, time() + 3600, "/");
+
+		if( $refer == 'sms' )
+			$this->Auth->updateSMSLinkUsed( $this->input->post("link_id"), 2 );
+		elseif($refer == 'email')
+			$this->Auth->updateEmailLinkUsed( $this->input->post("link_id"), 2 );
+
 		/*print_r($this->input->post());
 		exit();*/
 
@@ -114,7 +121,7 @@ class Home extends CI_Controller {
 	    		if($response > 0){
 	    			if($type == 'actor'){
 
-	    				$plan = (isset($_REQUEST['plan']) && $_REQUEST['plan'] == 'basic') ? 0 : 1;
+	    				$plan = (isset($_REQUEST['plan']) && $_REQUEST['plan'] == 'pro') ? 1 : 0;
 
 	    				$this->Auth->setupActorProfile($response);
 
@@ -239,7 +246,7 @@ class Home extends CI_Controller {
 		$link = trim($linkDetails['StashEmailInvite_link']);
 		setcookie("Cstko_link", $link, time() + 3600, "/");
 		$_SESSION['Cstko_link'] = $link;
-		redirect( base_url() . "home/choose_plan#ForActors" );
+		redirect( base_url() . "home/register/actor" );
 	}
 
 	public function pricing($link = ''){
@@ -313,7 +320,7 @@ class Home extends CI_Controller {
 				// Not Registered yet.
 				setcookie("Cstko_link", $link, time() + 3600, "/");
 				$_SESSION['Cstko_link'] = $link;
-				redirect( base_url() . "home/choose_plan#ForActors" );
+				redirect( base_url() . "home/register/actor" );
 			}
 		}else{
 			redirect(base_url());
@@ -332,7 +339,7 @@ class Home extends CI_Controller {
 			$l = $linkDetails['StashPromo_id'];
 			setcookie("Cstko_link", $l, time() + 3600, "/");
 			$_SESSION['Cstko_link'] = $l;
-			redirect( base_url() . "home/choose_plan#ForActors" );
+			redirect( base_url() . "home/register/actor" );
 
 		}else{
 			redirect( base_url() );

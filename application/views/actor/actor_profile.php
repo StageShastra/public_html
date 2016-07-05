@@ -13,7 +13,7 @@
     }
   ?>
     <body>
-          <style>
+     <style>
           body{
             padding-top: 90px;
           }
@@ -59,7 +59,7 @@
             text-align: left;
         }
         .category_heading{
-            font-family: Raleway;
+            font-family: "Open Sans","Raleway","Helvetica";
             font-weight: 400;
             font-size: 15px;
             color: #FFB600;
@@ -398,6 +398,9 @@
             .blurb{
                 font-size: 15px;
             }
+            .ul_list{
+                margin-right: 120px;
+            }
         }
         /* lg */
         @media screen and (min-width: 1200px) {
@@ -425,6 +428,9 @@
             }
             .blurb{
                 font-size: 15px;
+            }
+            .ul_list{
+                margin-right: 120px;
             }
         }
         .videoWrapper {
@@ -457,7 +463,7 @@
         }
         .collapse
         {
-            height: 75px !important;
+            height: auto;
         }
         .custom-navbar{
             padding-bottom: 0px;
@@ -594,8 +600,62 @@ textarea{
     padding: 0px;
     line-height: normal;
 }
-   
-        </style>
+.submit-btn{
+    background: #FFC107;
+    color: #fff;
+    border-radius:4px;
+    padding: 5px; 
+    border: none;
+    font-size: 14px;
+
+}
+.submit-btn:hover{
+    background: #fff;
+    color: #FFC107;
+    border: 1px solid #FFC107;
+}
+.edit_inputs_basics{
+    background: white;
+    border-radius: 0px;
+    border: 1px solid #ddd;
+}
+.alertbox{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    float: none;
+    z-index: 99999999;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    margin-top: 20px;
+    background: #607D8B !important;
+    color: white;
+    max-width: 400px;
+    border: 3px solid;
+    box-shadow: 2px 2px 10px gray;
+}
+.alert-dismissable .close, .alert-dismissible .close {
+    position: relative;
+    top: -2px;
+    right: -5px;
+    color: inherit;
+}
+.navbar-nav > li > a{
+    font-size: 16px !important;
+}
+.navbar-nav > li > a:hover {
+    color: #fff !important;
+    background: #F7A9A9 !important;
+}
+.shareButton{
+    font-size: 20px;
+}
+.counter_exp{
+    font-size: 14px;
+    color:#9b9b9b;
+}
+</style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -606,7 +666,7 @@ textarea{
         <!-- Ths section is post selection !-->
         <div class="container-fluid" id="home">
            
-           
+           <script>var first_time=1</script>
             <nav class="navbar navbar-default navbar-fixed-top custom-navbar">
                 <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -666,8 +726,8 @@ textarea{
                                 <div class="elements">
                                     <span class="elements_label">Sex: </span><span id="actor_sex"><?= ($actorProfile['StashActor_gender']) ? "Male" : "Female" ?></span>
                                     <br>
-                                    <span class="elements_label">Age Range:</span><span id="actor_min_age" ><?= $actorProfile['StashActor_min_role_age'] ?></span>-<span id="actor_max_age"><?= $actorProfile['StashActor_max_role_age'] ?></span><span style="font-size:9px;"> years</span><br>
-                                   <span class="elements_label ">Weight:</span><span id="actor_weight" ><?= $actorProfile['StashActor_weight'] ?></span> kgs<br>
+                                    <span class="elements_label">Age Range: </span><span id="actor_min_age" ><?= $actorProfile['StashActor_min_role_age'] ?></span>-<span id="actor_max_age"><?= $actorProfile['StashActor_max_role_age'] ?></span><span> yrs</span><br>
+                                   <span class="elements_label ">Weight: </span><span id="actor_weight" ><?= $actorProfile['StashActor_weight'] ?></span> kgs<br>
                                     <span class="elements_label ">Height: </span><span id="actor_height" ><?= $actorProfile['StashActor_height'] ?></span> cms<br>
                                 </div>
                             </div>
@@ -679,7 +739,7 @@ textarea{
                             <div class="category_heading">DETAILS
                             </div>
                             <div id="actor_details">
-                                <span class="elements_label">Date of Birth:</span><span class="elements" id="actor_dob"><?php
+                                <span class="elements_label">Date of Birth: </span><span class="elements" id="actor_dob"><?php
                                 if($actorProfile['StashActor_dob'] == 0){
                                     echo '';
                                     $actorProfile['StashActor_dob'] = strtotime("-18 years");
@@ -792,7 +852,7 @@ textarea{
                                             if($youtube_flag==1) 
                                             {    
                                                 
-                                                echo '<div class="col-sm-7" style="padding-left:0px;padding-right:0px;max-width:400px;margin-left:15px;"><div class="videoWrapper"><iframe width="482" height="300" src="'.$youtube.'" frameborder="0" allowfullscreen></iframe></div></div>';
+                                                echo '<div class="col-sm-7" style="padding-left:0px;padding-right:0px;max-width:400px;"><div class="videoWrapper"><iframe width="482" height="300" src="'.$youtube.'" frameborder="0" allowfullscreen></iframe></div></div>';
                                                 echo '<div class="col-sm-5"">
 
                                                         <span class="info black" id="actor_ex_title_'.$key.'"><b>'.ucfirst($experience['StashActorExperience_title']).'</b></span>
@@ -829,11 +889,13 @@ textarea{
                                             }
                                             if($onlyone!=1)
                                             {
+                                                $index=$key+1;
                                                 echo '<div class="nav_icons">
-                                                <span class="leftnav center toggleEdit glyphicon glyphicon-chevron-left gray" data-hide-id="#experience-'.$key.'" data-unhide-id=#experience-'.$previous.'>
-                                                </span>
-                                                <span class="righttnav toggleEdit center glyphicon glyphicon-chevron-right gray" data-hide-id="#experience-'.$key.'" data-unhide-id=#experience-'.$next.' >
+                                                <span class="leftnav center edit-button toggleEdit glyphicon edit-button glyphicon-chevron-left gray" data-hide-id="#experience-'.$key.'" data-unhide-id=#experience-'.$previous.'>
+                                                </span><span class="counter_exp center">'.$index.' of '.$count_experience.'</span>
+                                                <span class="righttnav edit-button toggleEdit center glyphicon glyphicon-chevron-right gray" data-hide-id="#experience-'.$key.'" data-unhide-id=#experience-'.$next.' >
                                                 </span></div>';
+                                            
                                             }
                                             
                                         ?>

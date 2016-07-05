@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-	var firsttime=0;
 	if(first_time==0)
 	{
 		startIntro();

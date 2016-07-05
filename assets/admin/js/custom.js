@@ -330,7 +330,7 @@ $(document).ready(function(){
 	            }
 	        },
 	        xaxis: {
-	            ticks: [[0,'Sent'],[1,'Seen'],[2,'Unseen'],[3,'Pending'],[4,'Joined'],[5,'Paid'],[6,'Basic'],[7,'Confirmed']]
+	            ticks: [[0,'Sent'],[1,'Seen'],[2,'Chose Plan'],[3,'Signed Up'],[4,'Clicked Checkout'],[5,'Paid'],[6,'Confirmed'],[7,'Completed']]
 	        },
 	        colors: ["#1ab394"],
 	        grid: {
@@ -355,8 +355,44 @@ $(document).ready(function(){
 	    $.plot($(divId), [barData], barOptions);
 	}
 
+	function pieChart(pro, basic, reg) {
+		var data = [{
+	        label: "Paid Pro",
+	        data: pro,
+	        color: "#d3d3d3",
+	    }, {
+	        label: "Basic",
+	        data: basic,
+	        color: "#bababa",
+	    }, {
+	        label: "Other",
+	        data: reg,
+	        color: "#79d2c0",
+	    }];
+
+	    var plotObj = $.plot($("#flot-pie-chart"), data, {
+	        series: {
+	            pie: {
+	                show: true
+	            }
+	        },
+	        grid: {
+	            hoverable: true
+	        },
+	        tooltip: true,
+	        tooltipOpts: {
+	            content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
+	            shifts: {
+	                x: 20,
+	                y: 0
+	            },
+	            defaultTheme: false
+	        }
+	    });
+	}
+
 	if( typeof graph !== 'undefined' ){
-		data = {request: "EmailGraphData", data: '{}'};
+		data = {request: "EmailGraphData", data: JSON.stringify({id:0, by:false})};
 		$.ajax({
 			url: url,
 			type: type,
@@ -365,9 +401,39 @@ $(document).ready(function(){
 				flowLineChart(response.data.main, '#flot-line-chart-main');
 				flowLineChart(response.data.email, '#flot-line-chart');
 				flowLineChart(response.data.sms, '#flot-line-chart-2');
+				pieChart(response.data.main[5][1], response.data.main[8][1], response.data.main[3][1]);
 			}
 		});
 	}
+
+	function updateFlowLineGraph(by, id) {
+		data = {request: "EmailGraphData", data: JSON.stringify({id:id, by:by})};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				if(by == 'email')
+					flowLineChart(response.data.email, '#flot-line-chart');
+				else
+					flowLineChart(response.data.sms, '#flot-line-chart-2');
+			}
+		});
+	}
+
+
+	$(document).on("focus", ".datetimefilter", function(){
+		app = $(this).attr("data-url");
+		link = base_url + "admin/filterInvites/" + app;
+		$(".datetimefilter").autocomplete({
+			source: link,
+			minLenght: 10,
+			select: function(ev, ui){
+				id = ui.item.id;
+				updateFlowLineGraph(app, id);
+			}
+		})
+	});
 	
 
 });

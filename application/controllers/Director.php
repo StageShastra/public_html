@@ -60,7 +60,7 @@
 			$link = isset($_GET['link']) ? trim($_GET['link']) : "";
 			$linkname = isset($_GET['linkname']) ? trim($_GET['linkname']) : "";
 			$this->load->model("Email");
-			$email = $this->Email->defaultTemplete($msg, $link, $linkname, $this->session->userdata("StaSh_User_name"));
+			$email = $this->Email->defaultTemplete("Hi,<br>".$msg, $link, $linkname);
 			//print_r($_GET);
 			header('Content-Type: text/html; charset=utf-8');
 			echo $email;

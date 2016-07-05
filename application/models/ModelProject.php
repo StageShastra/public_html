@@ -61,4 +61,23 @@
 			return $this->db->update("stash-email-message", array( 'StashEmailMsg_response' => $res ));
 		}
 
+		public function updateCheckoutClicked(){
+			$refer = $this->input->cookie("Cstko_refer");
+			if($refer == 'sms'){
+				$by = $this->getUserData("StashUsers_mobile", $this->session->userdata("StaSh_User_id"));
+				$this->db->where("StashSMSInvites_mobile", $by);
+				$this->db->update("stash-sms-invites", array('StashSMSInvites_status' => 3));
+			}else{
+				$by = $this->getUserData("StashUsers_email", $this->session->userdata("StaSh_User_id"));
+				$this->db->where("StashEmailInvite_email", $by);
+				$this->db->update("stash-email-invites", array('StashEmailInvite_status' => 3));
+			}
+		}
+
+		public function getUserData($field = '', $value = ''){
+			$this->db->where($field, $value);
+			$fetch = $this->db->get("stash-users", 1)->first_row('array');
+			return $fetch[$field];
+		}
+
 	}

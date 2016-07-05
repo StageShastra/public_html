@@ -777,11 +777,12 @@
 
 			}
 			$result['recipient'] = $recipient;
-			$result['responded'] = $o + $s;
+			$result['responded'] = $o ;
 			$result['seen'] = $o;
 			$result['used'] = $s;
 			$result['msg'] = $msg;
 			$result['pending'] = $recipient - $result['responded'];
+			
 
 			return $result;
 		}
@@ -829,7 +830,7 @@
 				
 			}
 			$result['recipient'] = $recipient;
-			$result['responded'] = $o + $s;
+			$result['responded'] = $o;
 			$result['seen'] = $o;
 			$result['used'] = $s;
 			$result['msg'] = $msg;
