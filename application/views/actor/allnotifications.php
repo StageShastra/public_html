@@ -220,28 +220,36 @@
                 <div class="row">
                   <ul>
                   <?php
+                      $last = '';
                       foreach ($notifications as $key => $notice) {
-                          
-                        $fa = $this->Notifications->type2fa($notice['StashNotification_type']);
-                        //echo $notice['StashNotification_type'];
-                        $delay = $this->Notifications->timeElapsedString($notice['StashNotification_time']);
-
-                        if($notice['StashNotification_type'] == 'audition'){
-                            $link = base_url() . "project/notification/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
-                        }elseif($notice['StashNotification_type'] == 'connect'){
-                            $link = base_url() . "home/connect/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
-                        }else{
-                            $link = '#';
+                        $close = false;
+                        $d = date("d-m-Y", $notice['StashNotification_time']);
+                        if($last != $d){
+                          echo ($last != '') ? "</ul><hr>" : "";
+                          echo "<li><i class='fa fa-calendar'></i> ".date("d M", $notice['StashNotification_time'])." </li><hr><ul>";
+                          $last = $d;
                         }
 
+                          
+                          $fa = $this->Notifications->type2fa($notice['StashNotification_type']);
+                          //echo $notice['StashNotification_type'];
+                          $delay = $this->Notifications->timeElapsedString($notice['StashNotification_time']);
+
+                          if($notice['StashNotification_type'] == 'audition'){
+                              $link = base_url() . "project/notification/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
+                          }elseif($notice['StashNotification_type'] == 'connect'){
+                              $link = base_url() . "home/connect/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
+                          }else{
+                              $link = '#';
+                          }
+
                   ?>
-                    <li><i class="fa <?= $fa ?>"></i><?= $delay ?></li>
-                    <hr>
-                    <ul>
-                      <li><?= $notice['StashNotification_message'] ?></li>
-                    </ul>
-                    <hr>
-                  <?php }  ?>
+                    <li><i class='fa <?= $fa ?>'></i> <?= $notice['StashNotification_message'] ?> <span><?= $delay ?></span></li>
+                  <?php 
+
+                    }  
+
+                  ?>
                   </ul>
                 </div>  
               </div>
