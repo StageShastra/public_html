@@ -757,6 +757,7 @@ textarea{
 
                                 foreach ($notices as $key => $notice) {
                                     $fa = $this->Notifications->type2fa($notice['StashNotification_type']);
+                                    echo $notice['StashNotification_type'];
                                     $delay = $this->Notifications->timeElapsedString($notice['StashNotification_time']);
 
                                     if($notice['StashNotification_type'] == 'audition'){
@@ -769,7 +770,7 @@ textarea{
                             ?>
                             
                                     <li>
-                                        <a href='#'>
+                                        <a href="<?= $link ?>">
                                             <span class='notification_message'><i class='fa <?= $fa ?>'></i><?= $notice['StashNotification_message'] ?></span><br>
                                             <span class ="time_notification gray"><i><?= $delay ?></i><span>
                                         </a>

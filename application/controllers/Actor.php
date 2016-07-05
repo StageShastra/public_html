@@ -49,7 +49,7 @@
 					$d = [];
 					$v = 'viewx';
 				}
-				$this->Notifications->insertNotification($userdata['StashUsers_id'], $m, 'view', $d);
+				$this->Notifications->insertNotification($userdata['StashUsers_id'], $m, $v, $d);
 			}
 			
 			if(count($userdata) == 0){
