@@ -35,7 +35,7 @@
 		public function getNotice(){
 			$this->db->where("StashNotification_actor_id_ref", $this->session->userdata("StaSh_User_id"));
 			$this->db->order_by("StashNotification_id", "DESC");
-			return $this->db->get("stash-notification", 6)->result('array');
+			return $this->db->get("stash-notification", 30)->result('array');
 		}
 
 		public function getNewNotice(){
@@ -82,7 +82,8 @@
 					'viewx' => 'fa-user-secret',
 					'audition' => 'fa-envelope',
 					'connect' => 'fa-user-plus',
-					'quick' => 'fa-bolt'
+					'quick' => 'fa-bolt',
+					'message' => 'fa-envelope-o'
 				);
 			return $box[trim($type)];
 		}

@@ -699,8 +699,9 @@
 					$this->ModelDirector->insertSendMail( $actors[$key], $project, $msgId, $time );
 
 					$notiD = array($this->session->userdata("StaSh_User_id"), $email, $time, $msgId);
-
-					$this->Notifications->insertNotification($actors[$key], $this->session->userdata("StaSh_User_name") . " has sent you an audition message.", 'audition', $notiD);
+					$x = ($projectID == 0) ? '' : 'audition';
+					$tag = ($projectID == 0) ? 'message' : 'audition';
+					$this->Notifications->insertNotification($actors[$key], $this->session->userdata("StaSh_User_name") . " has sent you an {$x} message.", $tag, $notiD);
 					$sent++;
 				}else{
 					$failedMails[] = $email;

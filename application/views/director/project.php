@@ -67,7 +67,7 @@
               <div class="row">
                   <div class="col-sm-8 projectSection">
                     <h3>Notification <br><small style="font-size: 13px;">On: <?= date("d/m/Y", $time) ?></small></h3>
-                    <p>Audition by: <a href="#"><?= $director ?></a></p>
+                    <p>Sent By: <a href="#"><?= $director ?></a></p>
                     <?php
                       if( count($project) ){
                         echo "<p> Project Name: <b>{$project['StashProject_name']}</b> </p><p>Date: <b>".date('d/m/Y', $project['StashProject_date'])."</b></p>";
