@@ -219,17 +219,29 @@
                 <hr>
                 <div class="row">
                   <ul>
-                    <li><i class="fa fa-calendar-o"></i>22nd June</li>
+                  <?php
+                      foreach ($notifications as $key => $notice) {
+                          
+                        $fa = $this->Notifications->type2fa($notice['StashNotification_type']);
+                        //echo $notice['StashNotification_type'];
+                        $delay = $this->Notifications->timeElapsedString($notice['StashNotification_time']);
+
+                        if($notice['StashNotification_type'] == 'audition'){
+                            $link = base_url() . "project/notification/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
+                        }elseif($notice['StashNotification_type'] == 'connect'){
+                            $link = base_url() . "home/connect/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
+                        }else{
+                            $link = '#';
+                        }
+
+                  ?>
+                    <li><i class="fa <?= $fa ?>"></i><?= $delay ?></li>
                     <hr>
                     <ul>
-                      <li>first notification</li>
+                      <li><?= $notice['StashNotification_message'] ?></li>
                     </ul>
                     <hr>
-                    <li><i class="fa fa-calendar-o"></i>19th June</li>
-                    <hr>
-                    <ul>
-                      <li>first notification</li>
-                    </ul>
+                  <?php }  ?>
                   </ul>
                 </div>  
               </div>

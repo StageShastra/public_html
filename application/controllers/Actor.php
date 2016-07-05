@@ -79,15 +79,17 @@
 			//$pageInfo['profile'] = $this->ModelActor->actorProfile();
 			$this->load->view("actor/account", $pageInfo);
 		}
-		public function allnotifications($value=''){
+		public function notifications($value=''){
 			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
 				redirect(base_url());
 			$pageInfo = [];
 			$this->load->model("Auth");
 			$this->load->model("ModelActor");
+			$this->load->model("Notifications");
+			$pageInfo['notifications'] = $this->Notifications->getAllNotices();
+			$pageInfo['plan'] = $this->ModelActor->getActorPlan();
 			$pageInfo['actor'] = $this->Auth->getUserData('StashUsers_id', $this->session->userdata("StaSh_User_id"));
 			$pageInfo['profile'] = $this->ModelActor->getActorProfileById($this->session->userdata("StaSh_User_id"));
-			$pageInfo['plan'] = $this->ModelActor->getActorPlan();
 			//$pageInfo['profile'] = $this->ModelActor->actorProfile();
 			$this->load->view("actor/allnotifications", $pageInfo);
 		}

@@ -45,6 +45,12 @@
 			return $this->db->get("stash-notification")->result('array');
 		}
 
+		public function getAllNotices(){
+			$this->db->where("StashNotification_actor_id_ref", $this->session->userdata("StaSh_User_id"));
+			$this->db->order_by("StashNotification_id", "DESC");
+			return $this->db->get("stash-notification")->result('array');
+		}
+
 		public function timeElapsedString($ptime){
 		    $etime = time() - $ptime;
 
