@@ -595,7 +595,10 @@ $(document).ready(function(){
 			success: function(response){
 				if(response.status){
 					data = response.data;
-					$(".seenNoticeSpan").after("<i class='label label-danger noticeCount'>"+ data.new +"</i>");
+					if(typeof $(".noticeCount") == 'undefined')
+						$(".seenNoticeSpan").after("<i class='label label-danger noticeCount'>"+ data.new +"</i>");
+					else
+						$(".noticeCount").html(data.new);
 					$(".mainNoticeCont").prepend(data.main);
 					$(".subNoticeCont").prepend(data.submain);
 				}

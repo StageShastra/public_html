@@ -20,8 +20,14 @@
 			$this->db->update("stash-notification", array('StashNotification_status' => 0));
 		}
 
-		public function newNotice(){
+		public function sentNotificationSeen($id = 0){
 			$this->db->where("StashNotification_status", 1);
+			$this->db->where("StashNotification_actor_id_ref", $this->session->userdata("StaSh_User_id"));
+			$this->db->update("stash-notification", array('StashNotification_status' => 2));
+		}
+
+		public function newNotice(){
+			$this->db->where("StashNotification_status <> ", 0);
 			$this->db->where("StashNotification_actor_id_ref", $this->session->userdata("StaSh_User_id"));
 			return $this->db->get("stash-notification")->num_rows();
 		}
@@ -30,6 +36,13 @@
 			$this->db->where("StashNotification_actor_id_ref", $this->session->userdata("StaSh_User_id"));
 			$this->db->order_by("StashNotification_id", "DESC");
 			return $this->db->get("stash-notification", 6)->result('array');
+		}
+
+		public function getNewNotice(){
+			$this->db->where("StashNotification_status", 1);
+			$this->db->where("StashNotification_actor_id_ref", $this->session->userdata("StaSh_User_id"));
+			$this->db->order_by("StashNotification_id", "DESC");
+			return $this->db->get("stash-notification")->result('array');
 		}
 
 		public function timeElapsedString($ptime){

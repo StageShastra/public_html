@@ -232,8 +232,9 @@
 		public function checkNotification($data = []){
 			$this->load->model("Notifications");
 			$new = $this->Notifications->newNotice();
-			$notices = $this->Notifications->getNotice();
+			$notices = $this->Notifications->getNewNotice();
 			$d = $this->parseNotice($notices);
+			$this->Notifications->sentNotificationSeen();
 			$d['new'] = $new;
 			if($new)
 				$this->response(true, "Notifications", $d);
