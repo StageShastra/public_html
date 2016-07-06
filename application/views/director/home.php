@@ -1,5 +1,13 @@
 <?php
   include 'includes/head.php';
+
+
+  // to check plan expired
+    if($plan['StashActorPlan_status'] == 0){
+        // Plane Expired 
+    }
+
+    
  ?>
 
     <body>

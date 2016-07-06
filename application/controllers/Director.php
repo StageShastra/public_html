@@ -7,7 +7,7 @@
 			parent::__construct();
 			if($this->session->userdata("StaSh_User_type") == 'director'){
 			$this->load->model("ModelDirector");
-				$plan=$this->ModelDirector->getDirectorPlan();
+				$plan=$this->ModelDirector->getDirectorPlan(0);
 				if(!count($plan)){
 					redirect(base_url()."payment");
 				}
@@ -19,6 +19,7 @@
 				redirect(base_url());
 			$pageInfo = [];
 			$this->load->model("ModelDirector");
+			$pageInfo['plan'] = $this->ModelDirector->getDirectorPlan(0);
 			$pageInfo['isAllowed'] = $this->ModelDirector->getAdminConfirmation();
 			$pageInfo['count_emails'] = $this->ModelDirector->getInvitationEmailCount($this->session->userdata("StaSh_User_id"));
 			$pageInfo['count_sms'] = $this->ModelDirector->getInvitationSMSCount($this->session->userdata("StaSh_User_id"));

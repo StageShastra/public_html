@@ -11,6 +11,14 @@
         $years = floor($diff / (365*60*60*24));
         return $years;
     }
+
+
+
+
+    // to check plan expired
+    if($plan['StashActorPlan_status'] == 0){
+        // Plane Expired 
+    }
   ?>
     <body>
         <style>

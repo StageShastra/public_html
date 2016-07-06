@@ -6,7 +6,7 @@
 			if($this->session->userdata("StaSh_User_type") == 'actor'){
 				$this->load->model("ModelActor");
 				$this->load->model("Notifications");
-				$plan=$this->ModelActor->getActorPlan();
+				$plan=$this->ModelActor->getActorPlan(0);
 				if(!count($plan)){
 					redirect(base_url()."payment");
 				}
@@ -23,7 +23,7 @@
 			$pageInfo['experience'] = $this->ModelActor->getActorExperienceById($this->session->userdata("StaSh_User_id"));
 			$pageInfo['training'] = $this->ModelActor->getActorTrainingById($this->session->userdata("StaSh_User_id"));
 			$pageInfo['directors'] = $this->ModelActor->getDirectors($this->session->userdata("StaSh_User_id"));
-			$pageInfo['plan'] = $this->ModelActor->getActorPlan();
+			$pageInfo['plan'] = $this->ModelActor->getActorPlan(0);
 			$pageInfo['newNotice'] = $this->Notifications->newNotice();
 			$pageInfo['notices'] = $this->Notifications->getNotice();
 			$this->load->view("actor/home", $pageInfo);
@@ -75,7 +75,7 @@
 			$this->load->model("ModelActor");
 			$pageInfo['actor'] = $this->Auth->getUserData('StashUsers_id', $this->session->userdata("StaSh_User_id"));
 			$pageInfo['profile'] = $this->ModelActor->getActorProfileById($this->session->userdata("StaSh_User_id"));
-			$pageInfo['plan'] = $this->ModelActor->getActorPlan();
+			$pageInfo['plan'] = $this->ModelActor->getActorPlan(0);
 			//$pageInfo['profile'] = $this->ModelActor->actorProfile();
 			$this->load->view("actor/account", $pageInfo);
 		}
@@ -87,7 +87,7 @@
 			$this->load->model("ModelActor");
 			$this->load->model("Notifications");
 			$pageInfo['notifications'] = $this->Notifications->getAllNotices();
-			$pageInfo['plan'] = $this->ModelActor->getActorPlan();
+			$pageInfo['plan'] = $this->ModelActor->getActorPlan(0);
 			$pageInfo['actor'] = $this->Auth->getUserData('StashUsers_id', $this->session->userdata("StaSh_User_id"));
 			$pageInfo['profile'] = $this->ModelActor->getActorProfileById($this->session->userdata("StaSh_User_id"));
 			//$pageInfo['profile'] = $this->ModelActor->actorProfile();

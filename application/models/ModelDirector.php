@@ -1004,9 +1004,10 @@
 		    }
 		}
 
-		public function getDirectorPlan($value=''){
+		public function getDirectorPlan($value = 1){
 			$this->db->where("StashDirectorPlan_director_id_ref", $this->session->userdata("StaSh_User_id"));
-			$this->db->where("StashDirectorPlan_status", 1);
+			if($value)
+				$this->db->where("StashDirectorPlan_status", 1);
 			$this->db->ordeR_by("StashDirectorPlan_id", "DESC");
 			return $this->db->get("stash-director-plans", 1)->first_row('array');
 		}
