@@ -9,7 +9,7 @@
     <meta name="description" content="Castiko is a platform to connect Actors and Casting Directors. Actors – create your own acting profiles with photos & videos. Get auditions. Casting directors – manage all your data, run auditions and find new actors">
     <meta name="keywords" content="Acting, Audition, Actor, Casting, Film, Castiko's Official Website, Casting Directors in Mumbai, Search Actors">
     <meta name="filename" content="Castiko-Acting-Audition-Casting-Tool-Home">
-    <meta property="og:title" content="Castiko Home - Acting auditions and casting for film production"/>
+    <meta property="og:title" content="Castiko Home - Making casting easier!"/>
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="http://www.castiko.com/"/>
     <meta property="og:image" content="http://www.castiko.com/assets/img/logo.png"/>
