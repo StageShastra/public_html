@@ -867,7 +867,7 @@ textarea{
                                 <span class="elements_label col-sm-5 col-xs-4">Phone: </span><input type="text" class="editwhite edit_inputs_basics col-sm-8" name="phone" value="<?= $actorProfile['StashActor_mobile'] ?>" maxlength='10' id="phone"/>
                                 </span>
                                 <br>
-                                <span class="elements_label col-sm-5 col-xs-4">WhatsApp: </span><input type="text" class="editwhite edit_inputs_basics col-sm-7 col-xs-8" name="whatsapp" value="<?= $actorProfile['StashActor_whatsapp'] ?>" id="whatsapp"/>
+                                <span class="elements_label col-sm-5 col-xs-4">WhatsApp: </span><input type="text" class="editwhite edit_inputs_basics col-sm-7 col-xs-8" name="whatsapp" value="<?= $actorProfile['StashActor_mobile'] ?>" id="whatsapp"/>
                                 </span>
                                 </div>
                                 <font class="sortbuttons">
