@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+<url>
+  <loc>http://castiko.com/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://castiko.com/home/choose_plan</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://castiko.com/home/pricing</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://castiko.com/home/pricing/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://castiko.com/home/register/actor</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://castiko.com/home/forgotpassword/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://castiko.com/home/register/actor?plan=basic</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://castiko.com/home/register/actor?plan=pro</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://castiko.com/home/register/director?plan=basic</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://castiko.com/home/register/director?plan=pro</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://castiko.com/home/register/director?plan=pro-plus</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://castiko.com/?redirect=%2Fpayment%3Fplan%3D1</loc>
+  <changefreq>weekly</changefreq>
+</url>
+</urlset>
