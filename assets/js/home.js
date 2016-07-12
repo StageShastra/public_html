@@ -135,9 +135,11 @@ $(document).ready(function(){
 
 	function populateActorList(actorsInfo, currentPage){
 		actors = actorsInfo;
+		var totalActors = Number(actorsInfo.length);
+
 		var ckh = (selectAll) ? "checked" : "";
 		var $table = $("#browse-table");
-		var content = '<table class="table table-striped display" id="actor_table">'
+		var content = '<span class="info-small gray">'+totalActors+'actors found.<br></span><table class="table table-striped display" id="actor_table">'
                		+ '<thead center>'
                		+ '<tr><th id="selectallcheckbox"><input type="checkbox" '+ckh+' name="selectallactor" id="selectallactor" class="css-checkbox" /><label for="selectallactor" class="css-label"></label></th><th>Profile</th>';
         
@@ -149,7 +151,7 @@ $(document).ready(function(){
     	content += "<tbody>";
     	var link = '', tag = '';
 		
-		var totalActors = Number(actorsInfo.length);
+		
     	var maxActors = 20;
     	var totalPages = Math.ceil(totalActors/maxActors);
     	var init = (currentPage * maxActors) - maxActors;
@@ -1159,11 +1161,11 @@ $(document).ready(function(){
 				   + "</tr>";
 		}
 
-		div1 = "<div class='col-sm-3 reciepients'><table class='messages table table-striped'><tbody> "+ usertr +" </tbody></table></div>";
+		div1 = "<div class='col-sm-4 reciepients'><table class='messages table table-striped'><tbody> "+ usertr +" </tbody></table></div>";
 		msg = obj.msg[2];
 		iframeSrc = base + "director/emailPreview/?msg=" + encodeURI( msg );
 		div2 = "<div class='col-sm-6'><iframe src='"+iframeSrc+"' class='center' id='emailPreviewiFrame' width='600' height='500'></iframe></div>";
-		div3 = "<div class='col-sm-3'>"
+		div3 = "<div class='col-sm-2'>"
 			 + "<div class='conversation_summary'><h3>Conversation Summary</h3><hr>"
 			 + "<span class='row_text'>Recipients: "+ obj.recipient +" </span><br>"
 			 + "<span class='row_text'>Responses</span><br>"
@@ -1198,11 +1200,11 @@ $(document).ready(function(){
 				   + "</tr>";
 		}
 
-		div1 = "<div class='col-sm-3 reciepients'><table class='messages table table-striped'><tbody> "+ usertr +" </tbody></table></div>";
+		div1 = "<div class='col-sm-4 reciepients'><table class='messages table table-striped'><tbody> "+ usertr +" </tbody></table></div>";
 		msg = obj.msg[2];
 		iframeSrc = base + "director/emailPreview/?msg=" + encodeURI( msg );
 		div2 = "<div class='col-sm-6'><iframe src='"+iframeSrc+"' class='center' id='emailPreviewiFrame' width='600' height='500'></iframe></div>";
-		div3 = "<div class='col-sm-3'>"
+		div3 = "<div class='col-sm-2'>"
 			 + "<div class='conversation_summary'><h3>Conversation Summary</h3><hr>"
 			 + "<span class='row_text'>Recipients: "+ obj.recipient +" </span><br>"
 			 + "<span class='row_text'>Responses</span><br>"
