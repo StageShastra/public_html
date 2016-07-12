@@ -95,7 +95,7 @@
                               $l = "warning";
                               $a = "May be";
                             }
-                            echo "<p id='res-message'><hr>Are you coming to the audition ?</p><p id='res-message'><br> You have selected <span class='label label-{$l}'>{$a}</span>. You can change your choice anytime. </p>";
+                            echo "<p id='res-ques'><hr>Are you coming to the audition ?</p><p id='res-message'><br> You have selected <span class='label label-{$l}'>{$a}</span>. You can change your choice anytime. </p>";
                           }
                     ?>
                     <h3>Response</h3>
