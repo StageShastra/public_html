@@ -674,7 +674,7 @@ textarea{
 .navbar-nav > li > a{
     font-size: 12px !important;
 }
-.navbar-nav > li > a:hover {
+.navbarlist:hover {
     color: #fff !important;
     background: #F7A9A9 !important;
 }
@@ -726,6 +726,12 @@ textarea{
 .mainNoticeCont:hover{
     overflow-y:scroll;
 }
+.seenNotice:hover{
+    background: white !important;
+}
+.seenNoticeSpan:hover{
+    color:red;
+}
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -775,6 +781,12 @@ textarea{
                           ?>
                           </a>
                           <ul class="dropdown-menu hidden-xs mainNoticeCont">
+                        <li>
+                            <a href="notifications">
+                                <span class='notification_message'><i class='fa fa-info'></i>Show all notifications</span><br>
+                            </a>
+                        </li>
+                        <hr>
                           <?php
 
                                 foreach ($notices as $key => $notice) {
@@ -810,21 +822,21 @@ textarea{
                           </ul>
                         </li>   
                         <li >
-                            <a href="<?= base_url()?>actor/"  > Dashboard
+                            <a href="<?= base_url()?>actor/"  class="navbarlist" > Dashboard
                             </a>
                         </li>
                         <li >
-                            <a href="<?= base_url()?>actor/account"  > Account
+                            <a href="<?= base_url()?>actor/account" class="navbarlist" > Account
                             </a>
                         </li>
                         <?php if(strtolower($plan['StashActorPlan_plan'])=="basic") { ?>
                         <li>
-                            <a href="<?= base_url() ?>/payment?plan=1"> Go Pro!
+                            <a href="<?= base_url() ?>/payment?plan=1" class="navbarlist"> Go Pro!
                             </a>
                         </li>
                          <?php } ?>
                         <li >
-                            <a href="<?= base_url() ?>home/logout/"> Sign Out
+                            <a href="<?= base_url() ?>home/logout/" class="navbarlist"> Sign Out
                             </a>
                         </li>
                       </ul>
@@ -837,6 +849,11 @@ textarea{
                 <!-- Notification Bar -->
                 <div class="collapse navbar-collapse hidden-lg hidden-sm hidden-md" style="height:auto!important;" id="notification_bar">  
                     <ul class="nav navbar-nav navbar-right ul_list subNoticeCont">
+                        <li>
+                            <a href="actor/notifications">
+                                <i class="fa fa-bell-o"></i><span>View all notifications</span>
+                            </a>
+                        </li>
                         <?php
 
                             foreach ($notices as $key => $notice) {
@@ -857,7 +874,7 @@ textarea{
                             </a>
                         </li>
                         <?php } ?>
-                    </ul>      
+                    </ul>    
                 </div><!-- /notification_bar-->
                 <!-- ====================================================== -->
 

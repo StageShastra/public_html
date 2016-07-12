@@ -154,9 +154,17 @@
     }
     ul{
         list-style: none;    
+        padding-left: 10px;
+        font-size: 12px;
+        color: #4a4a4a;
     }
     li{
       list-style: none;
+    }
+    .date{
+      font-size: 10px;
+      color:#777;
+      margin-right: 10px;
     }
               </style>
         <!--[if lt IE 8]> -->
@@ -244,7 +252,9 @@
                           }
 
                   ?>
-                    <li><i class='fa <?= $fa ?>'></i> <?= $notice['StashNotification_message'] ?> <span><?= $delay ?></span></li>
+                   <?php if($link!="#"){echo '<a href='. $link.'">';}?>
+                    <li><i class='fa <?= $fa ?>'></i> <?= $notice['StashNotification_message'] ?> <span class="date pull-right"><i><?= $delay ?></i></span></li><hr>
+                    </a>
                   <?php 
 
                     }  

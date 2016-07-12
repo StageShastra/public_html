@@ -3,7 +3,7 @@
 
 
   // to check plan expired
-    if($plan['StashActorPlan_status'] == 0){
+    if($plan['StashDirectorPlan_status'] == 0){
         // Plane Expired 
     }
 
