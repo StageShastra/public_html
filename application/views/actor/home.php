@@ -794,7 +794,7 @@ textarea{
                                     //echo $notice['StashNotification_type'];
                                     $delay = $this->Notifications->timeElapsedString($notice['StashNotification_time']);
 
-                                    if($notice['StashNotification_type'] == 'audition'){
+                                    if($notice['StashNotification_type'] == 'audition' || $notice['StashNotification_type'] == 'message'){
                                         $link = base_url() . "project/notification/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
                                     }elseif($notice['StashNotification_type'] == 'connect'){
                                         $link = base_url() . "home/connect/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
@@ -859,8 +859,8 @@ textarea{
                             foreach ($notices as $key => $notice) {
                                 $fa = $this->Notifications->type2fa($notice['StashNotification_type']);
                                 $delay = $this->Notifications->timeElapsedString($notice['StashNotification_time']);
-
-                                if($notice['StashNotification_type'] == 'audition'){
+                                
+                                if($notice['StashNotification_type'] == 'audition' || $notice['StashNotification_type'] == 'message'){
                                     $link = base_url() . "project/notification/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
                                 }elseif($notice['StashNotification_type'] == 'connect'){
                                     $link = base_url() . "home/connect/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);

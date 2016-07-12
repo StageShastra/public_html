@@ -17,7 +17,7 @@ $(document).ready(function(){
 		}
 
 		data = {request: "ResponseAudition", data: JSON.stringify({ for: cate, forId: cate_id, res: res })};
-
+	    url = "/project/ajax/";
 		$.ajax({
 			url: url,
 			type: type,
@@ -27,9 +27,10 @@ $(document).ready(function(){
 					$(".responseToAudtion").removeClass("disabled");
 					$that.addClass("disabled");
 
-					$("#res-message").html( "You selected <span class='label label-"+l+"'>"+a+"</span>. Still you can change your choice." )
+					$("#res-message").html( "You have selected <span class='label label-"+l+"'>"+a+"</span>. You can change your choice anytime." )
 				}else{
 					alert(" Failed. Try again. ");
+					console.log(data);
 				}
 			}
 		});

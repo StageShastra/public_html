@@ -325,15 +325,20 @@
 		public function editUsername($data = []){
 			$this->load->model("ModelActor");
 			$username = trim($data['username']);
+			$username_is_not_link=1;
+			if($username=="admin" || $username=="actor" || $username=="home" || $username=="ajax" || $username=="director" || $username=="phpmyadmin" || $username=="invite" || $username=="info" || $username=="project" || $username=="secure" )
+			{	
+				$username_is_not_link=0;
+			}
 			if(preg_match("/[a-zA-Z0-9-_\.]$/i", $username)){
 				$users = $this->ModelActor->isUsernameExist($username);
-				if($users == 0){
+				if($users == 0 && $username_is_not_link!=0){
 					if($this->ModelActor->updateUsername($username, $this->session->userdata("StaSh_User_id"))){
 						$this->response(true, "Username Updated");
 					}else{
 						$this->response(false, Ac_Ajx_GenFailed);
 					}
-				}elseif($users == 1){
+				}elseif($users == 1 && $username_is_not_link!=0){
 					$this->load->model("Auth");
 					$userdata = $this->Auth->getUserData('StashUsers_username', $username);
 					if($userdata["StashUsers_id"] == $this->session->userdata("StaSh_User_id")){

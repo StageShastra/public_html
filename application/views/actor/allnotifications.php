@@ -243,7 +243,7 @@
                           //echo $notice['StashNotification_type'];
                           $delay = $this->Notifications->timeElapsedString($notice['StashNotification_time']);
 
-                          if($notice['StashNotification_type'] == 'audition'){
+                          if($notice['StashNotification_type'] == 'audition' || $notice['StashNotification_type'] == 'message'){
                               $link = base_url() . "project/notification/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
                           }elseif($notice['StashNotification_type'] == 'connect'){
                               $link = base_url() . "home/connect/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
@@ -252,7 +252,7 @@
                           }
 
                   ?>
-                   <?php if($link!="#"){echo '<a href='. $link.'">';}?>
+                   <?php if($link!="#"){echo '<a href="'. $link.'">';}?>
                     <li><i class='fa <?= $fa ?>'></i> <?= $notice['StashNotification_message'] ?> <span class="date pull-right"><i><?= $delay ?></i></span></li><hr>
                     </a>
                   <?php 
