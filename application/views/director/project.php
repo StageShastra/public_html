@@ -30,7 +30,7 @@
 
           .message-box {
             border: 1px solid #ddd;
-            padding: 10px 20px;
+            padding: 5px 5px;
           }
         </style>
         <div class="container-fluid" id="home">
@@ -82,8 +82,8 @@
                     
                     <?php
                       if(count($project)){
-                          if( $response == 0 ){
-                            echo "<p id='res-message'>Are you coming to the audition ?</p>";
+                          if( $response != 6 ){
+                            echo "<p id='res-message'><hr>Are you coming to the audition ?</p>";
                           }else{
                             if($response == 1){
                               $l = 'success';
@@ -95,7 +95,7 @@
                               $l = "warning";
                               $a = "May be";
                             }
-                            echo "<p id='res-message'> You selected <span class='label label-{$l}'>{$a}</span>. You can change your choice anytime. </p>";
+                            echo "<p id='res-message'><br> You have selected <span class='label label-{$l}'>{$a}</span>. You can change your choice anytime. </p>";
                           }
                     ?>
                     <h3>Response</h3>

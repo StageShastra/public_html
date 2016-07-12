@@ -782,7 +782,7 @@ textarea{
                           </a>
                           <ul class="dropdown-menu hidden-xs mainNoticeCont">
                         <li>
-                            <a href="notifications">
+                            <a href="<?= base_url()?>actor/notifications">
                                 <span class='notification_message'><i class='fa fa-info'></i>Show all notifications</span><br>
                             </a>
                         </li>
@@ -850,10 +850,11 @@ textarea{
                 <div class="collapse navbar-collapse hidden-lg hidden-sm hidden-md" style="height:auto!important;" id="notification_bar">  
                     <ul class="nav navbar-nav navbar-right ul_list subNoticeCont">
                         <li>
-                            <a href="actor/notifications">
+                            <a href="<?= base_url()?>actor/notifications">
                                 <i class="fa fa-bell-o"></i><span>View all notifications</span>
                             </a>
                         </li>
+                        <hr>
                         <?php
 
                             foreach ($notices as $key => $notice) {
