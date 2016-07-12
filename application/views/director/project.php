@@ -82,7 +82,7 @@
                     
                     <?php
                       if(count($project)){
-                          if( $response != 0 ){
+                          if( $response == 0 ){
                             echo "<p id='res-message'><hr>Are you coming to the audition ?</p>";
                           }else{
                             if($response == 1){
