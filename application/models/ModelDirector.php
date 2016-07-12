@@ -277,6 +277,7 @@
 				$actor['StashActor_language'] = $this->getActorLanguage($actor['StashActor_actor_id_ref']);
 				$actor['StashActor_skills'] = $this->getActorSkills($actor['StashActor_actor_id_ref']);
 				$actor['StashActor_projects'] = $this->getActorProjects($actor['StashActor_actor_id_ref']);
+				$actor['StashActor_username'] = $this->getActorUsername($actor['StashActor_actor_id_ref']);
 				$result[] = $actor;
 			}
 

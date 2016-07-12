@@ -139,7 +139,7 @@ $(document).ready(function(){
 
 		var ckh = (selectAll) ? "checked" : "";
 		var $table = $("#browse-table");
-		var content = '<span class="info-small gray">'+totalActors+'actors found.<br></span><table class="table table-striped display" id="actor_table">'
+		var content = '<span class="info-small gray pull-left">'+totalActors+' actors found.<br></span><table class="table table-striped display" id="actor_table">'
                		+ '<thead center>'
                		+ '<tr><th id="selectallcheckbox"><input type="checkbox" '+ckh+' name="selectallactor" id="selectallactor" class="css-checkbox" /><label for="selectallactor" class="css-label"></label></th><th>Profile</th>';
         
@@ -668,6 +668,7 @@ $(document).ready(function(){
 				//console.log(response);
 				if(response.status){
 					populateActorList(response.data, 1);
+					console.log(response.data);
 				}else{
 					$("#main-container").html("");
 					noActorFound();
