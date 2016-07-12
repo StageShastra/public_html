@@ -355,9 +355,10 @@
 			return $result;
 		}
 
-		public function getActorPlan($value=''){
+		public function getActorPlan($value= 1){
 			$this->db->where("StashActorPlan_actor_id_ref", $this->session->userdata("StaSh_User_id"));
-			$this->db->where("StashActorPlan_status", 1);
+			if($value)
+				$this->db->where("StashActorPlan_status", 1);
 			$this->db->ordeR_by("StashActorPlan_id", "DESC");
 			return $this->db->get("stash-actor-plan", 1)->first_row('array');
 		}

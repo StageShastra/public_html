@@ -138,7 +138,7 @@
 			if($res)
 				$this->response(true, "Success");
 			else
-				$this->response(false, "Failed");
+				$this->response(false, $res);
 
 		}
 	}

@@ -11,6 +11,14 @@
         $years = floor($diff / (365*60*60*24));
         return $years;
     }
+
+
+
+
+    // to check plan expired
+    if($plan['StashActorPlan_status'] == 0){
+        // Plane Expired 
+    }
   ?>
     <body>
         <style>
@@ -354,10 +362,19 @@
             .blurb{
                 font-size: 14px;
             }
+            .notification{
+                display: block !important;
+            }
             
         }
         /* sm */
         @media screen and (min-width: 768px) {
+            .navbar-right .dropdown-menu {
+                right: 0px;
+                float: none;
+                left: 0px;
+                width: 400px;
+            }
             body {
                 font-size: 1em;
             }
@@ -378,6 +395,12 @@
         }
         /* md */
         @media screen and (min-width: 992px) {
+            .navbar-right .dropdown-menu {
+                right: 0px;
+                float: none;
+                left: 0px;
+                width: 400px;
+            }
             body {
                 font-size: 1.1em;
             }
@@ -404,6 +427,13 @@
         }
         /* lg */
         @media screen and (min-width: 1200px) {
+            .navbar-right .dropdown-menu {
+                right: 0px;
+                float: none;
+                left: 0px;
+                width: 360px!important;
+                max-width: 400px!important;
+            }
             body {
                 font-size: 1.2em;
             }
@@ -642,11 +672,45 @@ textarea{
     color: inherit;
 }
 .navbar-nav > li > a{
-    font-size: 16px !important;
+    font-size: 12px !important;
 }
-.navbar-nav > li > a:hover {
+.navbarlist:hover {
     color: #fff !important;
     background: #F7A9A9 !important;
+}
+.notification{
+    padding: 10px;
+    padding: 10px;
+    position: relative;
+    top: 8px;
+    font-size: 12px;
+
+}
+.notificaton_btn{
+    position: relative;
+    top: 24px;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+}
+.notification:hover{
+    background: white !important;
+    color:red !important;
+}
+#notification_bar{
+    height: auto!important;
+}
+.notification_message{
+    color:#4a4a4a;
+    font-size: 13px;
+}
+.fa{
+    width: 14px;
+    margin-right: 5px;
+    color: #9b9b9b;
+}
+.time_notification{
+    font-size: 9px;
 }
 .shareButton{
     font-size: 20px;
@@ -654,6 +718,19 @@ textarea{
 .counter_exp{
     font-size: 14px;
     color:#9b9b9b;
+}
+.mainNoticeCont{
+    overflow-y:hidden;
+    height: 450px;
+}
+.mainNoticeCont:hover{
+    overflow-y:scroll;
+}
+.seenNotice:hover{
+    background: white !important;
+}
+.seenNoticeSpan:hover{
+    color:red;
 }
         </style>
         <!--[if lt IE 8]>
@@ -671,7 +748,9 @@ textarea{
                 <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <button type="button" class="notificaton_btn hidden-lg hidden-sm hidden-md" data-toggle="collapse" data-target="#notification_bar" aria-haspopup="true" aria-expanded="false"><span class="fa fa-bell-o firstcolor" aria-hidden="true"></span></a>
+                
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> 
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -693,26 +772,114 @@ textarea{
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  
                       <ul class="nav navbar-nav navbar-right ul_list">
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle hidden-xs seenNotice" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-bell-o firstcolor seenNoticeSpan" aria-hidden="true"></span>
+                          <?php
+                            if($newNotice){
+                                echo "<i class='label label-danger noticeCount'>{$newNotice}</i>";
+                            }
+                          ?>
+                          </a>
+                          <ul class="dropdown-menu hidden-xs mainNoticeCont">
+                        <li>
+                            <a href="notifications">
+                                <span class='notification_message'><i class='fa fa-info'></i>Show all notifications</span><br>
+                            </a>
+                        </li>
+                        <hr>
+                          <?php
+
+                                foreach ($notices as $key => $notice) {
+                                    $fa = $this->Notifications->type2fa($notice['StashNotification_type']);
+                                    //echo $notice['StashNotification_type'];
+                                    $delay = $this->Notifications->timeElapsedString($notice['StashNotification_time']);
+
+                                    if($notice['StashNotification_type'] == 'audition' || $notice['StashNotification_type'] == 'message'){
+                                        $link = base_url() . "project/notification/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
+                                    }elseif($notice['StashNotification_type'] == 'connect'){
+                                        $link = base_url() . "home/connect/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
+                                    }else{
+                                        $link = '#';
+                                    }
+                            ?>
+                            
+                                    <li>
+                                        <a href="<?= $link ?>">
+                                            <span class='notification_message'><i class='fa <?= $fa ?>'></i><?= $notice['StashNotification_message'] ?></span><br>
+                                            <span class ="time_notification gray"><i><?= $delay ?></i><span>
+                                        </a>
+                                    </li>
+
+                            <?php
+                                }
+
+                          ?>
+                            <!-- <li>
+                                <a href="<?= base_url() ?>/payment?plan=1">
+                                    <span class="notification_message"><i class="fa fa-comment-o"></i>Pritesh has sent you a private message.</span><br><span class ="time_notification gray"><i>2 days ago</i><span>
+                                </a>
+                            </li> -->
+                          </ul>
+                        </li>   
                         <li >
-                            <a href="<?= base_url()?>actor/"  > Dashboard
+                            <a href="<?= base_url()?>actor/"  class="navbarlist" > Dashboard
                             </a>
                         </li>
                         <li >
-                            <a href="<?= base_url()?>actor/account"  > Account
+                            <a href="<?= base_url()?>actor/account" class="navbarlist" > Account
                             </a>
                         </li>
                         <?php if(strtolower($plan['StashActorPlan_plan'])=="basic") { ?>
                         <li>
-                            <a href="<?= base_url() ?>/payment?plan=1"> Go Pro!
+                            <a href="<?= base_url() ?>/payment?plan=1" class="navbarlist"> Go Pro!
                             </a>
                         </li>
                          <?php } ?>
                         <li >
-                            <a href="<?= base_url() ?>home/logout/"> Sign Out
+                            <a href="<?= base_url() ?>home/logout/" class="navbarlist"> Sign Out
                             </a>
                         </li>
                       </ul>
                     </div><!-- /.navbar-collapse -->
+                    
+                </div>
+
+
+                <!-- ========================================================= -->
+                <!-- Notification Bar -->
+                <div class="collapse navbar-collapse hidden-lg hidden-sm hidden-md" style="height:auto!important;" id="notification_bar">  
+                    <ul class="nav navbar-nav navbar-right ul_list subNoticeCont">
+                        <li>
+                            <a href="actor/notifications">
+                                <i class="fa fa-bell-o"></i><span>View all notifications</span>
+                            </a>
+                        </li>
+                        <?php
+
+                            foreach ($notices as $key => $notice) {
+                                $fa = $this->Notifications->type2fa($notice['StashNotification_type']);
+                                $delay = $this->Notifications->timeElapsedString($notice['StashNotification_time']);
+                                
+                                if($notice['StashNotification_type'] == 'audition' || $notice['StashNotification_type'] == 'message'){
+                                    $link = base_url() . "project/notification/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
+                                }elseif($notice['StashNotification_type'] == 'connect'){
+                                    $link = base_url() . "home/connect/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
+                                }else{
+                                    $link = '#';
+                                }
+                        ?>
+                        <li>
+                            <a href="<?= $link ?>">
+                                <i class="fa <?= $fa ?>"></i><span><?= $notice['StashNotification_message'] ?></span>
+                            </a>
+                        </li>
+                        <?php } ?>
+                    </ul>    
+                </div><!-- /notification_bar-->
+                <!-- ====================================================== -->
+
+
+
                 </div>
             </nav>
 

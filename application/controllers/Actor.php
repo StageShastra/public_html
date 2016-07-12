@@ -5,7 +5,8 @@
 			parent::__construct();
 			if($this->session->userdata("StaSh_User_type") == 'actor'){
 				$this->load->model("ModelActor");
-				$plan=$this->ModelActor->getActorPlan();
+				$this->load->model("Notifications");
+				$plan=$this->ModelActor->getActorPlan(0);
 				if(!count($plan)){
 					redirect(base_url()."payment");
 				}
@@ -22,7 +23,9 @@
 			$pageInfo['experience'] = $this->ModelActor->getActorExperienceById($this->session->userdata("StaSh_User_id"));
 			$pageInfo['training'] = $this->ModelActor->getActorTrainingById($this->session->userdata("StaSh_User_id"));
 			$pageInfo['directors'] = $this->ModelActor->getDirectors($this->session->userdata("StaSh_User_id"));
-			$pageInfo['plan'] = $this->ModelActor->getActorPlan();
+			$pageInfo['plan'] = $this->ModelActor->getActorPlan(0);
+			$pageInfo['newNotice'] = $this->Notifications->newNotice();
+			$pageInfo['notices'] = $this->Notifications->getNotice();
 			$this->load->view("actor/home", $pageInfo);
 		}
 		
@@ -32,7 +35,22 @@
 			$pageInfo = [];
 			$this->load->model("ModelActor");
 			$this->load->model("Auth");
+			$this->load->model("Notifications");
+
 			$userdata = $this->Auth->getUserData('StashUsers_username', $username);
+
+			if($this->session->userdata("StaSh_User_type") != 'actor'){
+				if($this->session->userdata("StaSh_User_Logged_In")){
+					$m = $this->session->userdata("StaSh_User_name") . " viewed your profile.";
+					$d = ['director' => $this->session->userdata("StaSh_User_id")];
+					$v = 'view';
+				}else{
+					$m = "Someone viewed your profile.";
+					$d = [];
+					$v = 'viewx';
+				}
+				$this->Notifications->insertNotification($userdata['StashUsers_id'], $m, $v, $d);
+			}
 			
 			if(count($userdata) == 0){
 				$this->displayPageNotFound();
@@ -57,9 +75,23 @@
 			$this->load->model("ModelActor");
 			$pageInfo['actor'] = $this->Auth->getUserData('StashUsers_id', $this->session->userdata("StaSh_User_id"));
 			$pageInfo['profile'] = $this->ModelActor->getActorProfileById($this->session->userdata("StaSh_User_id"));
-			$pageInfo['plan'] = $this->ModelActor->getActorPlan();
+			$pageInfo['plan'] = $this->ModelActor->getActorPlan(0);
 			//$pageInfo['profile'] = $this->ModelActor->actorProfile();
 			$this->load->view("actor/account", $pageInfo);
+		}
+		public function notifications($value=''){
+			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
+				redirect(base_url());
+			$pageInfo = [];
+			$this->load->model("Auth");
+			$this->load->model("ModelActor");
+			$this->load->model("Notifications");
+			$pageInfo['notifications'] = $this->Notifications->getAllNotices();
+			$pageInfo['plan'] = $this->ModelActor->getActorPlan(0);
+			$pageInfo['actor'] = $this->Auth->getUserData('StashUsers_id', $this->session->userdata("StaSh_User_id"));
+			$pageInfo['profile'] = $this->ModelActor->getActorProfileById($this->session->userdata("StaSh_User_id"));
+			//$pageInfo['profile'] = $this->ModelActor->actorProfile();
+			$this->load->view("actor/allnotifications", $pageInfo);
 		}
 		
 		protected function displayPageNotFound() {
@@ -198,6 +230,12 @@
 					case "ImageToEncode":
 						$this->imageToEncode($data);
 						break;
+					case "SeenNotice":
+						$this->seenNotice($data);
+						break;
+					case 'CheckNotification':
+						$this->checkNotification($data);
+						break;
 					default:
 						$this->response(false, "Invalid Request");
 						break;
@@ -205,6 +243,46 @@
 			}
 		}
 
+		public function checkNotification($data = []){
+			$this->load->model("Notifications");
+			$new = $this->Notifications->newNotice();
+			$notices = $this->Notifications->getNewNotice();
+			$d = $this->parseNotice($notices);
+			$this->Notifications->sentNotificationSeen();
+			$d['new'] = $new;
+			if($new)
+				$this->response(true, "Notifications", $d);
+			$this->response(false, "No New Notifications");
+		}
+
+		public function parseNotice($notices = []){
+			$this->load->model("Notifications");
+			$html = "";
+			$html2 = "";
+			foreach ($notices as $key => $notice) {
+				$fa = $this->Notifications->type2fa($notice['StashNotification_type']);
+	            $delay = $this->Notifications->timeElapsedString($notice['StashNotification_time']);
+
+	            if($notice['StashNotification_type'] == 'audition'){
+	                $link = base_url() . "project/notification/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
+	            }elseif($notice['StashNotification_type'] == 'connect'){
+	                $link = base_url() . "home/connect/" . $this->Notifications->getEncryptedText($notice['StashNotification_data']);
+	            }else{
+	                $link = '#';
+	            }
+	            $html .= "<li><a href='{$link}'><span class='notification_message'><i class='fa {$fa}'></i>{$notice['StashNotification_message']}</span><br><span class='time_notification gray'><i>{$delay}</i></span></a></li>";
+
+	            $html2 .= "<li><a href='{$link}'><i class='fa {$fa}'></i>{$notice['StashNotification_message']}</a></li>";
+			}
+
+			return ['main' => $html, 'submain' => $html2];
+		}
+
+		public function seenNotice($data = []){
+			$this->load->model("Notifications");
+			$this->Notifications->updateNotificationSeen();
+			$this->response(true, "Notification Seen...");
+		}
 		
 
 		public function imageToEncode($data = []){
@@ -247,15 +325,20 @@
 		public function editUsername($data = []){
 			$this->load->model("ModelActor");
 			$username = trim($data['username']);
+			$username_is_not_link=1;
+			if($username=="admin" || $username=="actor" || $username=="home" || $username=="ajax" || $username=="director" || $username=="phpmyadmin" || $username=="invite" || $username=="info" || $username=="project" || $username=="secure" )
+			{	
+				$username_is_not_link=0;
+			}
 			if(preg_match("/[a-zA-Z0-9-_\.]$/i", $username)){
 				$users = $this->ModelActor->isUsernameExist($username);
-				if($users == 0){
+				if($users == 0 && $username_is_not_link!=0){
 					if($this->ModelActor->updateUsername($username, $this->session->userdata("StaSh_User_id"))){
 						$this->response(true, "Username Updated");
 					}else{
 						$this->response(false, Ac_Ajx_GenFailed);
 					}
-				}elseif($users == 1){
+				}elseif($users == 1 && $username_is_not_link!=0){
 					$this->load->model("Auth");
 					$userdata = $this->Auth->getUserData('StashUsers_username', $username);
 					if($userdata["StashUsers_id"] == $this->session->userdata("StaSh_User_id")){
