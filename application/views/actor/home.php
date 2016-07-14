@@ -1,6 +1,6 @@
 <?php
     include 'includes/head.php';
-    
+    error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
     $user = $actor;
     $actorProfile = $profile;
     $actorExperiences = $experience;

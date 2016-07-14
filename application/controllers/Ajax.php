@@ -470,7 +470,7 @@
 				}else{
 					$this->ModelDirector->insertInvitationMail( $fe, $msgId, $projectID, 'connect', $rand );
 					$actId = $this->ModelDirector->getActorIdByEmail($fe);
-					$m = $this->session->userdata("StaSh_User_name") . ' wants to connect with you. Click t accept.';
+					$m = $this->session->userdata("StaSh_User_name") . ' wants to connect with you. Click to accept.';
 					$notiD = array($this->session->userdata("StaSh_User_id"), $projectID, time(), $fe, $rand);
 					$this->Notifications->insertNotification( $actId, $m, "connect", $notiD );
 					$sent++;

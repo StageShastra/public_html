@@ -398,6 +398,29 @@
 
           
       </div>
+      <!-- Preview EMail Start -->
+      <div id="emailPreview" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content" style="min-width: 680px;">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title firstcolor info"> Email Preview </h4>
+            <span class="info-small gray"></span>
+          </div>
+          <div class="modal-body" style="background-color:#f2f2f2;">
+            <div class="container" style="max-width:100%; ">
+            <iframe src="#" id="emailPreviewiFrame" width="620" height="550">
+              
+            </iframe>
+            </div>
+          </div>
+          
+          </div>
+
+        </div>
+      </div>
       <!-- Preview Email End -->
 
       <!-- Preview  SMS start-->

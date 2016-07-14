@@ -162,6 +162,7 @@
       .btn{
         font-size: 12px;
         margin-right: 5px;
+        margin-top: 5px;
       }
       .btn-info:hover{
         background: #0288D1;
@@ -183,6 +184,7 @@
     border-color: #607D8B;
     box-shadow:0px 0px 10px #607D8B;
 }
+
       </style>
      
         

@@ -488,6 +488,7 @@
 			$this->db->from("stash-users as Users");
 			$this->db->join("stash-director-actor-link as DALink", "DALink.StashDirectorActorLink_actor_id_ref = Users.StashUsers_id");
 			$this->db->where("DALink.StashDirectorActorLink_director_id_ref", $this->session->userdata("StaSh_User_id"));
+			$this->db->where("DALink.StashDirectorActorLink_status", '1');
 			$query = $this->db->get();
 			$result = [];
 			$fetch = $query->result('array');
