@@ -184,14 +184,7 @@
     border-color: #607D8B;
     box-shadow:0px 0px 10px #607D8B;
 }
-@media screen and (min-width: 768px) and (max-width:992px) {
-.conversation_summary{
-    background: rgba(255,255,255,00.9);
-    box-shadow: 2px 2px 10px gray;
-    padding: 10px 5px 10px 10px;
-    border-radius: 10px;
-}
-}
+
       </style>
      
         

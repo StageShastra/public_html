@@ -1166,7 +1166,7 @@ $(document).ready(function(){
 		msg = obj.msg[2];
 		iframeSrc = base + "director/emailPreview/?msg=" + encodeURI( msg );
 		div2 = "<div class='col-sm-6'><iframe src='"+iframeSrc+"' class='center' id='emailPreviewiFrame' width='600' height='500'></iframe></div>";
-		div3 = "<div class='col-sm-2'>"
+		div3 = "<div class='col-lg-2 col-md-2 col-sm-12 col-xs-12'>"
 			 + "<div class='conversation_summary'><h3>Conversation Summary</h3><hr>"
 			 + "<span class='row_text'>Recipients: "+ obj.recipient +" </span><br>"
 			 + "<span class='row_text'>Responses</span><br>"
@@ -1205,7 +1205,7 @@ $(document).ready(function(){
 		msg = obj.msg[2];
 		iframeSrc = base + "director/emailPreview/?msg=" + encodeURI( msg );
 		div2 = "<div class='col-sm-6'><iframe src='"+iframeSrc+"' class='center' id='emailPreviewiFrame' width='600' height='500'></iframe></div>";
-		div3 = "<div class='col-sm-2'>"
+		div3 = "<div class='col-lg-2 col-md-2 col-sm-12 col-xs-12'>"
 			 + "<div class='conversation_summary'><h3>Conversation Summary</h3><hr>"
 			 + "<span class='row_text'>Recipients: "+ obj.recipient +" </span><br>"
 			 + "<span class='row_text'>Responses</span><br>"
