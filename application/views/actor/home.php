@@ -1619,7 +1619,6 @@ textarea{
             <div class="modal-dialog bigmodal-dialog">
               <div class="modal-content bigmodal-content modal-content-four col-sm-8 col-md-6 col-lg-6 col-xs-12">
                 <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                   <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 1 of 4<br>Let's get started! <br> Tell us some basic things about yourself. This is usually the first thing a casting director wants to know.</h4>
                 </div>
                 <div class="modal-body">
@@ -1819,8 +1818,8 @@ textarea{
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Video Link</label>
-                                 <input type="text" class="form-control" name='cp_exp_link' id="addlink" Placeholder="Youtube Video Link"/>
-                                <p class="help-block text-danger">Leave as blank if you dont have the link</p>
+                                 <input type="text" class="form-control" name='cp_exp_link' id="addlink" Placeholder="Video Link e.g. https://www.youtube.com/watch?v=xyzabcd"/>
+                                <p class="help-block text-danger">Leave as blank if you don't have a link</p>
                             </div>
                         </div>
                         <div class="row control-group">
@@ -1835,8 +1834,8 @@ textarea{
                         <div class="row">
                             <div class="form-group col-xs-12">
                                 <font class="sortbuttons">
-                                    <button type="button" class="btn submit-btn firstcolor center cp_addExperience toggleEdit tick" id="add_exp_btn" data-hide-id="#add_exp_btn" data-unhide-id="#add_exp_btn_load" ><span class="glyphicon glyphicon-ok"></span></button>
-                                    <button type="submit" class="btn submit-btn firstcolor center addExperience tick hidden rotate-img" id="add_exp_btn_load" ><span class="glyphicon glyphicon-refresh"></span></button></font>
+                                    <button type="button" class="btn submit-btn firstcolor center cp_addExperience toggleEdit tick" id="add_exp_btn" data-hide-id="#add_exp_btn" data-unhide-id="#add_exp_btn_load" >Finish</button>
+                                    <button type="button" class="btn submit-btn tick " id="add_exp_btn_load" onclick="set_profile_stage(5); location.reload();" >Skip</button></font>
                             </div>
                         </div>
                     </form>
