@@ -321,7 +321,7 @@
             </ul>
 
             <div class="tab-content">
-              <div id="actor" class="tab-pane fade in active">
+              <div id="actor" class="tab-pane fade ">
                 <p class="login_form">
                   <font class="info dark-gray center"> Log In | </font><a href="<?=base_url() ?>home/pricing#forDirectors"><font class="info firstcolor center"> Sign Up! </a></font>
                       <form role="form" id="login-form" class="login-forms" method="post">
@@ -345,7 +345,7 @@
                     </form>
                 </p>
               </div>
-              <div id="cd" class="tab-pane fade">
+              <div id="cd" class="tab-pane fade in active">
                 <p class="login_form">
                 <font class="info dark-gray  center"> Log In | <a href="<?=base_url() ?>home/register/actor"><font class="info firstcolor center"> Sign Up! </a></font></font>
                     <form role="form" id="actor_login-form" class="login-forms" method="post" >
