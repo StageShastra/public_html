@@ -667,6 +667,7 @@ textarea{
         <div class="container-fluid" id="home">
            
            <script>var first_time=1</script>
+           <script> var step=5;</script>
             <nav class="navbar navbar-default navbar-fixed-top custom-navbar">
                 <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->

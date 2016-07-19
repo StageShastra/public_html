@@ -167,6 +167,7 @@
       margin-right: 10px;
     }
               </style>
+              <script> var step=5;</script>
         <!--[if lt IE 8]> -->
          <div class="container-fluid" id="home">
            
