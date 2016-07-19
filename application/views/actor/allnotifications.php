@@ -168,6 +168,7 @@
     }
               </style>
               <script> var step=5;</script>
+              <script>var first_time=1</script>
         <!--[if lt IE 8]> -->
          <div class="container-fluid" id="home">
            
