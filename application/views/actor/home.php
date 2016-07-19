@@ -1515,6 +1515,7 @@ textarea{
                                                     <button type="submit" class="btn btn-primary btn-block avatar-save">Crop and Save</button>
                                                  </div>
                                                 </div>
+                                            </form>
                                         </div>
                                     </div> 
                       
@@ -1710,7 +1711,12 @@ textarea{
                            <form action="<?= base_url() ?>upload/" class="dropzone" id="photo-upload" style="border: 1px dashed #b2b2b2;border-radius: 5px;background: white;margin-top:120px;"></form>
                     </div>
                     <button type="submit" class="btn submit-btn firstcolor disabled" id="upload-btn-cp" data-click-src="cpmodal"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Upload</button>
-                
+                    <?php
+                                            if($number_of_images>=2)
+                                            {
+                                                echo '<button type="button" class="btn submit-btn  " id="add_exp_btn_load" onclick="set_profile_stage(3); location.reload();" >Skip</button></font>';
+                                            }
+                    ?>
                   </div>
                     </div>
                 </div>
@@ -1748,6 +1754,7 @@ textarea{
                                                     <button type="submit" class="btn btn-primary btn-block avatar-save">Crop and Save</button>
                                                  </div>
                                                 </div>
+                                            </form>
                                         </div>
                                     </div> 
                       

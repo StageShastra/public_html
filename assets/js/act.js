@@ -699,7 +699,7 @@ $(document).ready(function(){
 							location.reload();
 							return false;
 						}
-					}, 2000);
+					}, 3000);
 					$("#photoCropping").addClass("hidden");
 					$("#displayGallery").removeClass("hidden");
 				}
