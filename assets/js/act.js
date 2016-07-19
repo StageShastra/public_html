@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
 	if(step!=5)
 	{
 		profile_Completion(step);
@@ -326,6 +325,7 @@ $(document).ready(function(){
 				$("#savedChnagedMsg").html(response.message);
 				$("#savedChnaged").show(500).delay(3000).hide(500);
 				set_profile_stage(5);
+				location.reload();
 			}
 		});
 		return false;
@@ -620,6 +620,7 @@ $(document).ready(function(){
 		  zoomable: false,
 		  zoomOnTouch: false, 
 		  zoomOnWheel: false,
+		  responsive:true,
 		  crop: function(e) {
 		    // Output the result data for cropping image.
 		    //console.log(e);
@@ -639,6 +640,7 @@ $(document).ready(function(){
     	e.stopPropagation();
     	$("#pc_photoCropping").removeClass("hidden");
     	$("#pc_photoCropping").addClass("animated bounceIn");
+    	$("#pc_displayGallery").addClass("hidden");
     	$form = $("form.cropperForm");
 		img = $("img", $(this)).attr("src");
 		$("input[name='imageName']", $form).val(img);
@@ -699,7 +701,7 @@ $(document).ready(function(){
 							location.reload();
 							return false;
 						}
-					}, 3000);
+					}, 200);
 					$("#photoCropping").addClass("hidden");
 					$("#displayGallery").removeClass("hidden");
 				}
@@ -726,7 +728,7 @@ $(document).ready(function(){
 				$("#changepassword_err").html(response.message).show(500).delay(3000).hide(500);
 				if(response.status){
 					setTimeout(function(){
-						window.location.href = base;
+						window.location.href = base+"/actor";
 					}, 5000);
 				}
 			}
@@ -943,6 +945,7 @@ function feet_to_cm()
 	var inches = $("#inches").val();
 	var measurement = Math.round((feet*12*2.54) + inches*2.54);
 	$("#height").val(measurement);
+	$("#pc_height").val(measurement);
 	$("#feetToCmConverterModal").hide();
 }
 function set_profile_stage(n){

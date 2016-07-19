@@ -100,13 +100,13 @@
 			$pageInfo['title'] = "Thank you.";
 			
 			if( $chk == 0 && $plan == 'basic' ){
-				$pageInfo['body'] = "You are active now in Free Basic for 1 Years.";
+				$pageInfo['body'] = "You are now subscribed to Basic plan for 1 Year.";
 			}else{
-				$pageInfo['body'] = "Your Payment was successful. You are active now in {$plan} <br><p>Payment Id: {$pay_id}</p>";
+				$pageInfo['body'] = "Your Payment was successful. You are now subscribed to {$plan} <br><p>Payment Id: {$pay_id}</p>";
 			}
 
 			
-			$pageInfo['body'] .= "<p><b>You will be redirected in 10 secs. If its taking too long <a href='".base_url()."{$page}'>redirect here.</a></b></p>";
+			$pageInfo['body'] .= "<p><b>You will be redirected in 10 secs. If its taking too long click <a href='".base_url()."{$page}'> here to redirect.</a></b></p>";
 			
 			$pageInfo['redirect'] = true;
 			$pageInfo['page'] = $page;

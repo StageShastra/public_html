@@ -317,7 +317,6 @@
             margin-bottom: 20px;
             border-radius: 4px;
             margin-top: 20px;
-            background:#FFB600;
             color: white; 
         }
         .navbar-fixed-top{
@@ -687,11 +686,10 @@ textarea{
     right: 0px;
     float: none;
     z-index: 99999999;
-    padding: 10px;
+    padding: 20px 10px;
     margin-bottom: 20px;
     border-radius: 4px;
     margin-top: 20px;
-    background: #607D8B !important;
     color: white;
     max-width: 400px;
     border: 3px solid;
@@ -768,7 +766,11 @@ textarea{
     font-family: "Roboto";
     font-size: 14px;
 }
-
+.gradient{
+    background: #F7A9A9;
+    background-image: linear-gradient(45deg, rgba(234, 83, 11, 0.67) 0%, rgba(216, 27, 79, 0.86) 31%, rgba(195, 15, 76, 0.86) 100%, rgb(253, 24, 255) 0%);
+    color: white;
+}
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -929,15 +931,15 @@ textarea{
                     echo '<script>var first_time='.$user["StashUsers_status"].';</script>';
                     echo '<script>var step='.$actorProfile['StashActor_profile_completion_stage'] .';</script>';
 
-                    if($user["StashUsers_status"] == 0){
+                    if($user["StashUsers_status"] == 0 &&  $actorProfile['StashActor_profile_completion_stage']>4){
                 ?>
-                <div class="alert alertbox alert-warning alert-dismissible center" id="warningmsg" role="alert">
+                <div class="alert alertbox alert-warning alert-dismissible center gradient" id="warningmsg" role="alert">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <strong>Warning!</strong> <?= AC_ActivationWarning ?>
                 </div>
                 <?php } ?>
                 
-                <div class="alert alert-primary alert-dismissible alertbox" id="savedChnaged" style="display:none;" role="alert">
+                <div class="alert alert-primary alert-dismissible alertbox gradient center" id="savedChnaged" style="display:none;" role="alert">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <span id="savedChnagedMsg"></span>
                 </div>
@@ -1560,7 +1562,7 @@ textarea{
 
             </div>
             
-            <div id="feetToCmConverterModal" class="modal fade" role="dialog">
+            <div id="feetToCmConverterModal" style="z-index:99999999;" class="modal fade" role="dialog">
                 <div class="modal-dialog">
 
                   <!-- Modal content-->
@@ -1658,35 +1660,35 @@ textarea{
                                         </div>
                                         
                                         <div class="col-sm-6 col-xs-6" >
-                                         <input type="text" name='pc_max_age' class="form-control edit_inputs_basics " value="<?= $actorProfile['StashActor_max_role_age'] ?>" placeholder="Maximum age which you can play onscreen"  required data-validation-required-message="Please enter your max age range. The maximum age which you can play onscreen" id="agemax"/> 
+                                         <input type="text" name='pc_max_age' class="form-control edit_inputs_basics " value="<?= $actorProfile['StashActor_max_role_age'] ?>" placeholder="Maximum age which you can play onscreen"  required data-validation-required-message="Please enter your max age range. The maximum age which you can play onscreen" id="agemax"/>
                                         </div>
-    
+                                        <span class="edit_basics_labels">age in years you can play naturally onscreen</span> 
                                     </div>
                                 
-                                <p class="help-block text-danger"> (age in years you can play naturally onscreen)</p>
+                                <p class="help-block text-danger"> </p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Weight</label>
-                               <input type="text" class="form-control edit_inputs_basics" name='pc_weight'  placeholder="Weight in kgs" value="<?= $actorProfile['StashActor_weight'] ?>" id="weight" required/> <span class="edit_basics_labels">in kgs</span>
+                               <input type="text" class="form-control edit_inputs_basics" name='pc_weight'  placeholder="Weight" value="<?= $actorProfile['StashActor_weight'] ?>" id="weight" required/> <span class="edit_basics_labels">in kgs</span>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Height</label>
-                                <input type="text" class="form-control edit_inputs_basics" name='pc_height'  placeholder="Height in cms" value="<?= $actorProfile['StashActor_height'] ?>" id="height" required />  <span class="edit_basics_labels">in cms</span>
+                                <input type="text" class="form-control edit_inputs_basics" name='pc_height'  placeholder="Height" value="<?= $actorProfile['StashActor_height'] ?>" id="pc_height" required />  <span class="edit_basics_labels">in cms &nbsp;<span data-toggle="modal" class="info-small" data-target="#feetToCmConverterModal">(Click here to open converter.)</span></p>
                             </div>
                         </div>
-                        <br>
                         <p id="step-1-error" class="help-block text-danger"></p>
                         <div class="row">
                             <div class="form-group col-xs-12">
+                                <span class="edit_basics_labels center">Done ?</span><br>
                                 <font class="sortbuttons">
                                         <button type="submit" class="btn submit-btn firstcolor tick center"
                                                  style="margin-left: -15px;">
-                                            <span > Next</span>
+                                            <span > Step 2: Upload Photos</span>
                                         </button>
                                 </font>
                             </div>
@@ -1751,7 +1753,7 @@ textarea{
                                                 <div class="row avatar-btns">
                                                   
                                                  <div class="col-md-3 center">
-                                                    <button type="submit" class="btn btn-primary btn-block avatar-save">Crop and Save</button>
+                                                    <button type="submit" class="btn btn-primary btn-block avatar-save submit-btn">Crop and Save</button>
                                                  </div>
                                                 </div>
                                             </form>
@@ -1761,7 +1763,7 @@ textarea{
                   <div class="container" style="max-width:100%; ">
                    
                    <div class="row" style="padding-right:15px;">
-                                    <div class="DocumentList" id="displayGallery" style="text-align:center; height:auto; background:white; border-radius:20px;">
+                                    <div class="DocumentList" id="pc_displayGallery" style="text-align:center; height:auto; background:white; border-radius:20px;">
                                         <ul class="list-inline center" style="vertical-align:middle;">
                                             
                                         <?php
