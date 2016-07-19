@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-	if(step!==5)
+	if(step!=5)
 	{
 		profile_Completion(step);
 	}
@@ -696,7 +696,6 @@ $(document).ready(function(){
 						{	
 							$("#modal_step_3").modal("hide");
 							set_profile_stage(4);
-							profile_step_four();
 							location.reload();
 							return false;
 						}
@@ -919,7 +918,7 @@ Dropzone.options.photoUpload={
         if(src!="")
         {
         	set_profile_stage(3);
-        	//location.reload();
+        	location.reload();
         }
         else{
         	$("#done-btn").removeClass("disabled");
