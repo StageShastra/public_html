@@ -1,9 +1,15 @@
 $(document).ready(function(){
 
+	if(step!==5)
+	{
+		profile_Completion(step);
+	}
 	if(first_time==0)
 	{
+		
 		startIntro();
 	}
+	
 	url = base + "actor/ajax";
 	//$("#warningmsg").hide();
 	$("#resendConfirmationModal").modal("hide");
@@ -34,15 +40,22 @@ $(document).ready(function(){
 		var request = $(this).attr("data-request");
 		var unhide = $(this).attr("data-unhide-id");
 		var hide = $(this).attr("data-hide-id");
+		var step = $(this).attr("data-step-id");
 		var form = {};
 		$.each( names, function(index, value){
 			name = $.trim(value);
-			form[name] = $('[name="'+name+'"]').val();
+			var newname=name;
+			if(name.search("pc_")!=-1)
+			{
+				newname=name.substring(3);
+				console.log(newname);
+			}
+			form[newname] = $('[name="'+name+'"]').val();
 		});
 
 		data = {request: request, data: JSON.stringify(form)};
 
-		//console.log(data);
+		console.log(data);
 
 		$.ajax({
 			url: url,
@@ -163,6 +176,62 @@ $(document).ready(function(){
 
 
 	});
+	$(document).on("submit", ".profileCompletion1", function(){
+
+		var that = this;
+		var str = '';
+		var names = $(this).attr("data-input-names").split(",");
+		var request = $(this).attr("data-request");
+		var unhide = $(this).attr("data-unhide-id");
+		var hide = $(this).attr("data-hide-id");
+		var step = $(this).attr("data-step-id");
+		var form = {};
+		$.each( names, function(index, value){
+			name = $.trim(value);
+			var newname=name;
+			if(name.search("pc_")!=-1)
+			{
+				newname=name.substring(3);
+				console.log(newname);
+			}
+			form[newname] = $('[name="'+name+'"]').val();
+		});
+
+
+		data = {request: request, data: JSON.stringify(form)};
+
+		console.log(data);
+
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				if(response.status){
+					
+					
+						$.each( form, function(index, value){
+							if(index == "sex")
+								if(value == "M")
+									value = "Male";
+								else
+									value = "Female";
+							$("#actor_" + index).html(value);
+						});
+					set_profile_stage(2);
+					$("#modal_step_1").modal("hide");	
+					$("#modal_step_2").modal("show");		
+				}
+				$(unhide).removeClass("hidden");
+				$(hide).addClass("hidden");
+				$("#savedChnagedMsg").html(response.message);
+				$("#savedChnaged").show(500).delay(3000).hide(500);
+				//console.log(response);
+			}
+		});
+
+		return false;
+	});
 
 	$(document).on("click", ".addExperience", function(){
 		var that = this;
@@ -211,7 +280,56 @@ $(document).ready(function(){
 		});
 		return false;
 	});
+	$(document).on("click", ".cp_addExperience", function(){
+		console.log("dd");
+		var that = this;
+		$(".input-error").remove();
+		var title = $("input[name='cp_exp_title']").val();
+		console.log("titk"+title);
+		$("input[name='cp_exp_title']").removeClass("isError");
+		if(title == ''){
+			$("input[name='cp_exp_title']").addClass("isError");
+			return false;
+		}
+		var role = $("input[name='cp_exp_role']").val();
+		$("input[name='cp_exp_role']").removeClass("isError");
+		if(role == ''){
+			$("input[name='cp_exp_role']").addClass("isError");
+			return false;
+		}
+		var blurb = $("textarea[name='cp_exp_blurb']").val();
+		var link = $("input[name='cp_exp_link']").val();
+		data = {request: "AddExperience", data: JSON.stringify({title: title, role: role, blurb: blurb, link: link})};
+		console.log(title);
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				if(response.status){
+					html = response.data.html;
+					console.log(data);
+					$("#experiencelist").html(html);
+					$("input[name='exp_title']").val("");
+					$("input[name='exp_role']").val("");
+					$("input[name='exp_link']").val("");
+					$("textarea[name='exp_blurb']").val("");
+					$("#experience_add").addClass("hidden");
+					$("#closeexperienceicon").addClass("hidden");
+					$("#openexperienceicon").removeClass("hidden");
+					$("#add_exp_btn").removeClass("hidden");
+					$("#add_exp_btn_load").addClass("hidden");
 
+				}
+				$("#experiencelist").removeClass("hidden");
+				$("#experience_add").addClass("hidden");
+				$("#savedChnagedMsg").html(response.message);
+				$("#savedChnaged").show(500).delay(3000).hide(500);
+				set_profile_stage(5);
+			}
+		});
+		return false;
+	});
 
 	$(document).on("click", ".addTraining", function(){
 		var that = this;
@@ -516,8 +634,44 @@ $(document).ready(function(){
 		});
 
 	});
+	$(document).on("click", ".pc_cropProfilePic", function(e){
+		e.preventDefault();
+    	e.stopPropagation();
+    	$("#pc_photoCropping").removeClass("hidden");
+    	$("#pc_photoCropping").addClass("animated bounceIn");
+    	$form = $("form.cropperForm");
+		img = $("img", $(this)).attr("src");
+		$("input[name='imageName']", $form).val(img);
+		img =  img;
 
-	$(document).on("submit", "form#cropperForm", function(){
+		$("#pc_cropThisImage").attr("src", img);
+
+		$('#pc_cropThisImage').cropper({
+		  aspectRatio: 1/1,
+		  scaleX:1,
+		  scaleY:1,
+		  minCropBoxHeight: 50,
+		  maxCropBoxHeight: 200,
+		  minCropBoxWidth: 50,
+		  maxCropBoxWidth: 200,
+		  zoomable: false,
+		  zoomOnTouch: false, 
+		  zoomOnWheel: false,
+		  crop: function(e) {
+		    // Output the result data for cropping image.
+		    //console.log(e);
+		    $("input[name='imageX']", $form).val(e.x);
+		    $("input[name='imageY']", $form).val(e.y);
+		    $("input[name='imageWidth']", $form).val(e.width);
+		    $("input[name='imageHeight']", $form).val(e.height);
+		    $("input[name='imageRotate']", $form).val(e.rotate);
+		    $("input[name='imageScaleX']", $form).val(e.scaleX);
+		    $("input[name='imageScaleY']", $form).val(e.scaleY);
+		  }
+		});
+
+	});
+	$(document).on("submit", ".cropperForm", function(){
 		var form = {};
 		$("input", $(this)).each(function(index, value){
 			if($(this).attr('name') == "imageName"){
@@ -538,7 +692,15 @@ $(document).ready(function(){
 					$("#actorAvatar").attr("src", base + "assets/img/actors/" + response.data.image);
 					setTimeout(function(){
 						$("#set_profile_photo").modal("hide");
-					}, 3000);
+						if(step==3)
+						{	
+							$("#modal_step_3").modal("hide");
+							set_profile_stage(4);
+							profile_step_four();
+							location.reload();
+							return false;
+						}
+					}, 2000);
 					$("#photoCropping").addClass("hidden");
 					$("#displayGallery").removeClass("hidden");
 				}
@@ -719,8 +881,16 @@ Dropzone.options.photoUpload={
     init: function()
     {
       var myDropzone = this;
+      var src="";
       $("#upload-btn").click(function(e)
       {
+        e.preventDefault();
+        e.stopPropagation();
+        myDropzone.processQueue();
+      });
+      $("#upload-btn-cp").click(function(e)
+      {
+      	src=$(this).attr("data-click-src");
         e.preventDefault();
         e.stopPropagation();
         myDropzone.processQueue();
@@ -735,17 +905,26 @@ Dropzone.options.photoUpload={
       this.on("drop", function()
       {
        $("#upload-btn").removeClass("disabled");
+       $("#upload-btn-cp").removeClass("disabled");
        
       });
       this.on("addedfile", function(file)
       {
-       $("#upload-btn").removeClass("disabled");
+       $("#upload-btn-cp").removeClass("disabled");
        
       });
       this.on("successmultiple", function(files, response)
       { 
         //console.log(files);
-        $("#done-btn").removeClass("disabled");
+        if(src!="")
+        {
+        	set_profile_stage(3);
+        	//location.reload();
+        }
+        else{
+        	$("#done-btn").removeClass("disabled");
+        }
+        
         console.log(response);
         
         // Gets triggered when the files have successfully been sent.
@@ -767,6 +946,21 @@ function feet_to_cm()
 	$("#height").val(measurement);
 	$("#feetToCmConverterModal").hide();
 }
+function set_profile_stage(n){
+	data = {request: "UpdateProfileStage", data: "{profile_stage:"+n+"}"};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				
+			}
+		});
+}
+function cp_photo_upload_complete(){
+	set_profile_stage(3);
+	location.reload();
+}
  function startIntro(){
         var intro = introJs();
           intro.setOptions({
@@ -780,7 +974,7 @@ function feet_to_cm()
               },
               {
                 element: document.querySelectorAll('#step2')[0],
-                intro: "You can add videos to your profile.",
+                intro: "You can add more videos to your profile.",
                 position: 'bottom'
               },
               {
@@ -790,7 +984,7 @@ function feet_to_cm()
               },
               {
                 element: '#actor_pro_pic',
-                intro: "Remember to choose your profile pic from already uploaded gallery and crop it perfectly",
+                intro: "You can change your profile pic from already uploaded gallery .",
                 position: 'bottom'
               },
               {
@@ -802,6 +996,56 @@ function feet_to_cm()
           
           intro.setOption('showProgress', true).start();
       }
+function profile_Completion(step)
+{
+	if(step==1){
+		profile_step_one();
+	}
+	if(step==2){
+		profile_step_two();
+	}
+	if(step==3)
+	{
+		profile_step_three();
+	}
+	if(step==4)
+	{
+		profile_step_four();
+	}
+	if(step==5)
+	{
+		profile_step_five();
+	}
+}
+function profile_step_one()
+{
+	$("#modal_step_1").modal("show");
+
+}
+function profile_step_two()
+{
+	$("#modal_step_2").modal("show");
+}
+function profile_step_three(){
+	$("#modal_step_3").modal("show");
+}
+function profile_step_four()
+{
+	$("#modal_step_4").modal("show");
+}
+function set_profile_stage(n){
+	data = {request: "UpdateProfileStage", data: '{"profile_stage":"'+n+'"}'};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				
+			}
+		});
+		console.log(data);
+}
+
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })

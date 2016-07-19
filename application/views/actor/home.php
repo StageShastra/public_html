@@ -17,7 +17,7 @@
 
     // to check plan expired
     if($plan['StashActorPlan_status'] == 0){
-        // Plane Expired 
+        // Plan Expired 
     }
   ?>
     <body>
@@ -324,7 +324,37 @@
                 margin-left: 0%;
                 margin-right: 0%;
             }
-           
+.bigmodal-dialog {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin:0;
+      position: absolute;
+      top: 0px;
+      background-color:rgba(0,0,0,0.66);
+}
+.bigmodal-content {    
+      height: auto;
+      width: 50%;
+      float: none;
+      margin: 0 auto;
+      margin-top: 50px;
+      border-radius: 0;
+      color:white;
+      overflow:auto;
+}
+.modal-content-four
+    {
+      background-color:#f44336;
+    }
+.help-block{
+    color: rgba(255,255,255,0.7);
+}
+
+.help-block:hover{
+    color:white;
+}
+
         /* xs */
         @media screen and (max-width: 767px) {
             body {
@@ -365,7 +395,9 @@
             .notification{
                 display: block !important;
             }
-            
+            .bigmodal-content {    
+                width: 95%;
+            }
         }
         /* sm */
         @media screen and (min-width: 768px) {
@@ -634,7 +666,7 @@ textarea{
     background: #FFC107;
     color: #fff;
     border-radius:4px;
-    padding: 5px; 
+    padding: 5px 15px; 
     border: none;
     font-size: 14px;
 
@@ -732,6 +764,11 @@ textarea{
 .seenNoticeSpan:hover{
     color:red;
 }
+.modal-title{
+    font-family: "Roboto";
+    font-size: 14px;
+}
+
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -890,6 +927,8 @@ textarea{
              <div class="container-fluid">
                 <?php
                     echo '<script>var first_time='.$user["StashUsers_status"].';</script>';
+                    echo '<script>var step='.$actorProfile['StashActor_profile_completion_stage'] .';</script>';
+
                     if($user["StashUsers_status"] == 0){
                 ?>
                 <div class="alert alertbox alert-warning alert-dismissible center" id="warningmsg" role="alert">
@@ -991,7 +1030,7 @@ textarea{
                                 
                                 <font class="sortbuttons">
                                         <button type="button" class="btn submit-btn firstcolor tick updateDataField center"
-                                                data-input-names="sex,min_age,max_age,weight,height"
+                                                data-input-names="sex,dob,min_age,max_age,weight,height"
                                                 data-request="EditBasics"
                                                 data-hide-id="#actor_basics_edit" 
                                                 data-unhide-id="#actor_basics" style="margin-left: -15px;">
@@ -1461,7 +1500,7 @@ textarea{
                                         </div>
 
                                         <div class="cropperDatadiv">
-                                            <form accept="#" method="post" id='cropperForm'>
+                                            <form accept="#" method="post" id='cropperForm' class="cropperForm">
                                                 <input type="hidden" name="imageName" value="">
                                                 <input type="hidden" name="imageX" value="">
                                                 <input type="hidden" name="imageY" value="">
@@ -1503,10 +1542,7 @@ textarea{
                                                         . "</a>"
                                                         . "</li>";
                                                         $counter++;
-                                                        if($counter%3==0)
-                                                        {
-                                                            echo '<br>';
-                                                        }
+                                                        
                                                 }
                                             }
                                         ?>     
@@ -1579,7 +1615,236 @@ textarea{
 
                 </div>
             </div>
-            
+            <div class="modal fade bigmodal" id="modal_step_1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog bigmodal-dialog">
+              <div class="modal-content bigmodal-content modal-content-four col-sm-8 col-md-6 col-lg-6 col-xs-12">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 1 of 4<br>Let's get started! <br> Tell us some basic things about yourself. This is usually the first thing a casting director wants to know.</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-sm-12 col-lg-6 col-xs-12 col-md-8 center">
+                        <form name="step1" id="contactForm" class="profileCompletion1" 
+                        data-input-names="pc_sex,pc_dob,pc_min_age,pc_max_age,pc_weight,pc_height"
+                        data-request="EditBasics"
+                        data-step-id="step-1-error"
+                        data-hide-id="#actor_basics_edit" 
+                        data-unhide-id="#actor_basics"
+                        validate>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Sex</label>
+                                <select type="text" class="form-control edit_inputs_basics " name="pc_sex" value="<?= ($actorProfile['StashActor_gender']) ? "M" : "F" ?>" id="sex" placeholder="Sex" required data-validation-required-message="Please enter your sex.">
+                                        <option value="M">Male</option>
+                                        <option value="F">Female</option>
+                                </select>
+                               
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Date of Birth</label>
+                                <input type="date" name="pc_dob" class="form-control edit_inputs_basics "  value="<?= date("Y-m-d", $actorProfile['StashActor_dob']) ?>" id="dob" required/>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Age Range </label>
+                                <div class="row">
+                                        <div class="col-sm-6 col-xs-6" >
+                                         <input type="text" name='pc_min_age' class="form-control edit_inputs_basics "  value="<?= $actorProfile['StashActor_min_role_age'] ?>" placeholder="Minimum age which you can play onscreen"  required data-validation-required-message="Please enter your min age range" id="agemin"/>
+                                        </div>
+                                        
+                                        <div class="col-sm-6 col-xs-6" >
+                                         <input type="text" name='pc_max_age' class="form-control edit_inputs_basics " value="<?= $actorProfile['StashActor_max_role_age'] ?>" placeholder="Maximum age which you can play onscreen"  required data-validation-required-message="Please enter your max age range. The maximum age which you can play onscreen" id="agemax"/> 
+                                        </div>
+    
+                                    </div>
+                                
+                                <p class="help-block text-danger"> (age in years you can play naturally onscreen)</p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Weight</label>
+                               <input type="text" class="form-control edit_inputs_basics" name='pc_weight'  placeholder="Weight in kgs" value="<?= $actorProfile['StashActor_weight'] ?>" id="weight" required/> <span class="edit_basics_labels">in kgs</span>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Height</label>
+                                <input type="text" class="form-control edit_inputs_basics" name='pc_height'  placeholder="Height in cms" value="<?= $actorProfile['StashActor_height'] ?>" id="height" required />  <span class="edit_basics_labels">in cms</span>
+                            </div>
+                        </div>
+                        <br>
+                        <p id="step-1-error" class="help-block text-danger"></p>
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                                <font class="sortbuttons">
+                                        <button type="submit" class="btn submit-btn firstcolor tick center"
+                                                 style="margin-left: -15px;">
+                                            <span > Next</span>
+                                        </button>
+                                </font>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal fade bigmodal" id="modal_step_2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog bigmodal-dialog">
+              <div class="modal-content bigmodal-content modal-content-four col-sm-8 col-md-6 col-lg-6 col-xs-12">
+                <div class="modal-header">
+                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 2 of 4<br>Add some photos!<br> Without a photo your profile might look bland…Photos are also crucial for casting...</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 center">
+                        <div class="container" style="max-width:100%; ">
+                   
+                    <div class="form-group" style="margin-top: -100px;">
+                           <form action="<?= base_url() ?>upload/" class="dropzone" id="photo-upload" style="border: 1px dashed #b2b2b2;border-radius: 5px;background: white;margin-top:120px;"></form>
+                    </div>
+                    <button type="submit" class="btn submit-btn firstcolor disabled" id="upload-btn-cp" data-click-src="cpmodal"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Upload</button>
+                
+                  </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal fade bigmodal" id="modal_step_3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog bigmodal-dialog">
+              <div class="modal-content bigmodal-content modal-content-four col-sm-8 col-md-6 col-lg-6 col-xs-12">
+                <div class="modal-header">
+                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 3 of 4<br>We all know what a good display picture can do. Don't we? So go ahead and set one!</h4>
+                </div>
+                <div class="modal-body">
+                                        <div class="photoCropping hidden" id='pc_photoCropping'> 
+                                        <div class="text-info">
+                                            <p id="cropperInfo" class="info-small gray center" style="display:none;margin-bottom:10px; font-family:Raleway;">  </p>
+                                        </div>
+                                        <div class="cropper-container">
+                                            <img src="#" id="pc_cropThisImage">
+                                        </div>
+
+                                        <div class="cropperDatadiv">
+                                            <form accept="#" method="post" id='cropperForm' class='cropperForm'>
+                                                <input type="hidden" name="imageName" value="">
+                                                <input type="hidden" name="imageX" value="">
+                                                <input type="hidden" name="imageY" value="">
+                                                <input type="hidden" name="imageWidth" value="">
+                                                <input type="hidden" name="imageHeight" value="">
+                                                <input type="hidden" name="imageRotate" value="">
+                                                <input type="hidden" name="imageScaleX" value="">
+                                                <input type="hidden" name="imageScaleY" value="">
+                                                <div class="row avatar-btns">
+                                                  
+                                                 <div class="col-md-3 center">
+                                                    <button type="submit" class="btn btn-primary btn-block avatar-save">Crop and Save</button>
+                                                 </div>
+                                                </div>
+                                        </div>
+                                    </div> 
+                      
+                  <div class="container" style="max-width:100%; ">
+                   
+                   <div class="row" style="padding-right:15px;">
+                                    <div class="DocumentList" id="displayGallery" style="text-align:center; height:auto; background:white; border-radius:20px;">
+                                        <ul class="list-inline center" style="vertical-align:middle;">
+                                            
+                                        <?php
+                                            $images = json_decode($actorProfile['StashActor_images'], true);
+                                            //print_r($images);
+                                            $number_of_images=sizeof($images);
+                                            if($number_of_images==0)
+                                            {
+                                                echo '<div class="info gray">'.AC_NoImage.'<br><button type="submit" class="btn submit-btn firstcolor toggleEdit"  data-toggle="modal" data-target="#photosupload" data-hide-id="#set_profile_photo" id="btn-login" ><span class="glyphicon glyphicon-plus"></span> &nbsp;Upload Photos</button></div>';
+                                            }
+                                            else
+                                            {
+                                                $counter=0;
+                                                foreach ($images as $key => $image) {
+                                                    echo "<li class='DocumentItem toggleEdit pc_cropProfilePic'   data-hide-id='#displayGallery'>"
+                                                        . "<a href='".IMG."/actors/".$image."' >"
+                                                        .   "<img src='".IMG."/actors/".$image."' height='100%' width='auto' style='border-radius:10px;'>"
+                                                        . "</a>"
+                                                        . "</li>";
+                                                        $counter++;
+                                                        
+                                                }
+                                            }
+                                        ?>     
+
+                                        </ul>
+                                    </div>
+                                    
+                                </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal fade bigmodal" id="modal_step_4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog bigmodal-dialog">
+              <div class="modal-content bigmodal-content modal-content-four col-sm-8 col-md-6 col-lg-6 col-xs-12">
+                <div class="modal-header">
+                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 4 of 4<br>How about adding one of your experiences to show how good you can act?</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-sm-12 col-lg-6 col-xs-12 col-md-8 center">
+                        <form name="step4"
+                        validate>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Title<sup>*</sup> </label>
+                                <input type="text" class="form-control" name='cp_exp_title' id="addtitle" Placeholder="Title of the play, ad, film etc." required/>
+                                
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Role<sup>*</sup></label>
+                                <input type="text" class="form-control " name='cp_exp_role' id="addrole" Placeholder="Role e.g. Dad, Mom, Character Name" required/>
+                               
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Video Link</label>
+                                 <input type="text" class="form-control" name='cp_exp_link' id="addlink" Placeholder="Youtube Video Link"/>
+                                <p class="help-block text-danger">Leave as blank if you dont have the link</p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Description</label>
+                               <textarea class="form-control" name='cp_exp_blurb' id="adddescription" placeholder="A little description about the role and the project." style="height:80px;"></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <br>
+                        <p id="step-1-error" class="help-block text-danger"></p>
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                                <font class="sortbuttons">
+                                    <button type="button" class="btn submit-btn firstcolor center cp_addExperience toggleEdit tick" id="add_exp_btn" data-hide-id="#add_exp_btn" data-unhide-id="#add_exp_btn_load" ><span class="glyphicon glyphicon-ok"></span></button>
+                                    <button type="submit" class="btn submit-btn firstcolor center addExperience tick hidden rotate-img" id="add_exp_btn_load" ><span class="glyphicon glyphicon-refresh"></span></button></font>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
             <!-- <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div> -->

@@ -215,6 +215,9 @@
 					case "UpdateProfileImage":
 						$this->updateProfileImage($data);
 						break;
+					case "UpdateProfileStage":
+						$this->updateProfileStage($data);
+						break;
 					case "ResendConfirmationLink":
 						$this->resendConfirmationLink($data);
 						break;
@@ -283,6 +286,7 @@
 			$this->Notifications->updateNotificationSeen();
 			$this->response(true, "Notification Seen...");
 		}
+		
 		
 
 		public function imageToEncode($data = []){
@@ -471,12 +475,15 @@
 		}
 		public function editBasicDetails($data = []){
 			$this->load->model("ModelActor");
+			$dob = strtotime(trim($data['dob']));
+
 			$data['gender'] = (strtolower($data['sex']) == 'm') ? 1 : 0;
 			$d = array(
 						"StashActor_gender" => $data['gender'],
 						"StashActor_height" => $data['height'],
 						"StashActor_weight" => $data['weight'],
 						"StashActor_min_role_age" => $data['min_age'],
+						"StashActor_dob" => $dob,
 						"StashActor_max_role_age" => $data['max_age']
 					);
 			if($this->ModelActor->updateActorProfile($d)){
@@ -775,6 +782,11 @@
 			}else{
 				$this->response(false, Ac_Ajx_GenFailed);
 			}
+		}
+		public function updateProfileStage($data = []){
+			$this->load->model("ModelActor");
+			$this->ModelActor->updateActorProfileStage($data["profile_stage"]);
+			$this->response(true, "Profile Stage Updated");
 		}
 		public function editWhatsApp($data = []){
 			$this->load->model("ModelActor");
