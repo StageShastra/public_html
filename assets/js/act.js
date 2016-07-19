@@ -3,7 +3,7 @@ $(document).ready(function(){
 	{
 		profile_Completion(step);
 	}
-	if(first_time==0)
+	if(first_time==0 && step==5)
 	{
 		
 		startIntro();
