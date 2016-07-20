@@ -1734,12 +1734,9 @@ textarea{
                 <div class="modal-body">
                                         <div class="photoCropping hidden" id='pc_photoCropping'> 
                                         <div class="text-info">
-                                            <p id="cropperInfo" class="info-small gray center" style="display:none;margin-bottom:10px; font-family:Raleway;">  </p>
+                                            <p id="pc_cropperInfo" class="info-small gray center" style="display:none;margin-bottom:10px; font-family:Raleway;
+                                            color:white; font-size:16px;">  </p>
                                         </div>
-                                        <div class="cropper-container">
-                                            <img src="#" id="pc_cropThisImage">
-                                        </div>
-
                                         <div class="cropperDatadiv">
                                             <form accept="#" method="post" id='cropperForm' class='cropperForm'>
                                                 <input type="hidden" name="imageName" value="">
@@ -1751,13 +1748,18 @@ textarea{
                                                 <input type="hidden" name="imageScaleX" value="">
                                                 <input type="hidden" name="imageScaleY" value="">
                                                 <div class="row avatar-btns">
-                                                  
-                                                 <div class="col-md-3 center">
-                                                    <button type="submit" class="btn btn-primary btn-block avatar-save submit-btn">Crop and Save</button>
-                                                 </div>
+                                                <div class="col-md-3 center">
+                                                    <button type="submit" class="btn btn-primary btn-block avatar-save submit-btn" style="margin-bottom:0px;">Crop and Save</button>
+                                                </div>
+                                                
                                                 </div>
                                             </form>
                                         </div>
+                                        <div class="cropper-container">
+                                            <img src="#" id="pc_cropThisImage">
+                                        </div>
+
+                                        
                                     </div> 
                       
                   <div class="container" style="max-width:100%; ">

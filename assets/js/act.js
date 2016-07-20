@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
 	if(step!=5)
 	{
 		profile_Completion(step);
@@ -690,6 +691,8 @@ $(document).ready(function(){
 			data: data,
 			success: function(response){
 				$("#cropperInfo").html(response.message).show(500);
+				$("#pc_cropperInfo").html(response.message).show(500);
+				console.log("dd");
 				if(response.status){
 					$("#actorAvatar").attr("src", base + "assets/img/actors/" + response.data.image);
 					setTimeout(function(){
