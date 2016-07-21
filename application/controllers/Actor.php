@@ -390,7 +390,7 @@
 				$scaley=$data['imageScaleY'];
 
 				if($x < 0 || $y < 0){
-					$this->response(false, "Image is not cropped properly.");
+					$this->response(false, "Image is not cropped properly and is out of bounds.Please keep the blue box inside the image.Avoid borders.");
 				}
 				$width = $data['imageWidth'];
 				$height = $data['imageHeight'];
