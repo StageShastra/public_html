@@ -915,6 +915,7 @@ Dropzone.options.photoUpload={
       this.on("addedfile", function(file)
       {
        $("#upload-btn-cp").removeClass("disabled");
+       $("#message_after_upload").removeClass("hidden");
        
       });
       this.on("successmultiple", function(files, response)
@@ -923,7 +924,8 @@ Dropzone.options.photoUpload={
         if(src!="")
         {
         	set_profile_stage(3);
-        	location.reload();
+        	$("#pc_done-btn").removeClass("disabled");
+        	
         }
         else{
         	$("#done-btn").removeClass("disabled");
