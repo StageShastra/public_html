@@ -1710,7 +1710,7 @@ textarea{
                         <div class="container" style="max-width:100%; ">
                    
                     <div class="form-group" style="margin-top: -100px;">
-                           <form action="<?= base_url() ?>upload/" class="dropzone" id="photo-upload" style="border: 1px dashed #b2b2b2;border-radius: 5px;background: white;margin-top:120px;"><div class="dz-default dz-message" id="message_after_upload"><span><b> Click here to add more images</b>.<span class="info-small gray"><li>Ideally, keep the image size less than 1.5MB</li></span></span></div></form>
+                           <form action="<?= base_url() ?>upload/" class="dropzone" id="photo-upload" style="border: 1px dashed #b2b2b2;border-radius: 5px;background: white;margin-top:120px;"><div class="dz-default dz-message hidden" id="message_after_upload"><span><b> Click here to add more images</b>.<span class="info-small gray"><li>Ideally, keep the image size less than 1.5MB</li></span></span></div></form>
                     </div>
                     <button type="submit" class="btn submit-btn firstcolor disabled" id="upload-btn-cp" data-click-src="cpmodal"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Upload</button>
                     <div class="row">
