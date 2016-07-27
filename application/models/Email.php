@@ -157,7 +157,7 @@
 			$encryptedText = str_replace("/", "_", $encryptedText);
 			$link = base_url() . "home/join/" . urlencode($encryptedText);
 			$message = $this->defaultTemplete("Hi, <br>".$msg, $link, "Accept Invitation", "");
-			$src='http://www.google-analytics.com/collect?v=1&tid=UA-81419637-1&cid='.$to.'&t=event&ec=email&ea=open&el=recipient_id&cs=invitation&cm=email&cn=Campaign_Name';
+			$src='http://www.google-analytics.com/collect?v=1&tid=UA-81419637-1&cid='.$to.'&t=event&ec=email&ea=open&el='.$to.'&cs=invitation&cm=email&cn=InvitaiontoNotinDB';
 			$message = $message.'<img src='.$src.'></img>';
 			$message = preg_replace('~\\\r\\\n~',"<br>", $message);
 			$this->email->clear();
