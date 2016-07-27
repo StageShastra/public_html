@@ -923,7 +923,8 @@ Dropzone.options.photoUpload={
         if(src!="")
         {
         	set_profile_stage(3);
-        	location.reload();
+        	$("#modal_step_3").modal("hide");
+        	$("#modal_step_4").modal("show");
         }
         else{
         	$("#done-btn").removeClass("disabled");
