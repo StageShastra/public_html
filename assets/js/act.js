@@ -701,7 +701,7 @@ $(document).ready(function(){
 						{	
 							$("#modal_step_3").modal("hide");
 							set_profile_stage(4);
-							location.reload();
+							$("#modal_step_4").modal("show");
 							return false;
 						}
 					}, 200);
@@ -923,8 +923,7 @@ Dropzone.options.photoUpload={
         if(src!="")
         {
         	set_profile_stage(3);
-        	$("#modal_step_3").modal("hide");
-        	$("#modal_step_4").modal("show");
+        	location.reload();
         }
         else{
         	$("#done-btn").removeClass("disabled");
