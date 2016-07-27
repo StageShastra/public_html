@@ -145,7 +145,7 @@ define('AC_ConfLinkSent', 'A confirmation link has been send to you email. Check
 		Naming Format: Suffix_Func_name 
 */
 define('Ho_Reg_SuccMsg', "You have successfully registered. You will get a confirmation link in your email. </br>This can take a few minutes.</br> Meanwhile, <a href='/'>click here</a> to sign in and get started.");
-define("Ho_Reg_ErrMsg", "Something went wronge! We are try to fix it.");
+define("Ho_Reg_ErrMsg", "Something went wrong! We are try to fix it.");
 
 // File Name: Secure.php, Suffix: Se
 // Some string are still in the file that cannot be put here.
