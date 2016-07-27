@@ -1684,7 +1684,7 @@ textarea{
                         <p id="step-1-error" class="help-block text-danger"></p>
                         <div class="row">
                             <div class="form-group col-xs-12">
-                                <span class="edit_basics_labels center">Done ?</span><br>
+                                <span class="edit_basics_labels center">Done?</span><br>
                                 <font class="sortbuttons">
                                         <button type="submit" class="btn submit-btn firstcolor tick center"
                                                  style="margin-left: -15px;">
@@ -1710,9 +1710,19 @@ textarea{
                         <div class="container" style="max-width:100%; ">
                    
                     <div class="form-group" style="margin-top: -100px;">
-                           <form action="<?= base_url() ?>upload/" class="dropzone" id="photo-upload" style="border: 1px dashed #b2b2b2;border-radius: 5px;background: white;margin-top:120px;"></form>
+                           <form action="<?= base_url() ?>upload/" class="dropzone" id="photo-upload" style="border: 1px dashed #b2b2b2;border-radius: 5px;background: white;margin-top:120px;"><div class="dz-default dz-message" id="message_after_upload"><span><b> Click here to add more images</b>.<span class="info-small gray"><li>Ideally, keep the image size less than 1.5MB</li></span></span></div></form>
                     </div>
                     <button type="submit" class="btn submit-btn firstcolor disabled" id="upload-btn-cp" data-click-src="cpmodal"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Upload</button>
+                    <div class="row">
+                            <div class="form-group col-xs-12">
+                                <span class="edit_basics_labels center">Done?</span><br>
+                                <font class="sortbuttons">
+                                        <button type="submit" class="btn submit-btn firstcolor disabled"  onclick="location.reload()" id="pc_done-btn"><span class="glyphicon glyphicon-log-in"></span> &nbsp;Step 3: Choose Profile Image
+                                        </button>
+                                </font>
+                            </div>
+                    </div>
+                    
                     <?php
                                             if($number_of_images>=2)
                                             {
