@@ -1711,7 +1711,7 @@ textarea{
                    
                     <div class="form-group" style="margin-top: -100px;">
                            <form action="<?= base_url() ?>upload/" class="dropzone" id="photo-upload" style="border: 1px dashed #b2b2b2;border-radius: 5px;background: white;margin-top:120px;">
-                               <div class="info-small" id="message_after_upload"><span><b> Click here to add more images</b>.<span class="info-small gray"><li>Ideally, keep the image size less than 1.5MB</li></span></span></div></form>
+                               <div class="info-small hidden" id="message_after_upload"><span class="info gray"><b> Click here to add more images</b>.<span class="info-small gray"><li>Ideally, keep the image size less than 1.5MB</li></span></span></div></form>
                     </div>
                     <button type="submit" class="btn submit-btn firstcolor disabled" id="upload-btn-cp" data-click-src="cpmodal"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Upload</button>
                     <div class="row">
