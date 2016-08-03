@@ -1643,7 +1643,7 @@ textarea{
             <div class="modal-dialog bigmodal-dialog">
               <div class="modal-content bigmodal-content modal-content-four col-sm-8 col-md-6 col-lg-6 col-xs-12">
                 <div class="modal-header">
-                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 1 of 4<br>Let's get started! <br> Tell us some basic things about yourself. This is usually the first thing a casting director wants to know.</h4><br><span onclick="raise_ticket()"> <span class="glyphicon glyphicon-question-sign"></span>Having trouble?</span>
+                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 1 of 4<br>Let's get started! <br> Tell us some basic things about yourself. This is usually the first thing a casting director wants to know.</h4><br><span onclick="need_help()"> <span class="glyphicon glyphicon-question-sign"></span>Having trouble?</span>
                 </div>
                 <div class="modal-body">
                     <div class="col-sm-12 col-lg-6 col-xs-12 col-md-8 center">
@@ -1725,7 +1725,7 @@ textarea{
             <div class="modal-dialog bigmodal-dialog">
               <div class="modal-content bigmodal-content modal-content-four col-sm-8 col-md-6 col-lg-6 col-xs-12">
                 <div class="modal-header">
-                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 2 of 4<br>Add some photos!<br> Without a photo your profile might look bland…Photos are also crucial for casting...</h4><br><span onclick="raise_ticket()"> <span class="glyphicon glyphicon-question-sign"></span>Having trouble?</span>
+                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 2 of 4<br>Add some photos!<br> Without a photo your profile might look bland…Photos are also crucial for casting...</h4><br><span onclick="need_help()"> <span class="glyphicon glyphicon-question-sign"></span>Having trouble?</span>
 
                 </div>
                 <div class="modal-body">
@@ -1763,7 +1763,7 @@ textarea{
             <div class="modal-dialog bigmodal-dialog">
               <div class="modal-content bigmodal-content modal-content-four col-sm-8 col-md-6 col-lg-6 col-xs-12">
                 <div class="modal-header">
-                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 3 of 4<br>We all know what a good display picture can do. Don't we? So go ahead and set one!</h4><br><span onclick="raise_ticket()"> <span class="glyphicon glyphicon-question-sign"></span>Having trouble?</span>
+                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 3 of 4<br>We all know what a good display picture can do. Don't we? So go ahead and set one!</h4><br><span onclick="need_help()"> <span class="glyphicon glyphicon-question-sign"></span>Having trouble?</span>
 
                 </div>
                 <div class="modal-body">
@@ -1839,7 +1839,7 @@ textarea{
             <div class="modal-dialog bigmodal-dialog">
               <div class="modal-content bigmodal-content modal-content-four col-sm-8 col-md-6 col-lg-6 col-xs-12">
                 <div class="modal-header">
-                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 4 of 4<br>How about adding one of your experiences to show how good you can act?</h4><br><span onclick="raise_ticket()"> <span class="glyphicon glyphicon-question-sign"></span>Having trouble?</span>
+                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 4 of 4<br>How about adding one of your experiences to show how good you can act?</h4><br><span onclick="need_help()"> <span class="glyphicon glyphicon-question-sign"></span>Having trouble?</span>
 
                 </div>
                 <div class="modal-body">
