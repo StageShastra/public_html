@@ -442,7 +442,7 @@ function resolve(id)
 		var divid="#resolve_"+id;
 		data = {request: "RaiseTicket", data: '{"ticket_status":"'+0+'","user_id":"'+id+'"}'};
 		$.ajax({
-			url: "http://www.castiko.com/actor/ajax",
+			url: base_url + "actor/ajax",
 			type: "POST",
 			data: data,
 			success: function(response){
