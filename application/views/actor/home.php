@@ -1601,7 +1601,7 @@ textarea{
 
             </div>
             
-            <div id="feetToCmConverterModal" style="z-index:99999999;" class="modal fade" role="dialog">
+            <div id="feetToCmConverterModal" style="z-index:999999999999;" class="modal fade" role="dialog">
                 <div class="modal-dialog">
 
                   <!-- Modal content-->
@@ -1661,7 +1661,7 @@ textarea{
             <div class="modal-dialog bigmodal-dialog">
               <div class="modal-content bigmodal-content modal-content-four col-sm-8 col-md-6 col-lg-6 col-xs-12">
                 <div class="modal-header">
-                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 1 of 4<br>Let's get started!<span onclick="need_help()" class="pull-right"> <span class="glyphicon glyphicon-question-sign"></span>Having trouble?</span> <br> Tell us some basic things about yourself. This is usually the first thing a casting director wants to know.</h4><br>
+                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 1 of 4<span onclick="need_help()" class="pull-right"> <span class="glyphicon glyphicon-question-sign"></span>Having trouble?</span><br>Let's get started! <br> Tell us some basic things about yourself. This is usually the first thing a casting director wants to know.</h4><br>
                 </div>
                 <div class="modal-body">
                     <div class="col-sm-12 col-lg-6 col-xs-12 col-md-8 center">
@@ -1743,7 +1743,7 @@ textarea{
             <div class="modal-dialog bigmodal-dialog">
               <div class="modal-content bigmodal-content modal-content-four col-sm-8 col-md-6 col-lg-6 col-xs-12">
                 <div class="modal-header">
-                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 2 of 4<br>Add some photos!<span onclick="need_help()" class="pull-right"> <span class="glyphicon glyphicon-question-sign"></span>Having trouble?</span><br> Without a photo your profile might look bland…Photos are also crucial for casting...</h4>
+                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 2 of 4<span onclick="need_help()" class="pull-right"> <span class="glyphicon glyphicon-question-sign"></span>Having trouble?</span><br>Add some photos!<br> Without a photo your profile might look bland…Photos are also crucial for casting...</h4>
 
                 </div>
                 <div class="modal-body">
