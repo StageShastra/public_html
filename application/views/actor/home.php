@@ -28,7 +28,9 @@
           .edit-button{
               z-index:999;
           }
-          
+          .modal{
+                  z-index: 99999999;
+          }
           .rotate-img {
             -webkit-animation: rotation 2s infinite linear;
           }
