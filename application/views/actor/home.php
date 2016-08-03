@@ -771,6 +771,16 @@ textarea{
     background-image: linear-gradient(45deg, rgba(234, 83, 11, 0.67) 0%, rgba(216, 27, 79, 0.86) 31%, rgba(195, 15, 76, 0.86) 100%, rgb(253, 24, 255) 0%);
     color: white;
 }
+.needhelp{
+    top: 7px;
+    left: 5px;
+    position: relative;
+    background-color: #ff3b49;
+}
+.raised{
+    background-color:#5cb85c;
+}
+
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -878,6 +888,17 @@ textarea{
                             <a href="<?= base_url() ?>home/logout/" class="navbarlist"> Sign Out
                             </a>
                         </li>
+                        <?php if ($user["StashUsers_ticket_status"]==0 || $user["StashUsers_ticket_status"]=="") {
+                            echo '<li >
+                            <span class="label label-danger needhelp" id="need_help" onclick="need_help()">I need help!</span>
+                        </li>';
+                        }
+                        else {
+                            echo '<li >
+                            <span class="label label-danger needhelp raised" id="need_help">Help request submitted</span>
+                        </li>';
+                        }
+                        ?>
                       </ul>
                     </div><!-- /.navbar-collapse -->
                     
@@ -894,7 +915,7 @@ textarea{
                             </a>
                         </li>
                         <hr>
-                        <?php
+                        <?php 
 
                             foreach ($notices as $key => $notice) {
                                 $fa = $this->Notifications->type2fa($notice['StashNotification_type']);
@@ -1622,7 +1643,7 @@ textarea{
             <div class="modal-dialog bigmodal-dialog">
               <div class="modal-content bigmodal-content modal-content-four col-sm-8 col-md-6 col-lg-6 col-xs-12">
                 <div class="modal-header">
-                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 1 of 4<br>Let's get started! <br> Tell us some basic things about yourself. This is usually the first thing a casting director wants to know.</h4>
+                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 1 of 4<br>Let's get started! <br> Tell us some basic things about yourself. This is usually the first thing a casting director wants to know.</h4><br><span onclick="raise_ticket()"> <span class="glyphicon glyphicon-question-sign"></span>Having trouble?</span>
                 </div>
                 <div class="modal-body">
                     <div class="col-sm-12 col-lg-6 col-xs-12 col-md-8 center">
@@ -1691,6 +1712,7 @@ textarea{
                                             <span > Step 2: Upload Photos</span>
                                         </button>
                                 </font>
+
                             </div>
                         </div>
                     </form>
@@ -1703,7 +1725,8 @@ textarea{
             <div class="modal-dialog bigmodal-dialog">
               <div class="modal-content bigmodal-content modal-content-four col-sm-8 col-md-6 col-lg-6 col-xs-12">
                 <div class="modal-header">
-                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 2 of 4<br>Add some photos!<br> Without a photo your profile might look bland…Photos are also crucial for casting...</h4>
+                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 2 of 4<br>Add some photos!<br> Without a photo your profile might look bland…Photos are also crucial for casting...</h4><br><span onclick="raise_ticket()"> <span class="glyphicon glyphicon-question-sign"></span>Having trouble?</span>
+
                 </div>
                 <div class="modal-body">
                     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 center">
@@ -1740,7 +1763,8 @@ textarea{
             <div class="modal-dialog bigmodal-dialog">
               <div class="modal-content bigmodal-content modal-content-four col-sm-8 col-md-6 col-lg-6 col-xs-12">
                 <div class="modal-header">
-                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 3 of 4<br>We all know what a good display picture can do. Don't we? So go ahead and set one!</h4>
+                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 3 of 4<br>We all know what a good display picture can do. Don't we? So go ahead and set one!</h4><br><span onclick="raise_ticket()"> <span class="glyphicon glyphicon-question-sign"></span>Having trouble?</span>
+
                 </div>
                 <div class="modal-body">
                                         <div class="photoCropping hidden" id='pc_photoCropping'> 
@@ -1815,7 +1839,8 @@ textarea{
             <div class="modal-dialog bigmodal-dialog">
               <div class="modal-content bigmodal-content modal-content-four col-sm-8 col-md-6 col-lg-6 col-xs-12">
                 <div class="modal-header">
-                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 4 of 4<br>How about adding one of your experiences to show how good you can act?</h4>
+                  <h4 class="modal-title center" id="myModalLabel">Profile Completion : Step 4 of 4<br>How about adding one of your experiences to show how good you can act?</h4><br><span onclick="raise_ticket()"> <span class="glyphicon glyphicon-question-sign"></span>Having trouble?</span>
+
                 </div>
                 <div class="modal-body">
                     <div class="col-sm-12 col-lg-6 col-xs-12 col-md-8 center">

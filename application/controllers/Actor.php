@@ -151,7 +151,7 @@
 
 
 		public function ajax($value=''){
-			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
+			if((!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor') && $this->session->userdata("CSTKO_Admin_login")!=true)
 				$this->response(false, Ac_Ajx_AuthFail);
 			if(count($this->input->post())){
 				$req = trim($this->input->post("request"));
@@ -217,6 +217,9 @@
 						break;
 					case "UpdateProfileStage":
 						$this->updateProfileStage($data);
+						break;
+					case "RaiseTicket":
+						$this->raiseTicket($data);
 						break;
 					case "ResendConfirmationLink":
 						$this->resendConfirmationLink($data);
@@ -785,6 +788,11 @@
 			$this->load->model("ModelActor");
 			$this->ModelActor->updateActorProfileStage($data["profile_stage"]);
 			$this->response(true, "Profile Stage Updated");
+		}
+		public function raiseTicket($data = []){
+			$this->load->model("Auth");
+			$this->Auth->raiseActorTicket($data);
+			$this->response(true, "Ticket Raised");
 		}
 		public function editWhatsApp($data = []){
 			$this->load->model("ModelActor");

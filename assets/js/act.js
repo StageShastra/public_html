@@ -1047,10 +1047,30 @@ function set_profile_stage(n){
 			type: type,
 			data: data,
 			success: function(response){
-				
+				console.log("ticket_raised");
 			}
 		});
 		console.log(data);
+}
+function need_help(){
+
+	var r = confirm("Submit a help request?");
+    if (r == true) {
+        data = {request: "RaiseTicket", data: '{"ticket_status":"'+1+'"}'};
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				$("#need_help").addClass("raised");
+				$("#need_help").prop('onclick',null).off('click');
+				$("#need_help").html("A ticket has been raised");
+
+			}
+		});
+    } else {
+        
+    }
 }
 
 $(function () {

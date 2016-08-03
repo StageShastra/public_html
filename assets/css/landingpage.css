@@ -432,19 +432,18 @@ header{
     margin-bottom: 15px;
 }
 .tabs-left{
-    width:50%; 
+    width:50%;
     text-align: center;
     font-family: sans-serif;
     color: white;
     background-image:linear-gradient(45deg,rgba(195, 15, 76, 0.86) 15%, rgb(197, 63, 63) 31%, rgba(234, 83, 11, 0.67) 114%, rgba(216, 27, 79, 0.86) 31%);
 }
 .tabs-right{
-    width:50%; 
+    width:50%;
     text-align: center;
     font-family: sans-serif;
     color: white;
     background-image: linear-gradient(45deg, rgba(234, 83, 11, 0.67) 0%, rgba(216, 27, 79, 0.86) 31%, rgba(195, 15, 76, 0.86) 100%, rgb(253, 24, 255) 0%);
-
 }
 .nav-tabs>li>a {
     margin-right: 0px;

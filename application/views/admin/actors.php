@@ -4,6 +4,11 @@
     include 'includes/nav.php';
 
 ?>
+<style>
+.raised{
+    background-color: #00bcd4;
+}
+</style>
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
             <h2>All Actors</h2>
@@ -56,6 +61,7 @@
                                     <th>IP</th>
                                     <th>Account</th>
                                     <th>Mobile</th>
+                                    <th>Ticket</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -74,6 +80,7 @@
                                     <td><?= $actor['StashUsers_ip']?></td>
                                     <td><label class='label label-<?= ($actor['StashUsers_status']) ? "primary" : "warning" ?>'><?= ($actor['StashUsers_status']) ? "active" : "pending" ?></label></td>
                                     <td><label class='label label-<?= ($actor['StashUsers_mobile_status']) ? "primary" : "warning" ?>'><?= ($actor['StashUsers_mobile_status']) ? "verified" : "pending" ?></label></td>
+                                    <td><label id='<?= 'resolve_'.$actor["StashUsers_id"]?>' class='label label-<?= ($actor['StashUsers_ticket_status']) ? "danger" : "primary" ?>' onclick='<?= ($actor['StashUsers_ticket_status']) ? 'resolve('.$actor["StashUsers_id"].')' : "primary" ?>'><?= ($actor['StashUsers_ticket_status']) ? "resolve" : "none" ?></label></td>
                                     <td></td>
         						</tr>
 
@@ -93,6 +100,7 @@
             </div>
         </div>
     </div>
+    
 	
 	
 <?php include 'includes/footer.php';?>

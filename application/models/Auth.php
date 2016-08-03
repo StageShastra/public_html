@@ -26,7 +26,8 @@
 						'StashUsers_ip' => $this->input->ip_address(),
 						'StashUsers_header' => $this->agent->agent_string(),
 						'StashUsers_refer' => $refer,
-						'StashUsers_refer_id' => $refer_id
+						'StashUsers_refer_id' => $refer_id,
+						'StashUsers_ticket_status' => 0
 					);
 			$response = $this->db->insert("stash-users", $data);
 			return $this->db->insert_id();
@@ -406,7 +407,17 @@
 			$this->db->where("StashSMSInvites_id", $id);
 			$this->db->update("stash-sms-invites", array('StashSMSInvites_status' => $s));
 		}
-
+		public function raiseActorTicket($data){
+			if (array_key_exists('user_id', $data)) 
+			{
+				$this->db->where("StashUsers_id", $data["user_id"]);	
+			}
+			else
+			{
+				$this->db->where("StashUsers_id", $this->session->userdata("StaSh_User_id"));
+			}
+			return $this->db->update("stash-users", array("StashUsers_ticket_status" => $data["ticket_status"]));
+		}
 		public function updateEmailLinkOpened($id = ''){
 			$this->db->where("StashEmailInvite_id", $id);
 			$this->db->update("stash-email-invites", array('StashEmailInvite_opened' => time()));

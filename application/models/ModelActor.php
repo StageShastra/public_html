@@ -297,6 +297,7 @@
 			$this->db->where("StashActor_actor_id_ref", $this->session->userdata("StaSh_User_id"));
 			return $this->db->update("stash-actor", array("StashActor_profile_completion_stage" => $data));
 		}
+		
 
 		public function getActorImages($ref = 0){
 			$this->db->select("StashActor_images");

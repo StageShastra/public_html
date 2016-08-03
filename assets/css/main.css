@@ -735,6 +735,7 @@ div.img-div{
 	font-size: 14px;
 	position: relative;
 	right: -25px;
+	z-index: 9999999999;
 }
 .edit-button:hover {
 	color: #FF003A;
@@ -981,5 +982,4 @@ footer .footer-below {
 }
 a:focus {
     outline: none;
-    text-decoration: none;
-}
+    text-decoration: none;  
