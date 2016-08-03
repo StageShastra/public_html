@@ -462,25 +462,7 @@ $(document).ready(function(){
 		return false;
 	});
 	
-	function need_help(){
-		var r = confirm("Submit a help request?");
-	    	if (r == true) {
-	        data = {request: "RaiseTicket", data: '{"ticket_status":"'+1+'"}'};
-			$.ajax({
-				url: url,
-				type: type,
-				data: data,
-				success: function(response){
-					$("#need_help").addClass("raised");
-					$("#need_help").prop('onclick',null).off('click');
-					$("#need_help").html("A ticket has been raised");
 	
-				}
-			});
-	    } else {
-	        
-	    }
-	}
 	
 	$(document).on("click", "#resendConfirmationLink", function(){
 		data = {request: "ResendConfirmationLink", data:JSON.stringify({})};
@@ -1057,6 +1039,25 @@ function profile_step_three(){
 function profile_step_four()
 {
 	$("#modal_step_4").modal("show");
+}
+function need_help(){
+		var r = confirm("Submit a help request?");
+	    	if (r == true) {
+	        data = {request: "RaiseTicket", data: '{"ticket_status":"'+1+'"}'};
+			$.ajax({
+				url: url,
+				type: type,
+				data: data,
+				success: function(response){
+					$("#need_help").addClass("raised");
+					$("#need_help").prop('onclick',null).off('click');
+					$("#need_help").html("A ticket has been raised");
+	
+				}
+			});
+	    } else {
+	        
+	    }
 }
 function set_profile_stage(n){
 	data = {request: "UpdateProfileStage", data: '{"profile_stage":"'+n+'"}'};
