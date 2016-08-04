@@ -1739,9 +1739,7 @@ textarea{
                 </div>
                 <div class="modal-body">
                     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 center">
-                        <div class="container" style="max-width:100%; ">
-                   
-                    <div class="form-group" style="margin-top: -100px;">
+                    <div class="form-group" >
                            <form action="<?= base_url() ?>upload/" class="dropzone" id="photo-upload" style="border: 1px dashed #b2b2b2;border-radius: 5px;background: white;margin-top:120px;">
                                <div class="info-small hidden" id="message_after_upload"><span class="info gray"><b> Click here to add more images</b>.<span class="info-small gray"><li>Ideally, keep the image size less than 1.5MB</li></span></span></div></form>
                     </div>
@@ -1763,7 +1761,6 @@ textarea{
                                             }
                     ?>
                   </div>
-                    </div>
                 </div>
               </div>
             </div>
@@ -1903,10 +1900,7 @@ textarea{
             <!-- <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div> -->
-          </form>
-        </div>
-      </div>
-    </div><!-- /.modal -->
+          <!-- /.modal -->
             <div id="resendConfirmationModal" class="modal fade" role="dialog">
               <div class="modal-dialog">
 
