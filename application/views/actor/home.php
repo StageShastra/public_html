@@ -27,6 +27,7 @@
           }
           .edit-button{
               z-index:999;
+              cursor:pointer;
           }
           .modal{
                   z-index: 99999999;
@@ -372,12 +373,7 @@
             {
                 padding: 0px 5px 0px 10px !important;
             }
-            .glyphicon-pencil{
-              z-index:9999999;
-            }
-            .glyphicon-plus{
-              z-index:9999999;
-            }
+            
             .no_padding_small{
             padding-left: 0px;
             padding-right: 0px;
@@ -428,12 +424,7 @@
             padding-left: 0px;
             padding-right: 0px;
         }
-        .glyphicon-pencil{
-              z-index:9999999;
-        }
-        .glyphicon-plus{
-              z-index:9999999;
-        }
+        
         .DocumentItem{
                 width:auto;
                 height: 75px;
