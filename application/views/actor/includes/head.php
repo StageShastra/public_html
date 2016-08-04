@@ -16,7 +16,7 @@
         <meta property="og:image" content="http://castiko.com/assets/img/actors/<?=$profile["StashActor_avatar"]?>"/>
         <meta property="og:description" content="View <?=$actor["StashUsers_name"]?>’s professional portfolio on Castiko. Castiko is a tool for casting directors and actors to work together better"/>
         <meta name="description" content="View <?=$actor["StashUsers_name"]?>’s professional portfolio on Castiko. Castiko is a tool for casting directors and actors to work together better">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <link rel="shortcut icon" href="<?= IMG ?>/favicon.ico" type="image/x-icon">
         <link rel="icon" href="<?= IMG ?>/favicon.ico" type="image/x-icon">
