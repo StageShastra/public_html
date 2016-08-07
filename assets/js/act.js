@@ -478,7 +478,7 @@ $(document).ready(function(){
 				}, 5000);
 			}
 		});
-		return false;
+		return false;d
 	});
 	
 	$(document).on("click", ".removeImage", function(){
@@ -914,6 +914,8 @@ Dropzone.options.photoUpload={
       });
       this.on("addedfile", function(file)
       {
+      
+       $("#upload-btn").removeClass("disabled");
        $("#upload-btn-cp").removeClass("disabled");
        $("#message_after_upload").removeClass("hidden");
        
