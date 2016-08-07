@@ -390,6 +390,12 @@
                 position: absolute;
                 top:10px;
             }
+            #profile_link{
+                font-size: 10px;
+                position: relative;
+                top:-10px;
+                margin-left: 15px;
+            }
             .DocumentList{
                 max-height:auto;
                 height:auto;
@@ -424,6 +430,12 @@
             padding-left: 0px;
             padding-right: 0px;
         }
+        #profile_link{
+                font-size: 10px;
+                position: relative;
+                top:-10px;
+                margin-left: 15px;
+            }
         
         .DocumentItem{
                 width:auto;
@@ -443,6 +455,12 @@
             }
             body {
                 font-size: 1.1em;
+            }
+            #profile_link{
+                font-size: 14px;
+                position: relative;
+                top:-10px;
+                margin-left: 15px;
             }
             .info-small{
                 font-size: 12px;
@@ -545,12 +563,7 @@
         .light-padded{
             padding: 15px 5px 0px 15px;
         }
-        #profile_link{
-            font-size: 9px;
-            position: relative;
-            top:-10px;
-            margin-left: 15px;
-        }
+        
         .tick{
                 border-radius: 30px;
                 font-size: 20px;
