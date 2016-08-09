@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+	
 	if(step!=5)
 	{
 		profile_Completion(step);
