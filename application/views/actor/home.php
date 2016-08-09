@@ -1917,7 +1917,7 @@ textarea{
                         validate>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Title<sup>*</sup> </label>
+                                <label class="pc_label">Title<sup>*</sup> </label>
                                 <input type="text" class="form-control" name='cp_exp_title' id="addtitle" Placeholder="Title of the play, ad, film etc." required/>
                                 
                                 <p class="help-block text-danger"></p>
@@ -1925,7 +1925,7 @@ textarea{
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Role<sup>*</sup></label>
+                                <label class="pc_label">Role<sup>*</sup></label>
                                 <input type="text" class="form-control " name='cp_exp_role' id="addrole" Placeholder="Role e.g. Dad, Mom, Character Name" required/>
                                
                                 <p class="help-block text-danger"></p>
@@ -1933,14 +1933,14 @@ textarea{
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Video Link</label>
+                                <label class="pc_label">Video Link</label>
                                  <input type="text" class="form-control" name='cp_exp_link' id="addlink" Placeholder="Video Link e.g. https://www.youtube.com/watch?v=xyzabcd"/>
                                 <p class="help-block text-danger">Leave as blank if you don't have a link</p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Description</label>
+                                <label class="pc_label">Description</label>
                                <textarea class="form-control" name='cp_exp_blurb' id="adddescription" placeholder="A little description about the role and the project." style="height:80px;"></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
