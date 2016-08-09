@@ -344,14 +344,16 @@
       width: 50%;
       float: none;
       margin: 0 auto;
-      margin-top: 50px;
+      margin-top: 10px;
       border-radius: 0;
       color:white;
       overflow:auto;
 }
 .modal-content-four
     {
-      background-color:#f44336;
+      background-image: linear-gradient(45deg, #D3263B 0%, #BE225A 41%, #A81E7B 100%);
+box-shadow: 0px 2px 4px 2px rgba(0,0,0,0.50);
+border-radius: 5px;
     }
 .help-block{
     color: rgba(255,255,255,0.7);
@@ -802,7 +804,45 @@ textarea{
 .raised{
     background-color:#5cb85c;
 }
-
+.step_name{
+    font-family: "AvenirNext-Medium","Open Sans","Roboto";
+    font-size: 20px;
+    color: #FFFFFF;
+}
+.step_count{
+    font-family: "AvertaDemo-Regular","AvenirNext-Medium","Open Sans","Roboto";
+    font-size: 24px;
+    color: #FBB515;
+}
+.step_brief{
+    font-family: "AvertaDemo-Regular","AvenirNext-Medium","Open Sans","Roboto";
+    font-size: 15px;
+    color: #FFFFFF;
+}
+.hr_pc{
+    border-bottom: 2px solid #FFFFFF;
+}
+.help_pc{
+    font-family: "AvertaDemo-Regular","AvenirNext-Medium","Open Sans","Roboto";
+    color: #FBB515;
+    font-size: 15px;
+}
+.label_pc{
+    font-family: "AvertaDemo-Regular","AvenirNext-Medium","Open Sans","Roboto";
+    font-size: 20px;
+    font-weight: 200;
+    color: #FFFFFF;
+    float: left;
+}
+.pc_button:hover, .pc_button:active{
+    background: black;
+    border: 1px solid #FFC107;
+    border-radius: 5px;
+    color:#FFC107;
+}
+.form-group {
+    margin-bottom:0px;
+}
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -1609,7 +1649,7 @@ textarea{
                 <div class="modal-dialog">
 
                   <!-- Modal content-->
-                  <div class="modal-content">
+                  <div class="modal-content col-sm-6 col-lg-5 col-md-5 center">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                       <h4 class="modal-title firstcolor info"> Feet to Centimeter Converter </h4><span class="info-small gray"></span>
@@ -1664,8 +1704,11 @@ textarea{
             <div class="modal fade bigmodal" id="modal_step_1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog bigmodal-dialog">
               <div class="modal-content bigmodal-content modal-content-four col-sm-8 col-md-6 col-lg-6 col-xs-12">
-                <div class="modal-header">
-                  <h4 class="modal-title center" id="myModalLabel"><span onclick="need_help()" class="pull-right"> <span class="glyphicon glyphicon-question-sign"></span>Having trouble?</span><br>Profile Completion : Step 1 of 4<br>Let's get started! <br> Tell us some basic things about yourself. This is usually the first thing a casting director wants to know.</h4><br>
+                <div class="modal-header hr_pc">
+                  <h4 class="modal-title center" id="myModalLabel"><span onclick="need_help()" id="step1_ticket" class="help_pc pull-right">Need Help <span class="glyphicon glyphicon-question-sign"></span></span>
+                    <br><br><span class="step_name">Getting Started</span><br>
+                    <span class="step_count">Step 1 of 4: Basic Details</span> <br> 
+                    <span class="step_brief">Easily the most important part of your profile.</span></h4><br>
                 </div>
                 <div class="modal-body">
                     <div class="col-sm-12 col-lg-6 col-xs-12 col-md-8 center">
@@ -1678,7 +1721,7 @@ textarea{
                         validate>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Sex</label>
+                                <label class="label_pc">Sex</label>
                                 <select type="text" class="form-control edit_inputs_basics " name="pc_sex" value="<?= ($actorProfile['StashActor_gender']) ? "M" : "F" ?>" id="sex" placeholder="Sex" required data-validation-required-message="Please enter your sex.">
                                         <option value="M">Male</option>
                                         <option value="F">Female</option>
@@ -1689,14 +1732,14 @@ textarea{
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Date of Birth</label>
+                                <label class="label_pc">Date of Birth</label>
                                 <input type="date" name="pc_dob" class="form-control edit_inputs_basics "  value="<?= date("Y-m-d", $actorProfile['StashActor_dob']) ?>" id="dob" required/>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Age Range </label>
+                                <label class="label_pc">Age Range </label><br><br><br>
                                 <div class="row">
                                         <div class="col-sm-6 col-xs-6" >
                                          <input type="text" name='pc_min_age' class="form-control edit_inputs_basics "  value="<?= $actorProfile['StashActor_min_role_age'] ?>" placeholder="Minimum age which you can play onscreen"  required data-validation-required-message="Please enter your min age range" id="agemin"/>
@@ -1713,25 +1756,25 @@ textarea{
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Weight</label>
+                                <label class="label_pc">Weight</label>
                                <input type="text" class="form-control edit_inputs_basics" name='pc_weight'  placeholder="Weight" value="<?= $actorProfile['StashActor_weight'] ?>" id="weight" required/> <span class="edit_basics_labels">in kgs</span>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Height</label>
+                                <label class="label_pc">Height</label>
                                 <input type="text" class="form-control edit_inputs_basics" name='pc_height'  placeholder="Height" value="<?= $actorProfile['StashActor_height'] ?>" id="pc_height" required />  <span class="edit_basics_labels">in cms &nbsp;<span data-toggle="modal" class="info-small" data-target="#feetToCmConverterModal">(Click here to open converter.)</span></p>
                             </div>
                         </div>
                         <p id="step-1-error" class="help-block text-danger"></p>
                         <div class="row">
                             <div class="form-group col-xs-12">
-                                <span class="edit_basics_labels center">Done?</span><br>
+                                
                                 <font class="sortbuttons">
-                                        <button type="submit" class="btn submit-btn firstcolor tick center"
+                                        <button type="submit" class="btn submit-btn firstcolor tick center pc_button"
                                                  style="margin-left: -15px;">
-                                            <span > Step 2: Upload Photos</span>
+                                            <span > Save and Go</span>
                                         </button>
                                 </font>
 
@@ -1747,21 +1790,23 @@ textarea{
             <div class="modal-dialog bigmodal-dialog">
               <div class="modal-content bigmodal-content modal-content-four col-sm-8 col-md-6 col-lg-6 col-xs-12">
                 <div class="modal-header">
-                  <h4 class="modal-title center" id="myModalLabel"><span onclick="need_help()" class="pull-right"> <span class="glyphicon glyphicon-question-sign"></span>Having trouble?</span><br>Profile Completion : Step 2 of 4<br>Add some photos!<br> Without a photo your profile might look bland…Photos are also crucial for casting...</h4>
-
+                  <h4 class="modal-title center" id="myModalLabel"><span onclick="need_help()" id="step2_ticket" class="help_pc pull-right">Need Help <span class="glyphicon glyphicon-question-sign"></span></span>
+                    <br><br><span class="step_name">Fill up your gallery</span><br>
+                    <span class="step_count">Step 2 of 4: Photos</span> <br> 
+                    <span class="step_brief">Without a photo your profile might look bland.Photos are also crucial for casting.</span></h4><br>
                 </div>
                 <div class="modal-body">
                     <div class="col-sm-12 col-lg-12 col-xs-12 col-md-12 center">
                     <div class="form-group" >
-                           <form action="<?= base_url() ?>upload/" class="dropzone" id="photo-upload" style="border: 1px dashed #b2b2b2;border-radius: 5px;background: white;margin-top:120px;">
+                           <form action="<?= base_url() ?>upload/" class="dropzone" id="photo-upload" style="border: 1px dashed #b2b2b2;border-radius: 5px;background: white;">
                                <div class="info-small hidden" id="message_after_upload"><span class="info gray"><b> Click here to add more images</b>.<span class="info-small gray"><li>Ideally, keep the image size less than 1.5MB</li></span></span></div></form>
                     </div>
-                    <button type="submit" class="btn submit-btn firstcolor disabled" id="upload-btn-cp" data-click-src="cpmodal"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Upload</button>
+                    <button type="submit" class="btn submit-btn firstcolor pc_button disabled" id="upload-btn-cp" data-click-src="cpmodal"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Upload</button>
                     <div class="row">
                             <div class="form-group col-xs-12">
                                 <span class="edit_basics_labels center">Done?</span><br>
                                 <font class="sortbuttons">
-                                        <button type="submit" class="btn submit-btn firstcolor disabled"  onclick="location.reload()" id="pc_done-btn"><span class="glyphicon glyphicon-log-in"></span> &nbsp;Step 3: Choose Profile Image
+                                        <button type="submit" class="btn submit-btn firstcolor pc_button disabled"  onclick="location.reload()" id="pc_done-btn"><span class="glyphicon glyphicon-log-in"></span> &nbsp;Step 3: Choose Profile Image
                                         </button>
                                 </font>
                             </div>
@@ -1770,7 +1815,7 @@ textarea{
                     <?php
                                             if($number_of_images>=2)
                                             {
-                                                echo '<button type="button" class="btn submit-btn  " id="add_exp_btn_load" onclick="set_profile_stage(3); location.reload();" >Skip</button></font>';
+                                                echo '<button type="button" class="btn submit-btn pc_button  " id="add_exp_btn_load" onclick="set_profile_stage(3); location.reload();" >Skip</button></font>';
                                             }
                     ?>
                   </div>
@@ -1782,8 +1827,10 @@ textarea{
             <div class="modal-dialog bigmodal-dialog">
               <div class="modal-content bigmodal-content modal-content-four col-sm-8 col-md-6 col-lg-6 col-xs-12">
                 <div class="modal-header">
-                  <h4 class="modal-title center" id="myModalLabel"><span onclick="need_help()" class="pull-right"> <span class="glyphicon glyphicon-question-sign"></span>Having trouble?</span><br>Profile Completion : Step 3 of 4<br>We all know what a good display picture can do. Don't we? So go ahead and set one!</h4>
-
+                  <h4 class="modal-title center" id="myModalLabel"><span onclick="need_help()" id="step3_ticket" class="help_pc pull-right">Need Help <span class="glyphicon glyphicon-question-sign"></span></span>
+                    <br><br><span class="step_name">Set Profile picture</span><br>
+                    <span class="step_count">Step 3 of 4: Display Picture</span> <br> 
+                    <span class="step_brief">We all know what a good display picture can do. Don't we? So go ahead and set one!</span></h4><br>
                 </div>
                 <div class="modal-body">
                                         <div class="photoCropping hidden" id='pc_photoCropping'> 
@@ -1803,7 +1850,7 @@ textarea{
                                                 <input type="hidden" name="imageScaleY" value="">
                                                 <div class="row avatar-btns">
                                                 <div class="col-md-3 center">
-                                                    <button type="submit" class="btn btn-primary btn-block avatar-save submit-btn" style="margin-bottom:0px;">Crop and Save</button>
+                                                    <button type="submit" class="btn btn-primary btn-block avatar-save submit-btn pc_button" style="margin-bottom:0px;">Crop and Save</button>
                                                 </div>
                                                 
                                                 </div>
@@ -1858,8 +1905,11 @@ textarea{
             <div class="modal-dialog bigmodal-dialog">
               <div class="modal-content bigmodal-content modal-content-four col-sm-8 col-md-6 col-lg-6 col-xs-12">
                 <div class="modal-header">
-                  <h4 class="modal-title center" id="myModalLabel"><span onclick="need_help()" class="pull-right"> <span class="glyphicon glyphicon-question-sign"></span>Having trouble?</span><br>Profile Completion : Step 4 of 4<br>How about adding one of your experiences to show how good you can act?</h4>
-
+                  <h4 class="modal-title center" id="myModalLabel">
+                    <span onclick="need_help()" id="step4_ticket" class="help_pc pull-right">Need Help <span class="glyphicon glyphicon-question-sign"></span></span>
+                    <br><br><span class="step_name">Experience</span><br>
+                    <span class="step_count">Step 4 of 4: Add an experience</span> <br> 
+                    <span class="step_brief">How about adding one of your experiences to show how good you can act? <br>Bonus points for adding youtube videos in the link field.</span></h4>
                 </div>
                 <div class="modal-body">
                     <div class="col-sm-12 col-lg-6 col-xs-12 col-md-8 center">
@@ -1900,8 +1950,8 @@ textarea{
                         <div class="row">
                             <div class="form-group col-xs-12">
                                 <font class="sortbuttons">
-                                    <button type="button" class="btn submit-btn firstcolor center cp_addExperience toggleEdit tick" id="add_exp_btn" data-hide-id="#add_exp_btn" data-unhide-id="#add_exp_btn_load" >Finish</button>
-                                    <button type="button" class="btn submit-btn tick " id="add_exp_btn_load" onclick="set_profile_stage(5); location.reload();" >Skip</button></font>
+                                    <button type="button" class="btn submit-btn firstcolor center cp_addExperience toggleEdit tick pc_button" id="add_exp_btn" data-hide-id="#add_exp_btn" data-unhide-id="#add_exp_btn_load" >Finish</button>
+                                    <button type="button" class="btn submit-btn tick pc_button" id="add_exp_btn_load" onclick="set_profile_stage(5); location.reload();" >Skip</button></font>
                             </div>
                         </div>
                     </form>
