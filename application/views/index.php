@@ -208,9 +208,9 @@
                         <span class="info-item-desc">Track responses, attendance and shortlists with ease.</span>
                     </div>
                     <div>
-                        <span  onmouseover='show_time_taken("cd")' onmouseout='hide_time_taken("cd")'><a href="<?=base_url() ?>home/choose_plan#forDirectors" class="btn btn-custom-outlined" >Get Demo</a></span>
+                        <span  onmouseover='show_time_taken("cd")' onmouseout='hide_time_taken("cd")'><a href="<?=base_url() ?>home/demo" class="btn btn-custom-outlined" >Get Demo</a></span>
                         <a href="<?=base_url() ?>home/pricing#forDirectors" class="btn btn-custom-outlined" target="_blank">See Pricing</a>
-                        <div id="time_taken_cd" class="time_taken hidden">Just takes 2 mins</div>
+                        <div id="time_taken_cd" class="time_taken hidden"></div>
                     </div>
                 </div>
             </div>
