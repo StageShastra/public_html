@@ -163,9 +163,9 @@ a:hover, a:focus {
                 </div>
                 <div class="col-lg-6 col-sm-6 col-xs-12" id="form-div">
 
-                  <font class="info-small text-primary signup_heading">Demo Request</font>
+                  <font class="info-small text-primary signup_heading">Request a Demo</font>
                   
-                      <form  id="demoForm" >
+                      <form  id="demoForm" validate>
                       <div class="form-group">
                         <input type="text" class="form-control login" id="name_requester" name="name" placeholder= "Full Name *" required>
                       </div>
@@ -181,7 +181,7 @@ a:hover, a:focus {
                               <input type="radio" name="type" value="actor"> Actor
                       </div> -->
                       <button type="button" id="submit_demo_request" class="btn btn-custom-outlined submit-btn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Request Demo</button>
-                      <center><a href="<?= base_url() ?>" class="already"><small><?= M_AlreadyRegistered ?></small></a></center>
+                      
                     </form>
                 
 					
@@ -198,7 +198,7 @@ a:hover, a:focus {
                   <div class="col-sm-6 col-lg-6 col-xs-12 col-md-6">
 
                     <!-- <img src="<?= IMG ?>/thanks.png"  style="float:left; height:50%;"/> -->
-					<h1 style="margin-top:15%;color:#ffb600;" class=""> Thank You!</b></h1><br>
+					<h3 style="margin-top:15px;color:#ffb600;" class=""> Thank You! We will get back to you shortly.</h3>
 					
 					
 
