@@ -209,6 +209,39 @@ $(document).on("submit", "form#contactForm", function(){
 
         return false;
 });
+$(document).on("click", "#submit_demo_request", function(){
+    console.log("Sada");
+    var data={};
+    var name = $("#name_requester").val();
+    var email = $("#contact_requester").val();
+    var phone = $("#contact_requester").val();
+    var message = "I need a demo. I am free on "+$("#date_requester").val();
+    data.request = "save_contact_message";
+
+    data.data = JSON.stringify({name:name,email:email,phone:phone,message:message});console.log(name);
+    $.ajax({
+            url: url,
+            type:type,
+            data: data,
+            success: function(response){
+                if(response.status){
+                    $("#demoForm").addClass("animated rubberband");
+                    $("#name_requester").val("");
+                    $("#contact_requester").val("");
+                    $("#date_requester").val("");
+                    $("#success").removeClass("hidden");
+                    setTimeout(function(){
+                        $("#success").addClass("animated fadeOut");
+                    }, 5000);
+                }else{
+                    console.log(response);
+                }
+                
+            }
+        });
+
+        return false;
+});
   
 
  
