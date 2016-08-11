@@ -173,7 +173,7 @@ a:hover, a:focus {
                         <input type="text" class="form-control login" id="contact_requester" name="email" placeholder= "Phone/Email *" required >
                       </div>
                       <div class="form-group">
-                        <input type="text" class="form-control login" id="date_requested" name="date" placeholder= "What date are you free?*" required >
+                        <input type="text" class="form-control login" id="date_requested" name="message" placeholder= "What date are you free?*" required >
                       </div>
                      
                       <!-- <div class='form-group'>
@@ -198,7 +198,7 @@ a:hover, a:focus {
                   <div class="col-sm-6 col-lg-6 col-xs-12 col-md-6">
 
                     <!-- <img src="<?= IMG ?>/thanks.png"  style="float:left; height:50%;"/> -->
-					<h1 style="margin-top:15%;color:white;" class=""> Thank You!</b></h1><br>
+					<h1 style="margin-top:15%;color:#ffb600;" class=""> Thank You!</b></h1><br>
 					
 					
 

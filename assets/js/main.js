@@ -215,7 +215,7 @@ $(document).on("click", "#submit_demo_request", function(){
     var name = $("#name_requester").val();
     var email = $("#contact_requester").val();
     var phone = $("#contact_requester").val();
-    var message = "I need a demo. I am free on "+$("#date_requester").val();
+    var message = "I need a demo. I am free on "+$("#date_requested").val();
     data.request = "save_contact_message";
 
     data.data = JSON.stringify({name:name,email:email,phone:phone,message:message});console.log(name);
