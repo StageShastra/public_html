@@ -252,6 +252,10 @@ class Home extends CI_Controller {
 	public function pricing($link = ''){
 		$this->load->view("pricing");
 	}
+	public function demo($link = ''){
+		$this->load->view("demo");
+		$this->load->model("Auth");
+	}
 	public function choose_plan($link = ''){
 		$this->load->view("choose_plan");
 	}
