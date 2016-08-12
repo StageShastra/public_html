@@ -168,7 +168,7 @@
                         <span class="info-item-desc " >Casting Directors are updated instantly when you add new work.</span>
                     </div>
                     <div>
-                        <a href="<?=base_url() ?>home/choose_plan#forActors" class="btn btn-custom-outlined"  onmouseover='show_time_taken("a")' onmouseout='hide_time_taken("a")' target="_blank">Sign up now</a>
+                        <a href="<?=base_url() ?>home/register/actor?plan=basic" class="btn btn-custom-outlined"  onmouseover='show_time_taken("a")' onmouseout='hide_time_taken("a")' target="_blank">Sign up now</a>
                         <a href="<?=base_url() ?>home/pricing#forActors" class="btn btn-custom-outlined" target="_blank">See Pricing</a>
                     </div>
                     <div id="time_taken_a" class="time_taken hidden">Just takes 2 mins</div>
