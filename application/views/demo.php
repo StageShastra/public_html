@@ -180,7 +180,7 @@ a:hover, a:focus {
                         I am <input type="radio" name="type" value="director" checked> Director
                               <input type="radio" name="type" value="actor"> Actor
                       </div> -->
-                      <button type="button" id="submit_demo_request" class="btn btn-custom-outlined submit-btn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Request Demo</button>
+                      <button type="click" id="submit_demo_request" class="btn btn-custom-outlined submit-btn"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Request Demo</button>
                       
                     </form>
                 

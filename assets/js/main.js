@@ -209,7 +209,7 @@ $(document).on("submit", "form#contactForm", function(){
 
         return false;
 });
-$(document).on("click", "#submit_demo_request", function(){
+$(document).on("submit", "form#demoForm", function(){
     console.log("Sada");
     var data={};
     var name = $("#name_requester").val();
