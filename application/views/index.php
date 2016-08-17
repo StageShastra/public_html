@@ -43,6 +43,7 @@
 
 <body id="page-top" class="index">
 <style>
+
 @media screen and (max-width: 767px) {
     body{
         overflow-x:hidden; 
@@ -130,7 +131,9 @@
                         <h3 class="name">Making casting easier.</h3>
                         <h1 class="skills">Castiko makes it easier for actors and casting directors <br>  to work together.</h1>
                         <div><a href="#forActor" class="btn btn-custom">I'm an Actor</a>
-                        <a href="#forDirector" class="btn btn-custom">I'm a Casting Director</a></div>
+                        <a href="#forDirector" class="btn btn-custom">I'm a Casting Director</a>
+                        <a data-target="#loginModal" data-toggle="modal" class="btn btn-custom hidden-lg hidden-md">Login</a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4 col-xs-12" style="text-align:center;">
