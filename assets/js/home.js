@@ -748,6 +748,7 @@ $(document).ready(function(){
 		}
 
 		data = {request: "AdvanceSearch", data: JSON.stringify(searchData)};
+		showSpinner();
 		$.ajax({
 			url: url,
 			type: type,
