@@ -161,9 +161,11 @@ a:hover, a:focus {
             <div class="row center signup_box">
               <div class="col-sm-12 light-padded">
                 <div class="col-lg-6 col-sm-6 col-xs-12" id="form-div">
+                <?php echo validation_errors("<p class='text-danger'>"); ?>
+		<?php echo ($error) ? "" : "<p class='text-danger'><b>{$error_msg}</b></p>" ?>
                 <?php if(!$error){ ?>
                   <font class="info-small text-primary signup_heading"> Actor Sign Up   <? if(isset($_REQUEST['plan'])) {echo ucwords("- ".$_REQUEST['plan']);} ?></font>
-                  
+                  	
                       <form role="form" action="<?= $_SERVER['REQUEST_URI'] ?>" method="POST">
                       <div class="form-group">
                         <input type="text" class="form-control login" id="fullname" name="name" placeholder= "Full Name *" required>
@@ -175,10 +177,10 @@ a:hover, a:focus {
                         <input type="text" class="form-control login" id="contact" name="mobile" placeholder= "Mobile No. *" required >
                       </div>
                       <div class="form-group">
-                        <input type="password" class="form-control login" id="password" name="password" placeholder= "Set a new Password *" required >
+                        <input type="password" class="form-control login" id="password" name="password" placeholder= "Set a new Password *" autocomplete="off" required >
                       </div>
 					            <div class="form-group">
-                        <input type="password" class="form-control login" id="password" name="cfn_password" placeholder= "Re Type Password *" required >
+                        <input type="password" class="form-control login" id="password" name="cfn_password" placeholder= "Re Type Password *" autocomplete="off" required >
                       </div>
                       <input type='hidden' name='director' value="<?= $director ?>">
                       <input type='hidden' name='project' value="<?= $project ?>">
@@ -192,9 +194,7 @@ a:hover, a:focus {
                     </form>
                 <?php } ?>
 					
-					<?php echo validation_errors("<p class='text-danger'>"); ?>
-
-					<?php echo ($error) ? "" : "<p class='text-danger'><b>{$error_msg}</b></p>" ?>
+					
                 
 					<script> var registerSuccess = <?= ($error) ? 1 : 0; ?>; </script>
 				</div>
