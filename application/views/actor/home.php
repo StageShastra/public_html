@@ -1733,7 +1733,7 @@ textarea{
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label class="label_pc">Date of Birth</label>
-                                <input type="date" name="pc_dob" class="form-control edit_inputs_basics "  value="<?= date("Y-m-d", $actorProfile['StashActor_dob']) ?>" id="dob" required/>
+                                <input type="date" name="pc_dob" class="form-control edit_inputs_basics "  id="dob" required/>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -1742,11 +1742,11 @@ textarea{
                                 <label class="label_pc">Age Range </label><br><br><br>
                                 <div class="row">
                                         <div class="col-sm-6 col-xs-6" >
-                                         <input type="text" name='pc_min_age' class="form-control edit_inputs_basics "  value="<?= $actorProfile['StashActor_min_role_age'] ?>" placeholder="Minimum age which you can play onscreen"  required data-validation-required-message="Please enter your min age range" id="agemin"/>
+                                         <input type="text" name='pc_min_age' class="form-control edit_inputs_basics "   placeholder="Minimum age which you can play onscreen"  required data-validation-required-message="Please enter your min age range" id="agemin"/>
                                         </div>
                                         
                                         <div class="col-sm-6 col-xs-6" >
-                                         <input type="text" name='pc_max_age' class="form-control edit_inputs_basics " value="<?= $actorProfile['StashActor_max_role_age'] ?>" placeholder="Maximum age which you can play onscreen"  required data-validation-required-message="Please enter your max age range. The maximum age which you can play onscreen" id="agemax"/>
+                                         <input type="text" name='pc_max_age' class="form-control edit_inputs_basics "  placeholder="Maximum age which you can play onscreen"  required data-validation-required-message="Please enter your max age range. The maximum age which you can play onscreen" id="agemax"/>
                                         </div>
                                         <span class="edit_basics_labels">age in years you can play naturally onscreen</span> 
                                     </div>
@@ -1757,14 +1757,14 @@ textarea{
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label class="label_pc">Weight</label>
-                               <input type="text" class="form-control edit_inputs_basics" name='pc_weight'  placeholder="Weight" value="<?= $actorProfile['StashActor_weight'] ?>" id="weight" required/> <span class="edit_basics_labels">in kgs</span>
+                               <input type="text" class="form-control edit_inputs_basics" name='pc_weight'  placeholder="Weight"  id="weight" required/> <span class="edit_basics_labels">in kgs</span>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label class="label_pc">Height</label>
-                                <input type="text" class="form-control edit_inputs_basics" name='pc_height'  placeholder="Height" value="<?= $actorProfile['StashActor_height'] ?>" id="pc_height" required />  <span class="edit_basics_labels">in cms &nbsp;<span data-toggle="modal" class="info-small" data-target="#feetToCmConverterModal">(Click here to open converter.)</span></p>
+                                <input type="text" class="form-control edit_inputs_basics" name='pc_height'  placeholder="Height"  id="pc_height" required />  <span class="edit_basics_labels">in cms &nbsp;<span data-toggle="modal" class="info-small" data-target="#feetToCmConverterModal">(Click here to open converter.)</span></p>
                             </div>
                         </div>
                         <p id="step-1-error" class="help-block text-danger"></p>
