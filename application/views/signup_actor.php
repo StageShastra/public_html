@@ -177,10 +177,10 @@ a:hover, a:focus {
                         <input type="text" class="form-control login" id="contact" name="mobile" placeholder= "Mobile No. *" required >
                       </div>
                       <div class="form-group">
-                        <input type="password" class="form-control login" id="password" name="password" placeholder= "Set a new Password *" autocomplete="off" required >
+                        <input type="password" class="form-control login" id="password" name="password" placeholder= "Set a new Password *" autocomplete="new-password" required >
                       </div>
 					            <div class="form-group">
-                        <input type="password" class="form-control login" id="password" name="cfn_password" placeholder= "Re Type Password *" autocomplete="off" required >
+                        <input type="password" class="form-control login" id="password" name="cfn_password" placeholder= "Re Type Password *" autocomplete="new-password" required >
                       </div>
                       <input type='hidden' name='director' value="<?= $director ?>">
                       <input type='hidden' name='project' value="<?= $project ?>">
