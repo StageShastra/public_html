@@ -126,7 +126,9 @@ a:hover, a:focus {
 .footer-items a:hover {
     color: rgba(255,255,255,1);
 }
-
+.text-danger{
+	color:#ffb600 !important;
+}
 </style>
     <body>
         <!--[if lt IE 8]>
