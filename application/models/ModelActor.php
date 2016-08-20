@@ -273,6 +273,7 @@
 						'StashActorTraining_verify' => 0,
 						'StashActorTraining_status' => 1
 					);
+					
 			return $this->db->insert("stash-actor-training", $data);
 		}
 
@@ -286,6 +287,7 @@
 						'StashActorTraining_start_time' => $data['tr_start_'. $key],
 						'StashActorTraining_end_time' => $data['tr_end_'. $key]
 					);
+			$this->db->where("StashActorTraining_id", $ref);
 			return $this->db->update("stash-actor-training", $data);
 		}
 
