@@ -132,7 +132,7 @@
                         <h1 class="skills">Castiko makes it easier for actors and casting directors <br>  to work together.</h1>
                         <div><a href="#forActor" class="btn btn-custom">I'm an Actor</a>
                         <a href="#forDirector" class="btn btn-custom">I'm a Casting Director</a>
-                        <a data-target="#loginModal" data-toggle="modal" class="btn btn-custom hidden-lg hidden-md">Login</a>
+                        <a data-target="#loginModal" data-toggle="modal" class="btn btn-custom">Login</a>
                         </div>
                     </div>
                 </div>
