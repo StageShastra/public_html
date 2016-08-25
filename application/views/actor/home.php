@@ -1057,7 +1057,7 @@ textarea{
                             <i>&emsp;</i>
                     <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#actor_username_edit" data-hide-id="#actor_username" aria-hidden="true" style="cursor:pointer;"></span>
                         
-
+<br>
                         <span class="actor_link" id="actor_username">
                             <span id="profile_link" ><a href="<?= base_url() . $user['StashUsers_username'] ?>" id="actor_username_txt" target="_blank"><?= "castiko.com/" . $user['StashUsers_username'] ?></a><i class="glyphicon  glyphicon-info-sign" style="color:#ffb600; font-size:15px;" data-toggle="tooltip" data-placement="right" title="You can also add your Castiko link to your other Social Media profiles."></i></span>
                             
