@@ -20,7 +20,7 @@
 				shareIn: "popup",
 				text: "<?= $actorProfile['StashActor_name'] ?> | Actor | Castiko",
 				url: "<?= base_url() . $user["StashUsers_username"] ?>",
-				shares: ["twitter", "facebook", "googleplus", "linkedin"]
+				shares: ["facebook", "twitter", "whatsapp", "email"]
 			});
 		</script>
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
