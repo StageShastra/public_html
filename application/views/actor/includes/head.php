@@ -34,7 +34,7 @@
         
 		<!-- jsSocial CSS -->
 		<link type="text/css" rel="stylesheet" href="<?= CSS ?>/jsSocial.min.css" />
-		<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials-theme-plain.css" />
+		<link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials-theme-flat.css" />
 		
 		
         <script src="<?= JS ?>/dropzone.js"></script>
