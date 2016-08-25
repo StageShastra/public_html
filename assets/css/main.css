@@ -962,6 +962,24 @@ button:hover
 footer {
     color: #fff;
 }
+@media screen and (max-width: 767px) {
+.removeImage {
+    display: block;
+    cursor: pointer;
+}
+}
+ @media screen and (min-width: 768px) {
+ .removeImage {
+    display: block;
+    cursor: pointer;
+}
+}
+ @media screen and (max-width: 992px) {
+ .removeImage {
+    display: block;
+    cursor: pointer;
+}
+}
 
 footer h3 {
     margin-bottom: 30px;
@@ -982,4 +1000,4 @@ footer .footer-below {
 }
 a:focus {
     outline: none;
-    text-decoration: none;  
+    text-decoration: none;
