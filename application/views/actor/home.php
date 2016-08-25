@@ -858,10 +858,10 @@ textarea{
 .fa-twitter{
     color:#fff;
 }
-.fa-google{
+.fa-whatsapp{
     color:#fff;
 }
-.fa-linkedin{
+.fa-at{
     color:#fff;
 }
 
