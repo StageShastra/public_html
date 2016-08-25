@@ -1063,6 +1063,7 @@ textarea{
                                             <span > Share</span>
                                         </button>
                                 </font>
+                                <br>
                         <span class="actor_link" id="actor_username">
                             <span id="profile_link" ><a href="<?= base_url() . $user['StashUsers_username'] ?>" id="actor_username_txt" target="_blank"><?= base_url() . $user['StashUsers_username'] ?></a><i class="glyphicon  glyphicon-info-sign" style="color:#ffb600; font-size:15px;" data-toggle="tooltip" data-placement="right" title="You can also add your Castiko link to your other Social Media profiles."></i></span>
                             
