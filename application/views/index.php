@@ -254,9 +254,6 @@
               <center>
                 <h3>FAQs</h3>
               </center>
-
-
-<head>
 <style>
 
 button.accordion {
@@ -349,8 +346,6 @@ div.panel2.show {
 }
 
 </style>
-</head>
-
 <div class="row"> 
 <div class="col-lg-8 col-centered">
 	
@@ -457,20 +452,7 @@ for (j = 0; j < acc2.length; j++) {
 
 
 </script>
-
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
+</section>
 
     <!-- Contact Section -->
      <a class="anchor" id="contact"></a>
