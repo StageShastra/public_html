@@ -954,10 +954,9 @@ button:hover
 
 
 #socialShare{
-	
 	padding: 3px;
 	font-size: 8px;
-	display: none;
+	/* display: none; */
 }
 footer {
     color: #fff;
@@ -1001,3 +1000,93 @@ footer .footer-below {
 a:focus {
     outline: none;
     text-decoration: none;
+}
+button.accordion {
+    cursor: pointer;
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 20px;
+    text-transform: uppercase;
+    background-color: white;
+    border: 2px solid #f3525b;
+    outline:none;
+    text-align: left;
+    margin: 0px 5px;
+}
+
+button.accordion.active, button.accordion:hover {  
+    border: 2px solid #f3525b;
+    background-color: #f3525b;
+    color: white;
+
+}
+
+button.accordion.active{
+    border-radius: 10px 10px 0px 0px;
+}
+
+
+
+button.accordion2 {
+    cursor: pointer;
+    padding: 12px;
+    width: 100%;
+    border-style:solid;
+    border-width:0px 0px 2px 0px;
+    border-color: #fcb33e;
+    font-size: 16px;
+    background-color: white;
+    outline:none;
+    text-align: left;
+}
+
+
+button.accordion2.active, button.accordion2:hover {
+    background-color: #fcb33e;
+}
+
+button.accordion2.active{
+border-radius: 0px 0px 0px 0px;
+}
+
+
+div.panel {
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    width: 100%;
+}
+
+div.panel.show {
+    opacity: 1;
+    max-height: 1400px;
+    border:none;
+    outline:none;
+    margin: 0px 5px 0px 5px;
+}
+
+div.panel2 {
+    padding: 10px 20px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    
+    opacity: 0;
+    width: 100%; 
+}
+
+div.panel2.show {
+    opacity: 1;
+    max-height: 500px;
+    border-radius: 0px 0px 0px 0px;
+    border:2px solid #fcb33e;
+    outline: none;
+
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
