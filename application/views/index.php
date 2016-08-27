@@ -5,7 +5,7 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content='width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="description" content="Castiko is a platform to connect Actors and Casting Directors. Actors – create your own acting profiles with photos & videos. Get auditions. Casting directors – manage all your data, run auditions and find new actors">
     <meta name="keywords" content="Acting, Audition, Actor, Casting, Film, Castiko's Official Website, Casting Directors in Mumbai, Search Actors">
     <meta name="filename" content="Castiko-Acting-Audition-Casting-Tool-Home">
