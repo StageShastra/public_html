@@ -270,7 +270,7 @@ button.accordion {
     border: 2px solid #f3525b;
     outline:none;
     text-align: left;
-    margin: 0px 5px;
+    
 }
 
 button.accordion.active, button.accordion:hover {  
