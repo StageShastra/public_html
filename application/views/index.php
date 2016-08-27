@@ -270,7 +270,7 @@ button.accordion {
     border: 2px solid #f3525b;
     outline:none;
     text-align: left;
-    transition: 0.5s;
+    margin: 0px 5px;
 }
 
 button.accordion.active, button.accordion:hover {  
@@ -290,7 +290,6 @@ button.accordion2 {
     cursor: pointer;
     padding: 12px;
     width: 100%;
-    transition: 0.5s;
     border-style:solid;
     border-width:0px 0px 2px 0px;
     border-color: #fcb33e;
@@ -311,20 +310,19 @@ border-radius: 0px 0px 0px 0px;
 
 
 div.panel {
-    padding: 0 5px;
     background-color: white;
     max-height: 0;
     overflow: hidden;
-    transition: 0.5s;
     opacity: 0;
     width: 100%;
 }
 
 div.panel.show {
     opacity: 1;
-    max-height: 1000px;
+    max-height: 1400px;
     border:none;
     outline:none;
+    margin: 0px 5px 0px 5px;
 }
 
 div.panel2 {
@@ -332,7 +330,7 @@ div.panel2 {
     background-color: white;
     max-height: 0;
     overflow: hidden;
-    transition: 0.5s;
+    
     opacity: 0;
     width: 100%; 
 }
