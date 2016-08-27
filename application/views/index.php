@@ -322,7 +322,6 @@ div.panel.show {
     max-height: 1400px;
     border:none;
     outline:none;
-    margin: 0px 5px 0px 5px;
 }
 
 div.panel2 {
