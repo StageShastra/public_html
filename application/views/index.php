@@ -128,7 +128,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="intro-text">
-                        <h3 class="name">Making casting easier.</h3>
+                        <h3 class="name">Making casting easier YAAARRRRRR.</h3>
                         <h1 class="skills">Castiko makes it easier for actors and casting directors <br>  to work together.</h1>
                         <div><a href="#forActor" class="btn btn-custom">I'm an Actor</a>
                         <a href="#forDirector" class="btn btn-custom">I'm a Casting Director</a>
