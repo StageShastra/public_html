@@ -355,7 +355,7 @@ div.panel2.show {
 <div class="row"> 
 <div class="col-lg-8 col-centered">
 	
-	<button class="accordion">Actors</button>
+	<button class="accordion col-sm-12">Actors</button>
 		<div class="panel">
 			<button class="accordion2">I'm an actor. How will Castiko help me?</button>
 				<div class="panel2">
@@ -394,7 +394,7 @@ div.panel2.show {
 				</div>
 
 		</div>
-	<button class="accordion">Casting Directors</button>
+	<button class="accordion col-sm-12">Casting Directors</button>
 		<div class="panel">
 			<button class="accordion2">I'm a casting director. How will Castiko help me?</button>
 				<div class="panel2">
@@ -417,7 +417,7 @@ div.panel2.show {
 				<div class="panel2">
 				We are building Castiko step-by-step in deep consultation with experienced and new casting directors. We can't promise you new features immediately, but if it will help your workflow better, we are open to discussing it with you. Your convenience is our top priority.				</div>
 		</div>
-		<button class="accordion">Other Questions</button>
+		<button class="accordion col-sm-12">Other Questions</button>
 		<div class="panel">
 			<button class="accordion2">I'm not a casting director, but I'm still looking for talent. Is  Castiko still useful to me?</button>
 				<div class="panel2">
