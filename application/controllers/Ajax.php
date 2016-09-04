@@ -65,10 +65,42 @@
 					case "ContactData":
 						$this->contactData($data);
 						break;
+					case "createNewPorject":
+						$this->createNewPorject($data);
+						break;
+					case "createNewRole":
+						$this->createNewRole($data);
+						break;
+					case "getRolesInProject":
+						$this->getRolesInProject($data);
+						break;
+					case "getQuestionsByRoleId":
+						$this->getQuestionsByRoleId($data);
+						break;
+					case "getActorDetailsByContact":
+						$this->getActorDetailsByContact($data);
+						break;
+					case "insertNewQuestion":
+						$this->insertNewQuestion($data);
+						break;
+					case "updateActorPastExperience":
+						$this->updateActorPastExperience($data);
+						break;
+					case "linkActorQuestionAnswer":
+						$this->linkActorQuestionAnswer($data);
+						break;
+					case "linkRoleActor":
+						$this->linkRoleActor($data);
+						break;
+					case "insertActorProject":
+						$this->insertActorProject($data);
+						break;
+					case "getActorsInAProject":
+						$this->getActorsInAProject($data);
+						break;
 					case "BulkProjectTag":
 						$this->bulkProjectTag($data);
 						break;
-
 					case "ChangePasswordIn":
 						$this->changePasswordIn($data);
 						break;
@@ -384,7 +416,26 @@
 			
 			$this->response(true, "Invitation SMS Sent", $r);
 		}
-
+		public function getActorDetailsByContact($d=[]){
+			$select = "*";
+			$val=$d["contact"];
+			$this->db->select( $select );
+			$this->db->from("stash-actor");
+			$this->db->where("StashActor_email", $val);
+			$this->db->or_where('StashActor_mobile',$val); 
+			$response=$this->db->get()->first_row('array');
+			$result=json_encode($response);
+			if($response!="")
+			{
+				$this->response(true, "Actor details fetched",$result);	
+			}
+			else
+			{
+				$this->response(false, "Actor does not exist");	
+			}
+			
+			
+		}
 		public function filterMobile($mobiles = ''){
 			$mobiles = explode(",", $mobiles);
 			$numbers = []; $invalid = [];
@@ -785,8 +836,127 @@
 				$this->response(false, Aj_FrgtPass_Invalid);
 			}
 		}
+		public function createNewPorject($d=[]){
+			$data = array(
+						"StashProject_id" => null,
+						"StashProject_director_id_ref" => $this->session->userdata("StaSh_User_id"),
+						"StashProject_name" => $d["project_name"],
+						"StashProject_date" => strtotime($d["project_date"]),
+						"StashProject_tag" => $d["project_name"]. '_' . $d["project_date"],
+						"StashProject_time" => time(),
+						"StashProject_status" => 1,
+						"StashProject_client" => $d["project_client"],
+						"StashProject_shoot_begins" => strtotime($d["project_shoot_begins"]),
+						"StashProject_shoot_ends" => strtotime($d["project_shoot_ends"])
 
-		
+					);
+			$this->db->insert("stash-project", $data);
+			echo $this->db->insert_id();
+			return $this->db->insert_id();
+		}
+		public function createNewRole($d=[]){
+			$data = array(
+						"StashRoles_id" => null,
+						"StashRoles_role" => $d["role_name"],
+						"StashRoles_scenes" => $d["role_scenes"],
+						"StashRoles_description" => $d["role_description"],
+						"StashRoles_project_id_ref" => $d["role_project"],
+						"StashRoles_status" => 1
+					);
+			$this->db->insert("stash-roles", $data);
+			echo $this->db->insert_id();
+			return $this->db->insert_id();
+		}
+		public function insertNewQuestion($d=[]){
+			$data = array(
+						"StashQuestions_id" => null,
+						"StashQuestions_question" => $d["question"],
+						"StashQuestions_type" => $d["question_type"],
+						"StashQuestions_project_id_ref" => $d["project_id"],
+						"StashQuestions_role_id_ref" => $d["question_addto"],
+						"StashQuestions_status" => 1
+					);
+			$this->db->insert("stash-questions", $data);
+			echo $this->db->insert_id();
+			return $this->db->insert_id();
+		}
+		public function getRolesInProject($data=[]){
+			$ref=$data["project_id"];
+			$this->db->select("*");
+			$this->db->from("stash-roles"); 
+			$this->db->where("StashRoles_project_id_ref", $ref);
+			$this->db->where("StashRoles_status", 1);
+			$query = $this->db->get();
+			$result = [];
+			$roles = $query->result('array');
+			$this->response(true, "Roles fetched",json_encode($roles));
+			
+		}
+		public function getQuestionsByRoleId($data=[]){
+			$ref=$data["role_id"];
+			$this->db->select("*");
+			$this->db->from("stash-questions"); 
+			$this->db->where("StashQuestions_role_id_ref", $ref);
+			$this->db->where("StashQuestions_status", 1);
+			$query = $this->db->get();
+			$result = [];
+			$roles = $query->result('array');
+			$this->response(true, "Questions fetched",json_encode($roles));
+			
+		}
+		public function updateActorPastExperience($data = []){
+			$ref = $data['actor_id'];
+			$data = array(
+						'StashActor_six_months_experience' => $data['actor_recent_exp'],
+						'StashActor_three_years_experience' => $data['actor_past_exp']
+					);
+			$this->db->where("StashActor_actor_id_ref", $ref);
+			$this->response(true, "Experience updated",$this->db->update("stash-actor", $data));
+		}
+		public function linkActorQuestionAnswer($d=[]){
+			$data = array(
+						"StashAnswers_id" => null,
+						"StashAnswers_answer" => $d["question_answer"],
+						"StashAnswers_questions_id_ref" => $d["question_id"],
+						"StashAnswers_actor_id_ref" => $d["actor_id"]
+					);
+			
+			$this->response(true, "Question and answers linked",$this->db->insert("stash-answers", $data));
+		}
+		public function linkRoleActor($d=[]){
+			$data = array(
+						"StashRoleActorLink_id" => null,
+						"StashRoleActorLink_role_id_ref" => $d["role_id"],
+						"StashRoleActorLink_actor_id_ref" => $d["actor_id"],
+						"StashRoleActorLink_shortlist_status" => 0,
+						"StashRoleActorLink_status"=> 1
+
+					);
+			
+			$this->response(true, "Role and actors linked",$this->db->insert("stash-role-actor-link", $data));
+		}
+		public function insertActorProject($d){
+			$data = array(
+						'StashActorProject_id' => null,
+						'StashActorProject_actor_id_ref' => $d["actor_id"],
+						'StashActorProject_project_id_ref' => $d["project_id"],
+						'StashActorProject_time' => time(),
+						'StashActorProject_status' => 1
+					);
+			//return $query = $this->db->get_compiled_insert("stash-actor-project", $data);
+			return $this->db->insert("stash-actor-project", $data);
+		}
+		public function getActorsInAProject($d){
+			$this->db->select("*");
+			$this->db->from("stash-actor-project as PA");
+			$this->db->join("stash-actor as A", "PA.StashActorProject_actor_id_ref = A.StashActor_actor_id_ref");
+			$this->db->where("PA.StashActorProject_project_id_ref", $d["project_id"]);
+			$query = $this->db->get();
+			$result = [];
+			$fetch = $query->result('array');
+			$result=json_encode($fetch);
+			$this->response(true, "Actors in a project found",$result);
+		}
 		public function userLogin($data = []){
 			$this->load->model("Auth");
 			if($this->Auth->ifUserExist($data['email'])){
