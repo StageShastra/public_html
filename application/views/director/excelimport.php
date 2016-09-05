@@ -257,6 +257,7 @@ function notRed(that){
   if(that.value=="empty"){
     that.style.background="#fff";
     that.style.color="#FF003A";
+    document.getElementById("finalSubmit").disabled=true;
   }
   else {
     that.style.background="honeydew";
@@ -269,14 +270,27 @@ function notRed(that){
 function checkCompletion(){
   var columnCount = document.getElementById("columns").value;
   var columns = [document.getElementById("col1"),document.getElementById("col2"),document.getElementById("col3"),document.getElementById("col4"),document.getElementById("col5"),document.getElementById("col6"),document.getElementById("col7")];
-
+  var checkCount=0;
   for(var k=0;k<columnCount;k++){
-    if(columns[k].value=="empty") { document.getElementById("excelFile").disabled=true;} //back to disabled
-    else { document.getElementById("excelFile").disabled=false; } //enable Upload File  
-  }    
+    if(columns[k].value=="empty"){ 
+      document.getElementById("excelFile").disabled=true;
+      return;
+    } //back to disabled
+    else{
+      checkCount++; 
+    } //enable Upload File  
+  }
+  console.log(checkCount + " and columnCount is " + columnCount);
+  if(checkCount==columnCount && columnCount!=0)
+  {
+    console.log("here");
+    document.getElementById("excelFile").disabled=false;
+    document.getElementById("finalSubmit").disabled=false;
+  }  
 }
 
 function validateForm(){
+  console.log("here also");
   if(document.getElementById("excelFile").value != "") {document.getElementById("finalSubmit").disabled=false;}
   else {document.getElementById("finalSubmit").disabled=true;}
 }
