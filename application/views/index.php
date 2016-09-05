@@ -5,7 +5,7 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content='width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="description" content="Castiko is a platform to connect Actors and Casting Directors. Actors – create your own acting profiles with photos & videos. Get auditions. Casting directors – manage all your data, run auditions and find new actors">
     <meta name="keywords" content="Acting, Audition, Actor, Casting, Film, Castiko's Official Website, Casting Directors in Mumbai, Search Actors">
     <meta name="filename" content="Castiko-Acting-Audition-Casting-Tool-Home">
@@ -98,10 +98,11 @@
                    <!-- <li class="page-scroll">
                         <a href="#about">Video</a>
                     </li>
-                    <li class="page-scroll">
-                        <a href="#contact">FAQ</a>
-                    </li>
                     -->
+                    <li class="page-scroll">
+                        <a href="#FAQ">FAQ</a>
+                    </li>
+                    
                     <li class="page-scroll">
                         <a href="#contact">Contact</a>
                     </li>
@@ -132,7 +133,7 @@
                         <h1 class="skills">Castiko makes it easier for actors and casting directors <br>  to work together.</h1>
                         <div><a href="#forActor" class="btn btn-custom">I'm an Actor</a>
                         <a href="#forDirector" class="btn btn-custom">I'm a Casting Director</a>
-                        <a data-target="#loginModal" data-toggle="modal" class="btn btn-custom hidden-lg hidden-md">Login</a>
+                        <a data-target="#loginModal" data-toggle="modal" class="btn btn-custom">Login</a>
                         </div>
                     </div>
                 </div>
@@ -185,7 +186,8 @@
     </section>
 
     <!-- For Casting Director Grid Section -->
-     <a class="anchor" id="forDirector"></a>
+    <br>
+    <a class="anchor" id="forDirector"></a>
     <section id="forDirector">
         <div class="container">
             <div class="row">
@@ -243,6 +245,214 @@
         </div>
     </section>
 -->
+	<!-- FAQ Section -->
+	<br>
+	<a class="anchor" id="FAQ"></a>
+    <section id="FAQ">
+        <div class="container">
+            <div class="row">
+              <center>
+                <h3>FAQs</h3>
+              </center>
+<style>
+
+button.accordion {
+    cursor: pointer;
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 20px;
+    text-transform: uppercase;
+    background-color: white;
+    border: 2px solid #f3525b;
+    outline:none;
+    text-align: left;
+    
+}
+
+button.accordion.active, button.accordion:hover {  
+    border: 2px solid #f3525b;
+    background-color: #f3525b;
+    color: white;
+
+}
+
+button.accordion.active{
+    border-radius: 10px 10px 0px 0px;
+}
+
+
+
+button.accordion2 {
+    cursor: pointer;
+    padding: 12px;
+    width: 100%;
+    border-style:solid;
+    border-width:0px 0px 2px 0px;
+    border-color: #fcb33e;
+    font-size: 16px;
+    background-color: white;
+    outline:none;
+    text-align: left;
+}
+
+
+button.accordion2.active, button.accordion2:hover {
+    background-color: #fcb33e;
+}
+
+button.accordion2.active{
+border-radius: 0px 0px 0px 0px;
+}
+
+
+div.panel {
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    width: 100%;
+}
+
+div.panel.show {
+    opacity: 1;
+    max-height: 1400px;
+    border:none;
+    outline:none;
+}
+
+div.panel2 {
+    padding: 10px 20px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    
+    opacity: 0;
+    width: 100%; 
+}
+
+div.panel2.show {
+    opacity: 1;
+    max-height: 500px;
+    border-radius: 0px 0px 0px 0px;
+    border:2px solid #fcb33e;
+    outline: none;
+
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+</style>
+<div class="row"> 
+<div class="col-lg-8 col-centered">
+	
+	<button class="accordion col-sm-12">Actors</button>
+		<div class="panel">
+			<button class="accordion2">I'm an actor. How will Castiko help me?</button>
+				<div class="panel2">
+					Castiko allows you to make a profile that will directly be added to casting directors databases. This helps them remember you, and makes it easy for them to contact you for auditions.
+				</div>
+			<button class="accordion2">What are the benefits of a free (Basic) account?</button>
+				<div class="panel2">
+					If a casting director already knows you and adds you to their database, you do not need to pay a penny. Just create a free account and your profile will show up on their laptops.
+
+					You also no longer need to keep sending emails to casting directors. Your profile has a public shareable link so you can share it with whoever you want!
+
+				</div>
+			<button class="accordion2">What are the benefits of a paid (Pro) account?</button>
+				<div class="panel2">
+					There might be casting directors on Castiko who do not know you yet. If you would like us to make your profile visible to them and get open audition notices, then you should get the Pro account.
+				</div>
+			<button class="accordion2">What information can I include in my profile?
+</button>
+				<div class="panel2">
+					You can add your basic information, including height, weight and screen age. You can add up to 10 photos, and as many YouTube videos as you want. You can also add your training, languages and special skills you want casting directors to know about. See our sample actor profile <a href="castiko.com/johndoe">here</a>.
+
+				</div>
+			<button class="accordion2">Will everyone be able to see my contact details? 
+</button>
+				<div class="panel2">
+					No, your contact details are private, and will only be visible to casting directors you choose to share them with.
+				</div>
+			<button class="accordion2">Is my profile visible on Google?</button>
+				<div class="panel2">
+				Yes, but not on page 1. Unless you link it on your social media pages and other websites, it's unlikely to show up on page 1. You will have a lot of control over who gets to see your profile.
+				</div>
+			<button class="accordion2">What if I face problems? 
+</button>
+				<div class="panel2">
+					You can call or email us any time and we will do our best to help you solve the issue. Our numbers are at the bottom of this page.
+				</div>
+
+		</div>
+	<button class="accordion col-sm-12">Casting Directors</button>
+		<div class="panel">
+			<button class="accordion2">I'm a casting director. How will Castiko help me?</button>
+				<div class="panel2">
+					Castiko is a comprehensive solution for you. <br>
+						<ul>
+						<li>You can bring all your actor data in one place, thus eliminating Excel sheets and pen and paper.</li>
+						<li>You can message actors to come and audition in just one click, thus saving hours and hours of time you spend SMSing and calling them individually.</li></ul>
+				</div>
+			<button class="accordion2">So how does it work?</button>
+				<div class="panel2">
+					Easy as 1-2-3. You sign up for an account. We help you upload all your data to Castiko. And you're ready to go! You can instantly start SMS-ing, emailing, and running auditions right from your dashboard.
+
+				</div>
+			<button class="accordion2">Will I have to keep updating it again and again?</button>
+				<div class="panel2">
+				No. We've built powerful features to help you manage it all in no time. For example, during an audition you can use Castiko's Casting Sheet feature so that all the audition data is already there at the end of the audition at zero extra effort.
+				</div>
+			<button class="accordion2">What if I want extra features?
+</button>
+				<div class="panel2">
+				We are building Castiko step-by-step in deep consultation with experienced and new casting directors. We can't promise you new features immediately, but if it will help your workflow better, we are open to discussing it with you. Your convenience is our top priority.				</div>
+		</div>
+		<button class="accordion col-sm-12">Other Questions</button>
+		<div class="panel">
+			<button class="accordion2">I'm not a casting director, but I'm still looking for talent. Is  Castiko still useful to me?</button>
+				<div class="panel2">
+					Yes. We have a lot of actors who sign up independent of casting directors. They are hoping to be contacted by people like you.
+				</div>
+			<button class="accordion2">My question isn't here.</button>
+				<div class="panel2">
+					No problem - just send us a message using the form below and we'll get right back to you.
+				</div>
+		</div>
+
+
+
+</div>
+</div>
+
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+    acc[i].onclick = function(){
+        this.classList.toggle("active");
+        this.nextElementSibling.classList.toggle("show");
+  }
+}
+
+var acc2 = document.getElementsByClassName("accordion2");
+var j;
+
+for (j = 0; j < acc2.length; j++) {
+    acc2[j].onclick = function(){
+        this.classList.toggle("active");
+        this.nextElementSibling.classList.toggle("show");
+  }
+}
+
+
+</script>
+</section>
 
     <!-- Contact Section -->
      <a class="anchor" id="contact"></a>
@@ -252,7 +462,7 @@
                 <div class="col-lg-12 text-center">
                     <h2>Say hello!</h2>
                     <div style="text-align:center;">
-                        It is good to see you here.<br> 
+                        It's good to see you here.<br> 
                         Leave us a message and we will get back to you shortly.
                     </div>
                     <hr class="star-primary">

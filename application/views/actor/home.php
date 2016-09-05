@@ -373,7 +373,7 @@ border-radius: 5px;
             }
             .light-padded
             {
-                padding: 0px 5px 0px 10px !important;
+                padding: 5px 5px 0px 10px !important;
             }
             
             .no_padding_small{
@@ -767,7 +767,12 @@ textarea{
     font-size: 9px;
 }
 .shareButton{
-    font-size: 20px;
+    border: 1px solid #FFC107;
+}
+.shareButton:focus{
+    background: #fff;
+    color: #FFC107;
+    border: 1px solid #FFC107;
 }
 .counter_exp{
     font-size: 14px;
@@ -843,6 +848,23 @@ textarea{
 .form-group {
     margin-bottom:0px;
 }
+.yellow_text{
+    color:#FBB515;
+}
+
+.fa-facebook{
+    color:#fff;
+}
+.fa-twitter{
+    color:#fff;
+}
+.fa-whatsapp{
+    color:#fff;
+}
+.fa-at{
+    color:#fff;
+}
+
         </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -1031,17 +1053,17 @@ textarea{
                     <div class="col-sm-3 light-padded left">
                     <div class="row">
                         <span class="a_name"><?= $actorProfile['StashActor_name'] ?></span>
-                         <span class="fa fa-share-alt edit-button  shareButton" data-open="false" style="cursor:pointer;" ></span>
+                         
                             <i>&emsp;</i>
                     <span class="glyphicon glyphicon-pencil edit-button pull-right toggleEdit" data-unhide-id="#actor_username_edit" data-hide-id="#actor_username" aria-hidden="true" style="cursor:pointer;"></span>
                         
-                        <br>
+<br>
                         <span class="actor_link" id="actor_username">
-                            <span id="profile_link" ><a href="<?= base_url() . $user['StashUsers_username'] ?>" id="actor_username_txt" target="_blank"><?= base_url() . $user['StashUsers_username'] ?></a><i class="glyphicon  glyphicon-info-sign" style="color:#ffb600; font-size:15px;" data-toggle="tooltip" data-placement="right" title="You can also add your Castiko link to your other Social Media profiles."></i></span>
+                            <span id="profile_link" ><a href="<?= base_url() . $user['StashUsers_username'] ?>" id="actor_username_txt" target="_blank"><?= "castiko.com/" . $user['StashUsers_username'] ?></a><i class="glyphicon  glyphicon-info-sign" style="color:#ffb600; font-size:15px;" data-toggle="tooltip" data-placement="right" title="You can also add your Castiko link to your other Social Media profiles."></i></span>
                             
                         </span>
                         
-                        <div id="socialShare" ></div>
+                        <div id="socialShare" style="margin-top:-10px;display:block;" ></div>
                         
                         <div id="actor_username_edit" class="hidden">
                             <div class="category_heading no_left_margin"></div>
@@ -1080,6 +1102,7 @@ textarea{
                                    <span class="elements_label ">Weight: </span><span id="actor_weight" ><?= $actorProfile['StashActor_weight'] ?></span> kgs<br>
                                     <span class="elements_label ">Height: </span><span id="actor_height" ><?= $actorProfile['StashActor_height'] ?></span> cms<br>
                                 </div>
+                                
                             </div>
 
 
@@ -1739,7 +1762,7 @@ textarea{
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label class="label_pc">Age Range </label><br><br><br>
+                                <label class="label_pc">Age Range <sup><span class="yellow_text">&nbsp;in years </span></sup></label><br><br><br>
                                 <div class="row">
                                         <div class="col-sm-6 col-xs-6" >
                                          <input type="text" name='pc_min_age' class="form-control edit_inputs_basics "   placeholder="Minimum age which you can play onscreen"  required data-validation-required-message="Please enter your min age range" id="agemin"/>
@@ -1756,15 +1779,15 @@ textarea{
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label class="label_pc">Weight</label>
-                               <input type="text" class="form-control edit_inputs_basics" name='pc_weight'  placeholder="Weight"  id="weight" required/> <span class="edit_basics_labels">in kgs</span>
+                                <label class="label_pc">Weight<sup><span class="yellow_text">&nbsp;in kgs</span></sup></label>
+                               <input type="text" class="form-control edit_inputs_basics" name='pc_weight'  placeholder="Weight"  id="weight" required/> 
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label class="label_pc">Height</label>
-                                <input type="text" class="form-control edit_inputs_basics" name='pc_height'  placeholder="Height"  id="pc_height" required />  <span class="edit_basics_labels">in cms &nbsp;<span data-toggle="modal" class="info-small" data-target="#feetToCmConverterModal">(Click here to open converter.)</span></p>
+                                <label class="label_pc">Height<sup><span class="yellow_text">&nbsp;in cms</span></sup></label>
+                                <input type="text" class="form-control edit_inputs_basics" name='pc_height'  onfocus='$("#feetToCmConverterModal").modal("show")' placeholder="Height in cms"  id="pc_height" required />  
                             </div>
                         </div>
                         <p id="step-1-error" class="help-block text-danger"></p>

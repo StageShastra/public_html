@@ -43,6 +43,7 @@
 			$this->db->join("stash-director-actor-link as DALink", "DALink.StashDirectorActorLink_actor_id_ref = act.StashActor_actor_id_ref");
 			$this->db->where("DALink.StashDirectorActorLink_director_id_ref", $ref);
 			$this->db->where("DALink.StashDirectorActorLink_status", 1);
+			$this->db->order_by("act.StashActor_actor_id_ref", "DESC");
 			$query = $this->db->get();
 			$result = [];
 			$actors = $query->result('array');

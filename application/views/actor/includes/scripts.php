@@ -16,18 +16,18 @@
 		<script>
 			$("#socialShare").jsSocials({
 				showLabel: false,
-				showCount: false,
+				showCount: "inside",
 				shareIn: "popup",
 				text: "<?= $actorProfile['StashActor_name'] ?> | Actor | Castiko",
 				url: "<?= base_url() . $user["StashUsers_username"] ?>",
-				shares: ["twitter", "facebook", "googleplus", "linkedin"]
+				shares: ["facebook", "twitter", "whatsapp", "email"]
 			});
 		</script>
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
       
         <footer class="footer">
           <foodiv class="container center">
-            <p class="dark-gray info-small center ">&copy; <?= date("Y") ?> Castiko | connect@castiko.com</p>
+            <p class="dark-gray info-small center " style="text-align:center;">&copy; <?= date("Y") ?> Castiko | connect@castiko.com</p>
         </footer>
     </body>
 </html>
