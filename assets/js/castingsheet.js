@@ -103,7 +103,7 @@ function get_actor_details()
 					$("#actor_dob").val(formattedDate);
 					console.log(formattedDate);
 					$("#actor_sex").val(actor.StashActor_gender);
-					var src="http://localhost:8888/public_html/assets/img/actors/"+actor.StashActor_avatar;
+					var src="http://castiko.com/assets/img/actors/"+actor.StashActor_avatar;
 					$("#pro_pic").attr("src",src);
 					show_casting_sheet();
 					console.log(response);

@@ -731,7 +731,7 @@ button[disabled], html input[disabled] {
                     <h5 class="marginl15 shoot_dates"><span style="">Shoot starts from  </span><span class="shoot_begins"></span> and ends on <span class="shoot_ends"></span> </h5>
                     <div class="col-sm-8">
                       <div class="photo_name">
-                        <img class="pro_pic" id="pro_pic" src="/public_html/assets/img/default.png"><h3 class="heading actor_name_ea">Welcome, <span id="actor_name_ea"> Prashant</span></h3></img>
+                        <img class="pro_pic" id="pro_pic" src="http://castiko.com/assets/img/default.png"><h3 class="heading actor_name_ea">Welcome, <span id="actor_name_ea"> Prashant</span></h3></img>
                       </div>
                       <div id="not_connected_message" class="hidden">
                           You are not registered with Castiko.<br>
