@@ -173,7 +173,7 @@ a:hover, a:focus {
                         <input type="email" class="form-control login" id="email" name="email" placeholder= "Email *" value="<?= $email ?>" <?= ($email != '') ? "readonly" : "" ?> required >
                       </div>
                       <div class="form-group">
-                        <input type="text" class="form-control login" id="contact" name="mobile" placeholder= "Mobile No. *" value="<?= $mobile ?>" <?= ($mobile != '') ? "readonly" : "" ?> required >
+                        <input type="text" class="form-control login" id="contact" name="mobile" maxlength="10" placeholder= "Mobile No. *" value="<?= $mobile ?>" <?= ($mobile != '') ? "readonly" : "" ?> required >
                       </div>
                       <div class="form-group">
                         <input type="password" class="form-control login" id="password" name="password" placeholder= "Password *" required >

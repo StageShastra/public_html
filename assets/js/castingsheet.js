@@ -57,12 +57,11 @@ function populate_attendees()
 		});
 }
 function append_attendees(name){
-	console.log("called with name "+name);
+
 	var attendee_count=attendees_names.length;
 	var newhtml='<div class="attendee_name last_inserted animated fadeInDown" id="attendee_id_'+attendee_count+'">'+name+'</div>';
 	$("#list_of_attendees").prepend(newhtml);
 	var second_last=attendee_count-1;
-	console.log("attendee_id_"+second_last+" removed.");
 	if(second_last>0)
 	{
 		$('#attendee_id_'+second_last).removeClass("last_inserted");	
@@ -92,24 +91,24 @@ function get_actor_details()
 				if(response.status==true)
 				{	
 					actor=JSON.parse(response.data);
-					console.log(actor);
 					$("#actor_name_ea").html(actor.StashActor_name);
 					$("#3_years_experience").val(actor.StashActor_three_years_experience);
 					$("#6_months_experience").val(actor.StashActor_six_months_experience);
 					var src="http://localhost:8888/public_html/assets/img/actors/"+actor.StashActor_avatar;
-					$("#pro_pic").attr("src",src)
+					$("#pro_pic").attr("src",src);
 					show_casting_sheet();
 				}
 				else
-				{
-					console.log("no actor found. Please proceed");
+				{	
+					show_new_casting_sheet();
+					
 				}
 
 			}
 		});
 }
 function populate_roles()
-{	console.log("here");
+{	
 	data = {request: "getRolesInProject",
 	 		data: JSON.stringify({
 	 								project_id: project_id, 
@@ -128,7 +127,7 @@ function populate_roles()
 				}
 				else
 				{
-					console.log("no actor found. Please proceed");
+					console.log("no roles found. Please proceed");
 				}
 
 			}
@@ -172,7 +171,10 @@ function show_casting_sheet(data)
 	var shoot_end_date = new Date(0);
 	shoot_start_date.setUTCSeconds(project_shoot_begins);
 	shoot_end_date.setUTCSeconds(project_shoot_ends);
-	
+	if(actor.isLinkedWithDirector==0)
+	{
+		$("#save_actor_response").html("Save and Connect")
+	}
 	//populating the forms
 	$(".shoot_begins").html(shoot_start_date.toDateString());
 	$(".shoot_ends").html(shoot_end_date.toDateString());
@@ -196,8 +198,6 @@ function show_dynamic_questions()
 	$("#save_actor_response").removeAttr("disabled");
 	var role_id=roles[index].StashRoles_id;
 	var questions=roles[index].questions;
-	console.log(roles);
-	console.log(questions);
 	var prehtml='';
 	for(i=0;i<questions.length ;i++)
 	{	
@@ -261,6 +261,7 @@ function submit_answers()
 	attendees_names.push(actor.StashActor_name);
 	append_attendees(actor.StashActor_name);
 	show_email_form();
+	clean_slate_protocol();
 	
 }
 function show_email_form(){
@@ -293,7 +294,7 @@ function update_actor_experience()
 				}
 				else
 				{
-					console.log("no actor found. Please proceed");
+					console.log("Could not update experience. Please proceed");
 				}
 
 			}
@@ -324,7 +325,7 @@ function insert_actor_answers()
 				}
 				else
 				{
-					console.log("no actor found. Please proceed");
+					console.log("Actor answers inserted. Please proceed");
 				}
 
 			}
@@ -357,7 +358,7 @@ function insert_role_actor(){
 				}
 				else
 				{
-					console.log("Role and actor linked");
+					console.log("Role and actor could not be linked");
 				}
 
 			}
@@ -388,7 +389,7 @@ function insert_project_actor(){
 				}
 				else
 				{
-					console.log("project and actor tagged");
+					console.log("project and actor could not be tagged");
 				}
 
 			}
@@ -396,3 +397,76 @@ function insert_project_actor(){
 
 
 }
+function show_new_casting_sheet(){
+	$("#new_actor").removeClass("hidden");
+	$(".photo_name").addClass("hidden");
+	$("#save_actor_response").attr("onclick","submit_new_actor_answers()");
+	show_casting_sheet();
+	var contact = $("#contact").val();
+	if(isEmail(contact)){
+		$("#email_new_actor").val(contact);
+
+	}
+	else{
+		$("#phone_new_actor").val(contact);
+	}
+}
+function submit_new_actor_answers(){
+	var actor_name = $("#name_new_actor").val();
+	var actor_email = $("#email_new_actor").val();
+	var actor_phone = $("#phone_new_actor").val();
+	var actor_password = $("#password_new_actor").val();
+	var confirm_password = $("#confirm_password_new_actor").val();
+	if(actor_name =="" || actor_email =="" || actor_phone=="" || actor_password == "")
+	{
+		alert("Please fill all the fields");
+		return;
+	}
+	if(actor_password != confirm_password)
+	{
+		alert("Passwords don't match. Please re-confirm your password");
+		return;
+	}
+	data = {request: "insertNewActor",
+	 		data: JSON.stringify({
+	 								actor_name: actor_name,
+	 								actor_email: actor_email,
+	 								actor_phone: actor_phone,
+	 								actor_password: actor_password 
+
+	 							 }
+	 							)};
+
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			async:false,
+			success: function(response){
+				if(response)
+				{	console.log(response);
+					actor.StashActor_actor_id_ref=response.data;
+					actor.StashActor_name=actor_name;
+					actor.last_six_months_exp = $("#6_months_experience").val();
+					actor.last_three_years_exp = $("#3_years_experience").val();
+					$("#save_actor_response").attr("onclick","submit_answers()");
+					submit_answers();
+					$("#not_registered_last_message").removeClass("hidden");
+				}
+				else
+				{
+					console.log("new actor could not be added");
+				}
+
+			}
+		});
+
+}
+function isEmail(email) {
+  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
+function clean_slate_protocol(){
+setTimeout(function(){ location.reload(); }, 9000);
+}
+	

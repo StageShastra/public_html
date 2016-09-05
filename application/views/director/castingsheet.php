@@ -597,6 +597,12 @@ button[disabled], html input[disabled] {
 }
 #list_of_attendees{
   margin-top: -34px;
+  overflow-y:hidden;
+  height: 100%
+
+}
+#list_of_attendees:hover{
+  overflow-y:scroll;
 }
 .attendee_name{
   font-family: "Roboto";
@@ -609,8 +615,30 @@ button[disabled], html input[disabled] {
   background: rgba(255, 59, 73,0.7);
   color: white;
 }
+#new_actor{
+  text-align: left;
+}
+#not_registered_message{
+    border: 1px solid #ff3b49;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-family: "Raleway";
+    /* font-weight: 600; */
+    padding: 20px;
+    margin: 10px 0px 10px 0px;
 
+}
+#not_registered_last_message{
+  border: 1px solid #ff3b49;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-family: "Raleway";
+  /* font-weight: 600; */
+  padding: 20px;
+  margin: 10px 0px 10px 0px;
+  text-align: center;
 
+}
               </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -674,7 +702,11 @@ button[disabled], html input[disabled] {
           </div>
            <!-- contact modal toggle -->
             <div class="container-fluid" id="create_project_home">
-              <div class="col-sm-10" id="email_form"> 
+              <div class="col-sm-10" id="email_form">
+               <div id="not_registered_last_message" class="hidden">
+                          We have mailed you a link of your new profile at Castiko.com<br>
+                          It is crucial that you complete your profile with basic details and photos.  
+               </div>
                 <div class="form-title-row">
                     <h1 class="heading"> CASTING SHEET</h1>
                     <h3 class="project_name"> PROJECT : <?= $project["StashProject_name"]; ?></h3>
@@ -691,18 +723,49 @@ button[disabled], html input[disabled] {
                       <div class="photo_name">
                         <img class="pro_pic" id="pro_pic" src="/public_html/assets/img/default.png"><h3 class="heading actor_name_ea">Welcome, <span id="actor_name_ea"> Prashant</span></h3></img>
                       </div>
-                      <div id="new_actor">
+                      <div id="new_actor" class="hidden">
                         <div id="not_registered_message">
                           You are not registered with Castiko.<br>
-                          Please complete the form to Sign Up and complete the casting sheet.
-                          
+                          Please complete the form to Sign Up and complete the casting sheet.  
                         </div>
                         <div class="row">
                             <div class="label_cs col-sm-6">
                               Your Name  
                             </div>
                             <div class="col-sm-6">
-                              <input type="text" id="name_new_actor" class="input_cs" name="date_audition" placeholder="Enter date of audition" value="<?php echo date('Y-m-d'); ?>"/>
+                              <input type="text" id="name_new_actor" class="input_cs" name="name_new_actor" placeholder="Enter your name" />
+                            </div> 
+                        </div>
+                        <div class="row">
+                            <div class="label_cs col-sm-6">
+                              Email 
+                            </div>
+                            <div class="col-sm-6">
+                              <input type="email" id="email_new_actor" class="input_cs" name="email_new_actor" placeholder="Enter your email"/>
+                            </div> 
+                        </div>
+                        <div class="row">
+                            <div class="label_cs col-sm-6">
+                              Phone Number  
+                            </div>
+                            <div class="col-sm-6">
+                              <input type="text" id="phone_new_actor" maxlength="10" class="input_cs" name="phone_new_actor" placeholder="Enter your phone"/>
+                            </div> 
+                        </div>
+                        <div class="row">
+                            <div class="label_cs col-sm-6">
+                              Choose Password  
+                            </div>
+                            <div class="col-sm-6">
+                              <input type="password" id="password_new_actor" class="input_cs" name="password_new_actor" placeholder="Please set a new password" oncopy="return false" />
+                            </div> 
+                        </div>
+                        <div class="row">
+                            <div class="label_cs col-sm-6">
+                              Confirm Password  
+                            </div>
+                            <div class="col-sm-6">
+                              <input type="text" id="confirm_password_new_actor" class="input_cs" name="confirm_password_new_actor" placeholder="Retype the above password" />
                             </div> 
                         </div>
 
@@ -749,6 +812,7 @@ button[disabled], html input[disabled] {
                         </div>  
                       </div>
                       <button type="button" id="save_actor_response" onclick="submit_answers()" class="go_button center" style="margin-top:30px; margin-bottom:30px;" disabled >Submit</button>
+
                     </div>
                 </div>
               </div>

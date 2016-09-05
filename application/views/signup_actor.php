@@ -176,7 +176,7 @@ a:hover, a:focus {
                         <input type="email" class="form-control login" id="email" name="email" placeholder= "Email *" required >
                       </div>
                       <div class="form-group">
-                        <input type="text" class="form-control login" id="contact" name="mobile" placeholder= "Mobile No. *" required >
+                        <input type="text" class="form-control login" id="contact" name="mobile" placeholder= "Mobile No. *" maxlength="10" required >
                       </div>
                       <div class="form-group">
                         <input type="password" class="form-control login" id="password" name="password" placeholder= "Set a new Password *" autocomplete="new-password" required >
