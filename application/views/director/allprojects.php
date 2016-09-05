@@ -156,6 +156,25 @@
         background-image: none;
         color : #fff !important;
     }
+    td, th, tr {
+  max-width: 0;
+  overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+td, th, tr.card-table-element-title {
+    text-align: left !important;
+    padding: 0.25rem !important;
+    border:none !important;
+    outline:none !important;
+    width: 40%;
+}
+
+td.card-table-element-data {
+    font-weight: bold;
+    width: 60%;
+}
 
               </style>
         <!--[if lt IE 8]>

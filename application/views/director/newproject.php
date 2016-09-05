@@ -336,6 +336,7 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
     background-image: linear-gradient(45deg, rgba(234, 83, 11, 0.67) 0%, rgba(216, 27, 79, 0.86) 31%, rgba(195, 15, 76, 0.86) 100%, rgb(253, 24, 255) 0%);
     color: white;
 }
+
 /*  Making the form responsive. Remove this media query
     if you don't need the form to work on mobile devices. */
 
@@ -478,7 +479,14 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
   text-align: left;
 
 }
-              </style>
+.go_button{
+  padding: 4px 10px;
+  background: #ffb600 !important;
+  border-radius: 4px;
+  color: #000 !important;
+  border: none;
+
+}              </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -646,7 +654,7 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
 
                     <div class="form-row">
 
-                        <button type="button" onclick="form_submit()">Submit Form</button>
+                        <button type="button" class="go_button" onclick="form_submit()">Create Project</button>
 
                     </div>
 
@@ -705,7 +713,7 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
                     <br>
                     <div class="form-row">
 
-                        <button type="button" style="margin:0px;" onclick="question_submit()">Finish</button>
+                        <button type="button" style="margin:0px;" class="go_button" onclick="question_submit()">Save and Open Casting Sheet</button>
 
                     </div>
 
@@ -721,3 +729,4 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
   include 'includes/footer.php';
   include 'includes/scripts.php';
 ?>
+<script src="<?= JS ?>/newproject.js"></script>

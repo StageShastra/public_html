@@ -66,6 +66,17 @@
 			$this->load->view("director/newproject", $pageInfo);
 			echo $value;
 		}
+		public function allprojects($value=''){
+			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'director')
+				redirect(base_url());
+			$pageInfo = [];
+			$this->load->model("ModelDirector");
+			$pageInfo['isAllowed'] = $this->ModelDirector->getAdminConfirmation();
+			$pageInfo['plan'] = $this->ModelDirector->getDirectorPlan();
+			$pageInfo['profile'] = $this->ModelDirector->directorProfile();
+			$this->load->view("director/allprojects", $pageInfo);
+			echo $value;
+		}
 
 		public function actor($ref = 0, $name = ''){
 			$name = str_replace("-", " ", $name);

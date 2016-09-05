@@ -5,8 +5,6 @@
         <script src="<?= JS ?>/vendor/js.cookies.js"></script>
         <script src='<?= JS ?>/tagsinput.js'></script>
         <script src="<?= JS ?>/home.js"></script>
-        <script src="<?= JS ?>/newproject.js"></script>
-        <script src="<?= JS ?>/castingsheet.js"></script>
         <script src="<?= JS ?>/project.js"></script>
         <script src="<?= JS ?>/lightbox.js"></script>
         <script src="<?= JS ?>/stupidtable.js"></script>

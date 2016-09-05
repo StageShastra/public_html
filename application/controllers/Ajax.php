@@ -428,10 +428,12 @@
 			$this->db->or_where('StashActor_mobile',$val); 
 			$response=$this->db->get()->first_row('array');
 			
-			$result=json_encode($response);
 			if($response!="")
 			{
-				$result["isLinkedWithDirector"]=$this->isLinkedWithDirector($response["StashActor_actor_id_ref"]);
+				$isLinked=$this->isLinkedWithDirector($response["StashActor_actor_id_ref"]);
+				$response["isLinkedWithDirector"]=$isLinked;
+				$result=json_encode($response);
+				//$result=array("isLinkedWithDirector" => $isLinked);
 				$this->response(true, "Actor details fetched",$result);	
 			}
 			else
@@ -913,7 +915,10 @@
 			$ref = $data['actor_id'];
 			$data = array(
 						'StashActor_six_months_experience' => $data['actor_recent_exp'],
-						'StashActor_three_years_experience' => $data['actor_past_exp']
+						'StashActor_three_years_experience' => $data['actor_past_exp'],
+						'StashActor_dob' => strtotime($data['actor_dob']),
+						'StashActor_height' => $data['actor_height'],
+						'StashActor_gender' => $data['actor_sex']
 					);
 			$this->db->where("StashActor_actor_id_ref", $ref);
 			$this->response(true, "Experience updated",$this->db->update("stash-actor", $data));
@@ -960,6 +965,7 @@
 			$this->db->from("stash-actor-project as PA");
 			$this->db->join("stash-actor as A", "PA.StashActorProject_actor_id_ref = A.StashActor_actor_id_ref");
 			$this->db->where("PA.StashActorProject_project_id_ref", $d["project_id"]);
+			$this->db->order_by("A.StashActor_name", "desc");
 			$query = $this->db->get();
 			$result = [];
 			$fetch = $query->result('array');

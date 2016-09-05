@@ -94,13 +94,24 @@ function get_actor_details()
 					$("#actor_name_ea").html(actor.StashActor_name);
 					$("#3_years_experience").val(actor.StashActor_three_years_experience);
 					$("#6_months_experience").val(actor.StashActor_six_months_experience);
+					$("#actor_feet").val(Math.floor(actor.StashActor_height/30.48));
+					$("#actor_inches").val(Math.round((actor.StashActor_height%30.48)/2.54));
+					var utcSeconds = actor.StashActor_dob;
+					var date = new Date(utcSeconds*1000);
+					console.log(date);
+					var formattedDate = date.getUTCFullYear() + '-' + leftPad((date.getUTCMonth() + 1),2)+ '-' + leftPad((date.getUTCDate()+1),2);
+					$("#actor_dob").val(formattedDate);
+					console.log(formattedDate);
+					$("#actor_sex").val(actor.StashActor_gender);
 					var src="http://localhost:8888/public_html/assets/img/actors/"+actor.StashActor_avatar;
 					$("#pro_pic").attr("src",src);
 					show_casting_sheet();
+					console.log(response);
 				}
 				else
 				{	
 					show_new_casting_sheet();
+					console.log(response);
 					
 				}
 
@@ -174,6 +185,8 @@ function show_casting_sheet(data)
 	if(actor.isLinkedWithDirector==0)
 	{
 		$("#save_actor_response").html("Save and Connect")
+		$("#not_connected_message").html("We found that you are not connected with the Casting Director.<br> By filling in the casting sheet you will automatically be added to his database.");
+		$("#not_connected_message").removeClass("hidden");
 	}
 	//populating the forms
 	$(".shoot_begins").html(shoot_start_date.toDateString());
@@ -261,6 +274,10 @@ function submit_answers()
 	attendees_names.push(actor.StashActor_name);
 	append_attendees(actor.StashActor_name);
 	show_email_form();
+	$("#contact").addClass("hidden");
+	$("#not_registered_last_message").html("Your response has been recorded<br>Note : If you haven't completed your profile on Castiko, please do so as soon as possible.");
+	$("#not_registered_last_message").removeClass("hidden");
+
 	clean_slate_protocol();
 	
 }
@@ -274,13 +291,20 @@ function show_email_form(){
 function update_actor_experience()
 {
 	var actor_id=actor.StashActor_actor_id_ref;
+	var actor_dob = $("#actor_dob").val();
+	var actor_height = Math.round(($("#actor_feet").val()*30.48)+($("#actor_inches").val()*2.54));
+	var actor_sex = $("#actor_sex").val();
 	data = {request: "updateActorPastExperience",
 	 		data: JSON.stringify({
 	 								actor_id: actor_id,
 	 								actor_recent_exp: actor.last_six_months_exp,
-	 								actor_past_exp:actor.last_three_years_exp
+	 								actor_past_exp:actor.last_three_years_exp,
+	 								actor_dob:actor_dob,
+	 								actor_sex:actor_sex,
+	 								actor_height:actor_height
 	 							 }
 	 							)};
+	 		console.log(data);
 
 		$.ajax({
 			url: url,
@@ -470,3 +494,10 @@ function clean_slate_protocol(){
 setTimeout(function(){ location.reload(); }, 9000);
 }
 	
+function leftPad(number, targetLength) {
+    var output = number + '';
+    while (output.length < targetLength) {
+        output = '0' + output;
+    }
+    return output;
+}

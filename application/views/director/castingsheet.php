@@ -465,7 +465,7 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
   padding-left: 0px;
 }
 .col-sm-3 input{
-  width: 100%;
+  width: 100% !important;
   margin: 0px 0px 5px 0px;
 }
  
@@ -628,6 +628,16 @@ button[disabled], html input[disabled] {
     margin: 10px 0px 10px 0px;
 
 }
+#not_connected_message{
+    border: 1px solid #ff3b49;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-family: "Raleway";
+    /* font-weight: 600; */
+    padding: 20px;
+    margin: 10px 0px 10px 0px;
+
+}
 #not_registered_last_message{
   border: 1px solid #ff3b49;
   padding: 5px 10px;
@@ -723,10 +733,14 @@ button[disabled], html input[disabled] {
                       <div class="photo_name">
                         <img class="pro_pic" id="pro_pic" src="/public_html/assets/img/default.png"><h3 class="heading actor_name_ea">Welcome, <span id="actor_name_ea"> Prashant</span></h3></img>
                       </div>
+                      <div id="not_connected_message" class="hidden">
+                          You are not registered with Castiko.<br>
+                          Please complete the casting sheet, and get registered. 
+                        </div>
                       <div id="new_actor" class="hidden">
                         <div id="not_registered_message">
                           You are not registered with Castiko.<br>
-                          Please complete the form to Sign Up and complete the casting sheet.  
+                          Please complete the casting sheet, and get registered. 
                         </div>
                         <div class="row">
                             <div class="label_cs col-sm-6">
@@ -796,6 +810,36 @@ button[disabled], html input[disabled] {
                       <div id="static_questions">
                         <div class="row">
                           <div class="label_cs col-sm-6">
+                            Height 
+                          </div>
+                          <div class="col-sm-3">
+                            <input type="number" min="0" max="7" step=1 id="actor_feet" class="input_cs " name="actor_feet" placeholder="Feet" /></input>
+                          </div>
+                          <div class="col-sm-3">
+                            <input type="number" min="0" max="11 "id="actor_inches" class="input_cs " name="actor_feet" placeholder="Inches" /></input>
+                          </div> 
+                        </div>
+                        <div class="row">
+                          <div class="label_cs col-sm-6">
+                            Date of Birth
+                          </div>
+                          <div class="col-sm-6">
+                            <input type="date"  id="actor_dob" class="input_cs  " name="actor_dob" placeholder="Date of Birth" /></input>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="label_cs col-sm-6">
+                            Sex
+                          </div>
+                          <div class="col-sm-6">
+                            <select id="actor_sex" class="input_cs" name="actor_sex" placeholder="Select Sex" />
+                              <option value=0>Female</option>
+                              <option value=1>Male</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="label_cs col-sm-6">
                             Past 6 months experience  
                           </div>
                           <div class="col-sm-6">
@@ -834,3 +878,4 @@ button[disabled], html input[disabled] {
   include 'includes/footer.php';
   include 'includes/scripts.php';
 ?>
+<script src="<?= JS ?>/castingsheet.js"></script>
