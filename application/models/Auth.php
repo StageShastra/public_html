@@ -53,8 +53,10 @@
 						'StashActor_state' => '',
 						'StashActor_country' => '',
 						'StashActor_zip' => '',
-						'StashActor_actor_card' => 0,
+						'StashActor_ticket_status' => 0,
 						'StashActor_profile_completion_stage' => 1,
+						'StashActor_six_months_experience' =>'',
+						'StashActor_three_years_experience' =>'',
 						'StashActor_last_update' => time(),
 						'StashActor_last_ip' => $this->input->ip_address()
 					);

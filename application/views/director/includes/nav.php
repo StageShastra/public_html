@@ -43,6 +43,10 @@
                             </a>
                         </li>
                         <li >
+                            <a href="<?= base_url()?>director/newproject"  > Create New Project
+                            </a>
+                        </li>
+                        <li >
                             <a href="#" data-toggle="modal" data-target="#advancedSearch" > Search
                             </a>
                         </li>

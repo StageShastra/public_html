@@ -60,6 +60,7 @@
 
 			return $result;
 		}
+		
 
 		public function getActorUsername($ref = 0){
 			$this->db->where("StashUsers_id", $ref);
@@ -298,7 +299,7 @@
 			$this->db->insert("stash-project", $data);
 			return $this->db->insert_id();
 		}
-
+		
 		/*public function insertInvitationMail($data = []){
 			$data = array(
 						'StashEmailInvite_id' => null,
@@ -564,6 +565,12 @@
 			$this->db->select( $select );
 			$this->db->from("stash-actor");
 			$this->db->where($field, $val);
+			return $this->db->get()->first_row('array');
+		}
+		public function getProjectDetails($val){
+			$this->db->select( "*" );
+			$this->db->from("stash-project");
+			$this->db->where("StashProject_id", $val);
 			return $this->db->get()->first_row('array');
 		}
 
