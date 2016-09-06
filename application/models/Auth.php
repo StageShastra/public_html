@@ -484,5 +484,88 @@
 			$this->db->ordeR_by("StashActorPlan_id", "DESC");
 			return $this->db->get("stash-actor-plan", 1)->num_rows();
 		}
+
+		public function addActorFromExcel($d = [], $director = 0){
+			$id = $this->insertActorMain($d);
+			$this->setActorProfile($id, $d);
+			$this->insertActorInDirectorList($id, $this->session->userdata("StaSh_User_id"));
+			return $id;
+		}
+
+		public function insertActorMain($d = []){
+			$this->load->library('user_agent');
+			$pass = hash_hmac('sha512', $d['password'], $this->config->item("encryption_key"));
+			// check username
+			$ret = ['1'];
+			$username = 'Actor';
+			if(isset($d['email'])){
+				$username = trim(explode("@", $d['email'])[0]);
+				$checkUsername = $username;
+				$ret = $this->getUserData("StashUsers_username", $checkUsername);
+			}
+			while (count($ret)){
+				$checkUsername = $username . "-" . mt_rand(100, 999);
+				$ret = $this->getUserData("StashUsers_username", $checkUsername);
+			}
+
+			$name = (isset($d['name'])) ? $d['name']: "";
+			
+			$data = array(
+						'StashUsers_id' => null,
+						'StashUsers_username' => $checkUsername,
+						'StashUsers_name' => ucwords($name),
+						'StashUsers_email' => (isset($d['email'])) ? $d['email']: "",
+						'StashUsers_mobile' => (isset($d['phone'])) ? $d['phone']: "",
+						'StashUsers_password' => $pass,
+						'StashUsers_type' => 'actor',
+						'StashUsers_time' => time(),
+						'StashUsers_status' => 0,
+						'StashUsers_mobile_status' => 0,
+						'StashUsers_ip' => $this->input->ip_address(),
+						'StashUsers_header' => $this->agent->agent_string()
+						/*'StashUsers_refer' => 2,
+						'StashUsers_refer_id' => 0,
+						'StashUsers_ticket_status' => 0*/
+					);
+			$response = $this->db->insert("stash-users", $data);
+			return $this->db->insert_id();
+		}
+
+		public function setActorProfile($ref = 0, $data = []){
+			$d = array(
+						'StashActor_id' => null,
+						'StashActor_actor_id_ref' => $ref,
+						'StashActor_name' => ucwords($data['name']),
+						'StashActor_email' => (isset($data['email'])) ? $data['email'] : "",
+						'StashActor_mobile' => (isset($data['phone'])) ? $data['phone'] : "",
+						'StashActor_whatsapp' => '',
+						'StashActor_dob' => (isset($data['age'])) ? strtotime("-".$data['age']." years") : 0,
+						'StashActor_gender' => (isset($data['gender'])) ? $data['gender'] : 0,
+						'StashActor_height' => (isset($data['height'])) ? $data['height'] : 0,
+						'StashActor_weight' => 0,
+						'StashActor_avatar' => 'default.png',
+						'StashActor_images' => '{}',
+						'StashActor_min_role_age' => 0,
+						'StashActor_max_role_age' => 0,
+						'StashActor_address' => '',
+						'StashActor_city' => '',
+						'StashActor_state' => '',
+						'StashActor_country' => '',
+						'StashActor_zip' => '',
+						'StashActor_actor_card' => 0,
+						'StashActor_passport' => 1,
+						'StashActor_last_update' => time(),
+						'StashActor_last_ip' => $this->input->ip_address()
+					);
+			return $this->db->insert("stash-actor", $d);
+		}
+
+		public function ifAccountExist($email = '', $phone = ''){
+			$this->db->where("StashUsers_email", $email);
+			$this->db->or_where("StashUsers_mobile", $phone);
+			/*echo $query = $this->db->get_compiled_select("stash-users");
+			exit();*/
+			return $this->db->get("stash-users")->num_rows();
+		}
 	}
 ?>
