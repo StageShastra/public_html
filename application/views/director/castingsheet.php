@@ -596,8 +596,8 @@ button[disabled], html input[disabled] {
   width: 240px !important;
   height: 72px;
 }
-textarea .input_cs{
-  margin : 0px 5px 5px 0px;
+.textarea{
+  margin : 0px 5px 5px 0px !important;
 }
 #list_of_attendees{
   margin-top: -34px;
