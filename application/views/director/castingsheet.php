@@ -714,7 +714,8 @@ button[disabled], html input[disabled] {
             <div class="container-fluid" id="create_project_home">
               <div class="col-sm-10" id="email_form">
                <div id="not_registered_last_message" class="hidden">
-                          We have mailed you a link of your new profile at Castiko.com<br>
+                          You are now registered on Castiko. We've sent you an email with instructions to complete your profile.
+                          <br>
                           It is crucial that you complete your profile with basic details and photos.  
                </div>
                 <div class="form-title-row">
@@ -779,7 +780,7 @@ button[disabled], html input[disabled] {
                               Confirm Password  
                             </div>
                             <div class="col-sm-6">
-                              <input type="text" id="confirm_password_new_actor" class="input_cs" name="confirm_password_new_actor" placeholder="Retype the above password" />
+                              <input type="password" id="confirm_password_new_actor" class="input_cs" name="confirm_password_new_actor" placeholder="Retype the above password" />
                             </div> 
                         </div>
 
