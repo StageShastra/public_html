@@ -335,6 +335,8 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
     background: #F7A9A9;
     background-image: linear-gradient(45deg, rgba(234, 83, 11, 0.67) 0%, rgba(216, 27, 79, 0.86) 31%, rgba(195, 15, 76, 0.86) 100%, rgb(253, 24, 255) 0%);
     color: white;
+    width:75%;
+    margin-top:5px;
 }
 
 /*  Making the form responsive. Remove this media query
@@ -648,7 +650,7 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
                           <div id="add_role_form" class="add_role hidden" >
                                 <span class="col-sm-3"><span class="small_label">Role Name</span><input type="text" id="role_input" placeholder="Role"></input></span>
                                 <span class="col-sm-3"><span class="small_label">Role Description</span><input type="text" id="role_description_input" placeholder="Role Description"></input></span>
-                                <span class="col-sm-3"><span class="small_label">No. of scenes</span><input type="text" id="role_scenes_input" placeholder="No. of scenes" value=1 title="Put the number of scenes you will using to audition for this role. This will help you later to organize the audition videos."></input></span>
+                                <span class="col-sm-3"><span class="small_label">No. of scenes to be auditions.</span><input type="text" id="role_scenes_input" placeholder="No. of scenes to be auditions" value=1 title="Put the number of scenes you will using to audition for this role. This will help you later to organize the audition videos."></input></span>
                                 <input type="hidden" id="request_input" value=""/>
                                 <input type="hidden" id="role_id_input" value=""/>
                                 <span id="add_role_form_submit" class="col-sm-2 glyphicon glyphicon-ok toggleEdit" onclick="role_add_edit()"></span>
