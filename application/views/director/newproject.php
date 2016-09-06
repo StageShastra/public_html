@@ -695,7 +695,6 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
                             onclick="add_question()">
                               + Add a new question<br>
                           </span>
-                          <br><br>
                           <div id="add_question_form" class="add_role hidden" >
                                 <span class="col-sm-6">
                                   <span class="small_label">Question</span><input type="text" id="question_input" placeholder="Enter Question"></input>
