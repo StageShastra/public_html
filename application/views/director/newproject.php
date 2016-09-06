@@ -417,7 +417,7 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
   border: 1px solid #009968;
   padding: 5px;
   width: auto;
-  top:3px;
+  top:18px;
   padding:10px !important;
 }
 .glyphicon-remove{
@@ -425,7 +425,7 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
   border: 1px solid #ff3b49;
   padding: 5px;
   width: auto;
-  top:3px;
+  top:18px;
   padding:10px !important;
 }
 .glyphicon-trash{
@@ -486,7 +486,18 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
   color: #000 !important;
   border: none;
 
-}              </style>
+}            
+.toggleEdit{
+    cursor: pointer;
+  }  
+  .small_label{
+    font-family: "Raleway";
+    font-weight: 500;
+    font-size: 12px;
+    color: #ffb600;
+  }
+
+  </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -635,9 +646,9 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
                         <div id="role_list" class="col-sm-9">
                           <span id="add_role_form_open" class="role-plus toggleEdit" data-unhide-id="#add_role_form,#add_role_form_close" data-hide-id="#add_role_form_open" onclick="add_role()">+ Add a new role<br></span>
                           <div id="add_role_form" class="add_role hidden" >
-                                <span class="col-sm-3"><input type="text" id="role_input" placeholder="Role"></input></span>
-                                <span class="col-sm-3"><input type="text" id="role_description_input" placeholder="Role Description"></input></span>
-                                <span class="col-sm-3"><input type="text" id="role_scenes_input" placeholder="Scenes"></input></span>
+                                <span class="col-sm-3"><span class="small_label">Role Name</span><input type="text" id="role_input" placeholder="Role"></input></span>
+                                <span class="col-sm-3"><span class="small_label">Role Description</span><input type="text" id="role_description_input" placeholder="Role Description"></input></span>
+                                <span class="col-sm-3"><span class="small_label">No. of scenes</span><input type="text" id="role_scenes_input" placeholder="No. of scenes" value=1 title="Put the number of scenes you will using to audition for this role. This will help you later to organize the audition videos."></input></span>
                                 <input type="hidden" id="request_input" value=""/>
                                 <input type="hidden" id="role_id_input" value=""/>
                                 <span id="add_role_form_submit" class="col-sm-2 glyphicon glyphicon-ok toggleEdit" onclick="role_add_edit()"></span>
@@ -687,15 +698,15 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
                           <br><br>
                           <div id="add_question_form" class="add_role hidden" >
                                 <span class="col-sm-6">
-                                  <input type="text" id="question_input" placeholder="Enter Question"></input>
+                                  <span class="small_label">Question</span><input type="text" id="question_input" placeholder="Enter Question"></input>
                                 </span>
                                 <span class="col-sm-2">
-                                  <select id="question_role_options" placeholder="Question Type">
+                                  <span class="small_label">Assign to role</span><select id="question_role_options" placeholder="Question Type">
                                     <option value=-1>All</option>
                                   </select>
                                 </span>
                                 <span class="col-sm-2">
-                                  <select id="question_type_all" placeholder="Question Type">
+                                  <span class="small_label">Answered in</span><select id="question_type_all" placeholder="Question Type">
                                     <option value=1>Yes/No/Maybe</option>
                                     <option value=2>Text</option>
                                   </select>

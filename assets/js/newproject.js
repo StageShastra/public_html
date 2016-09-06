@@ -74,9 +74,13 @@ function role_add_edit()
 		roles[id].role_name=$("#role_input").val(); //editing the values in object
 		roles[id].role_description=$("#role_description_input").val(); //editing the values in object
 		roles[id].role_scenes=$("#role_scenes_input").val(); //editing the values in object
-
+		$("#role_input").val("");
+		$("#role_description_input").val("");
 		$("#role_name_"+id).html("+ "+roles[id].role_name); //updating view with new role name
 		$("#add_edit_form_info").addClass("hidden");
+		$("#add_role_form").addClass("hidden");
+
+		
 		
 	}	
 }
@@ -236,12 +240,14 @@ function add_edit_question()
 		}
 		questions[id].question_description=$("#question_input").val(); //editing the values in object
 		questions[id].q_addto=$("#question_role_options").val(); //editing the values in object
-		questions[id].q_type=$("#question_type_all").val() //editing the values in object
+		questions[id].q_type=$("#question_type_all").val(); //editing the values in object
 
 		$("#question_name_"+id).html("Q. "+questions[id].question_description); //updating view with new role name
 		$("#add_edit_form_info_q").addClass("hidden");
 		$("#add_question_form").addClass("hidden");
-		add_question_form
+		$("#question_input").val("");
+		$("#question_role_options").val("");
+		$("#question_type_all").val(""); 
 	}	
 }
 function remove_question(id){
