@@ -550,6 +550,7 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
     font-size: 17px;
     /*padding: 5px 0px 5px 0px !important;*/
     font-weight: 600;
+    text-align:right;
 }
 #static_questions{
     margin-top: 25px;
@@ -594,6 +595,9 @@ button[disabled], html input[disabled] {
 .textarea{
   width: 240px !important;
   height: 72px;
+}
+textarea .input_cs{
+  margin : 0px 5px 5px 0px;
 }
 #list_of_attendees{
   margin-top: -34px;
