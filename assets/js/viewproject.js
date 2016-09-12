@@ -302,7 +302,7 @@ function populate_table()
              console.log(shortlist_string);
              dyn_html+= shortlist_string+''
              +'  <td class="profile" style="vertical-align:middle-top;">'
-             +'    <div class="center"><img src="http://localhost:8888/public_html/assets/img/actors/'+attendees[i].StashActor_avatar+'" class="showDetails pro_pic" ></div>'
+             +'    <div class="center"><img src="http://www.castiko.com/assets/img/actors/'+attendees[i].StashActor_avatar+'" class="showDetails pro_pic" ></div>'
              +'  </td>'
              +'  <td class="role_name">'
              +		attendees[i].StashActor_name
