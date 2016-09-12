@@ -64,7 +64,19 @@
 			$pageInfo['plan'] = $this->ModelDirector->getDirectorPlan();
 			$pageInfo['profile'] = $this->ModelDirector->directorProfile();
 			$this->load->view("director/newproject", $pageInfo);
-			echo $value;
+			//echo $value;
+		}
+		public function project($value=''){
+			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'director')
+				redirect(base_url());
+			$pageInfo = [];
+			$this->load->model("ModelDirector");
+			$pageInfo['isAllowed'] = $this->ModelDirector->getAdminConfirmation();
+			$pageInfo['plan'] = $this->ModelDirector->getDirectorPlan();
+			$pageInfo['profile'] = $this->ModelDirector->directorProfile();
+			$pageInfo['project'] = $this->ModelDirector->getProjectDetails($value);
+			$this->load->view("director/viewproject", $pageInfo);
+			//echo $value;
 		}
 		public function allprojects($value=''){
 			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'director')

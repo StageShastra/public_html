@@ -1,8 +1,9 @@
 $(document).ready(function(){
 	
-	if(step!=5)
+	if(step!=5 && isnotsteppage==true)
 	{
 		profile_Completion(step);
+		console.log(isnotsteppage);
 	}
 	if(first_time==0 && step==5)
 	{
@@ -219,6 +220,7 @@ $(document).ready(function(){
 							$("#actor_" + index).html(value);
 						});
 					set_profile_stage(2);
+					window.location.assign("./step2");
 					$("#modal_step_1").modal("hide");	
 					$("#modal_step_2").modal("show");		
 				}
@@ -326,7 +328,7 @@ $(document).ready(function(){
 				$("#savedChnagedMsg").html(response.message);
 				$("#savedChnaged").show(500).delay(3000).hide(500);
 				set_profile_stage(5);
-				location.reload();
+				window.location.assign("./");
 			}
 		});
 		return false;
@@ -697,10 +699,12 @@ $(document).ready(function(){
 					$("#actorAvatar").attr("src", base + "assets/img/actors/" + response.data.image);
 					setTimeout(function(){
 						$("#set_profile_photo").modal("hide");
-						if(step==3)
+						console.log(!isnotsteppage);
+						if(!isnotsteppage)
 						{	
 							$("#modal_step_3").modal("hide");
 							set_profile_stage(4);
+							window.location.assign("./step4");
 							$("#modal_step_4").modal("show");
 							return false;
 						}
@@ -908,13 +912,14 @@ Dropzone.options.photoUpload={
       });
       this.on("drop", function()
       {
+       $("#choose-btn-cp").html("Choose more photos");
        $("#upload-btn").removeClass("disabled");
        $("#upload-btn-cp").removeClass("disabled");
        
       });
       this.on("addedfile", function(file)
       {
-      
+       $("#choose-btn-cp").html("Choose more photos");
        $("#upload-btn").removeClass("disabled");
        $("#upload-btn-cp").removeClass("disabled");
        $("#message_after_upload").removeClass("hidden");
@@ -926,6 +931,8 @@ Dropzone.options.photoUpload={
         if(src!="")
         {
         	set_profile_stage(3);
+        	window.location.assign("./step3");
+
         	$("#pc_done-btn").removeClass("disabled");
         	
         }
@@ -962,13 +969,14 @@ function set_profile_stage(n){
 			type: type,
 			data: data,
 			success: function(response){
-				
+				//location.reload();
 			}
 		});
 }
 function cp_photo_upload_complete(){
 	set_profile_stage(3);
-	location.reload();
+	window.location.assign("./step3");
+	//location.reload();
 }
  function startIntro(){
         var intro = introJs();
@@ -1028,19 +1036,22 @@ function profile_Completion(step)
 }
 function profile_step_one()
 {
-	$("#modal_step_1").modal("show");
+	window.location.assign("./step1");
 
 }
 function profile_step_two()
 {
-	$("#modal_step_2").modal("show");
+	window.location.assign("./step2");
+
 }
 function profile_step_three(){
-	$("#modal_step_3").modal("show");
+	window.location.assign("./step3");
+
 }
 function profile_step_four()
 {
-	$("#modal_step_4").modal("show");
+	window.location.assign("./step4");
+
 }
 function need_help(){
 		var r = confirm("Submit a help request?");
@@ -1069,11 +1080,30 @@ function set_profile_stage(n){
 			data: data,
 			success: function(response){
 				console.log("ticket_raised");
+				//window.location.assign("./");
 			}
 		});
 		console.log(data);
 }
+function embed_video_show()
+{
+	var url=$("#addlink").val();
+	var id=getId(url);
+	$("#iframe_video").attr("src","http://www.youtube.com/embed/"+id);
+	$("#embed_video").removeClass("hidden");
 
+}
+function getId(url) {
+	console.log(url);
+    var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var match = url.match(regExp);
+
+    if (match && match[2].length == 11) {
+        return match[2];
+    } else {
+        return 'error';
+    }
+}
 
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
