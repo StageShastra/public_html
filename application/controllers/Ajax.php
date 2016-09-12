@@ -98,8 +98,35 @@
 					case "getActorsInAProject":
 						$this->getActorsInAProject($data);
 						break;
+					case "getActorsInARole":
+						$this->getActorsInARole($data);
+						break;
+					case "getActorsAnswers":
+						$this->getActorsAnswers($data);
+						break;
+					case "getActorVideos":
+						$this->getActorVideos($data);
+						break;
+					case "setActorVideo":
+						$this->setActorVideo($data);
+						break;
+					case "setActorNotes":
+						$this->setActorNotes($data);
+						break;
+					case "setActorShortlistStatus":
+						$this->setActorShortlistStatus($data);
+						break;
+					case "changeProjectStatus":
+						$this->changeProjectStatus($data);
+						break;
 					case "insertNewActor":
 						$this->insertNewActor($data);
+						break;
+					case "insertRoleActorScenes":
+						$this->insertRoleActorScenes($data);
+						break;
+					case "getProjectsInDirector":
+						$this->getProjectsInDirector();
 						break;
 					case "BulkProjectTag":
 						$this->bulkProjectTag($data);
@@ -938,6 +965,7 @@
 						"StashRoleActorLink_id" => null,
 						"StashRoleActorLink_role_id_ref" => $d["role_id"],
 						"StashRoleActorLink_actor_id_ref" => $d["actor_id"],
+						"StashRoleActorLink_project_id_ref" => $d["project_id"],
 						"StashRoleActorLink_shortlist_status" => 0,
 						"StashRoleActorLink_status"=> 1
 
@@ -972,6 +1000,67 @@
 			$result=json_encode($fetch);
 			$this->response(true, "Actors in a project found",$result);
 		}
+		public function getActorsInARole($d){
+			$this->db->select("*");
+			$this->db->from("stash-role-actor-link as RA");
+			$this->db->join("stash-actor as A", "RA.StashRoleActorLink_actor_id_ref = A.StashActor_actor_id_ref");
+			$this->db->where("RA.StashRoleActorLink_project_id_ref", $d["project_id"]);
+			$this->db->order_by("A.StashActor_name", "desc");
+			$query = $this->db->get();
+			$result = [];
+			$fetch = $query->result('array');
+			$result=json_encode($fetch);
+			$this->response(true, "Actors in a project found",$result);
+		}
+		public function getActorsAnswers($d){
+			$this->db->select("*");
+			$this->db->from("stash-answers");
+			$this->db->where("StashAnswers_actor_id_ref", $d["actor_id"]);
+			$this->db->where("StashAnswers_questions_id_ref", $d["question_id"]);
+			$query = $this->db->get();
+			$result = [];
+			$result=$query->first_row('array');
+			$result=json_encode($result);
+			$this->response(true, "Actors answers for a role found",$result);
+		}
+		public function getActorVideos($d){
+			$this->db->select("*");
+			$this->db->from("stash-scene-video");
+			$this->db->where("StashSceneVideo_actor_id_ref", $d["actor_id"]);
+			$this->db->where("StashSceneVideo_role_id_ref", $d["role_id"]);
+			$query = $this->db->get();
+			$result = [];
+			$fetch = $query->result('array');
+			$result=json_encode($fetch);
+			$this->response(true, "Actors videos for a role found",$result);
+		}
+		public function setActorShortlistStatus($d = []){
+			$data = array(
+						'StashRoleActorLink_shortlist_status' => $d['status']
+					);
+			$this->db->where("StashRoleActorLink_actor_id_ref", $d["actor_id"]);
+			$this->db->where("StashRoleActorLink_role_id_ref", $d["role_id"]);
+			$this->response(true, "Shortlist status updated",$this->db->update("stash-role-actor-link", $data));
+		}
+		public function setActorVideo($d = []){
+			$ref = $d['actor_id'];
+			$data = array(
+						'StashSceneVideo_video' => $d['video']
+					);
+			$this->db->where("StashSceneVideo_actor_id_ref", $d["actor_id"]);
+			$this->db->where("StashSceneVideo_role_id_ref", $d["role_id"]);
+			$this->db->where("StashSceneVideo_scene_index", $d["index"]);
+			$this->response(true, "Video updated",$this->db->update("stash-scene-video", $data));
+		}
+		public function setActorNotes($d = []){
+			$data = array(
+						'StashRoleActorLink_notes' => $d['notes']
+					);
+			$this->db->where("StashRoleActorLink_actor_id_ref", $d["actor_id"]);
+			$this->db->where("StashRoleActorLink_role_id_ref", $d["role_id"]);
+			$this->response(true, "Video updated",$this->db->update("stash-role-actor-link", $data));
+		}
+
 		public function insertNewActor($d){
 			$type = 'actor';
 			$refer = 'castingsheet';
@@ -1076,6 +1165,42 @@
 			$this->db->insert("stash-director-actor-link", $data);
 			//return $query = $this->db->get_compiled_insert("stash-director-actor-link", $data);
 		}
+		public function insertRoleActorScenes($d){
+			$data = array(
+						'StashSceneVideo_id' => null,
+						'StashSceneVideo_actor_id_ref' => $d["actor_id"],
+						'StashSceneVideo_project_id_ref' => $d["project_id"],
+						'StashSceneVideo_role_id_ref' =>$d["role_id"],
+						'StashSceneVideo_scene_index' =>$d["scene_index"],
+						'StashSceneVideo_video' => $d["scene"]
+					);
+			//return $query = $this->db->get_compiled_insert("stash-actor-project", $data);
+			
+			 $response=$this->db->insert("stash-scene-video", $data);
+			 $this->response(true, "Role Video inserted",$response);
+		}
+		public function getProjectsInDirector(){
+			$this->db->select("*");
+			$this->db->from("stash-project");
+			$director_ref=$this->session->userdata("StaSh_User_id");
+			$this->db->where("StashProject_director_id_ref", $director_ref);
+			$this->db->order_by("StashProject_id", "desc");
+			$query = $this->db->get();
+			$result = [];
+			$fetch = $query->result('array');
+			$result=json_encode($fetch);
+			$this->response(true, "Projects in director found",$result);
+		}
+		public function changeProjectStatus($d = []){
+			$data = array(
+						'StashProject_status' => $d['status']
+					);
+			$director_ref=$this->session->userdata("StaSh_User_id");
+			//$this->db->where("StashProject_director_id_ref", $director_ref);
+			$this->db->where("StashProject_id", $d["project_id"]);
+			$this->response(true, "Status updated",$this->db->update("stash-project", $data));
+		}
+
 		public function userLogin($data = []){
 			$this->load->model("Auth");
 			if($this->Auth->ifUserExist($data['email'])){

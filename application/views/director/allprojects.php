@@ -175,6 +175,14 @@ td.card-table-element-data {
     font-weight: bold;
     width: 60%;
 }
+.one_letter{
+  font-size: 48px;
+  color: white;
+  font-weight: 200;
+  text-shadow:1px 1px 2px gray;
+  font-family: "Roboto";
+  text-transform: uppercase;
+}
 
               </style>
         <!--[if lt IE 8]>
@@ -241,90 +249,9 @@ td.card-table-element-data {
             
 <br>
 <div class="card-deck-wrapper">
-  <div class="card-deck">
+  <div class="card-deck" id="list_projects">
   
-    <div class="col-lg-3 col-xs-12 card-marginbottom">  
-    <div class="card" onclick="openProject()">
-
-    <!--ENSURE YOU ARE IGNORING THE "onoffswitch" CLASS in openProject function. See - http://stackoverflow.com/questions/9992368/html-click-anywhere-except-one-element -->
-
-        <div style="width:100%; height:100px; background-color:#c9c9c9"></div>
-
-        <div class="card-block">         
-          
-          <div class="row">
-            <div class="col-lg-8"> <p class="card-title">Band Baaja TVC</p></div>
-            <div class="col-lg-4">
-              <div class="onoffswitch" style="padding-top:10px;">
-                  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-                  <label class="onoffswitch-label center" for="myonoffswitch"></label>
-              </div>
-            </div>
-          </div>
-
-          <div class="card-subtitle"> Project Date: 8 August, 2016</div>
-          
-          <div class="card-text">
-            <table class="card-table">
-              <tr>
-                <td class="card-table-element">Client</td>
-                <td class="card-table-element-data">ClickMonger Company</td>
-              </tr>
-              <tr>
-                <td class="card-table-element">Shoot Start</td>
-                <td class="card-table-element-data">25/06/2016</td>
-              </tr>
-              <tr>
-                <td class="card-table-element">Shoot End</td>
-                <td class="card-table-element-data">27/06/2016</td>
-              </tr>
-              <tr>
-                <td class="card-table-element">Actors</td>
-                <td class="card-table-element-data">25</td>
-              </tr>
-            </table>
-          </div>
-        </div>
-    </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
-
-
-
-
   </div>
 </div>
 
@@ -336,3 +263,4 @@ td.card-table-element-data {
   include 'includes/footer.php';
   include 'includes/scripts.php';
 ?>
+<script src="<?= JS ?>/allproject.js"></script>

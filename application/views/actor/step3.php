@@ -189,7 +189,11 @@
                 </div>
             </nav>
 
-            
+            <?php
+                    echo '<script>var first_time='.$user["StashUsers_status"].';</script>';
+                    echo '<script>var step='.$actorProfile['StashActor_profile_completion_stage'] .';</script>';
+
+            ?>
      <div class="modal-content-four col-lg-5 col-md-5 center">
           <div class="modal-header hr_pc">
                   <h4 class="modal-title center" id="myModalLabel">
@@ -294,7 +298,7 @@
 
                 </div>
             </div>
-                    
+         <script> var isnotsteppage=false;</script>           
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php
     include 'includes/scripts.php';

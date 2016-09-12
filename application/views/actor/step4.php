@@ -186,7 +186,11 @@
                 </div>
             </nav>
 
-            
+            <?php
+                    echo '<script>var first_time='.$user["StashUsers_status"].';</script>';
+                    echo '<script>var step='.$actorProfile['StashActor_profile_completion_stage'] .';</script>';
+
+            ?>
      <div class="modal-content-four col-lg-5 col-md-5 center">
           <div class="modal-header hr_pc">
                   <h4 class="modal-title center" id="myModalLabel">
@@ -238,7 +242,7 @@
                             <div class="form-group col-xs-12">
                                 <font class="sortbuttons">
                                     <button type="button" class="btn submit-btn firstcolor center cp_addExperience toggleEdit tick pc_button" id="add_exp_btn" data-hide-id="#add_exp_btn" data-unhide-id="#add_exp_btn_load" >Finish</button>
-                                    <button type="button" class="btn submit-btn tick pc_button" id="add_exp_btn_load" onclick="set_profile_stage(5); location.reload();" >Skip</button></font>
+                                    <button type="button" class="btn submit-btn tick pc_button" id="add_exp_btn_load" onclick='set_profile_stage(5); window.location.assign("./");' >Skip</button></font>
                             </div>
                         </div>
                     </form>
@@ -274,7 +278,7 @@
 
                 </div>
             </div>
-                    
+         <script> var isnotsteppage=false;</script>           
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php
     include 'includes/scripts.php';

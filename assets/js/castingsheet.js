@@ -3,7 +3,7 @@ var roles=[];
 var actor=[];
 var attendees=[];
 var attendees_names=[];
-
+var repopulate=true;
 $(document).ready(function(){
 $(document).on("click", ".toggleEdit", function(){
 
@@ -25,6 +25,63 @@ $(document).on("click", ".toggleEdit", function(){
 	$(".shoot_begins").html(shoot_start_date.toDateString());
 	$(".shoot_ends").html(shoot_end_date.toDateString());
 });
+function populate_roles()
+{	
+	data = {request: "getRolesInProject",
+	 		data: JSON.stringify({
+	 								project_id: project_id, 
+	 							 }
+	 							)};
+
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			success: function(response){
+				if(response.status==true)
+				{
+					roles=JSON.parse(response.data);
+					populate_questions();
+				}
+				else
+				{
+					console.log("no roles found. Please proceed");
+				}
+
+			}
+		});
+
+		
+}
+function populate_questions()
+{
+	for(i=0;i<roles.length;i++)
+	{
+		data = {request: "getQuestionsByRoleId",
+	 		data: JSON.stringify({
+	 								role_id: roles[i].StashRoles_id, 
+	 							 }
+	 							)};
+
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			async:false,
+			success: function(response){
+				if(response.status==true)
+				{
+					roles[i].questions=JSON.parse(response.data);
+				}
+				else
+				{
+					console.log("no questions found. Please proceed");
+				}
+
+			}
+		});
+	}	
+}
 function populate_attendees()
 {
 	data = {request: "getActorsInAProject",
@@ -118,63 +175,7 @@ function get_actor_details()
 			}
 		});
 }
-function populate_roles()
-{	
-	data = {request: "getRolesInProject",
-	 		data: JSON.stringify({
-	 								project_id: project_id, 
-	 							 }
-	 							)};
 
-		$.ajax({
-			url: url,
-			type: type,
-			data: data,
-			success: function(response){
-				if(response.status==true)
-				{
-					roles=JSON.parse(response.data);
-					populate_questions();
-				}
-				else
-				{
-					console.log("no roles found. Please proceed");
-				}
-
-			}
-		});
-
-		
-}
-function populate_questions()
-{
-	for(i=0;i<roles.length;i++)
-	{
-		data = {request: "getQuestionsByRoleId",
-	 		data: JSON.stringify({
-	 								role_id: roles[i].StashRoles_id, 
-	 							 }
-	 							)};
-
-		$.ajax({
-			url: url,
-			type: type,
-			data: data,
-			async:false,
-			success: function(response){
-				if(response.status==true)
-				{
-					roles[i].questions=JSON.parse(response.data);
-				}
-				else
-				{
-					console.log("no questions found. Please proceed");
-				}
-
-			}
-		});
-	}	
-}
 function show_casting_sheet(data)
 {
 	//$('#date_audition').val(new Date().toDateInputValue());
@@ -198,7 +199,7 @@ function show_casting_sheet(data)
 	$("#casting_sheet_form").removeClass("fadeOut");
 	
 
-	var prehtml=$("#role_audition").html();
+	var prehtml="<option disabled selected value> Select a Role</option>";
 	for(i=0;i<roles.length ;i++)
 	{	
 		prehtml+='<option value="'+i+'">'+roles[i].StashRoles_role+'</option>';
@@ -240,6 +241,7 @@ function show_dynamic_questions()
 }
 function submit_answers()
 {	
+	$("#not_registered_last_message").removeClass("animated fadeOut");
 	actor.audition_date = $('#date_audition').val();
 	var index = $("#role_audition").val();
 	var role_id = roles[index].StashRoles_id;
@@ -274,7 +276,7 @@ function submit_answers()
 	attendees_names.push(actor.StashActor_name);
 	append_attendees(actor.StashActor_name);
 	show_email_form();
-	$("#contact").addClass("hidden");
+	//$("#contact").addClass("hidden");
 	$("#not_registered_last_message").html("Your response has been recorded<br>Note : If you haven't completed your profile on Castiko, please do so as soon as possible.");
 	$("#not_registered_last_message").removeClass("hidden");
 
@@ -367,8 +369,10 @@ function insert_role_actor(){
 	 		data: JSON.stringify({
 	 								actor_id: actor_id,
 	 								role_id: role_id,
+	 								project_id: project_id
 	 							 }
 	 							)};
+	 	console.log(data);
 
 		$.ajax({
 			url: url,
@@ -379,6 +383,7 @@ function insert_role_actor(){
 				if(response.status==true)
 				{	
 					console.log(response);
+					insert_actor_scenes(index,actor_id);
 				}
 				else
 				{
@@ -389,6 +394,42 @@ function insert_role_actor(){
 		});
 
 
+}
+function insert_actor_scenes(index,actor_id)
+{
+	var role_id=roles[index].StashRoles_id;
+	for(i=0;i<=roles[index].StashRoles_scenes;i++)
+	{
+		data = {
+			request: "insertRoleActorScenes",
+	 		data: JSON.stringify({
+	 								actor_id: actor_id,
+	 								project_id:project_id,
+	 								role_id: role_id,
+	 								scene_index:i,
+	 								scene:""
+	 							 }
+				)};
+	 		
+		$.ajax({
+			url: url,
+			type: type,
+			data: data,
+			async:false,
+			success: function(response){
+				if(response.status==true)
+				{	
+					console.log("Scene and actor linked");
+					
+				}
+				else
+				{
+					console.log("Scene and actor could not be linked");
+				}
+
+			}
+		});
+	}
 }
 function insert_project_actor(){
 
@@ -409,7 +450,7 @@ function insert_project_actor(){
 			success: function(response){
 				if(response.status==true)
 				{	
-					console.log(response);
+					console.log("project and actor tagged");
 				}
 				else
 				{
@@ -468,12 +509,13 @@ function submit_new_actor_answers(){
 			async:false,
 			success: function(response){
 				if(response)
-				{	console.log(response);
+				{	
 					actor.StashActor_actor_id_ref=response.data;
 					actor.StashActor_name=actor_name;
 					actor.last_six_months_exp = $("#6_months_experience").val();
 					actor.last_three_years_exp = $("#3_years_experience").val();
 					$("#save_actor_response").attr("onclick","submit_answers()");
+					$("#new_actor").addClass("hidden");
 					submit_answers();
 					$("#not_registered_last_message").removeClass("hidden");
 				}
@@ -491,7 +533,15 @@ function isEmail(email) {
   return re.test(email);
 }
 function clean_slate_protocol(){
-setTimeout(function(){ location.reload(); }, 9000);
+
+//
+actor=[];
+$("#role_based_questions").html('<option disabled selected value> Select a Role</option>');
+$(".input_cs").val("");
+
+setTimeout(function(){ 
+	$("#not_registered_last_message").addClass("animated fadeOut");
+	 }, 9000);
 }
 	
 function leftPad(number, targetLength) {

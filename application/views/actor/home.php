@@ -2011,6 +2011,7 @@ textarea{
                 </div>
             </div>
                     
+        <script> var isnotsteppage=true;</script>
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php
     include 'includes/scripts.php';

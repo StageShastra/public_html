@@ -186,7 +186,11 @@
                 </div>
             </nav>
 
-            
+            <?php
+                    echo '<script>var first_time='.$user["StashUsers_status"].';</script>';
+                    echo '<script>var step='.$actorProfile['StashActor_profile_completion_stage'] .';</script>';
+
+            ?>
      <div class="modal-content-four col-lg-5 col-md-5 center">
           <div class="modal-header hr_pc">
                   <h4 class="modal-title center" id="myModalLabel">
@@ -299,7 +303,62 @@
 
                 </div>
             </div>
+            <div id="feetToCmConverterModal" style="z-index:999999999999;" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content col-sm-6 col-lg-5 col-md-5 center">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title firstcolor info"> Feet to Centimeter Converter </h4><span class="info-small gray"></span>
+                    </div>
+                    <div class="modal-body" style="background-color:#f2f2f2;">
+                      <div class="container" style="max-width:100%; ">
+                        <form action='#' id="feetToCMConverter" method="post">
+                            <div class="row">
+                              <div class="col-sm-6 form-group no-paddinglr">
+                                  <span class="info-small gray">Feet</span>
+                                  <select class="form-control add" id="feet" name="feet" >
+                                    <?php
+                                        for($i = 0; $i < 11; $i++)
+                                            echo "<option value='{$i}'>{$i}</option>";
+                                    ?>
+                                  </select>
+                                  
+
+                              </div>
+                              <div class="col-sm-6 form-group no-paddinglr">
+                                <span class="info-small gray">Inches</span>
+                                <select class="form-control add" id="inches" name="inches" >
+                                    <?php
+                                        for($i = 0; $i < 12; $i++)
+                                            echo "<option value='{$i}'>{$i}</option>";
+                                    ?>
+                                  </select>
+                              </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 form-group no-paddinglr" style="text-align:center;">
+                                    <button type="button" class="btn submit-btn firstcolor"  onclick="feet_to_cm()" style="margin-top: 20px; margin-left:10px;" id="btn-search" >
+                                        <span class="glyphicon glyphicon-filter"></span> &nbsp; Convert</button>
+                                </div>
+                            </div>
+                            <div class="row" id="convertedBox " style="text-align:center;">
+                                <div class="col-sm-12 form-group no-paddinglr">
+                                    <h3><span id="converted">0</span> cm</h3>
+                                    <p class="gray"><small>Rounding up.</small></p>
+                                </div>
+                            </div>
+                            
+                        </form>
+                      </div>
+                      
+                    </div>
                     
+                  </div>
+
+                </div>
+<script> var isnotsteppage=false</script>
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php
     include 'includes/scripts.php';

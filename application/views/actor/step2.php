@@ -189,7 +189,11 @@
                 </div>
             </nav>
 
-            
+            <?php
+                    echo '<script>var first_time='.$user["StashUsers_status"].';</script>';
+                    echo '<script>var step='.$actorProfile['StashActor_profile_completion_stage'] .';</script>';
+
+            ?>
      <div class="modal-content-four col-lg-5 col-md-5 center">
           <div class="modal-header hr_pc">
                   <h4 class="modal-title center" id="myModalLabel">
@@ -204,7 +208,7 @@
                            <form action="<?= base_url() ?>upload/" class="dropzone" id="photo-upload" style="border: 1px dashed #b2b2b2;border-radius: 5px;background: white;">
                                <div class="info-small hidden" id="message_after_upload"><span class="info gray"><b> Click here to add more images</b>.<span class="info-small gray"><li>Ideally, keep the image size less than 1.5MB</li></span></span></div></form>
                     </div>
-                     <button type="submit" class="btn submit-btn firstcolor pc_button disabled" id="upload-btn-cp" data-click-src="cpmodal"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Choose Photos</button>
+                     <button type="submit" class="btn submit-btn firstcolor pc_button" onclick="$( '#photo-upload' ).click ();" id="choose-btn-cp" data-click-src="cpmodal"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Choose Photos</button>
                     <button type="submit" class="btn submit-btn firstcolor pc_button disabled" id="upload-btn-cp" data-click-src="cpmodal"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Upload and Go</button>
                    
                     
@@ -246,7 +250,7 @@
 
                 </div>
             </div>
-                    
+        <script> var isnotsteppage=false;</script>            
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php
     include 'includes/scripts.php';
