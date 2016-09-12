@@ -1,5 +1,6 @@
 $(document).ready(function(){
-	
+	step=4;
+	var first_time=0;
 	if(step!=5)
 	{
 		profile_Completion(step);
@@ -1073,7 +1074,25 @@ function set_profile_stage(n){
 		});
 		console.log(data);
 }
+function embed_video_show()
+{
+	var url=$("#addlink").val();
+	var id=getId(url);
+	$("#iframe_video").attr("src","http://www.youtube.com/embed/"+id);
+	$("#embed_video").removeClass("hidden");
 
+}
+function getId(url) {
+	console.log(url);
+    var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var match = url.match(regExp);
+
+    if (match && match[2].length == 11) {
+        return match[2];
+    } else {
+        return 'error';
+    }
+}
 
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
