@@ -358,7 +358,8 @@ function video_embed(actor)
 		}
 	}
 	console.log("max_scenes are_"+max_scenes);
-	if(actor.videos.length<max_scenes)
+	var actor_Scenes=actor.videos.length - 1;
+	if(actor_Scenes<max_scenes)
 	{
 		console.log("in max scenes");
 		for(h=actor.videos.length;h<=max_scenes+1;h++)
