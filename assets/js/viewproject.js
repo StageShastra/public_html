@@ -96,7 +96,7 @@ function populate_questions()
 				if(response.status==true)
 				{
 					roles[i].questions=JSON.parse(response.data);
-					console.log(roles[i]);
+					//console.log(roles[i]);
 					//console.log("question "+ (i+1) + " of " + roles.length + " fetched...")
 					
 				}
@@ -164,7 +164,7 @@ function get_question_details(index,role_id)
 		if(roles[i].StashRoles_id==role_id)
 		{
 			attendees[index].questions=[];
-			insert_actor_scenes(role_id,attendees[index].StashActor_actor_id_ref,roles[i].StashRoles_scenes);
+			//insert_actor_scenes(role_id,attendees[index].StashActor_actor_id_ref,roles[i].StashRoles_scenes);
 			if(attendees[index].StashRoleActorLink_role_id_ref==role_id)
 			{
 				attendees[index].role_name=roles[i].StashRoles_role;	
@@ -357,11 +357,11 @@ function video_embed(actor)
 	                +' </td>';
 		}
 	}
-	console.log("max_scenes are_"+max_scenes);
+	//console.log("max_scenes are_"+max_scenes);
 	var actor_Scenes=actor.videos.length - 1;
 	if(actor_Scenes<max_scenes)
 	{
-		console.log("in max scenes");
+		//console.log("in max scenes");
 		for(h=actor_Scenes;h<max_scenes;h++)
 		{
 			string+='<td class="video">'
@@ -489,14 +489,14 @@ function show_video(actor_id,role_id,index)
 	var input_id='input_'+actor_id+'_'+role_id+'_'+index+'';
 	var youtube_link=$('#'+input_id).val();
 	//youtube_link=$('#pakla').val();
-	console.log(youtube_link);
+	//console.log(youtube_link);
 	var video_id = getId(youtube_link);
 	var embed_string = "https://www.youtube.com/embed/"+video_id;
 	var iframe_id='iframe_'+actor_id+'_'+role_id+'_'+index+'';
 	var embed_id= 'embed_'+actor_id+'_'+role_id+'_'+index+'';
 	$('#'+iframe_id).attr("src",embed_string);
 
-	console.log('#'+iframe_id);
+	//console.log('#'+iframe_id);
 	$('#'+embed_id).removeClass("hidden");
 	data = {request: "setActorVideo",
 				 		data: JSON.stringify({
@@ -506,7 +506,7 @@ function show_video(actor_id,role_id,index)
 				 								video: embed_string
 				 							 }
 				 							)};
-				 		console.log(data);
+				 		//console.log(data);
 
 					$.ajax({
 						url: url,
@@ -515,7 +515,7 @@ function show_video(actor_id,role_id,index)
 						async:false,
 						success: function(response){
 							if(response.status==true)
-							{	console.log(response);
+							{	//console.log(response);
 								console.log("video added");
 								
 							}
@@ -606,7 +606,7 @@ function insert_actor_scenes(role_id,actor_id,scenes)
 			success: function(response){
 				if(response.status==true)
 				{	
-					console.log("Scene and actor linked");
+				//	console.log("Scene and actor linked");
 					
 				}
 				else
