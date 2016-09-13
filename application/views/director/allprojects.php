@@ -67,6 +67,20 @@
         font-family: "Roboto","Open Sans";
         font-size: 15px;
       }
+      .shoot_begins{
+        padding: 2px 4px;
+        background: #ff3b49;
+        color: white;
+        border-radius: 3px;
+        font-size:11px;
+      }
+      .shoot_ends{
+        padding: 2px 4px;
+        background: #ffb600;
+        border-radius: 3px;
+        font-size:11px;
+        color: white;
+      }
       .profile_image{
         height: 75px;
         width: 75px;
