@@ -100,7 +100,7 @@ function populate_cards()
 		shoot_start_date.setUTCSeconds(projects[i].StashProject_shoot_begins);
 		shoot_end_date.setUTCSeconds(projects[i].StashProject_shoot_ends);
 		project_date.setUTCSeconds(projects[i].StashProject_date);
-		dyn_html+='<div class="col-lg-3 col-xs-12 card-marginbottom">'
+dyn_html+='<div class="col-lg-3 col-xs-12 card-marginbottom">'
     			+'<div class="card" data='+projects[i].StashProject_id+'>'
         		+'<div style="width:100%; height:100px; text-align:center; background-color:'+project_background(projects[i].StashProject_name)+'"><span class="one_letter">'+projects[i].StashProject_name[0]+'</span></div>'
         		+'<div class="card-block" style="min-width:100% !important;">'         
@@ -122,15 +122,11 @@ function populate_cards()
             +  '</tr>'
             +  '<tr>'
             +    '<td class="card-table-element">Shoot Start</td>'
-            +    '<td class="card-table-element-data">'+ shoot_start_date.toDateString() + '</td>'
+            +    '<td class="card-table-element-data"><span class="shoot_starts">'+ shoot_start_date.toDateString() + '</span></td>'
             +  '</tr>'
             +  '<tr>'
             +    '<td class="card-table-element">Shoot End</td>'
-            +    '<td class="card-table-element-data">'+ shoot_end_date.toDateString()+'</td>'
-            +  '</tr>'
-            +  '<tr>'
-            +    '<td class="card-table-element">Actors</td>'
-            +    '<td class="card-table-element-data">25</td>'
+            +    '<td class="card-table-element-data"><span class="shoot_ends">'+ shoot_end_date.toDateString()+'</span></td>'
             +  '</tr>'
             +'</table>'
           +'</div>'
