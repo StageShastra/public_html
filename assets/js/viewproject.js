@@ -97,7 +97,7 @@ function populate_questions()
 				{
 					roles[i].questions=JSON.parse(response.data);
 					console.log(roles[i]);
-					console.log("question "+ (i+1) + " of " + roles.length + " fetched...")
+					//console.log("question "+ (i+1) + " of " + roles.length + " fetched...")
 					
 				}
 				else
@@ -170,7 +170,7 @@ function get_question_details(index,role_id)
 				attendees[index].role_name=roles[i].StashRoles_role;	
 			}
 			var questions_answers={};
-			console.log("linking actor's answer with questions... " +roles[i].questions.length);
+		//	console.log("linking actor's answer with questions... " +roles[i].questions.length);
 			for(k=0;k<(roles[i].questions).length && roles[i].questions.length!=0;k++)
 			{
 				questions_answers.question=roles[i].questions[k];
@@ -190,7 +190,7 @@ function get_question_details(index,role_id)
 							if(response.status==true)
 							{	
 								(questions_answers.question).answer=JSON.parse(response.data);
-								console.log("question " + (k+1) + " of " + roles[i].questions.length + "linked...")
+							//	console.log("question " + (k+1) + " of " + roles[i].questions.length + "linked...")
 								return 1;
 								
 							}
@@ -204,7 +204,7 @@ function get_question_details(index,role_id)
 				
 				attendees[index].questions[k]=questions_answers;
 			}
-			console.log("all question and answers mapped for actor " + (index+1));
+			//console.log("all question and answers mapped for actor " + (index+1));
 			
 		}
 	}
@@ -231,7 +231,7 @@ function populate_videos()
 							if(response.status==true)
 							{	
 								attendees[i].videos=JSON.parse(response.data);
-								console.log("videos " + (i+1) + " of " + attendees.length + "linked...")
+								//console.log("videos " + (i+1) + " of " + attendees.length + "linked...")
 								
 							}
 							else
@@ -265,7 +265,7 @@ function set_videos(actor_id,role_id,index)
 						success: function(response){
 							if(response.status==true)
 							{	
-								console.log("actor video set");
+							//	console.log("actor video set");
 							}
 							else
 							{
@@ -299,7 +299,7 @@ function populate_table()
 	{
 		
              var shortlist_string=shortlist_star(attendees[i]);
-             console.log(shortlist_string);
+             //console.log(shortlist_string);
              dyn_html+= shortlist_string+''
              +'  <td class="profile" style="vertical-align:middle-top;">'
              +'    <div class="center"><img src="http://www.castiko.com/assets/img/actors/'+attendees[i].StashActor_avatar+'" class="showDetails pro_pic" ></div>'
@@ -314,7 +314,7 @@ function populate_table()
              //console.log(video_string);
              dyn_html+= video_string+''
              var notes_string=show_notes(attendees[i]);
-             console.log(shortlist_string);
+             //console.log(shortlist_string);
              dyn_html+= notes_string+''
              +'</tr>';
 	}
@@ -330,7 +330,7 @@ function isEmail(email) {
 }
 function video_embed(actor)
 {
-	console.log("video embed called");
+	//console.log("video embed called");
 	var string='';
 	for(t=0;t<actor.videos.length;t++)
 	{
@@ -357,8 +357,10 @@ function video_embed(actor)
 	                +' </td>';
 		}
 	}
+	console.log("max_scenes are_"+max_scenes);
 	if(actor.videos.length<max_scenes)
 	{
+		console.log("in max scenes");
 		for(h=actor.videos.length;h<=max_scenes;h++)
 		{
 			string+='<td class="video">'
@@ -426,7 +428,7 @@ function shortlist_actor(actor_id,role_id,status)
 				 								status: status
 				 							 }
 				 							)};
-				 		console.log(data);
+				 		//console.log(data);
 
 					$.ajax({
 						url: url,
