@@ -1036,21 +1036,21 @@ function profile_Completion(step)
 }
 function profile_step_one()
 {
-	window.location.assign("./step1");
+	window.location.assign("./actor/step1");
 
 }
 function profile_step_two()
 {
-	window.location.assign("./step2");
+	window.location.assign("./actor/step2");
 
 }
 function profile_step_three(){
-	window.location.assign("./step3");
+	window.location.assign("./actor/step3");
 
 }
 function profile_step_four()
 {
-	window.location.assign("./step4");
+	window.location.assign("./actor/step4");
 
 }
 function need_help(){
