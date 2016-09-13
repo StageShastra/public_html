@@ -361,7 +361,7 @@ function video_embed(actor)
 	if(actor.videos.length<max_scenes)
 	{
 		console.log("in max scenes");
-		for(h=actor.videos.length;h<=max_scenes;h++)
+		for(h=actor.videos.length;h<=max_scenes+1;h++)
 		{
 			string+='<td class="video">'
 	                +'<span class="click_to_add">Not applicable</span>'    
