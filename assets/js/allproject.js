@@ -32,7 +32,7 @@ $(document).ready(function(){
 	$(document).on("click",".card",function(e) { 
 		var id=$(this).attr("data");
 		//console.log(id);
-		window.location.assign('./castingsheet/'+id);
+		window.location.assign('./project/'+id);
 	});  
 
 	//handles clicks on the onoffswitch
