@@ -283,7 +283,7 @@ function question_submit(){
 		}
 		
 	}
-	window.location.assign("http://castiko.com/director/castingsheet/"+project_id);
+	window.location.assign("http://castiko.com/director/project/"+project_id);
 
 }
 function save_link_question(q_index,role_id,project_id)
