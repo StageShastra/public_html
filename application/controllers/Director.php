@@ -26,6 +26,18 @@
 			$this->load->view("director/home", $pageInfo);
 		}
 
+		public function profile($value=''){
+			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'director')
+				redirect(base_url());
+			$pageInfo = [];
+			$this->load->model("ModelDirector");
+			$pageInfo['plan'] = $this->ModelDirector->getDirectorPlan(0);
+			$pageInfo['isAllowed'] = $this->ModelDirector->getAdminConfirmation();
+			$pageInfo['count_emails'] = $this->ModelDirector->getInvitationEmailCount($this->session->userdata("StaSh_User_id"));
+			$pageInfo['count_sms'] = $this->ModelDirector->getInvitationSMSCount($this->session->userdata("StaSh_User_id"));
+			$this->load->view("director/castingdirectorprofile", $pageInfo);
+		}
+
 		public function conversations($value=''){
 
 			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'director')
