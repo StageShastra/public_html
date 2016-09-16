@@ -42,9 +42,13 @@
                             <a href="<?= base_url()?>director/account"  > Account
                             </a>
                         </li>
-                        <li >
-                            <a href="<?= base_url()?>director/newproject"  > Create New Project
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Project</a>
                             </a>
+                            <ul class="dropdown-menu">
+                             <li><a href="<?= base_url() . "director/allprojects" ?>" >View all projects</a></li>
+                             <li><a href="<?= base_url() . "director/createnewproject" ?>" >Create new project</a></li>
+                            </ul>
                         </li>
                         <li >
                             <a href="#" data-toggle="modal" data-target="#advancedSearch" > Search
