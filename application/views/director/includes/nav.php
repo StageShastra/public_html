@@ -47,7 +47,7 @@
                             </a>
                             <ul class="dropdown-menu">
                              <li><a href="<?= base_url() . "director/allprojects" ?>" >View all projects</a></li>
-                             <li><a href="<?= base_url() . "director/createnewproject" ?>" >Create new project</a></li>
+                             <li><a href="<?= base_url() . "director/newproject" ?>" >Create new project</a></li>
                             </ul>
                         </li>
                         <li >
