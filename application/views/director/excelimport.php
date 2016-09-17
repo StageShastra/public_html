@@ -237,68 +237,6 @@
 .hiddenoption { display: none; }
 </style>
 
-<<<<<<< HEAD
-function revealColumns(that){
-  document.getElementById("columnHeaders").style.display="block";
-
-  var columnCount = that.value;
-  var columns = [document.getElementById("col1"),document.getElementById("col2"),document.getElementById("col3"),document.getElementById("col4"),document.getElementById("col5"),document.getElementById("col6"),document.getElementById("col7")];
-  
-
-  for(var j=0;j<7;j++)
-  {columns[j].style.display="none";}
-
-  for (var i=0;i < columnCount;i++)
-  {columns[i].style.display="block"; }
-  
-}
-
-function notRed(that){ 
-  if(that.value=="empty"){
-    that.style.background="#fff";
-    that.style.color="#FF003A";
-    document.getElementById("finalSubmit").disabled=true;
-  }
-  else {
-    that.style.background="honeydew";
-    that.style.color="black";
-  }
-
-  checkCompletion();
-}  
-
-function checkCompletion(){
-  var columnCount = document.getElementById("columns").value;
-  var columns = [document.getElementById("col1"),document.getElementById("col2"),document.getElementById("col3"),document.getElementById("col4"),document.getElementById("col5"),document.getElementById("col6"),document.getElementById("col7")];
-  var checkCount=0;
-  for(var k=0;k<columnCount;k++){
-    if(columns[k].value=="empty"){ 
-      document.getElementById("excelFile").disabled=true;
-      return;
-    } //back to disabled
-    else{
-      checkCount++; 
-    } //enable Upload File  
-  }
-  console.log(checkCount + " and columnCount is " + columnCount);
-  if(checkCount==columnCount && columnCount!=0)
-  {
-    console.log("here");
-    document.getElementById("excelFile").disabled=false;
-    document.getElementById("finalSubmit").disabled=false;
-  }  
-}
-
-function validateForm(){
-  console.log("here also");
-  if(document.getElementById("excelFile").value != "") {document.getElementById("finalSubmit").disabled=false;}
-  else {document.getElementById("finalSubmit").disabled=true;}
-}
-
-</script>
-=======
->>>>>>> 515084c6e5d4a01db3e36a71996afee255293893
-
 <div class="container light-padded">
             <h1> Import Your Actor Data From an Excel File </h1>
 <hr />
