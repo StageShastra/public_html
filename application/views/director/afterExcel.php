@@ -231,97 +231,22 @@
 .datagrid table th { padding: 0.5rem 0.5rem; }
 .datagrid table thead th {background-color:#FFFFFF; color:black; font-size: 15px; font-weight: bold; } 
 .datagrid table thead th:first-child { border: none; }
-.datagrid table tbody td { color: #00557F; font-size: 12px;font-weight: normal; }
+.datagrid table tbody td { color: #00557F; font-size: 12px;font-weight: normal; text-align: center;}
 .datagrid table tbody td:first-child { border-left: none !important; }
 .datagrid table tbody tr:last-child td { border-bottom: none !important; }
 .hiddenoption { display: none; }
 </style>
 
-<<<<<<< HEAD
-function revealColumns(that){
-  document.getElementById("columnHeaders").style.display="block";
-
-  var columnCount = that.value;
-  var columns = [document.getElementById("col1"),document.getElementById("col2"),document.getElementById("col3"),document.getElementById("col4"),document.getElementById("col5"),document.getElementById("col6"),document.getElementById("col7")];
-  
-
-  for(var j=0;j<7;j++)
-  {columns[j].style.display="none";}
-
-  for (var i=0;i < columnCount;i++)
-  {columns[i].style.display="block"; }
-  
-}
-
-function notRed(that){ 
-  if(that.value=="empty"){
-    that.style.background="#fff";
-    that.style.color="#FF003A";
-    document.getElementById("finalSubmit").disabled=true;
-  }
-  else {
-    that.style.background="honeydew";
-    that.style.color="black";
-  }
-
-  checkCompletion();
-}  
-
-function checkCompletion(){
-  var columnCount = document.getElementById("columns").value;
-  var columns = [document.getElementById("col1"),document.getElementById("col2"),document.getElementById("col3"),document.getElementById("col4"),document.getElementById("col5"),document.getElementById("col6"),document.getElementById("col7")];
-  var checkCount=0;
-  for(var k=0;k<columnCount;k++){
-    if(columns[k].value=="empty"){ 
-      document.getElementById("excelFile").disabled=true;
-      return;
-    } //back to disabled
-    else{
-      checkCount++; 
-    } //enable Upload File  
-  }
-  console.log(checkCount + " and columnCount is " + columnCount);
-  if(checkCount==columnCount && columnCount!=0)
-  {
-    console.log("here");
-    document.getElementById("excelFile").disabled=false;
-    document.getElementById("finalSubmit").disabled=false;
-  }  
-}
-
-function validateForm(){
-  console.log("here also");
-  if(document.getElementById("excelFile").value != "") {document.getElementById("finalSubmit").disabled=false;}
-  else {document.getElementById("finalSubmit").disabled=true;}
-}
-
-</script>
-=======
->>>>>>> 515084c6e5d4a01db3e36a71996afee255293893
 
 <div class="container light-padded">
-            <h1> Import Your Actor Data From an Excel File </h1>
+            <h1> Imported data from <?= $name ?> </h1>
 <hr />
-            <h3> Step 1: Tell Us About Your File </h3>
-            <br>
-            <div>  
-              <label class="col-lg-1" style="padding:7px 0px 7px 0px;" for="columns">Columns: </label>
-              <div class="col-lg-3"><select class="form-control firstcolor firstColumn" id="columns"  name="columns" > 
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7" selected="selected">7</option>
-              </select></div>
-            </div>
-            <br>
-            <br>
+            <h3> Few row from upload excel sheet displayed here. Finish if correct or Cancel to re-upload. </h3>
             <br>
 
             <?php
 
-                function selectOptFlood(){
+                function getKeyValue($name = ''){
                   $selectOpt = array(
                                     'name' => 'Name',
                                     'gender' => 'Gender',
@@ -331,71 +256,65 @@ function validateForm(){
                                     'phone' => 'Phone',
                                     'project' => 'Project'
                                 );
-                  foreach ($selectOpt as $key => $value) {
-                    echo "<option val='{$key}'>{$value}</option>";
-                  }
+                  return $selectOpt[$name];
               }
+
+
+              $handle = fopen("./tmpSheets/{$filename}", 'r');
 
             ?>
 
-            <div class="datagrid" id="columnHeaders" style="display:none;">
-            <label style="font-size:1.5rem;"> Now tell us which column contains which information: </label>
+            <div class="datagrid" id="columnHeaders">
+            <!-- <label style="font-size:1.5rem;"> Now tell us which column contains which information: </label> -->
               <table>
 
-                <thead><tr>
-                  <th>Column 1</th>
-                  <th>Column 2</th>
-                  <th>Column 3</th>
-                  <th>Column 4</th>
-                  <th>Column 5</th>
-                  <th>Column 6</th>
-                  <th>Column 7</th>
+                <thead>
+                  <tr>
+                    <?php
+                      foreach ($fields as $key => $f) {
+                        echo "<th>".getKeyValue($f)."</th>";
+                      }
+                    ?>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                      $i = true;
+                      $index = 1;
+                      while (!feof($handle)) {
+                        $line = fgets($handle);
+                        if($i){
+                          $i = false;
+                          continue;
+                        }
 
-                </tr></thead>
-                <tr>
-                  <td><select class="form-control firstcolor hiddenoption" id="col1" name="col1" >
-                    <option selected="selected" value="empty"> Select One </option>
-                    <?= selectOptFlood() ?></select></td>
-                  
-                  <td><select class="form-control firstcolor hiddenoption" id="col2" name="col2" ">
-                    <option selected="selected"  value="empty"> Select One </option>
-                    <?= selectOptFlood() ?></select></td>
-                  
-                  <td><select class="form-control firstcolor hiddenoption" id="col3" name="col3" >
-                    <option selected="selected"  value="empty"> Select One </option>
-                    <?= selectOptFlood() ?></select></td>
 
-                  <td><select class="form-control firstcolor hiddenoption" id="col4" name="col4" >
-                    <option selected="selected"  value="empty"> Select One </option>
-                    <?= selectOptFlood() ?></select></td>
-                  
-                  <td><select class="form-control firstcolor hiddenoption" id="col5" name="col5" >
-                    <option selected="selected"  value="empty"> Select One </option>
-                    <?= selectOptFlood() ?></select></td>
-                  
-                  <td><select class="form-control firstcolor hiddenoption" id="col6" name="col6" >
-                    <option selected="selected"  value="empty"> Select One </option>
-                    <?= selectOptFlood() ?></select></td>
+                        $peices = explode(",", $line);
 
-                  <td><select class="form-control firstcolor hiddenoption" id="col7" name="col7" >
-                    <option selected="selected"  value="empty"> Select One </option>
-                    <?= selectOptFlood() ?></select></td>
-
-                </tr>
+                        echo "<tr>";
+                        foreach ($peices as $key => $l) {
+                          if($fields[$key] == 'gender')
+                            $l = ($l == 1) ? "Male" : "Female";
+                          echo "<td>{$l}</td>";
+                        }
+                        echo "</tr>";
+                        if($i == 10){
+                          break;
+                        }
+                        $i++;
+                      }
+                  ?>
+                </tbody>
               </table>
             </div>
             
           
           <br>
 <hr />
-          <h3> Step 2: Choose Your File </h3>
+          <h3> Click finish if all correct or Re-Upload </h3>
           <br>
-          <form action="" method="post" enctype="multipart/form-data" id="excelUpload">
-            <input type="file" name="excelFile" id="excelFile" disabled="true" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"  />
-            <br>
-           <input type="hidden" name="fields">
-            <input class="btn submit-btn firstcolor" type="submit" value="Submit" id="finalSubmit" disabled="true">
-          </form>
+          <a href="<?= base_url() ?>director/finishUpload/" class="btn submit-btn firstcolor"> Finish <i class="fa fa-check"></i> </a>
+          <a href="<?= base_url() ?>director/spreadsheet/" class="btn submit-btn firstcolor">Re-Upload <i class="fa fa-refresh"></i></a>
           
           
             <!-- <table border="1">
