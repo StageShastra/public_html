@@ -540,7 +540,7 @@ $("#role_based_questions").html('<option disabled selected value> Select a Role<
 $(".input_cs").val("");
 
 setTimeout(function(){ 
-	$("#not_registered_last_message").addClass("animated fadeOut");
+	location.reload();
 	 }, 9000);
 }
 	
