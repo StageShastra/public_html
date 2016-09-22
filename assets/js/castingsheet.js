@@ -274,7 +274,10 @@ function submit_answers()
 		return;
 	}
 	update_actor_experience();
-	insert_actor_answers(0);
+	if(actor.questions_answers.length>0)
+	{
+		insert_actor_answers(0);
+	}
 	insert_role_actor();
 	insert_project_actor();
 	$("body").scrollTop(0);
