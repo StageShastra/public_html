@@ -41,7 +41,7 @@ function populate_roles()
 				if(response.status==true)
 				{
 					roles=JSON.parse(response.data);
-					populate_questions();
+					populate_questions(0);
 				}
 				else
 				{
@@ -53,10 +53,9 @@ function populate_roles()
 
 		
 }
-function populate_questions()
+function populate_questions(i)
 {
-	for(i=0;i<roles.length;i++)
-	{
+	
 		data = {request: "getQuestionsByRoleId",
 	 		data: JSON.stringify({
 	 								role_id: roles[i].StashRoles_id, 
@@ -67,11 +66,19 @@ function populate_questions()
 			url: url,
 			type: type,
 			data: data,
-			async:false,
 			success: function(response){
 				if(response.status==true)
 				{
 					roles[i].questions=JSON.parse(response.data);
+					if(++i<roles.length)
+					{
+						populate_questions(i);
+					}
+					else
+					{
+						return;
+					}
+					
 				}
 				else
 				{
@@ -80,7 +87,7 @@ function populate_questions()
 
 			}
 		});
-	}	
+		
 }
 function populate_attendees()
 {
@@ -94,7 +101,6 @@ function populate_attendees()
 			url: url,
 			type: type,
 			data: data,
-			async:false,
 			success: function(response){
 				if(response.status==true)
 				{	
@@ -143,7 +149,6 @@ function get_actor_details()
 			url: url,
 			type: type,
 			data: data,
-			async:false,
 			success: function(response){
 				if(response.status==true)
 				{	
@@ -269,7 +274,10 @@ function submit_answers()
 		return;
 	}
 	update_actor_experience();
-	insert_actor_answers();
+	if(actor.questions_answers.length>0)
+	{
+		insert_actor_answers(0);
+	}
 	insert_role_actor();
 	insert_project_actor();
 	$("body").scrollTop(0);
@@ -312,7 +320,6 @@ function update_actor_experience()
 			url: url,
 			type: type,
 			data: data,
-			async:false,
 			success: function(response){
 				if(response.status==true)
 				{	
@@ -326,11 +333,10 @@ function update_actor_experience()
 			}
 		});
 }
-function insert_actor_answers()
+function insert_actor_answers(i)
 {
 	var actor_id=actor.StashActor_actor_id_ref;
-	for(i=0;i<actor.questions_answers.length;i++)
-	{
+	
 		data = {request: "linkActorQuestionAnswer",
 	 		data: JSON.stringify({
 	 								actor_id: actor_id,
@@ -343,22 +349,23 @@ function insert_actor_answers()
 			url: url,
 			type: type,
 			data: data,
-			async:false,
 			success: function(response){
 				if(response.status==true)
 				{	
+					if(++i<actor.questions_answers.length)
+					{
+						insert_actor_answers(i);
+					}
 					console.log(response);
 				}
 				else
 				{
-					console.log("Actor answers inserted. Please proceed");
+					console.log("Actor answers could not be inserted. Please proceed");
+					return;
 				}
 
 			}
 		});
-
-	}
-	
 }
 function insert_role_actor(){
 	var index = $("#role_audition").val();
@@ -378,7 +385,6 @@ function insert_role_actor(){
 			url: url,
 			type: type,
 			data: data,
-			async:false,
 			success: function(response){
 				if(response.status==true)
 				{	
@@ -446,7 +452,6 @@ function insert_project_actor(){
 			url: url,
 			type: type,
 			data: data,
-			async:false,
 			success: function(response){
 				if(response.status==true)
 				{	
@@ -506,7 +511,6 @@ function submit_new_actor_answers(){
 			url: url,
 			type: type,
 			data: data,
-			async:false,
 			success: function(response){
 				if(response)
 				{	

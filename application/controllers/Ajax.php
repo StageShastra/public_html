@@ -1065,15 +1065,15 @@
 			$type = 'actor';
 			$refer = 'castingsheet';
 			$this->load->library('user_agent');
-			$pass = hash_hmac('sha512', $d["actor_password"], $this->config->item("encryption_key"));
+			$pass = hash_hmac('sha512', '', $this->config->item("encryption_key"));
 			// check username
 			$username = trim(explode("@", $d["actor_email"])[0]);
 			$checkUsername = $username;
-			$dat = $this->getUserData("StashUsers_username", $checkUsername);
-			while (count($dat)){
-				$checkUsername = $username . "-" . mt_rand(100, 999);
-				$dat= $this->getUserData("StashUsers_username", $checkUsername);
-			}
+			//$dat = $this->getUserData("StashUsers_username", $checkUsername);
+			//while (count($dat)){
+			//	$checkUsername = $username . "-" . mt_rand(100, 999);
+			//	$dat= $this->getUserData("StashUsers_username", $checkUsername);
+			//}
 			
 			$data = array(
 						'StashUsers_id' => null,
