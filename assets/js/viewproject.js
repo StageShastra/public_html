@@ -212,9 +212,10 @@ function get_link_question_role(i,index,k,role_id)
 							if(response.status==true)
 							{	
 								(questions_answers.question).answer=JSON.parse(response.data);
+								console.log("lenth of qs is "+roles[i].questions.length);
 								if(++k<(roles[i].questions).length && roles[i].questions.length!=0)
 								{
-									get_link_question_role(i,k,role_id);
+									get_link_question_role(i,index,k,role_id);
 								}
 								return 1;
 								
