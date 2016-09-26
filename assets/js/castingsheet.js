@@ -544,13 +544,13 @@ function clean_slate_protocol(){
 actor=[];
 $("#role_based_questions").html('<option disabled selected value> Select a Role</option>');
 $(".input_cs").val("");
-
+$("#save_actor_response").removeAttr('disabled');
+$("#save_actor_response").html('Submit');
 setTimeout(function(){ 
 	$("#not_registered_last_message").addClass("animated fadeOut");
 	 }, 9000);
 }
-$("#save_actor_response").removeAttr('disabled');
-$("#save_actor_response").html('Submit');
+
 
 
 	
