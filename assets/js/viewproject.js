@@ -59,7 +59,8 @@ function populate_roles()
 				{
 					roles=JSON.parse(response.data);
 					console.log("Roles fetched");
-					populate_questions();
+					populate_questions(0);
+					
 					
 				}
 				else
@@ -72,11 +73,10 @@ function populate_roles()
 
 		
 }
-function populate_questions()
+function populate_questions(i)
 {
 	console.log("fetching questions...");
-	for(i=0;i<roles.length;i++)
-	{
+	
 		if(roles[i].StashRoles_scenes>max_scenes)
 		{
 			max_scenes=roles[i].StashRoles_scenes;
@@ -91,11 +91,17 @@ function populate_questions()
 			url: url,
 			type: type,
 			data: data,
-			async:false,
 			success: function(response){
 				if(response.status==true)
 				{
 					roles[i].questions=JSON.parse(response.data);
+					if(++i<roles.length)
+					{
+						populate_questions(i);
+					}
+					else{
+						populate_attendees();
+					}
 					//console.log(roles[i]);
 					//console.log("question "+ (i+1) + " of " + roles.length + " fetched...")
 					
@@ -107,9 +113,8 @@ function populate_questions()
 
 			}
 		});
-	}
 	console.log("all questions fetched")
-	populate_attendees();	
+	
 }
 function populate_attendees()
 {
@@ -123,13 +128,13 @@ function populate_attendees()
 			url: url,
 			type: type,
 			data: data,
-			async:false,
 			success: function(response){
 				if(response.status==true)
 				{	
 					attendees=JSON.parse(response.data);
 					console.log(attendees.length +" actors fetched.");
-					get_actors_answers();
+					get_actors_answers(0);
+					
 				}
 				else
 				{
@@ -140,40 +145,58 @@ function populate_attendees()
 		});
 }
 
-function get_actors_answers()
+function get_actors_answers(f)
 {
 	console.log("fetching actor's answers...");
-	for(f=0;f<attendees.length;)
-	{
+	
+		console.log(f);
+		console.log(attendees);
 		if(get_question_details(f,attendees[f].StashRoleActorLink_role_id_ref)==1)
 		{
 			
-			f++;
+			if(++f<attendees.length)
+			{
+				get_actors_answers(f);
+				console.log(f);
+			}
+			else
+			{
+				populate_videos(0);
+				console.log("all actor's answers fetched");
+			}
 
 		}
-	}	
-	console.log("all actor's answers fetched");
-	populate_videos();
+	
 }
+
 
 function get_question_details(index,role_id)
 {
 
-	for(var i=0;i<roles.length;i++)
+	for(var ri=0;ri<roles.length;ri++)
 	{	
-		if(roles[i].StashRoles_id==role_id)
+		console.log(ri);
+		if(roles[ri].StashRoles_id==role_id)
 		{
 			attendees[index].questions=[];
-			//insert_actor_scenes(role_id,attendees[index].StashActor_actor_id_ref,roles[i].StashRoles_scenes);
 			if(attendees[index].StashRoleActorLink_role_id_ref==role_id)
 			{
-				attendees[index].role_name=roles[i].StashRoles_role;	
+				attendees[index].role_name=roles[ri].StashRoles_role;	
 			}
+			console.log(ri);
+			get_link_question_role(ri,index,0,role_id);
+			break;
+			
+		}
+	}
+	return 1;
+}
+function get_link_question_role(i,index,k,role_id)
+{
 			var questions_answers={};
-		//	console.log("linking actor's answer with questions... " +roles[i].questions.length);
-			for(k=0;k<(roles[i].questions).length && roles[i].questions.length!=0;k++)
-			{
-				questions_answers.question=roles[i].questions[k];
+			console.log(roles);
+			console.log(i);
+			questions_answers.question=roles[i].questions[k];
 				data = {request: "getActorsAnswers",
 				 		data: JSON.stringify({
 				 								actor_id: attendees[index].StashActor_actor_id_ref,
@@ -185,12 +208,14 @@ function get_question_details(index,role_id)
 						url: url,
 						type: type,
 						data: data,
-						async:false,
 						success: function(response){
 							if(response.status==true)
 							{	
 								(questions_answers.question).answer=JSON.parse(response.data);
-							//	console.log("question " + (k+1) + " of " + roles[i].questions.length + "linked...")
+								if(++k<(roles[i].questions).length && roles[i].questions.length!=0)
+								{
+									get_link_question_role(i,k,role_id);
+								}
 								return 1;
 								
 							}
@@ -203,18 +228,11 @@ function get_question_details(index,role_id)
 					});
 				
 				attendees[index].questions[k]=questions_answers;
-			}
-			//console.log("all question and answers mapped for actor " + (index+1));
-			
-		}
-	}
-	return 1;
 }
-function populate_videos()
+function populate_videos(i)
 {
 	console.log("fetching videos...");
-	for(i=0;i<attendees.length;i++)
-	{
+	
 		data = {request: "getActorVideos",
 				 		data: JSON.stringify({
 				 								actor_id: attendees[i].StashActor_actor_id_ref,
@@ -226,11 +244,20 @@ function populate_videos()
 						url: url,
 						type: type,
 						data: data,
-						async:false,
 						success: function(response){
 							if(response.status==true)
 							{	
 								attendees[i].videos=JSON.parse(response.data);
+								if(++i<attendees.length)
+								{
+									populate_videos(i);
+								}
+								else
+								{
+									console.log("all videos fetched.");
+									console.log(attendees);
+									populate_table();
+								}
 								//console.log("videos " + (i+1) + " of " + attendees.length + "linked...")
 								
 							}
@@ -241,11 +268,10 @@ function populate_videos()
 
 						}
 					});
-	}
-	console.log("all videos fetched.");
-	console.log(attendees);
-	populate_table();
+	
+	
 }
+
 function set_videos(actor_id,role_id,index)
 {
 	data = {request: "setActorSceneVideo",
@@ -261,7 +287,6 @@ function set_videos(actor_id,role_id,index)
 						url: url,
 						type: type,
 						data: data,
-						async:false,
 						success: function(response){
 							if(response.status==true)
 							{	
@@ -435,7 +460,6 @@ function shortlist_actor(actor_id,role_id,status)
 						url: url,
 						type: type,
 						data: data,
-						async:false,
 						success: function(response){
 							if(response.status==true)
 							{	
@@ -512,7 +536,6 @@ function show_video(actor_id,role_id,index)
 						url: url,
 						type: type,
 						data: data,
-						async:false,
 						success: function(response){
 							if(response.status==true)
 							{	//console.log(response);
@@ -549,7 +572,6 @@ function save_notes(actor_id,role_id,index)
 						url: url,
 						type: type,
 						data: data,
-						async:false,
 						success: function(response){
 							if(response.status==true)
 							{	console.log(response);
@@ -582,11 +604,10 @@ function show_all(){
 	$("#shortlist_all").addClass("fa-star-o");
 	$("#shortlist_all").removeClass("fa-star");
 }
-function insert_actor_scenes(role_id,actor_id,scenes)
+function insert_actor_scenes(role_id,actor_id,scenes,index)
 {
 	
-	for(i=0;i<=scenes;i++)
-	{
+	
 		data = {
 			request: "insertRoleActorScenes",
 	 		data: JSON.stringify({
@@ -602,21 +623,27 @@ function insert_actor_scenes(role_id,actor_id,scenes)
 			url: url,
 			type: type,
 			data: data,
-			async:false,
 			success: function(response){
 				if(response.status==true)
 				{	
-				//	console.log("Scene and actor linked");
-					
+					console.log("Scene and actor linked");
+					if(++index<=scenes)
+					{
+						insert_actor_scenes(role_id,actor_id,scenes,index);
+					}
 				}
 				else
 				{
 					console.log("Scene and actor could not be linked");
+					if(++index<=scenes)
+					{
+						insert_actor_scenes(role_id,actor_id,scenes,index);
+					}
 				}
 
 			}
 		});
-	}
+	
 }
 function getId(url) {
 	console.log(url);
