@@ -184,7 +184,9 @@ function get_question_details(index,role_id)
 				attendees[index].role_name=roles[ri].StashRoles_role;	
 			}
 			console.log(ri);
-			get_link_question_role(ri,index,0,role_id);
+			if(roles[ri].questions.length!=0){
+				get_link_question_role(ri,index,0,role_id);
+			}
 			break;
 			
 		}
