@@ -568,6 +568,7 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
 }
 .col-sm-6 select{
       margin: 0px 0px 5px 0px;
+      padding: 6px 12px !important;
 }
 button[disabled], html input[disabled] {
     cursor: not-allowed!important;

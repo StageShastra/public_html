@@ -246,6 +246,8 @@ function show_dynamic_questions()
 }
 function submit_answers()
 {	
+	$("#save_actor_response").attr('disabled', 'disabled');
+
 	$("#not_registered_last_message").removeClass("animated fadeOut");
 	actor.audition_date = $('#date_audition').val();
 	var index = $("#role_audition").val();
@@ -287,7 +289,7 @@ function submit_answers()
 	//$("#contact").addClass("hidden");
 	$("#not_registered_last_message").html("Your response has been recorded<br>Note : If you haven't completed your profile on Castiko, please do so as soon as possible.");
 	$("#not_registered_last_message").removeClass("hidden");
-
+	$("#not_connected_message").addClass("hidden");
 	clean_slate_protocol();
 	
 }
@@ -547,6 +549,7 @@ setTimeout(function(){
 	$("#not_registered_last_message").addClass("animated fadeOut");
 	 }, 9000);
 }
+$("#save_actor_response").removeAttr('disabled');
 	
 function leftPad(number, targetLength) {
     var output = number + '';

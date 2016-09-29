@@ -714,6 +714,28 @@ button[disabled], html input[disabled] {
 #table{
   margin-top: 20px;
 }
+.role-tab{
+  padding: 3px 9px;
+  border: 2px solid #FF5722;
+  border-radius: 4px;
+  background: #ff3b49;
+  color: white;
+  font-size: 13px;
+  font-family: "Roboto";
+  font-weight: 500;
+  box-shadow: 2px 2px 10px gray;
+  margin-right: 10px;
+  transition: all 500ms;
+}
+.role-tab:hover{
+  opacity: 0.5;
+}
+.inactive-tab{
+  opacity: 0.5;
+}
+.inactive-tab:hover{
+  opacity: 1;
+}
 
               </style>
         <!--[if lt IE 8]>
@@ -785,6 +807,9 @@ button[disabled], html input[disabled] {
                     <h3 class="project_name"> PROJECT : <?= $project["StashProject_name"]; ?></h3>
                     <h5 class="shoot_dates"><span style="">Shoot starts from  </span><span class="shoot_begins"></span> and ends on <span class="shoot_ends"></span> </h5>
                     <button type="button" class="go_button" onclick="window.location.assign('../castingsheet/<?= $project["StashProject_id"]; ?>')">Open Casting Sheet</button>
+                </div>
+                <div class="role-tabs">
+                  
                 </div>
                 <table class="table table-striped actors">
                 
