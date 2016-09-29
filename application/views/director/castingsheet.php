@@ -785,7 +785,7 @@ button[disabled], html input[disabled] {
                               Choose Password  
                             </div>
                             <div class="col-sm-6">
-                              <input type="password" id="password_new_actor" class="input_cs" name="password_new_actor" placeholder="Please set a new password" oncopy="return false" />
+                              <input type="password" id="password_new_actor" class="input_cs" name="password_new_actor" placeholder="Please set a new password" oncopy="return false" autocomplete="new-password"/>
                             </div> 
                         </div>
                         <div class="row">
@@ -793,7 +793,7 @@ button[disabled], html input[disabled] {
                               Confirm Password  
                             </div>
                             <div class="col-sm-6">
-                              <input type="password" id="confirm_password_new_actor" class="input_cs" name="confirm_password_new_actor" placeholder="Retype the above password" />
+                              <input type="password" id="confirm_password_new_actor" class="input_cs" name="confirm_password_new_actor" placeholder="Retype the above password" autocomplete="new-password" />
                             </div> 
                         </div>
 
