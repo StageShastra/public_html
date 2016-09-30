@@ -1,5 +1,6 @@
 var project_id;
 var roles=[];
+var role_names=[];
 var actor=[];
 var attendees=[];
 var attendees_names=[];
@@ -17,7 +18,8 @@ $(document).on("click", ".toggleEdit", function(){
 	});
 	populate_roles();
 	populate_attendees();
-
+	
+	console.log(role_names);
 	var shoot_start_date = new Date(0); // The 0 there is the key, which sets the date to the epoch
 	var shoot_end_date = new Date(0);
 	shoot_start_date.setUTCSeconds(project_shoot_begins);
@@ -41,7 +43,9 @@ function populate_roles()
 				if(response.status==true)
 				{
 					roles=JSON.parse(response.data);
+					console.log(roles);
 					populate_questions(0);
+
 				}
 				else
 				{
@@ -55,7 +59,7 @@ function populate_roles()
 }
 function populate_questions(i)
 {
-	
+	    role_names[i]=roles[i].StashRoles_role;
 		data = {request: "getQuestionsByRoleId",
 	 		data: JSON.stringify({
 	 								role_id: roles[i].StashRoles_id, 
@@ -73,6 +77,7 @@ function populate_questions(i)
 					if(++i<roles.length)
 					{
 						populate_questions(i);
+						
 					}
 					else
 					{
@@ -210,6 +215,12 @@ function show_casting_sheet(data)
 		prehtml+='<option value="'+i+'">'+roles[i].StashRoles_role+'</option>';
 	}
 	$("#role_audition").html(prehtml);
+	$('select').selectize({					
+					sortField: {
+						field: 'text',
+						direction: 'asc'
+					}
+					});
 }
 function show_dynamic_questions()
 {
@@ -226,7 +237,7 @@ function show_dynamic_questions()
                  +'<div class="col-sm-6">';
         if(questions[i].StashQuestions_type==1)
         {
-        	prehtml+='<select class="input_cs" id="question_'+i+'">'
+        	prehtml+='<select class="input_cs answer_dropdown" id="question_'+i+'">'
         			+'<option disabled selected value> Select a response</option>'
         			+'<option value="Yes">Yes</option>'
         			+'<option value="No">No</option>'
@@ -241,13 +252,19 @@ function show_dynamic_questions()
                          
 	}
 	$("#role_based_questions").html(prehtml);
+	$('.answer_dropdown').selectize({					
+					sortField: {
+						field: 'text',
+						direction: 'asc'
+					}
+					});
 
 
 }
 function submit_answers()
 {	
 	$("#save_actor_response").attr('disabled', 'disabled');
-
+	$("#save_actor_response").html('Saving...');
 	$("#not_registered_last_message").removeClass("animated fadeOut");
 	actor.audition_date = $('#date_audition').val();
 	var index = $("#role_audition").val();
@@ -542,14 +559,17 @@ function clean_slate_protocol(){
 
 //
 actor=[];
-$("#role_based_questions").html('<option disabled selected value> Select a Role</option>');
+$("#role_audition").val("");
+document.getElementById("#date_audition").valueAsDate = new Date();
 $(".input_cs").val("");
-
+$("#save_actor_response").removeAttr('disabled');
+$("#save_actor_response").html('Submit');
 setTimeout(function(){ 
 	$("#not_registered_last_message").addClass("animated fadeOut");
 	 }, 9000);
 }
 $("#save_actor_response").removeAttr('disabled');
+
 	
 function leftPad(number, targetLength) {
     var output = number + '';

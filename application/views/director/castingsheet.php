@@ -2,6 +2,8 @@
   include 'includes/head.php';
  ?>
 
+ <link rel="stylesheet" type="text/css" href="<?= CSS ?>/selectize.css" />
+
     <body>
         <style>
           body{
@@ -415,7 +417,7 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
   font-size: 12px;
   border:1px solid #ffc107;
   border-radius: 5px;
-  margin: 10px 5px 5px 0px;
+  margin: 0px 5px 5px 0px;
 }
 .input_cs:active{
   outline: none;
@@ -568,7 +570,7 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
 }
 .col-sm-6 select{
       margin: 0px 0px 5px 0px;
-      padding: 6px 12px !important;
+      height: 27px !important;
 }
 button[disabled], html input[disabled] {
     cursor: not-allowed!important;
@@ -653,6 +655,12 @@ button[disabled], html input[disabled] {
   margin: 10px 0px 10px 0px;
   text-align: center;
 
+}
+
+.input_height{
+  width: 110px !important;
+  margin-left: 0px;
+  margin-right: 0px;
 }
               </style>
         <!--[if lt IE 8]>
@@ -777,7 +785,7 @@ button[disabled], html input[disabled] {
                               Choose Password  
                             </div>
                             <div class="col-sm-6">
-                              <input type="password" id="password_new_actor" class="input_cs" name="password_new_actor" placeholder="Please set a new password" oncopy="return false" />
+                              <input type="password" id="password_new_actor" class="input_cs" name="password_new_actor" placeholder="Please set a new password" oncopy="return false" autocomplete="new-password"/>
                             </div> 
                         </div>
                         <div class="row">
@@ -785,7 +793,7 @@ button[disabled], html input[disabled] {
                               Confirm Password  
                             </div>
                             <div class="col-sm-6">
-                              <input type="password" id="confirm_password_new_actor" class="input_cs" name="confirm_password_new_actor" placeholder="Retype the above password" />
+                              <input type="password" id="confirm_password_new_actor" class="input_cs" name="confirm_password_new_actor" placeholder="Retype the above password" autocomplete="new-password" />
                             </div> 
                         </div>
 
@@ -818,12 +826,14 @@ button[disabled], html input[disabled] {
                           <div class="label_cs col-sm-6">
                             Height 
                           </div>
-                          <div class="col-sm-3">
-                            <input type="number" min="0" max="7" step=1 id="actor_feet" class="input_cs " name="actor_feet" placeholder="Feet" /></input>
-                          </div>
-                          <div class="col-sm-3">
-                            <input type="number" min="0" max="11 "id="actor_inches" class="input_cs " name="actor_feet" placeholder="Inches" /></input>
-                          </div> 
+                  
+                            <div class="col-sm-2">
+                              <input type="number" min="0" max="7" step=1 id="actor_feet" class="input_cs input_height" name="actor_feet" placeholder="Feet" /></input>
+                            </div>
+                            <div class="col-sm-2">
+                              <input type="number" min="0" max="11" id="actor_inches" class="input_cs input_height" name="actor_feet" placeholder="Inches" /></input>
+                            </div>
+                           
                         </div>
                         <div class="row">
                           <div class="label_cs col-sm-6">
@@ -885,3 +895,5 @@ button[disabled], html input[disabled] {
   include 'includes/scripts.php';
 ?>
 <script src="<?= JS ?>/castingsheet.js"></script>
+<script type="text/javascript" src="<?= JS ?>/selectize.min.js"></script>
+
