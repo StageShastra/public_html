@@ -1065,7 +1065,7 @@
 			$type = 'actor';
 			$refer = 'castingsheet';
 			$this->load->library('user_agent');
-			$pass = hash_hmac('sha512', '', $this->config->item("encryption_key"));
+			$pass = hash_hmac('sha512', ' $d["actor_password"]', $this->config->item("encryption_key"));
 			// check username
 			$username = trim(explode("@", $d["actor_email"])[0]);
 			$checkUsername = $username;
