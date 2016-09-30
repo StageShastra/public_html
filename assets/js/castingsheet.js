@@ -215,12 +215,12 @@ function show_casting_sheet(data)
 		prehtml+='<option value="'+i+'">'+roles[i].StashRoles_role+'</option>';
 	}
 	$("#role_audition").html(prehtml);
-	$('select').selectize({					
+	/*$('select').selectize({					
 					sortField: {
 						field: 'text',
 						direction: 'asc'
 					}
-					});
+					});*/
 }
 function show_dynamic_questions()
 {
