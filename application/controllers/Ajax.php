@@ -157,21 +157,17 @@
 				$this->response(false, Aj_Req_NoData);
 			}
 		}
-
-
 		public function quickViewNotice($data = []){
 			$this->load->model("Notifications");
 			$m = $this->session->userdata("StaSh_User_name") . " took a quick view of your profile";
 			$this->Notifications->insertNotification( $data['actor'], $m, 'quick', ['director' => $this->session->userdata("StaSh_User_id")] );
 			$this->response(true, "Quick View");
 		}
-
 		public function checkoutClicked($data = []){
 			$this->load->model("ModelProject");
 			$this->updateCheckoutClicked();
 			$this->response(true);
 		}
-
 		public function bulkDupReInvite($data = []){
 			$this->load->model("ModelDirector");
 			$failed = [];
@@ -188,12 +184,10 @@
 			$this->response(true, "{$e} re-sent successfully.", ['failed' => $failed]);
 			
 		}
-
 		public function reSendSMS($numbers = [], $msgId = 0, $project = 0){
 			$this->load->model("ModelDirector");
 			$this->load->model("SMS");
 			$msg = $this->ModelDirector->getThisMessage($msgId);
-
 			$totNum = count($numbers);
 			$msgLen = strlen($msg['StashInviteMsg_message']);
 			$totSMS = ($msgLen / 160) * $totNum;
@@ -205,9 +199,7 @@
 			if($leftSMS < $totSMS){
 				$this->response(false, "You don't have enough SMS Credits. Plan recharge for SMS Credits.");
 			}
-
 			foreach ($numbers as $key => $number) {
-
 				$rand = substr(base64_encode(md5(microtime() . $number . microtime())), 0, 6);
 				while($this->ModelDirector->checkRandLink($rand))
 					$rand = substr(base64_encode(md5(microtime() . $number . microtime())), 0, 6);
@@ -215,16 +207,12 @@
 				$link = "http://castiko.com/invite/{$rand}";
 				$this->SMS->sendInvitaionSMS( $msg['StashInviteMsg_message'], $number, $link );
 				$this->ModelDirector->insertInvitationSMS($msgId, $rand, $project, $number);
-
 			}
-
 			$this->ModelDirector->updateCountAudSMS(count($numbers), "invite", "sms");
-
 			$totSMSUsed = $usedSMS + count($numbers);
 			$this->ModelDirector->updateSMSCreditUsed( $planId, $totSMSUsed );
 			
 		}
-
 		public function reSendEmails($emails = [], $msgId = 0, $project = 0){
 			$this->load->model("ModelDirector");
 			$this->load->model("Email");
@@ -234,7 +222,6 @@
 				$rand = substr(base64_encode(md5(microtime() . $fe . microtime())), 0, 8);
 				while($this->ModelDirector->checkEmailRandLink($rand))
 					$rand = substr(base64_encode(md5(microtime() . $fe . microtime())), 0, 8);
-
 				$failed = $this->Email->sendInvitationToInDB( $msg['StashInviteMsg_message'], $fe, $project, $rand, $msg['StashInviteMsg_subject'], 'Confirm' );
 				if( $failed !== true ){
 					// Sending Mail Failed. do something here.
@@ -243,18 +230,15 @@
 					$this->ModelDirector->insertInvitationMail( $fe, $msgId, $project, 'connect', $rand );
 				}
 			}
-
 			$this->ModelDirector->insertFailedInvitations( $failedEmailConnect, $msgId, $project, 'invite' );
 			return $failedEmailConnect;
 		}
-
 		public function bulkDupTag($data =[]){
 			$this->load->model("ModelDirector");
 			if( $data['type'] == 'email' )
 				$userIdList = $this->ModelDirector->getUserIdListBy('StashUsers_email', $data['contacts']);
 			else
 				$userIdList = $this->ModelDirector->getUserIdListBy('StashUsers_mobile', $data['contacts']);
-
 			if(count($userIdList)){
 				if($this->ModelDirector->addInProject($data['project'], $userIdList)){
 					$this->response(true, "Added to the Project.");
@@ -265,7 +249,6 @@
 				$this->response(false, "Not in List");
 			}
 		}
-
 		public function goBasicPlan($data = []){
 			$this->load->model("Auth");
 			if( $this->Auth->insertActorPlan( $data['plan'] ) ){
@@ -292,7 +275,6 @@
 				$this->response(false, "Invalid password.");
 			}
 		}
-
 		public function destroyUserSession($value=''){
 			$this->session->set_userdata(array());
 			$this->session->sess_destroy();
@@ -300,7 +282,6 @@
 			delete_cookie('categories');
 			delete_cookie('isCat');
 		}
-
 		public function bulkProjectTag($data = []){
 			$this->load->model("ModelDirector");
 			$list = $data['list'];
@@ -313,13 +294,11 @@
 					$r[] = $listid[$key];
 				}
 			}
-
 			if($c)
 				$this->response(true, "selected actor added to project.");
 			else
 				$this->response(false, "something went wrong. try again later.");
 		}
-
 		public function contactData($data = []){
 			$this->load->model("ModelDirector");
 			$res = [];
@@ -334,8 +313,6 @@
 			}
 			$this->response(true, "Data", $res);
 		}
-
-
 		public function bulkRemove($data = []){
 			$this->load->model("ModelDirector");
 			$list = $data['list'];
@@ -347,7 +324,6 @@
 					$r[] = $listid[$key];
 				}
 			}
-
 			if($c)
 				$this->response(true, "{$c} selected actor removed from your list.", ["removed" => $r]);
 			else
@@ -357,7 +333,6 @@
 		public function testAttachment($data){
 			print_r($data);
 		}
-
 		public function contactLits($data = []){
 			$this->load->model("ModelDirector");
 			$d = [];
@@ -372,7 +347,6 @@
 			}
 			$this->response( true, "Messages", $res );
 		}
-
 		public function lastMessages($data = []){
 			$this->load->model("ModelDirector");
 			$msgData = $this->ModelDirector->getLastMessage( $data['from'], $this->session->userdata("StaSh_User_id"), $data['offset'] );
@@ -387,15 +361,12 @@
 					$this->response(false, "No last message found.");
 				}
 			}
-
 		}
 		
 		public function SMSInvitation($data = []){
 			$this->load->model("ModelDirector");
 			$this->load->model("SMS");
-
 			$filterNumbers = $this->filterMobile( $data['mobiles'] );
-
 			$totNum = count($filterNumbers);
 			$msgLen = strlen($data['msg']);
 			$totSMS = ($msgLen / 160) * $totNum;
@@ -407,7 +378,6 @@
 			if($leftSMS < $totSMS){
 				$this->response(false, "You don't have enough SMS Credits. Plan recharge for SMS Credits.");
 			}
-
 			$project = $this->ModelDirector->getProject($data['project_name'], $data['project_date']);
 			if(count($project)){
 				$projectID = $project['StashProject_id'];
@@ -416,18 +386,14 @@
 			}
 			$data['project_id'] = $projectID;
 			// Generating Link.
-
 			
 			$mobiles = $filterNumbers['numbers'];
 			$invalid = $filterNumbers['invalid'];
 			$mobileIndirectorDB = $this->ModelDirector->getMobileFromDirectorDB();
 			$mobileNotInDB = array_diff($mobiles, $mobileIndirectorDB);
 			$duplicate = array_intersect($mobiles, $mobileIndirectorDB);
-
 			$msgId = $this->ModelDirector->insertSMSMsg($data['msg'], 'sms');
-
 			foreach ($mobileNotInDB as $key => $notInDB) {
-
 				$rand = substr(base64_encode(md5(microtime() . $notInDB . microtime())), 0, 6);
 				while($this->ModelDirector->checkRandLink($rand))
 					$rand = substr(base64_encode(md5(microtime() . $notInDB . microtime())), 0, 6);
@@ -435,12 +401,10 @@
 				$link = "http://castiko.com/invite/{$rand}";
 				$this->SMS->sendInvitaionSMS( $data['msg'], $notInDB, $link );
 				$this->ModelDirector->insertInvitationSMS($msgId, $rand, $projectID, $notInDB);
-
 			}
 			$duplicate = $this->remapArray($duplicate);
 			$r = array( 'sent' => count($mobileNotInDB), 'invalid' => count($invalid), 'invalidNums' => $invalid, 'duplicate' => count($duplicate), "duplicateNums" => $duplicate, 'project_id' => $projectID, 'msg' => $msgId );
 			$this->ModelDirector->updateCountAudSMS(count($mobileNotInDB), "invite", "sms");
-
 			$totSMSUsed = $usedSMS + count($mobileNotInDB);
 			$this->ModelDirector->updateSMSCreditUsed( $planId, $totSMSUsed );
 			
@@ -492,10 +456,8 @@
 					}
 				}
 			}
-
 			return ['numbers' => $numbers, 'invalid' => $invalid];
 		}
-
 		public function eMailInvitation($data = []){
 			$this->load->model("ModelDirector");
 			$this->load->model("Email");
@@ -509,9 +471,7 @@
 			$data['project_id'] = $projectID;
 			$data['msg'] = str_replace("\n", "<br>", $data['msg']);
 			
-
 			$msgId = $this->ModelDirector->insertSMSMsg($data['msg'], 'email', $data['subject']);
-
 			$filterEmails = $this->filterEmail( $data['emails'] );
 			$emails = $filterEmails[0];
 			$invalid = $filterEmails[1];
@@ -520,16 +480,13 @@
 			$emailInMainDB = array_diff($emailInDB, $emailInDirectorDB); // Email to be send  Connect mail as they are in Castiko Db but not in CD Db.
 			$emailFresh = array_diff($emails, $emailInDB); // Very Fresh Emails, not registered to Castiko
 			$emailInCDdb = array_intersect($emails, $emailInDirectorDB); // Duplicate Email, Already in CD db.
-
 			// Sending Invitation to fresh emails.
 			$failedEmailFresh = $failedEmailConnect = [];
 			$sent = $fail = 0;
-
 			foreach ($emailFresh as $key => $fe) {
 				$rand = substr(base64_encode(md5(microtime() . $fe . microtime())), 0, 8);
 				while($this->ModelDirector->checkEmailRandLink($rand))
 					$rand = substr(base64_encode(md5(microtime() . $fe . microtime())), 0, 8);
-
 				$failed = $this->Email->sendInvitationToNotInDB( $data['msg'], $fe, $projectID, $rand , $data['subject']);
 				if( $failed !== true ){
 					// Sending Mail Failed. do something here.
@@ -540,13 +497,11 @@
 					$this->ModelDirector->insertInvitationMail( $fe, $msgId, $projectID, 'invite', $rand );
 				}
 			}
-
 			// Sending Connect Mail to already registered Email.
 			foreach ($emailInMainDB as $key => $fe) {
 				$rand = substr(base64_encode(md5(microtime() . $fe . microtime())), 0, 8);
 				while($this->ModelDirector->checkEmailRandLink($rand))
 					$rand = substr(base64_encode(md5(microtime() . $fe . microtime())), 0, 8);
-
 				$failed = $this->Email->sendInvitationToInDB( $data['msg'], $fe, $projectID, $rand ,  $data['subject']);
 				if( $failed !== true ){
 					// Sending Mail Failed. do something here.
@@ -561,17 +516,13 @@
 					$sent++;
 				}
 			}
-
 			$this->ModelDirector->insertFailedInvitations( $failedEmailFresh, $msgId, $projectID, 'invite' );
 			$this->ModelDirector->insertFailedInvitations( $failedEmailConnect, $msgId, $projectID, 'connect' );
-
 			$this->ModelDirector->updateCountAudSMS($sent, "invite", "email");
-
 			$emailInCDdb = $this->remapArray($emailInCDdb);
 			$r = array( 'sent' => $sent, 'invalid' => count($invalid), 'failed' => $fail, 'invalidEmails' => $invalid, 'duplicate' => count($emailInCDdb), "duplicateEmail" => $emailInCDdb, 'project_id' => $projectID, 'msg' => $msgId );
 			$this->response(true, "{$sent} Invitation Emails sent", $r);
 		}
-
 		public function remapArray($arr = []){
 			$a = [];
 			foreach ($arr as $key => $value) {
@@ -579,7 +530,6 @@
 			}
 			return $a;
 		}
-
 		public function filterEmail($emails = ''){
 			$emails = explode(",", $emails);
 			$invalid = $valid = [];
@@ -601,16 +551,12 @@
 						$invalid[] = $email;
 				}
 			}
-
 			return [$valid, $invalid];
 		}
-
 		public function sanitizeEmail($email = ''){
 			$email = filter_var($email, FILTER_SANITIZE_EMAIL);
 			return trim(filter_var($email, FILTER_VALIDATE_EMAIL));
 		}
-
-
 		public function csv2array($value = ''){
 			$array = [];
 			$values = explode(",", $value);
@@ -620,8 +566,6 @@
 			}
 			return $array;
 		}
-
-
 		public function getCSVList($values = []){
 			$csv = '';
 			//$values = explode(",", $values);
@@ -698,7 +642,6 @@
 		public function contactActorBySMS($data = []){
 			$this->load->model("ModelDirector");
 			$this->load->model("SMS");
-
 			$totNum = count($data['contact']['mobile']);
 			$msgLen = strlen($data['sms']);
 			$totSMS = ($msgLen / 160) * $totNum;
@@ -710,9 +653,6 @@
 			if($leftSMS < $totSMS){
 				$this->response(false, "You don't have enough SMS Credits. Plan recharge for SMS Credits.");
 			}
-
-
-
 			$projectID = 0;
 			if(trim($data['project_name']) != ''){
 				$project = $this->ModelDirector->getProject($data['project_name'], $data['project_date']);
@@ -740,7 +680,6 @@
 				}
 				$rand = substr($str, $start, 6);
 			}
-
 			$url = "http://castiko.com/info/{$rand}";
 			$response = $this->SMS->sendAuditionSMS($data['contact']['mobile'], $data['sms'], $url);
 			$response = json_decode($response, true);
@@ -748,10 +687,8 @@
 			foreach ($data['contact']['ref'] as $key => $ref) {
 				$this->ModelDirector->insertSendSMS( $ref, $msgId, $project, $isQues, $time, $rand );
 			}
-
 			$totSMSUsed = $usedSMS + $sent;
 			$this->ModelDirector->updateSMSCreditUsed( $planId, $totSMSUsed );
-
 			$this->response(true, "{$sent} SMS Sent.");
 		}
 		public function contactActorByEmail($data = []){
@@ -772,17 +709,14 @@
 			$msgId = $this->ModelDirector->insertSMSMsg($data['mail'], 'email', $data['subject']);
 			$emails = $data['contact']['email'];
 			$actors = $data['contact']['ref'];
-
 			$isQues = $data['isAud'];
 			$project = $projectID;
 			$time = time();
 			$sent = $failed = 0;
 			$failedMails = [];
-
 			foreach ($emails as $key => $email) {
 				if( $this->Email->sendAuditionMailUpdated( $email, $time, $msgId ) ){
 					$this->ModelDirector->insertSendMail( $actors[$key], $project, $msgId, $time );
-
 					$notiD = array($this->session->userdata("StaSh_User_id"), $email, $time, $msgId);
 					$x = ($projectID == 0) ? 'a' : 'an audition';
 					$tag = ($projectID == 0) ? 'message' : 'audition';
@@ -793,19 +727,16 @@
 					$failed++;
 				}
 			}
-
 			if($failed)
 				$this->ModelDirector->insertFailedInvitations($failedMails, $msgId, $project, "message", $time);
 			//$this->ModelDirector->updateCountAudSMS($sent, 0, "contact", "email");
 			$arr = array( 'sent' => $sent, 'fail' => $failed );
 			$this->response(true, "{$sent} Emails successfully sent.", $arr);
 		}
-
 		public function getEncryptedText($text = ''){
 			$this->load->library('encrypt');
 			return $this->encrypt->encode($text);
 		}
-
 		public function removeActor($data = []){
 			$this->load->model("ModelDirector");
 			if($this->ModelDirector->deleteActorFromDirector($data['actor_ref'])){
@@ -836,7 +767,6 @@
 							// Sending a password reset Mail
 							$this->load->model("Email");
 							$this->Email->sendPasswordResetMail( $userData['StashUsers_email'], $this->input->ip_address() );
-
 							$this->response(true, Aj_ChangePass_Succ);
 						}else{
 							$this->response(false, Aj_ChangePass_Fail);
@@ -851,8 +781,6 @@
 				$this->response(false, Aj_ChangePass_Invalid);
 			}
 		}
-
-
 		public function forgotPassword($data = []){
 			$this->load->model("Auth");
 			$this->load->model("Email");
@@ -882,7 +810,6 @@
 						"StashProject_client" => $d["project_client"],
 						"StashProject_shoot_begins" => strtotime($d["project_shoot_begins"]),
 						"StashProject_shoot_ends" => strtotime($d["project_shoot_ends"])
-
 					);
 			$this->db->insert("stash-project", $data);
 			echo $this->db->insert_id();
@@ -968,7 +895,6 @@
 						"StashRoleActorLink_project_id_ref" => $d["project_id"],
 						"StashRoleActorLink_shortlist_status" => 0,
 						"StashRoleActorLink_status"=> 1
-
 					);
 			
 			$this->response(true, "Role and actors linked",$this->db->insert("stash-role-actor-link", $data));
@@ -1060,20 +986,19 @@
 			$this->db->where("StashRoleActorLink_role_id_ref", $d["role_id"]);
 			$this->response(true, "Video updated",$this->db->update("stash-role-actor-link", $data));
 		}
-
 		public function insertNewActor($d){
 			$type = 'actor';
 			$refer = 'castingsheet';
 			$this->load->library('user_agent');
-			$pass = hash_hmac('sha512', ' $d["actor_password"]', $this->config->item("encryption_key"));
+			$pass = hash_hmac('sha512', $d["actor_password"], $this->config->item("encryption_key"));
 			// check username
 			$username = trim(explode("@", $d["actor_email"])[0]);
 			$checkUsername = $username;
-			//$dat = $this->getUserData("StashUsers_username", $checkUsername);
-			//while (count($dat)){
-			//	$checkUsername = $username . "-" . mt_rand(100, 999);
-			//	$dat= $this->getUserData("StashUsers_username", $checkUsername);
-			//}
+			$dat = $this->getUserData("StashUsers_username", $checkUsername);
+			while (count($dat)){
+				$checkUsername = $username . "-" . mt_rand(100, 999);
+				$dat= $this->getUserData("StashUsers_username", $checkUsername);
+			}
 			
 			$data = array(
 						'StashUsers_id' => null,
@@ -1200,7 +1125,6 @@
 			$this->db->where("StashProject_id", $d["project_id"]);
 			$this->response(true, "Status updated",$this->db->update("stash-project", $data));
 		}
-
 		public function userLogin($data = []){
 			$this->load->model("Auth");
 			if($this->Auth->ifUserExist($data['email'])){
@@ -1208,16 +1132,13 @@
 				if(count($profile)){
 					$this->Auth->startLoginSession($profile);
 					$this->Auth->updateUserLogin($profile['StashUsers_id']);
-
 					if($data['type'] == 'director'){
 						$this->Auth->setDefaultCookies();
 						$paymentData = $this->Auth->getDirectPayments();
 					}else{
 						$paymentData = $this->Auth->getActorPayments();
 					}
-
 					$redirect = (bool) $paymentData;
-
 					$this->response(true, Aj_Login_Succ . " {$data['email']}", ['redirect' => $redirect]);
 				}else{
 					$this->response(false, Aj_Login_Failed);
@@ -1230,7 +1151,6 @@
 			$this->load->model("Auth");
 			$this->Auth->insert_contact_message($data);
 			$this->response(true, "200");
-
 		}
 		public function getUserData($key = '', $value = ''){
 			$this->db->where($key, trim($value));
@@ -1238,7 +1158,6 @@
 			return $query->first_row('array');
 		}
 		
-
 	}
 	
 		
