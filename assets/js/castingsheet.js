@@ -559,8 +559,9 @@ function clean_slate_protocol(){
 
 //
 actor=[];
-$("#role_audition").val("");
-document.getElementById("#date_audition").valueAsDate = new Date();
+$("#role_based_questions").html("");
+//$("#role_audition").html("<option disabled selected value> Select a Role</option>");
+document.getElementById("date_audition").valueAsDate = new Date();
 $(".input_cs").val("");
 $("#save_actor_response").removeAttr('disabled');
 $("#save_actor_response").html('Submit');

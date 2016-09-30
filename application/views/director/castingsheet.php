@@ -813,7 +813,7 @@ button[disabled], html input[disabled] {
                           </div>
                           <div class="col-sm-6">
                             <select  id="role_audition" class="input_cs" name="role_audition" onchange="show_dynamic_questions()" placeholder="Select role">
-                              <option disabled selected value> Select a Role</option>
+                              
                             </select>
                           </div>
                         </div>  
