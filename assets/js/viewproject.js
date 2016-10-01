@@ -454,7 +454,7 @@ function open_casting_response(id)
 	 	var question_a=questions_obj.question.answer.StashAnswers_answer;
 		 prehtml+='<span>Q. '+question_q+'</span>?'
                   +'<br>'
-                  +'A. '+.+'<br>';
+                  +'A. <br>';
 	}
 	$(".m_questions").html(prehtml);
 
