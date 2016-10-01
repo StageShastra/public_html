@@ -798,7 +798,7 @@ button[disabled], html input[disabled] {
                 </div>
             </nav>
           </div>
-          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#castingsheetresponse">Open Modal</button>
+          
            <!-- contact modal toggle -->
             <div class="container-fluid" id="create_project_home">
                
