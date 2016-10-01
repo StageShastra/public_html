@@ -798,6 +798,7 @@ button[disabled], html input[disabled] {
                 </div>
             </nav>
           </div>
+          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#castingsheetresponse">Open Modal</button>
            <!-- contact modal toggle -->
             <div class="container-fluid" id="create_project_home">
                
@@ -816,7 +817,87 @@ button[disabled], html input[disabled] {
                 </table>
               </div>
             </div>
-              
+            <div id="castingsheetresponse" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Casting Sheet Response</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="container col-sm-12">
+                      <div class="row">
+                        <div class="col-sm-6">
+                           Name: 
+                        </div>
+                        <div class="col-sm-6">
+                          <span id="m_actor_name"></span>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          Email:
+                        </div>
+                        <div class="col-sm-6">
+                          <span id="m_actor_email"></span>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          Mobile:
+                        </div>
+                        <div class="col-sm-6">
+                          <span id="m_actor_mobile"></span>
+                        </div>
+                      </div>
+                      <div class="row"> 
+                        <div class="col-sm-6">
+                          Height:
+                        </div>
+                        <div class="col-sm-6">
+                          <span id="m_actor_height"></span>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          Weight:
+                        </div>
+                        <div class="col-sm-6">
+                          <span id="m_actor_weight"></span>
+                        </div>
+                      </div>
+                    
+                    
+                      <div class="row">
+                       <div class="m_questions col-sm-12">
+                       
+                       </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6">
+                            Past 6 months experience: 
+                        </div>
+                        <div class="col-sm-6">
+                            <span id="m_actor_6_experience"></span>
+                        </div>
+                      </div>
+                    <div class="row"> 
+                     <div class="col-sm-6">
+                      Past 3 years experience: 
+                     </div>
+                     <div class="col-sm-6">
+                      <span id="m_actor_3_experience"></span>
+                     </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div> 
+            </div>
       <script>
       var project_id = <?= $project["StashProject_id"]; ?>;
       var project_shoot_begins = <?= $project["StashProject_shoot_begins"]; ?>;
