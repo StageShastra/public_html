@@ -448,10 +448,12 @@ function open_casting_response(id)
 	$("#m_actor_weight").html(attendees[id].StashActor_weight);
 	var prehtml='';
 	for(n=0;n<attendees[id].questions.length;n++)
-	{
-		 prehtml+='<span>Q. '+attendees[id].questions[n].question.StashQuestions_question+'</span>?'
+	{	var questions_obj=attendees[id].questions[n];
+	 	var question_q=questions_obj.question.StashQuestions_question;
+	 	var question_a=questions_obj.question.answer.StashAnswers_answer;
+		 prehtml+='<span>Q. '+].question_q+'</span>?'
                   +'<br>'
-                  +'A. '+((attendees[id].questions[n].question).answer).StashAnswers_answer+'<br>';
+                  +'A. '+question_a+'<br>';
 	}
 	$(".m_questions").html(prehtml);
 	$("#m_actor_6_experience").html(attendees[id].StashActor_six_months_experience);
