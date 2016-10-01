@@ -451,7 +451,7 @@ function open_casting_response(id)
 	{	var questions_obj=attendees[id].questions[n];
 	 	var question_q=questions_obj.question.StashQuestions_question;
 	 	var question_a=questions_obj.question.answer.StashAnswers_answer;
-		 prehtml+='<span>Q. '+].question_q+'</span>?'
+		 prehtml+='<span>Q. '+question_q+'</span>?'
                   +'<br>'
                   +'A. '+question_a+'<br>';
 	}
