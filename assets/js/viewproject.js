@@ -354,7 +354,7 @@ function populate_table()
              var video_string=video_embed(attendees[i]);
              //console.log(video_string);
              dyn_html+= video_string+''
-             var notes_string=show_notes(attendees[i]);
+             var notes_string=show_notes(attendees[i],i);
              //console.log(shortlist_string);
              dyn_html+= notes_string+''
              +'</tr>';
@@ -412,7 +412,7 @@ function video_embed(actor)
 	}
 	return string;
 }
-function show_notes(actor)
+function show_notes(actor,i)
 {
 		var t=0;
 		var string="";
@@ -422,7 +422,7 @@ function show_notes(actor)
 					   +'<div id="notes_"'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit" data-hide-id="#notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"data-unhide-id="#notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'">'
 					   +'<span id="notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="click_to_add">Click to add notes</span>'
 					   +'<input class="input_cs hidden" id="notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="text" placeholder="Add notes here" onfocusout="setTimeout(function(){ save_notes('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)">'
-					   +'</div></td>' ;
+					   +'</div><span class="fa fa-newspaper-o" onclick="open_casting_response('+i+')"></span></td>' ;
 
 
 		}
@@ -434,10 +434,29 @@ function show_notes(actor)
 	                +'<button id="notes_edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-hide-id="#notes_edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-unhide-id="#notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+',#notes_update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit go_button">Edit</button>'
 	               
 	                +'<button id="notes_update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="button" onclick="setTimeout(function(){ save_notes('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)" class="go_button toggleEdit hidden" data-unhide-id="#notes_edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-hide-id="#notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+',#notes_update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" >Go</button>'
-	                +'</div></td>';
+	                +'</div><span class="fa fa-newspaper-o" onclick="open_casting_response('+i+')"></span></td>';
 		}
 	
 	return string;
+}
+function open_casting_response(id)
+{
+	$("#m_actor_name").html(attendees[id].StashActor_name);
+	$("#m_actor_email").html(attendees[id].StashActor_email);
+	$("#m_actor_mobile").html(attendees[id].StashActor_mobile);
+	$("#m_actor_height").html(attendees[id].StashActor_height);
+	$("#m_actor_weight").html(attendees[id].StashActor_weight);
+	var prehtml='';
+	for(n=0;n<attendees[id].questions.length;n++)
+	{
+		 prehtml+='<span>Q. '+attendees[id].questions[n].question.StashQuestions_question+'</span>?'
+                  +'<br>'
+                  +'A. '+attendees[id].questions[n].question.answer+'<br>';
+	}
+	$(".m_questions").html(prehtml);
+	$("#m_actor_6_experience").html(attendees[id].StashActor_six_months_experience);
+	$("#m_actor_3_experience").html(attendees[id].StashActor_three_years_experience);
+	$("#castingsheetresponse").modal("show");
 }
 function shortlist_star(actor)
 {
