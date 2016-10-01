@@ -451,7 +451,7 @@ function open_casting_response(id)
 	{
 		 prehtml+='<span>Q. '+attendees[id].questions[n].question.StashQuestions_question+'</span>?'
                   +'<br>'
-                  +'A. '+attendees[id].questions[n].question.answer.StashAnswers_answer+'<br>';
+                  +'A. '+((attendees[id].questions[n].question).answer).StashAnswers_answer+'<br>';
 	}
 	$(".m_questions").html(prehtml);
 	$("#m_actor_6_experience").html(attendees[id].StashActor_six_months_experience);
