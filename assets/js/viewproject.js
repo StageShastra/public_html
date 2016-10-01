@@ -449,13 +449,15 @@ function open_casting_response(id)
 	var prehtml='';
 	for(n=0;n<attendees[id].questions.length;n++)
 	{	var questions_obj=attendees[id].questions[n];
+		console.log(questions_obj.question);
 	 	var question_q=questions_obj.question.StashQuestions_question;
 	 	var question_a=questions_obj.question.answer.StashAnswers_answer;
 		 prehtml+='<span>Q. '+question_q+'</span>?'
                   +'<br>'
-                  +'A. '+question_a+'<br>';
+                  +'A. '++'<br>';
 	}
 	$(".m_questions").html(prehtml);
+
 	$("#m_actor_6_experience").html(attendees[id].StashActor_six_months_experience);
 	$("#m_actor_3_experience").html(attendees[id].StashActor_three_years_experience);
 	$("#castingsheetresponse").modal("show");
