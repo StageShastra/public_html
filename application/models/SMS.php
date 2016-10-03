@@ -1,7 +1,7 @@
 <?php
 	class SMS extends CI_Model {
 		protected $username = "shiv@castiko.com";
-		protected $password = "d7cb41660e65f01d6fa6d632c5856f98b74966d5";
+		protected $password = "584c2eea2385af2421e30efa109d5039cd107e94";
 		protected $sender = 'CSTIKO';
 		protected $prefix = "Dear Actor, ";
 		protected $url = "http://api.textlocal.in/send/?";
