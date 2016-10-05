@@ -1137,6 +1137,7 @@
 						$paymentData = $this->Auth->getDirectPayments();
 					}else{
 						$paymentData = $this->Auth->getActorPayments();
+						$this->checkForReferal();
 					}
 					$redirect = (bool) $paymentData;
 					$this->response(true, Aj_Login_Succ . " {$data['email']}", ['redirect' => $redirect]);
@@ -1156,6 +1157,47 @@
 			$this->db->where($key, trim($value));
 			$query = $this->db->get("stash-users");
 			return $query->first_row('array');
+		}
+		
+		public function checkForReferal(){
+			if(!$this->session->userdata("StaSh_User_Logged_In"))
+				return false;
+
+			$userRef = $this->session->userdata("StaSh_User_id");
+			$refer = $_COOKIE['Cstko_refer'];
+			$refId = $_COOKIE['Cstko_link'];
+			if($refer != 'refer')
+				return false;
+
+			$refData = $this->Auth->getPromoLinkDetailsById( $refId );
+			if( count($refData) ){
+
+				$directors = json_decode($refData['StashPromo_directors'], true);
+				$projects = json_decode($refData['StashPromo_projects'], true);
+
+				foreach ($directors as $key => $director) {
+					$this->Auth->insertActorInDirectorList($userRef, $director);
+				}
+
+				foreach ($projects as $key => $project) {
+					$this->Auth->insertActorInProject($userRef, $project);
+				}
+
+				$this->Auth->updatePromoUsed( $refId, $userRef );
+				if(isset($_SESSION['Cstko_link']))
+					unset($_SESSION['Cstko_link']);
+				if(isset($_SESSION['Cstko_refer']))
+					unset($_SESSION['Cstko_refer']);
+
+				if(isset($_COOKIE['Cstko_link']))
+					unset($_COOKIE['Cstko_link']);
+				setcookie('Cstko_link', null, -1, '/');
+				if(isset($_COOKIE['Cstko_refer']))
+					unset($_COOKIE['Cstko_refer']);
+				setcookie('Cstko_refer', null, -1, '/');
+
+			}
+			return false;
 		}
 		
 	}
