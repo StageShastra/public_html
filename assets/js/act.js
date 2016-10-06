@@ -8,7 +8,7 @@ $(document).ready(function(){
 	if(first_time==0 && step==5)
 	{
 		
-		startIntro();
+		//startIntro();
 	}
 	
 	url = base + "actor/ajax";
@@ -1036,21 +1036,21 @@ function profile_Completion(step)
 }
 function profile_step_one()
 {
-	window.location.assign("./actor/step1");
+	window.location.assign("http://castiko.com/actor/step1");
 
 }
 function profile_step_two()
 {
-	window.location.assign("./actor/step2");
+	window.location.assign("http://castiko.com/actor/step2");
 
 }
 function profile_step_three(){
-	window.location.assign("./actor/step3");
+	window.location.assign("http://castiko.com/actor/step3");
 
 }
 function profile_step_four()
 {
-	window.location.assign("./actor/step4");
+	window.location.assign("http://castiko.com/actor/step4");
 
 }
 function need_help(){
