@@ -459,6 +459,12 @@
 
 		}
 
+		public function isPromoUsed($promo = 0, $user = 0){
+			$this->db->where("StashPromoUsed_promo_id_ref", $promo);
+			$this->db->where("StashPromoUsed_user_id_ref", $user);
+			return $this->db->get("stash-promo-used", 1)->num_rows();
+		}
+
 		public function insertActorPlan($plan = ''){
 			$d = array(
 						'StashActorPlan_id' => null,

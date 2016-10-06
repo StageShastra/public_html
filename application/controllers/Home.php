@@ -333,7 +333,7 @@ class Home extends CI_Controller {
 
 	public function promo($link = ''){
 		$link = trim($link);
-		
+
 		if( strlen($link) ){
 			$this->load->model("Auth");
 			$linkDetails = $this->Auth->getPromoLinkDetails( $link );
@@ -341,9 +341,32 @@ class Home extends CI_Controller {
 				redirect( base_url() );
 			$this->Auth->promoLinkOpened($linkDetails['StashPromo_id']);
 			$l = $linkDetails['StashPromo_id'];
-			setcookie("Cstko_link", $l, time() + 3600, "/");
-			$_SESSION['Cstko_link'] = $l;
-			redirect( base_url() . "home/register/actor" );
+			$userRef = $this->session->userdata("StaSh_User_id");
+
+			if($this->session->userdata("StaSh_User_Logged_In") && 
+				$this->session->userdata("StaSh_User_type") == 'actor' &&
+				!$this->Auth->isPromoUsed($l, $userRef)){
+
+				$directors = json_decode($linkDetails['StashPromo_directors'], true);
+				$projects = json_decode($linkDetails['StashPromo_projects'], true);
+				
+				foreach ($directors as $key => $director) {
+					$this->Auth->insertActorInDirectorList($userRef, $director);
+				}
+
+				foreach ($projects as $key => $project) {
+					$this->Auth->insertActorInProject($userRef, $project);
+				}
+
+				$this->Auth->updatePromoUsed( $l, $userRef );
+
+				redirect(base_url() . "actor/");
+
+			}else{
+				setcookie("Cstko_link", $l, time() + 3600, "/");
+				$_SESSION['Cstko_link'] = $l;
+				redirect( base_url() . "home/register/actor" );
+			}
 
 		}else{
 			redirect( base_url() );
