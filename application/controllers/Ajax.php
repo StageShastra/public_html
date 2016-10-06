@@ -1160,7 +1160,7 @@
 		}
 		
 		public function checkForReferal(){
-			if(!$this->session->userdata("StaSh_User_Logged_In"))
+			if(!$this->session->userdata("StaSh_User_Logged_In") || !isset($_COOKIE['Cstko_refer']))
 				return false;
 
 			$userRef = $this->session->userdata("StaSh_User_id");
