@@ -258,6 +258,8 @@
 				$data['StashActor_avatar <> '] = 'default.png';
 			}
 
+			//print_r($data);
+
 			$this->db->where($data);
 			$this->db->like("StashActor_gender", $filter['sex'], 'both');
 			$this->db->where_in('StashActor_actor_id_ref', $filter['in']);
@@ -1082,6 +1084,7 @@
 			$d = array(
 				'DirectorPage_id' => null,
 				'DirectorPage_director_ref' => $data['ref'],
+				'DirectorPage_pagename' => $data['clink'],
 				'DirectorPage_name' => $data['cname'],
 				'DirectorPage_about' => $data['cabout'],
 				'DirectorPage_logo' => $data['clogo'],
@@ -1097,6 +1100,7 @@
 		public function updateDirectorPageBasic($data = []){
 			$d = array(
 				'DirectorPage_name' => $data['cname'],
+				'DirectorPage_pagename' => $data['clink'],
 				'DirectorPage_about' => $data['cabout'],
 				'DirectorPage_logo' => $data['clogo']
 			);
@@ -1174,6 +1178,39 @@
 			$this->db->where("DirectorWork_director_ref", $this->session->userdata("StaSh_User_id"));
 			$this->db->where("DirectorWork_id", $work);
 			return $this->db->delete("stash-director-works");
+		}
+
+		public function checkInPages($name = '', $ref = 0){
+			$this->db->where("DirectorPage_pagename", $name);
+			$this->db->where("DirectorPage_director_ref <>", $ref);
+			return $this->db->get("stash-director-page")->num_rows();
+		}
+
+		public function checkInUsernames($name = '', $ref = ''){
+			$this->db->where("StashUsers_username", $name);
+			$this->db->where("StashUsers_id <>", $ref);
+			return $this->db->get("stash-users")->num_rows();
+		}
+
+		public function isPageNameAvailable($name = '', $ref = 0){
+			$available = true;
+			if($this->checkInPages($name, $ref))
+				$available = false;
+
+			if($this->checkInUsernames($name, $ref))
+				$available = false;
+
+			return $available;
+		}
+
+		public function isPageName($name = ''){
+			$this->db->where("DirectorPage_pagename", $name);
+			return $this->db->get("stash-director-page")->num_rows();
+		}
+
+		public function getPageNameInfo($name = ''){
+			$this->db->where("DirectorPage_pagename", $name);
+			return $this->db->get("stash-director-page", 1)->first_row('array');
 		}
 	}
 

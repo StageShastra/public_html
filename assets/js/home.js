@@ -1656,6 +1656,44 @@ $(document).ready(function(){
 		return false;
 	});
 
+	$(document).on("keyup", "input[name='companyurl']", function(){
+		v = $(this).val();
+		$("#pagename-typing").text(v);
+		if(v == '')
+			return false;
+		if(v.match(/^[a-zA-Z0-9_\-\.]+$/i) == null){
+			$("#pagename-typing-error").css("color", 'red').text("special character not allowed accept ( . _ - )");
+		}else{
+			$("#pagename-typing-error").text("");
+		}
+	});
+
+	$("input[name='companyurl']").change(function(){
+		name = $(this).val();
+		if(name.length < 6){
+			$("#pagename-typing-error").css("color", 'red').text("Page link cannot be less then 6 characters");
+			return false;
+		}else{
+			$("#pagename-typing-error").text("");
+		}
+
+		data = {
+			request: "CheckPageName",
+			data: JSON.stringify({pagename: name})
+		};
+		$.ajax({
+			url: base + "director/secure",
+			type: type,
+			data: data,
+			success: function(response){
+				c = 'red';
+				if(response.status)
+					c = 'green';
+				$("#pagename-typing-error").css("color", c).html(response.message);
+			}
+		});
+	});
+
 });
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()

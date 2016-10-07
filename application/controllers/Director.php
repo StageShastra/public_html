@@ -141,9 +141,13 @@
 		public function directorpageupdate($value=''){
 			if(count($this->input->post())){
 				$cname = trim($this->input->post("companyname"));
+				$clink = trim($this->input->post("companyurl"));
 				$clogo = "";
 				$cabout = trim($this->input->post("aboutus"));
 				$this->load->model("ModelDirector");
+				if(!$this->ModelDirector->isPageNameAvailable($clink, $this->session->userdata("StaSh_User_id")))
+					$this->response(true, "Page URL already taken.");
+
 				if($_FILES['companylogo']['size']){
 					$config = array(
 								'upload_path' => './assets/img/pages/',
@@ -178,6 +182,7 @@
 						'cname' => $cname,
 						'cabout' => $cabout,
 						'clogo' => $clogo,
+						'clink' => $clink,
 						'ref' => $this->session->userdata("StaSh_User_id")
 					);
 					$flag = $this->ModelDirector->updateDirectorPageBasic($d);
@@ -192,6 +197,7 @@
 						'cname' => $cname,
 						'cabout' => $cabout,
 						'clogo' => $clogo,
+						'clink' => $clink,
 						'ref' => $this->session->userdata("StaSh_User_id")
 					);
 					$flag = $this->ModelDirector->insertDirectorPage($d);
@@ -232,6 +238,10 @@
 					case 'DeleteDirectorWork':
 						$this->deleteDirectorWork($data);
 						break;
+
+					case 'CheckPageName':
+						$this->checkPageName($data);
+						break;
 					
 					default:
 						$this->response(false, "Invalid Request");
@@ -240,6 +250,14 @@
 			}else{
 				$this->response(false, Aj_Req_NoData);
 			}
+		}
+
+		public function checkPageName($data = []){
+			$this->load->model("ModelDirector");
+			if($this->ModelDirector->isPageNameAvailable($data['pagename'], $this->session->userdata("StaSh_User_id")))
+				$this->response(true, "<i class='fa fa-check-circle'></i> Available");
+			else
+				$this->response(false, "<i class='fa fa-times'></i>  not available");
 		}
 
 		public function deleteDirectorWork($data = []){

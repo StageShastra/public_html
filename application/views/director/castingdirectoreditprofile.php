@@ -371,6 +371,11 @@ div.panel2.show {
               <input class="form-control" type="text" name="companyname" value="<?= $pagaBasic['DirectorPage_name'] ?>">
           </div>
           <div class="form-group">
+              <label class="control-label"><h3>Company URL:</h3></label>
+              <input class="form-control" type="text" name="companyurl" value="<?= $pagaBasic['DirectorPage_pagename'] ?>">
+              <p class="help-text">http://castiko.com/<span id="pagename-typing"><?= $pagaBasic['DirectorPage_pagename'] ?></span> <span id="pagename-typing-error"></span></p>
+          </div>
+          <div class="form-group">
             <label class="control-label"><h3>Company Logo:</h3></label>
             <input type="file" name="companylogo" class="showPreview"><br>
 
