@@ -1381,6 +1381,281 @@ $(document).ready(function(){
 		return false;
 	});
 
+
+
+
+
+
+
+
+
+
+
+
+	// Code for Director Page/Profile
+
+	function previewImages(input, location){
+		if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+
+            reader.onload = function (e) {
+                $(".img-preview img").attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+	}
+
+	var topAlertDisplay = function(msg) {
+		w = $(window).width();
+		$alert = $(".top-alert-bar");
+		aw = $alert.width();
+		dw = w/2 - aw/2;
+		$alert.css("left", dw);
+		$alert.find('p').html(msg);
+		$alert.show(100).delay(3000).hide(100);	
+	};
+
+	$(document).on('change', ".showPreview", function(){
+		//var displayIn = $(this).attr('data-for');
+		previewImages(this);
+	});
+
+	$(document).on("submit", "form#form-directorpage-first", function(){
+		form = new FormData(this);
+		$.ajax({
+			url: base + "director/directorpageupdate",
+			type: type,
+			data: form,
+			contentType: false,
+			cache: false,
+			processData: false,
+			success: function(response){
+				topAlertDisplay(response.message);
+				//$.delay(500);
+				if(response.status){
+					$activeAccord = $(".accordion.active");
+					$nextAcord = $activeAccord.next().next();
+					$nextAcord.addClass("active");
+					$nextAcord.next().addClass("show");
+
+					$("html, body").animate({
+						scrollTop: $nextAcord.offset().top - 200
+					}, 1000);
+				}
+				
+			}
+		});
+		return false;
+	});
+
+	$(document).on("change", "select#no-of-teammates", function(){
+		n = Number($(this).val());
+		
+
+		teamtr = $("tr.dummy-tr").html();
+		totTr = $(".teammates tbody tr").length;
+		$allTbodyTr = $(".teammates tbody tr");
+		$eleTbody = $(".teammates tbody");
+		if(n == totTr)
+			return;
+		else if(n > totTr){
+			nw = n-totTr;
+			if(nw == 0)
+				topAlertDisplay('Please select atleast 1 team member.');
+			for(i = 0; i < nw; i++){
+				newTr = "<tr>"+teamtr+"</tr>";
+				$eleTbody.append(newTr);
+			}
+		}else{
+			nw = totTr-n;
+			if(nw <= totTr)
+				nw = totTr-nw-1;
+			for(i = totTr-1; i > nw; i--){
+				$allTbodyTr.eq(i).remove();
+			}
+		}
+		//console.log(n, totTr, nw);
+
+		$("#teammates").removeClass("hidden");
+	});
+
+	$(document).on("click", ".update-page-team", function(){
+		$allTbodyTr = $(".teammates tbody tr");
+		d = [];
+		
+		$allTbodyTr.each(function(){
+			tmp = {};
+			tmp['name'] = $(this).find("input[name='name']").val();
+			tmp['title'] = $(this).find("input[name='title']").val();
+			tmp['desc'] = $(this).find("input[name='desc']").val();
+			tmp['imdb'] = $(this).find("input[name='imdb']").val();
+			tmp['fb'] = $(this).find("input[name='fb']").val();
+			d.push(tmp);
+		});
+
+		data = {
+			request: 'TeamUpdate',
+			data: JSON.stringify(d)
+		};
+
+		$.ajax({
+			url: base + "director/secure/",
+			type: type,
+			data: data,
+			success: function(response){
+				topAlertDisplay(response.message);
+				if(response.status){
+					$activeAccord = $(".accordion.active");
+					$nextAcord = $activeAccord.next().next();
+					$nextAcord.addClass("active");
+					$nextAcord.next().addClass("show");
+
+					$teamTable = $("table#display-team-detail tbody");
+					team = response.data.team;
+					i=0;
+					tr = '';
+					for(t = 0; t < team.length; t++){
+						
+						i++;
+						tr += "<tr><td>"+i+"</td>"
+						   + "<td>"+ team[t].DirectorTeam_name +"</td>"
+						   + "<td>"+ team[t].DirectorTeam_title +"</td>"
+						   + "<td>"+ team[t].DirectorTeam_desc +"</td>"
+						   + "<td>"+ team[t].DirectorTeam_imdb +"</td>"
+						   + "<td>"+ team[t].DirectorTeam_fb +"</td>"
+						   + "<td><a href='#' class='team-member-delete' data-member-ref='"+team[t].DirectorTeam_id+"'><i class='fa fa-trash'><></a></td></tr>";
+						
+					}
+					$teamTable.append(tr);
+				}
+			}
+		})
+		return false;
+	});
+
+	$(document).on("click", ".page-project-update", function(){
+		$projectInputs = $(".projectinput");
+		d = {};
+		$projectInputs.find("input, select").each(function(){
+			if($(this).attr("type") == 'radio'){
+				name = $(this).attr("name");
+				d[$(this).attr("name")] = $("input[name='"+name+"']:checked").val();
+			}else{
+				d[$(this).attr("name")] = $(this).val();
+			}
+			
+		});
+		data = {
+			request: "AddProjectWork",
+			data: JSON.stringify(d)
+		};
+		$.ajax({
+			url: base + "director/secure",
+			type: type,
+			data: data,
+			success: function(response){
+				topAlertDisplay(response.message);
+				if(response.status){
+					pwork = response.data.work;
+					console.log(pwork);
+					$displayPWork = $("#display-project-work");
+					div = '';
+					for(i = 0; i < pwork.length; i++){
+						div += '<div class="col-lg-1 removesidepadding" data-work-ref="'+ pwork[i].DirectorWork_id +'"><span class="glyphicon glyphicon-eye-open"> </span> &nbsp;<span class="glyphicon glyphicon-pencil p-work-edit"></span> &nbsp; <span class="glyphicon glyphicon-trash p-work-delete"> </span></div>'
+							+ '<div class="col-lg-11 removesidepadding"> <b>'+pwork[i].DirectorWork_title+'</b> '+ pwork[i].DirectorWork_producer + '  ' + pwork[i].DirectorWork_date +' </div>';
+						
+					}
+					$displayPWork.html(div);
+
+					$activeAccord = $(".accordion.active");
+					$nextAcord = $activeAccord.next().next();
+					$nextAcord.addClass("active");
+					$nextAcord.next().addClass("show");
+
+					$("#projectform").toggleClass('hidden');
+  					$("#newprojectbutton").toggleClass('hidden');
+				}
+			}
+		})
+		return false;
+	});
+
+	$(document).on("change", "input[name='contactustext']", function(){
+		if($(this).val() == '')
+			return false;
+
+
+		data = {
+			request: "UpdateContactText",
+			data: JSON.stringify({ text: $(this).val() })
+		};
+
+		$.ajax({
+			url: base + "director/secure",
+			type: type,
+			data: data,
+			success: function(response){
+				topAlertDisplay(response.message);
+			}
+		})
+	});
+
+	$(document).on("click", ".team-member-delete", function(){
+		$that = $(this);
+		conf = confirm("You are sure to remove member from the list ?");
+		if(!conf)
+			return false;
+
+		member_ref = $(this).attr("data-member-ref");
+		data = {
+			request: "DeleteTeamMember",
+			data: JSON.stringify({member_ref: member_ref})
+		};
+		$.ajax({
+			url: base + "director/secure",
+			type: type,
+			data: data,
+			success: function(response){
+				topAlertDisplay(response.message);
+				if(response.status){
+					$that.parent().parent().remove();
+				}
+			}
+		});
+		return false;
+	});
+
+	$(document).on("click", ".p-work-delete", function(){
+		$that = $(this);
+		conf = confirm("You are sure to remove this work ?");
+		if(!conf)
+			return false;
+
+		work_ref = $(this).parent().attr("data-work-ref");
+		data = {
+			request: "DeleteDirectorWork",
+			data: JSON.stringify({work_ref: work_ref})
+		};
+		$.ajax({
+			url: base + "director/secure",
+			type: type,
+			data: data,
+			success: function(response){
+				topAlertDisplay(response.message);
+				if(response.status){
+					$parent = $that.parent();
+					$next = $parent.next();
+
+					$parent.remove();
+					$next.remove();
+				}
+			}
+		});
+		return false;
+	});
+
 });
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()

@@ -1072,6 +1072,109 @@
 			$this->db->where("StashActorProject_project_id_ref", $project);
 			return $this->db->get("stash-actor-project")->num_rows();
 		}
+
+		public function getPageData($ref = 0){
+			$this->db->where("DirectorPage_director_ref", $ref);
+			return $this->db->get("stash-director-page", 1)->first_row("array");
+		}
+
+		public function insertDirectorPage($data = []){
+			$d = array(
+				'DirectorPage_id' => null,
+				'DirectorPage_director_ref' => $data['ref'],
+				'DirectorPage_name' => $data['cname'],
+				'DirectorPage_about' => $data['cabout'],
+				'DirectorPage_logo' => $data['clogo'],
+				'DirectorPage_contact' => '',
+				'DirectorPage_maps' => '',
+				'DirectorPage_time' => time(),
+				'DirectorPage_status' => 1
+			);
+			return $this->db->insert("stash-director-page", $d);
+			//return $this->db->insert_id();
+		}
+
+		public function updateDirectorPageBasic($data = []){
+			$d = array(
+				'DirectorPage_name' => $data['cname'],
+				'DirectorPage_about' => $data['cabout'],
+				'DirectorPage_logo' => $data['clogo']
+			);
+			$this->db->where("DirectorPage_director_ref", $data['ref']);
+			return $this->db->update("stash-director-page", $d);
+		}
+
+		public function insertTeamMembers($data = []){
+			foreach ($data as $key => $team) {
+				$d = array(
+					'DirectorTeam_id' => null,
+					'DirectorTeam_director_ref' => $this->session->userdata("StaSh_User_id"),
+					'DirectorTeam_name' => $team['name'],
+					'DirectorTeam_title' => $team['title'],
+					'DirectorTeam_desc' => $team['desc'],
+					'DirectorTeam_imdb' => $team['imdb'],
+					'DirectorTeam_fb' => $team['fb'],
+					'DirectorTeam_time' => time(),
+					'DirectorTeam_status' => 1
+				);
+
+				$this->db->insert("stash-director-team", $d);
+			}
+			return true;
+		}
+
+		public function getTemMember($ref = 0){
+			$this->db->where("DirectorTeam_director_ref", $ref);
+			$this->db->where("DirectorTeam_status", 1);
+			return $this->db->get("stash-director-team")->result("array");
+		}
+
+		public function insertProjectWork($data = []){
+			$d = array(
+				'DirectorWork_id' => null,
+				'DirectorWork_director_ref' => $this->session->userdata("StaSh_User_id"),
+				'DirectorWork_title' => $data['projecttitle'],
+				'DirectorWork_producer' => $data['projectproducer'],
+				'DirectorWork_date' => $data['projectdate'],
+				'DirectorWork_remark' => $data['projectremarks'],
+				'DirectorWork_team' => '',
+				'DirectorWork_category' => $data['category'],
+				'DirectorWork_work_status' => $data['status'],
+				'DirectorWork_accept_application' => $data['optradio'],
+				'DirectorWork_youtube_link' => $data['youtube'],
+				'DirectorWork_time' => time(),
+				'DirectorWork_status' => 1
+			);
+
+			return $this->db->insert("stash-director-works", $d);
+		}
+
+		public function getProjectWork($ref = 0){
+			$this->db->where("DirectorWork_director_ref", $ref);
+			$this->db->where("DirectorWork_status", 1);
+			return $this->db->get("stash-director-works")->result("array");
+		}
+
+		public function updateContactTxt($txt = '', $ref = 0){
+			$d = array(
+				'DirectorPage_contact' => $txt
+			);
+			$this->db->where("DirectorPage_director_ref", $this->session->userdata("StaSh_User_id"));
+			$this->db->where("DirectorPage_id", $ref);
+			return $this->db->update("stash-director-page", $d);
+		}
+
+		public function removeTeamMember($mem = 0){
+			$this->db->where("DirectorTeam_director_ref", $this->session->userdata("StaSh_User_id"));
+			$this->db->where("DirectorTeam_id", $mem);
+			return $this->db->delete("stash-director-team");
+		}
+
+		public function removeDirectorWork($work = 0){
+			$this->db->where("DirectorWork_director_ref", $this->session->userdata("StaSh_User_id"));
+			$this->db->where("DirectorWork_id", $work);
+			return $this->db->delete("stash-director-works");
+		}
 	}
 
 ?>
