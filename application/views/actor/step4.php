@@ -242,7 +242,7 @@
                             <div class="form-group col-xs-12">
                                 <font class="sortbuttons">
                                     <button type="button" class="btn submit-btn firstcolor center cp_addExperience toggleEdit tick pc_button" id="add_exp_btn" data-hide-id="#add_exp_btn" data-unhide-id="#add_exp_btn_load" >Finish</button>
-                                    <button type="button" class="btn submit-btn tick pc_button" id="add_exp_btn_load" onclick='set_profile_stage(5); window.location.assign("./");' >Skip</button></font>
+                                    
                             </div>
                         </div>
                     </form>
