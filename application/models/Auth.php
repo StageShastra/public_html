@@ -492,5 +492,10 @@
 			$this->db->ordeR_by("StashActorPlan_id", "DESC");
 			return $this->db->get("stash-actor-plan", 1)->num_rows();
 		}
+
+		public function isPageName($name = ''){
+			$this->db->where("DirectorPage_pagename", $name);
+			return $this->db->get("stash-director-page")->num_rows();
+		}
 	}
 ?>

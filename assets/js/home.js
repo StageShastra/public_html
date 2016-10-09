@@ -1694,6 +1694,32 @@ $(document).ready(function(){
 		});
 	});
 
+
+	$(document).on("click", ".displayFullWorkDetail", function(){
+		$that = $(this);
+		$displayArea = $(".videoprojectcard");
+		ref = $(this).attr("data-work-ref");
+		ytube = $(this).attr("data-ytube");
+		embed = 'https://www.youtube.com/embed/' + ytube;
+		parseWorkJSON = JSON.parse(WorkJSON);
+		thisWork = parseWorkJSON[ref];
+
+		$(".videoprojectmedia iframe").attr("src", embed);
+		$tds = $(".videoprojecttable tr td:last-child");
+		/*tds.each(function(){
+			$(this).text("Dilip");
+		});*/
+		$tds.eq(0).text(thisWork.DirectorWork_title);
+		$tds.eq(1).text(thisWork.DirectorWork_producer);
+		$tds.eq(2).text(thisWork.DirectorWork_date);
+		$tds.eq(3).text(thisWork.DirectorWork_remark);
+
+		statusApp = (thisWork.DirectorWork_work_status == 1) ? 'Accepting application!' : 'Application closed!';
+		$tds.eq(4).text(statusApp);
+
+		return false;
+	});
+
 });
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()

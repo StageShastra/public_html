@@ -185,9 +185,9 @@
 					$this->response(false, "Field cannot be empty.");
 				}
 				$flag = false;
-				$pageData = $this->session->userdata("StaSh_User_id");
+				$pageData = $this->ModelDirector->getPageData($this->session->userdata("StaSh_User_id"));
 				//echo "page data is ".$pageData;
-				var_dump($pageData);
+				//var_dump($pageData);
 				if(count($pageData)){
 					if($clogo == '')
 						$clogo = $pageData['DirectorPage_logo'];

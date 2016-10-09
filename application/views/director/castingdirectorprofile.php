@@ -227,7 +227,7 @@
 
         <!-- Casting Director Header-->
         <div name="CDheader" class="center CDsection"> 
-          <span> <img  class="companylogo" src="http://www.ijcprr.com/uploads/53b9377cec56b1404647292SP_Logo.png"></span><span><h1>Casting Bay</h1></span>
+          <span> <img  class="companylogo" src="<?= IMG . "/pages/" . $basic['DirectorPage_logo'] ?>" alt='<?= $basic['DirectorPage_pagename'] ?>'></span><span><h1><?= $basic['DirectorPage_name'] ?></h1></span>
           </div>
           <nav class="navbar CDnavbar CDsection">
                     <div class="container-fluid center">
@@ -245,7 +245,9 @@
         <div id="aboutus" class="container col-lg-12 col-md-12 col-sm-12 CDsection">
           <h2 class="center"> About Us </h2>
           <div class=" col-lg-10 center">
-          <p class="sectioncontent"> Some the cursor property of cursor to be displayed when pointing on an elementThe cursor property specifies the type of cursor to be displayed when pointing on an elementThe cursor property specifies the type of cursor to be displayed when pointing on an elementThe cursor  type of cursor to be displayed when pointing on an elementThe cursor property specifies the type of cursor to be displayed when po elementThe cursor property specifies the type of cursor to be displayed when pointing on an elementThe cursor property specifies the type pointing on an element. </p>
+          <p class="sectioncontent"> 
+          <?= htmlentities($basic['DirectorPage_about']) ?>
+          </p>
 
           </div>
         </div>
@@ -255,86 +257,39 @@
           <h2 class="center" id="team"> Team </h2>
                 <div class="container">
                   <div class="row">
+                  <?php
+
+                    foreach ($teams as $key => $team) {
+                  ?>
                     <div class="col-lg-3 col-sm-6">
                       <div class="card hovercard">
                           <div class="avatar">
-                              <img alt="" src="<?=CSS?>/guyface.jpg">
+                              <img alt="<?= $team['DirectorTeam_name'] ?>" src="http://placehold.it/150x150/?text=[IMG]">
                           </div>
                           <div class="info">
                               <div class="title">
-                                  Abhishek Banerjee
+                                  <?= $team['DirectorTeam_name'] ?>
                               </div>
-                              <div class="desc">Co-Founder, Casting Director-in-Chief</div>
+                              <div class="desc"><?= $team['DirectorTeam_title'] .", ". $team['DirectorTeam_desc'] ?></div>
                       
                           </div>
                           <div class="bottom">
                               <a class="socialbtn btn-primary btn-sm" rel="publisher"
-                                 href="https://plus.google.com/shahnuralam">
+                                 href="<?= $team['DirectorTeam_fb'] ?>" title='Facebook'>
                                   <i class="fa fa-facebook"></i>
+                              </a>
+                              &nbsp;
+                              <a class="socialbtn btn-primary btn-sm" rel="publisher"
+                                 href="<?= $team['DirectorTeam_imdb'] ?>" title='IMDB'>
+                                  <i class="fa fa-external-link"></i>
                               </a>
                           </div>
                       </div> <!-- first card -->
                     </div>
-                    <div class="col-lg-3 col-sm-6">
-                      <div class="card hovercard">
-                          <div class="avatar">
-                              <img alt="" src="<?=CSS?>/guyface.jpg">
-                          </div>
-                          <div class="info">
-                              <div class="title">
-                                  Abhishek Banerjee
-                              </div>
-                              <div class="desc">Co-Founder, Casting Director-in-Chief</div>
-                      
-                          </div>
-                          <div class="bottom">
-                              <a class="socialbtn btn-primary btn-sm" rel="publisher"
-                                 href="https://plus.google.com/shahnuralam">
-                                  <i class="fa fa-facebook"></i>
-                              </a>
-                          </div>
-                      </div> <!-- first card --><!-- second card -->
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                      <div class="card hovercard">
-                          <div class="avatar">
-                              <img alt="" src="<?=CSS?>/guyface.jpg">
-                          </div>
-                          <div class="info">
-                              <div class="title">
-                                  Abhishek Banerjee
-                              </div>
-                              <div class="desc">Co-Founder, Casting Director-in-Chief</div>
-                      
-                          </div>
-                          <div class="bottom">
-                              <a class="socialbtn btn-primary btn-sm" rel="publisher"
-                                 href="https://plus.google.com/shahnuralam">
-                                  <i class="fa fa-facebook"></i>
-                              </a>
-                          </div>
-                      </div> <!-- first card --><!-- third card -->
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                      <div class="card hovercard">
-                          <div class="avatar">
-                              <img alt="" src="<?=CSS?>/guyface.jpg">
-                          </div>
-                          <div class="info">
-                              <div class="title">
-                                  Abhishek Banerjee
-                              </div>
-                              <div class="desc">Co-Founder, Casting Director-in-Chief</div>
-                      
-                          </div>
-                          <div class="bottom">
-                              <a class="socialbtn btn-primary btn-sm" rel="publisher"
-                                 href="https://plus.google.com/shahnuralam">
-                                  <i class="fa fa-facebook"></i>
-                              </a>
-                          </div>
-                      </div> <!-- first card --><!-- third card --><!-- fourth card -->
-                    </div>
+                  <?php
+                    }
+
+                  ?>
 
                   </div>
                 </div>
@@ -351,20 +306,31 @@
                   <button class="btn submit-btn firstcolor center">Ongoing</button>
                   <button class="btn submit-btn firstcolor center">Past Work</button>
             </div>
+            <?php
+              $regex = '/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/';
+              $ytube = preg_match($regex, $works[0]['DirectorWork_youtube_link'], $matches);
+              if(isset($matches[2]) && trim($matches[2]) != ''){
+                $ytube = trim($matches[2]);
+              }else{
+                $ytube = '';
+              }
+              $embed = 'https://www.youtube.com/embed/' . $ytube;
 
+            ?>
             <div class="container-fluid col-lg-8 center videoprojectcard">
               <div class="col-lg-6 videoprojectmedia">
-                <img src="http://placehold.it/320x180" style="width:100%;">
+                <!-- <img src="http://placehold.it/320x180" style="width:100%;"> -->
+                <iframe width="320" height="180" src="<?= $embed ?>" frameborder="0" allowfullscreen></iframe>
               </div>
               <div class="col-lg-6">
                 
                   <table class="videoprojecttable">
-                    <tr> <td> Title </td> <td> Filmy Keeda </td></tr>
-                    <tr> <td> Producer </td><td> Dharma Productions </td></tr>
-                    <tr> <td> Date </td> <td> 22 October, 2012 </td> </tr>
-                    <tr> <td> Remarks </td><td> One of our earliest films. We were responsible for casting 65 roles in the film. </td></tr>
-                    <tr> <td> Team </td> <td> <a href="#"> Abhishek</a>, <a href="#"> Anmol </a></td></tr>
-                    <tr> <td> Status </td> <td> <a href="#">Accepting Applications!</a></td> </tr>
+                    <tr> <td> Title </td> <td> <?= $works[0]['DirectorWork_title'] ?> </td></tr>
+                    <tr> <td> Producer </td><td> <?= $works[0]['DirectorWork_producer'] ?> </td></tr>
+                    <tr> <td> Date </td> <td> <?= $works[0]['DirectorWork_date'] ?> </td> </tr>
+                    <tr> <td> Remarks </td><td> <?= $works[0]['DirectorWork_remark'] ?> </td></tr>
+                   <!--  <tr> <td> Team </td> <td> <a href="#"> Abhishek</a>, <a href="#"> Anmol </a></td></tr> -->
+                    <tr> <td> Status </td> <td> <a href="#"><?= ($works[0]['DirectorWork_work_status']) ? "Accepting application !" : "Application Closed!" ?></a></td> </tr>
                   </table>
                 
               </div>
@@ -385,35 +351,58 @@
                             
                             <!-- Carousel items -->
                             <div class="carousel-inner">
-                                
-                            <div class="item active">
-                              <div class="row-fluid">
-                                <div class="col-lg-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/140x100" alt="Image" style="widt:=100%;"/></a></div>
-                                <div class="col-lg-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/140x100" alt="Image"  style="widt:=100%;"/></a></div>
-                                <div class="col-lg-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/140x100" alt="Image"  style="widt:=100%;"/></a></div>
-                                <div class="col-lg-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/140x100" alt="Image"  style="widt:=100%;"/></a></div>
-                              </div><!--/row-fluid-->
-                            </div><!--/item-->
-                            
-                            <div class="item">
-                              <div class="row-fluid">
-                                <div class="col-lg-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/140x100" alt="Image"/></a></div>
-                                <div class="col-lg-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/140x100" alt="Image"/></a></div>
-                                <div class="col-lg-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/140x100" alt="Image"/></a></div>
-                                <div class="col-lg-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/140x100" alt="Image"/></a></div>
-                              </div><!--/row-fluid-->
-                            </div><!--/item--> 
-                            
-                             
-                             <div class="item">
-                              <div class="row-fluid">
-                                <div class="col-lg-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/140x100" alt="Image"/></a></div>
-                                <div class="col-lg-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/140x100" alt="Image"/></a></div>
-                                <div class="col-lg-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/140x100" alt="Image"/></a></div>
-                                <div class="col-lg-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/140x100" alt="Image"/></a></div>
-                              </div><!--/row-fluid-->
-                            </div><!--/item-->
 
+                            <?php
+
+                              $open = false;
+                              $active = 'active';
+                              
+                              foreach ($works as $key => $work) {
+                                    
+                                if($key%4 == 0){
+                                  if($open){
+                                    echo '</div></div>';
+                                  }
+                                  echo '<div class="item '.$active.'"><div class="row-fluid">';
+                                  $active = '';
+                                  $open = true;
+                                }
+
+                                $ytube = preg_match($regex, $work['DirectorWork_youtube_link'], $matches);
+                                if(isset($matches[2]) && trim($matches[2]) != ''){
+                                  $ytube = trim($matches[2]);
+                                }else{
+                                  $ytube = '';
+                                }
+
+                                //$embed = 'https://www.youtube.com/embed/' . $ytube;
+                                $embed = "http://img.youtube.com/vi/{$ytube}/default.jpg";
+                                $title = $work['DirectorWork_title'];
+                                $ref = $work['DirectorWork_id'];
+
+                                echo '<div class="col-lg-3">'
+                                    . '<a href="#" class="thumbnail displayFullWorkDetail" data-ytube="'.$ytube.'" data-work-ref="'.$key.'" title="'.$title.'" >' 
+                                    . '<img src="'.$embed.'" alt="Image" style="widt:=100%;" width="140" height="100" />'
+                                    /*. '<iframe width="140" height="100" src="'.$embed.'" frameborder="0" allowfullscreen></iframe>'*/
+                                    . '</a>'
+                                    . '</div>';
+
+                                if($key % 4 != 0 && $open){
+                                  echo '</div></div>';
+                                }
+
+                              }
+
+                            ?>                            
+                             
+                             <!-- <div class="item">
+                              <div class="row-fluid">
+                                <div class="col-lg-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/140x100" alt="Image"/></a></div>
+                                <div class="col-lg-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/140x100" alt="Image"/></a></div>
+                                <div class="col-lg-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/140x100" alt="Image"/></a></div>
+                                <div class="col-lg-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/140x100" alt="Image"/></a></div>
+                              </div>
+                            </div> -->
                             </div><!--/carousel-inner-->
 
                             <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
@@ -431,13 +420,17 @@
             <h2 class="center"> Contact Us </h2><br>
               <div class="col-lg-8 center">
                 <p class="sectioncontent" style="text-align:center;"> 
-                You can get in touch with us at whatever@gmail.com. 
+                <?= $basic['DirectorPage_contact'] ?> 
                 </p>
               </div>
         </div>
 </div>
     
 </body>
+
+<script type="text/javascript">
+  var WorkJSON = '<?= json_encode($works) ?>';
+</script>
 
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php
