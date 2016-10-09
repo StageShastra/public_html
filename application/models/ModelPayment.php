@@ -71,4 +71,18 @@
 			return $this->db->insert("stash-actor-plan", $d);
 		}
 
+		public function getLastDirectorNameForActor($ref = 0){
+			$this->db->select("U.StashUsers_name");
+			$this->db->from("stash-director-actor-link DAL");
+			$this->db->join("stash-users as U", "DAL.StashDirectorActorLink_director_id_ref = U.StashUsers_id");
+			$this->db->where("DAL.StashDirectorActorLink_actor_id_ref", $ref);
+			$this->db->order_by("DAL.StashDirectorActorLink_id", "DESC");
+			$this->db->limit(1);
+			$fetch = $this->db->get()->first_row('array');
+			if(count($fetch))
+				return $fetch['StashUsers_name'];
+			else
+				return '';
+		}
+
 	}

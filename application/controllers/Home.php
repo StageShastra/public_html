@@ -34,6 +34,7 @@ class Home extends CI_Controller {
 		$pageInfo['director'] = 0;
 		$pageInfo['project'] = 0;
 		$pageInfo['link_id'] = 0;
+		$pageInfo['welcome_msg'] = '';
 
 		$refer_id = 0;
 		$refer = 'direct';
@@ -61,6 +62,10 @@ class Home extends CI_Controller {
 					$refer = 'email';
 					$refer_id = $linkDetails['StashEmailInvite_id'];
 				}
+
+				$dname = $this->Auth->getUserData("StashUsers_id", $pageInfo['director']);
+				$dname = $dname['StashUsers_name'];
+ 				$pageInfo['welcome_msg'] = str_replace("__ADD_NAME__", $dname, SignUp_Refer_Msg);
 				
 			}
 		}else{
@@ -191,6 +196,14 @@ class Home extends CI_Controller {
 	    			// Sending Confirmation Mail
 	    			$this->load->model("Email");
 	    			$this->Email->sendActivationMail($this->input->post('name'), $this->input->post('email'), $response);
+
+	    			// Send invitation confirm SMS to Actor
+	    			if($type == 'actor'){
+	    				if($refer != 'refer' || $refer != 'direct'){
+	    					$this->load->model("SMS");
+	    					$this->SMS->sentInvitationConfirmSMS( $this->input->post("mobile"), SMS_Confirm_Invite );
+	    				}
+	    			}
 
 	    			//startLoginSession
 

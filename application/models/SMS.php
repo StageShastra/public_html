@@ -100,5 +100,25 @@
 					
 			return $this->sendCurlSMS($data);
 		}
+
+		public function sentInvitationConfirmSMS($mobile = '', $msg = ''){
+			$postmessage = "\nPowered By. Castiko";
+			$msg = $this->prefix.$msg;
+			$msg .= $postmessage;
+			$msg = rawurlencode($msg);
+
+			if(strlen($mobile) == 10)
+				$mobile .= '91' . $mobile;
+
+			$data = array(
+					'username' => $this->username, 
+					'hash' => $this->password, 
+					'numbers' => $number, 
+					"sender" => urlencode($this->sender), 
+					"message" => $msg,
+					"test" => $this->test
+				);
+			return $curl = $this->sendCurlSMS($data);
+		}
 	}
 ?>

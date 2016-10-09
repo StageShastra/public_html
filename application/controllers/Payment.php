@@ -27,6 +27,9 @@
 		public function paymentActor($plan = 0){
 			setcookie("Cstko_user_id", $this->session->userdata("StaSh_User_id"), time() + 3600, "/");
 			$pageInfo['plan'] = $plan;
+			$dname = $this->ModelPayment->getLastDirectorNameForActor( $this->session->userdata("StaSh_User_id") );
+			$msg = str_replace("__ADD_NAME__", $dname, Plan_Refer_Msg);
+			$pageInfo['welcome_msg'] = ($dname != '') ? $msg : null;
 			$this->load->view("checkout_actor", $pageInfo);
 		}
 

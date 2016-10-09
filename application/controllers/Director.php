@@ -53,6 +53,7 @@
 			$pageInfo['plan'] = $this->ModelDirector->getDirectorPlan();
 			$pageInfo['profile'] = $this->ModelDirector->directorProfile();
 			$pageInfo['project'] = $this->ModelDirector->getProjectDetails($value);
+			//$this->debugger($pageInfo);
 			$this->load->view("director/castingsheet", $pageInfo);
 		}
 		public function newproject($value=''){
@@ -110,6 +111,13 @@
 			//print_r($_GET);
 			header('Content-Type: text/html; charset=utf-8');
 			echo $email;
+			exit();
+		}
+
+		public function debugger($data = []){
+			echo "<pre>";
+			print_r($data);
+			echo "</pre>";
 			exit();
 		}
 

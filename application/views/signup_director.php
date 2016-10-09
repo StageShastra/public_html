@@ -166,6 +166,8 @@ a:hover, a:focus {
                   <font class="info-small text-primary signup_heading"> Director Sign Up   <? if(isset($_REQUEST['plan'])) {echo ucwords("- ".$_REQUEST['plan']);} ?></font>
                   
                       <form role="form" action="<?= $_SERVER['REQUEST_URI'] ?>" method="POST">
+                      
+                      <br>
                       <div class="form-group">
                         <input type="text" class="form-control login" id="fullname" name="name" placeholder= "Full Name *" required>
                       </div>

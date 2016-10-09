@@ -213,6 +213,17 @@ define('Em_AudiMail_subject', 'Audition Mail');
 define('Em_AudiMail_message', 'You got a Message from __PUT_DIRECTOR_NAME_HERE__. Open this link to see message.');
 define('Em_AudiMail_ifQues', '');
 
+// SMS Invitations
+define('SMS_Confirm_Invite', 'Thank you for connecting with Casting Bay. PLEASE NOTE: they will be sending audition msges here. Keep checking.');
+define('SMS_Confirm_Sheet', 'Thank you for auditioning for Flipkart at Casting Bay. NOTE: they will be sending audition msgs here. Keep checking. Please add photos and videos to your profile.');
+
+define('SignUp_Refer_Msg', 'Welcome - you are here because you were invited by __ADD_NAME__ to join their database. Please fill in your details below.');
+define('Plan_Refer_Msg', '"One more thing! If you are only interested in connecting with __ADD_NAME__ right now, just choose the Basic plan."');
+
+
+
+
+
 
 
 

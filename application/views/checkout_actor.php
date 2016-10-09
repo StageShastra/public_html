@@ -237,6 +237,7 @@ a:hover, a:focus {
                 <span class="heading white">CHECKOUT</span><br>
                 <div class="row">
                     <div class="col-sm-6 col-lg-6 col-md-6 col-xs-12">
+                        <p><?= $welcome_msg ?></p><br>
                         <div class="checkout_box">
                             <div class="row">
                                 <span class="labels col-xs-6">Name : </span>
