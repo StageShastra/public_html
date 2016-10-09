@@ -26,7 +26,7 @@
 			$this->load->view("director/home", $pageInfo);
 		}
 
-		public function profile($value=''){
+		/*public function profile($value=''){
 			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'director')
 				redirect(base_url());
 			$pageInfo = [];
@@ -36,7 +36,7 @@
 			$pageInfo['count_emails'] = $this->ModelDirector->getInvitationEmailCount($this->session->userdata("StaSh_User_id"));
 			$pageInfo['count_sms'] = $this->ModelDirector->getInvitationSMSCount($this->session->userdata("StaSh_User_id"));
 			$this->load->view("director/castingdirectorprofile", $pageInfo);
-		}
+		}*/
 
 		public function conversations($value=''){
 
@@ -185,7 +185,9 @@
 					$this->response(false, "Field cannot be empty.");
 				}
 				$flag = false;
-				$pageData = $this->ModelDirector->getPageData( $this->session->userdata("StaSh_User_id") );
+				$pageData = $this->session->userdata("StaSh_User_id");
+				//echo "page data is ".$pageData;
+				var_dump($pageData);
 				if(count($pageData)){
 					if($clogo == '')
 						$clogo = $pageData['DirectorPage_logo'];
