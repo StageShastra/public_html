@@ -459,6 +459,12 @@
 
 		}
 
+		public function isPromoUsed($promo = 0, $user = 0){
+			$this->db->where("StashPromoUsed_promo_id_ref", $promo);
+			$this->db->where("StashPromoUsed_user_id_ref", $user);
+			return $this->db->get("stash-promo-used", 1)->num_rows();
+		}
+
 		public function insertActorPlan($plan = ''){
 			$d = array(
 						'StashActorPlan_id' => null,
@@ -485,6 +491,11 @@
 			$this->db->where("StashActorPlan_status", 1);
 			$this->db->ordeR_by("StashActorPlan_id", "DESC");
 			return $this->db->get("stash-actor-plan", 1)->num_rows();
+		}
+
+		public function isPageName($name = ''){
+			$this->db->where("DirectorPage_pagename", $name);
+			return $this->db->get("stash-director-page")->num_rows();
 		}
 	}
 ?>

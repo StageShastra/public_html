@@ -345,6 +345,11 @@ div.panel2.show {
                     </div><!-- /.navbar-collapse -->
                 </div>
             </nav>
+
+            <div class="top-alert-bar">
+              <p>This is some message.</p>
+              <!-- <a href="#" class="close-top-alert"><i class="fa fa-times"></i></a> -->
+            </div>
  
 <div class="container"> <!-- The Main Container -->
   <div class="col-lg-12 center">
@@ -354,74 +359,132 @@ div.panel2.show {
   <br>
 
 
-  <form class="form-horizontal">
+
   <div class="col-lg-12">
     
-    <button type="button" class="accordion col-sm-12"><span class="glyphicon glyphicon-star"></span> &nbsp;Basic Details</button>
-    <div class="panel very-light-padded">
+    <button type="button" class="accordion col-sm-12 active"><span class="glyphicon glyphicon-star"></span> &nbsp;Basic Details</button>
+    <div class="panel very-light-padded show">
       <div class="col-lg-12">
-      <div class="form-group">
-          <label class="control-label"><h3>Company Name:</h3></label>
-          <input class="form-control" type="text" name="companyname"><br>
-        
-          <label class="control-label"><h3>Company Logo:</h3></label>
-          <input type="file" name="companylogo"><br>
+        <form id="form-directorpage-first" method="post" action="" target="_blank" enctype="multipart/form-data">
+          <div class="form-group">
+              <label class="control-label"><h3>Company Name:</h3></label>
+              <input class="form-control" type="text" name="companyname" value="<?= $pagaBasic['DirectorPage_name'] ?>">
+          </div>
+          <div class="form-group">
+              <label class="control-label"><h3>Company URL:</h3></label>
+              <input class="form-control" type="text" name="companyurl" value="<?= $pagaBasic['DirectorPage_pagename'] ?>">
+              <p class="help-text">http://castiko.com/<span id="pagename-typing"><?= $pagaBasic['DirectorPage_pagename'] ?></span> <span id="pagename-typing-error"></span></p>
+          </div>
+          <div class="form-group">
+            <label class="control-label"><h3>Company Logo:</h3></label>
+            <input type="file" name="companylogo" class="showPreview"><br>
 
-      <div class="col-lg-12 removesidepadding">
-        <label class="control-label"><h3>About Us:</h3></label>
-        <input class="form-control" type="text" name="aboutus">
-        <br>
-      </div>
-      </div>
-      </div>
-    </div> <!-- End of Basic Details panel -->
+            <div class="img-preview">
+              <img src="<?= IMG . "/pages/". $pagaBasic['DirectorPage_logo']  ?>" height="100" width="100">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label"><h3>About Us:</h3></label>
+            <textarea class="form-control" name="aboutus" rows="3"><?= $pagaBasic['DirectorPage_about']  ?></textarea>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn firstcolor submit-btn director-page-update">Update</button>
+          </div>
+        </form>
+      </div> <!-- End of Basic Details panel -->
+    </div>
     
     <button type="button" class="accordion col-sm-12"><span class="glyphicon glyphicon-user"></span> &nbsp;Team</button>
     <div class="panel very-light-padded">
+
+      <div class="removesidepadding">
+        <table class="table table-striped table-hover" id="display-team-detail">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>IMDB</th>
+                <th>Facebook</th>
+                <th>Action</th>
+              </tr>
+              </thead>
+
+              <tbody>
+                <?php
+                  foreach ($teams as $key => $team) {
+                ?>
+                  <tr>
+                    <td><?= ++$key ?></td>
+                    <td><?= $team['DirectorTeam_name'] ?></td>
+                    <td><?= $team['DirectorTeam_title'] ?></td>
+                    <td><?= $team['DirectorTeam_desc'] ?></td>
+                    <td><?= $team['DirectorTeam_imdb'] ?></td>
+                    <td><?= $team['DirectorTeam_fb'] ?></td>
+                    <td>
+                      <!-- <a href="#" class="team-member-edit" data-member-ref="<?= $team['DirectorTeam_id'] ?>"><i class="fa fa-pencil"></i></a> -->
+                      <a href="#" class="team-member-delete" data-member-ref="<?= $team['DirectorTeam_id'] ?>"><i class="fa fa-trash"></i></a>
+                    </td>
+                  </tr>
+                <?php
+                  }
+                ?>
+              </tbody>
+          </table>
+      </div>
+
       <div class="col-lg-12 removesidepadding">
 
         <label class="control-label"> <h3> Number of Members: </h3></label>
-          <select  onchange="showTeammates()" class="form-control">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-            <option>8</option>
-            <option>9</option>
-            <option>10</option>
+          <select class="form-control" name="no-of-teammates" id="no-of-teammates">
+            <?php
+              $c = count($teams);
+              for($i = 0; $i < 11; $i++){
+                //$s = ($c== $i) ? 'selected' : "";
+                echo "<option value='{$i}'>{$i}</option>";
+              }
+            ?>
           </select>
           <br>
       </div>      
       <div id="teammates" class="form-group col-lg-12 hidden">
         <label class="control-label"><h3>Team Details: </h3></label>
           <table class="teammates removesidepadding">
-          <tr>
-            <th> Name </th>
-            <th> Title </th>
-            <th> Description </th>
-            <th> IMDB Link </th>
-            <th> Facebook Link </th>
-          </tr>
-          <tr>
-            <td> <input class="form-control" type="text" name="name1"></td>
-            <td> <input class="form-control" type="text" name="title1"></td>
-            <td> <input class="form-control" type="text" name="desc1"></td>
-            <td> <div class="input-group"><input class="form-control" type="text" name="imdb1" /><span class="input-group-addon"> <i class="glyphicon glyphicon-eye-open"></i></span></div></td>
-            <td> <div class="input-group"><input class="form-control" type="text" name="fb1" /><span class="input-group-addon"> <i class="glyphicon glyphicon-eye-open"></i></span></div></td>
-          </tr>
-          <tr>
-            <td> <input class="form-control" type="text" name="name2"></td>
-            <td> <input class="form-control" type="text" name="title2"></td>
-            <td> <input class="form-control" type="text" name="desc2"></td>
-            <td> <div class="input-group"><input class="form-control" type="text" name="imdb2" /><span class="input-group-addon"> <i class="glyphicon glyphicon-eye-open"></i></span></div></td>
-            <td> <div class="input-group"><input class="form-control" type="text" name="fb2" /><span class="input-group-addon"> <i class="glyphicon glyphicon-eye-open"></i></span></div></td>
-          </tr>
+          <thead>
+            <tr>
+              <th> Name* </th>
+              <th> Title* </th>
+              <th> Description* </th>
+              <th> IMDB Link </th>
+              <th> Facebook Link </th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+          <tfoot>
+            <tr class="dummy-tr" style="display: none;">
+              <td> <input class="form-control" type="text" name="name"></td>
+              <td> <input class="form-control" type="text" name="title"></td>
+              <td> <input class="form-control" type="text" name="desc"></td>
+              <td> <div class="input-group"><input class="form-control" type="text" name="imdb" /><span class="input-group-addon"> <i class="glyphicon glyphicon-eye-open"></i></span></div></td>
+              <td> <div class="input-group"><input class="form-control" type="text" name="fb" /><span class="input-group-addon"> <i class="glyphicon glyphicon-eye-open"></i></span></div></td>
+            </tr>
+
+            <tr>
+              <td>
+                <button type="button" class="btn firstcolor submit-btn update-page-team">Update</button>
+              </td>
+            </tr>
+          </tfoot>
+
+
         </table>
       </div> <!-- End of Teammates Table div -->
-    </div> <!--End of Team panel -->
+    </div> <!--End of Team panel-->
 
 
     <button type="button" class="accordion col-sm-12"><span class="glyphicon glyphicon-film"></span> &nbsp; Work</button>
@@ -431,11 +494,16 @@ div.panel2.show {
       <br>
        
         <!--Projects that are already added -->
-        <div class="col-lg-12">
-          <div class="col-lg-1 removesidepadding"><span class="glyphicon glyphicon-eye-open"> </span> &nbsp;<span class="glyphicon glyphicon-pencil"></span> &nbsp; <span class="glyphicon glyphicon-trash"> </span>
-          </div>
-          <div class="col-lg-11 removesidepadding"> <b> Krishna Hill </b>. Dharma Productions. 20 October, 2014.
-          </div>
+        <div class="col-lg-12" id="display-project-work">
+          <?php
+            foreach ($works as $key => $work) {
+          ?>
+            <div class="col-lg-1 removesidepadding" data-work-ref="<?= $work['DirectorWork_id'] ?>"><span class="glyphicon glyphicon-eye-open"> </span> &nbsp;<span class="glyphicon glyphicon-pencil p-work-edit"></span> &nbsp; <span class="glyphicon glyphicon-trash p-work-delete"> </span></div>
+              <div class="col-lg-11 removesidepadding"> <b><?= $work['DirectorWork_title'] ?></b> <?= $work['DirectorWork_producer'] . " " . $work['DirectorWork_date'] ?>  </div>
+            
+          <?php
+            }
+          ?>
         </div>
       
         <br>
@@ -452,21 +520,21 @@ div.panel2.show {
             <tr> <th> Producer:  </th>   <td> <input class="form-control" type="text" name="projectproducer"> </td></tr>
             <tr> <th> Date:      </th>   <td> <input class="form-control" type="date" name="projectdate">     </td> </tr>
             <tr> <th> Remarks:   </th>   <td> <input class="form-control" type="text" name="projectremarks">  </td></tr>
-            <tr> <th> Team:      </th>   <td> <select class="form-control"><option>Teammate1</option><option>Teammate2</option><option>Teammate3</option><option>Teammate4</option><option>Teammate5</option></select>               </td></tr>
+            <!-- <tr> <th> Team:      </th>   <td> <select class="form-control"><option>Teammate1</option><option>Teammate2</option><option>Teammate3</option><option>Teammate4</option><option>Teammate5</option></select>               </td></tr> -->
             
-            <tr> <th> Category:  </th>    <td> <select class="form-control"><option>Film</option><option>TVC</option><option>Online</option></select></td></tr>
+            <tr> <th> Category:  </th>    <td> <select class="form-control" name="category"><option value="Film">Film</option><option value="TVC">TVC</option><option value="Online">Online</option></select></td></tr>
             
-            <tr> <th> Status:    </th>    <td> <select class="form-control"><option>Upcoming</option><option>Ongoing</option><option>Previous Work</option></select></td></tr>
+            <tr> <th> Status:    </th>    <td> <select class="form-control" name="status"><option value="Upcoming">Upcoming</option><option value="Ongoing">Ongoing</option><option value="Previous Work">Previous Work</option></select></td></tr>
             
-            <tr> <th> Accepting Applications? </th> <td> <label class="radio-inline radiobuttons"><input type="radio" name="optradio">Yes</label><label class="radio-inline radiobuttons"><input type="radio" name="optradio">No</label></td></tr>
+            <tr> <th> Accepting Applications? </th> <td> <label class="radio-inline radiobuttons"><input type="radio" value="1" name="optradio">Yes</label><label class="radio-inline radiobuttons"><input type="radio" name="optradio" value="0" checked>No</label></td></tr>
             
-            <tr> <th> YouTube Link:</th> <td> <input type="text" class="form-control" placeholder="Paste a YouTube link here."/></td></tr>
+            <tr> <th> YouTube Link:</th> <td> <input type="text" name="youtube" class="form-control" placeholder="Paste a YouTube link here."/></td></tr>
 
         </table>
         <br><br>
         <div class="center"> 
-          <button type="button" class="btn btn-primary firstcolor submit-btn" onclick="showProjectPreview()"><span class="glyphicon glyphicon-eye-open"> </span> &nbsp;Preview</button>
-          <button type="button" class="btn btn-primary firstcolor submit-btn" onclick="saveProjectForm()"><span class="glyphicon glyphicon-ok"> </span> &nbsp;Save</button>
+          <button type="button" class="btn btn-primary firstcolor submit-btn" onclick="saveProjectForm()"><span class="fa fa-times"> </span> &nbsp;Cancel</button>
+          <button type="button" class="btn btn-primary firstcolor submit-btn page-project-update"><span class="glyphicon glyphicon-ok"> </span> &nbsp;Save</button>
         </div>
       </div><!-- End of project form -->
       </div> <!--End of form group -->
@@ -476,9 +544,10 @@ div.panel2.show {
     <div class="panel very-light-padded">
       <div class="form-group col-lg-12">
         <label class="control-label"><h3>Add Contact Us Text:</h3></label>
-        <input  class="form-control" type="text" name="contactustext">
-        <label  class="control-label"><h3>Enter Your Location to Enable Maps:</h3></label>
-        <input  class="form-control" type="text" name="googlemapshere"><br>
+        <input  class="form-control" type="text" name="contactustext" value="<?= $pagaBasic['DirectorPage_contact'] ?>">
+        <!-- <label  class="control-label"><h3>Enter Your Location to Enable Maps:</h3></label>
+        <input  class="form-control" type="text" name="googlemapshere"><br> -->
+        <div class="clearfix"></div>
       </div>
     </div><!-- End of Contact panel -->
   </div> <!-- End 12 column Div -->
@@ -489,7 +558,6 @@ div.panel2.show {
   </div>
 </div>
 </div>
-</form>
 
 </div>
        

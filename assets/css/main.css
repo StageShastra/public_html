@@ -1477,3 +1477,21 @@ table.card-table {
 
 }
 
+
+.top-alert-bar{
+	position: fixed;
+	top: 30px;
+	z-index: 99999;
+	display: none;
+	background-color: #fff;
+	color: #ff003a;
+	min-width: 450px;
+	padding: 5px 8px;
+	border: 2px solid #ff003a;
+	border-radius: 3px;
+	text-align: center;
+}
+
+.top-alert-bar a{
+	float: right;
+}

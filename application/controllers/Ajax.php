@@ -1170,7 +1170,7 @@
 				return false;
 
 			$refData = $this->Auth->getPromoLinkDetailsById( $refId );
-			if( count($refData) ){
+			if( count($refData) && !$this->Auth->isPromoUsed($refData['StashPromo_id'], $userRef)){
 
 				$directors = json_decode($refData['StashPromo_directors'], true);
 				$projects = json_decode($refData['StashPromo_projects'], true);
