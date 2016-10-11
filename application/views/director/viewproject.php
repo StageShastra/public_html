@@ -154,7 +154,7 @@
 
 .form-title-row{
     text-align: center;
-    margin-bottom: 55px;
+    margin-bottom: 20px;
 }
 
 .form-validation h1{
@@ -805,8 +805,8 @@ button[disabled], html input[disabled] {
               <div class="col-sm-12" id="table">
               
                 <div class="form-title-row">
-                    <h3 class="project_name"> PROJECT : <?= $project["StashProject_name"]; ?></h3>
-                    <h5 class="shoot_dates"><span style="">Shoot starts from  </span><span class="shoot_begins"></span> and ends on <span class="shoot_ends"></span> </h5>
+                    <h3 class="project_name"> Project:<b style="text-transform: uppercase;"> <?= $project["StashProject_name"]; ?></b></h3>
+                    <h4 class="shoot_dates"><span style="">SHOOT DATES:  </span><span class="shoot_begins"></span> to <span class="shoot_ends"></span> </h4>
                     <button type="button" class="go_button" onclick="window.location.assign('../castingsheet/<?= $project["StashProject_id"]; ?>')">Open Casting Sheet</button>
                 </div>
                 <div class="role-tabs">
@@ -822,49 +822,49 @@ button[disabled], html input[disabled] {
 
                 <!-- Modal content-->
                 <div class="modal-content">
-                  <div class="modal-header">
+                  <div class="modal-header" style="border-bottom: 2px solid #f3525b">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Casting Sheet Response</h4>
+                    <h4 class="modal-title">Casting Sheet: <b><span id="m_actor_name" style="text-transform: uppercase;"></span></b></h4>
                   </div>
                   <div class="modal-body">
                     <div class="container col-sm-12">
-                      <div class="row">
-                        <div class="col-sm-6">
-                           Name: 
-                        </div>
-                        <div class="col-sm-6">
-                          <span id="m_actor_name"></span>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-sm-6">
+                      <div class="row" style="border-top: 1px solid white;">
+                        <div class="col-sm-5 firstcolor">
                           Email:
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-7">
                           <span id="m_actor_email"></span>
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-5 firstcolor">
                           Mobile:
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-7">
                           <span id="m_actor_mobile"></span>
                         </div>
                       </div>
                       <div class="row"> 
-                        <div class="col-sm-6">
+                        <div class="col-sm-5 firstcolor">
+                          Age:
+                        </div>
+                        <div class="col-sm-7">
+                          <span id="m_actor_age">ADD AGE HERE</span>
+                        </div>
+                      </div>
+                      <div class="row"> 
+                        <div class="col-sm-5 firstcolor">
                           Height:
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-7">
                           <span id="m_actor_height"></span>
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-5 firstcolor">
                           Weight:
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-7">
                           <span id="m_actor_weight"></span>
                         </div>
                       </div>
@@ -876,27 +876,28 @@ button[disabled], html input[disabled] {
                        </div>
                       </div>
                       <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-5 firstcolor">
                             Past 6 months experience: 
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-7">
                             <span id="m_actor_6_experience"></span>
                         </div>
                       </div>
                     <div class="row"> 
-                     <div class="col-sm-6">
+                     <div class="col-sm-5 firstcolor">
                       Past 3 years experience: 
                      </div>
-                     <div class="col-sm-6">
+                     <div class="col-sm-7">
                       <span id="m_actor_3_experience"></span>
                      </div>
                     </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  <div class="modal-footer center">
+                    <button type="button" class="btn submit-btn" onclick="window.open('http://i.imgur.com/odnRdn3.gif', '_blank')">Open Profile</button>
                   </div>
                 </div>
               </div> 
+            </div>
             </div>
       <script>
       var project_id = <?= $project["StashProject_id"]; ?>;
