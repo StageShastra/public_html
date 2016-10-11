@@ -215,6 +215,7 @@
 						'ref' => $this->session->userdata("StaSh_User_id")
 					);
 					$flag = $this->ModelDirector->insertDirectorPage($d);
+					//var_dump($flag);
 				}
 
 				if($flag)

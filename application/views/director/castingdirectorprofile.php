@@ -330,7 +330,7 @@
                     <tr> <td> Date </td> <td> <?= $works[0]['DirectorWork_date'] ?> </td> </tr>
                     <tr> <td> Remarks </td><td> <?= $works[0]['DirectorWork_remark'] ?> </td></tr>
                    <!--  <tr> <td> Team </td> <td> <a href="#"> Abhishek</a>, <a href="#"> Anmol </a></td></tr> -->
-                    <tr> <td> Status </td> <td> <a href="#"><?= ($works[0]['DirectorWork_work_status']) ? "Accepting application !" : "Application Closed!" ?></a></td> </tr>
+                    <tr> <td> Status </td> <td> <a href="#"><?= ($works[0]['DirectorWork_accept_application']) ? "Accepting application !" : "Application Closed!" ?></a></td> </tr>
                   </table>
                 
               </div>
