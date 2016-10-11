@@ -2,7 +2,65 @@
   include 'includes/head.php';
  ?>
 
-    <body>
+<head>
+<style>
+/* Center the loader */
+#loader {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  width: 25px;
+  height: 25px;
+  margin: -25px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #ffb600;;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#overlay {
+    /* Height & width depends on how you want to reveal the overlay (see JS below) */    
+    height: 100%;
+    width: 100%;
+    margin-top:120px;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 125;
+    background-color: rgb(0,0,0); /* Black fallback color */
+    background-color: rgba(0,0,0, 0.6); /* Black w/opacity */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    overflow-y: hidden; /* Disable vertical scroll */
+}
+.overlaytext{
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  margin: auto;
+  display: block;
+  margin-top: 220px;
+  margin-right: 30px;
+}
+
+</style></head>
+
+    <body onload="myFunction()">
+    <div id="overlay"><font class="overlaytext">Good things take time.</font></div>
+
         <style>
           body{
             padding-top: 120px;
@@ -812,6 +870,7 @@ button[disabled], html input[disabled] {
                 <div class="role-tabs">
                   
                 </div>
+                <div id="loader"> </div>
                 <table class="table table-striped actors">
                 
                 </table>
@@ -909,3 +968,16 @@ button[disabled], html input[disabled] {
   include 'includes/scripts.php';
 ?>
 <script src="<?= JS ?>/viewproject.js"></script>
+<script>
+var myVar;
+
+function myFunction() {
+    myVar = setTimeout(showPage, 3000);
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("overlay").style.display = "none";
+  document.getElementById("myDiv").style.display = "block";
+}
+</script>
