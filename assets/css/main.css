@@ -368,7 +368,8 @@ div.img-div{
     padding: 0 15px;
     text-align: left;
     background-color: #fff;
-
+    margin-top:10px
+    margin-bottom:10px;
 }
 
 .DocumentItem
@@ -710,8 +711,13 @@ div.img-div{
   background-color: #428bca;
 }
 .photo{
-	box-shadow: 0 0 10px #000;
-    border: 6px solid white;
+	border-radius: 4%;
+    /* box-shadow: 0 0 10px #000; */
+    /* border: 6px solid white; */
+}
+.photo:hover{
+	transform: scale(1.02);
+	transition-duration: 0.2s;
 }
 #actorprofile{
 	background-color: #EFEFEF;

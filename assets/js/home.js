@@ -770,64 +770,72 @@ $(document).ready(function(){
 		var str = '';
 		var t = actors[id].StashActor_dob;
 		var d = new Date(t * 1000);
-		content = '<div class="center">'
-           +'         <div class="row collapsedetail">'
-           +'             <div class="col-sm-4">'
-           +'                 <font class="info-medium firstcolor">Name:<span class="gray">'+ actors[id].StashActor_name +'</font>'
-           +'             </div>'
-           +'             <div class="col-sm-4">'
-           +'                 <font class="info-medium firstcolor">Email: <span class="gray">'+ actors[id].StashActor_email +'</font>'
-           +'             </div>'
-           +'             <div class="col-sm-4">'
-           +'                 <font class="info-medium firstcolor">DOB: <span class="gray">'+ d.getUTCDate() + '-' + (d.getUTCMonth() + 1)+ '-' + d.getUTCFullYear()+'</font>'
-           +'             </div>'
-           +'         </div>'
-           +'         <div class="row collapsedetail">'
-           +'             <div class="col-sm-4">'
-           +'                 <font class="info-medium firstcolor">Whatsapp: <span class="gray">'+ actors[id].StashActor_whatsapp +'</font>'
-           +'             </div>'
-           +'             <div class="col-sm-4">'
-           +'                 <font class="info-medium firstcolor">Phone: <span class="gray">'+ actors[id].StashActor_mobile +'</font>'
-           +'             </div>'
-           +'             <div class="col-sm-4">'
-           +'                 <font class="info-medium firstcolor">Age-Range: <span class="gray"> '+ actors[id].StashActor_range+' years</font>'
-           +'             </div>'
-           +'         </div>'
-           +'         <div class="row collapsedetail">'
-           +'             <div class="col-sm-4">'
-           +'					<font class="info-medium firstcolor">Height: <span class="gray">'+ actors[id].StashActor_height +'cms</font>'
-           +'             </div>'
-           +'             <div class="col-sm-4 scrolr">'
-           +'                 <font class="info-medium firstcolor">Weight: <span class="gray">'+ actors[id].StashActor_weight +'kgs</font>'
-           +'             </div>'
-           +'            <div class="col-sm-4 scrolr">'
-           +'                 <font class="info-medium firstcolor">Language: <span class="gray">'+ actors[id].StashActor_language+'</font>'
-           +'             </div>'
-           +'         </div>'
-		   +'         <div class="row collapsedetail">'
-           +'             <div class="col-sm-4 scrolr">'
-           +'                 <font class="info-medium firstcolor">Skills: <span class="gray">'+ actors[id].StashActor_skills+'</font>'
-           +'             </div>'
-           +'            <div class="col-sm-4 scrolr">'
-           +'                 <font class="info-medium firstcolor">Projects: <span class="gray">'+ actors[id].StashActor_projects+'</font>'
-           +'             </div>'
-           +'         </div>'
-           +'         <div class="row" style="padding-right:15px;">'
-           +'             <div class="DocumentList">'
-           +'                 <ul class="list-inline">';
-           images = JSON.parse(actors[id].StashActor_images);
-           for(var k = 0;k < images.length; k++){
-	            image = images[k];
-	            str = base + "assets/img/actors/" + image;
-	            content += '<li class="DocumentItem">'
-	           +'<a href="'+str+'" data-lightbox="'+actors[id].StashActor_name+'"><img class="photo" src='+str+' height="100%" width=auto></img></a>' 
-	           +'         </li>';
-	        }
-	        content += '                 </ul>'
-                       +'             </div>'
-                       +'         </div>'
-                       +'     </div>'
-                       +'</div> ';
+		content = '<div class="modal-header">'
+ 		   +'		<button type="button" class="close" data-dismiss="modal">&times;</button>'
+		   +'			<a class="firstcolor actormodaltitle" href="'+ base+actors[id].StashActor_username +'"><div class="modal-title info" style="">' + actors[id].StashActor_name + '</a></div>'
+		   +'	   </div>'
+		   +'      <div class="modal-body" style="height:100%;">'
+		   +'      		<div class="row">'
+           +'      			<div class="DocumentList">'
+	           +'           	<ul class="list-inline">';
+	           						images = JSON.parse(actors[id].StashActor_images);
+	           						for(var k = 0;k < images.length; k++){
+		            				image = images[k];
+		            				str = base + "assets/img/actors/" + image;
+		            				content += '<li class="DocumentItem">'
+		   +'						<a href="'+str+'" data-lightbox="'+actors[id].StashActor_name+'"><img class="photo" src='+str+' height="100%" width=auto></img></a>' 
+		   +'         				</li>';
+		        }
+		        content += '                 </ul>'
+               +'             </div>'
+               +'       </div>'
+
+           +'		<div class="row light-padded">'
+           +'			<div class="col-lg-5" style="text-align: left;">'
+		   +'          		<div class="col-lg-4">'
+           +'               	<font class="info-medium firstcolor">Age-Range:</div>' 
+           +'				<div class="col-lg-8">'
+           +'					<span class="gray">'+ actors[id].StashActor_range +'yrs</font>'
+           +'           	</div>'
+           +'          		<div class="col-lg-4">'
+           +'               	<font class="info-medium firstcolor">Height:</div>' 
+           +'				<div class="col-lg-8">'
+           +'					<span class="gray">'+ actors[id].StashActor_height +'cms</font>'
+           +'           	</div>'
+		   +'          		<div class="col-lg-4">'
+           +'               	<font class="info-medium firstcolor">Weight:</div>' 
+           +'				<div class="col-lg-8">'
+           +'					<span class="gray">'+ actors[id].StashActor_weight +'kgs</font>'
+           +'           	</div>'
+           +'             	<div class="col-lg-4">'
+           +'               	<font class="info-medium firstcolor">Email:</div>' 
+           +'				<div class="col-lg-8">'
+           +'					<span class="gray">'+ actors[id].StashActor_email +'</font>'
+           +'           	</div>'
+		   +'          		<div class="col-lg-4">'
+           +'               	<font class="info-medium firstcolor">Phone:</div>' 
+           +'				<div class="col-lg-8">'
+           +'					<span class="gray">'+ actors[id].StashActor_mobile +'</font>'
+           +'           	</div>'
+		   +'          		<div class="col-lg-4">'
+           +'               	<font class="info-medium firstcolor">WhatsApp:</div>' 
+           +'				<div class="col-lg-8">'
+           +'					<span class="gray">'+ actors[id].StashActor_whatsapp +'</font>'
+           +'           	</div>'
+           +'			</div>'
+           +'			<div class="col-lg-7"  style="text-align: left;">'
+           +'          		<div class="col-lg-12">'
+           +'               	<font class="info-medium firstcolor">Projects:</div>' 
+           +'				<div class="col-lg-12">'
+           +'					<span class="gray">'+ actors[id].StashActor_projects +'</font>'
+           +'           	</div>'
+           +'			</div>'
+           +'		</div>'
+
+          
+
+                       +'     </div><!--modal body end -->'
+                       
         $("#actor_detail").html(content);
         $('#detailsActor').modal('show');
 

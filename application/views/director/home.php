@@ -152,6 +152,20 @@
       transform:scale(1.3);
     }
 
+    .actormodaltitle{
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 2rem !important;
+      padding: 5px;
+      border-radius: 5px;
+    }
+
+    .actormodaltitle:hover {
+      text-decoration: none !important;
+      background: #ff9800 !important;
+      color: black !important;
+    }
+
               </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -719,16 +733,12 @@
               </div>
             </div>
 
-            <div id="detailsActor" class="modal col-sm-10 center" role="dialog">
+            <div id="detailsActor" class="modal col-sm-10 center" role="dialog" >
             <div class="modal-dialog" style="width:100%;">
 
               <!-- Modal content-->
-              <div class="modal-content center" style="width:100%;">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title firstcolor info">Actor's Details</h4>
-                </div>
-                <div class="modal-body" id="actor_detail"  style="background-color:#fff;">
+              <div class="modal-content center" style="width:100%; height: 500px;">
+                <div class="" id="actor_detail">
                   
                 </div>
                 </div>
