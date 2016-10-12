@@ -29,6 +29,7 @@ $(document).on("click", ".toggleEdit", function(){
 		//console.log(hide, unhide);
 
 	});
+    show_loader_gif("#loader");
 	populate_roles();
 
 	var shoot_start_date = new Date(0); // The 0 there is the key, which sets the date to the epoch
@@ -72,7 +73,7 @@ function populate_roles()
 	 								project_id: project_id, 
 	 							 }
 	 							)};
-	 		console.log("fetching roles...");
+	 		change_loader_text("fetching roles...");
 
 		$.ajax({
 			url: url,
@@ -82,7 +83,7 @@ function populate_roles()
 				if(response.status==true)
 				{
 					roles=JSON.parse(response.data);
-					console.log("Roles fetched");
+					change_loader_text(roles.length+" roles fetched...");
 					var pre_html="";
 					for(var i=0;i<roles.length;i++)
 					{
@@ -90,6 +91,7 @@ function populate_roles()
 						pre_html+='<span class="role-tab" data-name='+roles[i].StashRoles_id+' data-state="active">'+roles[i].StashRoles_role+'</span>';
 				                  
 					}
+
 					$(".role-tabs").html(pre_html);
 					populate_questions(0);
 					
@@ -107,7 +109,7 @@ function populate_roles()
 }
 function populate_questions(i)
 {
-	console.log("fetching questions...");
+	change_loader_text("fetching questions...");
 	
 		if(roles[i].StashRoles_scenes>max_scenes)
 		{
@@ -135,7 +137,7 @@ function populate_questions(i)
 						populate_attendees();
 					}
 					//console.log(roles[i]);
-					//console.log("question "+ (i+1) + " of " + roles.length + " fetched...")
+					//change_loader_text("question "+ (i+1) + " of " + roles.length + " fetched...")
 					
 				}
 				else
@@ -155,7 +157,7 @@ function populate_attendees()
 	 								project_id: project_id, 
 	 							 }
 	 							)};
-	 		console.log("fetching actors...");
+	 		change_loader_text("fetching actors...");
 		$.ajax({
 			url: url,
 			type: type,
@@ -164,13 +166,13 @@ function populate_attendees()
 				if(response.status==true)
 				{	
 					attendees=JSON.parse(response.data);
-					console.log(attendees.length +" actors fetched.");
+					change_loader_text(attendees.length +" actors fetched...");
 					get_actors_answers(0);
 					
 				}
 				else
 				{
-					console.log("no actor found. Please proceed");
+					change_loader_text("no actor found. Please proceed");
 				}
 
 			}
@@ -179,7 +181,7 @@ function populate_attendees()
 
 function get_actors_answers(f)
 {
-	console.log("fetching actor's answers...");
+	change_loader_text("fetching actor's answers...");
 	
 		console.log(f);
 		console.log(attendees);
@@ -194,7 +196,7 @@ function get_actors_answers(f)
 			else
 			{
 				populate_videos(0);
-				console.log("all actor's answers fetched");
+				change_loader_text("all actor's answers fetched");
 			}
 
 		}
@@ -258,7 +260,7 @@ console.log(data);
 							}
 							else
 							{
-								console.log("no answers found. Please proceed");
+								change_loader_text("no answers found. Please proceed");
 							}
 
 						}
@@ -268,7 +270,7 @@ console.log(data);
 }
 function populate_videos(i)
 {
-	console.log("fetching videos...");
+	change_loader_text("fetching videos...");
 	
 		data = {request: "getActorVideos",
 				 		data: JSON.stringify({
@@ -291,8 +293,8 @@ function populate_videos(i)
 								}
 								else
 								{
-									console.log("all videos fetched.");
-									console.log(attendees);
+									change_loader_text("all videos fetched.");
+									//console.log(attendees);
 									populate_table();
 								}
 								//console.log("videos " + (i+1) + " of " + attendees.length + "linked...")
@@ -343,7 +345,7 @@ function set_videos(actor_id,role_id,index)
 function populate_table()
 {
 
-                
+    change_loader_text("painting the big picture...");        
 	var dyn_html='<thead>'
              +' <th class="star"><i class="fa fa-star-o" id="shortlist_all" aria-hidden="true" onclick="show_shortlisted()"></i></th>'
              +' <th>Profile</th>'
@@ -359,7 +361,7 @@ function populate_table()
              dyn_html+=' <th><span class="fa fa-trash-o" title="Delete record"></span></th>';
              dyn_html+='</thead>';
              dyn_html+='<tbody>';
-             console.log("attendees length is + "+ attendees.length);
+             change_loader_text("hold on...");
 	for(i=0;i<attendees.length;i++)
 	{
 		
@@ -385,8 +387,12 @@ function populate_table()
              +'<td><span class="fa fa-trash-o" onclick="delete_record_response('+i+')"></span></td>'
              +'</tr>';
 	}
+	change_loader_text("almost there...");
 	 dyn_html+='</tbody>';
 	$(".actors").html(dyn_html);
+	$("#loader").addClass("hidden");
+	$(".role-tabs").removeClass("hidden");
+
 
 }
 
@@ -550,7 +556,7 @@ function shortlist_star(actor)
 		}
 		else
 		{
-			string+= '  <tr id="tr_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" class="'+actor.StashRoleActorLink_role+'_role shortlisted"><td class="star">'
+			string+= '  <tr id="tr_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" class="'+actor.StashRoleActorLink_role_id_ref+'_role shortlisted"><td class="star">'
              		+'    <i class="fa fa-star" id="star_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" onclick="shortlist_actor('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+0+')" aria-hidden="true"></i>'
              		+'  </td>' ;
 		}
@@ -852,4 +858,18 @@ function _calculateAge(birthday) { // birthday is a date
     var ageDifMs = Date.now() - birthday.getTime();
     var ageDate = new Date(ageDifMs); // miliseconds from epoch
     return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
+function show_loader_gif(id){
+	var text = '"for good things, we wait must!"<br><span><i>- Master Yoda</i></span>';
+	var content = '<div class="loader"><img src="'+base+'/assets/img/spinner.gif" height="300"/><br><span class="quote" style="font-family: "Roboto";font-weight: 800;">'+text+'</span><br><span class="loader_text">'+text+'</span></div>';
+	$(id).html(content);
+	console.log(content);
+}
+function change_loader_text(text)
+{	
+	$(".loader_text").addClass("animated fadeInUp");
+	$(".loader_text").html(text);
+
+	
+	//$(".loader_text").addClass("animated fadeOutUp");
 }

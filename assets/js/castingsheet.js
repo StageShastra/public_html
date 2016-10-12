@@ -282,7 +282,7 @@ function submit_answers()
 	$("#not_registered_last_message").removeClass("animated fadeOut");
 
 	//setting variabes in the actor object
-	actor.audition_date = $('#date_audition').val();
+	actor.audition_date = todaysdate;
 	var index = $("#role_audition").val();
 	var role_id = roles[index].StashRoles_id;
 	actor.audition_role = role_id;
@@ -296,6 +296,8 @@ function submit_answers()
 		if($("#question_"+i).val()=="" || $("#question_"+i).val()==null)
 		{
 			alert("Please fill all the answers");
+			$("#save_actor_response").removeAttr('disabled');
+			$("#save_actor_response").html('Submit');
 			return;
 		}
 		question_answer_obj.answer = $("#question_"+i).val();
@@ -308,6 +310,8 @@ function submit_answers()
 	if(actor.last_three_years_exp=="" || actor.last_six_months_exp=="" )
 	{
 		alert("Please fill in the experiences");
+		$("#save_actor_response").removeAttr('disabled');
+		$("#save_actor_response").html('Submit');
 		return;
 	}
 
@@ -521,6 +525,11 @@ function show_new_casting_sheet(){
 function submit_new_actor_answers(){
 	var actor_name = $("#name_new_actor").val();
 	var actor_email = $("#email_new_actor").val();
+	if(!isEmail(actor_email))
+	{
+		alert("Please fill in email address properly.");
+		return;
+	}
 	var actor_phone = $("#phone_new_actor").val();
 	var actor_password = $("#password_new_actor").val();
 	var confirm_password = $("#confirm_password_new_actor").val();

@@ -799,7 +799,7 @@ button[disabled], html input[disabled] {
 
                       </div>
                       <div id="static_questions">
-                        <div class="row">
+                        <div class="row hidden">
                           <div class="label_cs col-sm-6">
                             Date of Audition  
                           </div>
