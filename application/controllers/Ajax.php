@@ -128,6 +128,9 @@
 					case "getProjectsInDirector":
 						$this->getProjectsInDirector();
 						break;
+					case "deleteActorRoleLink":
+						$this->deleteActorRoleLink($data);
+						break;
 					case "BulkProjectTag":
 						$this->bulkProjectTag($data);
 						break;
@@ -888,16 +891,32 @@
 			$this->response(true, "Question and answers linked",$this->db->insert("stash-answers", $data));
 		}
 		public function linkRoleActor($d=[]){
-			$data = array(
-						"StashRoleActorLink_id" => null,
-						"StashRoleActorLink_role_id_ref" => $d["role_id"],
-						"StashRoleActorLink_actor_id_ref" => $d["actor_id"],
-						"StashRoleActorLink_project_id_ref" => $d["project_id"],
-						"StashRoleActorLink_shortlist_status" => 0,
-						"StashRoleActorLink_status"=> 1
-					);
+
+			$this->db->select("*");
+			$this->db->from("stash-role-actor-link"); 
+			$this->db->where("StashRoleActorLink_project_id_ref", $d["project_id"]);
+			$this->db->where("StashRoleActorLink_actor_id_ref", $d["actor_id"]);
+			$this->db->where("StashRoleActorLink_role_id_ref", $d["role_id"]);
+			$query = $this->db->get();
+			if($query->num_rows()>0)
+			{
+				$this->response(false, "Role and actors should not be linked", 0, 0);
+			}
+			else
+			{
+				$data = array(
+							"StashRoleActorLink_id" => null,
+							"StashRoleActorLink_role_id_ref" => $d["role_id"],
+							"StashRoleActorLink_actor_id_ref" => $d["actor_id"],
+							"StashRoleActorLink_project_id_ref" => $d["project_id"],
+							"StashRoleActorLink_shortlist_status" => 0,
+							"StashRoleActorLink_status"=> 1
+						);
+				$this->response(true, "Role and actors linked",$this->db->insert("stash-role-actor-link", $data));
+			}
 			
-			$this->response(true, "Role and actors linked",$this->db->insert("stash-role-actor-link", $data));
+			
+			
 		}
 		public function insertActorProject($d){
 			$data = array(
@@ -915,10 +934,11 @@
 			return $this->db->insert("stash-actor-project", $data);
 		}
 		public function getActorsInAProject($d){
-			$this->db->select("*");
-			$this->db->from("stash-actor-project as PA");
-			$this->db->join("stash-actor as A", "PA.StashActorProject_actor_id_ref = A.StashActor_actor_id_ref");
-			$this->db->where("PA.StashActorProject_project_id_ref", $d["project_id"]);
+			$this->db->select('StashActor_name');
+			$this->db->distinct();
+			$this->db->from("stash-role-actor-link as PA");
+			$this->db->join("stash-actor as A", "PA.StashRoleActorLink_actor_id_ref = A.StashActor_actor_id_ref");
+			$this->db->where("PA.StashRoleActorLink_project_id_ref", $d["project_id"]);
 			$this->db->order_by("A.StashActor_name", "desc");
 			$query = $this->db->get();
 			$result = [];
@@ -1104,6 +1124,17 @@
 			 $response=$this->db->insert("stash-scene-video", $data);
 			 $this->response(true, "Role Video inserted",$response);
 		}
+		public function deleteActorRoleLink($d){
+			
+			 $this->db->where("StashRoleActorLink_actor_id_ref", $d["actor_id"]);
+			 $this->db->where("StashRoleActorLink_role_id_ref", $d["role_id"]);
+			 $this->db->delete("stash-role-actor-link");
+			 $this->db->where("StashSceneVideo_actor_id_ref", $d["actor_id"]);
+			 $this->db->where("StashSceneVideo_role_id_ref", $d["role_id"]);
+			 $response = $this->db->delete("stash-scene-video");
+			 $this->response(true, "Record Deleted",$response);
+		}
+		
 		public function getProjectsInDirector(){
 			$this->db->select("*");
 			$this->db->from("stash-project");

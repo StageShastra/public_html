@@ -1501,3 +1501,13 @@ table.card-table {
 .top-alert-bar a{
 	float: right;
 }
+.loader_text{
+	color: #777;
+    position: relative;
+    top: -100px;
+    font-size: 17px;
+    font-family: "Raleway";
+}
+.loader{
+	text-align: center;
+}

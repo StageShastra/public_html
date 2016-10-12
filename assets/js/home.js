@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	
+	showSpinner();
 	var count = 0,
 		select = [],
 		actors = [],
@@ -223,7 +223,7 @@ $(document).ready(function(){
 
 	function getActorProfile(){
 		var selectedCat = JSON.parse(Cookies.get('categories'));
-		$("#logo_start").addClass("rotate-img");
+		$("#logo_start").attr("src",base+"/assets/img/spinner.gif");
 		data = {request: "FetchActors", data: JSON.stringify(selectedCat)};
 		//console.log(data);
 		$.ajax({
@@ -232,7 +232,7 @@ $(document).ready(function(){
 			data: data,
 			success: function(response){
 				//console.log(response);
-				$("#logo_start").removeClass("rotate-img");
+				$("#logo_start").attr("src",base+"/assets/img/logo.png");
 				$("#prelogin").addClass("hidden");
      			$("#home").removeClass("hidden");
      			if(response.status){
@@ -630,9 +630,9 @@ $(document).ready(function(){
 
 	function showSpinner(argument) {
 		var $table = $("#browse-table");
-		var content = '<div class="showwelcome" id="spinner">'
-					+ '<center><img src="'+base+'assets/img/logo.png" class="rotate-img center" width="80px" height="80px"/><br>'
-					+ '<font class="info gray">Crunching the latest data for you!</div>';
+		var content = '<div class="showwelcome" id="spinner" style="margin-bottom:50px;">'
+					+ '<center><img src="'+base+'assets/img/spinner.gif" /><br>'
+					+ '<span class="loader_text">bringing forth your precious...</span></div>';
 		$table.html(content);
 	}
 
@@ -1104,6 +1104,7 @@ $(document).ready(function(){
 		$that = $(this);
 		thisfor = $(this).attr("data-for");
 		target = $(this).attr("href");
+		show_loader(target);
 		data = {request: "ContactList", data: JSON.stringify({ for: thisfor })};
 		$(target + " table tbody").html("");
 		$.ajax({
@@ -1112,6 +1113,7 @@ $(document).ready(function(){
 			data: data,
 			success: function(response){
 				data = response.data;
+				var prehtml="<table><tbody>";
 				for( i = 0; i < data.length; i++ ){
 					txt1 = ( data[i].others != 0 ) ? " and " + data[i].others + " others" : "";
 
@@ -1135,11 +1137,12 @@ $(document).ready(function(){
 					   + "	<td class='col-sm-8 subject'>"+data[i].subject[1]+"</td>"
 					   + "	<td class='col-sm-1 sent_on'> "+ data[i].date +" </td>"
 					   + "</tr><tr class='convo-trs' id='convo-"+thisfor+"-"+data[i].id+"' style='display:none;'></tr>";
-
-					$(target + " table tbody").append(tr);
+					   //hide_loader(target);
+					prehtml+=tr;
 					//console.log(target + " table tbody");
 
 				}
+				$(target ).html(prehtml);
 			}
 		});
 	});
@@ -1149,7 +1152,16 @@ $(document).ready(function(){
 			$("#clickFirst").trigger("click");
 		}
 	}
-
+	function show_loader(id)
+	{	var text = "conversations are being loaded..."
+		var content = '<div class="loader"><img src="'+base+'/assets/img/spinner.gif" height="300"><br><span class="loader_text">'+text+'</span></div>';
+		$(id).html(content);
+		console.log(content);
+	}
+	function hide_loader(id)
+	{
+		$(id).html("");	
+	}
 	function populateForInviteConv( obj, that, thisId, thisfor ) {
 		contacts = obj.users;
 		usertr = "";

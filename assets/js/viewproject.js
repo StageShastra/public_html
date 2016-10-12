@@ -38,9 +38,28 @@ $(document).on("click", ".toggleEdit", function(){
 	$(".shoot_begins").html(shoot_start_date.toDateString());
 	$(".shoot_ends").html(shoot_end_date.toDateString());
 });
+
 $(document).on("click", ".role-tab", function(e){
 
-		//this=e;
+		var state = $(this).attr("data-state");
+		var role_name = $(this).attr("data-name");
+		if(state=="active")
+		{
+			$("."+role_name+"_role").addClass("animated fadeOut");
+			$(this).attr("data-state","inactive");
+			$(this).addClass("inactive-tab");
+			$("."+role_name+"_role").addClass("hidden");
+
+		}
+		else
+		{
+			$("."+role_name+"_role").removeClass("hidden");
+			$("."+role_name+"_role").removeClass("animated fadeOut");
+			$("."+role_name+"_role").addClass("animated fadeIn");
+			$(this).attr("data-state","active");
+			$(this).removeClass("inactive-tab");
+			
+		}
 		console.log($(e).attr("data-name"));
 
 });
@@ -68,7 +87,7 @@ function populate_roles()
 					for(var i=0;i<roles.length;i++)
 					{
 						
-						pre_html+='<span class="role-tab" data-name='+roles[i].StashRoles_role+' data-state="active">'+roles[i].StashRoles_role+'</span>';
+						pre_html+='<span class="role-tab" data-name='+roles[i].StashRoles_id+' data-state="active">'+roles[i].StashRoles_role+'</span>';
 				                  
 					}
 					$(".role-tabs").html(pre_html);
@@ -212,13 +231,14 @@ function get_link_question_role(i,index,k,role_id)
 			console.log(roles);
 			console.log(i);
 			questions_answers.question=roles[i].questions[k];
+
 				data = {request: "getActorsAnswers",
 				 		data: JSON.stringify({
 				 								actor_id: attendees[index].StashActor_actor_id_ref,
 				 								question_id: roles[i].questions[k].StashQuestions_id 
 				 							 }
 				 							)};
-
+console.log(data);
 					$.ajax({
 						url: url,
 						type: type,
@@ -227,6 +247,7 @@ function get_link_question_role(i,index,k,role_id)
 							if(response.status==true)
 							{	
 								(questions_answers.question).answer=JSON.parse(response.data);
+								console.log(response);
 								console.log("lenth of qs is "+roles[i].questions.length);
 								if(++k<(roles[i].questions).length && roles[i].questions.length!=0)
 								{
@@ -328,14 +349,17 @@ function populate_table()
              +' <th>Profile</th>'
              +' <th data-sort="string">Name <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>'
              +' <th data-sort="string">Role <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>'
-             +'	<th>Intro</th>';
+             +'	<th>Notes</th>';
+             dyn_html+=' <th>Intro</th>';
              for(i=0;i<max_scenes;i++)
              {
              	dyn_html+='<th>Scene '+ (i+1) +'</th>';
              }
-             dyn_html+=' <th>Notes</th>'
-             +'</thead>';
+             dyn_html+=' <th><span class="fa fa-newspaper-o" title="Casting Sheet response"></span></th>';
+             dyn_html+=' <th><span class="fa fa-trash-o" title="Delete record"></span></th>';
+             dyn_html+='</thead>';
              dyn_html+='<tbody>';
+             console.log("attendees length is + "+ attendees.length);
 	for(i=0;i<attendees.length;i++)
 	{
 		
@@ -343,7 +367,7 @@ function populate_table()
              //console.log(shortlist_string);
              dyn_html+= shortlist_string+''
              +'  <td class="profile" style="vertical-align:middle-top;">'
-             +'    <div class="center"><img src="http://www.castiko.com/assets/img/actors/'+attendees[i].StashActor_avatar+'" class="showDetails pro_pic" ></div>'
+             +'    <div class="center" ><img src="http://www.castiko.com/assets/img/actors/'+attendees[i].StashActor_avatar+'" class="showDetailscs pro_pic" data-id='+i+' ></div>'
              +'  </td>'
              +'  <td class="role_name">'
              +		attendees[i].StashActor_name
@@ -351,12 +375,14 @@ function populate_table()
              +'  <td class="role_name">'
              +		attendees[i].role_name
              +'  </td>';
+             var notes_string=show_notes(attendees[i],i);
+             //console.log(shortlist_string);
+             dyn_html+= notes_string+'';
              var video_string=video_embed(attendees[i]);
              //console.log(video_string);
              dyn_html+= video_string+''
-             var notes_string=show_notes(attendees[i],i);
-             //console.log(shortlist_string);
-             dyn_html+= notes_string+''
+             +'<td><span class="fa fa-newspaper-o" onclick="open_casting_response('+i+')"></span></td>'
+             +'<td><span class="fa fa-trash-o" onclick="delete_record_response('+i+')"></span></td>'
              +'</tr>';
 	}
 	 dyn_html+='</tbody>';
@@ -422,7 +448,7 @@ function show_notes(actor,i)
 					   +'<div id="notes_"'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit" data-hide-id="#notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"data-unhide-id="#notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'">'
 					   +'<span id="notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="click_to_add">Click to add notes</span>'
 					   +'<input class="input_cs hidden" id="notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="text" placeholder="Add notes here" onfocusout="setTimeout(function(){ save_notes('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)">'
-					   +'</div><span class="fa fa-newspaper-o" onclick="open_casting_response('+i+')"></span></td>' ;
+					   +'</div></td>' ;
 
 
 		}
@@ -434,7 +460,7 @@ function show_notes(actor,i)
 	                +'<button id="notes_edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-hide-id="#notes_edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-unhide-id="#notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+',#notes_update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit go_button">Edit</button>'
 	               
 	                +'<button id="notes_update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="button" onclick="setTimeout(function(){ save_notes('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)" class="go_button toggleEdit hidden" data-unhide-id="#notes_edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-hide-id="#notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+',#notes_update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" >Go</button>'
-	                +'</div><span class="fa fa-newspaper-o" onclick="open_casting_response('+i+')"></span></td>';
+	                +'</div></td>';
 		}
 	
 	return string;
@@ -444,17 +470,25 @@ function open_casting_response(id)
 	$("#m_actor_name").html(attendees[id].StashActor_name);
 	$("#m_actor_email").html(attendees[id].StashActor_email);
 	$("#m_actor_mobile").html(attendees[id].StashActor_mobile);
-	$("#m_actor_height").html(attendees[id].StashActor_height);
-	$("#m_actor_weight").html(attendees[id].StashActor_weight);
+	$("#m_actor_height").html(attendees[id].StashActor_height+" cms");
+	$("#m_actor_weight").html(attendees[id].StashActor_weight+" kgs");
+	var t = attendees[id].StashActor_dob;
+	var d = new Date(t * 1000);
+	var age=_calculateAge(d);
+	$("#m_actor_age").html(age+ " years");
 	var prehtml='';
 	for(n=0;n<attendees[id].questions.length;n++)
 	{	var questions_obj=attendees[id].questions[n];
 		console.log(questions_obj.question);
 	 	var question_q=questions_obj.question.StashQuestions_question;
-	 	//var question_a=questions_obj.question.answer.StashAnswers_answer;
+	 	if(questions_obj.question.answer!=null)
+	 	{
+	 		var question_a=questions_obj.question.answer.StashAnswers_answer;
+
 		 prehtml+='<span>Q. '+question_q+'</span>?'
                   +'<br>'
-                  +'A. <br>';
+                  +'A. '+question_a+'<br>';
+        }
 	}
 	$(".m_questions").html(prehtml);
 
@@ -462,13 +496,53 @@ function open_casting_response(id)
 	$("#m_actor_3_experience").html(attendees[id].StashActor_three_years_experience);
 	$("#castingsheetresponse").modal("show");
 }
+function delete_record_response(id)
+{
+	var role_id = attendees[id].StashRoleActorLink_role_id_ref;
+	var actor_id =  attendees[id].StashActor_actor_id_ref;
+	var r = confirm("Are you sure you want to remove "+attendees[id].StashActor_name+" from "+ attendees[id].role_name+"'s role");
+	if (r == true) {
+		data = {request: "deleteActorRoleLink",
+				 		data: JSON.stringify({
+				 								actor_id: attendees[id].StashActor_actor_id_ref,
+				 								role_id: attendees[id].StashRoleActorLink_role_id_ref
+
+				 							 }
+				 							)};
+
+					$.ajax({
+						url: url,
+						type: type,
+						data: data,
+						success: function(response){
+							if(response.status==true)
+							{	
+								$("#tr_"+actor_id+"_"+role_id).addClass("animated fadeOut");
+								$("#tr_"+actor_id+"_"+role_id).addClass("hidden");
+
+								//console.log("videos " + (i+1) + " of " + attendees.length + "linked...")
+								
+							}
+							else
+							{
+								console.log("could not be deleted. Please proceed");
+							}
+
+						}
+					});
+	   
+	} else {
+	    txt = "You pressed Cancel!";
+	}
+	
+}
 function shortlist_star(actor)
 {
 	var string='';
 	
 		if(actor.StashRoleActorLink_shortlist_status=="0")
 		{
-			string+= '  <tr id="tr_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" class="'+actor.StashRoleActorLink_role+'_role unshortlisted"><td class="star">'
+			string+= '  <tr id="tr_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" class="'+actor.StashRoleActorLink_role_id_ref+'_role unshortlisted"><td class="star">'
              		+'    <i class="fa fa-star-o" id="star_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" onclick="shortlist_actor('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+1+')" aria-hidden="true"></i>'
              		+'  </td>' ;
 
@@ -695,4 +769,87 @@ function getId(url) {
         return 'error';
     }
 }
+$(document).on("click", ".showDetailscs", function(){
+		var id = $(this).attr("data-id");
+		console.log(id);
+		var str = '';
+		var t = attendees[id].StashActor_dob;
+		var d = new Date(t * 1000);
+		var age=_calculateAge(d);
+		content = '<div class="modal-header">'
+ 		   +'		<button type="button" class="close" data-dismiss="modal">&times;</button>'
+		   +'			<a class="firstcolor actormodaltitle" href="'+ base+attendees[id].StashActor_username +'"><div class="modal-title info" style="">' + attendees[id].StashActor_name + '</a></div>'
+		   +'	   </div>'
+		   +'      <div class="modal-body" style="height:100%;">'
+		   +'      		<div class="row">'
+           +'      			<div class="DocumentList">'
+	           +'           	<ul class="list-inline">';
+	           						images = JSON.parse(attendees[id].StashActor_images);
+	           						for(var k = 0;k < images.length; k++){
+		            				image = images[k];
+		            				str = base + "assets/img/actors/" + image;
+		            				content += '<li class="DocumentItem">'
+		   +'						<a href="'+str+'" data-lightbox="'+attendees[id].StashActor_name+'"><img class="photo" src='+str+' height="100%" width=auto></img></a>' 
+		   +'         				</li>';
+		        }
+		        content += '                 </ul>'
+               +'             </div>'
+               +'       </div>'
 
+           +'		<div class="row light-padded">'
+           +'			<div class="col-lg-5" style="text-align: left;">'
+		   +'          		<div class="col-lg-4">'
+           +'               	<font class="info-medium firstcolor">Age:</div>' 
+           +'				<div class="col-lg-8">'
+           +'					<span class="gray">'+ age +' yrs</font>'
+           +'           	</div>'
+           +'          		<div class="col-lg-4">'
+           +'               	<font class="info-medium firstcolor">Height:</div>' 
+           +'				<div class="col-lg-8">'
+           +'					<span class="gray">'+ attendees[id].StashActor_height +' cms</font>'
+           +'           	</div>'
+		   +'          		<div class="col-lg-4">'
+           +'               	<font class="info-medium firstcolor">Weight:</div>' 
+           +'				<div class="col-lg-8">'
+           +'					<span class="gray">'+ attendees[id].StashActor_weight +' kgs</font>'
+           +'           	</div>'
+           +'             	<div class="col-lg-4">'
+           +'               	<font class="info-medium firstcolor">Email:</div>' 
+           +'				<div class="col-lg-8">'
+           +'					<span class="gray">'+ attendees[id].StashActor_email +'</font>'
+           +'           	</div>'
+		   +'          		<div class="col-lg-4">'
+           +'               	<font class="info-medium firstcolor">Phone:</div>' 
+           +'				<div class="col-lg-8">'
+           +'					<span class="gray">'+ attendees[id].StashActor_mobile +'</font>'
+           +'           	</div>'
+		   +'          		<div class="col-lg-4">'
+           +'               	<font class="info-medium firstcolor">WhatsApp:</div>' 
+           +'				<div class="col-lg-8">'
+           +'					<span class="gray">'+ attendees[id].StashActor_whatsapp +'</font>'
+           +'           	</div>'
+           +'			</div>'
+           +'			<div class="col-lg-7"  style="text-align: left;">'
+           +'          		<div class="col-lg-12">'
+           +'               	<font class="info-medium firstcolor">Recent Experience:</div>' 
+           +'				<div class="col-lg-12">'
+           +'					<span class="gray">'+ attendees[id].StashActor_six_months_experience +'</font>'
+           +'           	</div>'
+           +'			</div>'
+           +'		</div>'
+
+          
+
+                       +'     </div><!--modal body end -->'
+                       
+        $("#actor_detail").html(content);
+        $('#detailsActor').modal('show');
+
+        
+	});
+
+function _calculateAge(birthday) { // birthday is a date
+    var ageDifMs = Date.now() - birthday.getTime();
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+}

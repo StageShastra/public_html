@@ -1,39 +1,54 @@
-var project_id;
-var roles=[];
-var role_names=[];
-var actor=[];
-var attendees=[];
-var attendees_names=[];
-var repopulate=true;
+
+//list of variables
+var project_id; //global variable for projectid
+var roles=[]; //array to hold details of the roles
+var role_names=[]; // just to populate the roles selector
+var actor={}; // actor object
+var attendees=[]; //list of attendees
+var attendees_names=[]; //to populate the table
+var todaysdate=$('#date_audition').val(); //today's date
+
+//logic
 $(document).ready(function(){
-$(document).on("click", ".toggleEdit", function(){
 
-		var unhide = $(this).attr("data-unhide-id");
-		var hide = $(this).attr("data-hide-id");
-		$(unhide).removeClass("hidden");
-		$(hide).addClass("hidden");
+	//defining toggleEdit behaviour
+	$(document).on("click", ".toggleEdit", function(){
 
-		//console.log(hide, unhide);
+			var unhide = $(this).attr("data-unhide-id");
+			var hide = $(this).attr("data-hide-id");
+			$(unhide).removeClass("hidden");
+			$(hide).addClass("hidden");
 
-	});
+			//console.log(hide, unhide);
+
+		});
+
+	//calling populating methods
 	populate_roles();
 	populate_attendees();
-	
-	console.log(role_names);
+
+	//some project specific variables
 	var shoot_start_date = new Date(0); // The 0 there is the key, which sets the date to the epoch
 	var shoot_end_date = new Date(0);
 	shoot_start_date.setUTCSeconds(project_shoot_begins);
 	shoot_end_date.setUTCSeconds(project_shoot_ends);
+
+	//prnting the dates
 	$(".shoot_begins").html(shoot_start_date.toDateString());
 	$(".shoot_ends").html(shoot_end_date.toDateString());
+
+	//casting sheet ready
 });
+
+//populates the roles
 function populate_roles()
 {	
-	data = {request: "getRolesInProject",
+	data = {
+			request: "getRolesInProject",
 	 		data: JSON.stringify({
 	 								project_id: project_id, 
 	 							 }
-	 							)};
+	 		)};
 
 		$.ajax({
 			url: url,
@@ -45,7 +60,7 @@ function populate_roles()
 					roles=JSON.parse(response.data);
 					console.log(roles);
 					populate_questions(0);
-
+					//calling populate questions
 				}
 				else
 				{
@@ -53,9 +68,7 @@ function populate_roles()
 				}
 
 			}
-		});
-
-		
+		});	
 }
 function populate_questions(i)
 {
@@ -263,9 +276,12 @@ function show_dynamic_questions()
 }
 function submit_answers()
 {	
+	//changes to the view
 	$("#save_actor_response").attr('disabled', 'disabled');
 	$("#save_actor_response").html('Saving...');
 	$("#not_registered_last_message").removeClass("animated fadeOut");
+
+	//setting variabes in the actor object
 	actor.audition_date = $('#date_audition').val();
 	var index = $("#role_audition").val();
 	var role_id = roles[index].StashRoles_id;
@@ -287,27 +303,20 @@ function submit_answers()
 	}
 	actor.last_three_years_exp=$("#3_years_experience").val();
 	actor.last_six_months_exp=$("#6_months_experience").val();
+
+	//validation check 
 	if(actor.last_three_years_exp=="" || actor.last_six_months_exp=="" )
 	{
 		alert("Please fill in the experiences");
 		return;
 	}
+
+	//method call to update actors_experience
 	update_actor_experience();
-	if(actor.questions_answers.length>0)
-	{
-		insert_actor_answers(0);
-	}
+
+	//method call to check whether he has already filled for the same role or not, if not it will insert.
 	insert_role_actor();
-	insert_project_actor();
-	$("body").scrollTop(0);
-	attendees_names.push(actor.StashActor_name);
-	append_attendees(actor.StashActor_name);
-	show_email_form();
-	//$("#contact").addClass("hidden");
-	$("#not_registered_last_message").html("Your response has been recorded<br>Note : If you haven't completed your profile on Castiko, please do so as soon as possible.");
-	$("#not_registered_last_message").removeClass("hidden");
-	$("#not_connected_message").addClass("hidden");
-	clean_slate_protocol();
+	
 	
 }
 function show_email_form(){
@@ -333,7 +342,7 @@ function update_actor_experience()
 	 								actor_height:actor_height
 	 							 }
 	 							)};
-	 		console.log(data);
+	 //		console.log(data);
 
 		$.ajax({
 			url: url,
@@ -342,20 +351,21 @@ function update_actor_experience()
 			success: function(response){
 				if(response.status==true)
 				{	
-					console.log(response);
+		//			console.log(response);
 				}
 				else
 				{
-					console.log("Could not update experience. Please proceed");
+		//			console.log("Could not update experience. Please proceed");
 				}
 
 			}
 		});
 }
-function insert_actor_answers(i)
+function insert_actor_answers(i,actor)
 {
 	var actor_id=actor.StashActor_actor_id_ref;
-	
+	//console.log(actor);
+	var quest_length=actor.questions_answers.length;
 		data = {request: "linkActorQuestionAnswer",
 	 		data: JSON.stringify({
 	 								actor_id: actor_id,
@@ -371,9 +381,10 @@ function insert_actor_answers(i)
 			success: function(response){
 				if(response.status==true)
 				{	
-					if(++i<actor.questions_answers.length)
+	//				console.log(actor);
+					if(++i<(quest_length))
 					{
-						insert_actor_answers(i);
+						insert_actor_answers(i,actor);
 					}
 					console.log(response);
 				}
@@ -390,7 +401,7 @@ function insert_role_actor(){
 	var index = $("#role_audition").val();
 	var role_id = roles[index].StashRoles_id;
 	var actor_id=actor.StashActor_actor_id_ref;
-	
+	var actor_name=actor.StashActor_name;
 		data = {request: "linkRoleActor",
 	 		data: JSON.stringify({
 	 								actor_id: actor_id,
@@ -398,21 +409,28 @@ function insert_role_actor(){
 	 								project_id: project_id
 	 							 }
 	 							)};
-	 	console.log(data);
+	 //	console.log(data);
 
 		$.ajax({
 			url: url,
 			type: type,
 			data: data,
+			async:false,
 			success: function(response){
 				if(response.status==true)
 				{	
-					console.log(response);
 					insert_actor_scenes(index,actor_id);
+					hasnotfilled();
+					attendees_names.push(actor_name);
+					append_attendees(actor_name);
+					return 0;
 				}
 				else
 				{
 					console.log("Role and actor could not be linked");
+					hasfilled();
+					return 1;
+					
 				}
 
 			}
@@ -561,7 +579,7 @@ function clean_slate_protocol(){
 actor=[];
 $("#role_based_questions").html("");
 //$("#role_audition").html("<option disabled selected value> Select a Role</option>");
-document.getElementById("date_audition").valueAsDate = new Date();
+
 $(".input_cs").val("");
 $("#save_actor_response").removeAttr('disabled');
 $("#save_actor_response").html('Submit');
@@ -570,7 +588,7 @@ setTimeout(function(){
 	 }, 9000);
 }
 $("#save_actor_response").removeAttr('disabled');
-
+document.getElementById("date_audition").valueAsDate = new Date();
 	
 function leftPad(number, targetLength) {
     var output = number + '';
@@ -578,4 +596,30 @@ function leftPad(number, targetLength) {
         output = '0' + output;
     }
     return output;
+}
+function hasnotfilled()
+{
+	if(actor.questions_answers.length>0)
+		{
+			insert_actor_answers(0,actor);
+		}
+		insert_role_actor();
+		insert_project_actor();
+		$("body").scrollTop(0);
+		show_email_form();
+		//$("#contact").addClass("hidden");
+		$("#not_registered_last_message").html("Your response has been recorded<br>Note : If you haven't completed your profile on Castiko, please do so as soon as possible.");
+		$("#not_registered_last_message").removeClass("hidden");
+		$("#not_connected_message").addClass("hidden");
+		clean_slate_protocol();
+}
+function hasfilled()
+{
+	show_email_form();
+	//$("#contact").addClass("hidden");
+	$("#not_registered_last_message").html("We found that you had already filled the casting sheet for this role, so your response has been updated.");
+	$("#not_registered_last_message").removeClass("hidden");
+	$("#not_connected_message").addClass("hidden");
+	clean_slate_protocol();
+	return ;
 }

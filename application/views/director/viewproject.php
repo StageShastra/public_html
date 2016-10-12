@@ -726,6 +726,8 @@ button[disabled], html input[disabled] {
   box-shadow: 2px 2px 10px gray;
   margin-right: 10px;
   transition: all 500ms;
+  float: left;
+  margin-bottom: 5px;
 }
 .role-tab:hover{
   opacity: 0.5;
@@ -817,6 +819,19 @@ button[disabled], html input[disabled] {
                 </table>
               </div>
             </div>
+            <div id="detailsActor" class="modal col-sm-10 center" role="dialog" >
+            <div class="modal-dialog" style="width:100%;">
+
+              <!-- Modal content-->
+              <div class="modal-content center" style="width:100%; height: 500px;">
+                <div class="" id="actor_detail">
+                  
+                </div>
+                </div>
+                
+              </div>
+
+            </div>
             <div id="castingsheetresponse" class="modal fade" role="dialog">
               <div class="modal-dialog">
 
@@ -893,12 +908,13 @@ button[disabled], html input[disabled] {
                     </div>
                     </div>
                   <div class="modal-footer center">
-                    <button type="button" class="btn submit-btn" onclick="window.open('http://i.imgur.com/odnRdn3.gif', '_blank')">Open Profile</button>
+                    <!--<button type="button" class="btn submit-btn" onclick="window.open('http://i.imgur.com/odnRdn3.gif', '_blank')">Open Profile</button>-->
                   </div>
                 </div>
               </div> 
             </div>
             </div>
+
       <script>
       var project_id = <?= $project["StashProject_id"]; ?>;
       var project_shoot_begins = <?= $project["StashProject_shoot_begins"]; ?>;
