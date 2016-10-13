@@ -1118,6 +1118,7 @@
 					'DirectorTeam_desc' => $team['desc'],
 					'DirectorTeam_imdb' => $team['imdb'],
 					'DirectorTeam_fb' => $team['fb'],
+					'DirectorTeam_image' => $team['image'],
 					'DirectorTeam_time' => time(),
 					'DirectorTeam_status' => 1
 				);

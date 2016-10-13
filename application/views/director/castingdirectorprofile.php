@@ -196,7 +196,7 @@
                     </div> 
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  
+                    <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  
                       <ul class="nav navbar-nav navbar-right ul_list">
                        <li >
                             <a href="<?= base_url()?>director/"  > Dashboard
@@ -211,15 +211,11 @@
                           <ul class="dropdown-menu">
                            <li><a href="#" class="changeCategory">Change Category</a></li>
                            <li><a href="<?= base_url() . "director/conversations" ?>" >Conversations</a></li>
-                            <!--<li><a href="add_actor.php">Add</a></li>
-                            <li><a class="not-active" href="#">Import</a></li>
-                            <li><a class="not-active" href="#">Export</a></li>
-                            <li role="separator" class="divider"></li>-->
                             <li><a href="<?= base_url() ?>home/logout/">Sign-Out</a></li>
                           </ul>
                         </li>
                       </ul>
-                    </div><!-- /.navbar-collapse -->
+                    </div> --><!-- /.navbar-collapse -->
                 </div>
             </nav>
  
@@ -264,7 +260,7 @@
                     <div class="col-lg-3 col-sm-6">
                       <div class="card hovercard">
                           <div class="avatar">
-                              <img alt="<?= $team['DirectorTeam_name'] ?>" src="http://placehold.it/150x150/?text=[IMG]">
+                              <img alt="<?= $team['DirectorTeam_name'] ?>" src="<?= IMG ?>/teams/<?= $team['DirectorTeam_image'] ?>" height="150" width="150">
                           </div>
                           <div class="info">
                               <div class="title">

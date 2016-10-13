@@ -460,6 +460,7 @@ div.panel2.show {
               <th> Description* </th>
               <th> IMDB Link </th>
               <th> Facebook Link </th>
+              <th> Image </th>
             </tr>
           </thead>
           <tbody>
@@ -472,6 +473,11 @@ div.panel2.show {
               <td> <input class="form-control" type="text" name="desc"></td>
               <td> <div class="input-group"><input class="form-control" type="text" name="imdb" /><span class="input-group-addon"> <i class="glyphicon glyphicon-eye-open"></i></span></div></td>
               <td> <div class="input-group"><input class="form-control" type="text" name="fb" /><span class="input-group-addon"> <i class="glyphicon glyphicon-eye-open"></i></span></div></td>
+              <td class="img-preview">
+                <img src="<?= IMG ?>/actors/default.png" height="64" width="64">
+                <input type="file" name="team_pic[]" style="display: none;" class="team-pic">
+                <span class="upload-trigger" style="cursor: pointer;">Upload!</span>
+              </td>
             </tr>
 
             <tr>
