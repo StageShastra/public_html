@@ -228,6 +228,58 @@
 		}
 
 
+		public function teamUpload($value=''){
+			if(count($this->input->post())){
+				$post = $this->input->post();
+				$data = [];
+				foreach ($post as $key => $p) {
+					foreach ($p as $k => $v) {
+						$data[$k][$key] = trim($v);
+					}
+				}
+
+				$config = array(
+							'upload_path' => './assets/img/teams/',
+							'allowed_types' => 'png|jpg|jpeg',
+							'overwrite' => TRUE,
+							'max_size' => 5120, // 1024 * 5 in Kb
+						);
+
+				$this->load->library('upload', $config);
+				if(count($_FILES['image'])){
+					$files = $_FILES['image'];
+					foreach ($files['name'] as $key => $p) {
+						$_FILES['images[]']['name']= $files['name'][$key];
+			            $_FILES['images[]']['type']= $files['type'][$key];
+			            $_FILES['images[]']['tmp_name']= $files['tmp_name'][$key];
+			            $_FILES['images[]']['error']= $files['error'][$key];
+			            $_FILES['images[]']['size']= $files['size'][$key];
+
+			            $p = explode(".", $files['name'][$key]);
+			            $ext = trim(strtolower(end($p)));
+			            $f = md5(microtime() . $files['name'][$key] . microtime()) . "." . $ext;
+			            $config['file_name'] = $f;
+			            $data[$key]['image'] = $f;
+	            		$this->upload->initialize($config);
+
+			            if($this->upload->do_upload('images[]')){
+			            	$upload = $this->upload->data();
+			            }
+					}
+				}
+
+				$this->load->model("ModelDirector");
+				if($this->ModelDirector->insertTeamMembers($data)){
+					$team = $this->ModelDirector->getTemMember( $this->session->userdata("StaSh_User_id") );
+					$this->response(true, count($data) . " team members added.", ['team' => $team]);
+				}else{
+					$this->response(false, "Failed! some error occured.");
+				}
+
+			}
+		}
+
+
 		public function secure(){
 			if(count($this->input->post())){
 				$req = trim($this->input->post("request"));

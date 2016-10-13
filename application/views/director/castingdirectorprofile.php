@@ -8,6 +8,7 @@
           body{
             padding-top: 120px;
             padding-bottom: 0px;
+            font-weight: 300;
           }
           .rotate-img {
             -webkit-animation: rotation 2s infinite linear;
@@ -172,62 +173,9 @@
 <div class="container-fluid" id="home">
            
            
-            <nav class="navbar navbar-default navbar-fixed-top custom-navbar">
-                <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="<?= base_url() ?>">
-                            <img src="<?= IMG ?>/logo.png" class="brands img-responsive "/>
-                            <div class="vertical-middle brandname title">
-                                <?= M_Title ?>
-                                <br>
-                                <span id="tag-line" class="firstcolor info-small hidden-xs">
-                                Making Casting easier!                      
-                                </span>
-                            </div>
-                            
-                        </a>
-                    </div> 
-
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">  
-                      <ul class="nav navbar-nav navbar-right ul_list">
-                       <li >
-                            <a href="<?= base_url()?>director/"  > Dashboard
-                            </a>
-                        </li>
-                        <li >
-                            <a href="<?= base_url()?>director/account"  > Account
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                          <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-chevron-down firstcolor" aria-hidden="true"></span></a>
-                          <ul class="dropdown-menu">
-                           <li><a href="#" class="changeCategory">Change Category</a></li>
-                           <li><a href="<?= base_url() . "director/conversations" ?>" >Conversations</a></li>
-                            <!--<li><a href="add_actor.php">Add</a></li>
-                            <li><a class="not-active" href="#">Import</a></li>
-                            <li><a class="not-active" href="#">Export</a></li>
-                            <li role="separator" class="divider"></li>-->
-                            <li><a href="<?= base_url() ?>home/logout/">Sign-Out</a></li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </div><!-- /.navbar-collapse -->
-                </div>
-            </nav>
- 
-
-
         <!-- Casting Director Header-->
         <div name="CDheader" class="center CDsection"> 
-          <span> <img  class="companylogo" src="<?= IMG . "/pages/" . $basic['DirectorPage_logo'] ?>" alt='<?= $basic['DirectorPage_pagename'] ?>'></span><span><h1><?= $basic['DirectorPage_name'] ?></h1></span>
+          <span> <img  class="companylogo" src="<?= IMG . "/pages/" . $basic['DirectorPage_logo'] ?>" alt='<?= $basic['DirectorPage_pagename'] ?>'></span><span></span>
           </div>
           <nav class="navbar CDnavbar CDsection">
                     <div class="container-fluid center">
@@ -264,7 +212,7 @@
                     <div class="col-lg-3 col-sm-6">
                       <div class="card hovercard">
                           <div class="avatar">
-                              <img alt="<?= $team['DirectorTeam_name'] ?>" src="http://placehold.it/150x150/?text=[IMG]">
+                              <img alt="<?= $team['DirectorTeam_name'] ?>" src="<?= IMG ?>/teams/<?= $team['DirectorTeam_image'] ?>" height="150" width="150">
                           </div>
                           <div class="info">
                               <div class="title">

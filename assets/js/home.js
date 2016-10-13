@@ -1501,7 +1501,7 @@ $(document).ready(function(){
 		$("#teammates").removeClass("hidden");
 	});
 
-	$(document).on("click", ".update-page-team", function(){
+	/*$(document).on("click", ".update-page-team", function(){
 		$allTbodyTr = $(".teammates tbody tr");
 		d = [];
 		
@@ -1553,7 +1553,7 @@ $(document).ready(function(){
 			}
 		})
 		return false;
-	});
+	});*/
 
 	$(document).on("click", ".page-project-update", function(){
 		$projectInputs = $(".projectinput");
@@ -1737,6 +1737,96 @@ $(document).ready(function(){
 		statusApp = (thisWork.DirectorWork_work_status == 1) ? 'Accepting application!' : 'Application closed!';
 		$tds.eq(4).text(statusApp);
 
+		return false;
+	});
+
+	$(document).on("click", ".upload-trigger", function(){
+		//console.log($(this).parent().find("input[type='file']"));
+		$(this).parent().find("input[type='file']").click();
+		//return false;
+	});
+
+	$(document).on("change", ".team-pic", function(){
+		$that = $(this);
+		if (this.files && this.files[0]) {
+            var reader = new FileReader();
+
+
+            reader.onload = function (e) {
+                $that.prev().attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(this.files[0]);
+        }
+		
+	});
+
+	$(document).on("click", ".update-page-team", function(){
+		form = new FormData();
+		$allTbodyTr = $(".teammates tbody tr");
+		d = [];
+		i = 0;
+		$allTbodyTr.each(function(){
+			tmp = {};
+			tmp['name'] = $(this).find("input[name='name']").val();
+			tmp['title'] = $(this).find("input[name='title']").val();
+			tmp['desc'] = $(this).find("input[name='desc']").val();
+			tmp['imdb'] = $(this).find("input[name='imdb']").val();
+			tmp['fb'] = $(this).find("input[name='fb']").val();
+			tmp['image'] = $(this).find("input[type='file']")[0].files[0];
+			if(typeof tmp['image'] == 'undefined')
+				i = 1;
+			form.append("name[]", tmp['name']);
+			form.append("desc[]", tmp['desc']);
+			form.append("title[]", tmp['title']);
+			form.append("imdb[]", tmp['imdb']);
+			form.append("fb[]", tmp['fb']);
+			form.append("image[]", tmp['image']);
+			
+		});
+
+		if(i){
+			topAlertDisplay("Please upload image for team member.");
+			return false;
+		}
+
+		$.ajax({
+			url: base + "director/teamUpload",
+			type: type,
+			data: form,
+			contentType: false,
+			cache: false,
+			processData: false,
+			success: function(response){
+				topAlertDisplay(response.message);
+				if(response.status){
+					$activeAccord = $(".accordion.active");
+					$nextAcord = $activeAccord.next().next();
+					$nextAcord.addClass("active");
+					$nextAcord.next().addClass("show");
+
+					$("#teammates").hide(100);
+
+					$teamTable = $("table#display-team-detail tbody");
+					team = response.data.team;
+					i=0;
+					tr = '';
+					for(t = 0; t < team.length; t++){
+						
+						i++;
+						tr += "<tr><td>"+i+"</td>"
+						   + "<td>"+ team[t].DirectorTeam_name +"</td>"
+						   + "<td>"+ team[t].DirectorTeam_title +"</td>"
+						   + "<td>"+ team[t].DirectorTeam_desc +"</td>"
+						   + "<td>"+ team[t].DirectorTeam_imdb +"</td>"
+						   + "<td>"+ team[t].DirectorTeam_fb +"</td>"
+						   + "<td><a href='#' class='team-member-delete' data-member-ref='"+team[t].DirectorTeam_id+"'><i class='fa fa-trash'><></a></td></tr>";
+						
+					}
+					$teamTable.append(tr);
+				}
+			}
+		})
 		return false;
 	});
 
