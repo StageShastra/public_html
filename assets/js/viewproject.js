@@ -392,6 +392,13 @@ function populate_table()
 	$(".actors").html(dyn_html);
 	$("#loader").addClass("hidden");
 	$(".role-tabs").removeClass("hidden");
+	if(isPublic==1)
+	{
+		$("#bs-example-navbar-collapse-1").html("");
+		$(".fa").addClass("public_disabled");
+		$(".fa").attr("onclick" ,'none');
+		show_shortlisted();
+	}
 
 
 }
