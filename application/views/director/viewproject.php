@@ -739,6 +739,9 @@ button[disabled], html input[disabled] {
 .inactive-tab:hover{
   opacity: 1;
 }
+.public_disabled{
+  cursor: not-allowed;
+}
 
               </style>
         <!--[if lt IE 8]>
@@ -921,6 +924,7 @@ button[disabled], html input[disabled] {
       var project_id = <?= $project["StashProject_id"]; ?>;
       var project_shoot_begins = <?= $project["StashProject_shoot_begins"]; ?>;
       var project_shoot_ends = <?= $project["StashProject_shoot_ends"]; ?>;
+      var isPublic  = <?= $isPublic; ?>;
       </script>
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php
