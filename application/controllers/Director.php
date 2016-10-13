@@ -79,16 +79,32 @@
 			//echo $value;
 		}
 		public function project($value=''){
-			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'director')
-				redirect(base_url());
-			$pageInfo = [];
 			$this->load->model("ModelDirector");
-			$pageInfo['isAllowed'] = $this->ModelDirector->getAdminConfirmation();
-			$pageInfo['plan'] = $this->ModelDirector->getDirectorPlan();
-			$pageInfo['profile'] = $this->ModelDirector->directorProfile();
-			$pageInfo['project'] = $this->ModelDirector->getProjectDetails($value);
-			$this->load->view("director/viewproject", $pageInfo);
-			//echo $value;
+			$pr_details=$this->ModelDirector->getProjectDetails($value);
+			if($pr_details["StashProject_status"]==2 && ( !$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'director'))
+			{
+				$pageInfo = [];
+				$this->load->model("ModelDirector");
+				$pageInfo['isAllowed'] = $this->ModelDirector->getAdminConfirmation();
+				$pageInfo['plan'] = $this->ModelDirector->getDirectorPlan();
+				$pageInfo['profile'] = $this->ModelDirector->directorProfile();
+				$pageInfo['project'] = $this->ModelDirector->getProjectDetails($value);
+				$pageInfo['isPublic']=1;
+				$this->load->view("director/viewproject", $pageInfo);
+			}
+			else
+			{
+				if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'director')
+				redirect(base_url());
+				$pageInfo = [];
+				$this->load->model("ModelDirector");
+				$pageInfo['isAllowed'] = $this->ModelDirector->getAdminConfirmation();
+				$pageInfo['plan'] = $this->ModelDirector->getDirectorPlan();
+				$pageInfo['profile'] = $this->ModelDirector->directorProfile();
+				$pageInfo['project'] = $this->ModelDirector->getProjectDetails($value);
+				$pageInfo['isPublic']=0;
+				$this->load->view("director/viewproject", $pageInfo);
+			}
 		}
 		public function allprojects($value=''){
 			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'director')
