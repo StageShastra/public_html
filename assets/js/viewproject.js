@@ -61,7 +61,7 @@ $(document).on("click", ".role-tab", function(e){
 			$(this).removeClass("inactive-tab");
 			
 		}
-		console.log($(e).attr("data-name"));
+		
 
 });
 
@@ -88,7 +88,7 @@ function populate_roles()
 					for(var i=0;i<roles.length;i++)
 					{
 						
-						pre_html+='<span class="role-tab inactive-tab" data-name='+roles[i].StashRoles_id+' data-state="inactive">'+roles[i].StashRoles_role+'</span>';
+						pre_html+='<span class="role-tab" data-name='+roles[i].StashRoles_id+' data-state="active">'+roles[i].StashRoles_role+'</span>';
 				                  
 					}
 
@@ -183,15 +183,13 @@ function get_actors_answers(f)
 {
 	change_loader_text("fetching actor's answers...");
 	
-		console.log(f);
-		console.log(attendees);
 		if(get_question_details(f,attendees[f].StashRoleActorLink_role_id_ref)==1)
 		{
 			
 			if(++f<attendees.length)
 			{
 				get_actors_answers(f);
-				console.log(f);
+
 			}
 			else
 			{
@@ -209,7 +207,7 @@ function get_question_details(index,role_id)
 
 	for(var ri=0;ri<roles.length;ri++)
 	{	
-		console.log(ri);
+		
 		if(roles[ri].StashRoles_id==role_id)
 		{
 			attendees[index].questions=[];
@@ -217,7 +215,7 @@ function get_question_details(index,role_id)
 			{
 				attendees[index].role_name=roles[ri].StashRoles_role;	
 			}
-			console.log(ri);
+		
 			if(roles[ri].questions.length!=0){
 				get_link_question_role(ri,index,0,role_id);
 			}
@@ -230,8 +228,7 @@ function get_question_details(index,role_id)
 function get_link_question_role(i,index,k,role_id)
 {
 			var questions_answers={};
-			console.log(roles);
-			console.log(i);
+			
 			questions_answers.question=roles[i].questions[k];
 
 				data = {request: "getActorsAnswers",
@@ -240,7 +237,7 @@ function get_link_question_role(i,index,k,role_id)
 				 								question_id: roles[i].questions[k].StashQuestions_id 
 				 							 }
 				 							)};
-console.log(data);
+
 					$.ajax({
 						url: url,
 						type: type,
@@ -249,8 +246,7 @@ console.log(data);
 							if(response.status==true)
 							{	
 								(questions_answers.question).answer=JSON.parse(response.data);
-								console.log(response);
-								console.log("lenth of qs is "+roles[i].questions.length);
+								
 								if(++k<(roles[i].questions).length && roles[i].questions.length!=0)
 								{
 									get_link_question_role(i,index,k,role_id);
@@ -289,12 +285,12 @@ function populate_videos(i)
 								attendees[i].videos=JSON.parse(response.data);
 								if(++i<attendees.length)
 								{
+									console.log("calling recursion");
 									populate_videos(i);
 								}
 								else
 								{
 									change_loader_text("all videos fetched.");
-									//console.log(attendees);
 									populate_table();
 								}
 								//console.log("videos " + (i+1) + " of " + attendees.length + "linked...")
@@ -418,7 +414,6 @@ function video_embed(actor)
 		{
 			string+='<td class="video"><div id="video_"'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit" data-hide-id="#cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"data-unhide-id="#input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"><span id="cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="click_to_add">Click to add video</span>'
 					   +'<div class="embed-responsive embed-responsive-4by3 hidden" id="embed_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'">'
-	                   +'	<iframe class="embed-responsive-item" id="iframe_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" src=""></iframe>'
 	                   +'</div>'
 					   +'<input class="input_cs hidden" id="input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="text" placeholder="Paste youtube video link" onpaste="setTimeout(function(){ show_video('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)">'
 					   +'</div></td>' ;
@@ -492,7 +487,6 @@ function open_casting_response(id)
 	var prehtml='';
 	for(n=0;n<attendees[id].questions.length;n++)
 	{	var questions_obj=attendees[id].questions[n];
-		console.log(questions_obj.question);
 	 	var question_q=questions_obj.question.StashQuestions_question;
 	 	if(questions_obj.question.answer!=null)
 	 	{
@@ -555,7 +549,7 @@ function shortlist_star(actor)
 	
 		if(actor.StashRoleActorLink_shortlist_status=="0")
 		{
-			string+= '  <tr id="tr_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" class="'+actor.StashRoleActorLink_role_id_ref+'_role unshortlisted hidden"><td class="star">'
+			string+= '  <tr id="tr_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" class="'+actor.StashRoleActorLink_role_id_ref+'_role unshortlisted "><td class="star">'
              		+'    <i class="fa fa-star-o" id="star_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" onclick="shortlist_actor('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+1+')" aria-hidden="true"></i>'
              		+'  </td>' ;
 
@@ -563,7 +557,7 @@ function shortlist_star(actor)
 		}
 		else
 		{
-			string+= '  <tr id="tr_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" class="'+actor.StashRoleActorLink_role_id_ref+'_role shortlisted hidden"><td class="star">'
+			string+= '  <tr id="tr_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" class="'+actor.StashRoleActorLink_role_id_ref+'_role shortlisted "><td class="star">'
              		+'    <i class="fa fa-star" id="star_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" onclick="shortlist_actor('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+0+')" aria-hidden="true"></i>'
              		+'  </td>' ;
 		}
@@ -591,7 +585,7 @@ function shortlist_actor(actor_id,role_id,status)
 							{	
 								if(status==1)
 								{
-									console.log(response);
+									
 									var id="star_"+actor_id+'_'+role_id+'';
 									var tr_id="tr_"+actor_id+'_'+role_id+'';
 									$('#'+tr_id).removeClass("unshortlisted");
@@ -603,7 +597,7 @@ function shortlist_actor(actor_id,role_id,status)
 								}
 								else
 								{
-									console.log(response);
+									
 									var tr_id="tr_"+actor_id+'_'+role_id+'';
 									$('#'+tr_id).removeClass("shorlisted");
 									$('#'+tr_id).addClass("unshortlisted");
@@ -644,7 +638,9 @@ function show_video(actor_id,role_id,index)
 	var embed_string = "https://www.youtube.com/embed/"+video_id;
 	var iframe_id='iframe_'+actor_id+'_'+role_id+'_'+index+'';
 	var embed_id= 'embed_'+actor_id+'_'+role_id+'_'+index+'';
-	$('#'+iframe_id).attr("src",embed_string);
+	var prehtml="";
+	prehtml = '<iframe class="embed-responsive-item" id="iframe_'+actor_id+'_'+role_id+'_'+index+'" src="'+embed_string+'"></iframe>'
+	$('#'+embed_id).html(prehtml);
 
 	//console.log('#'+iframe_id);
 	$('#'+embed_id).removeClass("hidden");
