@@ -614,11 +614,6 @@ for (j = 0; j < acc2.length; j++) {
     <!-- Custom Theme JavaScript -->
     <script src="<?= JS ?>/constants.js"></script>
     <script src="<?= JS ?>/landingpage.js"></script>
-    <script> 
-        base="www.castiko.com/";
-        var url = base + "ajax/";
-        console.log(base);
-    </script>
     <script src="<?= JS ?>/main.js"></script>
     
 </body>
