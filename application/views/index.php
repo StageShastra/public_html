@@ -616,6 +616,7 @@ for (j = 0; j < acc2.length; j++) {
     <script src="<?= JS ?>/landingpage.js"></script>
     <script> 
         base=document.location.href;
+        var url = base + "ajax/";
         console.log(base);
     </script>
     <script src="<?= JS ?>/main.js"></script>
