@@ -614,11 +614,12 @@ for (j = 0; j < acc2.length; j++) {
     <!-- Custom Theme JavaScript -->
     <script src="<?= JS ?>/constants.js"></script>
     <script src="<?= JS ?>/landingpage.js"></script>
-    <script src="<?= JS ?>/main.js"></script>
     <script> 
-    base=document.location.href;
-    console.log(base);
+        base=document.location.href;
+        console.log(base);
     </script>
+    <script src="<?= JS ?>/main.js"></script>
+    
 </body>
 
 </html>
