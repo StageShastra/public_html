@@ -258,9 +258,32 @@
 				$data['StashActor_avatar <> '] = 'default.png';
 			}
 
+			// updated for check screen age.
+			/*$orWhere = [];
+
+			if($filter['roleMin'] != '')
+				$orWhere['StashActor_min_role_age <= '] = $filter['roleMin']; 
+
+			if($filter['roleMax'] != '')
+				$orWhere['StashActor_max_role_age >'] = $filter['roleMax'];
+			*/
+			$orWhere = '';
+
+			if($filter['roleMin'] != '')
+				$orWhere .= "StashActor_min_role_age <= {$filter['roleMin']}";
+
+			if($orWhere != '')
+				$orWhere .= " AND ";
+
+			if($filter['roleMin'] != '')
+				$orWhere .= "StashActor_max_role_age >= {$filter['roleMax']}";
+
 			//print_r($data);
 
 			$this->db->where($data);
+
+			if($orWhere != '')
+				$this->db->or_where("(" . $orWhere . ")");
 			$this->db->like("StashActor_gender", $filter['sex'], 'both');
 			$this->db->where_in('StashActor_actor_id_ref', $filter['in']);
 			$names = explode(',', $filter['names']);
@@ -764,7 +787,7 @@
 			$project = $this->getProjectById($data['StashEmailInvite_project_id_ref']);
 			$result['project'] = $project;
 
-			$msg = [$msg['StashInviteMsg_id'], $project['StashProject_name'] . " : " . $msg['StashInviteMsg_subject'], $msg['StashInviteMsg_message'] ];
+			$msg = [$msg['StashInviteMsg_id'], $project['StashProject_name'] . " : " . htmlentities($msg['StashInviteMsg_subject']), htmlentities($msg['StashInviteMsg_message']) ];
 			foreach ($fetch as $key => $f) {
 				if( $f['StashEmailInvite_opened'])
 					$o++;
@@ -816,7 +839,7 @@
 			$o = $s = 0;
 			$project = $this->getProjectById($data['StashSMSInvites_project_id_ref']);
 			$msg = $this->getThisMessage( $data['StashSMSInvites_msg_id'] );
-			$msg = [$msg['StashInviteMsg_id'], $project['StashProject_name'].' : '.$msg['StashInviteMsg_subject'], $msg['StashInviteMsg_message'] ];
+			$msg = [$msg['StashInviteMsg_id'], $project['StashProject_name'].' : '.htmlentities($msg['StashInviteMsg_subject']), htmlentities($msg['StashInviteMsg_message']) ];
 			foreach ($fetch as $key => $f) {
 				if( $f['StashSMSInvites_opened'])
 					$o++;
@@ -867,8 +890,9 @@
 			$recipient = count($fetch);
 			$result = [];
 			$o = $s = $y = $n = $mb = 0;
+			$aud = $fetch[0]['StashEmailMsg_has_ques'];
 			$msg = $this->getThisMessage( $data['StashEmailMsg_msg_id_ref'] );
-			$msg = [$msg['StashInviteMsg_id'], $msg['StashInviteMsg_subject'], $msg['StashInviteMsg_message'] ];
+			$msg = [$msg['StashInviteMsg_id'], htmlentities($msg['StashInviteMsg_subject']), htmlentities($msg['StashInviteMsg_message']) ];
 			foreach ($fetch as $key => $f) {
 				$st = "not seen";
 				$lb = "default";
@@ -914,6 +938,7 @@
 			$result['maybe'] = $mb;
 			$result['msg'] = $msg;
 			$result['pending'] = $recipient - $s;
+			$result['aud'] = (int)$aud;
 
 			return $result;
 		}
@@ -934,8 +959,9 @@
 			$recipient = count($fetch);
 			$result = [];
 			$o = $s = $y = $n = $mb = 0;
+			$aud = $fetch[0]['StashSMSMsg_has_ques'];
 			$msg = $this->getThisMessage( $data['StashSMSMsg_msg_id_ref'] );
-			$msg = [$msg['StashInviteMsg_id'], $msg['StashInviteMsg_subject'], $msg['StashInviteMsg_message'] ];
+			$msg = [$msg['StashInviteMsg_id'], htmlentities($msg['StashInviteMsg_subject']), htmlentities($msg['StashInviteMsg_message']) ];
 			foreach ($fetch as $key => $f) {
 				$st = "not seen";
 				$lb = "default";
@@ -981,6 +1007,7 @@
 			$result['maybe'] = $mb;
 			$result['msg'] = $msg;
 			$result['pending'] = $recipient - $s;
+			$result['aud'] = (int)$aud;
 
 			return $result;
 		}

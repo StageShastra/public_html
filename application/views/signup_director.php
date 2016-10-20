@@ -167,13 +167,13 @@ a:hover, a:focus {
                   
                       <form role="form" action="<?= $_SERVER['REQUEST_URI'] ?>" method="POST">
                       <div class="form-group">
-                        <input type="text" class="form-control login" id="fullname" name="name" placeholder= "Full Name *" required>
+                        <input type="text" class="form-control login" id="fullname" name="name" value="<?= $this->input->post('name') ?>" placeholder= "Full Name *" required>
                       </div>
                       <div class="form-group">
-                        <input type="email" class="form-control login" id="email" name="email" placeholder= "Email *" value="<?= $email ?>" <?= ($email != '') ? "readonly" : "" ?> required >
+                        <input type="email" class="form-control login" id="email" name="email" placeholder= "Email *" value="<?= ($email != '') ? $email : $this->input->post('email') ?>" <?= ($email != '') ? "readonly" : "" ?> required >
                       </div>
                       <div class="form-group">
-                        <input type="text" class="form-control login" id="contact" name="mobile" maxlength="10" placeholder= "Mobile No. *" value="<?= $mobile ?>" <?= ($mobile != '') ? "readonly" : "" ?> required >
+                        <input type="text" class="form-control login" id="contact" name="mobile" maxlength="10" placeholder= "Mobile No. *" value="<?= ($mobile != '') ? $mobile : $this->input->post('mobile') ?>" <?= ($mobile != '') ? "readonly" : "" ?> required >
                       </div>
                       <div class="form-group">
                         <input type="password" class="form-control login" id="password" name="password" placeholder= "Password *" required >

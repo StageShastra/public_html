@@ -170,13 +170,13 @@ a:hover, a:focus {
                   	
                       <form role="form" action="<?= $_SERVER['REQUEST_URI'] ?>" method="POST">
                       <div class="form-group">
-                        <input type="text" class="form-control login" id="fullname" name="name" placeholder= "Full Name *" required>
+                        <input type="text" class="form-control login" id="fullname" name="name" value="<?= $this->input->post("name") ?>" placeholder= "Full Name *" required>
                       </div>
                       <div class="form-group">
-                        <input type="email" class="form-control login" id="email" name="email" placeholder= "Email *" required >
+                        <input type="email" class="form-control login" id="email" name="email" value="<?= $this->input->post("email") ?>" placeholder= "Email *" required >
                       </div>
                       <div class="form-group">
-                        <input type="text" class="form-control login" id="contact" name="mobile" placeholder= "Mobile No. *" maxlength="10" required >
+                        <input type="text" class="form-control login" id="contact" name="mobile" value="<?= $this->input->post("mobile") ?>" placeholder= "Mobile No. *" maxlength="10" required >
                       </div>
                       <div class="form-group">
                         <input type="password" class="form-control login" id="password" name="password" placeholder= "Set a new Password *" autocomplete="new-password" required >

@@ -99,6 +99,11 @@
 
 			echo "Data Transfered... {$num} ";
 		}
+
+		public function formData($value=''){
+            print_r($this->input->post());
+            print_r($_FILES);
+        }
 		
 	}
 
