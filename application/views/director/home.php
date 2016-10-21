@@ -570,8 +570,9 @@
                   <div class="modal-body" style="background-color:#fff;">
                     <div class="container" style="max-width:100%; ">
 
-          <div class="alert alert-info" role="alert">
-            <?
+          <!--
+          <div class="alert alert-info" role="alert">-->
+            <!--<?
               if($count_emails==1)
               {
                 echo "You have sent " .$count_emails." Email and have used". $count_sms ." SMS credit till today.";
@@ -581,7 +582,7 @@
                 echo "You have sent " .$count_emails." Emails and have used". $count_sms ." SMS credits till today.";
               }
             ?>
-            </div>
+            </div>-->
                       <!-- Nav tabs -->
                       <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" id="#emailtab" class="active"><a href="#viaEmail" aria-controls="home" role="tab" data-toggle="tab">Via Email</a></li>

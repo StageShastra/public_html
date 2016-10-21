@@ -254,5 +254,6 @@
             </div>
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php
+
   include 'includes/scripts.php';
 ?>
