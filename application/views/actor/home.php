@@ -1289,7 +1289,12 @@ textarea{
                                <span id="experience_add" class="hidden">
                                     <input type="text" class="editwhite long" name='exp_title' id="addtitle" Placeholder="Title of the play, ad, film etc." required/>
                                     <input type="text" class="editwhite long" name='exp_role' id="addrole" Placeholder="Role e.g. Dad, Mom, Character Name" required/>
-                                    <input type="text" class="editwhite long" name='exp_link' id="addlink" Placeholder="Youtube Video Link"/>
+                                    <input type="text" class="editwhite long" name='exp_link' id="addlink" onpaste="setTimeout(function(){embed_video_show()},4)"Placeholder="Youtube video link" />
+                                    <p class="help-block text-danger"></p>
+                                    <div class="embed-responsive embed-responsive-4by3 hidden" style="height:40%,width:100%;"id="embed_video">
+                                    <iframe class="embed-responsive-item" id="iframe_video" src="">
+                                    </iframe>
+                                    </div><br>
                                     <textarea class="editwhite long" name='exp_blurb' id="adddescription" placeholder="A little description about the role and the project." style="height:80px;"></textarea>
                                     <br><font class="sortbuttons">
                                     <button type="submit" class="btn submit-btn firstcolor center addExperience toggleEdit tick" id="add_exp_btn" data-hide-id="#add_exp_btn" data-unhide-id="#add_exp_btn_load" ><span class="glyphicon glyphicon-ok"></span></button>

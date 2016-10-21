@@ -458,7 +458,7 @@
            
         }
         #socialShare{
-            padding: 0px;
+            padding: 2px;
             margin-top: -15px;
         }
         .collapse

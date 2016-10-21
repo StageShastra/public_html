@@ -255,5 +255,6 @@
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php
 
+  include 'includes/footer.php'
   include 'includes/scripts.php';
 ?>

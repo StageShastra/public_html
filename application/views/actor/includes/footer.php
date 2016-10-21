@@ -24,14 +24,5 @@
                 </div>
             </div>
         </div>
-        <div class="footer-below">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        &copy; 2016 Castiko | connect@castiko.com
-                    </div>
-                </div>
-            </div>
-        </div>
     </footer>
     
