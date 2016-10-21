@@ -399,8 +399,8 @@
                   </button> -->
                 </div>
 
-
-                <div class="container col-sm-12 center" id="browse-table">
+                
+                <div style="align:left;" class="container col-sm-12" id="browse-table">
                       
                 </div>
                 <div class='container col-sm-12 center' id="main-container"></div>

@@ -786,11 +786,8 @@ textarea{
                                 <?php
                                     }
                                 ?>
-
-                            </span>
-                                
+                            </span>         
                         </div>
-
                     </div>
                     <div class="col-sm-8 left" id="second_column_actor">
                          <div class="col-sm-12 no_padding_small" >
