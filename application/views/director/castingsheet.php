@@ -878,6 +878,7 @@ button[disabled], html input[disabled] {
               </div>
               <div class="col-sm-2 attendees">
                 <h4 class="label_att">ATTENDEES</h4>
+                
                 <div id="list_of_attendees">
                 </div>
               </div>
