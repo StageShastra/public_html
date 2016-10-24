@@ -62,7 +62,7 @@
 /*small screens*/
  @media screen and (max-width: 235px) {
             .navbar-brand{
-                width:160px;
+                width:190px;
             }
             .title{
                 font-size: 14px;
@@ -70,6 +70,11 @@
             #tag-line{
                 display: none;
             }
+            .navbar-header{
+    height:90px;
+    overflow: hidden;
+}
+
  }
  /* xs */
         @media screen and (max-width: 767px) {
@@ -77,11 +82,16 @@
                 width:240px;
             }
             .title{
-                font-size: 20px;
+                font-size: 15px;
             }
             #tag-line{
                 display: none;
             }
+            .navbar-header{
+                height:69px;
+                overflow: hidden;
+            }
+
         }
         /* sm */
         @media screen and (min-width: 768px) {
@@ -94,6 +104,11 @@
             #tag-line{
                 font-size: 12px;
             }
+            .navbar-header{
+                height:69px;
+                overflow: hidden;
+            }
+
         }
         /* md */
         @media screen and (min-width: 992px) {
@@ -110,6 +125,11 @@
                 margin-top: 18px;
                 font-size: 16px;
             }
+            .navbar-header{
+                height:90px;
+                overflow: hidden;
+            }
+
         }
         /* lg */
         @media screen and (min-width: 1200px) {
@@ -126,6 +146,11 @@
                 margin-top: 18px;
                 font-size: 16px;
             }
+            .navbar-header{
+                height:90px;
+                overflow: hidden;
+            }
+
         }
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
     color: #555;

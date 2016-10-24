@@ -731,7 +731,7 @@ button[disabled], html input[disabled] {
                           <br>
                           It is crucial that you complete your profile with basic details and photos.  
                </div>
-                <div class="form-title-row">
+                <div class="form-title-row" style="">
                     <h1 class="heading"> CASTING SHEET</h1>
                     <h3 class="project_name"> PROJECT : <?= $project["StashProject_name"]; ?></h3>
                     <h5 class="shoot_dates"><span style="">Shoot starts from  </span><span class="shoot_begins"></span> and ends on <span class="shoot_ends"></span> </h5>
@@ -878,12 +878,18 @@ button[disabled], html input[disabled] {
               </div>
               <div class="col-sm-2 attendees">
                 <h4 class="label_att">ATTENDEES</h4>
-                
+                <div id="loader_atten">
+                <div class="loader_atten"><img src="<?= base_url() ?>/assets/img/spinner.gif" height="150"><br></div>
+                 </div>
                 <div id="list_of_attendees">
                 </div>
               </div>
             </div>
-            
+            <script>
+            setTimeout(function() {
+             $('#loader_atten').fadeOut('fast');
+}, 1000);
+            </script>
 
       <script>
       var project_id = <?= $project["StashProject_id"]; ?>;

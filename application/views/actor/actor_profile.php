@@ -797,6 +797,7 @@ textarea{
                             <div >
                                 </span>
                                 <div id="experiencelist" style="overflow:hidden;">
+                                
                                 <?php
                                     $count_experience=sizeof($actorExperiences);
                                     $counter_exp=0;
@@ -907,6 +908,7 @@ textarea{
                                 ?>
                                 </div>
                                 <hr>
+                            </div>
                             </div>
                             <div class="category_heading">GALLERY
                                 <div id="photos_videos">

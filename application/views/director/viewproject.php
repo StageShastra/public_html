@@ -809,12 +809,12 @@ button[disabled], html input[disabled] {
             <div class="container-fluid" id="create_project_home">
                
               <div class="col-sm-12" id="table">
-              
+                <div class="nocur" style="cursor:default">
                 <div class="form-title-row">
                     <h3 class="project_name"> Project:<b style="text-transform: uppercase;"> <?= $project["StashProject_name"]; ?></b></h3>
                     <h4 class="shoot_dates"><span style="">SHOOT DATES:  </span><span class="shoot_begins"></span> to <span class="shoot_ends"></span> </h4>
                     <button type="button" class="go_button" onclick="window.location.assign('../castingsheet/<?= $project["StashProject_id"]; ?>')">Open Casting Sheet</button>
-                </div>
+                </div></div>
                 <div class="role-tabs hidden">
                   
                 </div>

@@ -10,6 +10,11 @@
     src: url(AvenirNext-Regular.otf);
 }
 
+.size {
+  width: 300px;
+  align:center;
+}
+
 body {
         padding-top: 50px;
         padding-bottom: 20px;
@@ -276,11 +281,15 @@ thead{
 	background-color:#f2f2f2;
 	height: 30px;
 	border-radius:10px;
+    text-align:left;
 	
 }
 th{	
 	color:#b3b3b3; 
-	text-align: center;
+	text-align: justify;
+}
+thead > :first-child {
+    text-align: center;
 }
 td{
 	border-top: none !important;
@@ -1510,4 +1519,7 @@ table.card-table {
 }
 .loader{
 	text-align: center;
+}
+.loader_atten{
+    text-align: left;
 }
