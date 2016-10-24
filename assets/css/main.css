@@ -281,11 +281,15 @@ thead{
 	background-color:#f2f2f2;
 	height: 30px;
 	border-radius:10px;
+    text-align:left;
 	
 }
 th{	
 	color:#b3b3b3; 
-	text-align: center;
+	text-align: justify;
+}
+thead > :first-child {
+    text-align: center;
 }
 td{
 	border-top: none !important;
