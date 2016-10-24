@@ -280,7 +280,7 @@
                 <li ><a data-toggle="tab" href="#email-invites" class="contactListNav" data-for="iEmail">Email Invites</a></li>
                 <li><a data-toggle="tab" href="#sms-invites" class="contactListNav" data-for="iSMS">SMS Invites</a></li>
               </ul>
-
+              <div class="iid" style="cursor:default;">
               <div class="tab-content">
                 <div id="email" class="tab-pane fade in active">
                   <table id="email_table" class="messages table table-striped">
@@ -336,6 +336,7 @@
                 </div>
               </div>
             </div>
+        </div>
       </div>
            <!-- contact modal toggle -->
            <?php include 'includes/modals.php'; ?>

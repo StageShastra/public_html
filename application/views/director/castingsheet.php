@@ -731,11 +731,11 @@ button[disabled], html input[disabled] {
                           <br>
                           It is crucial that you complete your profile with basic details and photos.  
                </div>
-                <div class="form-title-row">
+                <div class="form-title-row" style="">
                     <h1 class="heading"> CASTING SHEET</h1>
                     <h3 class="project_name"> PROJECT : <?= $project["StashProject_name"]; ?></h3>
                     <h5 class="shoot_dates"><span style="">Shoot starts from  </span><span class="shoot_begins"></span> and ends on <span class="shoot_ends"></span> </h5>
-                    <input type="text" id="contact" class="input_cs" name="contact" placeholder="Enter your email/phone"/><button type="button" onclick="get_actor_details()" class="go_button">Go</button>
+                    <input type="text" id="contact" style="cursor:default;" class="input_cs" name="contact" placeholder="Enter your email/phone"/><button type="button" onclick="get_actor_details()" class="go_button">Go</button>
                 </div>
               </div>
               <div class="col-sm-10 hidden" id="casting_sheet_form"> 
