@@ -62,7 +62,7 @@
 /*small screens*/
  @media screen and (max-width: 235px) {
             .navbar-brand{
-                width:160px;
+                width:190px;
             }
             .title{
                 font-size: 14px;

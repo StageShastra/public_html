@@ -878,12 +878,18 @@ button[disabled], html input[disabled] {
               </div>
               <div class="col-sm-2 attendees">
                 <h4 class="label_att">ATTENDEES</h4>
-                
+                <div id="loader_atten">
+                <div class="loader_atten"><img src="<?= base_url() ?>/assets/img/spinner.gif" height="150"><br></div>
+                 </div>
                 <div id="list_of_attendees">
                 </div>
               </div>
             </div>
-            
+            <script>
+            setTimeout(function() {
+             $('#loader_atten').fadeOut('fast');
+            }, 1000);
+            </script>
 
       <script>
       var project_id = <?= $project["StashProject_id"]; ?>;

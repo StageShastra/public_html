@@ -1511,3 +1511,6 @@ table.card-table {
 .loader{
 	text-align: center;
 }
+.loader_atten{
+    text-align: left;
+}
