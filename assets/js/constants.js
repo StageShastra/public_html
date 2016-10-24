@@ -1,4 +1,4 @@
-var base = "http://localhost:81/castiko/";
+var base = "http://localhost:8888/public_html/";
 var url = base + "ajax/";
 var type = "POST";
 var data = {};
