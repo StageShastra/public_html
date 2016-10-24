@@ -796,7 +796,6 @@ textarea{
                             </div>
                             <div >
                                 </span>
-                                <div id="parent_box" style="width:30%;height:40%">
                                 <div id="experiencelist" style="overflow:hidden;">
                                 
                                 <?php

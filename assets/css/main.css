@@ -10,6 +10,11 @@
     src: url(AvenirNext-Regular.otf);
 }
 
+.size {
+  width: 300px;
+  align:center;
+}
+
 body {
         padding-top: 50px;
         padding-bottom: 20px;

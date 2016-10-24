@@ -888,7 +888,7 @@ button[disabled], html input[disabled] {
             <script>
             setTimeout(function() {
              $('#loader_atten').fadeOut('fast');
-            }, 1000);
+}, 1000);
             </script>
 
       <script>
