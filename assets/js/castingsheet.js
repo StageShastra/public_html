@@ -239,7 +239,6 @@ function show_casting_sheet(data)
 function show_dynamic_questions()
 {
 	$("#role_audition").removeClass("animated infinite pulse");
-	$("#role_based_questions").addClass("animated slideInDown");
 	var index=$("#role_audition").val();
 	$("#save_actor_response").removeAttr("disabled");
 	var role_id=roles[index].StashRoles_id;
