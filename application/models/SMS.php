@@ -38,7 +38,7 @@
 			$postmessage = "\nPowered By. Castiko";
 			$msg = $this->prefix.$msg;
 
-			$msg .= "\nFor more detail: {$link}";
+			$msg .= "\nFor more details: {$link}";
 
 			$msg .= $postmessage;
 			$msg = rawurlencode($msg);

@@ -204,6 +204,7 @@ function show_casting_sheet(data)
 	//$('#date_audition').val(new Date().toDateInputValue());
 	var shoot_start_date = new Date(0); // The 0 there is the key, which sets the date to the epoch
 	var shoot_end_date = new Date(0);
+	$("#role_audition").addClass("animated infinite pulse");
 	shoot_start_date.setUTCSeconds(project_shoot_begins);
 	shoot_end_date.setUTCSeconds(project_shoot_ends);
 	if(actor.isLinkedWithDirector==0)
@@ -237,6 +238,7 @@ function show_casting_sheet(data)
 }
 function show_dynamic_questions()
 {
+	$("#role_audition").removeClass("animated infinite pulse");
 	var index=$("#role_audition").val();
 	$("#save_actor_response").removeAttr("disabled");
 	var role_id=roles[index].StashRoles_id;
