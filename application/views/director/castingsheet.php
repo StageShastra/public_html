@@ -735,7 +735,7 @@ button[disabled], html input[disabled] {
                     <h1 class="heading"> CASTING SHEET</h1>
                     <h3 class="project_name"> PROJECT : <?= $project["StashProject_name"]; ?></h3>
                     <h5 class="shoot_dates"><span style="">Shoot starts from  </span><span class="shoot_begins"></span> and ends on <span class="shoot_ends"></span> </h5>
-                    <input type="text" id="contact" class="input_cs" name="contact" placeholder="Enter your email/phone"/><button type="button" onclick="get_actor_details()" class="go_button">Go</button>
+                    Enter your email/phone : <input type="text" id="contact" class="input_cs" name="contact" placeholder="Enter your email/phone"/><button type="button" onclick="get_actor_details()" class="go_button">Go</button>
                 </div>
               </div>
               <div class="col-sm-10 hidden" id="casting_sheet_form"> 
@@ -782,7 +782,7 @@ button[disabled], html input[disabled] {
                         </div>
                         <div class="row">
                             <div class="label_cs col-sm-6">
-                              Choose Password  
+                              Create Password  
                             </div>
                             <div class="col-sm-6">
                               <input type="password" id="password_new_actor" class="input_cs" name="password_new_actor" placeholder="Please set a new password" oncopy="return false" autocomplete="new-password"/>

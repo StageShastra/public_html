@@ -910,7 +910,8 @@
 							"StashRoleActorLink_actor_id_ref" => $d["actor_id"],
 							"StashRoleActorLink_project_id_ref" => $d["project_id"],
 							"StashRoleActorLink_shortlist_status" => 0,
-							"StashRoleActorLink_status"=> 1
+							"StashRoleActorLink_status"=> 1,
+							"StashRoleActorLink_date_of_audition"=>strtotime($d["audition_date"])
 						);
 				$this->response(true, "Role and actors linked",$this->db->insert("stash-role-actor-link", $data));
 			}

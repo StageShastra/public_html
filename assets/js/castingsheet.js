@@ -410,7 +410,8 @@ function insert_role_actor(){
 	 		data: JSON.stringify({
 	 								actor_id: actor_id,
 	 								role_id: role_id,
-	 								project_id: project_id
+	 								project_id: project_id,
+	 								audition_date: todaysdate
 	 							 }
 	 							)};
 	 //	console.log(data);
