@@ -163,8 +163,9 @@ a:hover, a:focus {
             <div class="row center signup_box">
               <div class="col-sm-12 light-padded">
                 <div class="col-lg-6 col-sm-6 col-xs-12" id="form-div">
+                <p class="text-info"><?= $extra_msg ?></p>
                 <?php echo validation_errors("<p class='text-danger'>"); ?>
-		<?php echo ($error) ? "" : "<p class='text-danger'><b>{$error_msg}</b></p>" ?>
+		            <?php echo ($error) ? "" : "<p class='text-danger'><b>{$error_msg}</b></p>" ?>
                 <?php if(!$error){ ?>
                   <font class="info-small text-primary signup_heading"> Actor Sign Up   <? if(isset($_REQUEST['plan'])) {echo ucwords("- ".$_REQUEST['plan']);} ?></font>
                   	

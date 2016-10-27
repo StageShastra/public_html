@@ -238,14 +238,6 @@
 		public function finalFilter($filter = []){
 			$data = array();
 
-			if($filter['minAge'] != ''){
-				$data['StashActor_dob <= '] = $filter['minAge'];
-			}
-
-			if($filter['maxAge'] != ''){
-				$data['StashActor_dob >= '] = $filter['maxAge'];
-			}
-
 			if($filter['minHeight'] != ''){
 				$data['StashActor_height >= '] = $filter['minHeight'];
 			}
@@ -268,6 +260,27 @@
 				$orWhere['StashActor_max_role_age >'] = $filter['roleMax'];
 			*/
 			$orWhere = '';
+			$andWhere = '';
+
+			/*if($filter['minAge'] != ''){
+				$data['StashActor_dob <= '] = $filter['minAge'];
+			}
+
+			if($filter['maxAge'] != ''){
+				$data['StashActor_dob >= '] = $filter['maxAge'];
+			}*/
+
+			if($filter['minAge'] != ''){
+				//$data['StashActor_dob <= '] = $filter['minAge'];
+				$andWhere .= "StashActor_dob <= {$filter['minAge']}";
+			}
+
+			if($filter['maxAge'] != ''){
+				//$data['StashActor_dob >= '] = $filter['maxAge'];
+				if($andWhere != '')
+					$andWhere .= " AND ";
+				$andWhere .= "StashActor_dob >= {$filter['maxAge']}";
+			}
 
 			if($filter['roleMin'] != '')
 				$orWhere .= "StashActor_min_role_age <= {$filter['roleMin']}";
@@ -278,12 +291,15 @@
 			if($filter['roleMin'] != '')
 				$orWhere .= "StashActor_max_role_age >= {$filter['roleMax']}";
 
+			if($orWhere != '')
+				$andWhere .= " OR ({$orWhere})";
+
 			//print_r($data);
 
 			$this->db->where($data);
 
-			if($orWhere != '')
-				$this->db->or_where("(" . $orWhere . ")");
+			if($andWhere != '')
+				$this->db->or_where("(" . $andWhere . ")");
 			$this->db->like("StashActor_gender", $filter['sex'], 'both');
 			$this->db->where_in('StashActor_actor_id_ref', $filter['in']);
 			$names = explode(',', $filter['names']);
@@ -307,7 +323,6 @@
 				$actor['StashActor_username'] = $this->getActorUsername($actor['StashActor_actor_id_ref']);
 				$result[] = $actor;
 			}
-
 			return $result;
 		}
 

@@ -28,7 +28,7 @@ $(document).ready(function(){
 		}
 
 		sorted = {i: i, c: c};
-		console.log('main - ', sorted);
+		//console.log('main - ', sorted);
 	});
 	
 	
@@ -97,7 +97,7 @@ $(document).ready(function(){
 				type: type,
 				data: data,
 				success: function(response){
-					console.log(data);
+					//console.log(data);
 					if(response.status){
 						$('#datarow'+actorRef).addClass("animated fadeOut");
 						setTimeout(
@@ -180,7 +180,10 @@ $(document).ready(function(){
                		+ '<tr><th id="selectallcheckbox"><input type="checkbox" '+ckh+' name="selectallactor" id="selectallactor" class="css-checkbox" /><label for="selectallactor" class="css-label"></label></th><th>Profile</th>';
         
         for(var i = 0; i < select.length; i++){
-    		content += '<th data-sort="string">'+select[i]+' <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>';
+        	s = 'string';
+        	if(select[i] == 'Age' || select[i] == 'Weight' || select[i] == 'Height')
+        		s = 'int';
+    		content += '<th data-sort="'+s+'">'+select[i]+' <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>';
     	}
 
     	content += "<th>Action</th></tr></thead>";
@@ -535,7 +538,7 @@ $(document).ready(function(){
 	function checkContactModal() {
 		var hidden = $("#contactmodal").attr("aria-hidden");
 		if(hidden == 'false'){
-			console.log("Open");
+			//console.log("Open");
 			$(".notice-selected-actors").hide();
 		}
 	}
@@ -710,7 +713,7 @@ $(document).ready(function(){
 				//console.log(response);
 				if(response.status){
 					populateActorList(response.data, 1);
-					console.log(response.data);
+					//console.log(response.data);
 				}else{
 					$("#main-container").html("");
 					noActorFound();
@@ -783,14 +786,14 @@ $(document).ready(function(){
 			searchData[dponly] = 0;
 		}else if(peices.length == 2){
 			d = searchData[peices[0]];
-			console.log(d, peices[1]);
+			//console.log(d, peices[1]);
 			searchData[peices[0]] = d.replace(peices[1], "");
 		}else{
 			searchData[thisKey] = "";
 		}
 		return false;
 
-		/*data = {request: "AdvanceSearch", data: JSON.stringify(searchData)};
+		data = {request: "AdvanceSearch", data: JSON.stringify(searchData)};
 		showSpinner();
 		$.ajax({
 			url: url,
@@ -805,7 +808,7 @@ $(document).ready(function(){
 					noActorFound();
 				}
 			}
-		});*/
+		});
 	});
 	
 	$(document).on("click", "img.showDetails", function(){
@@ -1043,7 +1046,7 @@ $(document).ready(function(){
 		source: base + "home/autoComplete/",
 		minLenght: 2,
 		select: function(ev, ui){
-			console.log(ui);
+			//console.log(ui);
 			$("input[name='project_date']").val(ui.item.date);
 		}
 	});
@@ -1052,7 +1055,7 @@ $(document).ready(function(){
 		source: base + "home/autoComplete/",
 		minLenght: 2,
 		select: function(ev, ui){
-			console.log(ui);
+			//console.log(ui);
 			$("input#addPName").val(ui.item.name);
 			$("input#addPName").attr("data-id", Number(ui.item.id));
 		}
@@ -1607,7 +1610,7 @@ $(document).ready(function(){
 				topAlertDisplay(response.message);
 				if(response.status){
 					pwork = response.data.work;
-					console.log(pwork);
+					//console.log(pwork);
 					$displayPWork = $("#display-project-work");
 					div = '';
 					for(i = 0; i < pwork.length; i++){
