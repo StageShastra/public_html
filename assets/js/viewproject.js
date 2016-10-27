@@ -481,7 +481,9 @@ function open_casting_response(id)
 	$("#m_actor_name").html(attendees[id].StashActor_name);
 	$("#m_actor_email").html(attendees[id].StashActor_email);
 	$("#m_actor_mobile").html(attendees[id].StashActor_mobile);
-	$("#m_actor_height").html(attendees[id].StashActor_height+" cms");
+	var height_feet = Math.floor(attendees[id].StashActor_height/30.48);
+	var height_inches = Math.round((attendees[id].StashActor_height%30.48)/2.54);
+	$("#m_actor_height").html(height_feet+" ft " + height_inches+" inches");
 	$("#m_actor_weight").html(attendees[id].StashActor_weight+" kgs");
 	var t = attendees[id].StashActor_dob;
 	var d = new Date(t * 1000);
