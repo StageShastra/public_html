@@ -735,7 +735,8 @@ button[disabled], html input[disabled] {
                     <h1 class="heading"> CASTING SHEET</h1>
                     <h3 class="project_name"> PROJECT : <?= $project["StashProject_name"]; ?></h3>
                     <h5 class="shoot_dates"><span style="">Shoot starts from  </span><span class="shoot_begins"></span> and ends on <span class="shoot_ends"></span> </h5>
-                    Enter your email/phone : <input type="text" id="contact" class="input_cs" name="contact" placeholder="Enter your email/phone"/><button type="button" onclick="get_actor_details()" class="go_button">Go</button>
+                    <h5 class="shoot_dates">Enter your email/phone</h5>
+                    <input type="text" id="contact" class="input_cs" name="contact" placeholder="Enter your email/phone"/><button type="button" onclick="get_actor_details()" class="go_button">Go</button>
                 </div>
               </div>
               <div class="col-sm-10 hidden" id="casting_sheet_form"> 
@@ -766,18 +767,18 @@ button[disabled], html input[disabled] {
                         </div>
                         <div class="row">
                             <div class="label_cs col-sm-6">
-                              Email 
-                            </div>
-                            <div class="col-sm-6">
-                              <input type="email" id="email_new_actor" class="input_cs" name="email_new_actor" placeholder="Enter your email"/>
-                            </div> 
-                        </div>
-                        <div class="row">
-                            <div class="label_cs col-sm-6">
                               Phone Number  
                             </div>
                             <div class="col-sm-6">
                               <input type="text" id="phone_new_actor" maxlength="10" class="input_cs" name="phone_new_actor" placeholder="Enter your phone"/>
+                            </div> 
+                        </div>
+                        <div class="row">
+                            <div class="label_cs col-sm-6">
+                              Email 
+                            </div>
+                            <div class="col-sm-6">
+                              <input type="email" id="email_new_actor" class="input_cs" name="email_new_actor" placeholder="Enter your email"/>
                             </div> 
                         </div>
                         <div class="row">
@@ -840,7 +841,10 @@ button[disabled], html input[disabled] {
                             Date of Birth
                           </div>
                           <div class="col-sm-6">
-                            <input type="date"  id="actor_dob" class="input_cs  " name="actor_dob" placeholder="Date of Birth" /></input>
+                            <select class="col-sm-2 input_cs" id="dobday"></select>
+                            <select class="col-sm-4 input_cs" id="dobmonth"></select>
+                            <select class="col-sm-4 input_cs"  id="dobyear"></select>
+                            <input type="date"  id="actor_dob" class="input_cs hidden " name="actor_dob" placeholder="Date of Birth" /></input>
                           </div>
                         </div>
                         <div class="row">

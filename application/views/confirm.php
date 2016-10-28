@@ -1,5 +1,6 @@
 <?php
   include 'includes/head.php';
+  header('Access-Control-Allow-Origin: *'); 
 ?>
     <body>
         <!--[if lt IE 8]>

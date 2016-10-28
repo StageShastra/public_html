@@ -693,6 +693,7 @@ button[disabled], html input[disabled] {
 .fa-star{
   color:#ffb600;
   transition: all 500ms;
+  cursor: pointer;
 }
 .fa-star:hover{
   transform:scale(1);
@@ -703,6 +704,7 @@ button[disabled], html input[disabled] {
     position: relative;
     font-size: 20px;
     top: -4px;
+    cursor: pointer;
 }
 .fa-star-o{
   transition: all 500ms;
@@ -729,16 +731,13 @@ button[disabled], html input[disabled] {
   transition: all 500ms;
   float: left;
   margin-bottom: 5px;
+  cursor: pointer;
 }
-.role-tab:hover{
-  opacity: 0.5;
-}
+
 .inactive-tab{
   opacity: 0.5;
 }
-.inactive-tab:hover{
-  opacity: 1;
-}
+
 .public_disabled{
   cursor: not-allowed;
 }
