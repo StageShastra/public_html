@@ -2021,5 +2021,6 @@ textarea{
         <script> var isnotsteppage=true;</script>
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php
+    include 'includes/footer.php';
     include 'includes/scripts.php';
 ?>
