@@ -22,6 +22,16 @@ $(document).ready(function(){
 			//console.log(hide, unhide);
 
 		});
+	$.dobPicker({
+					daySelector: '#dobday', /* Required */
+					monthSelector: '#dobmonth', /* Required */
+					yearSelector: '#dobyear', /* Required */
+					dayDefault: 'Day', /* Optional */
+					monthDefault: 'Month', /* Optional */
+					yearDefault: 'Year', /* Optional */
+					minimumAge: 0, /* Optional */
+					maximumAge:110 /* Optional */
+				});
 
 	//calling populating methods
 	populate_roles();
