@@ -117,8 +117,9 @@ function populate_questions(i)
 		});
 		
 }
+
 function populate_attendees()
-{
+{ 
 	data = {request: "getActorsInAProject",
 	 		data: JSON.stringify({
 	 								project_id: project_id, 

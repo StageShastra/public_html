@@ -97,6 +97,7 @@
         font-size: 16px;
         font-weight: 600;
         background: white;
+        align:left;
         
       }
       th{

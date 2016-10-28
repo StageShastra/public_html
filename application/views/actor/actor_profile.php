@@ -458,7 +458,7 @@
            
         }
         #socialShare{
-            padding: 0px;
+            padding: 2px;
             margin-top: -15px;
         }
         .collapse
@@ -786,11 +786,8 @@ textarea{
                                 <?php
                                     }
                                 ?>
-
-                            </span>
-                                
+                            </span>         
                         </div>
-
                     </div>
                     <div class="col-sm-8 left" id="second_column_actor">
                          <div class="col-sm-12 no_padding_small" >
@@ -800,6 +797,7 @@ textarea{
                             <div >
                                 </span>
                                 <div id="experiencelist" style="overflow:hidden;">
+                                
                                 <?php
                                     $count_experience=sizeof($actorExperiences);
                                     $counter_exp=0;
@@ -911,6 +909,7 @@ textarea{
                                 </div>
                                 <hr>
                             </div>
+                            </div>
                             <div class="category_heading">GALLERY
                                 <div id="photos_videos">
                                 <div class="row" style="padding-right:15px;">
@@ -993,9 +992,10 @@ textarea{
             </div>
    
         </div>
-    </div>
-                    
+    </div>          
         <!--================================== Navigation Ends Here =======================================-!-->
+
 <?php
+    include 'includes/footer.php';
     include 'includes/scripts.php';
 ?>
