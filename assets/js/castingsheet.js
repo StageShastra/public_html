@@ -22,6 +22,16 @@ $(document).ready(function(){
 			//console.log(hide, unhide);
 
 		});
+	$.dobPicker({
+					daySelector: '#dobday', /* Required */
+					monthSelector: '#dobmonth', /* Required */
+					yearSelector: '#dobyear', /* Required */
+					dayDefault: 'Day', /* Optional */
+					monthDefault: 'Month', /* Optional */
+					yearDefault: 'Year', /* Optional */
+					minimumAge: 0, /* Optional */
+					maximumAge:110 /* Optional */
+				});
 
 	//calling populating methods
 	populate_roles();
@@ -179,10 +189,12 @@ function get_actor_details()
 					$("#actor_inches").val(Math.round((actor.StashActor_height%30.48)/2.54));
 					var utcSeconds = actor.StashActor_dob;
 					var date = new Date(utcSeconds*1000);
-					console.log(date);
+					//console.log(date);
 					var formattedDate = date.getUTCFullYear() + '-' + leftPad((date.getUTCMonth() + 1),2)+ '-' + leftPad((date.getUTCDate()+1),2);
 					$("#actor_dob").val(formattedDate);
-					console.log(formattedDate);
+					$("#dobday").val(date.getUTCDate()+1);
+					$("#dobmonth").val(leftPad((date.getUTCMonth() + 1),2));
+					$("#dobyear").val((date.getUTCFullYear()).toString());
 					$("#actor_sex").val(actor.StashActor_gender);
 					var src="http://castiko.com/assets/img/actors/"+actor.StashActor_avatar;
 					$("#pro_pic").attr("src",src);
@@ -205,6 +217,7 @@ function show_casting_sheet(data)
 	//$('#date_audition').val(new Date().toDateInputValue());
 	var shoot_start_date = new Date(0); // The 0 there is the key, which sets the date to the epoch
 	var shoot_end_date = new Date(0);
+	$("#role_audition").addClass("animated infinite pulse");
 	shoot_start_date.setUTCSeconds(project_shoot_begins);
 	shoot_end_date.setUTCSeconds(project_shoot_ends);
 	if(actor.isLinkedWithDirector==0)
@@ -238,6 +251,7 @@ function show_casting_sheet(data)
 }
 function show_dynamic_questions()
 {
+	$("#role_audition").removeClass("animated infinite pulse");
 	var index=$("#role_audition").val();
 	$("#save_actor_response").removeAttr("disabled");
 	var role_id=roles[index].StashRoles_id;
@@ -335,6 +349,7 @@ function update_actor_experience()
 {
 	var actor_id=actor.StashActor_actor_id_ref;
 	var actor_dob = $("#actor_dob").val();
+	actor_dob = $("#dobyear").val() + '-' + $("#dobmonth").val()+ '-' + $("#dobday").val();
 	var actor_height = Math.round(($("#actor_feet").val()*30.48)+($("#actor_inches").val()*2.54));
 	var actor_sex = $("#actor_sex").val();
 	data = {request: "updateActorPastExperience",
@@ -411,7 +426,8 @@ function insert_role_actor(){
 	 		data: JSON.stringify({
 	 								actor_id: actor_id,
 	 								role_id: role_id,
-	 								project_id: project_id
+	 								project_id: project_id,
+	 								audition_date: todaysdate
 	 							 }
 	 							)};
 	 //	console.log(data);
@@ -596,6 +612,7 @@ $("#save_actor_response").html('Submit');
 setTimeout(function(){ 
 	$("#not_registered_last_message").addClass("animated fadeOut");
 	 }, 9000);
+$(".photo_name").removeClass("hidden");
 }
 $("#save_actor_response").removeAttr('disabled');
 document.getElementById("date_audition").valueAsDate = new Date();
@@ -633,3 +650,4 @@ function hasfilled()
 	clean_slate_protocol();
 	return ;
 }
+

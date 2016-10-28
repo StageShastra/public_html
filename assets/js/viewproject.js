@@ -353,7 +353,8 @@ function populate_table()
              {
              	dyn_html+='<th>Scene '+ (i+1) +'</th>';
              }
-             dyn_html+=' <th><span class="fa fa-newspaper-o" title="Casting Sheet response"></span></th>';
+             dyn_html+=' <th data-sort="string">Date <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>'
+             +'<th><span class="fa fa-newspaper-o" title="Casting Sheet response"></span></th>';
              dyn_html+=' <th><span class="fa fa-trash-o" title="Delete record"></span></th>';
              dyn_html+='</thead>';
              dyn_html+='<tbody>';
@@ -378,8 +379,10 @@ function populate_table()
              dyn_html+= notes_string+'';
              var video_string=video_embed(attendees[i]);
              //console.log(video_string);
+             var aud_date = new Date(0);
+				aud_date.setUTCSeconds(attendees[i].StashRoleActorLink_date_of_audition);
              dyn_html+= video_string+''
-             +'<td><span class="fa fa-newspaper-o" onclick="open_casting_response('+i+')"></span></td>'
+             +'<td>'+aud_date.toDateString()+'</td><td><span class="fa fa-newspaper-o" onclick="open_casting_response('+i+')"></span></td>'
              +'<td><span class="fa fa-trash-o" onclick="delete_record_response('+i+')"></span></td>'
              +'</tr>';
 	}
@@ -396,7 +399,7 @@ function populate_table()
 		show_shortlisted();
 	}
 
-
+	console.log(attendees);
 }
 
 //ancillary functions
@@ -478,7 +481,9 @@ function open_casting_response(id)
 	$("#m_actor_name").html(attendees[id].StashActor_name);
 	$("#m_actor_email").html(attendees[id].StashActor_email);
 	$("#m_actor_mobile").html(attendees[id].StashActor_mobile);
-	$("#m_actor_height").html(attendees[id].StashActor_height+" cms");
+	var height_feet = Math.floor(attendees[id].StashActor_height/30.48);
+	var height_inches = Math.round((attendees[id].StashActor_height%30.48)/2.54);
+	$("#m_actor_height").html(height_feet+" ft " + height_inches+" inches");
 	$("#m_actor_weight").html(attendees[id].StashActor_weight+" kgs");
 	var t = attendees[id].StashActor_dob;
 	var d = new Date(t * 1000);

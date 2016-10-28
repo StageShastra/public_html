@@ -400,16 +400,16 @@ div.img-div{
     transition : height 5s; 
 }
 .contact-btn {
-	
 	background-color: #FF003A;
 	color: white;
 	width: 80px;
 	height: 80px;
-	//text-indent: -9999px;
+	//
+	text-indent: -9999px;
 	position: fixed;
 	z-index: 999;
 	right: 20px;
-	bottom: 20px;
+	bottom: 90px;
 	font-size: 25px;
 	-webkit-border-radius: 40px;
 	-moz-border-radius: 40px;
@@ -426,16 +426,16 @@ div.img-div{
     color: #FF003A;
 }
 .bulk-btn {
-	
 	background-color: #FF9800;
 	color: white;
 	width: 80px;
 	height: 80px;
-	//text-indent: -9999px;
+	//
+	text-indent: -9999px;
 	position: fixed;
 	z-index: 999;
 	right: 20px;
-	bottom: 110px;
+	bottom: 175px;
 	font-size: 25px;
 	-webkit-border-radius: 40px;
 	-moz-border-radius: 40px;
