@@ -223,7 +223,7 @@ $(document).ready(function(){
 
 	function getActorProfile(){
 		var selectedCat = JSON.parse(Cookies.get('categories'));
-		$("#logo_start").attr("src",base+"/assets/img/spinner.gif");
+		$("#logo_start").attr("src",base+"assets/img/spinner.gif");
 		data = {request: "FetchActors", data: JSON.stringify(selectedCat)};
 		//console.log(data);
 		$.ajax({
