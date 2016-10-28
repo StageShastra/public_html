@@ -22,6 +22,16 @@ $(document).ready(function(){
 			//console.log(hide, unhide);
 
 		});
+	$.dobPicker({
+					daySelector: '#dobday', /* Required */
+					monthSelector: '#dobmonth', /* Required */
+					yearSelector: '#dobyear', /* Required */
+					dayDefault: 'Day', /* Optional */
+					monthDefault: 'Month', /* Optional */
+					yearDefault: 'Year', /* Optional */
+					minimumAge: 0, /* Optional */
+					maximumAge:110 /* Optional */
+				});
 
 	//calling populating methods
 	populate_roles();
@@ -178,10 +188,12 @@ function get_actor_details()
 					$("#actor_inches").val(Math.round((actor.StashActor_height%30.48)/2.54));
 					var utcSeconds = actor.StashActor_dob;
 					var date = new Date(utcSeconds*1000);
-					console.log(date);
+					//console.log(date);
 					var formattedDate = date.getUTCFullYear() + '-' + leftPad((date.getUTCMonth() + 1),2)+ '-' + leftPad((date.getUTCDate()+1),2);
 					$("#actor_dob").val(formattedDate);
-					console.log(formattedDate);
+					$("#dobday").val(date.getUTCDate()+1);
+					$("#dobmonth").val(leftPad((date.getUTCMonth() + 1),2));
+					$("#dobyear").val((date.getUTCFullYear()).toString());
 					$("#actor_sex").val(actor.StashActor_gender);
 					var src="http://castiko.com/assets/img/actors/"+actor.StashActor_avatar;
 					$("#pro_pic").attr("src",src);
@@ -336,6 +348,7 @@ function update_actor_experience()
 {
 	var actor_id=actor.StashActor_actor_id_ref;
 	var actor_dob = $("#actor_dob").val();
+	actor_dob = $("#dobyear").val() + '-' + $("#dobmonth").val()+ '-' + $("#dobday").val();
 	var actor_height = Math.round(($("#actor_feet").val()*30.48)+($("#actor_inches").val()*2.54));
 	var actor_sex = $("#actor_sex").val();
 	data = {request: "updateActorPastExperience",
@@ -598,6 +611,7 @@ $("#save_actor_response").html('Submit');
 setTimeout(function(){ 
 	$("#not_registered_last_message").addClass("animated fadeOut");
 	 }, 9000);
+$(".photo_name").removeClass("hidden");
 }
 $("#save_actor_response").removeAttr('disabled');
 document.getElementById("date_audition").valueAsDate = new Date();
@@ -635,3 +649,4 @@ function hasfilled()
 	clean_slate_protocol();
 	return ;
 }
+
