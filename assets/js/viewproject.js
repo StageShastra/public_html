@@ -869,7 +869,7 @@ function _calculateAge(birthday) { // birthday is a date
 }
 function show_loader_gif(id){
 	var text = '"for good things, we wait must!"<br><span><i>- Master Yoda</i></span>';
-	var content = '<div class="loader"><img src="'+base+'/assets/img/spinner.gif" height="300"/><br><span class="quote" style="font-family: "Roboto";font-weight: 800;">'+text+'</span><br><span class="loader_text">'+text+'</span></div>';
+	var content = '<div class="loader"><img src="'+base+'assets/img/spinner.gif" height="300"/><br><span class="quote" style="font-family: "Roboto";font-weight: 800;">'+text+'</span><br><span class="loader_text">'+text+'</span></div>';
 	$(id).html(content);
 	console.log(content);
 }
