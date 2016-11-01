@@ -788,6 +788,25 @@ textarea{
                                 ?>
                             </span>         
                         </div>
+                        <div class="row">
+                            <br>
+                             <div class="category_heading">SOCIAL
+                            </div>
+                                 <span id="actor_social" class="info dark-gray">
+                                <?php
+                                    $skills = $actorProfile['StashActor_social'];
+                                    foreach ($social as $key => $skill) {
+                                ?>
+                                <div class="col-sm-6 col-xs-4 col-lg-4 col-md-6 vertical-padded ellipsis">
+                                    <button type="button" class="btn skills_tag"  aria-label="Left Align" >
+                                        <font class="taga-text"><?php $skill_=ucfirst(trim($social)); if(strlen($social_)>7) {echo $social_;} else{echo $social_;}?></font>
+                                    </button>
+                                </div>  
+                                <?php
+                                    }
+                                ?>
+                            </span>         
+                        </div>
                     </div>
                     <div class="col-sm-8 left" id="second_column_actor">
                          <div class="col-sm-12 no_padding_small" >
