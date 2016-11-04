@@ -4,6 +4,7 @@
  ?>
 <link rel="stylesheet" href="<?=CSS?>/castingdirectorprofile.css">
 <link href="<?= CSS ?>/landingpage.css" rel="stylesheet">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <body>
         <style>
           body{
@@ -308,7 +309,7 @@
                               
                               foreach ($works as $key => $work) {
                                     
-                                if($key%4 == 0){
+                                if(($key)%4 == 0 || $key==0){
                                   if($open){
                                     echo '</div></div>';
                                   }
@@ -336,9 +337,7 @@
                                     . '</a>'
                                     . '</div>';
 
-                                if($key % 4 != 0 && $open){
-                                  echo '</div></div>';
-                                }
+                                
 
                               }
 
