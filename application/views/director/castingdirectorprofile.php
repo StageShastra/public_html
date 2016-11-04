@@ -382,7 +382,7 @@
 </body>
 
 <script type="text/javascript">
-  var WorkJSON =  <?php echo "'".json_encode($works)."'"; ?> ;
+  var WorkJSON =  <?php echo "'".addslashes(json_encode($works))."'"; ?> ;
   //console.log(WorkJSON);
 </script>
 
