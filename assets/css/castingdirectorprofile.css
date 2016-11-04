@@ -365,7 +365,7 @@ section {
     padding-top: 0;
     overflow: hidden;
     text-align: center;
-    background-color: rgba(214, 224, 226, 0.1);
+    background-color: white;
 }
 
 .card.hovercard .cardheader {
@@ -393,8 +393,12 @@ section {
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
-    border: 1px solid black;
+    border: 2px solid white;
+    box-shadow: 2px 2px 10px gray;
 }
+
+
+
 
 .card.hovercard .info {
     padding: 4px 8px 10px;

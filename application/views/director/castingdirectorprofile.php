@@ -164,6 +164,7 @@
     .team-card{
       min-height: 240px;
     }
+
     /* Removes the default 20px margin and creates some padding space for the indicators and controls */
 
 
@@ -379,7 +380,7 @@
 </body>
 
 <script type="text/javascript">
-  var WorkJSON = '<?= json_encode($works) ?>';
+  var WorkJSON = <?= json_encode($works) ?>;
 </script>
 
         <!--================================== Navigation Ends Here =======================================-!-->
