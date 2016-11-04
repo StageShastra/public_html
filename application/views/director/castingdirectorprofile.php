@@ -8,7 +8,7 @@
     <body>
         <style>
           body{
-            padding-top: 120px;
+            padding-top: 30px;
             padding-bottom: 0px;
             font-weight: 300;
           }
@@ -162,7 +162,7 @@
         color : #fff !important;
     }
     .team-card{
-      min-height: 240px;
+      min-height: 260px;
     }
 
     /* Removes the default 20px margin and creates some padding space for the indicators and controls */
@@ -380,7 +380,8 @@
 </body>
 
 <script type="text/javascript">
-  var WorkJSON = <?= json_encode($works) ?>;
+  var WorkJSON = '<?= json_encode($works) ?>';
+  //console.log(WorkJSON);
 </script>
 
         <!--================================== Navigation Ends Here =======================================-!-->
