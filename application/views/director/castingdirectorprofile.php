@@ -1,5 +1,6 @@
 <?php
   include 'includes/head.php';
+  error_reporting(0);
  ?>
 <link rel="stylesheet" href="<?=CSS?>/castingdirectorprofile.css">
 <link href="<?= CSS ?>/landingpage.css" rel="stylesheet">
