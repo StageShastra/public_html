@@ -164,9 +164,16 @@
         color : #fff !important;
     }
     .team-card{
-      min-height: 260px;
+      min-height: 275px;
     }
-
+    .fa-facebook-official{
+      color:#3b5998;
+      font-size: 14px;
+    }
+    .fa-external-link-square{
+      color:#e9c332;
+      font-size: 14px;
+    }
     /* Removes the default 20px margin and creates some padding space for the indicators and controls */
 
 
@@ -229,15 +236,20 @@
                       
                           </div>
                           <div class="bottom">
-                              <a class="socialbtn btn-primary btn-sm" rel="publisher"
+                              <a class="socialbtn" rel="publisher"
                                  href="<?= $team['DirectorTeam_fb'] ?>" title='Facebook'>
-                                  <i class="fa fa-facebook"></i>
+                                  <i class="fa fa-facebook-official"></i>
                               </a>
                               &nbsp;
-                              <a class="socialbtn btn-primary btn-sm" rel="publisher"
-                                 href="<?= $team['DirectorTeam_imdb'] ?>" title='IMDB'>
-                                  <i class="fa fa-external-link"></i>
+                              <?  if($team['DirectorTeam_imdb']!='')
+                              {
+                              ?>
+                            
+                              <a class="socialbtn" rel="publisher"
+                                 href="<?=$team['DirectorTeam_imdb']?>" title='IMDB'>
+                                  <i class="fa fa-external-link-square"></i>
                               </a>
+                              <? } ?>
                           </div>
                       </div> <!-- first card -->
                     </div>
@@ -388,7 +400,6 @@
 
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php
-  include 'includes/footer.php';
   include 'includes/scripts.php';
 ?>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
