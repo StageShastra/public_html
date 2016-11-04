@@ -138,6 +138,7 @@ function populate_attendees()
 					{
 						attendees_names[i]=attendees[i].StashActor_name;
 						append_attendees(attendees_names[i]);
+						$('#loader_atten').fadeOut('fast');
 					}
 				}
 				else
@@ -196,6 +197,7 @@ function get_actor_details()
 					$("#dobmonth").val(leftPad((date.getUTCMonth() + 1),2));
 					$("#dobyear").val((date.getUTCFullYear()).toString());
 					$("#actor_sex").val(actor.StashActor_gender);
+					$("#actor_city").val(actor.StashActor_city);
 					var src="http://castiko.com/assets/img/actors/"+actor.StashActor_avatar;
 					$("#pro_pic").attr("src",src);
 					show_casting_sheet();
@@ -320,11 +322,12 @@ function submit_answers()
 	}
 	actor.last_three_years_exp=$("#3_years_experience").val();
 	actor.last_six_months_exp=$("#6_months_experience").val();
+	actor.location_city=$("#actor_city").val();
 
 	//validation check 
-	if(actor.last_three_years_exp=="" || actor.last_six_months_exp=="" )
+	if(actor.last_three_years_exp=="" || actor.last_six_months_exp=="" || $("#actor_city").val()=="")
 	{
-		alert("Please fill in the experiences");
+		alert("Please fill in the experiences and location");
 		$("#save_actor_response").removeAttr('disabled');
 		$("#save_actor_response").html('Submit');
 		return;
@@ -347,7 +350,8 @@ function show_email_form(){
 }
 function update_actor_experience()
 {
-	var actor_id=actor.StashActor_actor_id_ref;
+	var actor_id = actor.StashActor_actor_id_ref;
+	var actor_location = actor.location_city;
 	var actor_dob = $("#actor_dob").val();
 	actor_dob = $("#dobyear").val() + '-' + $("#dobmonth").val()+ '-' + $("#dobday").val();
 	var actor_height = Math.round(($("#actor_feet").val()*30.48)+($("#actor_inches").val()*2.54));
@@ -359,7 +363,8 @@ function update_actor_experience()
 	 								actor_past_exp:actor.last_three_years_exp,
 	 								actor_dob:actor_dob,
 	 								actor_sex:actor_sex,
-	 								actor_height:actor_height
+	 								actor_height:actor_height,
+	 								actor_location:actor_location
 	 							 }
 	 							)};
 	 //		console.log(data);

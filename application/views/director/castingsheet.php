@@ -860,6 +860,18 @@ button[disabled], html input[disabled] {
                         </div>
                         <div class="row">
                           <div class="label_cs col-sm-6">
+                            City
+                          </div>
+                          <div class="col-sm-6">
+                            <select id="actor_city" class="input_cs" name="actor_city" placeholder="Select City of Audition" />
+                              <option value="Delhi">Delhi</option>
+                              <option value="Mumbai">Mumbai</option>
+                              <option value="Chandigarh">Chandigarh</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="label_cs col-sm-6">
                             Past 6 months experience  
                           </div>
                           <div class="col-sm-6">
@@ -889,12 +901,6 @@ button[disabled], html input[disabled] {
                 </div>
               </div>
             </div>
-            <script>
-            setTimeout(function() {
-             $('#loader_atten').fadeOut('fast');
-}, 1000);
-            </script>
-
       <script>
       var project_id = <?= $project["StashProject_id"]; ?>;
       var project_shoot_begins = <?= $project["StashProject_shoot_begins"]; ?>;
@@ -907,4 +913,3 @@ button[disabled], html input[disabled] {
 ?>
 <script src="<?= JS ?>/castingsheet.js"></script>
 <script type="text/javascript" src="<?= JS ?>/selectize.min.js"></script>
-

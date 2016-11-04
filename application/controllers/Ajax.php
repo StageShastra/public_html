@@ -875,7 +875,8 @@
 						'StashActor_three_years_experience' => $data['actor_past_exp'],
 						'StashActor_dob' => strtotime($data['actor_dob']),
 						'StashActor_height' => $data['actor_height'],
-						'StashActor_gender' => $data['actor_sex']
+						'StashActor_gender' => $data['actor_sex'],
+						'StashActor_city' => $data['actor_location']
 					);
 			$this->db->where("StashActor_actor_id_ref", $ref);
 			$this->response(true, "Experience updated",$this->db->update("stash-actor", $data));
