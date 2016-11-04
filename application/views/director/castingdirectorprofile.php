@@ -4,7 +4,7 @@
  ?>
 <link rel="stylesheet" href="<?=CSS?>/castingdirectorprofile.css">
 <link href="<?= CSS ?>/landingpage.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <body>
         <style>
           body{
@@ -161,7 +161,9 @@
         background-image: none;
         color : #fff !important;
     }
-
+    .team-card{
+      min-height: 240px;
+    }
     /* Removes the default 20px margin and creates some padding space for the indicators and controls */
 
 
@@ -211,7 +213,7 @@
 
                     foreach ($teams as $key => $team) {
                   ?>
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-3 col-sm-6 team-card">
                       <div class="card hovercard">
                           <div class="avatar">
                               <img alt="<?= $team['DirectorTeam_name'] ?>" src="<?= IMG ?>/teams/<?= $team['DirectorTeam_image'] ?>" height="150" width="150">
@@ -385,7 +387,7 @@
   include 'includes/footer.php';
   include 'includes/scripts.php';
 ?>
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
       var isAllowed = <?= ($isAllowed) ? 1 : 0; ?>;
 
