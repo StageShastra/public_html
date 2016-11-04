@@ -1,6 +1,8 @@
 <?php
   include 'includes/head.php';
   error_reporting(0);
+  $e_works=addslashes($works);
+
  ?>
 <link rel="stylesheet" href="<?=CSS?>/castingdirectorprofile.css">
 <link href="<?= CSS ?>/landingpage.css" rel="stylesheet">
@@ -223,7 +225,7 @@
                               <div class="title">
                                   <?= $team['DirectorTeam_name'] ?>
                               </div>
-                              <div class="desc"><?= $team['DirectorTeam_title'] .", ". $team['DirectorTeam_desc'] ?></div>
+                              <div class="desc"><?= $team['DirectorTeam_title'] ."<br>". $team['DirectorTeam_desc'] ?></div>
                       
                           </div>
                           <div class="bottom">
@@ -380,7 +382,7 @@
 </body>
 
 <script type="text/javascript">
-  var WorkJSON = '<?= json_encode($works) ?>';
+  var WorkJSON =  <?php echo "'".json_encode($works)."'"; ?> ;
   //console.log(WorkJSON);
 </script>
 
