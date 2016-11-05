@@ -389,7 +389,7 @@ function populate_table()
              var aud_date = new Date(0);
 				aud_date.setUTCSeconds(attendees[i].StashRoleActorLink_date_of_audition);
              dyn_html+= video_string+''
-             +'<td>'+aud_date.toDateString()+'</td>'+attendees[i].StashActor_city+'<td><td><span class="fa fa-newspaper-o" onclick="open_casting_response('+i+')"></span></td>'
+             +'<td>'+aud_date.toDateString()+'</td><td>'+attendees[i].StashActor_city+'<td><span class="fa fa-newspaper-o" onclick="open_casting_response('+i+')"></span></td>'
              +'<td><span class="fa fa-trash-o" onclick="delete_record_response('+i+')"></span></td>'
              +'</tr>';
 	}
