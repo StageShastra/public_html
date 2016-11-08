@@ -247,19 +247,21 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title firstcolor info"><?= CD_AdvSearch ?></h4><span class="info-small gray"><?= CD_AdvSearchSmall ?></span>
+                  <h4 id="sear" class="modal-title firstcolor info"><?= CD_AdvSearch ?></h4>
                 </div>
                 <div class="modal-body" style="background-color:#f2f2f2;">
                   <div class="container" style="max-width:100%; ">
                     <form action="#" method="post" id="advanceSearch">
                       <div class="row">
                         <div class="col-sm-6 form-group no-paddinglr">
-                          <span class="info-small gray">Age Range (Min)</span> <input type="text" class="form-control add" id="aagemin" name="agemin"  placeholder= "from age:"  />
-                          <span class="info-small gray">Sex(M/F) </span> <input type="text" class="form-control add" id="asex" name="sex" placeholder= "M/F:"  />
-
+                          <span class="info-small gray">Age: </span> <input type="text" style="display:inline;width:80px;" class="form-control add" id="aagemin" name="agemin"  placeholder= "10"/><p style="display:inline;"> to </p><input type="text" style="display:inline;width:80px;" class="form-control add" id="aagemax"  name="agemax" placeholder="70"/><br><br>
+                          <fieldset>
+                          <div class="se"><span style="display:inline" class="info-small gray"><label for="sex">Sex: </label></span> </div>
+                          <div class="se"><label for="asex">  M</label> <input type="checkbox" style="display:inline;" class="form-control add" id="asex" name="sex" value="m" placeholder="M"/> <label for="asex">  F</label> <input type="checkbox" style="display:inline;" class="form-control add" id="bsex" name="sex" value="F" placeholder="F"/></div><div class="se"><label for="asex">  O</label> <input type="checkbox" style="display:inline;" class="form-control add" id="csex" name="sex" value="O" placeholder="O"/></div>
+                          </fieldset>
                         </div>
                         <div class="col-sm-6 form-group no-paddinglr">
-                          <span class="info-small gray">Age Range (Max) </span> <input type="text" class="form-control add" id="aagemax"  name="agemax" placeholder= "upto age :"  />
+                          <input id="agebar" type="range"/><br/>
                           <span class="info-small gray">Skills(tag)</span>  <input type="text" data-role="tagsinput" class="form-control add" id="askills" name="skills" placeholder= "Skills :"  />
                         </div>
                       </div>
@@ -400,8 +402,6 @@
                   </button> -->
                 </div>
 
-                
-<<<<<<< HEAD
                 <div  class="container col-sm-12 center" style="text-align:left;" id="browse-table">
 =======
                 <div class="container col-sm-12 center" id="browse-table">
@@ -741,6 +741,10 @@
           </div>
       <script>
       var isAllowed = <?= ($isAllowed) ? true : false; ?>;
+      </script>
+      <script>
+      new Slider("#agebar", { id: "slider12c", min: 0, max: 10, range: true, value: [3, 7] });
+
       </script>
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php

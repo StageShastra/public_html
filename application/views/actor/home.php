@@ -1242,7 +1242,7 @@ textarea{
                                 </font>
                             </span>
                         </div>
-                        <div class="row">
+                         <div class="row">
                             <br>
                              <div class="category_heading">SKILLS
                                <span class="glyphicon glyphicon-pencil  edit-button pull-right toggleEdit" data-unhide-id="#skills_edit" data-hide-id="#actor_skills" aria-hidden="true"></span>
@@ -1276,8 +1276,44 @@ textarea{
                             </span>
                                 
                         </div>
+                        <div class="row">
+                            <br>
+                             <div class="category_heading">SOCIAL
+                               <span class="glyphicon glyphicon-pencil  edit-button pull-right toggleEdit" data-unhide-id="#skills_edit" data-hide-id="#actor_skills" aria-hidden="true"></span>
+                            </div>
+                                 <span id="actor_social" class="info dark-gray">
+                                <?php
+                                    $social = $actorProfile['StashActor_social'];
+                                    foreach ($social as $key => $skill) {
+                                ?>
+                                <div class="col-sm-6 col-xs-4 col-lg-4 col-md-6 vertical-padded ellipsis">
+                                    <button type="button" class="btn skills_tag"  aria-label="Left Align" >
+                                        <font class="taga-text"><?php $skill_=ucfirst(trim($skill)); if(strlen($skill_)>7) {echo $skill_;} else{echo $skill_;}?></font>
+                                    </button>
+                                </div>  
+                                <?php
+                                    }
+                                ?>
+
+                            </span>
+                            <span id="skills_edit" class="left hidden ">
+                                 <input type="text" class="form-control login" value="<?= implode(",", $actorProfile['StashActor_social']).", " ?>" data-role="tagsinput" id="skills" name="social" placeholder= "Skills:(comma separated)" />
+                                 <br><font class="sortbuttons">
+                                    <button type="button" class="btn submit-btn firstcolor center tick updateDataField"
+                                            data-input-names="social"
+                                            data-request="EditSocial"
+                                            data-hide-id="#social_edit" 
+                                            data-unhide-id="#actor_social">
+                                        Save
+                                    </button>
+                                </font>
+                            </span>
+                                
+                        </div>
 
                     </div>
+                    <!-- Added Apoorv-->
+
                     <div class="col-sm-8 left" id="second_column_actor">
                          <div class="col-sm-12 no_padding_small" >
                             <br>

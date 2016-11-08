@@ -266,6 +266,8 @@
 					case "EditLanguage":
 						$this->editLanguage($data);
 						break;
+                    case "EditSocial":
+                        $this->editSocial($data);
 					case "EditSkills":
 						$this->editSkill($data);
 						break;
@@ -899,7 +901,23 @@
 				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
-		public function editActorName($data = []){
+		public function editSocial($data = []){
+			$this->load->model("ModelActor");
+			$langs = $this->ModelActor->getSocialId($data['Social']);
+			$this->ModelActor->deleteOldSocial($langs);
+			$actorLang = $this->ModelActor->getActorSocialIds();
+			$newLang = array_diff($langs, $actorLang);
+			if(count($newLang)){
+				if($this->ModelActor->updateActorSocial($newLang)){
+					$this->response(true, Ac_Ajx_GenSucc);
+				}else{
+					$this->response(false, Ac_Ajx_GenFailed);
+				}
+			}else{
+				$this->response(true, Ac_Ajx_GenSucc);
+			}
+		}
+        public function editActorName($data = []){
 			$this->load->model("ModelActor");
 			$name = trim($data['name']);
 			$sex = (strtolower($data['sex']) == 'm') ? 1 : 0;

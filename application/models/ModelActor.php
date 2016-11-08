@@ -26,7 +26,7 @@
 
 			return $result;
 		}
-
+        
 		public function getActorSkills($ref = 0){
 			$this->db->select("*");
 			$this->db->from("stash-skills as skill");
