@@ -241,10 +241,7 @@
 				$req = trim($this->input->post("request"));
 				$data = json_decode($this->input->post("data"), true);
 				switch ($req) {
-					case "EditSocial":
-						$this->editSocial($data);
-						break;
-                    case 'EditName':
+					case 'EditName':
 						$this->editActorName($data);
 						break;
 					case "EditMobile":
@@ -798,7 +795,7 @@
 				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
-
+		
 		public function editSkill($data = []){
 			$this->load->model("ModelActor");
 			$langs = $this->ModelActor->getSkillId($data['skills']);
@@ -902,24 +899,6 @@
 				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
-     //Added by Apoorv _ Social Data
-		public function editSocial($data =[]){
-            $this->load->model("ModelActor");
-            $langs = $this->ModelActor->getSocialId($data['social']);
-			$this->ModelActor->deleteOldSocial($langs);
-			$actorLang = $this->ModelActor->getActorSocialIds();
-			$newLang = array_diff($langs, $actorLang);
-			if(count($newLang)){
-				if($this->ModelActor->updateActorSocial($newLang)){
-					$this->response(true, Ac_Ajx_GenSucc);
-				}else{
-					$this->response(false, Ac_Ajx_GenFailed);
-				}
-			}else{
-				$this->response(false, "Nothing to Updated");
-			}
-        }
-        //End Of Social Data
 		public function editActorName($data = []){
 			$this->load->model("ModelActor");
 			$name = trim($data['name']);

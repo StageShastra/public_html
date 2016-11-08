@@ -401,7 +401,11 @@
                 </div>
 
                 
+<<<<<<< HEAD
                 <div  class="container col-sm-12 center" style="text-align:left;" id="browse-table">
+=======
+                <div class="container col-sm-12 center" id="browse-table">
+>>>>>>> a1870e6ca95d029ed5eae3754298a1f8a2d2bfe8
                       
                 </div>
                 <div class='container col-sm-12 center' id="main-container"></div>
@@ -570,20 +574,6 @@
                   </div>
                   <div class="modal-body" style="background-color:#fff;">
                     <div class="container" style="max-width:100%; ">
-
-          <!--
-          <div class="alert alert-info" role="alert">-->
-            <!--<?
-              if($count_emails==1)
-              {
-                echo "You have sent " .$count_emails." Email and have used". $count_sms ." SMS credit till today.";
-              }
-              else
-              {
-                echo "You have sent " .$count_emails." Emails and have used". $count_sms ." SMS credits till today.";
-              }
-            ?>
-            </div>-->
                       <!-- Nav tabs -->
                       <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" id="#emailtab" class="active"><a href="#viaEmail" aria-controls="home" role="tab" data-toggle="tab">Via Email</a></li>

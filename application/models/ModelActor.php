@@ -43,7 +43,7 @@
 		}
 		
 		public function getActorProjects($ref = 0){
-			$this->db->select("DISTINCT StashActorProject_project_id_ref");
+			$this->db->select("*");
 			$this->db->from("stash-project as project");
 			$this->db->join("stash-actor-project as actProject", "actProject.StashActorProject_project_id_ref = project.StashProject_id");
 			$this->db->where("actProject.StashActorProject_actor_id_ref", $ref);
@@ -375,80 +375,7 @@
 			$query = $this->db->get("stash-users");
 			return $query->first_row('array');
 		}
-        public function getActorSocial($ref = 0){
-			$this->db->select("*");
-			$this->db->from("stash-social as social");
-			$this->db->join("stash-actor-social as actSocial", "actSocial.StashActorSocial_social_id_ref = skill.StashSocial_id");
-			$this->db->where("actSocial.StashActorSocial_actor_id_ref", $ref);
-			$query = $this->db->get();
-			$result = [];
-			$langs = $query->result('array');
-			foreach ($langs as $key => $lng) {
-				$result[] = $lng['StashSocial_title'];
-			}
 
-			return $result;
-		}
-            public function getSocialId($data = ''){
-			$data = explode(",", $data);
-			$ids = [];
-			foreach ($data as $key => $lang) {
-				if($id = $this->ifInSocial(trim($lang))){
-					$ids[] = $id;
-				}else{
-					$ids[] = $this->insertSocial(trim($lang));
-				}
-			}
-
-			return $ids;
-		}
-
-		public function ifInSocial($value=''){
-			$this->db->where("StashSocial_title", $value);
-			$query = $this->db->get("stash-social");
-			$result = $query->result("array");
-			if(count($result))
-				return $result[0]['StashSocial_id'];
-			else
-				return 0;
-		}
-
-		public function insertSocial($value=''){
-			$data = array("StashSocial_id" => null, "StashSocial_title" => $value, "StashSocial_status" => 1);
-			$this->db->insert("stash-social", $data);
-			return $this->db->insert_id();
-		}
-
-		public function deleteOldSocial($data = []){
-			$this->db->where_not_in("StashActorSocial_Social_id_ref", $data);
-			$this->db->where("StashActorSocial_actor_id_ref", $this->session->userdata("StaSh_User_id"));
-			$this->db->delete("stash-actor-social");
-		}
-
-		public function getActorSocialIds($value=''){
-			$this->db->where("StashActorSocial_actor_id_ref", $this->session->userdata("StaSh_User_id"));
-			$query = $this->db->get("stash-actor-social");
-			$langs = $query->result("array");
-			$result = [];
-			foreach ($langs as $key => $value) {
-				$result[] = $value['StashActorSocial_social_id_ref'];
-			}
-			return $result;
-		}
-
-		public function updateActorSocial($data = []){
-			$d = array();
-			foreach ($data as $key => $value) {
-				$d[] = array(
-						"StashActorSocial_social_id_ref" => $value, 
-						"StashActorSocial_actor_id_ref" => $this->session->userdata("StaSh_User_id"),
-						"StashActorSocial_time" => time(),
-						"StashActorSocial_id" => null
-					);
-			}
-
-			return $this->db->insert_batch("stash-actor-social", $d);
-		}
 	}
 
 ?>
