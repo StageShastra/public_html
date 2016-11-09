@@ -506,7 +506,7 @@ for (j = 0; j < acc2.length; j++) {
                         <div id="success" class="hidden">
                             <span class="firstcolor title"> Thank You! </span>
                             <br>
-                            <span> We will get back to you soon! </span>
+                            <span> We'll get back to you soon! </span>
                         </div>
                         <div class="row">
                             <div class="form-group col-xs-12">
