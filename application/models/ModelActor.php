@@ -46,11 +46,12 @@
 		}
 		
 		public function getActorProjects($ref = 0){
-			$this->db->select("*");
+			$this->db->distinct('StashProject_name');
+            $this->db->select('*');
 			$this->db->from("stash-project as project");
 			$this->db->join("stash-actor-project as actProject", "actProject.StashActorProject_project_id_ref = project.StashProject_id");
 			$this->db->where("actProject.StashActorProject_actor_id_ref", $ref);
-			$query = $this->db->get();
+            $query = $this->db->get();
 			$result = [];
 			$langs = $query->result('array');
 			foreach ($langs as $key => $lng) {
