@@ -9,6 +9,9 @@
 			$result['StashActor_language'] = $this->getActorLanguage($ref);
 			$result['StashActor_skills'] = $this->getActorSkills($ref);
 			$result['StashActor_projects'] = $this->getActorProjects($ref);
+            $result['StashActor_fb'] = $this->getActorFacebook($ref);
+            $result['StashActor_tw'] = $this->getActorTwitter($ref);
+            $result['StashActor_ins'] = $this->getActorInsta($ref);
 			return $result;
 		}
 
@@ -291,6 +294,8 @@
 			return $this->db->update("stash-actor-training", $data);
 		}
 
+        
+
 		public function updateActorImages($images = []){
 			$this->db->where("StashActor_actor_id_ref", $this->session->userdata("StaSh_User_id"));
 			return $this->db->update("stash-actor", array("StashActor_images" => json_encode($images)));
@@ -375,7 +380,27 @@
 			$query = $this->db->get("stash-users");
 			return $query->first_row('array');
 		}
-
+        public function getActorFacebook($ref){
+            $this->db->select("stashActor_fb");
+			$this->db->from("stash-actor");
+			$this->db->where("StashActor_actor_id_ref", $this->session->userdata("StaSh_User_id"));
+			$query = $this->db->get();
+	    	return $query;
+        }
+        public function getActorTwitter($ref){
+            $this->db->select("stashActor_tw");
+			$this->db->from("stash-actor");
+			$this->db->where("StashActor_actor_id_ref", $this->session->userdata("StaSh_User_id"));
+			$query = $this->db->get();
+	    	return $query;
+        }
+        public function getActorInsta($ref){
+            $this->db->select("stashActor_ins");
+			$this->db->from("stash-actor");
+			$this->db->where("StashActor_actor_id_ref", $this->session->userdata("StaSh_User_id"));
+			$query = $this->db->get();
+	    	return $query;
+        }
 	}
 
 ?>

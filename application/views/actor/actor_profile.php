@@ -790,22 +790,13 @@ textarea{
                         </div>
                         <div class="row">
                             <br>
-                             <div class="category_heading">SOCIAL
+                             <div class="category_heading">SOCIALS
                             </div>
-                                 <span id="actor_social" class="info dark-gray">
-                                <?php
-                                    $skills = $actorProfile['StashActor_social'];
-                                    foreach ($social as $key => $skill) {
-                                ?>
-                                <div class="col-sm-6 col-xs-4 col-lg-4 col-md-6 vertical-padded ellipsis">
-                                    <button type="button" class="btn skills_tag"  aria-label="Left Align" >
-                                        <font class="taga-text"><?php $skill_=ucfirst(trim($social)); if(strlen($social_)>7) {echo $social_;} else{echo $social_;}?></font>
-                                    </button>
-                                </div>  
-                                <?php
-                                    }
-                                ?>
-                            </span>         
+                             <div id="actor_socials">
+                             <a href="<?='http://facebook.com/' . $actorProfile['StashActor_twitter'] ?>" id="actor_username_txt" target="_blank"><img src="<?= IMG ?>/fb_social.png" class="brands "/></a>
+                            <a href="<?='http://twitter.com/' . $actorProfile['StashActor_twitter'] ?>" id="actor_username_txt" target="_blank"><img src="<?= IMG ?>/twitter_social.png" class="brands "/></a>
+                            <a href="<?='http://instagram.com/' . $actorProfile['StashActor_insta'] ?>" id="actor_username_txt" target="_blank"><img src="<?= IMG ?>/insta_social.png" class="brands "/></a>
+                       </div>         
                         </div>
                     </div>
                     <div class="col-sm-8 left" id="second_column_actor">

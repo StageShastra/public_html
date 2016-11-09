@@ -1279,38 +1279,34 @@ textarea{
                         <div class="row">
                             <br>
                              <div class="category_heading">SOCIAL
-                               <span class="glyphicon glyphicon-pencil  edit-button pull-right toggleEdit" data-unhide-id="#skills_edit" data-hide-id="#actor_skills" aria-hidden="true"></span>
+                               <span class="glyphicon glyphicon-pencil  edit-button pull-right toggleEdit" data-unhide-id="#social_edit" data-hide-id="#actor_socials" aria-hidden="true"></span>
                             </div>
-                                 <span id="actor_social" class="info dark-gray">
-                                <?php
-                                    $social = $actorProfile['StashActor_social'];
-                                    foreach ($social as $key => $skill) {
-                                ?>
-                                <div class="col-sm-6 col-xs-4 col-lg-4 col-md-6 vertical-padded ellipsis">
-                                    <button type="button" class="btn skills_tag"  aria-label="Left Align" >
-                                        <font class="taga-text"><?php $skill_=ucfirst(trim($skill)); if(strlen($skill_)>7) {echo $skill_;} else{echo $skill_;}?></font>
-                                    </button>
-                                </div>  
-                                <?php
-                                    }
-                                ?>
-
-                            </span>
-                            <span id="skills_edit" class="left hidden ">
-                                 <input type="text" class="form-control login" value="<?= implode(",", $actorProfile['StashActor_social']).", " ?>" data-role="tagsinput" id="skills" name="social" placeholder= "Skills:(comma separated)" />
-                                 <br><font class="sortbuttons">
+                            <div id="actor_socials">
+                       <br><a href="<?='http://facebook.com/' . $actorProfile['StashActor_fb'] ?>" id="actor_username_txt" target="_blank"><img src="<?= IMG ?>/fb_social.png" class="brands "/></a>
+                            <a href="<?='http://twitter.com/' . $actorProfile['StashActor_twitter'] ?>" id="actor_username_txt" target="_blank"><img src="<?= IMG ?>/twitter_social.png" class="brands "/></a>
+                            <a href="<?='http://instagram.com/' . $actorProfile['StashActor_insta'] ?>" id="actor_username_txt" target="_blank"><img src="<?= IMG ?>/insta_social.png" class="brands "/></a>
+                       </div>
+                        </div>
+                            <div id="social_edit" class="hidden">
+                            <div class="category_heading no_left_margin"></div>
+                            
+                            <div id="soc" class="row no_left_margin">
+                                <br><p>Facebook:</p> <input type="text" class="editwhite edit_inputs_basics col-sm-6" style="padding:10px;" name="fb" value="<?= $actorProfile['StashActor_fb'] ?>" id="facebook"/>
+                                <br><p> Twitter:</p><input type="text" class="editwhite edit_inputs_basics col-sm-6" style="padding:10px;" name="twitter" value="<?= $actorProfile["StashActor_twitter"] ?>" id="twitter"/> 
+                                <br><p> Instagram:</p><input type="text" class="editwhite edit_inputs_basics col-sm-6" style="padding:10px;" name="ins" value="<?= $actorProfile["StashActor_insta"] ?>"  id="insta"/>
+                            </div>
+                            
+                            <font class="sortbuttons">
                                     <button type="button" class="btn submit-btn firstcolor center tick updateDataField"
-                                            data-input-names="social"
+                                            data-input-names="fb,twitter,ins"
                                             data-request="EditSocial"
                                             data-hide-id="#social_edit" 
-                                            data-unhide-id="#actor_social">
-                                        Save
+                                            data-unhide-id="#actor_socials">
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                    Save
                                     </button>
-                                </font>
-                            </span>
-                                
+                            </font>
                         </div>
-
                     </div>
                     <!-- Added Apoorv-->
 

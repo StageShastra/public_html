@@ -268,6 +268,7 @@
 						break;
                     case "EditSocial":
                         $this->editSocial($data);
+                        break;
 					case "EditSkills":
 						$this->editSkill($data);
 						break;
@@ -579,6 +580,19 @@
 				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
+        public function editSocial($data =[]){
+            $this->load->model("ModelActor");
+            $d = array(
+						"StashActor_fb" => $data['fb'],
+						"StashActor_twitter" => $data['twitter'],
+						"StashActor_insta" => $data['ins'],
+					);
+			if($this->ModelActor->updateActorProfile($d)){
+				$this->response(true, Ac_Ajx_GenSucc);
+			}else{
+				$this->response(false, Ac_Ajx_GenFailed);
+			}
+        }
 		public function removeImage($data = []){
 			$this->load->model("ModelActor");
 			$images = $this->ModelActor->getActorImages($this->session->userdata("StaSh_User_id"));
@@ -901,22 +915,7 @@
 				$this->response(false, Ac_Ajx_GenFailed);
 			}
 		}
-		public function editSocial($data = []){
-			$this->load->model("ModelActor");
-			$langs = $this->ModelActor->getSocialId($data['Social']);
-			$this->ModelActor->deleteOldSocial($langs);
-			$actorLang = $this->ModelActor->getActorSocialIds();
-			$newLang = array_diff($langs, $actorLang);
-			if(count($newLang)){
-				if($this->ModelActor->updateActorSocial($newLang)){
-					$this->response(true, Ac_Ajx_GenSucc);
-				}else{
-					$this->response(false, Ac_Ajx_GenFailed);
-				}
-			}else{
-				$this->response(true, Ac_Ajx_GenSucc);
-			}
-		}
+		
         public function editActorName($data = []){
 			$this->load->model("ModelActor");
 			$name = trim($data['name']);
@@ -928,6 +927,7 @@
 			}else{
 				$this->response(false, Ac_Ajx_GenFailed);
 			}
-		}
+		}                
+        
 	}
 ?>
