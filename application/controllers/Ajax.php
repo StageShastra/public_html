@@ -871,8 +871,10 @@
 		public function updateActorPastExperience($data = []){
 			$ref = $data['actor_id'];
 			$data = array(
-						'StashActor_six_months_experience' => $data['actor_recent_exp'],
-						'StashActor_three_years_experience' => $data['actor_past_exp'],
+						'StashActor_tvc_experience' => $data['actor_tvc_exp'],
+						'StashActor_series_experience' => $data['actor_series_exp'],
+						'StashActor_film_experience' => $data['actor_film_exp'],
+						'StashActor_theatre_experience' => $data['actor_theatre_exp'],
 						'StashActor_dob' => strtotime($data['actor_dob']),
 						'StashActor_height' => $data['actor_height'],
 						'StashActor_gender' => $data['actor_sex'],
@@ -1063,8 +1065,6 @@
 						'StashActor_zip' => '',
 						'StashActor_ticket_status' => 0,
 						'StashActor_profile_completion_stage' => 1,
-						'StashActor_six_months_experience' =>'',
-						'StashActor_three_years_experience' =>'',
 						'StashActor_last_update' => time(),
 						'StashActor_last_ip' => $this->input->ip_address()
 					);

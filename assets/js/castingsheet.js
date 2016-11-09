@@ -184,8 +184,10 @@ function get_actor_details()
 				{	
 					actor=JSON.parse(response.data);
 					$("#actor_name_ea").html(actor.StashActor_name);
-					$("#3_years_experience").val(actor.StashActor_three_years_experience);
-					$("#6_months_experience").val(actor.StashActor_six_months_experience);
+					$("#tvc_experience").val(actor.StashActor_tvc_experience);
+					$("#series_experience").val(actor.StashActor_series_experience);
+					$("#film_experience").val(actor.StashActor_film_experience);
+					$("#theatre_experience").val(actor.StashActor_theatre_experience);
 					$("#actor_feet").val(Math.floor(actor.StashActor_height/30.48));
 					$("#actor_inches").val(Math.round((actor.StashActor_height%30.48)/2.54));
 					var utcSeconds = actor.StashActor_dob;
@@ -320,8 +322,10 @@ function submit_answers()
 		question_answer_obj.answer = $("#question_"+i).val();
 		actor.questions_answers[i] = question_answer_obj;
 	}
-	actor.last_three_years_exp=$("#3_years_experience").val();
-	actor.last_six_months_exp=$("#6_months_experience").val();
+	actor.tvc_exp=$("#tvc_experience").val();
+	actor.series_exp=$("#series_experience").val();
+	actor.film_exp=$("#film_experience").val();
+	actor.theatre_exp=$("#theatre_experience").val();
 	actor.location_city=$("#actor_city").val();
 
 	//validation check 
@@ -359,8 +363,10 @@ function update_actor_experience()
 	data = {request: "updateActorPastExperience",
 	 		data: JSON.stringify({
 	 								actor_id: actor_id,
-	 								actor_recent_exp: actor.last_six_months_exp,
-	 								actor_past_exp:actor.last_three_years_exp,
+	 								actor_tvc_exp: actor.tvc_exp,
+	 								actor_series_exp:actor.series_exp,
+	 								actor_film_exp: actor.film_exp,
+	 								actor_theatre_exp:actor.theatre_exp,
 	 								actor_dob:actor_dob,
 	 								actor_sex:actor_sex,
 	 								actor_height:actor_height,
@@ -441,7 +447,6 @@ function insert_role_actor(){
 			url: url,
 			type: type,
 			data: data,
-			async:false,
 			success: function(response){
 				if(response.status==true)
 				{	
@@ -500,10 +505,10 @@ function insert_actor_scenes(index,actor_id)
 		});
 	}
 }
-function insert_project_actor(){
+function insert_project_actor(id){
 
-	var actor_id=actor.StashActor_actor_id_ref;
-	
+	var actor_id=id;
+	console.log("here it id"+ actor_id);
 		data = {request: "insertActorProject",
 	 		data: JSON.stringify({
 	 								actor_id: actor_id,
@@ -583,6 +588,7 @@ function submit_new_actor_answers(){
 				if(response)
 				{	
 					actor.StashActor_actor_id_ref=response.data;
+					console.log(response);
 					actor.StashActor_name=actor_name;
 					actor.last_six_months_exp = $("#6_months_experience").val();
 					actor.last_three_years_exp = $("#3_years_experience").val();
@@ -636,7 +642,7 @@ function hasnotfilled()
 			insert_actor_answers(0,actor);
 		}
 		insert_role_actor();
-		insert_project_actor();
+		insert_project_actor(actor.StashActor_actor_id_ref);
 		$("body").scrollTop(0);
 		show_email_form();
 		//$("#contact").addClass("hidden");

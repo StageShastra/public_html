@@ -167,7 +167,17 @@ function populate_attendees()
 				{	
 					attendees=JSON.parse(response.data);
 					change_loader_text(attendees.length +" actors fetched...");
-					get_actors_answers(0);
+					if(attendees.length==0)
+					{
+						$("#loader_gif").addClass("hidden");	
+						$(".loader_text").addClass("bigger_text");
+                    	change_loader_text("no actor found. please come back later....");
+					}
+					else
+					{
+						get_actors_answers(0);	
+					}
+					
 					
 				}
 				else
@@ -869,9 +879,9 @@ function _calculateAge(birthday) { // birthday is a date
 }
 function show_loader_gif(id){
 	var text = '"for good things, we wait must!"<br><span><i>- Master Yoda</i></span>';
-	var content = '<div class="loader"><img src="'+base+'assets/img/spinner.gif" height="300"/><br><span class="quote" style="font-family: "Roboto";font-weight: 800;">'+text+'</span><br><span class="loader_text">'+text+'</span></div>';
+	var content = '<div class="loader"><img id="loader_gif" src="'+base+'assets/img/spinner.gif" height="300"/><br><span class="quote" style="font-family: "Roboto";font-weight: 800;">'+text+'</span><br><div class="loader_text">'+text+'</div></div>';
 	$(id).html(content);
-	console.log(content);
+	//console.log(content);
 }
 function change_loader_text(text)
 {	

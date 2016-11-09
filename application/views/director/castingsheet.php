@@ -735,8 +735,8 @@ button[disabled], html input[disabled] {
                     <h1 class="heading"> CASTING SHEET</h1>
                     <h3 class="project_name"> PROJECT : <?= $project["StashProject_name"]; ?></h3>
                     <h5 class="shoot_dates"><span style="">Shoot starts from  </span><span class="shoot_begins"></span> and ends on <span class="shoot_ends"></span> </h5>
-                    <h5 class="shoot_dates">Enter your email/phone</h5>
-                    <input type="text" id="contact" class="input_cs" name="contact" placeholder="Enter your email/phone"/><button type="button" onclick="get_actor_details()" class="go_button">Go</button>
+                    <h5 class="shoot_dates">Enter your email or phone</h5>
+                    <input type="text" id="contact" class="input_cs" name="contact" placeholder="Enter your email or phone"/><button type="button" onclick="get_actor_details()" class="go_button">Go</button>
                 </div>
               </div>
               <div class="col-sm-10 hidden" id="casting_sheet_form"> 
@@ -872,21 +872,38 @@ button[disabled], html input[disabled] {
                         </div>
                         <div class="row">
                           <div class="label_cs col-sm-6">
-                            Past 6 months experience  
+                            TVC Experience
                           </div>
                           <div class="col-sm-6">
-                            <textarea type="text" id="6_months_experience" class="input_cs textarea " name="6_months_experience" placeholder="Enter your recent experiences" /></textarea>
+                            <textarea type="text" id="tvc_experience" class="input_cs textarea " name="tvc_experience" placeholder="Enter your TVC experiences. Please add names." /></textarea>
                           </div> 
                         </div>
                         <div class="row">
                           <div class="label_cs col-sm-6">
-                            Last 3 years experience  
+                            TV/Web Series Experience
                           </div>
                           <div class="col-sm-6">
-                            <textarea type="text" id="3_years_experience" class="input_cs textarea " name="3_years_experience" placeholder="Enter your last 3 years experiences" /></textarea>
+                            <textarea type="text" id="series_experience" class="input_cs textarea " name="series_experience" placeholder="Enter your TV/Web Series experiences. Please add names of the TV/Web Series" /></textarea>
+                          </div> 
+                        </div>
+                        <div class="row">
+                          <div class="label_cs col-sm-6">
+                            Film Experience
                           </div>
-                        </div>  
+                          <div class="col-sm-6">
+                            <textarea type="text" id="film_experience" class="input_cs textarea " name="film_experience" placeholder="Enter summary about your experience in films. Please be a bit specific about recent work." /></textarea>
+                          </div>
+                        </div> 
+                        <div class="row">
+                          <div class="label_cs col-sm-6">
+                            Theatre Experience
+                          </div>
+                          <div class="col-sm-6">
+                            <textarea type="text" id="theatre_experience" class="input_cs textarea " name="theatre_experience" placeholder="Enter your theatre experiences" /></textarea>
+                          </div> 
+                        </div> 
                       </div>
+                      
                       <button type="button" id="save_actor_response" onclick="submit_answers()" class="go_button center" style="margin-top:30px; margin-bottom:30px;" disabled >Submit</button>
 
                     </div>
