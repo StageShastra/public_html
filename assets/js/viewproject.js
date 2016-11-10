@@ -88,7 +88,7 @@ function populate_roles()
 					for(var i=0;i<roles.length;i++)
 					{
 						
-						pre_html+='<span class="role-tab" data-name='+roles[i].StashRoles_id+' data-state="active">'+roles[i].StashRoles_role+'</span>';
+						pre_html+='<span class="role-tab" data-name='+roles[i].StashRoles_id+' data-state="active">'+roles[i].StashRoles_role+' <span class="badge"> 5 </span></span>';
 				                  
 					}
 
@@ -356,17 +356,17 @@ function populate_table()
 
     change_loader_text("painting the big picture...");        
 	var dyn_html='<thead>'
-             +' <th class="star"><i class="fa fa-star-o" id="shortlist_all" aria-hidden="true" onclick="show_shortlisted()"></i></th>'
+             +' <th class="star"><i class="fa fa-star-o" id="shortlist_all" data-tooltip="Click to sort." aria-hidden="true" onclick="show_shortlisted()"></i></th>'
              +' <th>Profile</th>'
-             +' <th data-sort="string">Name <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>'
-             +' <th data-sort="string">Role <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>'
+             +' <th data-sort="string" style="cursor:pointer;" data-tooltip="Click to sort.">Name <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>'
+             +' <th data-sort="string"  style="cursor:pointer;" data-tooltip="Click to sort.">Role <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>'
              +'	<th>Notes</th>';
              dyn_html+=' <th>Intro</th>';
              for(i=0;i<max_scenes;i++)
              {
              	dyn_html+='<th>Scene '+ (i+1) +'</th>';
              }
-             dyn_html+=' <th data-sort="string">Date <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th><th data-sort="string">City <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>'
+             dyn_html+=' <th data-sort="string" style="cursor:pointer;" data-tooltip="Click to sort.">Date <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th><th data-sort="string" data-tooltip="Click to sort." style="cursor:pointer;">City <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>'
              +'<th><span class="fa fa-newspaper-o" title="Casting Sheet response"></span></th>';
              dyn_html+=' <th><span class="fa fa-trash-o" title="Delete record"></span></th>';
              dyn_html+='</thead>';
@@ -510,10 +510,11 @@ function open_casting_response(id)
 	 	{
 	 		var question_a=questions_obj.question.answer.StashAnswers_answer;
 
-		 prehtml+='<span>Q. '+question_q+'</span>?'
-                  +'<br>'
-                  +'A. '+question_a+'<br>';
+		 prehtml+='<div class="col-sm-5 firstcolor">'+question_q+'</div>'
+        
+                  +'<div class="col-sm-7">'+question_a+'</div>';
         }
+
 	}
 	$(".m_questions").html(prehtml);
 

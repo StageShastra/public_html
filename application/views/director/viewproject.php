@@ -575,20 +575,8 @@ button[disabled], html input[disabled] {
   color: #777;
   font-weight: 600;
 }
-.shoot_begins{
-  padding: 2px 4px;
-  background: #ff3b49;
-  color: white;
-  border-radius: 3px;
-  font-size:11px;
-}
-.shoot_ends{
-  padding: 2px 4px;
-  background: #ffb600;
-  border-radius: 3px;
-  font-size:11px;
-  color: white;
-}
+
+
 .textarea{
   width: 240px !important;
   height: 72px;
@@ -723,12 +711,17 @@ button[disabled], html input[disabled] {
   font-weight: 500;
   box-shadow: 2px 2px 10px gray;
   margin-right: 10px;
-  transition: all 500ms;
+  transition-duration: 0.1s;
   float: left;
   margin-bottom: 5px;
   cursor: pointer;
 }
 
+.role-tab:hover{
+  transform: scale(1.05);
+  margin: 0px 15px 0px 5px;
+  transition-duration: 0.1s;
+}
 .inactive-tab{
   opacity: 0.5;
 }
@@ -736,12 +729,51 @@ button[disabled], html input[disabled] {
 .public_disabled{
   cursor: not-allowed;
 }
+
 .bigger_text{
   font-size: 18px;
   color: #444;
   position: relative;
   top: -70px;
 }
+
+
+.scrollable{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    min-height: 140px;
+    max-height: 200px;
+    margin-bottom: 10px;
+}
+
+hr{
+    margin-top: 5px !important;
+    margin-bottom: 0px !important;
+    border: 0 !important;
+    border-top: 1px solid #eee !important;
+}
+
+.projectheaderlabel{
+  font-size: 12px;
+  color: #777;
+
+  text-transform: uppercase;
+  vertical-align: middle;
+  padding-top: 2px;
+  margin-bottom: 5px;
+}
+
+.projectheaderdata{
+  font-size: 16px;
+  text-transform: uppercase;
+  vertical-align: bottom;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+
+
+
               </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -807,16 +839,36 @@ button[disabled], html input[disabled] {
            <!-- contact modal toggle -->
             <div class="container-fluid" id="create_project_home">
                
-              <div class="col-sm-12" id="table">
+              <div class="" id="table">
                 <div class="nocur" style="cursor:default">
-                <div class="form-title-row">
-                    <h3 class="project_name"> Project:<b style="text-transform: uppercase;"> <?= $project["StashProject_name"]; ?></b></h3>
-                    <h4 class="shoot_dates"><span style="">SHOOT DATES:  </span><span class="shoot_begins"></span> to <span class="shoot_ends"></span> </h4>
-                    <button type="button" class="go_button" onclick="window.location.assign('../castingsheet/<?= $project["StashProject_id"]; ?>')">Open Casting Sheet</button>
-                </div></div>
-                <div class="role-tabs hidden">
+                
+                <div class="col-sm-5">
+                      <div class="col-sm-3 projectheaderlabel">Project</div>
+                      <div class="col-sm-9 projectheaderdata"> <?= $project["StashProject_name"]; ?></div></span>
+                      <div class="col-sm-3 projectheaderlabel">Shoot Dates</div>
+                      <div class="col-sm-9 projectheaderdata"><span class="shoot_begins"></span> - <span class="shoot_ends"></span> </div>
+                      <div class="col-sm-12 center">
+                        <button type="button" target="_blank" class="go_button submit-btn" onclick="window.location.assign('../castingsheet/<?= $project["StashProject_id"]; ?>')">Open Casting Sheet</button>
+                        <button type="button" class="go_button hidden" style="opacity: 0.7;" target="_blank">Edit Project </button>
+                      </div>
+                </div>
+
+      
+                <div class="col-sm-5">
+
+                </div>
+                <div class="col-sm-2">
+
+                </div>
+</div></div>
+                <br>
+                <div class="col-sm-12">
+
+                <span class="projectheaderlabel">Roles:</span><div class="role-tabs hidden">
                   
                 </div>
+                </div>
+                <br>
                 <div id="loader"> </div>
                 <table class="table table-striped actors">
                 
@@ -889,27 +941,62 @@ button[disabled], html input[disabled] {
                       </div>
                     
                     
-                      <div class="row">
-                       <div class="m_questions col-sm-12">
+                      <div class="row m_questions">
                        
-                       </div>
                       </div>
+                      <div class="row">
+                        <div class="col-sm-12 firstcolor">
+                             <b>Experience:</b> 
+                        </div>                     
+                      </div>
+                      
+                      <div class="scrollable col-sm-12">
                       <div class="row">
                         <div class="col-sm-5 firstcolor">
-                            Past 6 months experience: 
+                            TVC: 
                         </div>
                         <div class="col-sm-7">
-                            <span id="m_actor_6_experience"></span>
+                            <span id="m_actor_tvc"></span>
                         </div>
                       </div>
-                    <div class="row"> 
-                     <div class="col-sm-5 firstcolor">
-                      Past 3 years experience: 
-                     </div>
-                     <div class="col-sm-7">
-                      <span id="m_actor_3_experience"></span>
-                     </div>
-                    </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-5 firstcolor">
+                            TV: 
+                        </div>
+                        <div class="col-sm-7">
+                            <span id="m_actor_tv"></span>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-5 firstcolor">
+                            Web: 
+                        </div>
+                        <div class="col-sm-7">
+                            <span id="m_actor_web"></span>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-5 firstcolor">
+                            Films: 
+                        </div>
+                        <div class="col-sm-7">
+                            <span id="m_actor_films"></span>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-5 firstcolor">
+                            Theatre: 
+                        </div>
+                        <div class="col-sm-7">
+                            <span id="m_actor_theatre"></span>
+                        </div>
+                      </div>
+                      </div>
+                    
                     </div>
                   <div class="modal-footer center">
                     <!--<button type="button" class="btn submit-btn" onclick="window.open('http://i.imgur.com/odnRdn3.gif', '_blank')">Open Profile</button>-->
@@ -924,6 +1011,9 @@ button[disabled], html input[disabled] {
       var project_shoot_begins = <?= $project["StashProject_shoot_begins"]; ?>;
       var project_shoot_ends = <?= $project["StashProject_shoot_ends"]; ?>;
       var isPublic  = <?= $isPublic; ?>;
+      function showcomingsoon(){
+        $("#comingsoon").toggle("hidden");
+      }
       </script>
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php
