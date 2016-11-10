@@ -701,11 +701,10 @@ button[disabled], html input[disabled] {
   margin-top: 20px;
 }
 .role-tab{
-  padding: 3px 9px;
-  border: 2px solid #FF5722;
+  padding: 2px 6px;
+  border: 0px solid #FFC107;
   border-radius: 4px;
-  background: #ff3b49;
-  color: white;
+  background: black;
   font-size: 13px;
   font-family: "Roboto";
   font-weight: 500;
@@ -715,6 +714,8 @@ button[disabled], html input[disabled] {
   float: left;
   margin-bottom: 5px;
   cursor: pointer;
+  color: #FFC107;
+  /*background-image: linear-gradient(45deg, #D3263B 0%, #BE225A 41%, #A81E7B 100%);*/
 }
 
 .role-tab:hover{
@@ -724,6 +725,7 @@ button[disabled], html input[disabled] {
 }
 .inactive-tab{
   opacity: 0.5;
+  color: gray;
 }
 
 .public_disabled{
@@ -843,12 +845,13 @@ hr{
                 <div class="nocur" style="cursor:default">
                 
                 <div class="col-sm-5">
-                      <div class="col-sm-3 projectheaderlabel">Project</div>
+                      <div class="col-sm-3 projectheaderlabel">Project:</div>
                       <div class="col-sm-9 projectheaderdata"> <?= $project["StashProject_name"]; ?></div></span>
-                      <div class="col-sm-3 projectheaderlabel">Shoot Dates</div>
+                      <div class="col-sm-3 projectheaderlabel">Shoot Dates:</div>
                       <div class="col-sm-9 projectheaderdata"><span class="shoot_begins"></span> - <span class="shoot_ends"></span> </div>
-                      <div class="col-sm-12 center">
-                        <button type="button" target="_blank" class="go_button submit-btn" onclick="window.location.assign('../castingsheet/<?= $project["StashProject_id"]; ?>')">Open Casting Sheet</button>
+                      <div class="col-sm-12">
+                        <button class="go_button submit-btn" onclick="window.open('../castingsheet/<?= $project["StashProject_id"]; ?>',
+                      '_blank')">Open Casting Sheet</button>
                         <button type="button" class="go_button hidden" style="opacity: 0.7;" target="_blank">Edit Project </button>
                       </div>
                 </div>
@@ -863,11 +866,17 @@ hr{
 </div></div>
                 <br>
                 <div class="col-sm-12">
+                  <div class="col-sm-12">
+                    <span class="projectheaderlabel">Audition Dates:</span><div class="role-tabs date-tabs hidden"></div>
+                  </div>
+                </div>
 
-                <span class="projectheaderlabel">Roles:</span><div class="role-tabs hidden">
-                  
+                <div class="col-sm-12">
+                  <div class="col-sm-12">
+                    <span class="projectheaderlabel">Roles:</span><div class="role-tabs hidden"></div>
+                  </div>
                 </div>
-                </div>
+
                 <br>
                 <div id="loader"> </div>
                 <table class="table table-striped actors">
