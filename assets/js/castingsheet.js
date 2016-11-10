@@ -1,4 +1,3 @@
-
 //list of variables
 var project_id; //global variable for projectid
 var roles=[]; //array to hold details of the roles
@@ -22,6 +21,12 @@ $(document).ready(function(){
 			//console.log(hide, unhide);
 
 		});
+	$('#contact').keyup(function(e){
+	    if(e.keyCode == 13)
+	    {
+	        get_actor_details();
+	    }
+	});
 	$.dobPicker({
 					daySelector: '#dobday', /* Required */
 					monthSelector: '#dobmonth', /* Required */
@@ -134,16 +139,24 @@ function populate_attendees()
 				if(response.status==true)
 				{	
 					attendees=JSON.parse(response.data);
-					for(i=0;i<attendees.length;i++)
+					if(attendees.length>0)
 					{
-						attendees_names[i]=attendees[i].StashActor_name;
-						append_attendees(attendees_names[i]);
-						$('#loader_atten').fadeOut('fast');
+						for(i=0;i<attendees.length;i++)
+						{
+							attendees_names[i]=attendees[i].StashActor_name;
+							append_attendees(attendees_names[i]);
+							$('#loader_atten').fadeOut('fast');
+						}
+					}
+					else
+					{
+						$('#loader_atten').html('<span class="loader_atten_text">No actor has auditioned yet...</span>');
+						console.log("no actor found. Please proceed");	
 					}
 				}
 				else
 				{
-					console.log("no actor found. Please proceed");
+					
 				}
 
 			}
@@ -186,6 +199,7 @@ function get_actor_details()
 					$("#actor_name_ea").html(actor.StashActor_name);
 					$("#tvc_experience").val(actor.StashActor_tvc_experience);
 					$("#series_experience").val(actor.StashActor_series_experience);
+					$("#web_experience").val(actor.StashActor_web_experience);
 					$("#film_experience").val(actor.StashActor_film_experience);
 					$("#theatre_experience").val(actor.StashActor_theatre_experience);
 					$("#actor_feet").val(Math.floor(actor.StashActor_height/30.48));
@@ -326,6 +340,7 @@ function submit_answers()
 	actor.series_exp=$("#series_experience").val();
 	actor.film_exp=$("#film_experience").val();
 	actor.theatre_exp=$("#theatre_experience").val();
+	actor.web_exp=$("#web_experience").val();
 	actor.location_city=$("#actor_city").val();
 
 	//validation check 
@@ -367,6 +382,7 @@ function update_actor_experience()
 	 								actor_series_exp:actor.series_exp,
 	 								actor_film_exp: actor.film_exp,
 	 								actor_theatre_exp:actor.theatre_exp,
+	 								actor_web_exp:actor.web_exp,
 	 								actor_dob:actor_dob,
 	 								actor_sex:actor_sex,
 	 								actor_height:actor_height,

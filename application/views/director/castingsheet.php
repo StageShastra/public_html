@@ -1,6 +1,6 @@
 <?php
   include 'includes/head.php';
- ?>
+?>
 
  <link rel="stylesheet" type="text/css" href="<?= CSS ?>/selectize.css" />
 
@@ -597,7 +597,7 @@ button[disabled], html input[disabled] {
 }
 .textarea{
   width: 240px !important;
-  height: 72px;
+  height: 45px;
 }
 .textarea{
   margin : 0px 5px 5px 0px !important;
@@ -662,7 +662,15 @@ button[disabled], html input[disabled] {
   margin-left: 0px;
   margin-right: 0px;
 }
-              </style>
+.loader_atten_text{
+    text-transform: lowercase;
+    font-family: "Roboto";
+    text-align: center;
+    margin-top: 53px;
+  }    
+  .loader_atten{
+    text-align: center;
+    }          </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -824,6 +832,7 @@ button[disabled], html input[disabled] {
                           </div>
                           <div class="col-sm-6">
                             <select id="actor_city" class="input_cs" name="actor_city" placeholder="Select City of Audition" />
+                              <option disabled selected value> Select a Role</option>
                               <option value="Delhi">Delhi</option>
                               <option value="Mumbai">Mumbai</option>
                               <option value="Chandigarh">Chandigarh</option>
@@ -870,42 +879,54 @@ button[disabled], html input[disabled] {
                             </select>
                           </div>
                         </div>
-                        
                         <div class="row">
                           <div class="label_cs col-sm-6">
-                            TVC Experience
+                            <u>Experience</u>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="label_cs col-sm-6">
+                            TVC 
                           </div>
                           <div class="col-sm-6">
-                            <textarea type="text" id="tvc_experience" class="input_cs textarea " name="tvc_experience" placeholder="Enter your TVC experiences. Please add names." /></textarea>
+                            <textarea type="text" id="tvc_experience" class="input_cs textarea " name="tvc_experience" placeholder="e.g. Dettol Swachh Bharat (2015)" /></textarea>
                           </div> 
                         </div>
                         <div class="row">
                           <div class="label_cs col-sm-6">
-                            TV/Web Series Experience
+                            TV
                           </div>
                           <div class="col-sm-6">
-                            <textarea type="text" id="series_experience" class="input_cs textarea " name="series_experience" placeholder="Enter your TV/Web Series experiences. Please add names of the TV/Web Series" /></textarea>
+                            <textarea type="text" id="series_experience" class="input_cs textarea " name="series_experience" placeholder="e.g. Sasural Simar Ka 2nd lead(2014) " /></textarea>
                           </div> 
                         </div>
                         <div class="row">
                           <div class="label_cs col-sm-6">
-                            Film Experience
+                            Web
                           </div>
                           <div class="col-sm-6">
-                            <textarea type="text" id="film_experience" class="input_cs textarea " name="film_experience" placeholder="Enter summary about your experience in films. Please be a bit specific about recent work." /></textarea>
+                            <textarea type="text" id="web_experience" class="input_cs textarea " name="web_experience" placeholder="e.g. TVF Pitchers E01(2015)  " /></textarea>
+                          </div> 
+                        </div>
+                        <div class="row">
+                          <div class="label_cs col-sm-6">
+                            Film 
+                          </div>
+                          <div class="col-sm-6">
+                            <textarea type="text" id="film_experience" class="input_cs textarea " name="film_experience" placeholder="e.g. Queen(2013)" /></textarea>
                           </div>
                         </div> 
                         <div class="row">
                           <div class="label_cs col-sm-6">
-                            Theatre Experience
+                            Theatre
                           </div>
                           <div class="col-sm-6">
-                            <textarea type="text" id="theatre_experience" class="input_cs textarea " name="theatre_experience" placeholder="Enter your theatre experiences" /></textarea>
+                            <textarea type="text" id="theatre_experience" class="input_cs textarea " name="theatre_experience" placeholder="e.g. Hayavadana-Prithvi Theatre(2016)" /></textarea>
                           </div> 
                         </div> 
                       </div>
                       
-                      <button type="button" id="save_actor_response" onclick="submit_answers()" class="go_button center" style="margin-top:30px; margin-bottom:30px;" disabled >Submit</button>
+                      <button type="button" id="save_actor_response" onclick="this.disabled=true;this.value='Submitting...';submit_answers();" class="go_button center" style="margin-top:30px; margin-bottom:30px;" disabled >Submit</button>
 
                     </div>
                 </div>

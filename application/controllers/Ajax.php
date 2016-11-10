@@ -873,6 +873,7 @@
 			$data = array(
 						'StashActor_tvc_experience' => $data['actor_tvc_exp'],
 						'StashActor_series_experience' => $data['actor_series_exp'],
+						'StashActor_web_experience' => $data['actor_web_exp'],
 						'StashActor_film_experience' => $data['actor_film_exp'],
 						'StashActor_theatre_experience' => $data['actor_theatre_exp'],
 						'StashActor_dob' => strtotime($data['actor_dob']),

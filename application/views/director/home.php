@@ -166,7 +166,13 @@
       background: #ff9800 !important;
       color: black !important;
     }
-
+    div.panel {
+      background-color: white;
+      max-height: 90px;
+      overflow-x: scroll;
+      opacity: 1;
+      width: 100%;
+    }
               </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>

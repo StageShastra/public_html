@@ -69,15 +69,17 @@
         font-family: "Roboto","Open Sans";
         font-size: 15px;
       }
-      .profile_image{
+      .pro_pic{
+        float: left;
         height: 75px;
-        width: 75px;
+        margin-right: 10px;
         border-radius: 50%;
-        border: 2px solid white;
+        border: 3px solid #fff;
+        box-shadow: 1px 1px 10px gray;
         transition: all .2s ease-in-out;
-
+        cursor: pointer;
       }
-      .profile_image:hover{
+      .pro_pic:hover{
         transform: scale(1.1);
       }
       thead{
@@ -531,14 +533,7 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
   margin-bottom: 5px;
 
 }
-.pro_pic{
-    float: left;
-    height: 75px;
-    margin-right: 10px;
-    border-radius: 50%;
-    border: 3px solid #fff;
-    box-shadow: 1px 1px 10px gray;
-}
+
 .actor_name_ea{
     vertical-align: middle;
     position: relative;

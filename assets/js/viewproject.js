@@ -172,7 +172,8 @@ function populate_attendees()
 
 						$("#loader_gif").addClass("hidden");	
 						$(".loader_text").addClass("bigger_text");
-                    	change_loader_text("no actor found. please come back later....");
+                    	change_loader_text("no actors here yet...");
+                    	//$(".quote").addClass("hidden");
                     	return;
 					}
 					else
