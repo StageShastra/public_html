@@ -715,7 +715,7 @@ div.img-div{
 	margin-left: 3px;
 	background-color: #fff;
 	border-radius: 2px;
-    color: #ff3b49;
+    color: gray;
     padding: 2px 5px;
 }
 /* Triangle hack to make tooltip look like a speech bubble */
