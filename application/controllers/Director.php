@@ -93,7 +93,7 @@
 			$fields = str_replace('"', '', $fields);
 			$fields = explode(",", rtrim($fields, ","));
 			
-			require('/phpClasses/spreadsheet/php-excel-reader/excel_reader2.php');
+			require('./phpClasses/spreadsheet/php-excel-reader/excel_reader2.php');
 			require('./phpClasses/spreadsheet/SpreadsheetReader.php');
 
 			$Reader = new SpreadsheetReader($file['tmp_name'], $file['name']);
