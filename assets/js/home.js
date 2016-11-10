@@ -1154,7 +1154,7 @@ $(document).ready(function(){
 	}
 	function show_loader(id)
 	{	var text = "conversations are being loaded..."
-		var content = '<div class="loader"><img src="'+base+'/assets/img/spinner.gif" height="300"><br><span class="loader_text">'+text+'</span></div>';
+		var content = '<div class="loader"><img src="'+base+'assets/img/spinner.gif" height="300"><br><span class="loader_text">'+text+'</span></div>';
 		$(id).html(content);
 		console.log(content);
 	}

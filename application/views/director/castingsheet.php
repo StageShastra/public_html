@@ -818,6 +818,18 @@ button[disabled], html input[disabled] {
                             </select>
                           </div>
                         </div>  
+                        <div class="row">
+                          <div class="label_cs col-sm-6">
+                            City
+                          </div>
+                          <div class="col-sm-6">
+                            <select id="actor_city" class="input_cs" name="actor_city" placeholder="Select City of Audition" />
+                              <option value="Delhi">Delhi</option>
+                              <option value="Mumbai">Mumbai</option>
+                              <option value="Chandigarh">Chandigarh</option>
+                            </select>
+                          </div>
+                        </div>
                       </div>
                       <div id="role_based_questions">
 
@@ -858,18 +870,7 @@ button[disabled], html input[disabled] {
                             </select>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="label_cs col-sm-6">
-                            City
-                          </div>
-                          <div class="col-sm-6">
-                            <select id="actor_city" class="input_cs" name="actor_city" placeholder="Select City of Audition" />
-                              <option value="Delhi">Delhi</option>
-                              <option value="Mumbai">Mumbai</option>
-                              <option value="Chandigarh">Chandigarh</option>
-                            </select>
-                          </div>
-                        </div>
+                        
                         <div class="row">
                           <div class="label_cs col-sm-6">
                             TVC Experience

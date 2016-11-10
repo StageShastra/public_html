@@ -169,16 +169,18 @@ function populate_attendees()
 					change_loader_text(attendees.length +" actors fetched...");
 					if(attendees.length==0)
 					{
+
 						$("#loader_gif").addClass("hidden");	
 						$(".loader_text").addClass("bigger_text");
                     	change_loader_text("no actor found. please come back later....");
+                    	return;
 					}
 					else
 					{
 						get_actors_answers(0);	
 					}
 					
-					
+
 				}
 				else
 				{
@@ -363,7 +365,7 @@ function populate_table()
              {
              	dyn_html+='<th>Scene '+ (i+1) +'</th>';
              }
-             dyn_html+=' <th data-sort="string">Date <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>'
+             dyn_html+=' <th data-sort="string">Date <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th><th data-sort="string">City <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>'
              +'<th><span class="fa fa-newspaper-o" title="Casting Sheet response"></span></th>';
              dyn_html+=' <th><span class="fa fa-trash-o" title="Delete record"></span></th>';
              dyn_html+='</thead>';
@@ -392,7 +394,7 @@ function populate_table()
              var aud_date = new Date(0);
 				aud_date.setUTCSeconds(attendees[i].StashRoleActorLink_date_of_audition);
              dyn_html+= video_string+''
-             +'<td>'+aud_date.toDateString()+'</td><td><span class="fa fa-newspaper-o" onclick="open_casting_response('+i+')"></span></td>'
+             +'<td>'+aud_date.toDateString()+'</td><td>'+attendees[i].StashActor_city+'<td><span class="fa fa-newspaper-o" onclick="open_casting_response('+i+')"></span></td>'
              +'<td><span class="fa fa-trash-o" onclick="delete_record_response('+i+')"></span></td>'
              +'</tr>';
 	}
