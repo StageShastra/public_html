@@ -770,7 +770,22 @@ hr{
   margin-bottom: 5px;
 }
 
+div .border-right{
+  border-right: 1px solid #ddd;
+}
 
+div .border-bottom{
+  border-bottom: 1px solid #ddd;
+}
+
+
+.graybackground{
+  background: #eee;
+}
+
+.minheight90>div{
+  min-height: 90px;
+}
 
               </style>
         <!--[if lt IE 8]>
@@ -835,45 +850,70 @@ hr{
           </div>
           
            <!-- contact modal toggle -->
-            <div class="container-fluid" id="create_project_home">
+            <div class="container-fluid graybackground" id="create_project_home">
                
-              <div class="" id="table">
+              <div class="border-bottom" id="table">
                 <div class="nocur" style="cursor:default">
                 
-                <div class="col-sm-5">
-                      <div class="col-sm-3 projectheaderlabel">Project:</div>
-                      <div class="col-sm-9 projectheaderdata"> <?= $project["StashProject_name"]; ?></div></span>
-                      <div class="col-sm-3 projectheaderlabel">Shoot Dates:</div>
-                      <div class="col-sm-9 projectheaderdata"><span class="shoot_begins"></span> - <span class="shoot_ends"></span> </div>
-                      <div class="col-sm-12">
-                        <button class="go_button submit-btn" onclick="window.open('../castingsheet/<?= $project["StashProject_id"]; ?>',
-                      '_blank')">Open Casting Sheet</button>
-                        <button type="button" class="go_button hidden" style="opacity: 0.7;" target="_blank">Edit Project </button>
-                      </div>
-                </div>
+                <div class="row minheight90">
+                  <div class="col-sm-4 border-right">
+                        <div class="col-sm-3 projectheaderlabel">Project</div>
+                        <div class="col-sm-9 projectheaderdata"> <?= $project["StashProject_name"]; ?></div>
+                        <div class="col-sm-12">
+                          <button class="go_button submit-btn" onclick="window.open('../castingsheet/<?= $project["StashProject_id"]; ?>',
+                        '_blank')">Open Casting Sheet</button>
+                          <button type="button" class="go_button hidden" style="opacity: 0.7;" target="_blank">Edit Project </button>
+                        </div>
+                  </div>
 
-      
-                <div class="col-sm-5">
+                  <div class="col-sm-4 border-right">
+                    <div class="col-sm-3 projectheaderlabel">Client</div>
+                    <div class="col-sm-9 projectheaderdata"> <?= $project["StashProject_client"]; ?></div>
+                    <div class="col-sm-3 projectheaderlabel">Start Date</div>
+                    <div class="col-sm-9 projectheaderdata"><span class="shoot_begins"></span> </div>
+                    <div class="col-sm-3 projectheaderlabel">Shoot Dates</div>
+                    <div class="col-sm-9 projectheaderdata"><span class="shoot_begins"></span> - <span class="shoot_ends"></span> </div>
+                  </div>
 
-                </div>
-                <div class="col-sm-2">
+                  <div class="col-sm-4">
+                    <div class="col-sm-4 projectheaderlabel">Actors Auditioned</div>
+                    <div class="col-sm-8 projectheaderdata" id="attendeeslength"> 174 </div>
+                    <div class="col-sm-4 projectheaderlabel">Show Videos</div>
+                    <div class="col-sm-8">
+                      <div class="col-sm-8 onoffswitch" data="" style="padding-top:10px; margin-top: -8px !important;">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox">
+                        <label class="onoffswitch-label center" for="myonoffswitch"></label>
+                      </div>                      
+                    </div>
+                    
 
-                </div>
-</div></div>
-                <br>
-                <div class="col-sm-12">
-                  <div class="col-sm-12">
-                    <span class="projectheaderlabel">Audition Dates:</span><div class="role-tabs date-tabs hidden"></div>
+
+
                   </div>
                 </div>
+                </div> 
+              </div>
+              <br>
 
+              <div class="row">
                 <div class="col-sm-12">
-                  <div class="col-sm-12">
-                    <span class="projectheaderlabel">Roles:</span><div class="role-tabs hidden"></div>
-                  </div>
+                  <div class="col-sm-1"><span class="projectheaderlabel">Audition Days</span></div>
+                  <div class="col-sm-11 role-tabs date-tabs hidden"></div>
                 </div>
+              </div>
 
-                <br>
+
+              <div class="row border-bottom">
+                <div class="col-sm-12">
+                  <div class="col-sm-1"><span class="projectheaderlabel">Roles</span></div>
+                  <div class="col-sm-11 role-tabs hidden"></div>
+                </div>
+              <br>
+              </div>
+
+            </div>
+
+        
                 <div id="loader"> </div>
                 <table class="table table-striped actors">
                 
