@@ -92,6 +92,12 @@
     margin-bottom: 0;
   padding: 0 40px 30px 40px;
 }
+@media screen and (max-width: 600px){
+.carousel{
+padding: 0 0 20px 0;
+}
+}
+
 /* Reposition the controls slightly */
 .carousel-control {
   left: -12px;
@@ -136,6 +142,18 @@ section {
   align-self: center;
 }
 
+@media screen and (max-width: 600px){
+   .videoprojectmedia{
+  float:left;
+  padding-left: 0px;
+} 
+
+.videoprojectcard{
+    flex-wrap: wrap;
+}
+
+}
+
 .videoprojecttable td {
   text-align: left;
   padding: 5px 5px 5px 10px;
@@ -151,7 +169,9 @@ section {
 
 .CDsection {
     border-bottom: 1px solid #e6e6e6;
-    margin-bottom: 10px; 
+    margin-bottom: 15px; 
+    margin-top: 15px;
+    padding: 0px 0px 10px 0px;
 }
 
 .CDsection h2 {
