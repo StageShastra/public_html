@@ -700,7 +700,7 @@ button[disabled], html input[disabled] {
 #table{
   margin-top: 20px;
 }
-.role-tab{
+.toggle-tab{
   padding: 2px 6px;
   border: 0px solid #FFC107;
   border-radius: 4px;
@@ -718,10 +718,8 @@ button[disabled], html input[disabled] {
   /*background-image: linear-gradient(45deg, #D3263B 0%, #BE225A 41%, #A81E7B 100%);*/
 }
 
-.role-tab:hover{
-  transform: scale(1.05);
-  margin: 0px 15px 0px 5px;
-  transition-duration: 0.1s;
+.toggle-tab:hover{
+  box-shadow: 0px 0px 3px 2px #f3525b;
 }
 .inactive-tab{
   opacity: 0.5;
@@ -867,7 +865,7 @@ hr{
                 <br>
                 <div class="col-sm-12">
                   <div class="col-sm-12">
-                    <span class="projectheaderlabel">Audition Dates:</span><div class="role-tabs date-tabs hidden"></div>
+                    <span class="projectheaderlabel">Audition Dates:</span><div class="date-tabs"></div>
                   </div>
                 </div>
 

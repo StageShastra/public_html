@@ -1,5 +1,9 @@
 var project_id;
 var roles=[];
+var dates={};
+var days=[];
+var city_names=[];
+var cities={};
 var actor=[];
 var attendees=[];
 var attendees_names=[];
@@ -64,7 +68,30 @@ $(document).on("click", ".role-tab", function(e){
 		
 
 });
+$(document).on("click", ".date-tab", function(e){
 
+		var state = $(this).attr("data-state");
+		var date_name = $(this).attr("data-name");
+		if(state=="active")
+		{
+			$("."+date_name+"_date").addClass("animated fadeOut");
+			$(this).attr("data-state","inactive");
+			$(this).addClass("inactive-tab");
+			$("."+date_name+"_date").addClass("hidden");
+
+		}
+		else
+		{
+			$("."+date_name+"_date").removeClass("hidden");
+			$("."+date_name+"_role").removeClass("animated fadeOut");
+			$("."+date_name+"_role").addClass("animated fadeIn");
+			$(this).attr("data-state","active");
+			$(this).removeClass("inactive-tab");
+			
+		}
+		
+
+});
 
 function populate_roles()
 {	
@@ -84,15 +111,10 @@ function populate_roles()
 				{
 					roles=JSON.parse(response.data);
 					change_loader_text(roles.length+" roles fetched...");
-					var pre_html="";
-					for(var i=0;i<roles.length;i++)
+					for(l=0;l<roles.length;l++)
 					{
-						
-						pre_html+='<span class="role-tab" data-name='+roles[i].StashRoles_id+' data-state="active">'+roles[i].StashRoles_role+' <span class="badge"> 5 </span></span>';
-				                  
+						roles[l].actor_in_role=0;
 					}
-
-					$(".role-tabs").html(pre_html);
 					populate_questions(0);
 					
 					
@@ -107,6 +129,7 @@ function populate_roles()
 
 		
 }
+
 function populate_questions(i)
 {
 	change_loader_text("fetching questions...");
@@ -179,6 +202,7 @@ function populate_attendees()
 					else
 					{
 						get_actors_answers(0);	
+						populate_dates();
 					}
 					
 
@@ -201,12 +225,29 @@ function get_actors_answers(f)
 			
 			if(++f<attendees.length)
 			{
+				if(!(attendees[f].StashRoleActorLink_date_of_audition in dates))
+				{
+					dates[attendees[f].StashRoleActorLink_date_of_audition]=1;
+				}
+				else
+				{
+					dates[attendees[f].StashRoleActorLink_date_of_audition]++;
+				}
+				if(!(attendees[f].StashActor_city in cities))
+				{
+					cities[attendees[f].StashActor_cities]=1;
+				}
+				else
+				{
+					cities[attendees[f].StashActor_cities]++;
+				}
 				get_actors_answers(f);
 
 			}
 			else
 			{
 				populate_videos(0);
+				console.log(dates);
 				change_loader_text("all actor's answers fetched");
 			}
 
@@ -217,7 +258,7 @@ function get_actors_answers(f)
 
 function get_question_details(index,role_id)
 {
-
+    
 	for(var ri=0;ri<roles.length;ri++)
 	{	
 		
@@ -227,6 +268,7 @@ function get_question_details(index,role_id)
 			if(attendees[index].StashRoleActorLink_role_id_ref==role_id)
 			{
 				attendees[index].role_name=roles[ri].StashRoles_role;	
+				roles[ri].actor_in_role++;
 			}
 		
 			if(roles[ri].questions.length!=0){
@@ -236,6 +278,7 @@ function get_question_details(index,role_id)
 			
 		}
 	}
+	console.log(roles);
 	return 1;
 }
 function get_link_question_role(i,index,k,role_id)
@@ -350,6 +393,32 @@ function set_videos(actor_id,role_id,index)
 }
 
 
+function populate_dates()
+{
+	var tmp_days=[];
+	tmp_days=Object.keys(dates);
+	var day_obj={};
+	var pre_html="";
+	for(k=0;k<tmp_days.length;k++)
+	{
+		var aud_date = new Date(0); // The 0 there is the key, which sets the date to the epoch
+		aud_date.setUTCSeconds(tmp_days[k]);
+		day_obj.date = aud_date.toDateString();
+		day_obj.day = "Day "+inWords(k+1);
+		days[k]=day_obj;
+		pre_html+='<span class="toggle-tab date-tab" data-name="'+tmp_days[k]+'" data-state="active">'+day_obj.day+' <span class="badge">'+dates[tmp_days[k]]+' </span></span>';
+	}
+	$(".date-tabs").html(pre_html);
+	var pre_html="";
+	for(var i=0;i<roles.length;i++)
+	{
+		
+		pre_html+='<span class="toggle-tab role-tab" data-name='+roles[i].StashRoles_id+' data-state="active">'+roles[i].StashRoles_role+' <span class="badge">'+roles[i].actor_in_role+' </span></span>';
+                  
+	}
+
+	$(".role-tabs").html(pre_html);
+}
 
 function populate_table()
 {
@@ -568,7 +637,7 @@ function shortlist_star(actor)
 	
 		if(actor.StashRoleActorLink_shortlist_status=="0")
 		{
-			string+= '  <tr id="tr_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" class="'+actor.StashRoleActorLink_role_id_ref+'_role unshortlisted "><td class="star">'
+			string+= '  <tr id="tr_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" class="'+actor.StashRoleActorLink_role_id_ref+'_role '+actor.StashRoleActorLink_date_of_audition+'_date unshortlisted "><td class="star">'
              		+'    <i class="fa fa-star-o" id="star_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" onclick="shortlist_actor('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+1+')" aria-hidden="true"></i>'
              		+'  </td>' ;
 
@@ -576,7 +645,7 @@ function shortlist_star(actor)
 		}
 		else
 		{
-			string+= '  <tr id="tr_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" class="'+actor.StashRoleActorLink_role_id_ref+'_role shortlisted "><td class="star">'
+			string+= '  <tr id="tr_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" class="'+actor.StashRoleActorLink_role_id_ref+'_role '+actor.StashRoleActorLink_date_of_audition+'_date shortlisted "><td class="star">'
              		+'    <i class="fa fa-star" id="star_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" onclick="shortlist_actor('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+0+')" aria-hidden="true"></i>'
              		+'  </td>' ;
 		}
@@ -894,4 +963,34 @@ function change_loader_text(text)
 
 	
 	//$(".loader_text").addClass("animated fadeOutUp");
+}
+Array.prototype.contains = function(v) {
+    for(var i = 0; i < this.length; i++) {
+        if(this[i] === v) return true;
+    }
+    return false;
+};
+
+Array.prototype.unique = function() {
+    var arr = [];
+    for(var i = 0; i < this.length; i++) {
+        if(!arr.contains(this[i])) {
+            arr.push(this[i]);
+        }
+    }
+    return arr; 
+}
+var a = ['','one ','two ','three ','four ', 'five ','six ','seven ','eight ','nine ','ten ','eleven ','twelve ','thirteen ','fourteen ','fifteen ','sixteen ','seventeen ','eighteen ','nineteen '];
+var b = ['', '', 'twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety'];
+
+function inWords (num) {
+    if ((num = num.toString()).length > 9) return 'overflow';
+    n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+    if (!n) return; var str = '';
+    str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
+    str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
+    str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
+    str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
+    str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + '' : '';
+    return str;
 }

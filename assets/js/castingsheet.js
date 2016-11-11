@@ -172,6 +172,7 @@ function append_attendees(name){
 	{
 		$('#attendee_id_'+second_last).removeClass("last_inserted");	
 	}
+	$('#loader_atten').fadeOut('fast');
 
 }
 function get_actor_details()
