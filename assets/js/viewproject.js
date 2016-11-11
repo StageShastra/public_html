@@ -488,10 +488,10 @@ function populate_table()
              +' <th>Name </th>'
              +' <th>Role </th>'
              +'	<th>Notes</th>';
-             dyn_html+=' <th class="video_col hidden">Intro</th>';
+             dyn_html+=' <th class="video_col">Intro</th>';
              for(i=0;i<max_scenes;i++)
              {
-             	dyn_html+='<th class="video_col hidden">Scene '+ (i+1) +'</th>';
+             	dyn_html+='<th class="video_col">Scene '+ (i+1) +'</th>';
              }
              dyn_html+=' <th>City</th>'
              +'<th><span class="fa fa-newspaper-o" title="Casting Sheet response"></span></th>';
@@ -555,7 +555,7 @@ function video_embed(actor)
 	{ 
 		if(actor.videos[t].StashSceneVideo_video=="")
 		{
-			string+='<td class="video video_col hidden"><div id="video_"'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit" data-hide-id="#cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"data-unhide-id="#input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"><span id="cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="click_to_add">Click to add video</span>'
+			string+='<td class="video video_col"><div id="video_"'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit" data-hide-id="#cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"data-unhide-id="#input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"><span id="cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="click_to_add">Click to add video</span>'
 					   +'<div class="embed-responsive embed-responsive-4by3 hidden" id="embed_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'">'
 	                   +'</div>'
 					   +'<input class="input_cs hidden" id="input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="text" placeholder="Paste youtube video link" onpaste="setTimeout(function(){ show_video('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)">'
@@ -565,7 +565,7 @@ function video_embed(actor)
 		}
 		else
 		{
-			string+='<td class="video video_col hidden">'
+			string+='<td class="video video_col">'
 	                +'    <div class="embed-responsive embed-responsive-4by3">'
 	                +'      <iframe id="iframe_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="embed-responsive-item" src="'+actor.videos[t].StashSceneVideo_video+'" allowfullscreen></iframe>'
 	                +'    </div>'
@@ -595,7 +595,7 @@ function show_notes(actor,i)
 		var string="";
 		if(actor.StashRoleActorLink_notes==null)
 		{
-			string+='<td class="notes">'
+			string+='<td class="notes" style="text-align:left;">'
 					   +'<div id="notes_"'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit" data-hide-id="#notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"data-unhide-id="#notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'">'
 					   +'<span id="notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="click_to_add">Click to add notes</span>'
 					   +'<input class="input_cs hidden" id="notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="text" placeholder="Add notes here" onfocusout="setTimeout(function(){ save_notes('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)">'
@@ -605,7 +605,7 @@ function show_notes(actor,i)
 		}
 		else
 		{
-			string+='<td class="notes"><div id="notes_"'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit" data-hide-id="#notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"data-unhide-id="#notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"><span id="notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="click_to_add">'+actor.StashRoleActorLink_notes+'</span>'
+			string+='<td class="notes" style="text-align:left;"><div id="notes_"'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit" data-hide-id="#notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"data-unhide-id="#notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"><span id="notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="click_to_add">'+actor.StashRoleActorLink_notes+'</span>'
 					   +'<input class="input_cs hidden" id="notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="text" placeholder="Add notes here" value="'+actor.StashRoleActorLink_notes+'" ><br>'
 			
 	                +'<button id="notes_edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-hide-id="#notes_edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-unhide-id="#notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+',#notes_update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit go_button">Edit</button>'
@@ -992,7 +992,7 @@ $(document).on("click", ".showDetailscs", function(){
            +'          		<div class="col-lg-12">'
            +'               	<font class="info-medium firstcolor">Recent Experience:</div>' 
            +'				<div class="col-lg-12">'
-           +'					<span class="gray">'+ attendees[id].StashActor_six_months_experience +'</font>'
+           +'					<span class="gray">'+ attendees[id].StashActor_tvc_experience +'</font>'
            +'           	</div>'
            +'			</div>'
            +'		</div>'
