@@ -68,7 +68,7 @@ $(document).on("click",".onoffswitch",function(e) {
 			{
 				$("#loader_gif_video").removeClass("hidden");
 				$(".video_col").removeClass("hidden");
-				$(".video_td").html('<img id="loader_gif_video" class="" src="'+base+'/assets/img/video_loader.gif" height="35">')
+				$(".video_td").html('<img id="loader_gif_video" class="" src="/assets/img/video_loader.gif" height="35">')
 				//populate_videos(0);
 			}
 			
