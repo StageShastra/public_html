@@ -981,7 +981,7 @@ $(document).on("click", ".showDetailscs", function(){
            +'           	</div>'
            +'			</div>'
            +'			<div class="col-lg-7"  style="text-align: left;">'
-           +'          		<div class="col-lg-12">'
+           +'          		<div class="col-lg-12" style="height:150px; overflow:scroll">'
            +'               	<font class="info-medium firstcolor">Recent Experience:</div>' 
            +'				<div class="col-lg-12">'
            +'					<span class="gray">'+ attendees[id].StashActor_tvc_experience +'</font>'
