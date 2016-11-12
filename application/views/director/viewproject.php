@@ -887,7 +887,7 @@ div .border-bottom{
                         <label class="onoffswitch-label center" for="myonoffswitch"></label>
                       </div>                      
                       <div class="col-sm-4" style="padding-top:10px; margin-top: -8px !important;">
-                        <img id="loader_gif_video" class="hidden" src="/assets/img/spinner.gif" height="35">
+                        <img id="loader_gif_video" class="hidden" src="/assets/img/video_loader.gif" height="35">
                       </div>
                     </div>
                     
