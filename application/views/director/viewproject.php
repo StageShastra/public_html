@@ -878,13 +878,14 @@ div .border-bottom{
                   </div>
 
                   <div class="col-sm-4">
-                    <div class="col-sm-4 projectheaderlabel">Actors Auditioned</div>
-                    <div class="col-sm-8 projectheaderdata" id="attendeeslength">  </div>
-                    <div class="col-sm-4 projectheaderlabel">Show Videos</div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-6 projectheaderlabel">Actors Auditioned</div>
+                    <div class="col-sm-6 projectheaderdata" id="attendeeslength"> updating... </div>
+                    <div class="col-sm-6 projectheaderlabel">Show Videos</div>
+                    <div class="col-sm-6">
                       <div class="col-sm-8 onoffswitch" data="" style="padding-top:10px; margin-top: -8px !important;">
-                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox">
+                        <input type="checkbox" id="myonoffswitch" name="onoffswitch" class="onoffswitch-checkbox" unchecked>
                         <label class="onoffswitch-label center" for="myonoffswitch"></label>
+                        <img id="loader_gif_video" class="hidden" src="/assets/img/spinner.gif" height="35"/>
                       </div>                      
                     </div>
                     
