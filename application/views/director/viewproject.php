@@ -886,7 +886,7 @@ div .border-bottom{
                         <input type="checkbox" id="myonoffswitch" name="onoffswitch" class="onoffswitch-checkbox" unchecked>
                         <label class="onoffswitch-label center" for="myonoffswitch"></label>
                       </div>                      
-                      <div class="col-sm-4" style="padding-top:10px; margin-top: -8px !important;">
+                      <div class="col-sm-4" style="padding-top:10px;margin-top: -18px !important;margin-left: -18px;">
                         <img id="loader_gif_video" class="hidden" src="/assets/img/video_loader.gif" height="35">
                       </div>
                     </div>
