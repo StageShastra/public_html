@@ -504,7 +504,7 @@ function populate_table()
 
     change_loader_text("painting the big picture...");        
 	var dyn_html='<thead>'
-             +' <th class="star"><i class="fa fa-star-o" id="shortlist_all" data-tooltip="Click to sort." aria-hidden="true" onclick="show_shortlisted()"></i></th>'
+             +' <th class="star"><i class="fa fa-star-o" id="shortlist_all" aria-hidden="true" onclick="show_shortlisted()"></i></th>'
              +' <th>Profile</th>'
              +' <th>Name </th>'
              +' <th>Role </th>'
