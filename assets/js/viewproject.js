@@ -62,11 +62,14 @@ $(document).on("click",".onoffswitch",function(e) {
 			{
 
 				$(".video_col").removeClass("hidden");
+
 			}
 			else
 			{
 				$("#loader_gif_video").removeClass("hidden");
-				populate_videos(0);
+				$(".video_col").removeClass("hidden");
+				$(".video_td").html('<img id="loader_gif_video" class="" src="'+base+'/assets/img/video_loader.gif" height="35">')
+				//populate_videos(0);
 			}
 			
 			
@@ -571,7 +574,7 @@ function video_embed(actor)
 	var string='';
 	for(t=0;t<actor.role_scenes;t++)
 	{ 
-		string+='<td class="video video_col hidden" id="td_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" >'
+		string+='<td class="video video_td video_col hidden" id="td_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" >'
 					  '</td>' ;
 	}
 	//console.log("max_scenes are_"+max_scenes);
