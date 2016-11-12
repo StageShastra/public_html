@@ -590,7 +590,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			url: url,
-			type: type,
+			//type: type,
 			data: data,
 			success: function(response){
 				//console.log(response);
@@ -779,6 +779,12 @@ $(document).ready(function(){
            +'      			<div class="DocumentList">'
 	           +'           	<ul class="list-inline">';
 	           						images = JSON.parse(actors[id].StashActor_images);
+
+	           						if(images.length==0 || images.length== null)
+	           							content+='<li class="DocumentItem">'
+	           						+'This actor has not added any photos yet.'
+	           						+'</li>';
+
 	           						for(var k = 0;k < images.length; k++){
 		            				image = images[k];
 		            				str = base + "assets/img/actors/" + image;
@@ -829,6 +835,8 @@ $(document).ready(function(){
            +'				<div class="col-lg-12">'
            +'					<span class="gray">'+ actors[id].StashActor_projects +'</font>'
            +'           	</div>'
+           +'				<div class="col-lg-12">'
+           +'               	<a class="firstcolor actormodaltitle" href="'+ base+actors[id].StashActor_username +'"><font class="info-medium firstcolor">See videos</a></div>'
            +'			</div>'
            +'		</div>'
 
