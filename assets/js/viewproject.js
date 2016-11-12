@@ -43,7 +43,35 @@ $(document).on("click", ".toggleEdit", function(){
 	$(".shoot_begins").html(shoot_start_date.toDateString());
 	$(".shoot_ends").html(shoot_end_date.toDateString());
 });
+$(document).on("click",".onoffswitch",function(e) { 
+		e.stopPropagation();
+		//var id=$(this).attr("data");
 
+		if($("#myonoffswitch").is(":checked"))
+		{
+			$("#myonoffswitch").prop('checked', false);
+			$("#loader_gif_video").removeClass("hidden");
+			$(".video_col").addClass("hidden");
+			$("#loader_gif_video").addClass("hidden");
+		}
+		else
+		{
+			$("#myonoffswitch").prop('checked', true);
+			$("#loader_gif_video").removeClass("hidden");
+			if(attendees[0].videos)
+			{
+				$(".video_col").removeClass("hidden");
+			}
+			else
+			{
+				populate_videos(0);
+			}
+			$("#loader_gif_video").addClass("hidden");
+			
+		}
+	
+
+	}); 
 $(document).on("click", ".role-tab", function(e){
 
 		var state = $(this).attr("data-state");
@@ -90,15 +118,9 @@ $(document).on("click", ".date-tab", function(e){
 });
 function hide_show_rows(c,index)
 {	
-console.log("Date Statuses");
-console.log("Day 1 status : "+days[0].state);
-console.log("Day 2 status : "+days[1].state);
-console.log("Role Stauses");
-console.log(roles[0].role_name+" status : "+roles[0].state);
-console.log(roles[1].role_name+" status : "+roles[1].state);
-console.log(roles[2].role_name+" status : "+roles[2].state);
 
-console.log(roles);
+	console.log(roles);
+
 	if(c==0)
 	{
 		
@@ -106,17 +128,12 @@ console.log(roles);
 		{
 			if(days[k].state*roles[index].state==0)
 			{
-				//console.log(days[k]);
-				//console.log(roles[index]);
-				$('.'+roles[index].StashRoles_role.split(' ').join('_')+'_role').addClass("hidden");
-				//console.log("."+roles[index].StashRoles_role+"_role");
-
+				$('.'+roles[index].StashRoles_role.split(' ').join('_')+'_role.'+days[k].real_date.split(' ').join('_')+'_date').addClass("hidden");
 			}
 			else
 			{
 				$('.'+roles[index].StashRoles_role.split(' ').join('_')+'_role.'+days[k].real_date.split(' ').join('_')+'_date').removeClass("hidden");
-				
-				
+
 			}
 		}
 	}
@@ -127,18 +144,16 @@ console.log(roles);
 			if(roles[k].state*days[index].state==0)
 			{
 				//$("."+days[index].real_date.split(' ').join('_')+"_date").addClass("animated fadeOut");
-				$("."+days[index].real_date.split(' ').join('_')+"_date").addClass("hidden");
+				$('.'+days[index].real_date.split(' ').join('_')+'_date.'+roles[k].StashRoles_role.split(' ').join('_')+'_role').addClass("hidden");
 
 			}
 			else
 			{
-				$('.'+days[index].real_date.split(' ').join('_')+'_date.'+roles[k].StashRoles_role.split(' ').join('_')+'_role').removeClass("hidden");
-				//$("."+days[index].real_date.split(' ').join('_')+"_role").removeClass("animated fadeOut");
-				//$("."+days[index].real_date.split(' ').join('_')+"_role").addClass("animated fadeIn");
-				
+				$('.'+days[index].real_date.split(' ').join('_')+'_date.'+roles[k].StashRoles_role.split(' ').join('_')+'_role').removeClass("hidden");	
 			}
 		}
 	}
+	
 }
 function populate_roles()
 {	
@@ -300,7 +315,7 @@ function get_actors_answers(f)
 			}
 			else
 			{
-				populate_videos(0);
+				populate_table();
 				//console.log(dates);
 				change_loader_text("all actor's answers fetched");
 			}
@@ -321,7 +336,8 @@ function get_question_details(index,role_id)
 			attendees[index].questions=[];
 			if(attendees[index].StashRoleActorLink_role_id_ref==role_id)
 			{
-				attendees[index].role_name=roles[ri].StashRoles_role;	
+				attendees[index].role_name = roles[ri].StashRoles_role;	
+				attendees[index].role_scenes = roles[ri].StashRoles_scenes; 
 				roles[ri].actor_in_role++;
 			}
 		
@@ -377,7 +393,7 @@ function get_link_question_role(i,index,k,role_id)
 function populate_videos(i)
 {
 	change_loader_text("fetching videos...");
-	
+	console.log("populating videos...");
 		data = {request: "getActorVideos",
 				 		data: JSON.stringify({
 				 								actor_id: attendees[i].StashActor_actor_id_ref,
@@ -401,7 +417,7 @@ function populate_videos(i)
 								else
 								{
 									change_loader_text("all videos fetched.");
-									populate_table();
+									inject_video();
 								}
 								//console.log("videos " + (i+1) + " of " + attendees.length + "linked...")
 								
@@ -551,32 +567,13 @@ function video_embed(actor)
 {
 	//console.log("video embed called");
 	var string='';
-	for(t=0;t<actor.videos.length;t++)
+	for(t=0;t<actor.role_scenes;t++)
 	{ 
-		if(actor.videos[t].StashSceneVideo_video=="")
-		{
-			string+='<td class="video video_col hidden"><div id="video_"'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit" data-hide-id="#cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"data-unhide-id="#input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"><span id="cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="click_to_add">Click to add video</span>'
-					   +'<div class="embed-responsive embed-responsive-4by3 hidden" id="embed_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'">'
-	                   +'</div>'
-					   +'<input class="input_cs hidden" id="input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="text" placeholder="Paste youtube video link" onpaste="setTimeout(function(){ show_video('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)">'
-					   +'</div></td>' ;
-
-
-		}
-		else
-		{
-			string+='<td class="video video_col hidden">'
-	                +'    <div class="embed-responsive embed-responsive-4by3">'
-	                +'      <iframe id="iframe_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="embed-responsive-item" src="'+actor.videos[t].StashSceneVideo_video+'" allowfullscreen></iframe>'
-	                +'    </div>'
-	                +'<button id="edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-hide-id="#edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-unhide-id="#input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+',#update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit go_button">Edit</button>'
-	                +'<input class="input_cs hidden" value="'+actor.videos[t].StashSceneVideo_video+'" id="input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="text" onpaste="setTimeout(function(){ show_video('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)">'
-	                +'<button id="update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="button" onclick="setTimeout(function(){ show_video('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)" class="go_button toggleEdit hidden" data-unhide-id="#edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-hide-id="#input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+',#update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" >Go</button>'
-	                +' </td>';
-		}
+		string+='<td class="video video_col hidden" id="td_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" >'
+					  '</td>' ;
 	}
 	//console.log("max_scenes are_"+max_scenes);
-	var actor_Scenes=actor.videos.length - 1;
+	var actor_Scenes=actor.role_scenes - 1;
 	if(actor_Scenes<max_scenes)
 	{
 		//console.log("in max scenes");
@@ -589,13 +586,49 @@ function video_embed(actor)
 	}
 	return string;
 }
+function inject_video()
+{
+	for(a=0;a<attendees.length;a++)
+	{	
+		actor=attendees[a];
+		for(t=0;t<actor.role_scenes;t++)
+		{ 	var string="";
+			if(actor.videos[t].StashSceneVideo_video=="")
+			{
+				string=	'<div id="video_"'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit" data-hide-id="#cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"data-unhide-id="#input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'">'
+						   +'<span id="cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="click_to_add">Click to add video</span>'
+						   +'<div class="embed-responsive embed-responsive-4by3 hidden" id="embed_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'">'
+		                   +'</div>'
+						   +'<input class="input_cs hidden" id="input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="text" placeholder="Paste youtube video link" onpaste="setTimeout(function(){ show_video('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)">'
+						   +'</div>' ;
+
+
+			}
+			else
+			{
+				string= '<div class="embed-responsive embed-responsive-4by3">'
+		                +'      <iframe id="iframe_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="embed-responsive-item" src="'+actor.videos[t].StashSceneVideo_video+'" allowfullscreen></iframe>'
+		                +'</div>'
+		                +'<button id="edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-hide-id="#edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-unhide-id="#input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+',#update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit go_button">Edit</button>'
+		                +'<input class="input_cs hidden" value="'+actor.videos[t].StashSceneVideo_video+'" id="input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="text" onpaste="setTimeout(function(){ show_video('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)">'
+		                +'<button id="update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="button" onclick="setTimeout(function(){ show_video('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)" class="go_button toggleEdit hidden" data-unhide-id="#edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-hide-id="#input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+',#update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" >Go</button>'
+		                +'';
+			}
+			$('#td_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'').html(string);
+		}
+
+	}
+	$(".video_col").addClass("animated fadeIn");
+	$(".video_col").removeClass("hidden");
+	
+}
 function show_notes(actor,i)
 {
 		var t=0;
 		var string="";
 		if(actor.StashRoleActorLink_notes==null)
 		{
-			string+='<td class="notes">'
+			string+='<td class="notes" style="text-align:left;">'
 					   +'<div id="notes_"'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit" data-hide-id="#notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"data-unhide-id="#notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'">'
 					   +'<span id="notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="click_to_add">Click to add notes</span>'
 					   +'<input class="input_cs hidden" id="notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="text" placeholder="Add notes here" onfocusout="setTimeout(function(){ save_notes('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)">'
@@ -605,7 +638,7 @@ function show_notes(actor,i)
 		}
 		else
 		{
-			string+='<td class="notes"><div id="notes_"'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit" data-hide-id="#notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"data-unhide-id="#notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"><span id="notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="click_to_add">'+actor.StashRoleActorLink_notes+'</span>'
+			string+='<td class="notes" style="text-align:left;"><div id="notes_"'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit" data-hide-id="#notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"data-unhide-id="#notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"><span id="notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="click_to_add">'+actor.StashRoleActorLink_notes+'</span>'
 					   +'<input class="input_cs hidden" id="notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="text" placeholder="Add notes here" value="'+actor.StashRoleActorLink_notes+'" ><br>'
 			
 	                +'<button id="notes_edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-hide-id="#notes_edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-unhide-id="#notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+',#notes_update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit go_button">Edit</button>'
@@ -989,10 +1022,10 @@ $(document).on("click", ".showDetailscs", function(){
            +'           	</div>'
            +'			</div>'
            +'			<div class="col-lg-7"  style="text-align: left;">'
-           +'          		<div class="col-lg-12">'
+           +'          		<div class="col-lg-12" >'
            +'               	<font class="info-medium firstcolor">Recent Experience:</div>' 
-           +'				<div class="col-lg-12">'
-           +'					<span class="gray">'+ attendees[id].StashActor_six_months_experience +'</font>'
+           +'				<div class="col-lg-12" style="height:150px; overflow:scroll">'
+           +'					<span class="gray">'+ attendees[id].StashActor_tvc_experience +'</font>'
            +'           	</div>'
            +'			</div>'
            +'		</div>'

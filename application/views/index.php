@@ -216,7 +216,7 @@
                     </div>
                     <div class="info-item">
                         <span class="info-item-title">Contact in Bulk</span>
-                        <span class="info-item-desc">Email/SMS hundreds of actors in just one click.</span>
+                        <span class="info-item-desc">Email/SMS hundreds of actors with just one click.</span>
                     </div>
                     <div class="info-item">
                         <span class="info-item-title">Run audition</span>
@@ -405,7 +405,7 @@ div.panel2.show {
 					Castiko is a comprehensive solution for you. <br>
 						<ul>
 						<li>You can bring all your actor data in one place, thus eliminating Excel sheets and pen and paper.</li>
-						<li>You can message actors to come and audition in just one click, thus saving hours and hours of time you spend SMSing and calling them individually.</li></ul>
+						<li>You can message actors to come and audition with just one click, thus saving hours and hours of time you spend SMSing and calling them individually.</li></ul>
 				</div>
 			<button class="accordion2">So how does it work?</button>
 				<div class="panel2">

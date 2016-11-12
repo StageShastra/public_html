@@ -311,7 +311,7 @@ box-shadow: 0px 0px 43px -5px rgba(219,219,219,1);
 
         <!-- Casting Director Header-->
         <div name="CDheader" class="center CDsection"> 
-          <span> <img  class="companylogo" src="<?= IMG . "/pages/" . $basic['DirectorPage_logo'] ?>" alt='<?= $basic['DirectorPage_pagename'] ?>'></span><span></span>
+          <img  class="companylogo img-responsive center" src="<?= IMG . "/pages/" . $basic['DirectorPage_logo'] ?>" alt='<?= $basic['DirectorPage_pagename'] ?>'><span></span>
           </div>
          <div class="CDsection">
            <nav class="clearfix">
