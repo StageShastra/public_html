@@ -57,16 +57,17 @@ $(document).on("click",".onoffswitch",function(e) {
 		else
 		{
 			$("#myonoffswitch").prop('checked', true);
-			$("#loader_gif_video").removeClass("hidden");
+			
 			if(attendees[0].videos)
 			{
+				$("#loader_gif_video").removeClass("hidden");
 				$(".video_col").removeClass("hidden");
 			}
 			else
 			{
 				populate_videos(0);
 			}
-			$("#loader_gif_video").addClass("hidden");
+			
 			
 		}
 	
@@ -620,7 +621,7 @@ function inject_video()
 	}
 	$(".video_col").addClass("animated fadeIn");
 	$(".video_col").removeClass("hidden");
-	
+	$("#loader_gif_video").addClass("hidden");
 }
 function show_notes(actor,i)
 {
