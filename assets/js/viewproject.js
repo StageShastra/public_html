@@ -90,15 +90,7 @@ $(document).on("click", ".date-tab", function(e){
 });
 function hide_show_rows(c,index)
 {	
-console.log("Date Statuses");
-console.log("Day 1 status : "+days[0].state);
-console.log("Day 2 status : "+days[1].state);
-console.log("Role Stauses");
-console.log(roles[0].role_name+" status : "+roles[0].state);
-console.log(roles[1].role_name+" status : "+roles[1].state);
-console.log(roles[2].role_name+" status : "+roles[2].state);
-
-console.log(roles);
+	console.log(roles);
 	if(c==0)
 	{
 		
