@@ -60,11 +60,12 @@ $(document).on("click",".onoffswitch",function(e) {
 			
 			if(attendees[0].videos)
 			{
-				$("#loader_gif_video").removeClass("hidden");
+
 				$(".video_col").removeClass("hidden");
 			}
 			else
 			{
+				$("#loader_gif_video").removeClass("hidden");
 				populate_videos(0);
 			}
 			
