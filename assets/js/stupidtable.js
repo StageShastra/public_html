@@ -9,7 +9,9 @@
       $table.data('sortFns', sortFns);
 
       $table.on("click.stupidtable", "thead th", function() {
+
           $(this).stupidsort();
+
       });
     });
   };
@@ -18,17 +20,19 @@
   // Expects $("#mytable").stupidtable() to have already been called.
   // Call on a table header.
   $.fn.stupidsort = function(force_direction){
+
     var $this_th = $(this);
+    
     var th_index = 0; // we'll increment this soon
     var dir = $.fn.stupidtable.dir;
     var $table = $this_th.closest("table");
     var datatype = $this_th.data("sort") || null;
-
+    
     // No datatype? Nothing to do.
     if (datatype === null) {
       return;
     }
-
+    
     // Account for colspans
     $this_th.parents("tr").find("th").slice(0, $(this).index()).each(function() {
       var cols = $(this).attr("colspan") || 1;
@@ -86,15 +90,14 @@
       // enough, .append accomplishes this for us.
       trs = $.map(column, function(kv) { return kv[1]; });
       $table.children("tbody").append(trs);
-
       // Reset siblings
       $table.find("th").data("sort-dir", null).removeClass("sorting-desc sorting-asc");
       $this_th.data("sort-dir", sort_dir).addClass("sorting-"+sort_dir);
-
+      
       $table.trigger("aftertablesort", {column: th_index, direction: sort_dir});
       $table.css("display");
     }, 10);
-
+   // $("#loader_gif_video_name").addClass("hidden");
     return $this_th;
   };
 
