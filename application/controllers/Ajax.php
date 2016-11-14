@@ -850,6 +850,7 @@
 			$this->db->from("stash-roles"); 
 			$this->db->where("StashRoles_project_id_ref", $ref);
 			$this->db->where("StashRoles_status", 1);
+			$this->db->order_by("StashRoles_role", "asc");
 			$query = $this->db->get();
 			$result = [];
 			$roles = $query->result('array');

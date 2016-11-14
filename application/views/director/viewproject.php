@@ -644,7 +644,7 @@ button[disabled], html input[disabled] {
   width: 30px;
 }
 .role_name{
-  width: 90px;
+  width: 150px;
   font-size: 12px;
   font-family: "Raleway";
   color: #777;
@@ -720,6 +720,11 @@ button[disabled], html input[disabled] {
 
 .toggle-tab:hover{
   box-shadow: 0px 0px 3px 2px #f3525b;
+}
+.toggle-tab-all{
+
+  background: #FFC107;
+  color:black;
 }
 .inactive-tab{
   opacity: 0.5;
@@ -904,7 +909,9 @@ div .border-bottom{
                 <div class="col-sm-12">
 
                   <div class="col-sm-1"><span class="projectheaderlabel">Audition Days</span></div>
-                  <div class="col-sm-11 date-tabs "></div>
+                  <div class="col-sm-11 date-tabs ">
+                    <span class="toggle-tab toggle-tab-all"  data-name="date" data-state="active">Hide All</span>
+                  </div>
                 </div>
               </div>
 
@@ -912,7 +919,9 @@ div .border-bottom{
               <div class="row border-bottom">
                 <div class="col-sm-12">
                   <div class="col-sm-1"><span class="projectheaderlabel">Roles</span></div>
-                  <div class="col-sm-11 role-tabs hidden"></div>
+                  <div class="col-sm-11 role-tabs ">
+                    <span class="toggle-tab toggle-tab-all" data-name="role" data-state="active">Hide All</span>
+                  </div>
                 </div>
               <br>
               </div>

@@ -284,9 +284,9 @@ thead{
     text-align:left;
 	
 }
-th{	
-	color:#b3b3b3; 
-	text-align: justify;
+th{
+	color:#b3b3b3;
+	/* text-align: justify; */
 }
 thead > :first-child {
     text-align: center;

@@ -86,18 +86,19 @@ $(document).on("click", ".role-tab", function(e){
 			roles[role_index].state=0;
 			$(this).attr("data-state","inactive");
 			$(this).addClass("inactive-tab");
-
+			$(this).removeClass("active-tab");
 		}
 		else
 		{
 			roles[role_index].state=1;
 			$(this).attr("data-state","active");
 			$(this).removeClass("inactive-tab");
-			
+			$(this).addClass("active-tab");
 		}
 		hide_show_rows(0,role_index) // 0 is for role, 1 is for days
 
 });
+
 $(document).on("click", ".date-tab", function(e){
 
 		var state = $(this).attr("data-state");
@@ -109,6 +110,7 @@ $(document).on("click", ".date-tab", function(e){
 			days[day_index].state=0;
 			$(this).attr("data-state","inactive");
 			$(this).addClass("inactive-tab");
+			$(this).removeClass("active-tab");
 
 		}
 		else
@@ -116,10 +118,32 @@ $(document).on("click", ".date-tab", function(e){
 			days[day_index].state=1;
 			$(this).attr("data-state","active");
 			$(this).removeClass("inactive-tab");
+			$(this).addClass("active-tab");
 			
 		}
 		hide_show_rows(1,day_index) // 0 is for role, 1 is for days
 
+});
+$(document).on("click", ".toggle-tab-all", function(e){
+
+		var state = $(this).attr("data-state");
+		var tab_name = $(this).attr("data-name");
+		
+		if(state=="active")
+		{
+			$("."+tab_name+"-tab.active-tab").click();
+			$(this).attr("data-state","inactive");
+			$(this).html("Show All");
+
+		}
+		else
+		{
+			$("."+tab_name+"-tab.inactive-tab").click();
+			$(this).attr("data-state","active");
+			$(this).html("Hide All");
+			
+		}
+		
 });
 function hide_show_rows(c,index)
 {	
@@ -473,7 +497,7 @@ function populate_dates()
 	var tmp_days=[];
 	tmp_days=Object.keys(dates);
 	
-	var pre_html="";
+	var pre_html=$(".date-tabs").html();
 	for(k=0;k<tmp_days.length;k++)
 	{
 		var day_obj={};
@@ -484,15 +508,15 @@ function populate_dates()
 		day_obj.date = aud_date.toDateString();
 		day_obj.day = "Day "+inWords(k+1);
 		days[k]=day_obj;
-		pre_html+='<span class="toggle-tab date-tab" data-name="'+k+'" data-state="active">'+day_obj.day+' <span class="badge">'+dates[tmp_days[k]]+' </span></span>';
+		pre_html+='<span class="toggle-tab date-tab active-tab" data-name="'+k+'" data-state="active">'+day_obj.day+' <span class="badge">'+dates[tmp_days[k]]+' </span></span>';
 	}
 	
 	$(".date-tabs").html(pre_html);
-	var pre_html="";
+	pre_html=$(".role-tabs").html();
 	for(var i=0;i<roles.length;i++)
 	{
 		
-		pre_html+='<span class="toggle-tab role-tab" data-name='+i+' data-state="active">'+roles[i].StashRoles_role+' <span class="badge">'+roles[i].actor_in_role+' </span></span>';
+		pre_html+='<span class="toggle-tab role-tab active-tab" data-name='+i+' data-state="active">'+roles[i].StashRoles_role+' <span class="badge">'+roles[i].actor_in_role+' </span></span>';
                   
 	}
 
@@ -506,15 +530,16 @@ function populate_table()
 	var dyn_html='<thead>'
              +' <th class="star"><i class="fa fa-star-o" id="shortlist_all" aria-hidden="true" onclick="show_shortlisted()"></i></th>'
              +' <th>Profile</th>'
-             +' <th>Name </th>'
-             +' <th>Role </th>'
+             +' <th  data-sort="string" data-tooltip="Click here to sort">Name<img id="loader_gif_video_name" class="hidden" src="/public_html/assets/img/video_loader.gif" height="25" style="position: relative;top: 7px;"> </th>'
+             +' <th  data-sort="string" data-tooltip="Click here to sort">Role </th>'
              +'	<th>Notes</th>';
              dyn_html+=' <th class="video_col hidden">Intro</th>';
              for(i=0;i<max_scenes;i++)
              {
              	dyn_html+='<th class="video_col hidden">Scene '+ (i+1) +'</th>';
              }
-             dyn_html+=' <th>City</th>'
+             dyn_html+='<th data-sort="string" data-tooltip="Click here to sort">Date</th>'
+
              +'<th><span class="fa fa-newspaper-o" title="Casting Sheet response"></span></th>';
              dyn_html+=' <th><span class="fa fa-trash-o" title="Delete record"></span></th>';
              dyn_html+='</thead>';
@@ -543,7 +568,7 @@ function populate_table()
              var aud_date = new Date(0);
 				aud_date.setUTCSeconds(attendees[i].StashRoleActorLink_date_of_audition);
              dyn_html+= video_string+''
-             +'<td>'+attendees[i].StashActor_city+'<td><span class="fa fa-newspaper-o" onclick="open_casting_response('+i+')"></span></td>'
+             +'<td>'+aud_date.toDateString()+'<td><span class="fa fa-newspaper-o" onclick="open_casting_response('+i+')"></span></td>'
              +'<td><span class="fa fa-trash-o" onclick="delete_record_response('+i+')"></span></td>'
              +'</tr>';
 	}
@@ -572,13 +597,13 @@ function video_embed(actor)
 {
 	//console.log("video embed called");
 	var string='';
-	for(t=0;t<actor.role_scenes;t++)
+	for(t=0;t<=actor.role_scenes;t++)
 	{ 
 		string+='<td class="video video_td video_col hidden" id="td_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" >'
 					  '</td>' ;
 	}
 	//console.log("max_scenes are_"+max_scenes);
-	var actor_Scenes=actor.role_scenes - 1;
+	var actor_Scenes=actor.role_scenes;
 	if(actor_Scenes<max_scenes)
 	{
 		//console.log("in max scenes");
@@ -593,10 +618,12 @@ function video_embed(actor)
 }
 function inject_video()
 {
+	//console.log(attendees);
 	for(a=0;a<attendees.length;a++)
 	{	
 		actor=attendees[a];
-		for(t=0;t<actor.role_scenes;t++)
+		//console.log(actor);
+		for(t=0;t<actor.videos.length;t++)
 		{ 	var string="";
 			if(actor.videos[t].StashSceneVideo_video=="")
 			{
