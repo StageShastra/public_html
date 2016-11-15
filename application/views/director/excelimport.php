@@ -241,17 +241,18 @@
             <h1> Import Your Actor Data From an Excel File </h1>
 <hr />
             <h3> Step 1: Tell Us About Your File </h3>
+
             <br>
             <div>  
               <label class="col-lg-1" style="padding:7px 0px 7px 0px;" for="columns">Columns: </label>
               <div class="col-lg-3"><select class="form-control firstcolor firstColumn" id="columns"  name="columns" > 
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
                   <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7" selected="selected">7</option>
-              </select></div>
+                  <option value="6" selected="selected">6</option>
+              </select><h5 class="firstcolor small">*Columns for Name, Age, Sex, Email and Phone are mandatory, even if left blank.</h5></div>
+              <div class="col-lg-6">
+                <input class="btn submit-btn firstcolor" style="margin-top:0px" type="submit" value="See a sample file" onclick="window.open('/public_html/assets/sample_excel.xlsx', '_blank')">
+                <br><br><br>
+              </div>
             </div>
             <br>
             <br>
@@ -262,12 +263,11 @@
                 function selectOptFlood(){
                   $selectOpt = array(
                                     'name' => 'Name',
-                                    'gender' => 'Gender',
+                                    'sex' => 'Sex',
                                     'age' => 'Age',
-                                    'height' => 'Height',
                                     'email' => 'Email',
                                     'phone' => 'Phone',
-                                    'project' => 'Project'
+                                    'height' => 'Height'
                                 );
                   foreach ($selectOpt as $key => $value) {
                     echo "<option val='{$key}'>{$value}</option>";
@@ -287,7 +287,6 @@
                   <th>Column 4</th>
                   <th>Column 5</th>
                   <th>Column 6</th>
-                  <th>Column 7</th>
 
                 </tr></thead>
                 <tr>
@@ -315,9 +314,6 @@
                     <option selected="selected"  value="empty"> Select One </option>
                     <?= selectOptFlood() ?></select></td>
 
-                  <td><select class="form-control firstcolor hiddenoption" id="col7" name="col7" >
-                    <option selected="selected"  value="empty"> Select One </option>
-                    <?= selectOptFlood() ?></select></td>
 
                 </tr>
               </table>
