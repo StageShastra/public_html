@@ -2,3 +2,4 @@ application/config/config.php
 application/config/constants.php
 application/config/database.php
 beta/application/config/constants.php
+application/assets/js/constants.js

@@ -26,6 +26,7 @@ $(document).ready(function(){
 			//console.log(hide, unhide);
 
 		});
+	show_loader_gif("#loader");
 	populate_projects();
 	
 	//hadnles clicks on the cards
@@ -134,6 +135,7 @@ dyn_html+='<div class="col-lg-3 col-xs-12 card-marginbottom">'
     +'</div></div>';
 	}
 }
+	$("#loader").addClass("hidden");
 	$("#list_projects").html(dyn_html);
 	console.log("all questions fetched")
 	//populate_attendees();	
@@ -189,4 +191,18 @@ function checkedornot(i)
 	{
 		return "unchecked";
 	}
+}
+function show_loader_gif(id){
+	var text = '"for good things, we wait must!"<br><span><i>- Master Yoda</i></span>';
+	var content = '<div class="loader"><img id="loader_gif" src="'+base+'assets/img/spinner.gif" height="300"/><br><span class="quote" style="font-family: "Roboto";font-weight: 800;">'+text+'</span><br><div class="loader_text">'+text+'</div></div>';
+	$(id).html(content);
+	//console.log(content);
+}
+function change_loader_text(text)
+{	
+	$(".loader_text").addClass("animated fadeInUp");
+	$(".loader_text").html(text);
+
+	
+	//$(".loader_text").addClass("animated fadeOutUp");
 }

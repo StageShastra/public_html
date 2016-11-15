@@ -69,15 +69,17 @@
         font-family: "Roboto","Open Sans";
         font-size: 15px;
       }
-      .profile_image{
+      .pro_pic{
+        float: left;
         height: 75px;
-        width: 75px;
+        margin-right: 10px;
         border-radius: 50%;
-        border: 2px solid white;
+        border: 3px solid #fff;
+        box-shadow: 1px 1px 10px gray;
         transition: all .2s ease-in-out;
-
+        cursor: pointer;
       }
-      .profile_image:hover{
+      .pro_pic:hover{
         transform: scale(1.1);
       }
       thead{
@@ -531,14 +533,7 @@ input[type=date], input[type=time], input[type=datetime-local], input[type=month
   margin-bottom: 5px;
 
 }
-.pro_pic{
-    float: left;
-    height: 75px;
-    margin-right: 10px;
-    border-radius: 50%;
-    border: 3px solid #fff;
-    box-shadow: 1px 1px 10px gray;
-}
+
 .actor_name_ea{
     vertical-align: middle;
     position: relative;
@@ -580,20 +575,8 @@ button[disabled], html input[disabled] {
   color: #777;
   font-weight: 600;
 }
-.shoot_begins{
-  padding: 2px 4px;
-  background: #ff3b49;
-  color: white;
-  border-radius: 3px;
-  font-size:11px;
-}
-.shoot_ends{
-  padding: 2px 4px;
-  background: #ffb600;
-  border-radius: 3px;
-  font-size:11px;
-  color: white;
-}
+
+
 .textarea{
   width: 240px !important;
   height: 72px;
@@ -661,7 +644,7 @@ button[disabled], html input[disabled] {
   width: 30px;
 }
 .role_name{
-  width: 90px;
+  width: 150px;
   font-size: 12px;
   font-family: "Raleway";
   color: #777;
@@ -693,6 +676,7 @@ button[disabled], html input[disabled] {
 .fa-star{
   color:#ffb600;
   transition: all 500ms;
+  cursor: pointer;
 }
 .fa-star:hover{
   transform:scale(1);
@@ -703,6 +687,7 @@ button[disabled], html input[disabled] {
     position: relative;
     font-size: 20px;
     top: -4px;
+    cursor: pointer;
 }
 .fa-star-o{
   transition: all 500ms;
@@ -715,33 +700,99 @@ button[disabled], html input[disabled] {
 #table{
   margin-top: 20px;
 }
-.role-tab{
-  padding: 3px 9px;
-  border: 2px solid #FF5722;
+.toggle-tab{
+  padding: 2px 6px;
+  border: 0px solid #FFC107;
   border-radius: 4px;
-  background: #ff3b49;
-  color: white;
+  background: black;
   font-size: 13px;
   font-family: "Roboto";
   font-weight: 500;
   box-shadow: 2px 2px 10px gray;
   margin-right: 10px;
-  transition: all 500ms;
+  transition-duration: 0.1s;
   float: left;
   margin-bottom: 5px;
+  cursor: pointer;
+  color: #FFC107;
+  /*background-image: linear-gradient(45deg, #D3263B 0%, #BE225A 41%, #A81E7B 100%);*/
 }
-.role-tab:hover{
-  opacity: 0.5;
+
+.toggle-tab:hover{
+  box-shadow: 0px 0px 3px 2px #f3525b;
+}
+.toggle-tab-all{
+
+  background: #FFC107;
+  color:black;
 }
 .inactive-tab{
   opacity: 0.5;
+  color: gray;
 }
-.inactive-tab:hover{
-  opacity: 1;
-}
+
 .public_disabled{
   cursor: not-allowed;
 }
+
+.bigger_text{
+  font-size: 18px;
+  color: #444;
+  position: relative;
+  top: -70px;
+}
+
+
+.scrollable{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    min-height: 140px;
+    max-height: 200px;
+    margin-bottom: 10px;
+}
+
+hr{
+    margin-top: 5px !important;
+    margin-bottom: 0px !important;
+    border: 0 !important;
+    border-top: 1px solid #eee !important;
+}
+
+.projectheaderlabel{
+  font-size: 12px;
+  color: #777;
+
+  text-transform: uppercase;
+  vertical-align: middle;
+  padding-top: 2px;
+  margin-bottom: 5px;
+}
+
+.projectheaderdata{
+  font-size: 16px;
+  text-transform: uppercase;
+  vertical-align: bottom;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+div .border-right{
+  border-right: 1px solid #ddd;
+}
+
+div .border-bottom{
+  border-bottom: 1px solid #ddd;
+}
+
+
+.graybackground{
+  background: #eee;
+}
+
+.minheight90>div{
+  min-height: 90px;
+}
+
 
               </style>
         <!--[if lt IE 8]>
@@ -806,18 +857,78 @@ button[disabled], html input[disabled] {
           </div>
           
            <!-- contact modal toggle -->
-            <div class="container-fluid" id="create_project_home">
+            <div class="container-fluid graybackground" id="create_project_home">
                
-              <div class="col-sm-12" id="table">
-              
-                <div class="form-title-row">
-                    <h3 class="project_name"> Project:<b style="text-transform: uppercase;"> <?= $project["StashProject_name"]; ?></b></h3>
-                    <h4 class="shoot_dates"><span style="">SHOOT DATES:  </span><span class="shoot_begins"></span> to <span class="shoot_ends"></span> </h4>
-                    <button type="button" class="go_button" onclick="window.location.assign('../castingsheet/<?= $project["StashProject_id"]; ?>')">Open Casting Sheet</button>
+              <div class="border-bottom" id="table">
+                <div class="nocur" style="cursor:default">
+                
+                <div class="row minheight90">
+                  <div class="col-sm-4 border-right">
+                        <div class="col-sm-3 projectheaderlabel">Project</div>
+                        <div class="col-sm-9 projectheaderdata"> <?= $project["StashProject_name"]; ?></div>
+                        <div class="col-sm-12">
+                          <button class="go_button submit-btn" onclick="window.open('../castingsheet/<?= $project["StashProject_id"]; ?>',
+                        '_blank')">Open Casting Sheet</button>
+                          <button type="button" class="go_button hidden" style="opacity: 0.7;" target="_blank">Edit Project </button>
+                        </div>
+                  </div>
+
+                  <div class="col-sm-4 border-right">
+                    <div class="col-sm-3 projectheaderlabel">Client</div>
+                    <div class="col-sm-9 projectheaderdata"> <?= $project["StashProject_client"]; ?></div>
+                    <div class="col-sm-3 projectheaderlabel">Start Date</div>
+                    <div class="col-sm-9 projectheaderdata"><span class="shoot_begins"></span> </div>
+                    <div class="col-sm-3 projectheaderlabel">Shoot Dates</div>
+                    <div class="col-sm-9 projectheaderdata"><span class="shoot_begins"></span> - <span class="shoot_ends"></span> </div>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <div class="col-sm-6 projectheaderlabel">Actors Auditioned</div>
+                    <div class="col-sm-6 projectheaderdata" id="attendeeslength"> updating... </div>
+                    <div class="col-sm-6 projectheaderlabel">Show Videos</div>
+                    <div class="col-sm-6">
+                      <div class="col-sm-8 onoffswitch" data="" style="padding-top:10px; margin-top: -8px !important;">
+                        <input type="checkbox" id="myonoffswitch" name="onoffswitch" class="onoffswitch-checkbox" unchecked>
+                        <label class="onoffswitch-label center" for="myonoffswitch"></label>
+                      </div>                      
+                      <div class="col-sm-4" style="padding-top:10px;margin-top: -18px !important;margin-left: -11px;">
+                        <img id="loader_gif_video" class="hidden" src="/assets/img/video_loader.gif" height="35">
+                      </div>
+                    </div>
+                    
+
+
+
+                  </div>
                 </div>
-                <div class="role-tabs hidden">
-                  
+                </div> 
+              </div>
+              <br>
+
+              <div class="row">
+                <div class="col-sm-12">
+
+                  <div class="col-sm-1"><span class="projectheaderlabel">Audition Days</span></div>
+                  <div class="col-sm-11 date-tabs ">
+                    <span class="toggle-tab toggle-tab-all"  data-name="date" data-state="active">Hide All</span>
+                  </div>
                 </div>
+              </div>
+
+
+              <div class="row border-bottom">
+                <div class="col-sm-12">
+                  <div class="col-sm-1"><span class="projectheaderlabel">Roles</span></div>
+                  <div class="col-sm-11 role-tabs ">
+                    <span class="toggle-tab toggle-tab-all" data-name="role" data-state="active">Hide All</span>
+                  </div>
+                </div>
+              <br>
+              </div>
+
+            </div>
+
+        
                 <div id="loader"> </div>
                 <table class="table table-striped actors">
                 
@@ -890,27 +1001,62 @@ button[disabled], html input[disabled] {
                       </div>
                     
                     
-                      <div class="row">
-                       <div class="m_questions col-sm-12">
+                      <div class="row m_questions">
                        
-                       </div>
                       </div>
+                      <div class="row">
+                        <div class="col-sm-12 firstcolor">
+                             <b>Experience:</b> 
+                        </div>                     
+                      </div>
+                      
+                      <div class="scrollable col-sm-12">
                       <div class="row">
                         <div class="col-sm-5 firstcolor">
-                            Past 6 months experience: 
+                            TVC: 
                         </div>
                         <div class="col-sm-7">
-                            <span id="m_actor_6_experience"></span>
+                            <span id="m_actor_tvc"></span>
                         </div>
                       </div>
-                    <div class="row"> 
-                     <div class="col-sm-5 firstcolor">
-                      Past 3 years experience: 
-                     </div>
-                     <div class="col-sm-7">
-                      <span id="m_actor_3_experience"></span>
-                     </div>
-                    </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-5 firstcolor">
+                            TV: 
+                        </div>
+                        <div class="col-sm-7">
+                            <span id="m_actor_tv"></span>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-5 firstcolor">
+                            Web: 
+                        </div>
+                        <div class="col-sm-7">
+                            <span id="m_actor_web"></span>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-5 firstcolor">
+                            Films: 
+                        </div>
+                        <div class="col-sm-7">
+                            <span id="m_actor_films"></span>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-5 firstcolor">
+                            Theatre: 
+                        </div>
+                        <div class="col-sm-7">
+                            <span id="m_actor_theatre"></span>
+                        </div>
+                      </div>
+                      </div>
+                    
                     </div>
                   <div class="modal-footer center">
                     <!--<button type="button" class="btn submit-btn" onclick="window.open('http://i.imgur.com/odnRdn3.gif', '_blank')">Open Profile</button>-->
@@ -925,6 +1071,9 @@ button[disabled], html input[disabled] {
       var project_shoot_begins = <?= $project["StashProject_shoot_begins"]; ?>;
       var project_shoot_ends = <?= $project["StashProject_shoot_ends"]; ?>;
       var isPublic  = <?= $isPublic; ?>;
+      function showcomingsoon(){
+        $("#comingsoon").toggle("hidden");
+      }
       </script>
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php

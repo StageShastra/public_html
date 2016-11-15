@@ -97,6 +97,7 @@
         font-size: 16px;
         font-weight: 600;
         background: white;
+        align:left;
         
       }
       th{
@@ -262,6 +263,7 @@ td.card-table-element-data {
            <!-- contact modal toggle -->
             
 <br>
+<div id="loader"> </div>
 <div class="card-deck-wrapper">
   <div class="card-deck" id="list_projects">
   

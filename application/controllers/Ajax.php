@@ -850,6 +850,7 @@
 			$this->db->from("stash-roles"); 
 			$this->db->where("StashRoles_project_id_ref", $ref);
 			$this->db->where("StashRoles_status", 1);
+			$this->db->order_by("StashRoles_role", "asc");
 			$query = $this->db->get();
 			$result = [];
 			$roles = $query->result('array');
@@ -871,11 +872,15 @@
 		public function updateActorPastExperience($data = []){
 			$ref = $data['actor_id'];
 			$data = array(
-						'StashActor_six_months_experience' => $data['actor_recent_exp'],
-						'StashActor_three_years_experience' => $data['actor_past_exp'],
+						'StashActor_tvc_experience' => $data['actor_tvc_exp'],
+						'StashActor_series_experience' => $data['actor_series_exp'],
+						'StashActor_web_experience' => $data['actor_web_exp'],
+						'StashActor_film_experience' => $data['actor_film_exp'],
+						'StashActor_theatre_experience' => $data['actor_theatre_exp'],
 						'StashActor_dob' => strtotime($data['actor_dob']),
 						'StashActor_height' => $data['actor_height'],
-						'StashActor_gender' => $data['actor_sex']
+						'StashActor_gender' => $data['actor_sex'],
+						'StashActor_city' => $data['actor_location']
 					);
 			$this->db->where("StashActor_actor_id_ref", $ref);
 			$this->response(true, "Experience updated",$this->db->update("stash-actor", $data));
@@ -910,7 +915,8 @@
 							"StashRoleActorLink_actor_id_ref" => $d["actor_id"],
 							"StashRoleActorLink_project_id_ref" => $d["project_id"],
 							"StashRoleActorLink_shortlist_status" => 0,
-							"StashRoleActorLink_status"=> 1
+							"StashRoleActorLink_status"=> 1,
+							"StashRoleActorLink_date_of_audition"=>strtotime($d["audition_date"])
 						);
 				$this->response(true, "Role and actors linked",$this->db->insert("stash-role-actor-link", $data));
 			}
@@ -1061,8 +1067,6 @@
 						'StashActor_zip' => '',
 						'StashActor_ticket_status' => 0,
 						'StashActor_profile_completion_stage' => 1,
-						'StashActor_six_months_experience' =>'',
-						'StashActor_three_years_experience' =>'',
 						'StashActor_last_update' => time(),
 						'StashActor_last_ip' => $this->input->ip_address()
 					);

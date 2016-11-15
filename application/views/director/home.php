@@ -92,6 +92,7 @@
         font-size: 16px;
         font-weight: 600;
         background: white;
+        text-align: left;
         
       }
       th{
@@ -165,7 +166,13 @@
       background: #ff9800 !important;
       color: black !important;
     }
-
+    div.panel {
+      background-color: white;
+      max-height: 90px;
+      overflow-x: scroll;
+      opacity: 1;
+      width: 100%;
+    }
               </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -221,7 +228,7 @@
                       </div>
                     </div>
 
-                    <textarea class="contact-sms sms-field" id="textsms" maxlength=280 placeholder="Type your sms text here."></textarea>
+                    <textarea class="contact-sms sms-field" id="textsms"  maxlength=410 placeholder="Type your sms text here."></textarea>
 
                     <span class="info-small gray pull-right">
                       ( <span id="audi-charCounter">160</span> / 
@@ -399,8 +406,8 @@
                   </button> -->
                 </div>
 
-
-                <div class="container col-sm-12 center" id="browse-table">
+                
+                <div  class="container col-sm-12 center" style="text-align:left;" id="browse-table">
                       
                 </div>
                 <div class='container col-sm-12 center' id="main-container"></div>
@@ -570,8 +577,9 @@
                   <div class="modal-body" style="background-color:#fff;">
                     <div class="container" style="max-width:100%; ">
 
-          <div class="alert alert-info" role="alert">
-            <?
+          <!--
+          <div class="alert alert-info" role="alert">-->
+            <!--<?
               if($count_emails==1)
               {
                 echo "You have sent " .$count_emails." Email and have used". $count_sms ." SMS credit till today.";
@@ -581,7 +589,7 @@
                 echo "You have sent " .$count_emails." Emails and have used". $count_sms ." SMS credits till today.";
               }
             ?>
-            </div>
+            </div>-->
                       <!-- Nav tabs -->
                       <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" id="#emailtab" class="active"><a href="#viaEmail" aria-controls="home" role="tab" data-toggle="tab">Via Email</a></li>

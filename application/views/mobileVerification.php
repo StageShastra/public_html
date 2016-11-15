@@ -1,5 +1,6 @@
 <?php
   include 'includes/head.php';
+  
 ?>
     <body>
         <!--[if lt IE 8]>

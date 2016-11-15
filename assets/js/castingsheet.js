@@ -1,4 +1,3 @@
-
 //list of variables
 var project_id; //global variable for projectid
 var roles=[]; //array to hold details of the roles
@@ -22,6 +21,22 @@ $(document).ready(function(){
 			//console.log(hide, unhide);
 
 		});
+	$('#contact').keyup(function(e){
+	    if(e.keyCode == 13)
+	    {
+	        get_actor_details();
+	    }
+	});
+	$.dobPicker({
+					daySelector: '#dobday', /* Required */
+					monthSelector: '#dobmonth', /* Required */
+					yearSelector: '#dobyear', /* Required */
+					dayDefault: 'Day', /* Optional */
+					monthDefault: 'Month', /* Optional */
+					yearDefault: 'Year', /* Optional */
+					minimumAge: 0, /* Optional */
+					maximumAge:110 /* Optional */
+				});
 
 	//calling populating methods
 	populate_roles();
@@ -107,8 +122,9 @@ function populate_questions(i)
 		});
 		
 }
+
 function populate_attendees()
-{
+{ 
 	data = {request: "getActorsInAProject",
 	 		data: JSON.stringify({
 	 								project_id: project_id, 
@@ -123,15 +139,24 @@ function populate_attendees()
 				if(response.status==true)
 				{	
 					attendees=JSON.parse(response.data);
-					for(i=0;i<attendees.length;i++)
+					if(attendees.length>0)
 					{
-						attendees_names[i]=attendees[i].StashActor_name;
-						append_attendees(attendees_names[i]);
+						for(i=0;i<attendees.length;i++)
+						{
+							attendees_names[i]=attendees[i].StashActor_name;
+							append_attendees(attendees_names[i]);
+							$('#loader_atten').fadeOut('fast');
+						}
+					}
+					else
+					{
+						$('#loader_atten').html('<span class="loader_atten_text">No actor has auditioned yet...</span>');
+						console.log("no actor found. Please proceed");	
 					}
 				}
 				else
 				{
-					console.log("no actor found. Please proceed");
+					
 				}
 
 			}
@@ -147,6 +172,7 @@ function append_attendees(name){
 	{
 		$('#attendee_id_'+second_last).removeClass("last_inserted");	
 	}
+	$('#loader_atten').fadeOut('fast');
 
 }
 function get_actor_details()
@@ -172,17 +198,23 @@ function get_actor_details()
 				{	
 					actor=JSON.parse(response.data);
 					$("#actor_name_ea").html(actor.StashActor_name);
-					$("#3_years_experience").val(actor.StashActor_three_years_experience);
-					$("#6_months_experience").val(actor.StashActor_six_months_experience);
+					$("#tvc_experience").val(actor.StashActor_tvc_experience);
+					$("#series_experience").val(actor.StashActor_series_experience);
+					$("#web_experience").val(actor.StashActor_web_experience);
+					$("#film_experience").val(actor.StashActor_film_experience);
+					$("#theatre_experience").val(actor.StashActor_theatre_experience);
 					$("#actor_feet").val(Math.floor(actor.StashActor_height/30.48));
 					$("#actor_inches").val(Math.round((actor.StashActor_height%30.48)/2.54));
 					var utcSeconds = actor.StashActor_dob;
 					var date = new Date(utcSeconds*1000);
-					console.log(date);
+					//console.log(date);
 					var formattedDate = date.getUTCFullYear() + '-' + leftPad((date.getUTCMonth() + 1),2)+ '-' + leftPad((date.getUTCDate()+1),2);
 					$("#actor_dob").val(formattedDate);
-					console.log(formattedDate);
+					$("#dobday").val(leftPad(date.getUTCDate()+1),2);
+					$("#dobmonth").val(leftPad((date.getUTCMonth() + 1),2));
+					$("#dobyear").val((date.getUTCFullYear()).toString());
 					$("#actor_sex").val(actor.StashActor_gender);
+					$("#actor_city").val(actor.StashActor_city);
 					var src="http://castiko.com/assets/img/actors/"+actor.StashActor_avatar;
 					$("#pro_pic").attr("src",src);
 					show_casting_sheet();
@@ -204,6 +236,7 @@ function show_casting_sheet(data)
 	//$('#date_audition').val(new Date().toDateInputValue());
 	var shoot_start_date = new Date(0); // The 0 there is the key, which sets the date to the epoch
 	var shoot_end_date = new Date(0);
+	$("#role_audition").addClass("animated infinite pulse");
 	shoot_start_date.setUTCSeconds(project_shoot_begins);
 	shoot_end_date.setUTCSeconds(project_shoot_ends);
 	if(actor.isLinkedWithDirector==0)
@@ -237,6 +270,7 @@ function show_casting_sheet(data)
 }
 function show_dynamic_questions()
 {
+	$("#role_audition").removeClass("animated infinite pulse");
 	var index=$("#role_audition").val();
 	$("#save_actor_response").removeAttr("disabled");
 	var role_id=roles[index].StashRoles_id;
@@ -303,13 +337,17 @@ function submit_answers()
 		question_answer_obj.answer = $("#question_"+i).val();
 		actor.questions_answers[i] = question_answer_obj;
 	}
-	actor.last_three_years_exp=$("#3_years_experience").val();
-	actor.last_six_months_exp=$("#6_months_experience").val();
+	actor.tvc_exp=$("#tvc_experience").val();
+	actor.series_exp=$("#series_experience").val();
+	actor.film_exp=$("#film_experience").val();
+	actor.theatre_exp=$("#theatre_experience").val();
+	actor.web_exp=$("#web_experience").val();
+	actor.location_city=$("#actor_city").val();
 
 	//validation check 
-	if(actor.last_three_years_exp=="" || actor.last_six_months_exp=="" )
+	if(actor.last_three_years_exp=="" || actor.last_six_months_exp=="" || $("#actor_city").val()=="")
 	{
-		alert("Please fill in the experiences");
+		alert("Please fill in the experiences and location");
 		$("#save_actor_response").removeAttr('disabled');
 		$("#save_actor_response").html('Submit');
 		return;
@@ -332,18 +370,24 @@ function show_email_form(){
 }
 function update_actor_experience()
 {
-	var actor_id=actor.StashActor_actor_id_ref;
+	var actor_id = actor.StashActor_actor_id_ref;
+	var actor_location = actor.location_city;
 	var actor_dob = $("#actor_dob").val();
+	actor_dob = $("#dobyear").val() + '-' + $("#dobmonth").val()+ '-' + $("#dobday").val();
 	var actor_height = Math.round(($("#actor_feet").val()*30.48)+($("#actor_inches").val()*2.54));
 	var actor_sex = $("#actor_sex").val();
 	data = {request: "updateActorPastExperience",
 	 		data: JSON.stringify({
 	 								actor_id: actor_id,
-	 								actor_recent_exp: actor.last_six_months_exp,
-	 								actor_past_exp:actor.last_three_years_exp,
+	 								actor_tvc_exp: actor.tvc_exp,
+	 								actor_series_exp:actor.series_exp,
+	 								actor_film_exp: actor.film_exp,
+	 								actor_theatre_exp:actor.theatre_exp,
+	 								actor_web_exp:actor.web_exp,
 	 								actor_dob:actor_dob,
 	 								actor_sex:actor_sex,
-	 								actor_height:actor_height
+	 								actor_height:actor_height,
+	 								actor_location:actor_location
 	 							 }
 	 							)};
 	 //		console.log(data);
@@ -410,7 +454,8 @@ function insert_role_actor(){
 	 		data: JSON.stringify({
 	 								actor_id: actor_id,
 	 								role_id: role_id,
-	 								project_id: project_id
+	 								project_id: project_id,
+	 								audition_date: todaysdate
 	 							 }
 	 							)};
 	 //	console.log(data);
@@ -419,7 +464,6 @@ function insert_role_actor(){
 			url: url,
 			type: type,
 			data: data,
-			async:false,
 			success: function(response){
 				if(response.status==true)
 				{	
@@ -478,10 +522,10 @@ function insert_actor_scenes(index,actor_id)
 		});
 	}
 }
-function insert_project_actor(){
+function insert_project_actor(id){
 
-	var actor_id=actor.StashActor_actor_id_ref;
-	
+	var actor_id=id;
+	console.log("here it id"+ actor_id);
 		data = {request: "insertActorProject",
 	 		data: JSON.stringify({
 	 								actor_id: actor_id,
@@ -561,6 +605,7 @@ function submit_new_actor_answers(){
 				if(response)
 				{	
 					actor.StashActor_actor_id_ref=response.data;
+					console.log(response);
 					actor.StashActor_name=actor_name;
 					actor.last_six_months_exp = $("#6_months_experience").val();
 					actor.last_three_years_exp = $("#3_years_experience").val();
@@ -595,6 +640,7 @@ $("#save_actor_response").html('Submit');
 setTimeout(function(){ 
 	$("#not_registered_last_message").addClass("animated fadeOut");
 	 }, 9000);
+$(".photo_name").removeClass("hidden");
 }
 $("#save_actor_response").removeAttr('disabled');
 document.getElementById("date_audition").valueAsDate = new Date();
@@ -613,7 +659,7 @@ function hasnotfilled()
 			insert_actor_answers(0,actor);
 		}
 		insert_role_actor();
-		insert_project_actor();
+		insert_project_actor(actor.StashActor_actor_id_ref);
 		$("body").scrollTop(0);
 		show_email_form();
 		//$("#contact").addClass("hidden");
@@ -632,3 +678,4 @@ function hasfilled()
 	clean_slate_protocol();
 	return ;
 }
+

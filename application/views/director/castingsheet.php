@@ -1,6 +1,6 @@
 <?php
   include 'includes/head.php';
- ?>
+?>
 
  <link rel="stylesheet" type="text/css" href="<?= CSS ?>/selectize.css" />
 
@@ -597,7 +597,7 @@ button[disabled], html input[disabled] {
 }
 .textarea{
   width: 240px !important;
-  height: 72px;
+  height: 45px;
 }
 .textarea{
   margin : 0px 5px 5px 0px !important;
@@ -662,7 +662,15 @@ button[disabled], html input[disabled] {
   margin-left: 0px;
   margin-right: 0px;
 }
-              </style>
+.loader_atten_text{
+    text-transform: lowercase;
+    font-family: "Roboto";
+    text-align: center;
+    margin-top: 53px;
+  }    
+  .loader_atten{
+    text-align: center;
+    }          </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -731,11 +739,12 @@ button[disabled], html input[disabled] {
                           <br>
                           It is crucial that you complete your profile with basic details and photos.  
                </div>
-                <div class="form-title-row">
+                <div class="form-title-row" style="">
                     <h1 class="heading"> CASTING SHEET</h1>
                     <h3 class="project_name"> PROJECT : <?= $project["StashProject_name"]; ?></h3>
                     <h5 class="shoot_dates"><span style="">Shoot starts from  </span><span class="shoot_begins"></span> and ends on <span class="shoot_ends"></span> </h5>
-                    <input type="text" id="contact" class="input_cs" name="contact" placeholder="Enter your email/phone"/><button type="button" onclick="get_actor_details()" class="go_button">Go</button>
+                    <h5 class="shoot_dates">Enter your email or phone</h5>
+                    <input type="text" id="contact" class="input_cs" name="contact" placeholder="Enter your email or phone"/><button type="button" onclick="get_actor_details()" class="go_button">Go</button>
                 </div>
               </div>
               <div class="col-sm-10 hidden" id="casting_sheet_form"> 
@@ -766,14 +775,6 @@ button[disabled], html input[disabled] {
                         </div>
                         <div class="row">
                             <div class="label_cs col-sm-6">
-                              Email 
-                            </div>
-                            <div class="col-sm-6">
-                              <input type="email" id="email_new_actor" class="input_cs" name="email_new_actor" placeholder="Enter your email"/>
-                            </div> 
-                        </div>
-                        <div class="row">
-                            <div class="label_cs col-sm-6">
                               Phone Number  
                             </div>
                             <div class="col-sm-6">
@@ -782,7 +783,15 @@ button[disabled], html input[disabled] {
                         </div>
                         <div class="row">
                             <div class="label_cs col-sm-6">
-                              Choose Password  
+                              Email 
+                            </div>
+                            <div class="col-sm-6">
+                              <input type="email" id="email_new_actor" class="input_cs" name="email_new_actor" placeholder="Enter your email"/>
+                            </div> 
+                        </div>
+                        <div class="row">
+                            <div class="label_cs col-sm-6">
+                              Create Password  
                             </div>
                             <div class="col-sm-6">
                               <input type="password" id="password_new_actor" class="input_cs" name="password_new_actor" placeholder="Please set a new password" oncopy="return false" autocomplete="new-password"/>
@@ -817,6 +826,19 @@ button[disabled], html input[disabled] {
                             </select>
                           </div>
                         </div>  
+                        <div class="row">
+                          <div class="label_cs col-sm-6">
+                            City
+                          </div>
+                          <div class="col-sm-6">
+                            <select id="actor_city" class="input_cs" name="actor_city" placeholder="Select City of Audition" />
+                              <option disabled selected value> Select a Role</option>
+                              <option value="Delhi">Delhi</option>
+                              <option value="Mumbai">Mumbai</option>
+                              <option value="Chandigarh">Chandigarh</option>
+                            </select>
+                          </div>
+                        </div>
                       </div>
                       <div id="role_based_questions">
 
@@ -840,7 +862,10 @@ button[disabled], html input[disabled] {
                             Date of Birth
                           </div>
                           <div class="col-sm-6">
-                            <input type="date"  id="actor_dob" class="input_cs  " name="actor_dob" placeholder="Date of Birth" /></input>
+                            <select class="col-sm-2 input_cs" id="dobday"></select>
+                            <select class="col-sm-4 input_cs" id="dobmonth"></select>
+                            <select class="col-sm-4 input_cs"  id="dobyear"></select>
+                            <input type="date"  id="actor_dob" class="input_cs hidden " name="actor_dob" placeholder="Date of Birth" /></input>
                           </div>
                         </div>
                         <div class="row">
@@ -856,34 +881,65 @@ button[disabled], html input[disabled] {
                         </div>
                         <div class="row">
                           <div class="label_cs col-sm-6">
-                            Past 6 months experience  
+                            <u>Experience</u>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="label_cs col-sm-6">
+                            TVC 
                           </div>
                           <div class="col-sm-6">
-                            <textarea type="text" id="6_months_experience" class="input_cs textarea " name="6_months_experience" placeholder="Enter your recent experiences" /></textarea>
+                            <textarea type="text" id="tvc_experience" class="input_cs textarea " name="tvc_experience" placeholder="e.g. Dettol Swachh Bharat (2015)" /></textarea>
                           </div> 
                         </div>
                         <div class="row">
                           <div class="label_cs col-sm-6">
-                            Last 3 years experience  
+                            TV
                           </div>
                           <div class="col-sm-6">
-                            <textarea type="text" id="3_years_experience" class="input_cs textarea " name="3_years_experience" placeholder="Enter your last 3 years experiences" /></textarea>
+                            <textarea type="text" id="series_experience" class="input_cs textarea " name="series_experience" placeholder="e.g. Sasural Simar Ka 2nd lead(2014) " /></textarea>
+                          </div> 
+                        </div>
+                        <div class="row">
+                          <div class="label_cs col-sm-6">
+                            Web
                           </div>
-                        </div>  
+                          <div class="col-sm-6">
+                            <textarea type="text" id="web_experience" class="input_cs textarea " name="web_experience" placeholder="e.g. TVF Pitchers E01(2015)  " /></textarea>
+                          </div> 
+                        </div>
+                        <div class="row">
+                          <div class="label_cs col-sm-6">
+                            Film 
+                          </div>
+                          <div class="col-sm-6">
+                            <textarea type="text" id="film_experience" class="input_cs textarea " name="film_experience" placeholder="e.g. Queen(2013)" /></textarea>
+                          </div>
+                        </div> 
+                        <div class="row">
+                          <div class="label_cs col-sm-6">
+                            Theatre
+                          </div>
+                          <div class="col-sm-6">
+                            <textarea type="text" id="theatre_experience" class="input_cs textarea " name="theatre_experience" placeholder="e.g. Hayavadana-Prithvi Theatre(2016)" /></textarea>
+                          </div> 
+                        </div> 
                       </div>
-                      <button type="button" id="save_actor_response" onclick="submit_answers()" class="go_button center" style="margin-top:30px; margin-bottom:30px;" disabled >Submit</button>
+                      
+                      <button type="button" id="save_actor_response" onclick="this.disabled=true;this.value='Submitting...';submit_answers();" class="go_button center" style="margin-top:30px; margin-bottom:30px;" disabled >Submit</button>
 
                     </div>
                 </div>
               </div>
               <div class="col-sm-2 attendees">
                 <h4 class="label_att">ATTENDEES</h4>
+                <div id="loader_atten">
+                <div class="loader_atten"><img src="<?= base_url() ?>/assets/img/spinner.gif" height="150"><br></div>
+                 </div>
                 <div id="list_of_attendees">
                 </div>
               </div>
             </div>
-            
-
       <script>
       var project_id = <?= $project["StashProject_id"]; ?>;
       var project_shoot_begins = <?= $project["StashProject_shoot_begins"]; ?>;
@@ -896,4 +952,3 @@ button[disabled], html input[disabled] {
 ?>
 <script src="<?= JS ?>/castingsheet.js"></script>
 <script type="text/javascript" src="<?= JS ?>/selectize.min.js"></script>
-
