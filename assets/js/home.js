@@ -590,7 +590,7 @@ $(document).ready(function(){
 
 		$.ajax({
 			url: url,
-			//type: type,
+			type: type,
 			data: data,
 			success: function(response){
 				//console.log(response);
