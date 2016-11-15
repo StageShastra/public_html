@@ -228,7 +228,7 @@
                       </div>
                     </div>
 
-                    <textarea class="contact-sms sms-field" id="textsms"  placeholder="Type your sms text here."></textarea>
+                    <textarea class="contact-sms sms-field" id="textsms"  maxlength=410 placeholder="Type your sms text here."></textarea>
 
                     <span class="info-small gray pull-right">
                       ( <span id="audi-charCounter">160</span> / 
