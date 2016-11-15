@@ -1,5 +1,9 @@
 var project_id;
 var roles=[];
+var dates={};
+var days=[];
+var city_names=[];
+var cities={};
 var actor=[];
 var attendees=[];
 var attendees_names=[];
@@ -39,33 +43,147 @@ $(document).on("click", ".toggleEdit", function(){
 	$(".shoot_begins").html(shoot_start_date.toDateString());
 	$(".shoot_ends").html(shoot_end_date.toDateString());
 });
+$(document).on("click",".onoffswitch",function(e) { 
+		e.stopPropagation();
+		//var id=$(this).attr("data");
 
+		if($("#myonoffswitch").is(":checked"))
+		{
+			$("#myonoffswitch").prop('checked', false);
+			$("#loader_gif_video").removeClass("hidden");
+			$(".video_col").addClass("hidden");
+			$("#loader_gif_video").addClass("hidden");
+		}
+		else
+		{
+			$("#myonoffswitch").prop('checked', true);
+			
+			if(attendees[0].videos)
+			{
+
+				$(".video_col").removeClass("hidden");
+
+			}
+			else
+			{
+				$("#loader_gif_video").removeClass("hidden");
+				$(".video_col").removeClass("hidden");
+				$(".video_td").html('<img id="loader_gif_video" style="float:left;" src="/assets/img/video_loader.gif" height="35">')
+				populate_videos(0);
+			}
+			
+			
+		}
+	
+
+	}); 
 $(document).on("click", ".role-tab", function(e){
 
 		var state = $(this).attr("data-state");
-		var role_name = $(this).attr("data-name");
+		var role_index = $(this).attr("data-name");
 		if(state=="active")
 		{
-			$("."+role_name+"_role").addClass("animated fadeOut");
+			roles[role_index].state=0;
 			$(this).attr("data-state","inactive");
 			$(this).addClass("inactive-tab");
-			$("."+role_name+"_role").addClass("hidden");
+			$(this).removeClass("active-tab");
+		}
+		else
+		{
+			roles[role_index].state=1;
+			$(this).attr("data-state","active");
+			$(this).removeClass("inactive-tab");
+			$(this).addClass("active-tab");
+		}
+		hide_show_rows(0,role_index) // 0 is for role, 1 is for days
+
+});
+
+$(document).on("click", ".date-tab", function(e){
+
+		var state = $(this).attr("data-state");
+		var date_name = $(this).attr("data-name");
+		var state = $(this).attr("data-state");
+		var day_index = $(this).attr("data-name");
+		if(state=="active")
+		{
+			days[day_index].state=0;
+			$(this).attr("data-state","inactive");
+			$(this).addClass("inactive-tab");
+			$(this).removeClass("active-tab");
 
 		}
 		else
 		{
-			$("."+role_name+"_role").removeClass("hidden");
-			$("."+role_name+"_role").removeClass("animated fadeOut");
-			$("."+role_name+"_role").addClass("animated fadeIn");
+			days[day_index].state=1;
 			$(this).attr("data-state","active");
 			$(this).removeClass("inactive-tab");
+			$(this).addClass("active-tab");
+			
+		}
+		hide_show_rows(1,day_index) // 0 is for role, 1 is for days
+
+});
+$(document).on("click", ".toggle-tab-all", function(e){
+
+		var state = $(this).attr("data-state");
+		var tab_name = $(this).attr("data-name");
+		
+		if(state=="active")
+		{
+			$("."+tab_name+"-tab.active-tab").click();
+			$(this).attr("data-state","inactive");
+			$(this).html("Show All");
+
+		}
+		else
+		{
+			$("."+tab_name+"-tab.inactive-tab").click();
+			$(this).attr("data-state","active");
+			$(this).html("Hide All");
 			
 		}
 		
-
 });
+function hide_show_rows(c,index)
+{	
 
+	console.log(roles);
 
+	if(c==0)
+	{
+		
+		for(k=0;k<days.length;k++)
+		{
+			if(days[k].state*roles[index].state==0)
+			{
+				$('.'+roles[index].StashRoles_role.split(' ').join('_')+'_role.'+days[k].real_date.split(' ').join('_')+'_date').addClass("hidden");
+			}
+			else
+			{
+				$('.'+roles[index].StashRoles_role.split(' ').join('_')+'_role.'+days[k].real_date.split(' ').join('_')+'_date').removeClass("hidden");
+
+			}
+		}
+	}
+	if(c==1)
+	{
+		for(k=0;k<roles.length;k++)
+		{
+			if(roles[k].state*days[index].state==0)
+			{
+				//$("."+days[index].real_date.split(' ').join('_')+"_date").addClass("animated fadeOut");
+				$('.'+days[index].real_date.split(' ').join('_')+'_date.'+roles[k].StashRoles_role.split(' ').join('_')+'_role').addClass("hidden");
+
+			}
+			else
+			{
+				$('.'+days[index].real_date.split(' ').join('_')+'_date.'+roles[k].StashRoles_role.split(' ').join('_')+'_role').removeClass("hidden");	
+			}
+		}
+	}
+	
+}
 function populate_roles()
 {	
 	data = {request: "getRolesInProject",
@@ -84,15 +202,11 @@ function populate_roles()
 				{
 					roles=JSON.parse(response.data);
 					change_loader_text(roles.length+" roles fetched...");
-					var pre_html="";
-					for(var i=0;i<roles.length;i++)
+					for(l=0;l<roles.length;l++)
 					{
-						
-						pre_html+='<span class="role-tab" data-name='+roles[i].StashRoles_id+' data-state="active">'+roles[i].StashRoles_role+'</span>';
-				                  
+						roles[l].actor_in_role=0;
+						roles[l].state = 1;
 					}
-
-					$(".role-tabs").html(pre_html);
 					populate_questions(0);
 					
 					
@@ -107,6 +221,7 @@ function populate_roles()
 
 		
 }
+
 function populate_questions(i)
 {
 	change_loader_text("fetching questions...");
@@ -167,8 +282,23 @@ function populate_attendees()
 				{	
 					attendees=JSON.parse(response.data);
 					change_loader_text(attendees.length +" actors fetched...");
-					get_actors_answers(0);
+					$("#attendeeslength").html(attendees.length);
+					if(attendees.length==0)
+					{
+
+						$("#loader_gif").addClass("hidden");	
+						$(".loader_text").addClass("bigger_text");
+                    	change_loader_text("no actors here yet...");
+                    	//$(".quote").addClass("hidden");
+                    	return;
+					}
+					else
+					{
+						get_actors_answers(0);	
+						populate_dates();
+					}
 					
+
 				}
 				else
 				{
@@ -182,18 +312,40 @@ function populate_attendees()
 function get_actors_answers(f)
 {
 	change_loader_text("fetching actor's answers...");
-	
+	if(attendees[f].StashRoleActorLink_date_of_audition==null)
+	{
+		attendees[f].StashRoleActorLink_date_of_audition = 1427333800;
+	}
+	if(!(attendees[f].StashRoleActorLink_date_of_audition in dates))
+	{
+		dates[attendees[f].StashRoleActorLink_date_of_audition]=1;
+	}
+	else
+	{
+		dates[attendees[f].StashRoleActorLink_date_of_audition]++;
+	}
+	if(!(attendees[f].StashActor_city in cities))
+	{
+		cities[attendees[f].StashActor_cities]=1;
+	}
+	else
+	{
+		cities[attendees[f].StashActor_cities]++;
+	}
 		if(get_question_details(f,attendees[f].StashRoleActorLink_role_id_ref)==1)
 		{
 			
 			if(++f<attendees.length)
 			{
+
+				
 				get_actors_answers(f);
 
 			}
 			else
 			{
-				populate_videos(0);
+				populate_table();
+				//console.log(dates);
 				change_loader_text("all actor's answers fetched");
 			}
 
@@ -204,7 +356,7 @@ function get_actors_answers(f)
 
 function get_question_details(index,role_id)
 {
-
+    
 	for(var ri=0;ri<roles.length;ri++)
 	{	
 		
@@ -213,7 +365,9 @@ function get_question_details(index,role_id)
 			attendees[index].questions=[];
 			if(attendees[index].StashRoleActorLink_role_id_ref==role_id)
 			{
-				attendees[index].role_name=roles[ri].StashRoles_role;	
+				attendees[index].role_name = roles[ri].StashRoles_role;	
+				attendees[index].role_scenes = roles[ri].StashRoles_scenes; 
+				roles[ri].actor_in_role++;
 			}
 		
 			if(roles[ri].questions.length!=0){
@@ -223,6 +377,7 @@ function get_question_details(index,role_id)
 			
 		}
 	}
+	//console.log(roles);
 	return 1;
 }
 function get_link_question_role(i,index,k,role_id)
@@ -267,7 +422,7 @@ function get_link_question_role(i,index,k,role_id)
 function populate_videos(i)
 {
 	change_loader_text("fetching videos...");
-	
+	console.log("populating videos...");
 		data = {request: "getActorVideos",
 				 		data: JSON.stringify({
 				 								actor_id: attendees[i].StashActor_actor_id_ref,
@@ -291,7 +446,7 @@ function populate_videos(i)
 								else
 								{
 									change_loader_text("all videos fetched.");
-									populate_table();
+									inject_video();
 								}
 								//console.log("videos " + (i+1) + " of " + attendees.length + "linked...")
 								
@@ -337,6 +492,36 @@ function set_videos(actor_id,role_id,index)
 }
 
 
+function populate_dates()
+{
+	var tmp_days=[];
+	tmp_days=Object.keys(dates);
+	
+	var pre_html=$(".date-tabs").html();
+	for(k=0;k<tmp_days.length;k++)
+	{
+		var day_obj={};
+		var aud_date = new Date(0); // The 0 there is the key, which sets the date to the epoch
+		aud_date.setUTCSeconds(tmp_days[k]);
+		day_obj.real_date = tmp_days[k];
+		day_obj.state=1;
+		day_obj.date = aud_date.toDateString();
+		day_obj.day = "Day "+inWords(k+1);
+		days[k]=day_obj;
+		pre_html+='<span class="toggle-tab date-tab active-tab" data-name="'+k+'" data-state="active">'+day_obj.day+' <span class="badge">'+dates[tmp_days[k]]+' </span></span>';
+	}
+	
+	$(".date-tabs").html(pre_html);
+	pre_html=$(".role-tabs").html();
+	for(var i=0;i<roles.length;i++)
+	{
+		
+		pre_html+='<span class="toggle-tab role-tab active-tab" data-name='+i+' data-state="active">'+roles[i].StashRoles_role+' <span class="badge">'+roles[i].actor_in_role+' </span></span>';
+                  
+	}
+
+	$(".role-tabs").html(pre_html);
+}
 
 function populate_table()
 {
@@ -345,15 +530,16 @@ function populate_table()
 	var dyn_html='<thead>'
              +' <th class="star"><i class="fa fa-star-o" id="shortlist_all" aria-hidden="true" onclick="show_shortlisted()"></i></th>'
              +' <th>Profile</th>'
-             +' <th data-sort="string">Name <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>'
-             +' <th data-sort="string">Role <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>'
+             +' <th  data-sort="string" data-tooltip="Click here to sort">Name<img id="loader_gif_video_name" class="hidden" src="/public_html/assets/img/video_loader.gif" height="25" style="position: relative;top: 7px;"> </th>'
+             +' <th  data-sort="string" data-tooltip="Click here to sort">Role </th>'
              +'	<th>Notes</th>';
-             dyn_html+=' <th>Intro</th>';
+             dyn_html+=' <th class="video_col hidden">Intro</th>';
              for(i=0;i<max_scenes;i++)
              {
-             	dyn_html+='<th>Scene '+ (i+1) +'</th>';
+             	dyn_html+='<th class="video_col hidden">Scene '+ (i+1) +'</th>';
              }
-             dyn_html+=' <th data-sort="string">Date <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>'
+             dyn_html+='<th data-sort="string" data-tooltip="Click here to sort">Date</th>'
+
              +'<th><span class="fa fa-newspaper-o" title="Casting Sheet response"></span></th>';
              dyn_html+=' <th><span class="fa fa-trash-o" title="Delete record"></span></th>';
              dyn_html+='</thead>';
@@ -382,7 +568,7 @@ function populate_table()
              var aud_date = new Date(0);
 				aud_date.setUTCSeconds(attendees[i].StashRoleActorLink_date_of_audition);
              dyn_html+= video_string+''
-             +'<td>'+aud_date.toDateString()+'</td><td><span class="fa fa-newspaper-o" onclick="open_casting_response('+i+')"></span></td>'
+             +'<td>'+aud_date.toDateString()+'<td><span class="fa fa-newspaper-o" onclick="open_casting_response('+i+')"></span></td>'
              +'<td><span class="fa fa-trash-o" onclick="delete_record_response('+i+')"></span></td>'
              +'</tr>';
 	}
@@ -411,43 +597,62 @@ function video_embed(actor)
 {
 	//console.log("video embed called");
 	var string='';
-	for(t=0;t<actor.videos.length;t++)
-	{
-		if(actor.videos[t].StashSceneVideo_video=="")
-		{
-			string+='<td class="video"><div id="video_"'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit" data-hide-id="#cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"data-unhide-id="#input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"><span id="cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="click_to_add">Click to add video</span>'
-					   +'<div class="embed-responsive embed-responsive-4by3 hidden" id="embed_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'">'
-	                   +'</div>'
-					   +'<input class="input_cs hidden" id="input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="text" placeholder="Paste youtube video link" onpaste="setTimeout(function(){ show_video('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)">'
-					   +'</div></td>' ;
-
-
-		}
-		else
-		{
-			string+='<td class="video">'
-	                +'    <div class="embed-responsive embed-responsive-4by3">'
-	                +'      <iframe id="iframe_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="embed-responsive-item" src="'+actor.videos[t].StashSceneVideo_video+'" allowfullscreen></iframe>'
-	                +'    </div>'
-	                +'<button id="edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-hide-id="#edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-unhide-id="#input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+',#update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit go_button">Edit</button>'
-	                +'<input class="input_cs hidden" value="'+actor.videos[t].StashSceneVideo_video+'" id="input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="text" onpaste="setTimeout(function(){ show_video('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)">'
-	                +'<button id="update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="button" onclick="setTimeout(function(){ show_video('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)" class="go_button toggleEdit hidden" data-unhide-id="#edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-hide-id="#input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+',#update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" >Go</button>'
-	                +' </td>';
-		}
+	for(t=0;t<=actor.role_scenes;t++)
+	{ 
+		string+='<td class="video video_td video_col hidden" id="td_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" >'
+					  '</td>' ;
 	}
 	//console.log("max_scenes are_"+max_scenes);
-	var actor_Scenes=actor.videos.length - 1;
+	var actor_Scenes=actor.role_scenes;
 	if(actor_Scenes<max_scenes)
 	{
 		//console.log("in max scenes");
 		for(h=actor_Scenes;h<max_scenes;h++)
 		{
-			string+='<td class="video">'
+			string+='<td class="video video_col hidden">'
 	                +'<span class="click_to_add">Not applicable</span>'    
 	                +' </td>';
 		}
 	}
 	return string;
+}
+function inject_video()
+{
+	//console.log(attendees);
+	for(a=0;a<attendees.length;a++)
+	{	
+		actor=attendees[a];
+		//console.log(actor);
+		for(t=0;t<actor.videos.length;t++)
+		{ 	var string="";
+			if(actor.videos[t].StashSceneVideo_video=="")
+			{
+				string=	'<div id="video_"'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit" data-hide-id="#cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"data-unhide-id="#input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'">'
+						   +'<span id="cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="click_to_add">Click to add video</span>'
+						   +'<div class="embed-responsive embed-responsive-4by3 hidden" id="embed_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'">'
+		                   +'</div>'
+						   +'<input class="input_cs hidden" id="input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="text" placeholder="Paste youtube video link" onpaste="setTimeout(function(){ show_video('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)">'
+						   +'</div>' ;
+
+
+			}
+			else
+			{
+				string= '<div class="embed-responsive embed-responsive-4by3">'
+		                +'      <iframe id="iframe_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="embed-responsive-item" src="'+actor.videos[t].StashSceneVideo_video+'" allowfullscreen></iframe>'
+		                +'</div>'
+		                +'<button id="edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-hide-id="#edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-unhide-id="#input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+',#update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit go_button">Edit</button>'
+		                +'<input class="input_cs hidden" value="'+actor.videos[t].StashSceneVideo_video+'" id="input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="text" onpaste="setTimeout(function(){ show_video('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)">'
+		                +'<button id="update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="button" onclick="setTimeout(function(){ show_video('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)" class="go_button toggleEdit hidden" data-unhide-id="#edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-hide-id="#input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+',#update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" >Go</button>'
+		                +'';
+			}
+			$('#td_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'').html(string);
+		}
+
+	}
+	$(".video_col").addClass("animated fadeIn");
+	$(".video_col").removeClass("hidden");
+	$("#loader_gif_video").addClass("hidden");
 }
 function show_notes(actor,i)
 {
@@ -455,7 +660,7 @@ function show_notes(actor,i)
 		var string="";
 		if(actor.StashRoleActorLink_notes==null)
 		{
-			string+='<td class="notes">'
+			string+='<td class="notes" style="text-align:left;">'
 					   +'<div id="notes_"'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit" data-hide-id="#notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"data-unhide-id="#notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'">'
 					   +'<span id="notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="click_to_add">Click to add notes</span>'
 					   +'<input class="input_cs hidden" id="notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="text" placeholder="Add notes here" onfocusout="setTimeout(function(){ save_notes('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+t+'); },4)">'
@@ -465,7 +670,7 @@ function show_notes(actor,i)
 		}
 		else
 		{
-			string+='<td class="notes"><div id="notes_"'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit" data-hide-id="#notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"data-unhide-id="#notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"><span id="notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="click_to_add">'+actor.StashRoleActorLink_notes+'</span>'
+			string+='<td class="notes" style="text-align:left;"><div id="notes_"'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit" data-hide-id="#notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"data-unhide-id="#notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'"><span id="notes_cta_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="click_to_add">'+actor.StashRoleActorLink_notes+'</span>'
 					   +'<input class="input_cs hidden" id="notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" type="text" placeholder="Add notes here" value="'+actor.StashRoleActorLink_notes+'" ><br>'
 			
 	                +'<button id="notes_edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-hide-id="#notes_edit_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" data-unhide-id="#notes_input_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+',#notes_update_btn_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'_'+t+'" class="toggleEdit go_button">Edit</button>'
@@ -497,15 +702,20 @@ function open_casting_response(id)
 	 	{
 	 		var question_a=questions_obj.question.answer.StashAnswers_answer;
 
-		 prehtml+='<span>Q. '+question_q+'</span>?'
-                  +'<br>'
-                  +'A. '+question_a+'<br>';
+		 prehtml+='<div class="col-sm-5 firstcolor">'+question_q+'</div>'
+        
+                  +'<div class="col-sm-7">'+question_a+'</div>';
         }
+
 	}
 	$(".m_questions").html(prehtml);
 
-	$("#m_actor_6_experience").html(attendees[id].StashActor_six_months_experience);
-	$("#m_actor_3_experience").html(attendees[id].StashActor_three_years_experience);
+	$("#m_actor_tvc").html(attendees[id].StashActor_tvc_experience);
+	$("#m_actor_tv").html(attendees[id].StashActor_series_experience);
+	$("#m_actor_web").html(attendees[id].StashActor_web_experience);
+	$("#m_actor_films").html(attendees[id].StashActor_films_experience);
+	$("#m_actor_theatre").html(attendees[id].StashActor_theatre_experience);
+	//$("#m_actor_3_experience").html(attendees[id].StashActor_three_years_experience);
 	$("#castingsheetresponse").modal("show");
 }
 function delete_record_response(id)
@@ -554,7 +764,7 @@ function shortlist_star(actor)
 	
 		if(actor.StashRoleActorLink_shortlist_status=="0")
 		{
-			string+= '  <tr id="tr_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" class="'+actor.StashRoleActorLink_role_id_ref+'_role unshortlisted "><td class="star">'
+			string+= '  <tr id="tr_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" class="'+actor.role_name.split(' ').join('_')+'_role '+actor.StashRoleActorLink_date_of_audition+'_date unshortlisted "><td class="star">'
              		+'    <i class="fa fa-star-o" id="star_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" onclick="shortlist_actor('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+1+')" aria-hidden="true"></i>'
              		+'  </td>' ;
 
@@ -562,7 +772,7 @@ function shortlist_star(actor)
 		}
 		else
 		{
-			string+= '  <tr id="tr_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" class="'+actor.StashRoleActorLink_role_id_ref+'_role shortlisted "><td class="star">'
+			string+= '  <tr id="tr_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" class="'+actor.role_name.split(' ').join('_')+'_role '+actor.StashRoleActorLink_date_of_audition+'_date shortlisted "><td class="star">'
              		+'    <i class="fa fa-star" id="star_'+actor.StashActor_actor_id_ref+'_'+actor.StashRoleActorLink_role_id_ref+'" onclick="shortlist_actor('+actor.StashActor_actor_id_ref+','+actor.StashRoleActorLink_role_id_ref+','+0+')" aria-hidden="true"></i>'
              		+'  </td>' ;
 		}
@@ -844,10 +1054,10 @@ $(document).on("click", ".showDetailscs", function(){
            +'           	</div>'
            +'			</div>'
            +'			<div class="col-lg-7"  style="text-align: left;">'
-           +'          		<div class="col-lg-12">'
+           +'          		<div class="col-lg-12" >'
            +'               	<font class="info-medium firstcolor">Recent Experience:</div>' 
-           +'				<div class="col-lg-12">'
-           +'					<span class="gray">'+ attendees[id].StashActor_six_months_experience +'</font>'
+           +'				<div class="col-lg-12" style="height:150px; overflow:scroll">'
+           +'					<span class="gray">'+ attendees[id].StashActor_tvc_experience +'</font>'
            +'           	</div>'
            +'			</div>'
            +'		</div>'
@@ -869,9 +1079,9 @@ function _calculateAge(birthday) { // birthday is a date
 }
 function show_loader_gif(id){
 	var text = '"for good things, we wait must!"<br><span><i>- Master Yoda</i></span>';
-	var content = '<div class="loader"><img src="'+base+'/assets/img/spinner.gif" height="300"/><br><span class="quote" style="font-family: "Roboto";font-weight: 800;">'+text+'</span><br><span class="loader_text">'+text+'</span></div>';
+	var content = '<div class="loader"><img id="loader_gif" src="'+base+'assets/img/spinner.gif" height="300"/><br><span class="quote" style="font-family: "Roboto";font-weight: 800;">'+text+'</span><br><div class="loader_text">'+text+'</div></div>';
 	$(id).html(content);
-	console.log(content);
+	//console.log(content);
 }
 function change_loader_text(text)
 {	
@@ -880,4 +1090,34 @@ function change_loader_text(text)
 
 	
 	//$(".loader_text").addClass("animated fadeOutUp");
+}
+Array.prototype.contains = function(v) {
+    for(var i = 0; i < this.length; i++) {
+        if(this[i] === v) return true;
+    }
+    return false;
+};
+
+Array.prototype.unique = function() {
+    var arr = [];
+    for(var i = 0; i < this.length; i++) {
+        if(!arr.contains(this[i])) {
+            arr.push(this[i]);
+        }
+    }
+    return arr; 
+}
+var a = ['','one ','two ','three ','four ', 'five ','six ','seven ','eight ','nine ','ten ','eleven ','twelve ','thirteen ','fourteen ','fifteen ','sixteen ','seventeen ','eighteen ','nineteen '];
+var b = ['', '', 'twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety'];
+
+function inWords (num) {
+    if ((num = num.toString()).length > 9) return 'overflow';
+    n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+    if (!n) return; var str = '';
+    str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
+    str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
+    str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
+    str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
+    str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + '' : '';
+    return str;
 }

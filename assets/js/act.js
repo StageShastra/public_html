@@ -14,7 +14,7 @@ $(document).ready(function(){
 	url = base + "actor/ajax";
 	//$("#warningmsg").hide();
 	$("#resendConfirmationModal").modal("hide");
-	
+	$("#photo-upload").attr("action",base+"upload/");
 	
 	function removeDefaultCookies(){
 		Cookies.remove("newInvite");

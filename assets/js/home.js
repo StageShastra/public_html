@@ -223,7 +223,7 @@ $(document).ready(function(){
 
 	function getActorProfile(){
 		var selectedCat = JSON.parse(Cookies.get('categories'));
-		$("#logo_start").attr("src",base+"/assets/img/spinner.gif");
+		$("#logo_start").attr("src",base+"assets/img/spinner.gif");
 		data = {request: "FetchActors", data: JSON.stringify(selectedCat)};
 		//console.log(data);
 		$.ajax({
@@ -779,6 +779,12 @@ $(document).ready(function(){
            +'      			<div class="DocumentList">'
 	           +'           	<ul class="list-inline">';
 	           						images = JSON.parse(actors[id].StashActor_images);
+
+	           						if(images.length==0 || images.length== null)
+	           							content+='<li class="DocumentItem">'
+	           						+'This actor has not added any photos yet.'
+	           						+'</li>';
+
 	           						for(var k = 0;k < images.length; k++){
 		            				image = images[k];
 		            				str = base + "assets/img/actors/" + image;
@@ -829,6 +835,8 @@ $(document).ready(function(){
            +'				<div class="col-lg-12">'
            +'					<span class="gray">'+ actors[id].StashActor_projects +'</font>'
            +'           	</div>'
+           +'				<div class="col-lg-12">'
+           +'               	<a class="firstcolor actormodaltitle" href="'+ base+actors[id].StashActor_username +'"><font class="info-medium firstcolor">See videos</a></div>'
            +'			</div>'
            +'		</div>'
 
@@ -1154,7 +1162,7 @@ $(document).ready(function(){
 	}
 	function show_loader(id)
 	{	var text = "conversations are being loaded..."
-		var content = '<div class="loader"><img src="'+base+'/assets/img/spinner.gif" height="300"><br><span class="loader_text">'+text+'</span></div>';
+		var content = '<div class="loader"><img src="'+base+'assets/img/spinner.gif" height="300"><br><span class="loader_text">'+text+'</span></div>';
 		$(id).html(content);
 		console.log(content);
 	}

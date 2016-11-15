@@ -166,7 +166,13 @@
       background: #ff9800 !important;
       color: black !important;
     }
-
+    div.panel {
+      background-color: white;
+      max-height: 90px;
+      overflow-x: scroll;
+      opacity: 1;
+      width: 100%;
+    }
               </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -222,7 +228,7 @@
                       </div>
                     </div>
 
-                    <textarea class="contact-sms sms-field" id="textsms" maxlength=280 placeholder="Type your sms text here."></textarea>
+                    <textarea class="contact-sms sms-field" id="textsms"  maxlength=410 placeholder="Type your sms text here."></textarea>
 
                     <span class="info-small gray pull-right">
                       ( <span id="audi-charCounter">160</span> / 
@@ -401,7 +407,7 @@
                 </div>
 
                 
-                <div style="align:left;" class="container col-sm-12" id="browse-table">
+                <div  class="container col-sm-12 center" style="text-align:left;" id="browse-table">
                       
                 </div>
                 <div class='container col-sm-12 center' id="main-container"></div>

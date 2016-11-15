@@ -57,7 +57,8 @@
 			$this->load->view("director/account", $pageInfo);
 		}
 		public function castingsheet($value=''){
-			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'director')
+			$pr_details=$this->ModelDirector->getProjectDetails($value);
+			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'director' || !($pr_details["StashProject_director_id_ref"]==$this->session->userdata("StaSh_User_id")))
 				redirect(base_url());
 			$pageInfo = [];
 			$this->load->model("ModelDirector");
@@ -92,9 +93,13 @@
 				$pageInfo['isPublic']=1;
 				$this->load->view("director/viewproject", $pageInfo);
 			}
+			else if(!($pr_details["StashProject_director_id_ref"]==$this->session->userdata("StaSh_User_id")))
+			{
+				redirect(base_url());
+			}
 			else
 			{
-				if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'director')
+				if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'director') 
 				redirect(base_url());
 				$pageInfo = [];
 				$this->load->model("ModelDirector");

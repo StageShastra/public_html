@@ -1,12 +1,19 @@
 <?php
   include 'includes/head.php';
+  error_reporting(0);
+  $e_works=addslashes($works);
+
  ?>
 <link rel="stylesheet" href="<?=CSS?>/castingdirectorprofile.css">
 <link href="<?= CSS ?>/landingpage.css" rel="stylesheet">
+
+
+
+
     <body>
         <style>
           body{
-            padding-top: 120px;
+            padding-top: 30px;
             padding-bottom: 0px;
             font-weight: 300;
           }
@@ -159,9 +166,137 @@
         background-image: none;
         color : #fff !important;
     }
-
+    .team-card{
+      min-height: 275px;
+    }
+    .fa-facebook-official{
+      color:#3b5998;
+      font-size: 14px;
+    }
+    .fa-external-link-square{
+      color:#e9c332;
+      font-size: 14px;
+    }
     /* Removes the default 20px margin and creates some padding space for the indicators and controls */
 
+
+nav {
+  height: 40px;
+  width: 100%;
+  font-size: 1.3rem;
+  font-weight: bold;
+  position: relative;
+  color: #777;
+}
+nav ul {
+  padding-left: 0;
+  margin: 0 auto;
+  width: 600px;
+  height: 40px;
+}
+
+nav li {
+  display: inline;
+  float: left;
+  vertical-align: middle;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix {
+    *zoom: 1;
+}
+
+nav a {
+  display: inline-block;
+  width: 150px;
+  text-align: center;
+  text-decoration: none;
+  line-height: 40px;
+  font-size:1.8rem;
+}
+
+
+
+nav a:hover, nav a:active {
+  color: #b9160a;
+}
+
+nav a#pull {
+  display: none;
+} 
+
+@media screen and (max-width: 600px) {
+  nav { 
+      height: auto;
+    }
+    nav ul {
+      width: 100%;
+      display: block;
+      height: auto;
+    }
+    nav li {
+      width: 50%;
+      float: left;
+      position: relative;
+    }
+    nav li a {
+    
+  }
+    nav a {
+      text-align: left;
+      width: 100%;
+      text-indent: 25px;
+    }
+}
+
+@media only screen and (max-width : 480px) {
+  nav {
+    border-bottom: 0;
+  }
+  nav ul {
+    display: none;
+    height: auto;
+  }
+  nav a#pull {
+    display: block;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 43px -5px rgba(219,219,219,1);
+-moz-box-shadow: 0px 0px 43px -5px rgba(219,219,219,1);
+box-shadow: 0px 0px 43px -5px rgba(219,219,219,1);
+  }
+  nav a#pull:after {
+    content:"";
+    background: url('nav-icon.png') no-repeat;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    
+  }
+}
+
+@media only screen and (max-width : 320px) {
+  nav li {
+    display: block;
+    float: none;
+    width: 100%;
+  }
+  nav li a {
+    
+  }
+}
 
               </style>
         <!--[if lt IE 8]>
@@ -172,14 +307,35 @@
         <!-- Ths section is post selection !-->
 <div class="container-fluid" id="home">
            
-           
+       
+
         <!-- Casting Director Header-->
         <div name="CDheader" class="center CDsection"> 
-          <span> <img  class="companylogo" src="<?= IMG . "/pages/" . $basic['DirectorPage_logo'] ?>" alt='<?= $basic['DirectorPage_pagename'] ?>'></span><span></span>
+          <img  class="companylogo img-responsive center" src="<?= IMG . "/pages/" . $basic['DirectorPage_logo'] ?>" alt='<?= $basic['DirectorPage_pagename'] ?>'><span></span>
           </div>
-          <nav class="navbar CDnavbar CDsection">
-                    <div class="container-fluid center">
-                      <ul class="nav navbar-nav CDnavbar">
+         <div class="CDsection">
+           <nav class="clearfix">
+            <ul class="clearfix">
+              <li><a href="#aboutus">About Us</a></li>
+              <li><a href="#team">Team</a></li>
+              <li><a href="#ourwork">Our Work</a></li>
+              <li><a href="#contactus">Contact Us</a></li>  
+            </ul>
+            <a href="#" id="pull">Menu</a>
+          </nav>
+        </div>
+
+        <!--  <div class="col-xs-12">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+            </button>
+          </div>
+          <nav class="navbar CDnavbar CDsection collapse navbar-collapse">
+                    <div class="container-fluid center"  id="bs-example-navbar-collapse-2">
+                      <ul class="nav navbar-nav CDnavbar ul_list">
                         <li><a href="#aboutus" href="#aboutus">About Us</a></li>
                         <li><a href="#team">Team</a></li>
                         <li><a href="#ourwork">Our Work</a></li>
@@ -187,7 +343,7 @@
                       </ul>
                     </div>
                   </nav>
-        
+        -->
         
         <!--About Us SECTION -->
         <div id="aboutus" class="container col-lg-12 col-md-12 col-sm-12 CDsection">
@@ -209,7 +365,7 @@
 
                     foreach ($teams as $key => $team) {
                   ?>
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-3 col-sm-6 team-card">
                       <div class="card hovercard">
                           <div class="avatar">
                               <img alt="<?= $team['DirectorTeam_name'] ?>" src="<?= IMG ?>/teams/<?= $team['DirectorTeam_image'] ?>" height="150" width="150">
@@ -218,19 +374,24 @@
                               <div class="title">
                                   <?= $team['DirectorTeam_name'] ?>
                               </div>
-                              <div class="desc"><?= $team['DirectorTeam_title'] .", ". $team['DirectorTeam_desc'] ?></div>
+                              <div class="desc"><?= $team['DirectorTeam_title'] ."<br>". $team['DirectorTeam_desc'] ?></div>
                       
                           </div>
                           <div class="bottom">
-                              <a class="socialbtn btn-primary btn-sm" rel="publisher"
+                              <a class="socialbtn" rel="publisher"
                                  href="<?= $team['DirectorTeam_fb'] ?>" title='Facebook'>
-                                  <i class="fa fa-facebook"></i>
+                                  <i class="fa fa-facebook-official"></i>
                               </a>
                               &nbsp;
-                              <a class="socialbtn btn-primary btn-sm" rel="publisher"
-                                 href="<?= $team['DirectorTeam_imdb'] ?>" title='IMDB'>
-                                  <i class="fa fa-external-link"></i>
+                              <?  if($team['DirectorTeam_imdb']!='')
+                              {
+                              ?>
+                            
+                              <a class="socialbtn" rel="publisher"
+                                 href="<?=$team['DirectorTeam_imdb']?>" title='IMDB'>
+                                  <i class="fa fa-external-link-square"></i>
                               </a>
+                              <? } ?>
                           </div>
                       </div> <!-- first card -->
                     </div>
@@ -265,12 +426,12 @@
               $embed = 'https://www.youtube.com/embed/' . $ytube;
 
             ?>
-            <div class="container-fluid col-lg-8 center videoprojectcard">
-              <div class="col-lg-6 videoprojectmedia">
+            <div class="container-fluid col-xs-12 col-sm-12 col-md-12 col-lg-8 center videoprojectcard">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 videoprojectmedia">
                 <!-- <img src="http://placehold.it/320x180" style="width:100%;"> -->
                 <iframe width="320" height="180" src="<?= $embed ?>" frameborder="0" allowfullscreen></iframe>
               </div>
-              <div class="col-lg-6">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 
                   <table class="videoprojecttable">
                     <tr> <td> Title </td> <td> <?= $works[0]['DirectorWork_title'] ?> </td></tr>
@@ -287,7 +448,7 @@
 
             <div class="container-fluid">
               <div class="row-fluid">
-                <div class="col-lg-8 center">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 center">
                       <div class="well"> 
                             <div id="myCarousel" class="carousel slide">
                              
@@ -307,7 +468,7 @@
                               
                               foreach ($works as $key => $work) {
                                     
-                                if($key%4 == 0){
+                                if(($key)%4 == 0 || $key==0){
                                   if($open){
                                     echo '</div></div>';
                                   }
@@ -328,16 +489,14 @@
                                 $title = $work['DirectorWork_title'];
                                 $ref = $work['DirectorWork_id'];
 
-                                echo '<div class="col-lg-3">'
+                                echo '<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">'
                                     . '<a href="#" class="thumbnail displayFullWorkDetail" data-ytube="'.$ytube.'" data-work-ref="'.$key.'" title="'.$title.'" >' 
-                                    . '<img src="'.$embed.'" alt="Image" style="widt:=100%;" width="140" height="100" />'
+                                    . '<img src="'.$embed.'" alt="Image" style="width:100%;" width="140" height="100" />'
                                     /*. '<iframe width="140" height="100" src="'.$embed.'" frameborder="0" allowfullscreen></iframe>'*/
                                     . '</a>'
                                     . '</div>';
 
-                                if($key % 4 != 0 && $open){
-                                  echo '</div></div>';
-                                }
+                                
 
                               }
 
@@ -377,15 +536,15 @@
 </body>
 
 <script type="text/javascript">
-  var WorkJSON = '<?= json_encode($works) ?>';
+  var WorkJSON =  <?php echo "'".addslashes(json_encode($works))."'"; ?> ;
+  //console.log(WorkJSON);
 </script>
 
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php
-  include 'includes/footer.php';
   include 'includes/scripts.php';
 ?>
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
       var isAllowed = <?= ($isAllowed) ? 1 : 0; ?>;
 
@@ -395,5 +554,22 @@
   });
 });
 
+$(function() {
+  var pull    = $('#pull');
+    menu    = $('nav ul');
+    menuHeight  = menu.height();
+ 
+  $(pull).on('click', function(e) {
+    e.preventDefault();
+    menu.slideToggle();
+  });
+});
+
+$(window).resize(function(){
+  var w = $(window).width();
+  if(w > 320 && menu.is(':hidden')) {
+    menu.removeAttr('style');
+  }
+}); 
 
 </script>
