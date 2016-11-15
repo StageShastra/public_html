@@ -850,7 +850,7 @@ function show_video(actor_id,role_id,index)
 	//youtube_link=$('#pakla').val();
 	//console.log(youtube_link);
 	var video_id = getId(youtube_link);
-	var embed_string = "https://www.youtube.com/embed/"+video_id;
+	var embed_string =  youtube_link.replace("watch", "embed");
 	var iframe_id='iframe_'+actor_id+'_'+role_id+'_'+index+'';
 	var embed_id= 'embed_'+actor_id+'_'+role_id+'_'+index+'';
 	var prehtml="";
