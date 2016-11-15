@@ -849,7 +849,7 @@ function show_video(actor_id,role_id,index)
 	var youtube_link=$('#'+input_id).val();
 	//youtube_link=$('#pakla').val();
 	//console.log(youtube_link);
-	var video_id = getId(youtube_link);
+	//var video_id = getId(youtube_link);
 	if (youtube_link.indexOf("playlist") !=-1)
 	{
    	 	var embed_string =  youtube_link.replace("playlist", "embed");
