@@ -13,6 +13,10 @@
         <script src="<?= JS ?>/intro.js"></script>
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.2.1/jssocials.min.js"></script>
 		
+		<script src="<?= JS ?>/croppie.js"></script>
+		<script src="<?= JS ?>/croppie.min.js"></script>
+		<script src="<?= JS ?>/demo.js"></script>
+
 		<script>
 			$("#socialShare").jsSocials({
 				showLabel: false,

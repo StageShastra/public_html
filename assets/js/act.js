@@ -530,6 +530,23 @@ $(document).ready(function(){
 	function extractList(term) {
 		return split( term ).pop();
 	}
+	function popupResult(result) {
+		var html;
+		if (result.html) {
+			html = result.html;
+		}
+		if (result.src) {
+			html = '<img src="' + result.src + '" />';
+		}
+		swal({
+			title: '',
+			html: true,
+			text: html,
+			allowOutsideClick: true
+		});
+		
+	}
+
 
 	$(".autoCompleteSkill")
 		.bind( "keydown", function(event){
@@ -649,9 +666,11 @@ $(document).ready(function(){
 		$("input[name='imageName']", $form).val(img);
 		img =  img;
 
-		$("#pc_cropThisImage").attr("src", img);
-
-		$('#pc_cropThisImage').cropper({
+		$("#cropper-1").attr("src", img);
+		
+            Demo.init();
+        
+		/*$('#pc_cropThisImage').cropper({
 		  aspectRatio: 1/1,
 		  scaleX:1,
 		  scaleY:1,
@@ -673,30 +692,40 @@ $(document).ready(function(){
 		    $("input[name='imageScaleX']", $form).val(e.scaleX);
 		    $("input[name='imageScaleY']", $form).val(e.scaleY);
 		  }
-		});
+		});*/
 
 	});
-	$(document).on("submit", ".cropperForm", function(){
-		var form = {};
-		$("input", $(this)).each(function(index, value){
-			if($(this).attr('name') == "imageName"){
-				form[$(this).attr('name')] = $(this).val();
-			}else{
-				form[$(this).attr('name')] = Number($(this).val());
-			}
-		});
+	$(document).on("submit", ".cropperForm", function(ev){
+		
+		 //Demo.init();
+		 var mc = $('#cropper-1');
+		   mc.croppie('result', {
+            	type: 'rawcanvas',
+            	format: 'png'
+            }).then(function (canvas) {
+            	alert(canvas.toDataURL());
+            	$d = canvas.toDataURL();
+				function popupResult($d) {
+					alert("fghjkl");
+		
+	}
 
-		data = {request: "UpdateProfileImage", data: JSON.stringify(form)};
+			});
+		/*data = {request: "UpdateProfileImage", data: JSON.stringify(form)};
+
 		$.ajax({
 			url: url,
-			type: type,
+			//type: type,
 			data: data,
 			success: function(response){
+				
 				$("#cropperInfo").html(response.message).show(500);
 				$("#pc_cropperInfo").html(response.message).show(500);
 				console.log("dd");
+				alert(response.message);
 				if(response.status){
-					$("#actorAvatar").attr("src", base + "assets/img/actors/" + response.data.image);
+					alert("yuiop");
+					/*$("#actorAvatar").attr("src", base + "assets/img/actors/" + response.data.image);
 					setTimeout(function(){
 						$("#set_profile_photo").modal("hide");
 						console.log(!isnotsteppage);
@@ -714,8 +743,9 @@ $(document).ready(function(){
 				}
 			}
 		});
-		return false;
-
+		
+		return false; 
+*/
 	});
 
 	$(document).on("click", ".changePassword", function(){

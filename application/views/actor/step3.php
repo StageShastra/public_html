@@ -209,7 +209,7 @@
                                         </div>
                                         
                                         <div class="cropper-container">
-                                            <img src="#" id="pc_cropThisImage">
+                                            <img src="#" id="cropper-1" class="demo-cropper" >
                                         </div>
                                         <div class="cropperDatadiv">
                                             <form accept="#" method="post" id='cropperForm' class='cropperForm'>
@@ -223,7 +223,7 @@
                                                 <input type="hidden" name="imageScaleY" value="">
                                                 <div class="row avatar-btns">
                                                 <div class="col-md-3 center">
-                                                    <button type="submit" class="btn btn-primary btn-block avatar-save submit-btn pc_button" style="margin-bottom:0px;">Crop and Save</button>
+                                                    <button type="submit" class="btn btn-primary btn-block avatar-save submit-btn pc_button" id="submit" style="margin-bottom:0px;">Crop and Save</button>
                                                 </div>
                                                 
                                                 </div>

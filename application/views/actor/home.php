@@ -1887,7 +1887,7 @@ textarea{
                                             </form>
                                         </div>
                                         <div class="cropper-container">
-                                            <img src="#" id="pc_cropThisImage">
+                                            <img src="#" id="cropper-1" class="demo-cropper" >
                                         </div>
 
                                         

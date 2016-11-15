@@ -102,6 +102,7 @@ function append_role(id){
 
 }
 function form_submit(){
+	role_add_edit();
 	var title=$("#title").val();
 	var client = $("#client").val();
 	var shoot_begins = $("#shoot_begins").val();
@@ -267,6 +268,7 @@ function append_question(id){
 
 }
 function question_submit(){
+	add_edit_question();
 	for(i=0;i<questions.length && questions[i].q_status!=0;i++)
 	{	
 		index=i;
