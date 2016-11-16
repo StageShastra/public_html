@@ -580,9 +580,10 @@ function populate_table()
 	if(isPublic==1)
 	{
 		$("#bs-example-navbar-collapse-1").html("");
-		$(".fa").addClass("public_disabled");
-		$(".fa").attr("onclick" ,'none');
-		show_shortlisted();
+		$(".fa-trash-o").addClass("public_disabled");
+		$(".fa-trash-o").attr("onclick" ,'none');
+		$(".go_button").addClass("hidden");
+		$(".go_button").attr("onclick" ,'none');
 	}
 
 	console.log(attendees);
