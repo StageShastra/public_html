@@ -653,6 +653,12 @@ function inject_video()
 	}
 	$(".video_col").addClass("animated fadeIn");
 	$(".video_col").removeClass("hidden");
+	if(isPublic==1)
+	{
+		$(".go_button").addClass("hidden");
+		$(".go_button").attr("onclick" ,'none');
+
+	}
 	$("#loader_gif_video").addClass("hidden");
 }
 function show_notes(actor,i)
