@@ -852,11 +852,12 @@ function show_video(actor_id,role_id,index)
 	//var video_id = getId(youtube_link);
 	if (youtube_link.indexOf("playlist") !=-1)
 	{
-   	 	var embed_string =  youtube_link.replace("playlist", "embed");
+    		var embed_string =  youtube_link.replace("playlist", "embed");
     	}
     	else
     	{
-    		var embed_string =  youtube_link.replace("watch", "embed");
+    		var video_id = getId(youtube_link);
+    		var embed_string = "https://www.youtube.com/embed/"+video_id;
     	}
 	var iframe_id='iframe_'+actor_id+'_'+role_id+'_'+index+'';
 	var embed_id= 'embed_'+actor_id+'_'+role_id+'_'+index+'';
