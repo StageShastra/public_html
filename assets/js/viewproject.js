@@ -720,7 +720,7 @@ function open_casting_response(id)
 	$("#m_actor_tvc").html(attendees[id].StashActor_tvc_experience);
 	$("#m_actor_tv").html(attendees[id].StashActor_series_experience);
 	$("#m_actor_web").html(attendees[id].StashActor_web_experience);
-	$("#m_actor_films").html(attendees[id].StashActor_films_experience);
+	$("#m_actor_films").html(attendees[id].StashActor_film_experience);
 	$("#m_actor_theatre").html(attendees[id].StashActor_theatre_experience);
 	//$("#m_actor_3_experience").html(attendees[id].StashActor_three_years_experience);
 	$("#castingsheetresponse").modal("show");
