@@ -832,10 +832,11 @@ button[disabled], html input[disabled] {
                           </div>
                           <div class="col-sm-6">
                             <select id="actor_city" class="input_cs" name="actor_city" placeholder="Select City of Audition" />
-                              <option disabled selected value> Select a Role</option>
+                              <option disabled selected value> Select a City</option>
                               <option value="Delhi">Delhi</option>
                               <option value="Mumbai">Mumbai</option>
                               <option value="Chandigarh">Chandigarh</option>
+                              <option value="Chandigarh">Other</option>
                             </select>
                           </div>
                         </div>
