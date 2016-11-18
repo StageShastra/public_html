@@ -580,9 +580,12 @@ function populate_table()
 	if(isPublic==1)
 	{
 		$("#bs-example-navbar-collapse-1").html("");
-		$(".fa").addClass("public_disabled");
-		$(".fa").attr("onclick" ,'none');
-		show_shortlisted();
+		$(".fa-trash-o").addClass("public_disabled");
+		$(".fa-trash-o").attr("onclick" ,'none');
+		$(".go_button").addClass("hidden");
+		$(".go_button").attr("onclick" ,'none');
+
+		//show_shortlisted();
 	}
 
 	console.log(attendees);
@@ -849,8 +852,17 @@ function show_video(actor_id,role_id,index)
 	var youtube_link=$('#'+input_id).val();
 	//youtube_link=$('#pakla').val();
 	//console.log(youtube_link);
-	var video_id = getId(youtube_link);
-	var embed_string = "https://www.youtube.com/embed/"+video_id;
+	
+	if (youtube_link.indexOf("playlist") !=-1)
+	{
+    	var embed_string =  youtube_link.replace("playlist", "embed");
+    }
+    else
+    {
+    	var video_id = getId(youtube_link);
+    	var embed_string = "https://www.youtube.com/embed/"+video_id;
+    }
+	
 	var iframe_id='iframe_'+actor_id+'_'+role_id+'_'+index+'';
 	var embed_id= 'embed_'+actor_id+'_'+role_id+'_'+index+'';
 	var prehtml="";

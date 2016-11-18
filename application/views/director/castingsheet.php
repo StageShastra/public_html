@@ -832,7 +832,7 @@ button[disabled], html input[disabled] {
                           </div>
                           <div class="col-sm-6">
                             <select id="actor_city" class="input_cs" name="actor_city" placeholder="Select City of Audition" />
-                              <option disabled selected value> Select a Role</option>
+                              <option disabled selected value> Select a City</option>
                               <option value="Delhi">Delhi</option>
                               <option value="Mumbai">Mumbai</option>
                               <option value="Chandigarh">Chandigarh</option>
@@ -926,7 +926,7 @@ button[disabled], html input[disabled] {
                         </div> 
                       </div>
                       
-                      <button type="button" id="save_actor_response" onclick="this.disabled=true;this.value='Submitting...';submit_answers();" class="go_button center" style="margin-top:30px; margin-bottom:30px;" disabled >Submit</button>
+                      <button type="button" id="save_actor_response" onclick="submit_answers()" class="go_button center" style="margin-top:30px; margin-bottom:30px;" disabled >Submit</button>
 
                     </div>
                 </div>

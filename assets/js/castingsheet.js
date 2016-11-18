@@ -310,6 +310,7 @@ function show_dynamic_questions()
 }
 function submit_answers()
 {	
+	console.log("called================================================================");
 	//changes to the view
 	$("#save_actor_response").attr('disabled', 'disabled');
 	$("#save_actor_response").html('Saving...');
@@ -446,6 +447,7 @@ function insert_actor_answers(i,actor)
 		});
 }
 function insert_role_actor(){
+	console.log("role_actor");
 	var index = $("#role_audition").val();
 	var role_id = roles[index].StashRoles_id;
 	var actor_id=actor.StashActor_actor_id_ref;
@@ -458,7 +460,7 @@ function insert_role_actor(){
 	 								audition_date: todaysdate
 	 							 }
 	 							)};
-	 //	console.log(data);
+	//console.log(data);
 
 		$.ajax({
 			url: url,
@@ -658,7 +660,7 @@ function hasnotfilled()
 		{
 			insert_actor_answers(0,actor);
 		}
-		insert_role_actor();
+		//insert_role_actor();
 		insert_project_actor(actor.StashActor_actor_id_ref);
 		$("body").scrollTop(0);
 		show_email_form();
