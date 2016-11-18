@@ -658,7 +658,7 @@ function hasnotfilled()
 		{
 			insert_actor_answers(0,actor);
 		}
-		insert_role_actor();
+		//insert_role_actor();
 		insert_project_actor(actor.StashActor_actor_id_ref);
 		$("body").scrollTop(0);
 		show_email_form();
