@@ -1383,7 +1383,7 @@ $(document).ready(function(){
 			
 
 			 tag = document.getElementById("tags").value;
-			 alert(tag);
+			 //alert(tag);
 
 			data = {request: "BulkCustomTag", data: JSON.stringify({list: toAdd, listid: actorRef, tag: tag})};
 
