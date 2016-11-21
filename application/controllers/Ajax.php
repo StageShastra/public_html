@@ -89,6 +89,9 @@
 					case "linkActorQuestionAnswer":
 						$this->linkActorQuestionAnswer($data);
 						break;
+					case "BulkCustomTag":
+						$this->BulkCustomTag($data);
+						break;	
 					case "linkRoleActor":
 						$this->linkRoleActor($data);
 						break;
@@ -302,6 +305,28 @@
 			else
 				$this->response(false, "something went wrong. try again later.");
 		}
+
+
+
+		public function BulkCustomTag($data = []){
+			$this->load->model("ModelDirector");
+			$list = $data['list'];
+			$listid = $data['listid'];
+			$tag = $data['tag'];
+			$c = 0;$r = [];
+			foreach ($list as $key => $value) {
+				if( $this->ModelDirector->insertCustomTag( $value, $tag ) ){
+					$c++;
+					$r[] = $listid[$key];
+				}
+			}
+			if($c)
+				$this->response(true, "selected actor added with the custom tag.");
+			else
+				$this->response(false, "something went wrong. try again later.");
+		}
+
+
 		public function contactData($data = []){
 			$this->load->model("ModelDirector");
 			$res = [];

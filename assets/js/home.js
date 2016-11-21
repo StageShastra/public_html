@@ -1323,6 +1323,19 @@ $(document).ready(function(){
 		return false;
 	});
 
+
+	$(document).on("click", ".toggleEditTagBox", function(){
+		if(Number($(this).attr("data-hide"))){
+			$(".edittag-box").show(500);
+			$(this).attr("data-hide", 0);
+		}
+		else{
+			$(".edittag-box").hide(500);
+			$(this).attr("data-hide", 1);
+		}
+		return false;
+	});
+
 	$(document).on("click", ".confirmTag", function(){
 		conf = confirm("Are you sure to tag them in selected project ?");
 		if(conf){
@@ -1354,7 +1367,42 @@ $(document).ready(function(){
 		}
 		return false;
 	});
+	$(document).on("click", ".confirmeditTag", function(){
+		conf = confirm("Are you sure to tag them with these tags ?");
+		if(conf){
+			/*pid = Number($("#addPName").attr("data-id"));
+			if(pid == 0){
+				$("#addPName").after("<p class='help-text text-danger'> Please select a project first. </p>");
+				return false;
+			}*/
+			toAdd = [];
+			for(i = 0; i < actorRef.length; i++){
+				id = actorRef[i];
+				toAdd.push(Number(actors[id].StashActor_actor_id_ref));
+			}
+			
 
+			 tag = document.getElementById("tags").value;
+			 alert(tag);
+
+			data = {request: "BulkCustomTag", data: JSON.stringify({list: toAdd, listid: actorRef, tag: tag})};
+
+			$.ajax({
+				url: url,
+				type: type,
+				data: data,
+				success: function(response){
+					$("#tagErr").html(response.message).show(500).delay(3000).hide(500);
+					if(response.status){
+						$("#tags").val("");
+					}
+				}
+				
+			});
+
+		}
+		return false;
+	});
 	$(document).on("click", ".changePassword", function(){
 		cur_p = $("input[name='current_passowrd']").val();
 		new_p = $("input[name='new_passowrd']").val();

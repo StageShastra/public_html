@@ -60,6 +60,28 @@
 
 			return $result;
 		}
+
+		public function getTags($searchTerm)
+		{
+			//echo $searchTerm;
+			$this->db->select("custom_tags");
+			$this->db->from("stash-custom-tags");
+			$this->db->like("custom_tags","$searchTerm");
+			$this->db->group_by('custom_tags');
+			$query = $this->db->get();
+			//echo "<br>%".$searchTerm."%<br>";
+
+			//echo json_encode($query->result_array());
+			if (isset($query)) {
+				if($query->num_rows() > 0){
+	     			foreach ($query->result_array() as $row){
+	       				 $row_set[] = htmlentities(stripslashes($row['custom_tags'])); //build an array
+	     			 }
+	      			echo json_encode($row_set); //format the array into json data
+	   			 }
+   			}
+			//echo json_encode($data);
+		}
 		
 
 		public function getActorUsername($ref = 0){
@@ -86,6 +108,18 @@
 					);
 			//return $query = $this->db->get_compiled_insert("stash-actor-project", $data);
 			return $this->db->insert("stash-actor-project", $data);
+		}
+
+		public function insertCustomTag($ref = 0, $tag = null){
+			$data = array(
+						'id' => null,
+						'actor_id' => $ref,
+						'director_id'=>$this->session->userdata("StaSh_User_id"),
+						'custom_tags'=> $tag
+
+					);
+			//return $query = $this->db->get_compiled_insert("stash-actor-project", $data);
+			return $this->db->insert("stash-custom-tags", $data);
 		}
 
 		public function getActorLanguage($ref = 0){

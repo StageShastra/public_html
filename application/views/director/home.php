@@ -9,7 +9,17 @@
 
     
  ?>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
+<script>
+$(function(){
+  $("#tags").autocomplete({
+    source: "http://castiko.com/autocomplete/tags" // path to the get_birds method
+  });
+});
+</script>
     <body>
         <style>
           body{
@@ -324,6 +334,9 @@
                     <button type="submit" class="btn submit-btn firstcolor bulkUserRemove" id="btn-login" ><span class="fa fa-ban"></span> &nbsp; Delete Selected</button>
 
                     <button type="button" class="btn submit-btn firstcolor toggleProjectBox" data-hide='1' style="margin-left:10px;" ><span class="fa fa-tags"></span> &nbsp; Tag to Project</button>
+
+                     <button type="button" class="btn submit-btn firstcolor toggleEditTagBox" data-hide='1' style="margin-left:10px;" ><span class="fa fa-tags"></span> &nbsp; Edit Tag</button>
+
                     <br><br>
                     <div class="row project-box" style="display:none;">
                       <p id="tagProjectErr" style="display:none;"></p>
@@ -332,6 +345,15 @@
                       </span> 
                       <input type="text" class="form-control contact_inputs" name="project_name" id="addPName" placeholder="Project Name" required />
                       <button type="button" class="btn submit-btn firstcolor confirmTag" style="margin-left:10px;" ><span class="fa fa-tags"></span> &nbsp; Confirm Tag</button>
+                    </div>
+
+                     <div class="row edittag-box tags" style="display:none;">
+                      <p id="tagProjectErr" style="display:none;"></p>
+                      <span class="info-small gray" for="tags">
+                        Select Tags:   
+                      </span> 
+                      <input type="text" class="form-control contact_inputs tags autoComplete ui-autocomplete-input" name="project_name" id="tags" placeholder="Tags" required />
+                      <button type="button" class="btn submit-btn firstcolor confirmeditTag" style="margin-left:10px;" ><span class="fa fa-tags"></span> &nbsp; Confirm Tag </button>
                     </div>
 
 
