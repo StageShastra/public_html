@@ -714,7 +714,7 @@ $(document).ready(function(){
 	                    + '</button>';
 				}
 
-				if(key == 'skills' || key == 'projects' || key == 'actor_names'){
+				if(key == 'skills' || key == 'projects' || key == 'actor_names'|| key == 'tags'){
 					peices = searchData[key].split(",");
 					btn = '';
 					for(k in peices){
@@ -1335,6 +1335,15 @@ $(document).ready(function(){
 		}
 		return false;
 	});
+
+	$(document).on("click", ".backTag", function(){;
+		//alert("rajul");
+		$(".edittag-box").hide(500);
+		$(document).on(".toggleEditTagBox").attr("data-hide",1);
+
+		return false;
+	});
+
 
 	$(document).on("click", ".confirmTag", function(){
 		conf = confirm("Are you sure to tag them in selected project ?");

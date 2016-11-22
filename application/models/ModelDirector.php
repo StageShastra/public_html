@@ -269,6 +269,20 @@
 			return $filtered;
 		}
 
+		public function filteredByTags($actors = [], $tags = []){
+			$tags = (count($tags)) ? $tagss : [''];
+			$this->db->select("actor_id");
+			$this->db->from("stash-custom-tags");
+			$this->db->where_in("custom_tags",$tags);
+			$query = $this->db->get();
+			print_r($query->result_array());
+			$fetched = $query->result('array');
+			$filtered = [];
+			foreach ($fetched as $key => $value) 
+				$filtered[] = $value['actor_id'];
+			return $filtered;
+		}
+
 		public function finalFilter($filter = []){
 			$data = array();
 
