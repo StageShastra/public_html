@@ -639,6 +639,13 @@
 			}else{
 				$filteredByProjects = [];
 			}
+
+			if($data['tags'] != ''){
+				$tags = trim($data['tags']);
+				$filteredByProjects = $this->ModelDirector->filterByTags($tags);
+			}else{
+				$filteredByProjects = [];
+			}
 			
 			if($data['actor_names'] != ''){
 				$actor_names = trim($data['actor_names']);
