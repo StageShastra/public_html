@@ -16,7 +16,7 @@
 <script>
 $(function(){
   $("#tags").autocomplete({
-    source: "http://castiko.com/autocomplete/tags" // path to the get_birds method
+    source: "http://localhost:8888/public_html/autocomplete/tags" // path to the get_birds method
   });
 });
 </script>
