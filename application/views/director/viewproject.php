@@ -793,6 +793,10 @@ div .border-bottom{
   min-height: 90px;
 }
 
+.div-inline{
+    display:inline-block;
+}
+
 
               </style>
         <!--[if lt IE 8]>
@@ -862,16 +866,25 @@ div .border-bottom{
               <div class="border-bottom" id="table">
                 <div class="nocur" style="cursor:default">
                 
-                <div class="row minheight90">
-                  <div class="col-sm-4 border-right">
-                        <div class="col-sm-3 projectheaderlabel">Project</div>
-                        <div class="col-sm-9 projectheaderdata"> <?= $project["StashProject_name"]; ?></div>
-                        <div class="col-sm-12">
-                          <button class="go_button submit-btn" onclick="window.open('../castingsheet/<?= $project["StashProject_id"]; ?>',
-                        '_blank')">Open Casting Sheet</button>
-                          <button type="button" class="go_button hidden" style="opacity: 0.7;" target="_blank">Edit Project </button>
-                        </div>
-                  </div>
+                  <div class="row minheight90">
+                    <div class="col-sm-4 border-right">
+                          <div class="col-sm-3 projectheaderlabel">Project</div>
+                          <div class="col-sm-9 projectheaderdata"> <?= $project["StashProject_name"]; ?></div>
+                          
+                          <div class="col-sm-12 col-lg-12 col-md-12">
+                            <button class="go_button submit-btn" onclick="window.open('../castingsheet/<?= $project["StashProject_id"]; ?>',
+                            '_blank')">Open Casting Sheet</button>
+                            
+                            <div class="dropdown div-inline">
+                              <button class="go_button submit-btn" type="button" data-toggle="dropdown">Edit Project<span class="caret"></span></button>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Add Roles</a></li>
+                              </ul>
+                            </div>
+                          </div>
+
+                    </div>
+                  
 
                   <div class="col-sm-4 border-right">
                     <div class="col-sm-3 projectheaderlabel">Client</div>
