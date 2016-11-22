@@ -211,8 +211,13 @@ class Home extends CI_Controller {
 		{
 			$this->load->view("signup_director", $pageInfo);	
 		}
-		if($type =="actor")
-		{
+		if($type =="actor"){
+			$pageInfo['extra_msg'] = null;
+			if($refer == 'sms' || $refer == 'email'){
+				$dname = $this->auth->getUserData("StashUsers_id", $pageInfo['director']);
+				$dname = $dname['StashUsers_name'];
+				$pageInfo['extra_msg'] = "Welcome - you are here because you were invited by {$name} to join database. Please fill in your details below.";
+			}
 			$this->load->view("signup_actor", $pageInfo);	
 		}
 		

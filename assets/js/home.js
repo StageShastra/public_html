@@ -12,6 +12,24 @@ $(document).ready(function(){
 	$("#failure_send").hide();
 	$(".notice-selected-actors").hide();
 	$('#contactmodal').modal('hide');
+
+	var sorted = {};
+
+	// To record Sorting Action
+	$(document).on("click", "#actor_table th[data-sort='string']", function(){
+
+		i = $(this).index();
+		c = $(this).attr("class");
+		if(c != ''){
+			if(c == 'sorting-desc')
+				c = 'sorting-asc';
+			else
+				c = 'sorting-desc';
+		}
+
+		sorted = {i: i, c: c};
+		//console.log('main - ', sorted);
+	});
 	
 	
 	function removeDefaultCookies(){
@@ -79,7 +97,7 @@ $(document).ready(function(){
 				type: type,
 				data: data,
 				success: function(response){
-					console.log(data);
+					//console.log(data);
 					if(response.status){
 						$('#datarow'+actorRef).addClass("animated fadeOut");
 						setTimeout(
@@ -134,6 +152,24 @@ $(document).ready(function(){
 	}
 
 	function populateActorList(actorsInfo, currentPage){
+		// Retrace Sorting to other pages...
+		/*sorted = {};
+		$("#actor_table th[data-sort='string']").each(function(){
+			c = $.trim($(this).attr('class'));
+			i = $(this).index();
+			if(c != ''){
+				if(c == 'sorting-desc')
+					c = 'sorting-asc';
+				else
+					c = 'sorting-desc';
+				sorted = {
+					i: i,
+					c: c
+				};
+			}
+		});*/
+
+
 		actors = actorsInfo;
 		var totalActors = Number(actorsInfo.length);
 
@@ -144,7 +180,10 @@ $(document).ready(function(){
                		+ '<tr><th id="selectallcheckbox"><input type="checkbox" '+ckh+' name="selectallactor" id="selectallactor" class="css-checkbox" /><label for="selectallactor" class="css-label"></label></th><th>Profile</th>';
         
         for(var i = 0; i < select.length; i++){
-    		content += '<th data-sort="string">'+select[i]+' <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>';
+        	s = 'string';
+        	if(select[i] == 'Age' || select[i] == 'Weight' || select[i] == 'Height')
+        		s = 'int';
+    		content += '<th data-sort="'+s+'">'+select[i]+' <font class="sortbuttons"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></font></th>';
     	}
 
     	content += "<th>Action</th></tr></thead>";
@@ -152,7 +191,7 @@ $(document).ready(function(){
     	var link = '', tag = '';
 		
 		
-    	var maxActors = 20;
+    	var maxActors = 15;
     	var totalPages = Math.ceil(totalActors/maxActors);
     	var init = (currentPage * maxActors) - maxActors;
     	var actorCovered = (currentPage - 1) * maxActors;
@@ -211,6 +250,12 @@ $(document).ready(function(){
    		$("img").error(function () { 
     		$(this).hide(); 
 		});
+   		//console.log(sorted);
+		if(sorted.length != 0){
+			$theader = $("#actor_table th");
+			$theader.eq(sorted.i).addClass(sorted.c).find(".sortbuttons");
+			$theader.eq(sorted.i).click();
+		}
 	}
 	
 	$(document).on("click", ".changePage", function(){
@@ -337,7 +382,7 @@ $(document).ready(function(){
 		//username = $.trim(actors[id].StashActor_email.split("@")[0]);
 		username = actors[id].StashActor_username;
 		link = base + username;
-		content += '<div class="media selected-actors" id="selected-actor-'+id+'">'
+		content += '<div class="media selected-actors selected-actor-'+id+'" id="selected-actor-'+id+'">'
 				+  '	<div class="media-left">'
 				+  '		<a href="'+link+'" target="_blank" class="selected-act-img">'
 				+  '			<img class="media-object " src="'+base+'assets/img/actors/'+actors[id].StashActor_avatar+'">'
@@ -372,9 +417,9 @@ $(document).ready(function(){
 			actorMobile.splice(actorMobile.indexOf(mobile), 1);
 			actorRef.splice(actorRef.indexOf(ref), 1);
 
-			$(".selectedActors #selected-actor-" + id).addClass("animated fadeOut");
+			$(".selected-actor-" + id).addClass("animated fadeOut");
 			setTimeout(function(){
-				$(".selectedActors #selected-actor-" + id).remove();
+				$(".selected-actor-" + id).remove();
 			}, 500);
 			//console.log("remove append triggered");
 		}
@@ -433,7 +478,7 @@ $(document).ready(function(){
 			//username = $.trim(actors[id].StashActor_email.split("@")[0]);
 			username = actors[id].StashActor_username;
 			link = base + username;
-			content += '<div class="media selected-actors" id="selected-actor-'+id+'">'
+			content += '<div class="media selected-actors selected-actor-'+id+'" id="selected-actor-'+id+'">'
 					+  '	<div class="media-left">'
 					+  '		<a href="'+link+'" target="_blank" class="selected-act-img">'
 					+  '			<img class="media-object " src="'+base+'assets/img/actors/'+actors[id].StashActor_avatar+'">'
@@ -474,9 +519,9 @@ $(document).ready(function(){
 		actorMobile.splice(actorMobile.indexOf(mobile), 1);
 		actorRef.splice(actorRef.indexOf(ref), 1);
 
-		$("#selected-actor-" + id).addClass("animated fadeOut");
+		$(".selected-actor-" + id).addClass("animated fadeOut");
 		setTimeout(function(){
-			$("#selected-actor-" + id).remove();
+			$(".selected-actor-" + id).remove();
 		}, 500);
 
 		$("#checkactor" + id).prop("checked", false);
@@ -493,7 +538,7 @@ $(document).ready(function(){
 	function checkContactModal() {
 		var hidden = $("#contactmodal").attr("aria-hidden");
 		if(hidden == 'false'){
-			console.log("Open");
+			//console.log("Open");
 			$(".notice-selected-actors").hide();
 		}
 	}
@@ -583,7 +628,7 @@ $(document).ready(function(){
 		project_date = $("#cSMS_PDate").val();
 		isAud = 0;
 		if($("#smsCheck").is(":checked"))
-			$isAud = 1;
+			isAud = 1;
 
 		var sms_message = $("#textsms").val();
 		data = {request: "ContactActorBySMS", data: JSON.stringify({contact: contact, sms: sms_message, project_name: project_name, project_date: project_date, isAud: isAud})};
@@ -668,7 +713,7 @@ $(document).ready(function(){
 				//console.log(response);
 				if(response.status){
 					populateActorList(response.data, 1);
-					console.log(response.data);
+					//console.log(response.data);
 				}else{
 					$("#main-container").html("");
 					noActorFound();
@@ -741,11 +786,12 @@ $(document).ready(function(){
 			searchData[dponly] = 0;
 		}else if(peices.length == 2){
 			d = searchData[peices[0]];
-			console.log(d, peices[1]);
+			//console.log(d, peices[1]);
 			searchData[peices[0]] = d.replace(peices[1], "");
 		}else{
 			searchData[thisKey] = "";
 		}
+		return false;
 
 		data = {request: "AdvanceSearch", data: JSON.stringify(searchData)};
 		showSpinner();
@@ -1016,7 +1062,7 @@ $(document).ready(function(){
 		source: base + "home/autoComplete/",
 		minLenght: 2,
 		select: function(ev, ui){
-			console.log(ui);
+			//console.log(ui);
 			$("input[name='project_date']").val(ui.item.date);
 		}
 	});
@@ -1025,7 +1071,7 @@ $(document).ready(function(){
 		source: base + "home/autoComplete/",
 		minLenght: 2,
 		select: function(ev, ui){
-			console.log(ui);
+			//console.log(ui);
 			$("input#addPName").val(ui.item.name);
 			$("input#addPName").attr("data-id", Number(ui.item.id));
 		}
@@ -1236,13 +1282,18 @@ $(document).ready(function(){
 		div2 = "<div class='col-sm-6'><iframe src='"+iframeSrc+"' class='center' id='emailPreviewiFrame' width='600' height='500'></iframe></div>";
 		div3 = "<div class='col-sm-2'>"
 			 + "<div class='conversation_summary'><h3>Conversation Summary</h3><hr>"
-			 + "<span class='row_text'>Recipients: "+ obj.recipient +" </span><br>"
-			 + "<span class='row_text'>Responses</span><br>"
+			 + "<span class='row_text'>Recipients: "+ obj.recipient +" </span><br>";
+
+		if(obj.aud  == 1){
+
+		div3 += "<span class='row_text'>Responses</span><br>"
 			 + "<button class='btn btn-info'>Seen: <span class='badge'>"+obj.seen+"</span></button>"
 			 + "<button class='btn btn-success'>Yes: <span class='badge'>"+obj.yes+"</span></button>"
 			 + "<button class='btn btn-danger'>No: <span class='badge'>"+obj.no+"</span></button>"
 			 + "<button class='btn btn-warning'>Maybe: <span class='badge'>"+obj.maybe+"</span></button>"
 			 + "<br></div></div>";
+
+		}
 
 		fianlTr = "<td colspan='12'><div class='row'>"+ div1 + div2 + div3 +"</div></td>";
 		$(".convo-trs").hide();
@@ -1587,7 +1638,7 @@ $(document).ready(function(){
 				topAlertDisplay(response.message);
 				if(response.status){
 					pwork = response.data.work;
-					console.log(pwork);
+					//console.log(pwork);
 					$displayPWork = $("#display-project-work");
 					div = '';
 					for(i = 0; i < pwork.length; i++){
@@ -1828,7 +1879,7 @@ $(document).ready(function(){
 						   + "<td>"+ team[t].DirectorTeam_desc +"</td>"
 						   + "<td>"+ team[t].DirectorTeam_imdb +"</td>"
 						   + "<td>"+ team[t].DirectorTeam_fb +"</td>"
-						   + "<td><a href='#' class='team-member-delete' data-member-ref='"+team[t].DirectorTeam_id+"'><i class='fa fa-trash'><></a></td></tr>";
+						   + "<td><a href='#' class='team-member-delete' data-member-ref='"+team[t].DirectorTeam_id+"'><i class='fa fa-trash'></i></a></td></tr>";
 						
 					}
 					$teamTable.append(tr);

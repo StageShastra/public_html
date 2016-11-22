@@ -163,20 +163,21 @@ a:hover, a:focus {
             <div class="row center signup_box">
               <div class="col-sm-12 light-padded">
                 <div class="col-lg-6 col-sm-6 col-xs-12" id="form-div">
+                <p class="text-info"><?= $extra_msg ?></p>
                 <?php echo validation_errors("<p class='text-danger'>"); ?>
-		<?php echo ($error) ? "" : "<p class='text-danger'><b>{$error_msg}</b></p>" ?>
+		            <?php echo ($error) ? "" : "<p class='text-danger'><b>{$error_msg}</b></p>" ?>
                 <?php if(!$error){ ?>
                   <font class="info-small text-primary signup_heading"> Actor Sign Up   <? if(isset($_REQUEST['plan'])) {echo ucwords("- ".$_REQUEST['plan']);} ?></font>
                   	
                       <form role="form" action="<?= $_SERVER['REQUEST_URI'] ?>" method="POST">
                       <div class="form-group">
-                        <input type="text" class="form-control login" id="fullname" name="name" placeholder= "Full Name *" required>
+                        <input type="text" class="form-control login" id="fullname" name="name" value="<?= $this->input->post("name") ?>" placeholder= "Full Name *" required>
                       </div>
                       <div class="form-group">
-                        <input type="email" class="form-control login" id="email" name="email" placeholder= "Email *" required >
+                        <input type="email" class="form-control login" id="email" name="email" value="<?= $this->input->post("email") ?>" placeholder= "Email *" required >
                       </div>
                       <div class="form-group">
-                        <input type="text" class="form-control login" id="contact" name="mobile" placeholder= "Mobile No. *" maxlength="10" required >
+                        <input type="text" class="form-control login" id="contact" name="mobile" value="<?= $this->input->post("mobile") ?>" placeholder= "Mobile No. *" maxlength="10" required >
                       </div>
                       <div class="form-group">
                         <input type="password" class="form-control login" id="password" name="password" placeholder= "Set a new Password *" autocomplete="new-password" required >

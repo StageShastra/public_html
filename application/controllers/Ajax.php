@@ -581,14 +581,16 @@
 		public function advanceSearch($data = []){
 			$this->load->model("ModelDirector");
 			// Santizing data
-			$minAge = $maxAge = $minHeight = $maxHeight = $sex = $skills = $projects = '';
+			$minAge = $maxAge = $minHeight = $maxHeight = $sex = $skills = $projects = $roleMinAge = $roleMaxAge = '';
 			$actorsInDirectorList = $this->ModelDirector->getActorsIdWithDirectors($this->session->userdata("StaSh_User_id"));
 			
 			if($data['agemin'] != ''){
 				$minAge = strtotime("-{$data['agemin']} years");
+				$roleMinAge = $data['agemin'];
 			}
 			if($data['agemax'] != ''){
 				$maxAge = (int)strtotime("-{$data['agemax']} years") - 31536000;
+				$roleMaxAge = $data['agemax'];
 			}
 			if($data['heightmin'] != ''){
 				$minHeight = $data['heightmin'];
@@ -632,7 +634,9 @@
 							'sex' => $sex,
 							'in' => $diff,
 							'names' => $data['actor_names'],
-							'dp' => $data['dponly']
+							'dp' => $data['dponly'],
+							'roleMin' => $roleMinAge,
+							'roleMax' => $roleMaxAge
 						);
 			//print_r($searchData);
 			$finalFilteredActors = $this->ModelDirector->finalFilter($searchData);
