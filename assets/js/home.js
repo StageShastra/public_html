@@ -1395,6 +1395,7 @@ $(document).ready(function(){
 	$(document).on("click", ".toggleEditTagBox", function(){
 		if(Number($(this).attr("data-hide"))){
 			$(this).addClass("hidden");
+			$("#backcustomtag").removeClass("hidden");
 			$(".bulkUserRemove").addClass("hidden");
 			$(".toggleProjectBox").addClass("hidden");
 			$(".edittag-box").removeClass("animated fadeOutRight");
@@ -1410,6 +1411,7 @@ $(document).ready(function(){
 			$(".toggleProjectBox").removeClass("hidden");
 			$(this).attr("data-hide", 1);
 			(".edittag-box").addClass("hidden");
+			$("#backcustomtag").removeClass("hidden");
 			
 		}
 		return false;
