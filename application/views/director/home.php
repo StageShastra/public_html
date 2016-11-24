@@ -9,63 +9,9 @@
 
     
  ?>
- <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
-<script>
-//this works when data-role is disabled.
-$(function(){
-  $("#tags").autocomplete({
-    source: "http://localhost:8888/public_html/autocomplete/tags" // path to the get_birds method
-  });
-});
 
 
-//This is not yet working it is a partial code copied from act.js
-$(".bootstrap-tagsinput input").addClass("tags");
-var ac = "language";
 
-  function split( val ) {
-      return val.split( /,\s*/ );
-    }
-
-  function extractList(term) {
-    return split( term ).pop();
-  }
-
-  $("#tags")
-    .autocomplete({
-      minLength: 1,
-      source: function(request, response){
-        $.getJSON(base + "actor/skillSuggestions/" + ac, {
-          term: extractList(request.term)
-        }, response);
-      },
-      search: function(){
-        var term = extractList(this.value);
-        if(term.length < 2){
-          return false;
-        }
-      },
-      focus: function(){
-        return false;
-      },
-      select: function(event, ui){
-        var terms = split($("input#"+ac).val());
-        console.log(terms);
-        //terms.pop();
-        terms.push(ui.item.value);
-        $("#"+ac+"_edit "+ ".bootstrap-tagsinput input").before('<span class="tag label label-info">'+ui.item.value+'<span data-role="remove"></span></span>');
-        //terms.push("");
-        this.value = '';
-        $("input#" + ac).val(terms);
-        console.log(terms);
-        return false;
-      }
-    });
-
-</script>
 
     <body>
         <style>
@@ -230,6 +176,26 @@ var ac = "language";
       opacity: 1;
       width: 100%;
     }
+    #feedback{
+      max-width: 40%;
+      width: auto;
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      bottom: 20px;
+      background: #4caf50;
+      color: white;
+      margin: 0 auto !important;
+      float: none !important;
+    }
+    .edittag-box{
+      margin-left: 0px;
+      position: relative;
+      top:-10px;
+    }
+    .error_feedback{
+      background: #e8b10c!important;
+    }
               </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -336,7 +302,7 @@ var ac = "language";
                           <span class="info-small gray">Actor Names(tag) <input type="text" data-role="tagsinput" class="form-control add" id="actr_name" name="actor_names" placeholder= "Actor Names"  />
                         </div>
                         <div class="col-sm-6 form-group no-paddinglr">
-                          <span class="info-small gray">Tags </span> <input type="text" class="form-control add" id="tags"  name="tags" placeholder= "Tags"  />
+                          <span class="info-small gray">Tags </span> <input type="text" class="form-control add" data-role="tagsinput" id="searchtags"  name="tags" placeholder= "Searchtags"  />
                           
                         </div>
                       </div>
@@ -386,9 +352,7 @@ var ac = "language";
 
                     <button type="button" class="btn submit-btn firstcolor toggleProjectBox" data-hide='1' style="margin-left:10px;" ><span class="fa fa-tags"></span> &nbsp; Tag to Project</button>
 
-                     <button type="button" class="btn submit-btn firstcolor toggleEditTagBox" data-hide='1' style="margin-left:10px;" ><span class="fa fa-tags"></span> &nbsp; Edit Tag</button>
-
-                    <br><br>
+                     <button type="button" class="btn submit-btn firstcolor toggleEditTagBox" data-hide='1' style="" ><span class="fa fa-tags"></span> &nbsp; Edit Tag</button>
                     <div class="row project-box" style="display:none;">
                       <p id="tagProjectErr" style="display:none;"></p>
                       <span class="info-small gray">
@@ -398,17 +362,19 @@ var ac = "language";
                       <button type="button" class="btn submit-btn firstcolor confirmTag" style="margin-left:10px;" ><span class="fa fa-tags"></span> &nbsp; Confirm Tag</button>
                     </div>
 
-                     <div class="row edittag-box tags" style="display:none;">
+                     <div class="row edittag-box tags hidden" >
                       <p id="tagProjectErr" style="display:none;"></p>
                       <span class="info-small gray" for="tags">
                         Select Tags:   
                       </span> 
-                      <input type="text" class="form-control tags autoComplete" name="tags" id="tags" placeholder="Tags" data-role="tagsinput" required />
+                      <span id="customtags">
+                        <input type="text" class="form-control tags" name="tags" data-role="tagsinput" id="tags" placeholder="Tags:" required />
+                      </span>
                       <br><font class="sortbuttons"></font>
 
                       <button type="button" class="btn submit-btn firstcolor confirmeditTag" style="margin-left:10px;" ><span class="fa fa-tags"></span> &nbsp; Confirm Tag </button>
 
-                      <button type="button" class="btn submit-btn firstcolor backTag" data-hide='1' style="margin-left:10px;" ><span class=""></span> Back </button>
+                      <button type="button" class="btn submit-btn firstcolor toggleEditTagBox" data-hide='0' style="margin-left:10px;" ><span class=""></span> Back </button>
 
                     </div>
 
@@ -832,6 +798,9 @@ var ac = "language";
               </div>
 
             </div>
+          </div>
+          <div id="feedback" class="alert alert-success center hidden">
+            
           </div>
       <script>
       var isAllowed = <?= ($isAllowed) ? true : false; ?>;

@@ -52,4 +52,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['404_override'] = "actor/profile";
 $route['translate_uri_dashes'] = FALSE;
-$route['autocomplete/tags'] = "director/get_tags";

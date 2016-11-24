@@ -153,6 +153,38 @@
 			}
 			return $result;
 		}
+		public function deleteOldTag($data = [], $actor_ref){
+			$this->db->where_not_in("StashActorTag_tag_id_ref", $data);
+			$this->db->where("StashActorTag_director_id_ref", $this->session->userdata("StaSh_User_id"));
+			$this->db->where("StashActorTag_actor_id_ref", $actor_ref);
+			$this->db->delete("stash-actor-tag");
+		}
+
+		public function getActorTagIds($data){
+			$this->db->where("StashActorTag_director_id_ref", $this->session->userdata("StaSh_User_id"));
+			$this->db->where("StashActorTag_actor_id_ref", $data);
+			$query = $this->db->get("stash-actor-tag");
+			$tags = $query->result("array");
+			$result = [];
+			foreach ($tags as $key => $value) {
+				$result[] = $value['StashActorTag_tag_id_ref'];
+			}
+			return $result;
+		}
+		public function updateActorTag($data = [],$actor_ref){
+			$d = array();
+			foreach ($data as $key => $value) {
+				$d[] = array(
+						"StashActorTag_tag_id_ref" => $value, 
+						"StashActorTag_actor_id_ref" => $actor_ref,
+						"StashActorTag_director_id_ref" => $this->session->userdata("StaSh_User_id"),
+						"StashActorTag_time" => time(),
+						"StashActorTag_id" => null
+					);
+			}
+
+			return $this->db->insert_batch("stash-actor-tag", $d);
+		}
 
 		public function updateActorLanguage($data = []){
 			$d = array();
@@ -341,6 +373,20 @@
 			foreach ($fetch as $key => $f) {
 				$v['label'] = $f['StashSkills_title'];
 				$v['value'] = $f['StashSkills_title'];
+				$result[] = $v;
+			}
+
+			return $result;
+		}
+		public function getTagsName($name = ''){
+			$this->db->like("StashTags_title", $name, "after");
+			$this->db->where("StashTags_status", 1);
+			$query = $this->db->get("stash-tags");
+			$fetch = $query->result("array");
+			$result = [];
+			foreach ($fetch as $key => $f) {
+				$v['label'] = $f['StashTags_title'];
+				$v['value'] = $f['StashTags_title'];
 				$result[] = $v;
 			}
 

@@ -310,20 +310,33 @@
 
 		public function BulkCustomTag($data = []){
 			$this->load->model("ModelDirector");
+			$this->load->model("ModelActor");
 			$list = $data['list'];
 			$listid = $data['listid'];
 			$tag = $data['tag'];
 			$c = 0;$r = [];
+			$tags = $this->ModelDirector->getTagId($data['tag']);
 			foreach ($list as $key => $value) {
-				if( $this->ModelDirector->insertCustomTag( $value, $tag ) ){
-					$c++;
-					$r[] = $listid[$key];
+				$this->ModelActor->deleteOldTag($tags, $value);
+				$actorTags = $this->ModelActor->getActorTagIds($value);
+				$newTag = array_diff($tags, $actorTags);
+				if(count($newTag)){
+					$this->ModelActor->updateActorTag($newTag,$value);
+					$c =1;
+				}else{
+					$this->response(false, "Nothing to Update");
 				}
 			}
 			if($c)
 				$this->response(true, "selected actor added with the custom tag.");
 			else
 				$this->response(false, "something went wrong. try again later.");
+
+
+			///=========================================================================================///
+			
+			
+			///=========================================================================================///
 		}
 
 
@@ -606,7 +619,7 @@
 		public function advanceSearch($data = []){
 			$this->load->model("ModelDirector");
 			// Santizing data
-			$minAge = $maxAge = $minHeight = $maxHeight = $sex = $skills = $projects = '';
+			$minAge = $maxAge = $minHeight = $maxHeight = $sex = $skills = $projects = $tags = '';
 			$actorsInDirectorList = $this->ModelDirector->getActorsIdWithDirectors($this->session->userdata("StaSh_User_id"));
 			
 			if($data['agemin'] != ''){
@@ -642,9 +655,10 @@
 
 			if($data['tags'] != ''){
 				$tags = trim($data['tags']);
-				$filteredByProjects = $this->ModelDirector->filterByTags($tags);
+				$tagsIDs = $this->ModelDirector->getTagsIDs($tags);
+				$filteredByTags = $this->ModelDirector->filteredByTags($actorsInDirectorList,$tagsIDs);
 			}else{
-				$filteredByProjects = [];
+				$filteredByTags = [];
 			}
 			
 			if($data['actor_names'] != ''){
@@ -652,7 +666,7 @@
 			}
 			
 			
-			$diff = array_merge($filteredBySKills, $filteredByProjects);
+			$diff = array_merge($filteredBySKills, $filteredByProjects, $filteredByTags);
 			//print_r($filteredByProjects);
 			if(count($diff) == 0)
 				$diff = $actorsInDirectorList;

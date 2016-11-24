@@ -13,7 +13,6 @@ $(document).ready(function(){
 	$(".notice-selected-actors").hide();
 	$('#contactmodal').modal('hide');
 	
-	
 	function removeDefaultCookies(){
 		Cookies.remove("newInvite");
 		Cookies.remove("project_ref");
@@ -35,7 +34,75 @@ $(document).ready(function(){
     	count++;
     	return false;
 	});
+	//autocmpletion starts
 
+	$(".bootstrap-tagsinput input").addClass("autoCompleteSkill");
+
+	var ac = "";
+
+	function split( val ) {
+      return val.split( /,\s*/ );
+    }
+
+	function extractList(term) {
+		return split( term ).pop();
+	}
+
+	$(".autoCompleteSkill")
+		.bind( "keydown", function(event){
+			if( event.keyCode === $.ui.keyCode.TAB && $(this).autocomplete("instance").menu.active ){
+				event.preventDefault();
+			}
+
+			plc = $(this).attr("placeholder").replace(":", "");
+			if(plc.search("Language")!=-1){
+				plc="language";
+				ac="tags";
+			} 
+			else if(plc.search("Tags")!=-1){
+				plc="tags";
+				ac="tags";
+			}
+			else if(plc.search("Searchtags")!=-1){
+				plc = "searchtags";
+				ac = "tags";
+			}
+			else {
+				plc="askills";
+				ac="skills";
+			}
+		})
+		.autocomplete({
+			minLength: 1,
+			source: function(request, response){
+				$.getJSON(base + "actor/skillSuggestions/" + ac, {
+					term: extractList(request.term)
+				}, response);
+			},
+			search: function(){
+				var term = extractList(this.value);
+				if(term.length < 2){
+					return false;
+				}
+			},
+			focus: function(){
+				return false;
+			},
+			select: function(event, ui){
+				var terms = split($("input#"+plc).val());
+				//console.log(terms);
+				//terms.pop();
+				terms.push(ui.item.value);
+				
+				//terms.push("");
+				this.value = '';
+				$("input#" + plc).val($("input#" + plc).tagsinput('items'));
+				$("input#" + plc).tagsinput('add', ui.item.value);
+				//console.log(terms);
+				return false;
+			}
+		});
+	//autocompletion ends
 	$(document).on("click", ".removeCate", function(){
 		var cat = $(this).attr("data-cate");
 		var index = select.indexOf(cat);
@@ -856,6 +923,7 @@ $(document).ready(function(){
         		//
         	}
         });
+
 	});
 
 	function smsCharCounter(textbox, countID, msgID) {
@@ -1326,17 +1394,28 @@ $(document).ready(function(){
 
 	$(document).on("click", ".toggleEditTagBox", function(){
 		if(Number($(this).attr("data-hide"))){
-			$(".edittag-box").show(500);
+			$(this).addClass("hidden");
+			$(".bulkUserRemove").addClass("hidden");
+			$(".toggleProjectBox").addClass("hidden");
+			$(".edittag-box").removeClass("animated fadeOutRight");
+			$(".edittag-box").addClass("animated fadeInRight");
+			$(".edittag-box").removeClass("hidden");
 			$(this).attr("data-hide", 0);
 		}
 		else{
-			$(".edittag-box").hide(500);
+			$(".edittag-box").removeClass("animated fadeInRight");
+			$(".edittag-box").addClass("animated fadeOutRight");
+			$(".toggleEditTagBox").removeClass("hidden");
+			$(".bulkUserRemove").removeClass("hidden");
+			$(".toggleProjectBox").removeClass("hidden");
 			$(this).attr("data-hide", 1);
+			(".edittag-box").addClass("hidden");
+			
 		}
 		return false;
 	});
 
-	$(document).on("click", ".backTag", function(){;
+	$(document).on("click", ".backTag", function(){
 		//alert("rajul");
 		$(".edittag-box").hide(500);
 		$(document).on(".toggleEditTagBox").attr("data-hide",1);
@@ -1391,20 +1470,41 @@ $(document).ready(function(){
 			}
 			
 
-			 tag = document.getElementById("tags").value;
+			 tag = $("#tags").val();
 			 //alert(tag);
 
 			data = {request: "BulkCustomTag", data: JSON.stringify({list: toAdd, listid: actorRef, tag: tag})};
-
+			console.log(data);
 			$.ajax({
 				url: url,
 				type: type,
 				data: data,
 				success: function(response){
-					$("#tagErr").html(response.message).show(500).delay(3000).hide(500);
+					$("#bulkActionModel").modal("hide");
+					//$("#tagErr").html(response.message).show(500).delay(3000).hide(500);
 					if(response.status){
+						
+						$("#feedback").removeClass("error_feedback");
+						$("#feedback").removeClass("hidden");
+						$("#feedback").addClass("alert-success");
 						$("#tags").val("");
+						$("#feedback").addClass("animated fadeInUp");
+						$("#feedback").html("Tags succesfully added");
+						$("#feedback").show(500).delay(5000).hide(500);
+					//	$("#feedback").addClass("hidden");
+
 					}
+					else
+					{   
+						$("#feedback").removeClass("hidden");
+						$("#feedback").removeClass("alert-success");
+						$("#feedback").addClass("error_feedback");
+						$("#feedback").addClass("animated fadeInUp");
+						$("#feedback").html(response.message);
+						$("#feedback").show(500).delay(5000).hide(500);
+						//$("#feedback").addClass("hidden");
+					}
+
 				}
 				
 			});
@@ -1898,4 +1998,11 @@ $(document).ready(function(){
 });
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
-})
+});
+
+
+
+//This is not yet working it is a partial code copied from act.js
+
+
+

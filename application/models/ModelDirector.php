@@ -256,7 +256,46 @@
 				$skillIds[] = $value['StashSkills_id'];
 			return $skillIds;
 		}
+		public function getTagsIDs($tags = ''){
+			$tags = explode(",", $tags);
+			$this->db->where_in("StashTags_title", $tags);
+			$this->db->select("StashTags_id");
+			$query = $this->db->get("stash-tags");
+			$fetched = $query->result('array');
+			$tagIds = [];
+			foreach ($fetched as $key => $value) 
+				$tagIds[] = $value['StashTags_id'];
+			return $tagIds;
+		}
+		public function getTagId($data = ''){
+			$data = explode(",", $data);
+			$ids = [];
+			foreach ($data as $key => $tag) {
+				if($id = $this->ifInTag(trim($tag))){
+					$ids[] = $id;
+				}else{
+					$ids[] = $this->insertTag(trim($tag));
+				}
+			}
 
+			return $ids;
+		}
+
+		public function ifInTag($value=''){
+			$this->db->where("StashTags_title", $value);
+			$query = $this->db->get("stash-tags");
+			$result = $query->result("array");
+			if(count($result))
+				return $result[0]['StashTags_id'];
+			else
+				return 0;
+		}
+
+		public function insertTag($value=''){
+			$data = array("StashTags_id" => null, "StashTags_title" => $value, "StashTags_status" => 1);
+			$this->db->insert("stash-tags", $data);
+			return $this->db->insert_id();
+		}
 		public function filteredBySKill($actors = [], $skills = []){
 			$skills = (count($skills)) ? $skills : [''];
 			$this->db->where_in("StashActorSkill_skill_id_ref", $skills);
@@ -268,20 +307,19 @@
 				$filtered[] = $value['StashActorSkill_actor_id_ref'];
 			return $filtered;
 		}
-
 		public function filteredByTags($actors = [], $tags = []){
-			$tags = (count($tags)) ? $tagss : [''];
-			$this->db->select("actor_id");
-			$this->db->from("stash-custom-tags");
-			$this->db->where_in("custom_tags",$tags);
-			$query = $this->db->get();
-			print_r($query->result_array());
+			$tags = (count($tags)) ? $tags : [''];
+			$this->db->where_in("StashActorTag_tag_id_ref", $tags);
+			$this->db->where_in("StashActorTag_actor_id_ref", $actors);
+			$this->db->where_in("StashActorTag_director_id_ref",$this->session->userdata("StaSh_User_id"));
+			$query = $this->db->get("stash-actor-tag");
 			$fetched = $query->result('array');
 			$filtered = [];
 			foreach ($fetched as $key => $value) 
-				$filtered[] = $value['actor_id'];
+				$filtered[] = $value['StashActorTag_actor_id_ref'];
 			return $filtered;
 		}
+		
 
 		public function finalFilter($filter = []){
 			$data = array();
