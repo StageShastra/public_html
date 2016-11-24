@@ -79,6 +79,18 @@
 			$this->load->view("director/newproject", $pageInfo);
 			//echo $value;
 		}
+
+		function get_tags(){
+			//echo $_GET['term'];
+		    $this->load->model('ModelDirector');
+
+		    if (isset($_GET['term']))
+		    {
+
+		      $q = strtolower($_GET['term']);
+		      $this->ModelDirector->getTags($q);
+		    }
+		  }
 		public function project($value=''){
 			$this->load->model("ModelDirector");
 			$pr_details=$this->ModelDirector->getProjectDetails($value);

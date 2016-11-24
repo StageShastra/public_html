@@ -215,7 +215,9 @@
 			$this->load->model("ModelActor");
 			if($value == 'language'){
 				$data = $this->ModelActor->getLanguageName($t);
-			}else{
+			}else if($value=='tags'){
+				$data = $this->ModelActor->getTagsName($t);
+			}else {
 				$data = $this->ModelActor->getSkillName($t);
 			}
 			header("Content-Type: application/json");
