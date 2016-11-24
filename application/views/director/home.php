@@ -352,7 +352,7 @@
 
                     <button type="button" class="btn submit-btn firstcolor toggleProjectBox" data-hide='1' style="margin-left:10px;" ><span class="fa fa-tags"></span> &nbsp; Tag to Project</button>
 
-                     <button type="button" class="btn submit-btn firstcolor toggleEditTagBox" data-hide='1' style="" ><span class="fa fa-tags"></span> &nbsp; Edit Tag</button>
+                     <button type="button" class="btn submit-btn firstcolor toggleEditTagBox" data-hide='1' style="" ><span class="fa fa-tags"></span> &nbsp; Add Tag</button>
                     <div class="row project-box" style="display:none;">
                       <p id="tagProjectErr" style="display:none;"></p>
                       <span class="info-small gray">
@@ -374,7 +374,7 @@
 
                       <button type="button" class="btn submit-btn firstcolor confirmeditTag" style="margin-left:10px;" ><span class="fa fa-tags"></span> &nbsp; Confirm Tag </button>
 
-                      <button type="button" class="btn submit-btn firstcolor toggleEditTagBox" data-hide='0' style="margin-left:10px;" ><span class=""></span> Back </button>
+                      <button id="backcustomtag" type="button" class="btn submit-btn firstcolor toggleEditTagBox" data-hide='0' style="margin-left:10px;" ><span class=""></span> Back </button>
 
                     </div>
 
