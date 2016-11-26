@@ -210,7 +210,7 @@ function get_actor_details()
 					//console.log(date);
 					var formattedDate = date.getUTCFullYear() + '-' + leftPad((date.getUTCMonth() + 1),2)+ '-' + leftPad((date.getUTCDate()+1),2);
 					$("#actor_dob").val(formattedDate);
-					$("#dobday").val(leftPad(date.getUTCDate()+1),2);
+					$("#dobday").val(leftPad((date.getUTCDate()+1),2));
 					$("#dobmonth").val(leftPad((date.getUTCMonth() + 1),2));
 					$("#dobyear").val((date.getUTCFullYear()).toString());
 					$("#actor_sex").val(actor.StashActor_gender);
