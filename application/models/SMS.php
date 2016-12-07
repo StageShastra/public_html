@@ -77,6 +77,26 @@
 			return $curl = $this->sendCurlSMS($data);
 		}
 
+		public function sendPasswordSMS(  $number = '', $pass, $dir){
+			$postmessage = "\nPowered By. Castiko";
+				
+			$msg = $this->prefix."You have been added to ".$dir." \'s database. Your login details are \n Userid :".$number ." \n  Password: ".$pass."Please login and complete your profile.";
+			$msg .= "\n".$link;
+			$msg .= $postmessage;
+			
+			$msg = rawurlencode($msg);
+
+			$data = array(
+					'username' => $this->username, 
+					'hash' => $this->password, 
+					'numbers' => $number, 
+					"sender" => urlencode($this->sender), 
+					"message" => $msg,
+					"test" => $this->test
+				);
+			return $curl = $this->sendCurlSMS($data);
+		}
+
 		public function sendOTP($otp = '', $numbers = ''){
 			//$len = strlen($msg);
 			$postmessage = "\nPowered By. Castiko";

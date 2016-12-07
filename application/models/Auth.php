@@ -83,7 +83,19 @@
 		}
 		public function verifyLoginCredentials($data = []){
 			$pass = hash_hmac('sha512', $data['password'], $this->config->item("encryption_key"));
-			$this->db->where("StashUsers_email", trim($data['email']));
+
+			$userid = trim($data['email']);
+
+    		if(strlen($userid) >= 10 && preg_match('/^[0-9]+$/i', $userid)){
+    			if(strlen($userid) > 10){
+		            $userid = substr($userid, strlen($userid) - 10, 10);
+		        }
+    			$this->db->where("StashUsers_mobile", $userid);
+    		}
+    		else if (!filter_var($userid, FILTER_VALIDATE_EMAIL) === false) {
+			    $this->db->where("StashUsers_email", $userid);
+			}
+			
 			$this->db->where("StashUsers_password", $pass);
 			$this->db->where("StashUsers_type", $data['type']);
 			$query = $this->db->get("stash-users");
@@ -457,7 +469,7 @@
 
 		}
 
-		public function insertActorPlan($plan = ''){
+		public function insertActorPlan($plan = ''){ 
 			$d = array(
 						'StashActorPlan_id' => null,
 						'StashActorPlan_actor_id_ref' => $this->session->userdata("StaSh_User_id"),
@@ -489,6 +501,7 @@
 			$id = $this->insertActorMain($d);
 			$this->setActorProfile($id, $d);
 			$this->insertActorInDirectorList($id, $this->session->userdata("StaSh_User_id"));
+			//$this->insertActorPlan("")
 			return $id;
 		}
 
@@ -522,12 +535,41 @@
 						'StashUsers_status' => 0,
 						'StashUsers_mobile_status' => 0,
 						'StashUsers_ip' => $this->input->ip_address(),
-						'StashUsers_header' => $this->agent->agent_string()
-						/*'StashUsers_refer' => 2,
+						'StashUsers_header' => $this->agent->agent_string(),
+						'StashUsers_refer' => 2,
 						'StashUsers_refer_id' => 0,
-						'StashUsers_ticket_status' => 0*/
+						'StashUsers_ticket_status' => 0
 					);
 			$response = $this->db->insert("stash-users", $data);
+			if($response==true)
+			{
+				$p = array(
+						'StashActorPlan_id' => null,
+						'StashActorPlan_actor_id_ref' => $this->db->insert_id(),
+						'StashActorPlan_plan' => $plan,
+						'StashActorPlan_start' => time(),
+						'StashActorPlan_end' => strtotime("+1 year"),
+						'StashActorPlan_time' => time(),
+						'StashActorPlan_status' => 1,
+						'StashActorPlan_ip' => $this->input->ip_address()
+					);
+				$this->db->insert("stash-actor-plan", $p);
+				$this->load->model("Email");
+				if(isset($d['phone']))
+				{
+					$this->load->model("SMS");
+					$this->SMS->sendPasswordSMS($d['phone'], $d['password'], $this->session->userdata("StaSh_User_name"));
+				}
+				else
+				{
+					
+					$this->Email->sendPasswordEmail(ucwords($name), $this->session->userdata("StaSh_User_name"), $d['email'], $d['password']);
+				}
+				$this->Email->sendActivationMail(ucwords($name), $d["email"], $response);
+				
+				//var_dump($this->session->userdata);
+
+			}
 			return $this->db->insert_id();
 		}
 
@@ -552,10 +594,14 @@
 						'StashActor_state' => '',
 						'StashActor_country' => '',
 						'StashActor_zip' => '',
-						'StashActor_actor_card' => 0,
-						'StashActor_passport' => 1,
+						'StashActor_ticket_status' => 0,
+						'StashActor_import_status' => 1,
+						'StashActor_profile_completion_stage' => 1,
+						'StashActor_six_months_experience' =>'',
+						'StashActor_three_years_experience' =>'',
 						'StashActor_last_update' => time(),
 						'StashActor_last_ip' => $this->input->ip_address()
+
 					);
 			return $this->db->insert("stash-actor", $d);
 		}

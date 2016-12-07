@@ -249,7 +249,7 @@
                 function getKeyValue($name = ''){
                   $selectOpt = array(
                                     'name' => 'Name',
-                                    'gender' => 'Gender',
+                                    'sex' => 'Sex',
                                     'age' => 'Age',
                                     'height' => 'Height',
                                     'email' => 'Email',

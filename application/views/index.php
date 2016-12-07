@@ -567,7 +567,7 @@ for (j = 0; j < acc2.length; j++) {
                     <form role="form" id="actor_login-form" class="login-forms" method="post" >
                     <b><p class="text-danger" id="login-error-actor"></p></b>
                     <div class="form-group col-lg-8 col-md-6 col-xs-12 center">
-                      <input type="email" class="form-control login" id="email" name="email" placeholder= "Email" required oninvalid="this.setCustomValidity('You appear to have entered an invalid email. Please try again.')" />
+                      <input type="text" class="form-control login" id="email" name="email" placeholder= "Phone or Email" required oninvalid="this.setCustomValidity('You appear to have entered an invalid entry. Please try again.')" />
                     </div>
                     <div class="form-group col-lg-8 col-md-6 col-xs-12 center">
                       <input type="password" class="form-control login" id="actor_password" name="password" placeholder= "Password" required />

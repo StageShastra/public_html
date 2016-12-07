@@ -109,31 +109,66 @@
 		        foreach ($Reader as $Row){
 		        	$line = '';
 		        	$have = true;
+		        	$hasemail = true;
+		        	$hasphone = true;
 		            foreach ($Row as $key => $col) {
 		            	// check no col value can be null/empty
+		            	
 		            	if(trim($col) == '')
+		            	{
 		            		$have = false;
 
+		            	}
+		            		
 
 		            	if($fields[$key] == 'phone'){
 		            		if(strlen($col) == 10 && preg_match('/^[0-9]+$/i', $col)){
 		            			$col = $col;
+		            			$hasphone=true;
 		            		}else{
 		            			if(strlen($col) > 10){
 		            				$col = substr($col, strlen($col) - 10, 10);
+		            				if(strlen($col) == 10 && preg_match('/^[0-9]+$/i', $col)){
+		            					$hasphone = true;
+		            				}
+		            				else{
+		            					$hasphone = false; 
+		            				}
+
 		            			}else{
 		            				$col = '';
+		            				$hasphone = false;
 		            			}
 		            		}
 		            	}
+		            	if($fields[$key] == 'email'){
+		            		if (!filter_var($col, FILTER_VALIDATE_EMAIL) === false) {
+							    $hasemail = true;
+							} else {
+							    $hasemail = false;
+							}
+		            	}
+
 
 		            	// if gender
 		            	if($fields[$key] == 'gender'){
-		            		$col = (strtolower($col[0]) == 'm') ? 1 : 0;
+		            		if(strtolower($col[0]) == 'm')
+		            		{
+		            			$col = 1;
+		            		}
+		            		if(strtolower($col[0]) == 'f')
+		            		{
+		            			$col = 0;
+		            		}
+		            		if(strtolower($col[0]) == 'o')
+		            		{
+		            			$col = 2;
+		            		}
+		            		
 		            	}
 		            	$line .= trim($col) . ", ";
 		            }
-		            if($have){
+		            if($hasemail || $hasphone){
 		            	$line = rtrim($line, ", ") . "\r\n";
 		            	fwrite($handle, $line);
 		            }

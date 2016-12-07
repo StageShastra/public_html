@@ -257,7 +257,7 @@
             <br>
             <br>
             <br>
-
+            <br><br><br>
             <?php
 
                 function selectOptFlood(){
@@ -294,7 +294,7 @@
                     <option selected="selected" value="empty"> Select One </option>
                     <?= selectOptFlood() ?></select></td>
                   
-                  <td><select class="form-control firstcolor hiddenoption" id="col2" name="col2" ">
+                  <td><select class="form-control firstcolor hiddenoption" id="col2" name="col2" >
                     <option selected="selected"  value="empty"> Select One </option>
                     <?= selectOptFlood() ?></select></td>
                   

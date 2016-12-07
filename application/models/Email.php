@@ -47,6 +47,31 @@
 				return false;
 			}
 		}
+
+		public function sendPasswordMail($actor_name = '', $dir_name = '',$email = '', $password = ''){
+			// Generate Confirmation Links....
+			$cipher_text = $this->getEncryptedText($email . '=' . $ref);
+			$cipher_text = str_replace("/", "_", $cipher_text);
+			$link = base_url() . "#login";
+			
+			$this->load->library('email', $this->config());
+			$this->email->set_newline("\n");
+			$this->email->from("no-reply@castiko.com", 'Castiko');
+			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
+			$this->email->to($email);
+			$this->email->subject("Your Castiko Login credentials");
+			$msg = "Hi ".$actor_name." <br> You have been added to ".$dir_name."\'s database. <br> Here are your login credentials: <br> <b>Username:</b> ".$email."<br><b>Password:</b> ".$password."<br>";
+			$message = $this->defaultTemplete($msg, $link, "Login");
+			
+			$this->email->message($message);
+			if($this->email->send()){
+				return true;
+			}else{
+				// for Developer Only
+				//echo $this->email->print_debugger();
+				return false;
+			}
+		}
 		
 		
 		public function getEncryptedText($text = ''){
