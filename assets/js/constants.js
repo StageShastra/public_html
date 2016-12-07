@@ -1,4 +1,4 @@
-var base = "/public_html/";
+var base = "/";
 var url = base + "ajax/";
 var type = "POST";
 var data = {};

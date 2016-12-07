@@ -19,7 +19,6 @@
 			$this->load->model("ModelActor");
 			$this->load->model("Auth");
 			$pageInfo['actor'] = $this->Auth->getUserData('StashUsers_id', $this->session->userdata("StaSh_User_id"));
-			var_dump($this->session->userdata("StaSh_User_id"));
 			$pageInfo['profile'] = $this->ModelActor->getActorProfileById($this->session->userdata("StaSh_User_id"));
 			$pageInfo['experience'] = $this->ModelActor->getActorExperienceById($this->session->userdata("StaSh_User_id"));
 			$pageInfo['training'] = $this->ModelActor->getActorTrainingById($this->session->userdata("StaSh_User_id"));

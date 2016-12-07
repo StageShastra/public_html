@@ -87,9 +87,8 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 /* Custom Constants */
 
-
-define("BASE_URL", "/public_html/");
-defined("ASSETS") OR define("ASSETS", "/public_html/assets/");
+define("BASE_URL", "/");
+defined("ASSETS") OR define("ASSETS", "/assets/");
 defined("JS") OR define("JS", ASSETS . "js");
 defined("IMG") OR define("IMG", ASSETS . "img");
 defined("CSS") OR define("CSS", ASSETS . "css");
