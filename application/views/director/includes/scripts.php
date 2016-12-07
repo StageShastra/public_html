@@ -8,7 +8,9 @@
         <script src="<?= JS ?>/project.js"></script>
         <script src="<?= JS ?>/lightbox.js"></script>
         <script src="<?= JS ?>/stupidtable.js"></script>
+        <script src="<?= JS ?>/importExcel.js"></script>
         <script src="<?= JS ?>/dobPicker.min.js"></script>
+
 
         <!-- Google Analytics: change UA-XXXXX-X to  be your site's ID. -->
         

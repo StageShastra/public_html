@@ -42,6 +42,10 @@
                             <a href="<?= base_url()?>director/account"  > Account
                             </a>
                         </li>
+                        <li >
+                            <a href="<?= base_url()?>director/spreadsheet"  > Import
+                            </a>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Project</a>
                             </a>

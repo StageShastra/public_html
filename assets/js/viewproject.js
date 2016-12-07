@@ -584,6 +584,7 @@ function populate_table()
 		$(".fa-trash-o").attr("onclick" ,'none');
 		$(".go_button").addClass("hidden");
 		$(".go_button").attr("onclick" ,'none');
+
 	}
 
 	console.log(attendees);
@@ -856,6 +857,7 @@ function show_video(actor_id,role_id,index)
 	var youtube_link=$('#'+input_id).val();
 	//youtube_link=$('#pakla').val();
 	//console.log(youtube_link);
+
 	//var video_id = getId(youtube_link);
 	if (youtube_link.indexOf("playlist") !=-1)
 	{
@@ -866,6 +868,7 @@ function show_video(actor_id,role_id,index)
     		var video_id = getId(youtube_link);
     		var embed_string = "https://www.youtube.com/embed/"+video_id;
     	}
+
 	var iframe_id='iframe_'+actor_id+'_'+role_id+'_'+index+'';
 	var embed_id= 'embed_'+actor_id+'_'+role_id+'_'+index+'';
 	var prehtml="";

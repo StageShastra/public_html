@@ -331,6 +331,10 @@
 			$this->db->where("StashActor_actor_id_ref", $this->session->userdata("StaSh_User_id"));
 			return $this->db->update("stash-actor", array("StashActor_profile_completion_stage" => $data));
 		}
+		public function updateActorImportStatus($data){
+			$this->db->where("StashActor_actor_id_ref", $this->session->userdata("StaSh_User_id"));
+			return $this->db->update("stash-actor", array("StashActor_import_status" => $data));
+		}
 		
 
 		public function getActorImages($ref = 0){

@@ -431,9 +431,11 @@
 			$this->db->insert("stash-failed-invitation", $data);
 		}
 
-		public function getProject($name = '', $data = ''){
+		public function getProject($name = '', $data = '', $ref = 0){
 			$this->db->where("StashProject_name", trim($name));
 			$this->db->where("StashProject_date", strtotime(trim($data)));
+			if($ref)
+				$this->db->where("StashProject_director_id_ref", $ref);
 			$query = $this->db->get("stash-project");
 			return $query->first_row('array');
 		}
@@ -1161,6 +1163,29 @@
 			return $this->db->get("stash-actor-project")->num_rows();
 		}
 
+
+		public function insertExcelData($ref = 0, $file = ''){
+			$d = array(
+					'StashDirectorExcel_id' => null,
+					'StashDirectorExcel_director_ref' => $ref,
+					'StashDirectorExcel_filename' => $file,
+					'StashDirectorExcel_time' => time(),
+					'StashDirectorExcel_status' => 0
+				);
+			return $this->db->insert("stash-director-excel", $d);
+		}
+
+		public function getLastUploadedExcel($ref = 0){
+			$this->db->where("StashDirectorExcel_director_ref", $ref);
+			$this->db->where("StashDirectorExcel_status", 0);
+			$this->db->order_by("StashDirectorExcel_id", 'desc');
+			return $this->db->get("stash-director-excel", 1)->first_row('array');
+		}
+
+		public function updateExcelUpload($ref = 0){
+			$this->db->where("StashDirectorExcel_director_ref", $ref);
+			$this->db->update("stash-director-excel", ['StashDirectorExcel_status' => 1]);
+		}
 		public function getPageData($ref = 0){
 			$this->db->where("DirectorPage_director_ref", $ref);
 			return $this->db->get("stash-director-page", 1)->first_row("array");
@@ -1298,6 +1323,7 @@
 		public function getPageNameInfo($name = ''){
 			$this->db->where("DirectorPage_pagename", $name);
 			return $this->db->get("stash-director-page", 1)->first_row('array');
+
 		}
 	}
 

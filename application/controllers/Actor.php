@@ -873,6 +873,10 @@
 		public function updateProfileStage($data = []){
 			$this->load->model("ModelActor");
 			$this->ModelActor->updateActorProfileStage($data["profile_stage"]);
+			if($data["profile_stage"]==2)
+			{
+				$this->ModelActor->updateActorImportStatus($data["profile_stage"]);	
+			}
 			$this->response(true, "Profile Stage Updated");
 		}
 		public function raiseTicket($data = []){
