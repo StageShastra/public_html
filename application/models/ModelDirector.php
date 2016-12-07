@@ -60,6 +60,28 @@
 
 			return $result;
 		}
+
+		public function getTags($searchTerm)
+		{
+			//echo $searchTerm;
+			$this->db->select("custom_tags");
+			$this->db->from("stash-custom-tags");
+			$this->db->like("custom_tags","$searchTerm");
+			$this->db->group_by('custom_tags');
+			$query = $this->db->get();
+			//echo "<br>%".$searchTerm."%<br>";
+
+			//echo json_encode($query->result_array());
+			if (isset($query)) {
+				if($query->num_rows() > 0){
+	     			foreach ($query->result_array() as $row){
+	       				 $row_set[] = htmlentities(stripslashes($row['custom_tags'])); //build an array
+	     			 }
+	      			echo json_encode($row_set); //format the array into json data
+	   			 }
+   			}
+			//echo json_encode($data);
+		}
 		
 
 		public function getActorUsername($ref = 0){
@@ -86,6 +108,18 @@
 					);
 			//return $query = $this->db->get_compiled_insert("stash-actor-project", $data);
 			return $this->db->insert("stash-actor-project", $data);
+		}
+
+		public function insertCustomTag($ref = 0, $tag = null){
+			$data = array(
+						'id' => null,
+						'actor_id' => $ref,
+						'director_id'=>$this->session->userdata("StaSh_User_id"),
+						'custom_tags'=> $tag
+
+					);
+			//return $query = $this->db->get_compiled_insert("stash-actor-project", $data);
+			return $this->db->insert("stash-custom-tags", $data);
 		}
 
 		public function getActorLanguage($ref = 0){
@@ -222,7 +256,46 @@
 				$skillIds[] = $value['StashSkills_id'];
 			return $skillIds;
 		}
+		public function getTagsIDs($tags = ''){
+			$tags = explode(",", $tags);
+			$this->db->where_in("StashTags_title", $tags);
+			$this->db->select("StashTags_id");
+			$query = $this->db->get("stash-tags");
+			$fetched = $query->result('array');
+			$tagIds = [];
+			foreach ($fetched as $key => $value) 
+				$tagIds[] = $value['StashTags_id'];
+			return $tagIds;
+		}
+		public function getTagId($data = ''){
+			$data = explode(",", $data);
+			$ids = [];
+			foreach ($data as $key => $tag) {
+				if($id = $this->ifInTag(trim($tag))){
+					$ids[] = $id;
+				}else{
+					$ids[] = $this->insertTag(trim($tag));
+				}
+			}
 
+			return $ids;
+		}
+
+		public function ifInTag($value=''){
+			$this->db->where("StashTags_title", $value);
+			$query = $this->db->get("stash-tags");
+			$result = $query->result("array");
+			if(count($result))
+				return $result[0]['StashTags_id'];
+			else
+				return 0;
+		}
+
+		public function insertTag($value=''){
+			$data = array("StashTags_id" => null, "StashTags_title" => $value, "StashTags_status" => 1);
+			$this->db->insert("stash-tags", $data);
+			return $this->db->insert_id();
+		}
 		public function filteredBySKill($actors = [], $skills = []){
 			$skills = (count($skills)) ? $skills : [''];
 			$this->db->where_in("StashActorSkill_skill_id_ref", $skills);
@@ -234,6 +307,19 @@
 				$filtered[] = $value['StashActorSkill_actor_id_ref'];
 			return $filtered;
 		}
+		public function filteredByTags($actors = [], $tags = []){
+			$tags = (count($tags)) ? $tags : [''];
+			$this->db->where_in("StashActorTag_tag_id_ref", $tags);
+			$this->db->where_in("StashActorTag_actor_id_ref", $actors);
+			$this->db->where_in("StashActorTag_director_id_ref",$this->session->userdata("StaSh_User_id"));
+			$query = $this->db->get("stash-actor-tag");
+			$fetched = $query->result('array');
+			$filtered = [];
+			foreach ($fetched as $key => $value) 
+				$filtered[] = $value['StashActorTag_actor_id_ref'];
+			return $filtered;
+		}
+		
 
 		public function finalFilter($filter = []){
 			$data = array();

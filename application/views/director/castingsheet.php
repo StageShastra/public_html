@@ -836,6 +836,7 @@ button[disabled], html input[disabled] {
                               <option value="Delhi">Delhi</option>
                               <option value="Mumbai">Mumbai</option>
                               <option value="Chandigarh">Chandigarh</option>
+                              <option value="Chandigarh">Other</option>
                             </select>
                           </div>
                         </div>

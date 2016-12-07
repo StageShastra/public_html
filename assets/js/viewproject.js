@@ -585,7 +585,6 @@ function populate_table()
 		$(".go_button").addClass("hidden");
 		$(".go_button").attr("onclick" ,'none');
 
-		//show_shortlisted();
 	}
 
 	console.log(attendees);
@@ -655,6 +654,12 @@ function inject_video()
 	}
 	$(".video_col").addClass("animated fadeIn");
 	$(".video_col").removeClass("hidden");
+	if(isPublic==1)
+	{
+		$(".go_button").addClass("hidden");
+		$(".go_button").attr("onclick" ,'none');
+
+	}
 	$("#loader_gif_video").addClass("hidden");
 }
 function show_notes(actor,i)
@@ -716,7 +721,7 @@ function open_casting_response(id)
 	$("#m_actor_tvc").html(attendees[id].StashActor_tvc_experience);
 	$("#m_actor_tv").html(attendees[id].StashActor_series_experience);
 	$("#m_actor_web").html(attendees[id].StashActor_web_experience);
-	$("#m_actor_films").html(attendees[id].StashActor_films_experience);
+	$("#m_actor_films").html(attendees[id].StashActor_film_experience);
 	$("#m_actor_theatre").html(attendees[id].StashActor_theatre_experience);
 	//$("#m_actor_3_experience").html(attendees[id].StashActor_three_years_experience);
 	$("#castingsheetresponse").modal("show");
@@ -852,17 +857,18 @@ function show_video(actor_id,role_id,index)
 	var youtube_link=$('#'+input_id).val();
 	//youtube_link=$('#pakla').val();
 	//console.log(youtube_link);
-	
+
+	//var video_id = getId(youtube_link);
 	if (youtube_link.indexOf("playlist") !=-1)
 	{
-    	var embed_string =  youtube_link.replace("playlist", "embed");
-    }
-    else
-    {
-    	var video_id = getId(youtube_link);
-    	var embed_string = "https://www.youtube.com/embed/"+video_id;
-    }
-	
+    		var embed_string =  youtube_link.replace("playlist", "embed");
+    	}
+    	else
+    	{
+    		var video_id = getId(youtube_link);
+    		var embed_string = "https://www.youtube.com/embed/"+video_id;
+    	}
+
 	var iframe_id='iframe_'+actor_id+'_'+role_id+'_'+index+'';
 	var embed_id= 'embed_'+actor_id+'_'+role_id+'_'+index+'';
 	var prehtml="";

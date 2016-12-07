@@ -10,6 +10,9 @@
     
  ?>
 
+
+
+
     <body>
         <style>
           body{
@@ -173,6 +176,26 @@
       opacity: 1;
       width: 100%;
     }
+    #feedback{
+      max-width: 40%;
+      width: auto;
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      bottom: 20px;
+      background: #4caf50;
+      color: white;
+      margin: 0 auto !important;
+      float: none !important;
+    }
+    .edittag-box{
+      margin-left: 0px;
+      position: relative;
+      top:-10px;
+    }
+    .error_feedback{
+      background: #e8b10c!important;
+    }
               </style>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -228,7 +251,7 @@
                       </div>
                     </div>
 
-                    <textarea class="contact-sms sms-field" id="textsms" maxlength=280 placeholder="Type your sms text here."></textarea>
+                    <textarea class="contact-sms sms-field" id="textsms"  maxlength=410 placeholder="Type your sms text here."></textarea>
 
                     <span class="info-small gray pull-right">
                       ( <span id="audi-charCounter">160</span> / 
@@ -278,6 +301,10 @@
                           <span class="info-small gray">Max. Height (in cm) </span> <input type="text" class="form-control add" id="aheightmax"  name="heightmax" placeholder= "upto height (in cms) :"  />
                           <span class="info-small gray">Actor Names(tag) <input type="text" data-role="tagsinput" class="form-control add" id="actr_name" name="actor_names" placeholder= "Actor Names"  />
                         </div>
+                        <div class="col-sm-6 form-group no-paddinglr">
+                          <span class="info-small gray">Tags </span> <input type="text" class="form-control add" data-role="tagsinput" id="searchtags"  name="tags" placeholder= "Searchtags"  />
+                          
+                        </div>
                       </div>
                       <div class="row">
                           <div class="col-sm-6 form-group no-paddinglr">
@@ -324,7 +351,8 @@
                     <button type="submit" class="btn submit-btn firstcolor bulkUserRemove" id="btn-login" ><span class="fa fa-ban"></span> &nbsp; Delete Selected</button>
 
                     <button type="button" class="btn submit-btn firstcolor toggleProjectBox" data-hide='1' style="margin-left:10px;" ><span class="fa fa-tags"></span> &nbsp; Tag to Project</button>
-                    <br><br>
+
+                     <button type="button" class="btn submit-btn firstcolor toggleEditTagBox" data-hide='1' style="" ><span class="fa fa-tags"></span> &nbsp; Add Tag</button>
                     <div class="row project-box" style="display:none;">
                       <p id="tagProjectErr" style="display:none;"></p>
                       <span class="info-small gray">
@@ -332,6 +360,22 @@
                       </span> 
                       <input type="text" class="form-control contact_inputs" name="project_name" id="addPName" placeholder="Project Name" required />
                       <button type="button" class="btn submit-btn firstcolor confirmTag" style="margin-left:10px;" ><span class="fa fa-tags"></span> &nbsp; Confirm Tag</button>
+                    </div>
+
+                     <div class="row edittag-box tags hidden" >
+                      <p id="tagProjectErr" style="display:none;"></p>
+                      <span class="info-small gray" for="tags">
+                        Select Tags:   
+                      </span> 
+                      <span id="customtags">
+                        <input type="text" class="form-control tags" name="tags" data-role="tagsinput" id="tags" placeholder="Tags:" required />
+                      </span>
+                      <br><font class="sortbuttons"></font>
+
+                      <button type="button" class="btn submit-btn firstcolor confirmeditTag" style="margin-left:10px;" ><span class="fa fa-tags"></span> &nbsp; Confirm Tag </button>
+
+                      <button id="backcustomtag" type="button" class="btn submit-btn firstcolor toggleEditTagBox" data-hide='0' style="margin-left:10px;" ><span class=""></span> Back </button>
+
                     </div>
 
 
@@ -754,6 +798,9 @@
               </div>
 
             </div>
+          </div>
+          <div id="feedback" class="alert alert-success center hidden">
+            
           </div>
       <script>
       var isAllowed = <?= ($isAllowed) ? true : false; ?>;
