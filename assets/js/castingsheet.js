@@ -197,6 +197,13 @@ function get_actor_details()
 				if(response.status==true)
 				{	
 					actor=JSON.parse(response.data);
+					if(actor.StashActor_import_status==1)
+					{
+						var import_date = new Date(0); // The 0 there is the key, which sets the date to the epoch
+						import_date.setUTCSeconds(actor.StashActor_last_update);
+						$("#import_date").html(import_date.toDateString());
+						$("#imported_message").removeClass("hidden");
+					}
 					$("#actor_name_ea").html(actor.StashActor_name);
 					$("#tvc_experience").val(actor.StashActor_tvc_experience);
 					$("#series_experience").val(actor.StashActor_series_experience);
@@ -223,6 +230,7 @@ function get_actor_details()
 				else
 				{	
 					show_new_casting_sheet();
+
 					console.log(response);
 					
 				}
@@ -310,7 +318,7 @@ function show_dynamic_questions()
 }
 function submit_answers()
 {	
-	console.log("called================================================================");
+	//console.log("called================================================================");
 	//changes to the view
 	$("#save_actor_response").attr('disabled', 'disabled');
 	$("#save_actor_response").html('Saving...');
@@ -643,6 +651,7 @@ setTimeout(function(){
 	$("#not_registered_last_message").addClass("animated fadeOut");
 	 }, 9000);
 $(".photo_name").removeClass("hidden");
+$("#imported_message").addClass("hidden");
 }
 $("#save_actor_response").removeAttr('disabled');
 document.getElementById("date_audition").valueAsDate = new Date();

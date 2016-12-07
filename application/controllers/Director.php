@@ -236,16 +236,16 @@
 
 
 		            	// if gender
-		            	if($fields[$key] == 'gender'){
-		            		if(strtolower($col[0]) == 'm')
+		            	if($fields[$key] == 'sex'){
+		            		if(strtolower($col) == 'm')
 		            		{
 		            			$col = 1;
 		            		}
-		            		if(strtolower($col[0]) == 'f')
+		            		if(strtolower($col) == 'f')
 		            		{
 		            			$col = 0;
 		            		}
-		            		if(strtolower($col[0]) == 'o')
+		            		if(strtolower($col) == 'o')
 		            		{
 		            			$col = 2;
 		            		}
@@ -337,7 +337,7 @@
 
 			}
 			redirect(base_url() . "director/");
-
+	}
 
 		public function profile($value=''){
 			$pageInfo['isAllowed'] = $this->ModelDirector->getAdminConfirmation();

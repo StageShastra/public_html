@@ -1185,7 +1185,7 @@
 		public function updateExcelUpload($ref = 0){
 			$this->db->where("StashDirectorExcel_director_ref", $ref);
 			$this->db->update("stash-director-excel", ['StashDirectorExcel_status' => 1]);
-
+		}
 		public function getPageData($ref = 0){
 			$this->db->where("DirectorPage_director_ref", $ref);
 			return $this->db->get("stash-director-page", 1)->first_row("array");

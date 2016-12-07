@@ -645,6 +645,16 @@ button[disabled], html input[disabled] {
     margin: 10px 0px 10px 0px;
 
 }
+#imported_message{
+    border: 1px solid #ff3b49;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-family: "Raleway";
+    /* font-weight: 600; */
+    padding: 20px;
+    margin: 10px 0px 10px 0px;
+
+}
 #not_registered_last_message{
   border: 1px solid #ff3b49;
   padding: 5px 10px;
@@ -743,8 +753,8 @@ button[disabled], html input[disabled] {
                     <h1 class="heading"> CASTING SHEET</h1>
                     <h3 class="project_name"> PROJECT : <?= $project["StashProject_name"]; ?></h3>
                     <h5 class="shoot_dates"><span style="">Shoot starts from  </span><span class="shoot_begins"></span> and ends on <span class="shoot_ends"></span> </h5>
-                    <h5 class="shoot_dates">Enter your email or phone</h5>
-                    <input type="text" id="contact" class="input_cs" name="contact" placeholder="Enter your email or phone"/><button type="button" onclick="get_actor_details()" class="go_button">Go</button>
+                    <h5 class="shoot_dates">Enter your phone or email</h5>
+                    <input type="text" id="contact" class="input_cs" name="contact" placeholder="Enter your phone(10 digits only) or email"/><button type="button" onclick="get_actor_details()" class="go_button">Go</button>
                 </div>
               </div>
               <div class="col-sm-10 hidden" id="casting_sheet_form"> 
@@ -755,6 +765,10 @@ button[disabled], html input[disabled] {
                     <div class="col-sm-8">
                       <div class="photo_name">
                         <img class="pro_pic" id="pro_pic" src="http://castiko.com/assets/img/default.png"><h3 class="heading actor_name_ea">Welcome, <span id="actor_name_ea"> Prashant</span></h3></img>
+                      </div>
+                      <div id="imported_message" class="hidden">
+                         You were added to Castiko on <span id="import_date" class="shoot_begins"></span> by the Casting Director<br>
+                         We have already emailed/SMSed your login credentials on the mentioned date. Please login and complete your profile after filling the casting sheet.
                       </div>
                       <div id="not_connected_message" class="hidden">
                           You are not registered with Castiko.<br>

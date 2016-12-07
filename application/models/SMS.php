@@ -79,8 +79,8 @@
 
 		public function sendPasswordSMS(  $number = '', $pass, $dir){
 			$postmessage = "\nPowered By. Castiko";
-				
-			$msg = $this->prefix."You have been added to ".$dir." \'s database. Your login details are \n Userid :".$number ." \n  Password: ".$pass."Please login and complete your profile.";
+			$link = "http://castiko.com/#login";
+			$msg = $this->prefix."You have been added to ".$dir."\'s database. Your login details are \n Userid :".$number ." \n  Password: ".$pass." Please login and complete your profile.";
 			$msg .= "\n".$link;
 			$msg .= $postmessage;
 			

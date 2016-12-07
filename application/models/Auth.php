@@ -76,7 +76,18 @@
 			return $response;
 		}
 		public function ifUserExist($email = ''){
-			$this->db->where("StashUsers_email", $email);
+			$userid = trim($email);
+
+    		if(strlen($userid) >= 10 && preg_match('/^[0-9]+$/i', $userid)){
+    			if(strlen($userid) > 10){
+		            $userid = substr($userid, strlen($userid) - 10, 10);
+		        }
+    			$this->db->where("StashUsers_mobile", $userid);
+    		}
+    		else if (!filter_var($userid, FILTER_VALIDATE_EMAIL) === false) {
+			    $this->db->where("StashUsers_email", $userid);
+			}
+			
 			//return $query = $this->db->get_compiled_select("stash-users");
 			$query = $this->db->get("stash-users");
 			return $query->num_rows();
@@ -550,12 +561,13 @@
 						'StashUsers_ticket_status' => 0
 					);
 			$response = $this->db->insert("stash-users", $data);
+			$actor_ref_id = $this->db->insert_id();
 			if($response==true)
 			{
 				$p = array(
 						'StashActorPlan_id' => null,
 						'StashActorPlan_actor_id_ref' => $this->db->insert_id(),
-						'StashActorPlan_plan' => $plan,
+						'StashActorPlan_plan' => "Basic",
 						'StashActorPlan_start' => time(),
 						'StashActorPlan_end' => strtotime("+1 year"),
 						'StashActorPlan_time' => time(),
@@ -579,7 +591,7 @@
 				//var_dump($this->session->userdata);
 
 			}
-			return $this->db->insert_id();
+			return $actor_ref_id;
 		}
 
 		public function setActorProfile($ref = 0, $data = []){
@@ -591,7 +603,7 @@
 						'StashActor_mobile' => (isset($data['phone'])) ? $data['phone'] : "",
 						'StashActor_whatsapp' => '',
 						'StashActor_dob' => (isset($data['age'])) ? strtotime("-".$data['age']." years") : 0,
-						'StashActor_gender' => (isset($data['gender'])) ? $data['gender'] : 0,
+						'StashActor_gender' => (isset($data['sex'])) ? $data['sex'] : 0,
 						'StashActor_height' => (isset($data['height'])) ? $data['height'] : 0,
 						'StashActor_weight' => 0,
 						'StashActor_avatar' => 'default.png',
@@ -606,8 +618,6 @@
 						'StashActor_ticket_status' => 0,
 						'StashActor_import_status' => 1,
 						'StashActor_profile_completion_stage' => 1,
-						'StashActor_six_months_experience' =>'',
-						'StashActor_three_years_experience' =>'',
 						'StashActor_last_update' => time(),
 						'StashActor_last_ip' => $this->input->ip_address()
 
@@ -621,7 +631,7 @@
 			/*echo $query = $this->db->get_compiled_select("stash-users");
 			exit();*/
 			return $this->db->get("stash-users")->num_rows();
-
+}
 		public function isPageName($name = ''){
 			$this->db->where("DirectorPage_pagename", $name);
 			return $this->db->get("stash-director-page")->num_rows();

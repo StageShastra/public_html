@@ -19,6 +19,7 @@
 			$this->load->model("ModelActor");
 			$this->load->model("Auth");
 			$pageInfo['actor'] = $this->Auth->getUserData('StashUsers_id', $this->session->userdata("StaSh_User_id"));
+			var_dump($this->session->userdata("StaSh_User_id"));
 			$pageInfo['profile'] = $this->ModelActor->getActorProfileById($this->session->userdata("StaSh_User_id"));
 			$pageInfo['experience'] = $this->ModelActor->getActorExperienceById($this->session->userdata("StaSh_User_id"));
 			$pageInfo['training'] = $this->ModelActor->getActorTrainingById($this->session->userdata("StaSh_User_id"));
@@ -873,6 +874,10 @@
 		public function updateProfileStage($data = []){
 			$this->load->model("ModelActor");
 			$this->ModelActor->updateActorProfileStage($data["profile_stage"]);
+			if($data["profile_stage"]==2)
+			{
+				$this->ModelActor->updateActorImportStatus($data["profile_stage"]);	
+			}
 			$this->response(true, "Profile Stage Updated");
 		}
 		public function raiseTicket($data = []){
