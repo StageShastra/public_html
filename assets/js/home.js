@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	
+	showSpinner();
 	var count = 0,
 		select = [],
 		actors = [],
@@ -12,7 +12,6 @@ $(document).ready(function(){
 	$("#failure_send").hide();
 	$(".notice-selected-actors").hide();
 	$('#contactmodal').modal('hide');
-	
 	
 	function removeDefaultCookies(){
 		Cookies.remove("newInvite");
@@ -35,7 +34,75 @@ $(document).ready(function(){
     	count++;
     	return false;
 	});
+	//autocmpletion starts
 
+	$(".bootstrap-tagsinput input").addClass("autoCompleteSkill");
+
+	var ac = "";
+
+	function split( val ) {
+      return val.split( /,\s*/ );
+    }
+
+	function extractList(term) {
+		return split( term ).pop();
+	}
+
+	$(".autoCompleteSkill")
+		.bind( "keydown", function(event){
+			if( event.keyCode === $.ui.keyCode.TAB && $(this).autocomplete("instance").menu.active ){
+				event.preventDefault();
+			}
+
+			plc = $(this).attr("placeholder").replace(":", "");
+			if(plc.search("Language")!=-1){
+				plc="language";
+				ac="tags";
+			} 
+			else if(plc.search("Tags")!=-1){
+				plc="tags";
+				ac="tags";
+			}
+			else if(plc.search("Searchtags")!=-1){
+				plc = "searchtags";
+				ac = "tags";
+			}
+			else {
+				plc="askills";
+				ac="skills";
+			}
+		})
+		.autocomplete({
+			minLength: 1,
+			source: function(request, response){
+				$.getJSON(base + "actor/skillSuggestions/" + ac, {
+					term: extractList(request.term)
+				}, response);
+			},
+			search: function(){
+				var term = extractList(this.value);
+				if(term.length < 2){
+					return false;
+				}
+			},
+			focus: function(){
+				return false;
+			},
+			select: function(event, ui){
+				var terms = split($("input#"+plc).val());
+				//console.log(terms);
+				//terms.pop();
+				terms.push(ui.item.value);
+				
+				//terms.push("");
+				this.value = '';
+				$("input#" + plc).val($("input#" + plc).tagsinput('items'));
+				$("input#" + plc).tagsinput('add', ui.item.value);
+				//console.log(terms);
+				return false;
+			}
+		});
+	//autocompletion ends
 	$(document).on("click", ".removeCate", function(){
 		var cat = $(this).attr("data-cate");
 		var index = select.indexOf(cat);
@@ -223,7 +290,7 @@ $(document).ready(function(){
 
 	function getActorProfile(){
 		var selectedCat = JSON.parse(Cookies.get('categories'));
-		$("#logo_start").addClass("rotate-img");
+		$("#logo_start").attr("src",base+"assets/img/spinner.gif");
 		data = {request: "FetchActors", data: JSON.stringify(selectedCat)};
 		//console.log(data);
 		$.ajax({
@@ -232,7 +299,7 @@ $(document).ready(function(){
 			data: data,
 			success: function(response){
 				//console.log(response);
-				$("#logo_start").removeClass("rotate-img");
+				$("#logo_start").attr("src",base+"/assets/img/logo.png");
 				$("#prelogin").addClass("hidden");
      			$("#home").removeClass("hidden");
      			if(response.status){
@@ -630,9 +697,9 @@ $(document).ready(function(){
 
 	function showSpinner(argument) {
 		var $table = $("#browse-table");
-		var content = '<div class="showwelcome" id="spinner">'
-					+ '<center><img src="'+base+'assets/img/logo.png" class="rotate-img center" width="80px" height="80px"/><br>'
-					+ '<font class="info gray">Crunching the latest data for you!</div>';
+		var content = '<div class="showwelcome" id="spinner" style="margin-bottom:50px;">'
+					+ '<center><img src="'+base+'assets/img/spinner.gif" /><br>'
+					+ '<span class="loader_text">bringing forth your precious...</span></div>';
 		$table.html(content);
 	}
 
@@ -714,7 +781,7 @@ $(document).ready(function(){
 	                    + '</button>';
 				}
 
-				if(key == 'skills' || key == 'projects' || key == 'actor_names'){
+				if(key == 'skills' || key == 'projects' || key == 'actor_names'|| key == 'tags'){
 					peices = searchData[key].split(",");
 					btn = '';
 					for(k in peices){
@@ -770,64 +837,80 @@ $(document).ready(function(){
 		var str = '';
 		var t = actors[id].StashActor_dob;
 		var d = new Date(t * 1000);
-		content = '<div class="center">'
-           +'         <div class="row collapsedetail">'
-           +'             <div class="col-sm-4">'
-           +'                 <font class="info-medium firstcolor">Name:<span class="gray">'+ actors[id].StashActor_name +'</font>'
-           +'             </div>'
-           +'             <div class="col-sm-4">'
-           +'                 <font class="info-medium firstcolor">Email: <span class="gray">'+ actors[id].StashActor_email +'</font>'
-           +'             </div>'
-           +'             <div class="col-sm-4">'
-           +'                 <font class="info-medium firstcolor">DOB: <span class="gray">'+ d.getUTCDate() + '-' + (d.getUTCMonth() + 1)+ '-' + d.getUTCFullYear()+'</font>'
-           +'             </div>'
-           +'         </div>'
-           +'         <div class="row collapsedetail">'
-           +'             <div class="col-sm-4">'
-           +'                 <font class="info-medium firstcolor">Whatsapp: <span class="gray">'+ actors[id].StashActor_whatsapp +'</font>'
-           +'             </div>'
-           +'             <div class="col-sm-4">'
-           +'                 <font class="info-medium firstcolor">Phone: <span class="gray">'+ actors[id].StashActor_mobile +'</font>'
-           +'             </div>'
-           +'             <div class="col-sm-4">'
-           +'                 <font class="info-medium firstcolor">Age-Range: <span class="gray"> '+ actors[id].StashActor_range+' years</font>'
-           +'             </div>'
-           +'         </div>'
-           +'         <div class="row collapsedetail">'
-           +'             <div class="col-sm-4">'
-           +'					<font class="info-medium firstcolor">Height: <span class="gray">'+ actors[id].StashActor_height +'cms</font>'
-           +'             </div>'
-           +'             <div class="col-sm-4 scrolr">'
-           +'                 <font class="info-medium firstcolor">Weight: <span class="gray">'+ actors[id].StashActor_weight +'kgs</font>'
-           +'             </div>'
-           +'            <div class="col-sm-4 scrolr">'
-           +'                 <font class="info-medium firstcolor">Language: <span class="gray">'+ actors[id].StashActor_language+'</font>'
-           +'             </div>'
-           +'         </div>'
-		   +'         <div class="row collapsedetail">'
-           +'             <div class="col-sm-4 scrolr">'
-           +'                 <font class="info-medium firstcolor">Skills: <span class="gray">'+ actors[id].StashActor_skills+'</font>'
-           +'             </div>'
-           +'            <div class="col-sm-4 scrolr">'
-           +'                 <font class="info-medium firstcolor">Projects: <span class="gray">'+ actors[id].StashActor_projects+'</font>'
-           +'             </div>'
-           +'         </div>'
-           +'         <div class="row" style="padding-right:15px;">'
-           +'             <div class="DocumentList">'
-           +'                 <ul class="list-inline">';
-           images = JSON.parse(actors[id].StashActor_images);
-           for(var k = 0;k < images.length; k++){
-	            image = images[k];
-	            str = base + "assets/img/actors/" + image;
-	            content += '<li class="DocumentItem">'
-	           +'<a href="'+str+'" data-lightbox="'+actors[id].StashActor_name+'"><img class="photo" src='+str+' height="100%" width=auto></img></a>' 
-	           +'         </li>';
-	        }
-	        content += '                 </ul>'
-                       +'             </div>'
-                       +'         </div>'
-                       +'     </div>'
-                       +'</div> ';
+		content = '<div class="modal-header">'
+ 		   +'		<button type="button" class="close" data-dismiss="modal">&times;</button>'
+		   +'			<a class="firstcolor actormodaltitle" href="'+ base+actors[id].StashActor_username +'"><div class="modal-title info" style="">' + actors[id].StashActor_name + '</a></div>'
+		   +'	   </div>'
+		   +'      <div class="modal-body" style="height:100%;">'
+		   +'      		<div class="row">'
+           +'      			<div class="DocumentList">'
+	           +'           	<ul class="list-inline">';
+	           						images = JSON.parse(actors[id].StashActor_images);
+
+	           						if(images.length==0 || images.length== null)
+	           							content+='<li class="DocumentItem">'
+	           						+'This actor has not added any photos yet.'
+	           						+'</li>';
+
+	           						for(var k = 0;k < images.length; k++){
+		            				image = images[k];
+		            				str = base + "assets/img/actors/" + image;
+		            				content += '<li class="DocumentItem">'
+		   +'						<a href="'+str+'" data-lightbox="'+actors[id].StashActor_name+'"><img class="photo" src='+str+' height="100%" width=auto></img></a>' 
+		   +'         				</li>';
+		        }
+		        content += '                 </ul>'
+               +'             </div>'
+               +'       </div>'
+
+           +'		<div class="row light-padded">'
+           +'			<div class="col-lg-5" style="text-align: left;">'
+		   +'          		<div class="col-lg-4">'
+           +'               	<font class="info-medium firstcolor">Age-Range:</div>' 
+           +'				<div class="col-lg-8">'
+           +'					<span class="gray">'+ actors[id].StashActor_range +'yrs</font>'
+           +'           	</div>'
+           +'          		<div class="col-lg-4">'
+           +'               	<font class="info-medium firstcolor">Height:</div>' 
+           +'				<div class="col-lg-8">'
+           +'					<span class="gray">'+ actors[id].StashActor_height +'cms</font>'
+           +'           	</div>'
+		   +'          		<div class="col-lg-4">'
+           +'               	<font class="info-medium firstcolor">Weight:</div>' 
+           +'				<div class="col-lg-8">'
+           +'					<span class="gray">'+ actors[id].StashActor_weight +'kgs</font>'
+           +'           	</div>'
+           +'             	<div class="col-lg-4">'
+           +'               	<font class="info-medium firstcolor">Email:</div>' 
+           +'				<div class="col-lg-8">'
+           +'					<span class="gray">'+ actors[id].StashActor_email +'</font>'
+           +'           	</div>'
+		   +'          		<div class="col-lg-4">'
+           +'               	<font class="info-medium firstcolor">Phone:</div>' 
+           +'				<div class="col-lg-8">'
+           +'					<span class="gray">'+ actors[id].StashActor_mobile +'</font>'
+           +'           	</div>'
+		   +'          		<div class="col-lg-4">'
+           +'               	<font class="info-medium firstcolor">WhatsApp:</div>' 
+           +'				<div class="col-lg-8">'
+           +'					<span class="gray">'+ actors[id].StashActor_whatsapp +'</font>'
+           +'           	</div>'
+           +'			</div>'
+           +'			<div class="col-lg-7"  style="text-align: left;">'
+           +'          		<div class="col-lg-12">'
+           +'               	<font class="info-medium firstcolor">Projects:</div>' 
+           +'				<div class="col-lg-12">'
+           +'					<span class="gray">'+ actors[id].StashActor_projects +'</font>'
+           +'           	</div>'
+           +'				<div class="col-lg-12">'
+           +'               	<a class="firstcolor actormodaltitle" href="'+ base+actors[id].StashActor_username +'"><font class="info-medium firstcolor">See videos</a></div>'
+           +'			</div>'
+           +'		</div>'
+
+          
+
+                       +'     </div><!--modal body end -->'
+                       
         $("#actor_detail").html(content);
         $('#detailsActor').modal('show');
 
@@ -840,6 +923,7 @@ $(document).ready(function(){
         		//
         	}
         });
+
 	});
 
 	function smsCharCounter(textbox, countID, msgID) {
@@ -1096,6 +1180,7 @@ $(document).ready(function(){
 		$that = $(this);
 		thisfor = $(this).attr("data-for");
 		target = $(this).attr("href");
+		show_loader(target);
 		data = {request: "ContactList", data: JSON.stringify({ for: thisfor })};
 		$(target + " table tbody").html("");
 		$.ajax({
@@ -1104,6 +1189,7 @@ $(document).ready(function(){
 			data: data,
 			success: function(response){
 				data = response.data;
+				var prehtml="<table><tbody>";
 				for( i = 0; i < data.length; i++ ){
 					txt1 = ( data[i].others != 0 ) ? " and " + data[i].others + " others" : "";
 
@@ -1127,11 +1213,12 @@ $(document).ready(function(){
 					   + "	<td class='col-sm-8 subject'>"+data[i].subject[1]+"</td>"
 					   + "	<td class='col-sm-1 sent_on'> "+ data[i].date +" </td>"
 					   + "</tr><tr class='convo-trs' id='convo-"+thisfor+"-"+data[i].id+"' style='display:none;'></tr>";
-
-					$(target + " table tbody").append(tr);
+					   //hide_loader(target);
+					prehtml+=tr;
 					//console.log(target + " table tbody");
 
 				}
+				$(target ).html(prehtml);
 			}
 		});
 	});
@@ -1141,7 +1228,16 @@ $(document).ready(function(){
 			$("#clickFirst").trigger("click");
 		}
 	}
-
+	function show_loader(id)
+	{	var text = "conversations are being loaded..."
+		var content = '<div class="loader"><img src="'+base+'assets/img/spinner.gif" height="300"><br><span class="loader_text">'+text+'</span></div>';
+		$(id).html(content);
+		console.log(content);
+	}
+	function hide_loader(id)
+	{
+		$(id).html("");	
+	}
 	function populateForInviteConv( obj, that, thisId, thisfor ) {
 		contacts = obj.users;
 		usertr = "";
@@ -1295,6 +1391,41 @@ $(document).ready(function(){
 		return false;
 	});
 
+
+	$(document).on("click", ".toggleEditTagBox", function(){
+		if(Number($(this).attr("data-hide"))){
+			$(this).addClass("hidden");
+			$("#backcustomtag").removeClass("hidden");
+			$(".bulkUserRemove").addClass("hidden");
+			$(".toggleProjectBox").addClass("hidden");
+			$(".edittag-box").removeClass("animated fadeOutRight");
+			$(".edittag-box").addClass("animated fadeInRight");
+			$(".edittag-box").removeClass("hidden");
+			$(this).attr("data-hide", 0);
+		}
+		else{
+			$(".edittag-box").removeClass("animated fadeInRight");
+			$(".edittag-box").addClass("animated fadeOutRight");
+			$(".toggleEditTagBox").removeClass("hidden");
+			$(".bulkUserRemove").removeClass("hidden");
+			$(".toggleProjectBox").removeClass("hidden");
+			$(this).attr("data-hide", 1);
+			(".edittag-box").addClass("hidden");
+			$("#backcustomtag").removeClass("hidden");
+			
+		}
+		return false;
+	});
+
+	$(document).on("click", ".backTag", function(){
+		//alert("rajul");
+		$(".edittag-box").hide(500);
+		$(document).on(".toggleEditTagBox").attr("data-hide",1);
+
+		return false;
+	});
+
+
 	$(document).on("click", ".confirmTag", function(){
 		conf = confirm("Are you sure to tag them in selected project ?");
 		if(conf){
@@ -1326,7 +1457,63 @@ $(document).ready(function(){
 		}
 		return false;
 	});
+	$(document).on("click", ".confirmeditTag", function(){
+		conf = confirm("Are you sure to tag them with these tags ?");
+		if(conf){
+			/*pid = Number($("#addPName").attr("data-id"));
+			if(pid == 0){
+				$("#addPName").after("<p class='help-text text-danger'> Please select a project first. </p>");
+				return false;
+			}*/
+			toAdd = [];
+			for(i = 0; i < actorRef.length; i++){
+				id = actorRef[i];
+				toAdd.push(Number(actors[id].StashActor_actor_id_ref));
+			}
+			
 
+			 tag = $("#tags").val();
+			 //alert(tag);
+
+			data = {request: "BulkCustomTag", data: JSON.stringify({list: toAdd, listid: actorRef, tag: tag})};
+			console.log(data);
+			$.ajax({
+				url: url,
+				type: type,
+				data: data,
+				success: function(response){
+					$("#bulkActionModel").modal("hide");
+					//$("#tagErr").html(response.message).show(500).delay(3000).hide(500);
+					if(response.status){
+						
+						$("#feedback").removeClass("error_feedback");
+						$("#feedback").removeClass("hidden");
+						$("#feedback").addClass("alert-success");
+						$("#tags").val("");
+						$("#feedback").addClass("animated fadeInUp");
+						$("#feedback").html("Tags succesfully added");
+						$("#feedback").show(500).delay(5000).hide(500);
+					//	$("#feedback").addClass("hidden");
+
+					}
+					else
+					{   
+						$("#feedback").removeClass("hidden");
+						$("#feedback").removeClass("alert-success");
+						$("#feedback").addClass("error_feedback");
+						$("#feedback").addClass("animated fadeInUp");
+						$("#feedback").html(response.message);
+						$("#feedback").show(500).delay(5000).hide(500);
+						//$("#feedback").addClass("hidden");
+					}
+
+				}
+				
+			});
+
+		}
+		return false;
+	});
 	$(document).on("click", ".changePassword", function(){
 		cur_p = $("input[name='current_passowrd']").val();
 		new_p = $("input[name='new_passowrd']").val();
@@ -1381,7 +1568,443 @@ $(document).ready(function(){
 		return false;
 	});
 
+
+
+
+
+
+
+
+
+
+
+
+	// Code for Director Page/Profile
+
+	function previewImages(input, location){
+		if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+
+            reader.onload = function (e) {
+                $(".img-preview img").attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+	}
+
+	var topAlertDisplay = function(msg) {
+		w = $(window).width();
+		$alert = $(".top-alert-bar");
+		aw = $alert.width();
+		dw = w/2 - aw/2;
+		$alert.css("left", dw);
+		$alert.find('p').html(msg);
+		$alert.show(100).delay(3000).hide(100);	
+	};
+
+	$(document).on('change', ".showPreview", function(){
+		//var displayIn = $(this).attr('data-for');
+		previewImages(this);
+	});
+
+	$(document).on("submit", "form#form-directorpage-first", function(){
+		form = new FormData(this);
+		$.ajax({
+			url: base + "director/directorpageupdate",
+			type: type,
+			data: form,
+			contentType: false,
+			cache: false,
+			processData: false,
+			success: function(response){
+				topAlertDisplay(response.message);
+				//$.delay(500);
+				if(response.status){
+					$activeAccord = $(".accordion.active");
+					$nextAcord = $activeAccord.next().next();
+					$nextAcord.addClass("active");
+					$nextAcord.next().addClass("show");
+
+					$("html, body").animate({
+						scrollTop: $nextAcord.offset().top - 200
+					}, 1000);
+				}
+				
+			}
+		});
+		return false;
+	});
+
+	$(document).on("change", "select#no-of-teammates", function(){
+		n = Number($(this).val());
+		
+
+		teamtr = $("tr.dummy-tr").html();
+		totTr = $(".teammates tbody tr").length;
+		$allTbodyTr = $(".teammates tbody tr");
+		$eleTbody = $(".teammates tbody");
+		if(n == totTr)
+			return;
+		else if(n > totTr){
+			nw = n-totTr;
+			if(nw == 0)
+				topAlertDisplay('Please select atleast 1 team member.');
+			for(i = 0; i < nw; i++){
+				newTr = "<tr>"+teamtr+"</tr>";
+				$eleTbody.append(newTr);
+			}
+		}else{
+			nw = totTr-n;
+			if(nw <= totTr)
+				nw = totTr-nw-1;
+			for(i = totTr-1; i > nw; i--){
+				$allTbodyTr.eq(i).remove();
+			}
+		}
+		//console.log(n, totTr, nw);
+
+		$("#teammates").removeClass("hidden");
+	});
+
+	/*$(document).on("click", ".update-page-team", function(){
+		$allTbodyTr = $(".teammates tbody tr");
+		d = [];
+		
+		$allTbodyTr.each(function(){
+			tmp = {};
+			tmp['name'] = $(this).find("input[name='name']").val();
+			tmp['title'] = $(this).find("input[name='title']").val();
+			tmp['desc'] = $(this).find("input[name='desc']").val();
+			tmp['imdb'] = $(this).find("input[name='imdb']").val();
+			tmp['fb'] = $(this).find("input[name='fb']").val();
+			d.push(tmp);
+		});
+
+		data = {
+			request: 'TeamUpdate',
+			data: JSON.stringify(d)
+		};
+
+		$.ajax({
+			url: base + "director/secure/",
+			type: type,
+			data: data,
+			success: function(response){
+				topAlertDisplay(response.message);
+				if(response.status){
+					$activeAccord = $(".accordion.active");
+					$nextAcord = $activeAccord.next().next();
+					$nextAcord.addClass("active");
+					$nextAcord.next().addClass("show");
+
+					$teamTable = $("table#display-team-detail tbody");
+					team = response.data.team;
+					i=0;
+					tr = '';
+					for(t = 0; t < team.length; t++){
+						
+						i++;
+						tr += "<tr><td>"+i+"</td>"
+						   + "<td>"+ team[t].DirectorTeam_name +"</td>"
+						   + "<td>"+ team[t].DirectorTeam_title +"</td>"
+						   + "<td>"+ team[t].DirectorTeam_desc +"</td>"
+						   + "<td>"+ team[t].DirectorTeam_imdb +"</td>"
+						   + "<td>"+ team[t].DirectorTeam_fb +"</td>"
+						   + "<td><a href='#' class='team-member-delete' data-member-ref='"+team[t].DirectorTeam_id+"'><i class='fa fa-trash'><></a></td></tr>";
+						
+					}
+					$teamTable.append(tr);
+				}
+			}
+		})
+		return false;
+	});*/
+
+	$(document).on("click", ".page-project-update", function(){
+		$projectInputs = $(".projectinput");
+		d = {};
+		$projectInputs.find("input, select").each(function(){
+			if($(this).attr("type") == 'radio'){
+				name = $(this).attr("name");
+				d[$(this).attr("name")] = $("input[name='"+name+"']:checked").val();
+			}else{
+				d[$(this).attr("name")] = $(this).val();
+			}
+			
+		});
+		data = {
+			request: "AddProjectWork",
+			data: JSON.stringify(d)
+		};
+		$.ajax({
+			url: base + "director/secure",
+			type: type,
+			data: data,
+			success: function(response){
+				topAlertDisplay(response.message);
+				if(response.status){
+					pwork = response.data.work;
+					console.log(pwork);
+					$displayPWork = $("#display-project-work");
+					div = '';
+					for(i = 0; i < pwork.length; i++){
+						div += '<div class="col-lg-1 removesidepadding" data-work-ref="'+ pwork[i].DirectorWork_id +'"><span class="glyphicon glyphicon-eye-open"> </span> &nbsp;<span class="glyphicon glyphicon-pencil p-work-edit"></span> &nbsp; <span class="glyphicon glyphicon-trash p-work-delete"> </span></div>'
+							+ '<div class="col-lg-11 removesidepadding"> <b>'+pwork[i].DirectorWork_title+'</b> '+ pwork[i].DirectorWork_producer + '  ' + pwork[i].DirectorWork_date +' </div>';
+						
+					}
+					$displayPWork.html(div);
+
+					$activeAccord = $(".accordion.active");
+					$nextAcord = $activeAccord.next().next();
+					$nextAcord.addClass("active");
+					$nextAcord.next().addClass("show");
+
+					$("#projectform").toggleClass('hidden');
+  					$("#newprojectbutton").toggleClass('hidden');
+				}
+			}
+		})
+		return false;
+	});
+
+	$(document).on("change", "input[name='contactustext']", function(){
+		if($(this).val() == '')
+			return false;
+
+
+		data = {
+			request: "UpdateContactText",
+			data: JSON.stringify({ text: $(this).val() })
+		};
+
+		$.ajax({
+			url: base + "director/secure",
+			type: type,
+			data: data,
+			success: function(response){
+				topAlertDisplay(response.message);
+			}
+		})
+	});
+
+	$(document).on("click", ".team-member-delete", function(){
+		$that = $(this);
+		conf = confirm("You are sure to remove member from the list ?");
+		if(!conf)
+			return false;
+
+		member_ref = $(this).attr("data-member-ref");
+		data = {
+			request: "DeleteTeamMember",
+			data: JSON.stringify({member_ref: member_ref})
+		};
+		$.ajax({
+			url: base + "director/secure",
+			type: type,
+			data: data,
+			success: function(response){
+				topAlertDisplay(response.message);
+				if(response.status){
+					$that.parent().parent().remove();
+				}
+			}
+		});
+		return false;
+	});
+
+	$(document).on("click", ".p-work-delete", function(){
+		$that = $(this);
+		conf = confirm("You are sure to remove this work ?");
+		if(!conf)
+			return false;
+
+		work_ref = $(this).parent().attr("data-work-ref");
+		data = {
+			request: "DeleteDirectorWork",
+			data: JSON.stringify({work_ref: work_ref})
+		};
+		$.ajax({
+			url: base + "director/secure",
+			type: type,
+			data: data,
+			success: function(response){
+				topAlertDisplay(response.message);
+				if(response.status){
+					$parent = $that.parent();
+					$next = $parent.next();
+
+					$parent.remove();
+					$next.remove();
+				}
+			}
+		});
+		return false;
+	});
+
+	$(document).on("keyup", "input[name='companyurl']", function(){
+		v = $(this).val();
+		$("#pagename-typing").text(v);
+		if(v == '')
+			return false;
+		if(v.match(/^[a-zA-Z0-9_\-\.]+$/i) == null){
+			$("#pagename-typing-error").css("color", 'red').text("special character not allowed accept ( . _ - )");
+		}else{
+			$("#pagename-typing-error").text("");
+		}
+	});
+
+	$("input[name='companyurl']").change(function(){
+		name = $(this).val();
+		if(name.length < 6){
+			$("#pagename-typing-error").css("color", 'red').text("Page link cannot be less then 6 characters");
+			return false;
+		}else{
+			$("#pagename-typing-error").text("");
+		}
+
+		data = {
+			request: "CheckPageName",
+			data: JSON.stringify({pagename: name})
+		};
+		$.ajax({
+			url: base + "director/secure",
+			type: type,
+			data: data,
+			success: function(response){
+				c = 'red';
+				if(response.status)
+					c = 'green';
+				$("#pagename-typing-error").css("color", c).html(response.message);
+			}
+		});
+	});
+
+
+	$(document).on("click", ".displayFullWorkDetail", function(){
+		$that = $(this);
+		$displayArea = $(".videoprojectcard");
+		ref = $(this).attr("data-work-ref");
+		ytube = $(this).attr("data-ytube");
+		embed = 'https://www.youtube.com/embed/' + ytube;
+		parseWorkJSON = JSON.parse(WorkJSON);
+		thisWork = parseWorkJSON[ref];
+
+		$(".videoprojectmedia iframe").attr("src", embed);
+		$tds = $(".videoprojecttable tr td:last-child");
+		/*tds.each(function(){
+			$(this).text("Dilip");
+		});*/
+		$tds.eq(0).text(thisWork.DirectorWork_title);
+		$tds.eq(1).text(thisWork.DirectorWork_producer);
+		$tds.eq(2).text(thisWork.DirectorWork_date);
+		$tds.eq(3).text(thisWork.DirectorWork_remark);
+
+		statusApp = (thisWork.DirectorWork_work_status == 1) ? 'Accepting application!' : 'Application closed!';
+		$tds.eq(4).text(statusApp);
+
+		return false;
+	});
+
+	$(document).on("click", ".upload-trigger", function(){
+		//console.log($(this).parent().find("input[type='file']"));
+		$(this).parent().find("input[type='file']").click();
+		//return false;
+	});
+
+	$(document).on("change", ".team-pic", function(){
+		$that = $(this);
+		if (this.files && this.files[0]) {
+            var reader = new FileReader();
+
+
+            reader.onload = function (e) {
+                $that.prev().attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(this.files[0]);
+        }
+		
+	});
+
+	$(document).on("click", ".update-page-team", function(){
+		form = new FormData();
+		$allTbodyTr = $(".teammates tbody tr");
+		d = [];
+		i = 0;
+		$allTbodyTr.each(function(){
+			tmp = {};
+			tmp['name'] = $(this).find("input[name='name']").val();
+			tmp['title'] = $(this).find("input[name='title']").val();
+			tmp['desc'] = $(this).find("input[name='desc']").val();
+			tmp['imdb'] = $(this).find("input[name='imdb']").val();
+			tmp['fb'] = $(this).find("input[name='fb']").val();
+			tmp['image'] = $(this).find("input[type='file']")[0].files[0];
+			if(typeof tmp['image'] == 'undefined')
+				i = 1;
+			form.append("name[]", tmp['name']);
+			form.append("desc[]", tmp['desc']);
+			form.append("title[]", tmp['title']);
+			form.append("imdb[]", tmp['imdb']);
+			form.append("fb[]", tmp['fb']);
+			form.append("image[]", tmp['image']);
+			
+		});
+
+		if(i){
+			topAlertDisplay("Please upload image for team member.");
+			return false;
+		}
+
+		$.ajax({
+			url: base + "director/teamUpload",
+			type: type,
+			data: form,
+			contentType: false,
+			cache: false,
+			processData: false,
+			success: function(response){
+				topAlertDisplay(response.message);
+				if(response.status){
+					$activeAccord = $(".accordion.active");
+					$nextAcord = $activeAccord.next().next();
+					$nextAcord.addClass("active");
+					$nextAcord.next().addClass("show");
+
+					$("#teammates").hide(100);
+
+					$teamTable = $("table#display-team-detail tbody");
+					team = response.data.team;
+					i=0;
+					tr = '';
+					for(t = 0; t < team.length; t++){
+						
+						i++;
+						tr += "<tr><td>"+i+"</td>"
+						   + "<td>"+ team[t].DirectorTeam_name +"</td>"
+						   + "<td>"+ team[t].DirectorTeam_title +"</td>"
+						   + "<td>"+ team[t].DirectorTeam_desc +"</td>"
+						   + "<td>"+ team[t].DirectorTeam_imdb +"</td>"
+						   + "<td>"+ team[t].DirectorTeam_fb +"</td>"
+						   + "<td><a href='#' class='team-member-delete' data-member-ref='"+team[t].DirectorTeam_id+"'><i class='fa fa-trash'><></a></td></tr>";
+						
+					}
+					$teamTable.append(tr);
+				}
+			}
+		})
+		return false;
+	});
+
 });
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
-})
+});
+
+
+
+//This is not yet working it is a partial code copied from act.js
+
+
+

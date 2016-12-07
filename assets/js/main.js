@@ -32,6 +32,7 @@ $(document).ready(function(){
 			url: url,
 			type: type,
 			data: data,
+            crossDomain:true,
 			success: function(response){
 				if(response.status){
 					$("#login-error-" + user).removeClass("text-danger").addClass("text-success");

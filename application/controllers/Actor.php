@@ -28,6 +28,74 @@
 			$pageInfo['notices'] = $this->Notifications->getNotice();
 			$this->load->view("actor/home", $pageInfo);
 		}
+
+		public function step1($value=''){
+			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
+				redirect(base_url());
+			$pageInfo = [];
+			$this->load->model("ModelActor");
+			$this->load->model("Auth");
+			$pageInfo['actor'] = $this->Auth->getUserData('StashUsers_id', $this->session->userdata("StaSh_User_id"));
+			$pageInfo['profile'] = $this->ModelActor->getActorProfileById($this->session->userdata("StaSh_User_id"));
+			$pageInfo['experience'] = $this->ModelActor->getActorExperienceById($this->session->userdata("StaSh_User_id"));
+			$pageInfo['training'] = $this->ModelActor->getActorTrainingById($this->session->userdata("StaSh_User_id"));
+			$pageInfo['directors'] = $this->ModelActor->getDirectors($this->session->userdata("StaSh_User_id"));
+			$pageInfo['plan'] = $this->ModelActor->getActorPlan(0);
+			$pageInfo['newNotice'] = $this->Notifications->newNotice();
+			$pageInfo['notices'] = $this->Notifications->getNotice();
+			$this->load->view("actor/step1", $pageInfo);
+		}
+
+		public function step2($value=''){
+			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
+				redirect(base_url());
+			$pageInfo = [];
+			$this->load->model("ModelActor");
+			$this->load->model("Auth");
+			$pageInfo['actor'] = $this->Auth->getUserData('StashUsers_id', $this->session->userdata("StaSh_User_id"));
+			$pageInfo['profile'] = $this->ModelActor->getActorProfileById($this->session->userdata("StaSh_User_id"));
+			$pageInfo['experience'] = $this->ModelActor->getActorExperienceById($this->session->userdata("StaSh_User_id"));
+			$pageInfo['training'] = $this->ModelActor->getActorTrainingById($this->session->userdata("StaSh_User_id"));
+			$pageInfo['directors'] = $this->ModelActor->getDirectors($this->session->userdata("StaSh_User_id"));
+			$pageInfo['plan'] = $this->ModelActor->getActorPlan(0);
+			$pageInfo['newNotice'] = $this->Notifications->newNotice();
+			$pageInfo['notices'] = $this->Notifications->getNotice();
+			$this->load->view("actor/step2", $pageInfo);
+		}
+
+		public function step3($value=''){
+			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
+				redirect(base_url());
+			$pageInfo = [];
+			$this->load->model("ModelActor");
+			$this->load->model("Auth");
+			$pageInfo['actor'] = $this->Auth->getUserData('StashUsers_id', $this->session->userdata("StaSh_User_id"));
+			$pageInfo['profile'] = $this->ModelActor->getActorProfileById($this->session->userdata("StaSh_User_id"));
+			$pageInfo['experience'] = $this->ModelActor->getActorExperienceById($this->session->userdata("StaSh_User_id"));
+			$pageInfo['training'] = $this->ModelActor->getActorTrainingById($this->session->userdata("StaSh_User_id"));
+			$pageInfo['directors'] = $this->ModelActor->getDirectors($this->session->userdata("StaSh_User_id"));
+			$pageInfo['plan'] = $this->ModelActor->getActorPlan(0);
+			$pageInfo['newNotice'] = $this->Notifications->newNotice();
+			$pageInfo['notices'] = $this->Notifications->getNotice();
+			$this->load->view("actor/step3", $pageInfo);
+		}
+
+		public function step4($value=''){
+			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
+				redirect(base_url());
+			$pageInfo = [];
+			$this->load->model("ModelActor");
+			$this->load->model("Auth");
+			$pageInfo['actor'] = $this->Auth->getUserData('StashUsers_id', $this->session->userdata("StaSh_User_id"));
+			$pageInfo['profile'] = $this->ModelActor->getActorProfileById($this->session->userdata("StaSh_User_id"));
+			$pageInfo['experience'] = $this->ModelActor->getActorExperienceById($this->session->userdata("StaSh_User_id"));
+			$pageInfo['training'] = $this->ModelActor->getActorTrainingById($this->session->userdata("StaSh_User_id"));
+			$pageInfo['directors'] = $this->ModelActor->getDirectors($this->session->userdata("StaSh_User_id"));
+			$pageInfo['plan'] = $this->ModelActor->getActorPlan(0);
+			$pageInfo['newNotice'] = $this->Notifications->newNotice();
+			$pageInfo['notices'] = $this->Notifications->getNotice();
+			$this->load->view("actor/step4", $pageInfo);
+		}
 		
 		public function profile($username = ''){
 			$username = explode("/", rtrim($_SERVER['REQUEST_URI'], "/"));
@@ -38,35 +106,51 @@
 			$this->load->model("Notifications");
 
 			$userdata = $this->Auth->getUserData('StashUsers_username', $username);
-
-			if($this->session->userdata("StaSh_User_type") != 'actor'){
-				if($this->session->userdata("StaSh_User_Logged_In")){
-					$m = $this->session->userdata("StaSh_User_name") . " viewed your profile.";
-					$d = ['director' => $this->session->userdata("StaSh_User_id")];
-					$v = 'view';
-				}else{
-					$m = "Someone viewed your profile.";
-					$d = [];
-					$v = 'viewx';
-				}
-				$this->Notifications->insertNotification($userdata['StashUsers_id'], $m, $v, $d);
-			}
-			
 			if(count($userdata) == 0){
-				$this->displayPageNotFound();
+				//$this->load->model("ModelDirector");
+				if($this->Auth->isPageName($username)){
+					$this->displayDirectorProfile($username);
+				}else{
+					$this->displayPageNotFound();
+				}
+			}else{
+
+				if($this->session->userdata("StaSh_User_type") != 'actor'){
+					if($this->session->userdata("StaSh_User_Logged_In")){
+						$m = $this->session->userdata("StaSh_User_name") . " viewed your profile.";
+						$d = ['director' => $this->session->userdata("StaSh_User_id")];
+						$v = 'view';
+					}else{
+						$m = "Someone viewed your profile.";
+						$d = [];
+						$v = 'viewx';
+					}
+					$this->Notifications->insertNotification($userdata['StashUsers_id'], $m, $v, $d);
+				}
+				
+				$ref = $userdata['StashUsers_id'];
+				$pageInfo['actor'] = $userdata;
+				$pageInfo['profile'] = $this->ModelActor->getActorProfileById($ref);
+				$pageInfo['experience'] = $this->ModelActor->getActorExperienceById($ref);
+				$pageInfo['training'] = $this->ModelActor->getActorTrainingById($ref);
+				$pageInfo['directors'] = $this->ModelActor->getDirectors($ref);
+				
+				$this->load->view("actor/actor_profile", $pageInfo);
+
 			}
-			
-			
-			
-			$ref = $userdata['StashUsers_id'];
-			$pageInfo['actor'] = $userdata;
-			$pageInfo['profile'] = $this->ModelActor->getActorProfileById($ref);
-			$pageInfo['experience'] = $this->ModelActor->getActorExperienceById($ref);
-			$pageInfo['training'] = $this->ModelActor->getActorTrainingById($ref);
-			$pageInfo['directors'] = $this->ModelActor->getDirectors($ref);
-			
-			$this->load->view("actor/actor_profile", $pageInfo);
 		}
+
+		public function displayDirectorProfile($name = ''){
+			$this->load->model("ModelDirector");
+			$basic = $this->ModelDirector->getPageNameInfo($name);
+			$pageInfo['isAllowed'] = $this->ModelDirector->getAdminConfirmation();
+			$pageInfo['basic'] = $basic;
+			$pageInfo['teams'] = $this->ModelDirector->getTemMember($basic['DirectorPage_director_ref']);
+			$pageInfo['works'] = $this->ModelDirector->getProjectWork($basic['DirectorPage_director_ref']);
+
+			$this->load->view("director/castingdirectorprofile", $pageInfo);
+		}
+
 		public function account($value=''){
 			if(!$this->session->userdata("StaSh_User_Logged_In") || $this->session->userdata("StaSh_User_type") != 'actor')
 				redirect(base_url());
@@ -131,7 +215,9 @@
 			$this->load->model("ModelActor");
 			if($value == 'language'){
 				$data = $this->ModelActor->getLanguageName($t);
-			}else{
+			}else if($value=='tags'){
+				$data = $this->ModelActor->getTagsName($t);
+			}else {
 				$data = $this->ModelActor->getSkillName($t);
 			}
 			header("Content-Type: application/json");

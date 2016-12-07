@@ -25,7 +25,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 
+
 $config['base_url'] = 'http://localhost:8888/public_html/';
+
 
 
 
@@ -373,7 +375,7 @@ $config['encryption_key'] = hex2bin("00b0e0b402d21b991508530bc1473ccb");
 */
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
-$config['sess_expiration'] = 7200;
+$config['sess_expiration'] = 17200;
 $config['sess_save_path'] = NULL;
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;

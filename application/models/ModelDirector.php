@@ -61,6 +61,29 @@
 			return $result;
 		}
 
+		public function getTags($searchTerm)
+		{
+			//echo $searchTerm;
+			$this->db->select("custom_tags");
+			$this->db->from("stash-custom-tags");
+			$this->db->like("custom_tags","$searchTerm");
+			$this->db->group_by('custom_tags');
+			$query = $this->db->get();
+			//echo "<br>%".$searchTerm."%<br>";
+
+			//echo json_encode($query->result_array());
+			if (isset($query)) {
+				if($query->num_rows() > 0){
+	     			foreach ($query->result_array() as $row){
+	       				 $row_set[] = htmlentities(stripslashes($row['custom_tags'])); //build an array
+	     			 }
+	      			echo json_encode($row_set); //format the array into json data
+	   			 }
+   			}
+			//echo json_encode($data);
+		}
+		
+
 		public function getActorUsername($ref = 0){
 			$this->db->where("StashUsers_id", $ref);
 			$query = $this->db->get("stash-users");
@@ -85,6 +108,18 @@
 					);
 			//return $query = $this->db->get_compiled_insert("stash-actor-project", $data);
 			return $this->db->insert("stash-actor-project", $data);
+		}
+
+		public function insertCustomTag($ref = 0, $tag = null){
+			$data = array(
+						'id' => null,
+						'actor_id' => $ref,
+						'director_id'=>$this->session->userdata("StaSh_User_id"),
+						'custom_tags'=> $tag
+
+					);
+			//return $query = $this->db->get_compiled_insert("stash-actor-project", $data);
+			return $this->db->insert("stash-custom-tags", $data);
 		}
 
 		public function getActorLanguage($ref = 0){
@@ -221,7 +256,46 @@
 				$skillIds[] = $value['StashSkills_id'];
 			return $skillIds;
 		}
+		public function getTagsIDs($tags = ''){
+			$tags = explode(",", $tags);
+			$this->db->where_in("StashTags_title", $tags);
+			$this->db->select("StashTags_id");
+			$query = $this->db->get("stash-tags");
+			$fetched = $query->result('array');
+			$tagIds = [];
+			foreach ($fetched as $key => $value) 
+				$tagIds[] = $value['StashTags_id'];
+			return $tagIds;
+		}
+		public function getTagId($data = ''){
+			$data = explode(",", $data);
+			$ids = [];
+			foreach ($data as $key => $tag) {
+				if($id = $this->ifInTag(trim($tag))){
+					$ids[] = $id;
+				}else{
+					$ids[] = $this->insertTag(trim($tag));
+				}
+			}
 
+			return $ids;
+		}
+
+		public function ifInTag($value=''){
+			$this->db->where("StashTags_title", $value);
+			$query = $this->db->get("stash-tags");
+			$result = $query->result("array");
+			if(count($result))
+				return $result[0]['StashTags_id'];
+			else
+				return 0;
+		}
+
+		public function insertTag($value=''){
+			$data = array("StashTags_id" => null, "StashTags_title" => $value, "StashTags_status" => 1);
+			$this->db->insert("stash-tags", $data);
+			return $this->db->insert_id();
+		}
 		public function filteredBySKill($actors = [], $skills = []){
 			$skills = (count($skills)) ? $skills : [''];
 			$this->db->where_in("StashActorSkill_skill_id_ref", $skills);
@@ -233,6 +307,19 @@
 				$filtered[] = $value['StashActorSkill_actor_id_ref'];
 			return $filtered;
 		}
+		public function filteredByTags($actors = [], $tags = []){
+			$tags = (count($tags)) ? $tags : [''];
+			$this->db->where_in("StashActorTag_tag_id_ref", $tags);
+			$this->db->where_in("StashActorTag_actor_id_ref", $actors);
+			$this->db->where_in("StashActorTag_director_id_ref",$this->session->userdata("StaSh_User_id"));
+			$query = $this->db->get("stash-actor-tag");
+			$fetched = $query->result('array');
+			$filtered = [];
+			foreach ($fetched as $key => $value) 
+				$filtered[] = $value['StashActorTag_actor_id_ref'];
+			return $filtered;
+		}
+		
 
 		public function finalFilter($filter = []){
 			$data = array();
@@ -256,6 +343,8 @@
 			if($filter['dp']){
 				$data['StashActor_avatar <> '] = 'default.png';
 			}
+
+			//print_r($data);
 
 			$this->db->where($data);
 			$this->db->like("StashActor_gender", $filter['sex'], 'both');
@@ -298,7 +387,7 @@
 			$this->db->insert("stash-project", $data);
 			return $this->db->insert_id();
 		}
-
+		
 		/*public function insertInvitationMail($data = []){
 			$data = array(
 						'StashEmailInvite_id' => null,
@@ -566,6 +655,12 @@
 			$this->db->select( $select );
 			$this->db->from("stash-actor");
 			$this->db->where($field, $val);
+			return $this->db->get()->first_row('array');
+		}
+		public function getProjectDetails($val){
+			$this->db->select( "*" );
+			$this->db->from("stash-project");
+			$this->db->where("StashProject_id", $val);
 			return $this->db->get()->first_row('array');
 		}
 
@@ -1068,6 +1163,7 @@
 			return $this->db->get("stash-actor-project")->num_rows();
 		}
 
+
 		public function insertExcelData($ref = 0, $file = ''){
 			$d = array(
 					'StashDirectorExcel_id' => null,
@@ -1089,6 +1185,145 @@
 		public function updateExcelUpload($ref = 0){
 			$this->db->where("StashDirectorExcel_director_ref", $ref);
 			$this->db->update("stash-director-excel", ['StashDirectorExcel_status' => 1]);
+
+		public function getPageData($ref = 0){
+			$this->db->where("DirectorPage_director_ref", $ref);
+			return $this->db->get("stash-director-page", 1)->first_row("array");
+		}
+
+		public function insertDirectorPage($data = []){
+			$d = array(
+				'DirectorPage_id' => null,
+				'DirectorPage_director_ref' => $data['ref'],
+				'DirectorPage_pagename' => $data['clink'],
+				'DirectorPage_name' => $data['cname'],
+				'DirectorPage_about' => $data['cabout'],
+				'DirectorPage_logo' => $data['clogo'],
+				'DirectorPage_contact' => '',
+				'DirectorPage_maps' => '',
+				'DirectorPage_time' => time(),
+				'DirectorPage_status' => 1
+			);
+			return $this->db->insert("stash-director-page", $d);
+			//return $this->db->insert_id();
+		}
+
+		public function updateDirectorPageBasic($data = []){
+			$d = array(
+				'DirectorPage_name' => $data['cname'],
+				'DirectorPage_pagename' => $data['clink'],
+				'DirectorPage_about' => $data['cabout'],
+				'DirectorPage_logo' => $data['clogo']
+			);
+			$this->db->where("DirectorPage_director_ref", $data['ref']);
+			return $this->db->update("stash-director-page", $d);
+		}
+
+		public function insertTeamMembers($data = []){
+			foreach ($data as $key => $team) {
+				$d = array(
+					'DirectorTeam_id' => null,
+					'DirectorTeam_director_ref' => $this->session->userdata("StaSh_User_id"),
+					'DirectorTeam_name' => $team['name'],
+					'DirectorTeam_title' => $team['title'],
+					'DirectorTeam_desc' => $team['desc'],
+					'DirectorTeam_imdb' => $team['imdb'],
+					'DirectorTeam_fb' => $team['fb'],
+					'DirectorTeam_image' => $team['image'],
+					'DirectorTeam_time' => time(),
+					'DirectorTeam_status' => 1
+				);
+
+				$this->db->insert("stash-director-team", $d);
+			}
+			return true;
+		}
+
+		public function getTemMember($ref = 0){
+			$this->db->where("DirectorTeam_director_ref", $ref);
+			$this->db->where("DirectorTeam_status", 1);
+			return $this->db->get("stash-director-team")->result("array");
+		}
+
+		public function insertProjectWork($data = []){
+			$d = array(
+				'DirectorWork_id' => null,
+				'DirectorWork_director_ref' => $this->session->userdata("StaSh_User_id"),
+				'DirectorWork_title' => $data['projecttitle'],
+				'DirectorWork_producer' => $data['projectproducer'],
+				'DirectorWork_date' => $data['projectdate'],
+				'DirectorWork_remark' => $data['projectremarks'],
+				'DirectorWork_team' => '',
+				'DirectorWork_category' => $data['category'],
+				'DirectorWork_work_status' => $data['status'],
+				'DirectorWork_accept_application' => $data['optradio'],
+				'DirectorWork_youtube_link' => $data['youtube'],
+				'DirectorWork_time' => time(),
+				'DirectorWork_status' => 1
+			);
+
+			return $this->db->insert("stash-director-works", $d);
+		}
+
+		public function getProjectWork($ref = 0){
+			$this->db->where("DirectorWork_director_ref", $ref);
+			$this->db->where("DirectorWork_status", 1);
+			return $this->db->get("stash-director-works")->result("array");
+		}
+
+		public function updateContactTxt($txt = '', $ref = 0){
+			$d = array(
+				'DirectorPage_contact' => $txt
+			);
+			$this->db->where("DirectorPage_director_ref", $this->session->userdata("StaSh_User_id"));
+			$this->db->where("DirectorPage_id", $ref);
+			return $this->db->update("stash-director-page", $d);
+		}
+
+		public function removeTeamMember($mem = 0){
+			$this->db->where("DirectorTeam_director_ref", $this->session->userdata("StaSh_User_id"));
+			$this->db->where("DirectorTeam_id", $mem);
+			return $this->db->delete("stash-director-team");
+		}
+
+		public function removeDirectorWork($work = 0){
+			$this->db->where("DirectorWork_director_ref", $this->session->userdata("StaSh_User_id"));
+			$this->db->where("DirectorWork_id", $work);
+			return $this->db->delete("stash-director-works");
+		}
+
+		public function checkInPages($name = '', $ref = 0){
+			$this->db->where("DirectorPage_pagename", $name);
+			$this->db->where("DirectorPage_director_ref <>", $ref);
+			return $this->db->get("stash-director-page")->num_rows();
+		}
+
+		public function checkInUsernames($name = '', $ref = ''){
+			$this->db->where("StashUsers_username", $name);
+			$this->db->where("StashUsers_id <>", $ref);
+			return $this->db->get("stash-users")->num_rows();
+		}
+
+		public function isPageNameAvailable($name = '', $ref = 0){
+			$available = true;
+			if($this->checkInPages($name, $ref))
+				$available = false;
+
+			if($this->checkInUsernames($name, $ref))
+				$available = false;
+
+			return $available;
+		}
+
+		public function isPageName($name = ''){
+			$this->db->where("DirectorPage_pagename", $name);
+			return $this->db->get("stash-director-page")->num_rows();
+		}
+
+		public function getPageNameInfo($name = ''){
+			$this->db->where("DirectorPage_pagename", $name);
+			return $this->db->get("stash-director-page", 1)->first_row('array');
+
 		}
 	}
 

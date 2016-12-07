@@ -53,7 +53,7 @@
 						'StashActor_state' => '',
 						'StashActor_country' => '',
 						'StashActor_zip' => '',
-						'StashActor_actor_card' => 0,
+						'StashActor_ticket_status' => 0,
 						'StashActor_profile_completion_stage' => 1,
 						'StashActor_last_update' => time(),
 						'StashActor_last_ip' => $this->input->ip_address()
@@ -469,7 +469,15 @@
 
 		}
 
-		public function insertActorPlan($plan = ''){ 
+
+		public function isPromoUsed($promo = 0, $user = 0){
+			$this->db->where("StashPromoUsed_promo_id_ref", $promo);
+			$this->db->where("StashPromoUsed_user_id_ref", $user);
+			return $this->db->get("stash-promo-used", 1)->num_rows();
+		}
+
+		public function insertActorPlan($plan = ''){
+
 			$d = array(
 						'StashActorPlan_id' => null,
 						'StashActorPlan_actor_id_ref' => $this->session->userdata("StaSh_User_id"),
@@ -496,6 +504,7 @@
 			$this->db->ordeR_by("StashActorPlan_id", "DESC");
 			return $this->db->get("stash-actor-plan", 1)->num_rows();
 		}
+
 
 		public function addActorFromExcel($d = [], $director = 0){
 			$id = $this->insertActorMain($d);
@@ -612,6 +621,11 @@
 			/*echo $query = $this->db->get_compiled_select("stash-users");
 			exit();*/
 			return $this->db->get("stash-users")->num_rows();
+
+		public function isPageName($name = ''){
+			$this->db->where("DirectorPage_pagename", $name);
+			return $this->db->get("stash-director-page")->num_rows();
+
 		}
 	}
 ?>

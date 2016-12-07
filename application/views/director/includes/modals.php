@@ -125,6 +125,9 @@
                 <span class="info-small gray">Max. Height (in cm) </span> <input type="text" class="form-control add" id="aheightmax"  name="heightmax" placeholder= "upto height (in cms) :"  />
                 <span class="info-small gray">Actor Names(tag) <input type="text" data-role="tagsinput" class="form-control add" id="actr_name" name="actor_names" placeholder= "Actor Names"  />
               </div>
+              <div class="col-sm-6 form-group no-paddinglr">
+                <span class="info-small gray">Tags </span> <input type="text" class="form-control add" id="aagemax"  name="agemax" placeholder= "upto age :"  />
+              </div>
             </div>
             <div class="row">
                 <div class="col-sm-6 form-group no-paddinglr">
