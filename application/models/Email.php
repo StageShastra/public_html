@@ -60,7 +60,7 @@
 			$this->email->reply_to("no-reply@castiko.com", 'Castiko');
 			$this->email->to($email);
 			$this->email->subject("Your Castiko Login credentials");
-			$msg = "Hi ".$actor_name." <br> You have been added to ".$dir_name."\'s database. <br> Here are your login credentials: <br> <b>Username:</b> ".$email."<br><b>Password:</b> ".$password."<br>";
+			$msg = "Hi ".$actor_name." <br> You have been added to ".$dir_name."'s database. <br> Here are your login credentials: <br> <b>Username:</b> ".$email."<br><b>Password:</b> ".$password."<br>";
 			$message = $this->defaultTemplete($msg, $link, "Login");
 			
 			$this->email->message($message);
