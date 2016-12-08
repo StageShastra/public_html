@@ -247,6 +247,7 @@
               <label class="col-lg-1" style="padding:7px 0px 7px 0px;" for="columns">Columns: </label>
               <div class="col-lg-3"><select class="form-control firstcolor firstColumn" id="columns"  name="columns" > 
                   <option value="5">5</option>
+                  <option value="6" selected="selected">6</option>
               </select><h5 class="firstcolor small">*Columns for Name, Age, Sex, Email and Phone are mandatory, even if left blank.</h5></div>
               <div class="col-lg-6">
                 <input class="btn submit-btn firstcolor" style="margin-top:0px" type="submit" value="See a sample file" onclick="window.open('/assets/sample_excel.xlsx', '_blank')">
@@ -265,7 +266,8 @@
                                     'age' => 'Age',
                                     'sex' => 'Sex',
                                     'phone' => 'Phone',
-                                    'email' => 'Email'
+                                    'email' => 'Email',
+                                    'height' => 'Height'
                                 );
                   foreach ($selectOpt as $key => $value) {
                     echo "<option val='{$key}'>{$value}</option>";
@@ -274,7 +276,7 @@
 
             ?>
 
-            <div class="datagrid" id="columnHeaders" >
+            <div class="datagrid" id="columnHeaders" style="display:none;">
             <label style="font-size:1.5rem;"> Now tell us which column contains which information: </label>
               <table>
 
@@ -284,6 +286,7 @@
                   <th>Column 3</th>
                   <th>Column 4</th>
                   <th>Column 5</th>
+                  <th>Column 6</th>
 
                 </tr></thead>
                 <tr>
@@ -307,7 +310,9 @@
                     <option selected="selected"  value="empty"> Select One </option>
                     <?= selectOptFlood() ?></select></td>
                   
-                  
+                  <td><select class="form-control firstcolor hiddenoption" id="col6" name="col6" >
+                    <option selected="selected"  value="empty"> Select One </option>
+                    <?= selectOptFlood() ?></select></td>
 
 
                 </tr>
