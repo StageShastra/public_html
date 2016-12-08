@@ -178,15 +178,15 @@
 			$fields = str_replace('"', '', $fields);
 			$fields = explode(",", rtrim($fields, ","));
 
-			require('/phpClasses/spreadsheet/php-excel-reader/excel_reader2.php');
-			require('/phpClasses/spreadsheet/SpreadsheetReader.php');
+			require('./phpClasses/spreadsheet/php-excel-reader/excel_reader2.php');
+			require('./phpClasses/spreadsheet/SpreadsheetReader.php');
 
 			$Reader = new SpreadsheetReader($file['tmp_name'], $file['name']);
 		    $Sheets = $Reader -> Sheets();
 		   
 		    // To make temp spreadsheet of csv format
 		    $filename = md5($this->session->userdata("StaSh_User_id") . "_" . microtime()) . ".csv";
-		    $handle = fopen("/tmpSheets/{$filename}", "a");
+		    $handle = fopen("./tmpSheets/{$filename}", "a");
 		    $line = implode(", ", $fields);
 		    fwrite($handle, $line . "\r\n");
 		    foreach ($Sheets as $Index => $Name){
