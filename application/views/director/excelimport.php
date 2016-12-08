@@ -245,12 +245,12 @@
             <br>
             <div>  
               <label class="col-lg-1" style="padding:7px 0px 7px 0px;" for="columns">Columns: </label>
-              <div class="col-lg-3"><select class="form-control firstcolor firstColumn" id="columns"  name="columns" > 
+              <div class="col-lg-3"><!--<select class="form-control firstcolor firstColumn" id="columns"  name="columns" > 
                   <option value="5">5</option>
                   <option value="6" selected="selected">6</option>
-              </select><h5 class="firstcolor small">*Columns for Name, Age, Sex, Email and Phone are mandatory, even if left blank.</h5></div>
+              </select>--><h5 class="firstcolor small">*Columns for Name, Age, Sex, Email and Phone are mandatory, even if left blank.</h5></div>
               <div class="col-lg-6">
-                <input class="btn submit-btn firstcolor" style="margin-top:0px" type="submit" value="See a sample file" onclick="window.open('/public_html/assets/sample_excel.xlsx', '_blank')">
+                <input class="btn submit-btn firstcolor" style="margin-top:0px" type="submit" value="See a sample file" onclick="window.open('/assets/sample_excel.xlsx', '_blank')">
                 <br><br><br>
               </div>
             </div>
@@ -263,11 +263,10 @@
                 function selectOptFlood(){
                   $selectOpt = array(
                                     'name' => 'Name',
-                                    'sex' => 'Sex',
                                     'age' => 'Age',
-                                    'email' => 'Email',
+                                    'sex' => 'Sex',
                                     'phone' => 'Phone',
-                                    'height' => 'Height'
+                                    'email' => 'Email'
                                 );
                   foreach ($selectOpt as $key => $value) {
                     echo "<option val='{$key}'>{$value}</option>";
@@ -276,7 +275,7 @@
 
             ?>
 
-            <div class="datagrid" id="columnHeaders" style="display:none;">
+            <div class="datagrid" id="columnHeaders" >
             <label style="font-size:1.5rem;"> Now tell us which column contains which information: </label>
               <table>
 
@@ -286,7 +285,6 @@
                   <th>Column 3</th>
                   <th>Column 4</th>
                   <th>Column 5</th>
-                  <th>Column 6</th>
 
                 </tr></thead>
                 <tr>
@@ -310,9 +308,7 @@
                     <option selected="selected"  value="empty"> Select One </option>
                     <?= selectOptFlood() ?></select></td>
                   
-                  <td><select class="form-control firstcolor hiddenoption" id="col6" name="col6" >
-                    <option selected="selected"  value="empty"> Select One </option>
-                    <?= selectOptFlood() ?></select></td>
+                  
 
 
                 </tr>
