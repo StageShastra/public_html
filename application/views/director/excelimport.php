@@ -1,5 +1,7 @@
 <?php
   include 'includes/head.php';
+  error_reporting(E_ALL);
+     
  ?>
  
     <body>
