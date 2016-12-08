@@ -584,7 +584,7 @@
 				if(isset($d['email']))
 				{
 					
-					$this->Email->sendPasswordEmail(ucwords($name), $this->session->userdata("StaSh_User_name"), $d['email'], $d['password']);
+					$this->Email->sendPasswordMail(ucwords($name), $this->session->userdata("StaSh_User_name"), $d['email'], $d['password']);
 				}
 				$this->Email->sendActivationMail(ucwords($name), $d["email"], $response);
 				
