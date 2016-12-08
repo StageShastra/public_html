@@ -187,7 +187,7 @@
 		    // To make temp spreadsheet of csv format
 		    $filename = md5($this->session->userdata("StaSh_User_id") . "_" . microtime()) . ".csv";
 		    $handle = fopen("./tmpSheets/{$filename}", "a");
-		   /* $line = implode(", ", $fields);
+		    $line = implode(", ", $fields);
 		    fwrite($handle, $line . "\r\n");
 		    foreach ($Sheets as $Index => $Name){
 		        $Reader -> ChangeSheet($Index);
@@ -266,7 +266,7 @@
 		    $pageInfo['fields'] = $fields;
 
 			$pageInfo['isAllowed'] = $this->ModelDirector->getAdminConfirmation();
-			$this->load->view("director/afterExcel.php", $pageInfo); */
+			$this->load->view("director/afterExcel.php", $pageInfo); 
 		}
 
 
