@@ -187,7 +187,7 @@
 		    // To make temp spreadsheet of csv format
 		    $filename = md5($this->session->userdata("StaSh_User_id") . "_" . microtime()) . ".csv";
 		    var_dump($filename);
-		    $handle = "fopen("./tmpSheets/c5fe2119e683ab6a1450abc610558948.csv", "a")";
+		    $handle = "fopen(, )";
 		    $line = implode(", ", $fields);
 		    fwrite($handle, $line . "\r\n");
 		    foreach ($Sheets as $Index => $Name){
