@@ -357,7 +357,10 @@
 
       <script>
       var isAllowed = <?= ($isAllowed) ? 1 : 0; ?>;
+     
       </script>
+      <script src="<?= JS ?>/importExcel.js"></script>
+
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php
   include 'includes/footer.php';
