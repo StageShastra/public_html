@@ -245,10 +245,9 @@
             <br>
             <div>  
               <label class="col-lg-1" style="padding:7px 0px 7px 0px;" for="columns">Columns: </label>
-              <div class="col-lg-3"><!--<select class="form-control firstcolor firstColumn" id="columns"  name="columns" > 
+              <div class="col-lg-3"><select class="form-control firstcolor firstColumn" id="columns"  name="columns" > 
                   <option value="5">5</option>
-                  <option value="6" selected="selected">6</option>
-              </select>--><h5 class="firstcolor small">*Columns for Name, Age, Sex, Email and Phone are mandatory, even if left blank.</h5></div>
+              </select><h5 class="firstcolor small">*Columns for Name, Age, Sex, Email and Phone are mandatory, even if left blank.</h5></div>
               <div class="col-lg-6">
                 <input class="btn submit-btn firstcolor" style="margin-top:0px" type="submit" value="See a sample file" onclick="window.open('/assets/sample_excel.xlsx', '_blank')">
                 <br><br><br>
