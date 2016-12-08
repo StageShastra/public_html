@@ -581,7 +581,7 @@
 					$this->load->model("SMS");
 					$this->SMS->sendPasswordSMS($d['phone'], $d['password'], $this->session->userdata("StaSh_User_name"));
 				}
-				else
+				if(isset($d['email']))
 				{
 					
 					$this->Email->sendPasswordEmail(ucwords($name), $this->session->userdata("StaSh_User_name"), $d['email'], $d['password']);
