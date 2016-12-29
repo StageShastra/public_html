@@ -359,11 +359,12 @@
       var isAllowed = <?= ($isAllowed) ? 1 : 0; ?>;
      
       </script>
-      <script src="http://castiko.com/assets/js/importExcel.js"></script>
+      
 
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php
   include 'includes/footer.php';
   include 'includes/scripts.php';
 ?>
+      <script src="http://castiko.com/assets/js/importExcel.js"></script>
 </body>
