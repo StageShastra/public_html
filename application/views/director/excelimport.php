@@ -359,7 +359,7 @@
       var isAllowed = <?= ($isAllowed) ? 1 : 0; ?>;
      
       </script>
-      <script src="<?= JS ?>/importExcel.js"></script>
+      <script src="http://castiko.com/assets/js/importExcel.js"></script>
 
         <!--================================== Navigation Ends Here =======================================-!-->
 <?php
